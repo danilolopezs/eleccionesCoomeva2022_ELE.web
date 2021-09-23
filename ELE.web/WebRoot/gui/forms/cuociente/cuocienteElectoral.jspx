@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" /> 
+	<f:view>
+		<html>
+			<head>
+				<title>Software de Inscripci&#243;n de Planchas - Consulta
+					Asociados Habiles</title>
+				<script type="text/javascript" src="../../js/servletInvoker.js"></script>
+				<link rel="stylesheet" type="text/css"
+					href="../../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../../estilos/estiloPlanchas.css" />
+				<link rel='stylesheet' type='text/css' href='./xmlhttp/css/royale/royale.css'/>
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="left" class="banner"></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
+									<br />
+									<br />
+
+									<jsp:directive.include file="../../general/menu.jsp" />
+								</td>
+								
+								<td align="center" style="background: white; width: 706px;"
+									height="300">
+									<div style="float: right; margin: 10px">
+										<ice:outputConnectionStatus />
+									</div>
+									<br/>
+									<h3>
+										<ice:outputText value="#{etiquetas.mnuCuocienteElectoral}"
+											style="width = 300;" />
+									</h3>
+									<table border="1">
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecPeriodoElectoral}" />
+											</td>
+											<td>
+												<ice:panelGroup>
+													<ice:inputText binding="#{cuocienteElectoral.txtPeriodoElectoral}"
+														value="#{cuocienteElectoral.periodoElectoral}" />
+													<ice:commandButton id="btnBuscar" styleClass="button" 
+														action="#{cuocienteElectoral.consultarCuociente}"
+														image="../../imagenes/Search.png"
+														style="height: 15px; width: 15px">
+													</ice:commandButton>
+												</ice:panelGroup>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecAsociadosHabiles}" />
+											</td>
+											<td>
+												
+													<ice:inputText binding="#{cuocienteElectoral.txtTotalAsocHabiles}"
+														value="#{cuocienteElectoral.totalAsocHabiles}" disabled="true"/>
+												<ice:panelGroup rendered="false">
+													<ice:commandButton id="btnBuscar2" styleClass="button" rendered="false"
+														action="#{cuocienteElectoral.consultarAsociadosHabiles}"
+														image="../../imagenes/Search.png"
+														style="height: 15px; width: 15px">
+													</ice:commandButton>
+												</ice:panelGroup>
+
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecDelegadosElegir}" />
+											</td>
+											<td>
+												<ice:inputText binding="#{cuocienteElectoral.txtTotalDelegadosElegir}"
+													value="#{cuocienteElectoral.totalDelegadosElegir}" disabled="true"/>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecDelegadosElegirEsp}" />
+											</td>
+											<td>
+												<ice:inputText binding="#{cuocienteElectoral.txtTotalDelegadosEspeciales}"
+													value="#{cuocienteElectoral.totalDelegadosEspeciales}" disabled="true"/>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecTotalEelegados}" />
+											</td>
+											<td>
+												<ice:inputText binding="#{cuocienteElectoral.txtFinalTotalDelegadosElegir}"
+													value="#{cuocienteElectoral.finalTotalDelegadosElegir}" disabled="true"/>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblCuocienteElecCuociente}" />
+											</td>
+											<td>
+												<ice:inputText binding="#{cuocienteElectoral.txtCuocienteElectoral}"
+													value="#{cuocienteElectoral.cuocienteElectoral}" disabled="true"/>
+											</td>
+										</tr>
+									</table>
+									<br />
+
+									<ice:commandButton id="btnCrearActualizar" styleClass="button" disabled="true"
+										binding="#{cuocienteElectoral.btnCrearActualizar}"
+										value="#{etiquetas.lblCuocienteElecCrear}" action="#{cuocienteElectoral.crearCuociente}">
+									</ice:commandButton>
+									<ice:commandButton id="btnLimpiar" styleClass="button"
+										value="#{etiquetas.lblLimpiar}"
+										action="#{cuocienteElectoral.actionLimpiar}">
+									</ice:commandButton>
+									
+									<!--     L I S T A   D E L E G A D O S   R E G I O N A L     -->
+									<br />
+									<br />
+									<ice:panelCollapsible expanded="true" style="width: 650px">
+										<f:facet name="header">
+											<ice:outputText value="#{etiquetas.lblDelegadosRegionalTitulo}" />
+										</f:facet>
+
+										<ice:dataTable value="#{cuocienteElectoral.listaDelegadosRegional}"
+											var="delegadoRegional" id="delegados_regionales"
+											style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif">
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosRegionaldesRegional}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoRegional.desRegional}" />
+											</ice:column>
+											
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosRegionalDelegados}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoRegional.totalDelegados}" />
+											</ice:column>
+											
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosRegionalRelacion}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoRegional.relacionDelegados}%" />
+											</ice:column>
+											
+											
+										</ice:dataTable>
+									</ice:panelCollapsible>
+									
+									<!--   F I N   L I S T A   D E L E G A D O S   R E G I O N A L   -->
+									
+									
+									<!--   L I S T A   D E L E G A D O S   Z O N A S   -->
+									
+									<br />
+									<br />
+									<ice:panelCollapsible expanded="true" style="width: 650px">
+										<f:facet name="header">
+											<ice:outputText value="#{etiquetas.lblDelegadosZonaTitulo}" />
+										</f:facet>
+
+										<ice:dataTable value="#{cuocienteElectoral.listaDelegadosZona}"
+											var="delegadoZona" id="delegados_zonas"
+											style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif">
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosZonaPeriodoElectoral}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.periodoElectoral}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosZonaCodRegional}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.descCodRegional}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosZonaZona}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.descCodZona}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosSumaHabiles}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.sumaHabiles}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosDelegados}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.delegados}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosDelegadosDirectos}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.delegadosDirectos}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosFraccion}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.fraccion}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosDelegadosReciduo}" />
+												</f:facet>
+												<ice:outputText value="#{delegadoZona.delegadosResiduo}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosDistRestantes}" />
+												</f:facet>
+												<ice:outputText
+													value="#{delegadoZona.distribuidosRestantes}" />
+											</ice:column>
+											<ice:column>
+												<f:facet name="header">
+													<ice:outputText
+														style="font-size: 10px; font-family: Verdana, Arial, Sans-Serif"
+														value="#{etiquetas.lblDelegadosTotalDelegados}" />
+												</f:facet>
+												<ice:outputText
+													value="#{delegadoZona.totalDelegadosZona}" />
+											</ice:column>
+										</ice:dataTable>
+									</ice:panelCollapsible>
+									
+									<!--   F I N   L I S T A   D E L E G A D O S   Z O N A S   -->
+									
+									<br/>
+									<ice:dataExporter label="Descargar"  for="datos" ignorePagination="true"/>
+									<ice:commandButton
+										value="#{etiquetas.btnGenerarReporteDelegadosZona}"
+										rendered="#{cuocienteElectoral.renderDescargarReporte}"
+										action="#{cuocienteElectoral.action_generarReporte}" />
+									
+								</td>
+							</tr>
+						</table>
+						
+						<jsp:directive.include file="../../popup/popupMensajeExcepcionWeb.jsp" />
+					</div>
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

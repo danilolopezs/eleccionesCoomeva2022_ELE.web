@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software de Inscripci&#243;n de Planchas - Consulta
+					Habilidad Asociados</title>
+				<script type="text/javascript" src="../js/servletInvoker.js">
+</script>
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+
+
+
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="left" class="banner"></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
+									<br />
+									<br />
+
+									<jsp:directive.include file="../general/menu.jsp" />
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;"
+									height="400">
+
+
+									<table border="0">
+										<tr align="center">
+											<td>
+												<div align="center">
+													<ice:outputLabel value="Reporte de juegos medios visuales"></ice:outputLabel>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<br />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<br />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<ice:panelGrid columns="4" styleClass="textoLabel2">
+													<ice:outputLabel
+														value="#{etiquetas.lblSeleccionarZonaElectoral}"></ice:outputLabel>
+													<ice:selectOneMenu id="selZona"
+														binding="#{generarReportesJuegosVista.selZona}"
+														partialSubmit="true">
+														<f:selectItems id="itemsEstados"
+															value="#{generarReportesJuegosVista.itemsZonas}" />
+													</ice:selectOneMenu>
+													<ice:outputLabel value="#{etiquetas.lblSeleccionarFase}"></ice:outputLabel>
+													<ice:selectOneMenu id="selFase"
+														binding="#{generarReportesJuegosVista.selFase}"
+														partialSubmit="true">
+														<f:selectItems id="itemsFases"
+															value="#{generarReportesJuegosVista.itemsFases}" />
+													</ice:selectOneMenu>
+												</ice:panelGrid>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<br />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div align="center">
+													<ice:commandButton
+														binding="#{generarReportesJuegosVista.btnGenerarReporte}"
+														action="#{generarReportesJuegosVista.action_generarReporte}"
+														value="#{etiquetas.lblBtnGenrarReporte}"
+														styleClass="boton" />
+												</div>
+											</td>
+										</tr>
+									</table>
+									<br />
+
+
+								</td>
+							</tr>
+						</table>
+						<jsp:directive.include file="../popup/popupMensajeExcepcion.jsp" />
+						<jsp:directive.include
+							file="../popup/popupReporteConfirmarHabilidades.jsp" />
+					</div>
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

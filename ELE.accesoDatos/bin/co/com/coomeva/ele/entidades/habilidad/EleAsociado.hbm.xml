@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2012 06:02:14 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="co.com.coomeva.ele.entidades.habilidad.EleAsociado" table="ELE_ASOCIADO" schema="ELECDB">
+        <id name="codigoAsociado" type="java.lang.Long">
+            <column name="CODIGO_ASOCIADO" precision="17" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="numeroDocumento" type="java.lang.Long">
+            <column name="NUMERO_DOCUMENTO" precision="15" scale="0" />
+        </property>
+        <property name="descZonaAso" type="java.lang.String">
+            <column name="DESC_ZONA_ASO" length="100" />
+        </property>
+        <property name="descCiudadAso" type="java.lang.String">
+            <column name="DESC_CIUDAD_ASO" length="100" />
+        </property>
+        <property name="codZonaAso" type="java.lang.String">
+            <column name="COD_ZONA_ASO" length="10" />
+        </property>
+        <property name="codCiudadAso" type="java.lang.String">
+            <column name="COD_CIUDAD_ASO" length="10" />
+        </property>
+        <property name="estadoAsociado" type="java.lang.Integer">
+            <column name="ESTADO_ASOCIADO" precision="5" scale="0" />
+        </property>
+        <property name="fechaIngreso" type="java.lang.Integer">
+            <column name="FECHA_INGRESO" precision="8" scale="0" />
+        </property>
+        <property name="codigoProfesion" type="java.lang.Long">
+            <column name="CODIGO_PROFESION" precision="10" scale="0" />
+        </property>
+        <property name="descProfesion" type="java.lang.String">
+            <column name="DESC_PROFESION" length="50" />
+        </property>
+        <set name="eleNovedads" inverse="true" lazy="true" table="ELE_NOVEDAD" fetch="select">
+            <key>
+                <column name="CODIGO_ASOCIADO" precision="17" scale="0" />
+            </key>
+            <one-to-many class="co.com.coomeva.ele.entidades.habilidad.EleNovedad" />
+        </set>
+        <set name="eleInhabilidads" inverse="true" lazy="true" table="ELE_INHABILIDAD" fetch="select">
+            <key>
+                <column name="CODIGO_ASOCIADO" precision="17" scale="0" />
+            </key>
+            <one-to-many class="co.com.coomeva.ele.entidades.habilidad.EleInhabilidad" />
+        </set>
+    </class>
+</hibernate-mapping>

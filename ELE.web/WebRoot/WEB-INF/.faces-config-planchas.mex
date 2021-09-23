@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSFFlowViewLayout version="1.0">
+  <Drawing gridVisible="true" snapOn="true" />
+  <JSFFlowResource path="/gui/forms/crearPlancha.jspx" location="20,0" dimension="261,36" />
+  <JSFFlowResource path="/gui/forms/verPlancha.jspx" location="20,300" dimension="201,36" />
+  <JSFFlowResource path="/gui/inicioAsociado.jspx" location="320,120" dimension="172,36" />
+  <JSFFlowResource path="/gui/forms/resumenPlancha.jspx" location="320,280" dimension="241,36" />
+  <JSFFlowResource path="/gui/forms/ConsultaPlanchaEstado.jspx" location="30,1030" dimension="254,36" />
+  <JSFFlowResource path="/gui/forms/ConsultaCabezaPlancha.jspx" location="480,930" dimension="257,36" />
+  <JSFFlowResource path="/gui/forms/modificarPlancha.jspx" location="220,540" dimension="261,36" />
+  <JSFFlowResource path="/gui/forms/verModPlancha.jspx" location="720,40" dimension="321,36" />
+  <JSFFlowResource path="/gui/forms/ejecutarProcesoHabilidadAsos.jspx" location="30,430" dimension="290,36" />
+  <JSFFlowResource path="/gui/forms/consultaHabilidadAsociados.jspx" location="30,630" dimension="280,36" />
+  <JSFFlowResource path="*" location="480,430" dimension="49,36" />
+  <JSFFlowResource path="/gui/forms/generarReportesHabilidades.jspx" location="480,430" dimension="278,36" />
+  <JSFFlowResource path="/gui/forms/consultarNovedadesAplicadas.jspx" location="480,630" dimension="289,36" />
+  <JSFFlowResource path="/gui/forms/resumenNovedades.jspx" location="30,730" dimension="235,36" />
+  <JSFFlowResource path="/gui/planchas/inicioMenuAsociado.jspx" location="330,730" dimension="255,36" />
+  <JSFFlowResource path="/gui/inicioRegistroPlanchas.jspx" location="30,830" dimension="213,36" />
+  <JSFFlowResource path="/gui/planchas/registrarPlancha.jspx" location="630,330" dimension="231,36" />
+  <JSFFlowResource path="/gui/planchas/consultaPlanchaAsociado.jspx" location="30,930" dimension="282,36" />
+  <JSFFlowResource path="/gui/forms/cuociente/cuocienteElectoral.jspx" location="30,1330" dimension="284,36" />
+  <JSFFlowResource path="/gui/forms/cuociente/delegadosZona.jspx" location="30,1230" dimension="268,36" />
+  <JSFFlowResource path="/gui/forms/cargarArchivoOtrasEntElect.jspx" location="480,1030" dimension="274,36" />
+  <JSFFlowResource path="/gui/forms/cargarArchivoSancionadosAnnos.jspx" location="30,1130" dimension="305,36" />
+  <JSFFlowResource path="/gui/planchas/registrarInfoCabezaPlancha.jspx" location="480,1130" dimension="290,36" />
+  <JSFFlowResource path="/gui/forms/elecciones2012/marcarPlanchaRecurso.jspx" location="480,1230" dimension="335,36" />
+  <JSFFlowResource path="/gui/planchas/generarNumeracionPlanchas.jspx" location="630,530" dimension="299,36" />
+  <JSFFlowResource path="/gui/planchas/generarNumeracionPlanchasRecurso.jspx" location="330,830" dimension="341,36" />
+  <JSFFlowResource path="/gui/forms/registrarVotante.jspx" location="30,1530" dimension="214,36" />
+  <JSFFlowResource path="/gui/forms/generarReportesJuegos.jspx" location="330,1530" dimension="252,36" />
+  <JSFFlowResource path="/gui/forms/registroNovedadesHabilidad.jspx" location="330,1630" dimension="280,36" />
+  <JSFFlowResource path="/gui/forms/formularioReportesComite.jspx" location="330,1730" dimension="271,36" />
+  <JSFFlowResource path="/gui/forms/formularioReportes.jspx" location="30,1730" dimension="232,36" />
+  <JSFFlowResource path="/gui/planchas/generarResolucionRechazo.jspx" location="480,1330" dimension="288,36" />
+  <JSFFlowResource path="/gui/forms/ExpedirResolucionInabilidad.jspx" location="30,1430" dimension="278,36" />
+  <JSFFlowResource path="/gui/planchas/generarAcreditacionOficio.jspx" location="480,1430" dimension="285,36" />
+  <JSFFlowResource path="/gui/forms/inicioAdmHabilidad.jspx" location="30,1630" dimension="236,36" />
+  <JSFFlowNavigationCase id="/gui/forms/crearPlancha.jspx,/gui/forms/verPlancha.jspx,verificado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="120,36" />
+      <AbsolutePoint location="120,300" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/crearPlancha.jspx,/gui/inicioAsociado.jspx,goInicioAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="165,36" />
+      <AbsolutePoint location="165,138" />
+      <AbsolutePoint location="320,138" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/verPlancha.jspx,/gui/inicioAsociado.jspx,goInicioAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="105,300" />
+      <AbsolutePoint location="105,153" />
+      <AbsolutePoint location="320,153" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/verPlancha.jspx,/gui/forms/crearPlancha.jspx,goCrearPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="150,300" />
+      <AbsolutePoint location="150,36" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/inicioAsociado.jspx,/gui/forms/crearPlancha.jspx,goCrearPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="406,120" />
+      <AbsolutePoint location="406,18" />
+      <AbsolutePoint location="281,18" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/inicioAsociado.jspx,/gui/forms/resumenPlancha.jspx,goResumenPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="440,156" />
+      <AbsolutePoint location="440,280" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/resumenPlancha.jspx,/gui/forms/modificarPlancha.jspx,goModPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,316" />
+      <AbsolutePoint location="350,540" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/resumenPlancha.jspx,/gui/inicioAsociado.jspx,goInicioAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="455,280" />
+      <AbsolutePoint location="455,156" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/ConsultaPlanchaEstado.jspx,/gui/forms/ConsultaCabezaPlancha.jspx,goConsultaCabezaPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="157,1030" />
+      <AbsolutePoint location="157,1003" />
+      <AbsolutePoint location="608,1003" />
+      <AbsolutePoint location="608,966" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/modificarPlancha.jspx,/gui/forms/verModPlancha.jspx,goVerModPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="481,573" />
+      <AbsolutePoint location="936,573" />
+      <AbsolutePoint location="936,76" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/modificarPlancha.jspx,/gui/forms/resumenPlancha.jspx,goResumenPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="440,540" />
+      <AbsolutePoint location="440,316" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/verModPlancha.jspx,/gui/inicioAsociado.jspx,goInicioAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="720,73" />
+      <AbsolutePoint location="421,73" />
+      <AbsolutePoint location="421,120" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/verModPlancha.jspx,/gui/forms/modificarPlancha.jspx,goModPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="880,76" />
+      <AbsolutePoint location="880,403" />
+      <AbsolutePoint location="365,403" />
+      <AbsolutePoint location="365,540" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/verModPlancha.jspx,/gui/forms/ejecutarProcesoHabilidadAsos.jspx,goEjecutarProcesoHabilidad,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="720,58" />
+      <AbsolutePoint location="228,58" />
+      <AbsolutePoint location="228,430" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/generarReportesHabilidades.jspx,goGenerarReportesHabilidades,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,448" />
+      <AbsolutePoint location="480,448" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/ejecutarProcesoHabilidadAsos.jspx,goProcesoHabilidad,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,463" />
+      <AbsolutePoint location="320,463" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/verPlancha.jspx,verificado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="504,430" />
+      <AbsolutePoint location="504,323" />
+      <AbsolutePoint location="221,323" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/inicioAsociado.jspx,goInicioAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="519,430" />
+      <AbsolutePoint location="519,343" />
+      <AbsolutePoint location="598,343" />
+      <AbsolutePoint location="598,138" />
+      <AbsolutePoint location="492,138" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/crearPlancha.jspx,goCrearPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="489,430" />
+      <AbsolutePoint location="489,373" />
+      <AbsolutePoint location="243,373" />
+      <AbsolutePoint location="243,36" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/resumenPlancha.jspx,goResumenPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,433" />
+      <AbsolutePoint location="455,433" />
+      <AbsolutePoint location="455,316" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/modificarPlancha.jspx,goModPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="489,466" />
+      <AbsolutePoint location="489,558" />
+      <AbsolutePoint location="481,558" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/verModPlancha.jspx,goVerModPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="519,466" />
+      <AbsolutePoint location="519,493" />
+      <AbsolutePoint location="895,493" />
+      <AbsolutePoint location="895,76" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/consultarNovedadesAplicadas.jspx,goConsultaNovedadesAplicadas,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="504,466" />
+      <AbsolutePoint location="504,630" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/resumenNovedades.jspx,goResumenNovedades,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="509,466" />
+      <AbsolutePoint location="509,493" />
+      <AbsolutePoint location="20,493" />
+      <AbsolutePoint location="20,748" />
+      <AbsolutePoint location="30,748" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/inicioMenuAsociado.jspx,goInicioMenuAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="516,466" />
+      <AbsolutePoint location="516,730" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/inicioRegistroPlanchas.jspx,goLInicioRegitroPlanchas,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="509,430" />
+      <AbsolutePoint location="509,424" />
+      <AbsolutePoint location="10,424" />
+      <AbsolutePoint location="10,848" />
+      <AbsolutePoint location="30,848" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/registrarPlancha.jspx,goRegistroPlanchaAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,435" />
+      <AbsolutePoint location="871,435" />
+      <AbsolutePoint location="871,348" />
+      <AbsolutePoint location="861,348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/consultaPlanchaAsociado.jspx,goConsultarPlanchaAsociado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="506,466" />
+      <AbsolutePoint location="506,483" />
+      <AbsolutePoint location="0,483" />
+      <AbsolutePoint location="0,948" />
+      <AbsolutePoint location="30,948" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/cuociente/cuocienteElectoral.jspx,goCuocienteElectoral,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="519,430" />
+      <AbsolutePoint location="519,414" />
+      <AbsolutePoint location="-40,414" />
+      <AbsolutePoint location="-40,1348" />
+      <AbsolutePoint location="30,1348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/ConsultaCabezaPlancha.jspx,goConsultaCabezaPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="526,466" />
+      <AbsolutePoint location="526,476" />
+      <AbsolutePoint location="747,476" />
+      <AbsolutePoint location="747,948" />
+      <AbsolutePoint location="737,948" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/ConsultaPlanchaEstado.jspx,goConsultaPlanchaEstado,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,460" />
+      <AbsolutePoint location="-10,460" />
+      <AbsolutePoint location="-10,1048" />
+      <AbsolutePoint location="30,1048" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/cuociente/delegadosZona.jspx,goDelegadosZona,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="514,430" />
+      <AbsolutePoint location="514,419" />
+      <AbsolutePoint location="-30,419" />
+      <AbsolutePoint location="-30,1248" />
+      <AbsolutePoint location="30,1248" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/cargarArchivoOtrasEntElect.jspx,goCargaArchivoOtrasEntElect,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,460" />
+      <AbsolutePoint location="764,460" />
+      <AbsolutePoint location="764,1048" />
+      <AbsolutePoint location="754,1048" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/cargarArchivoSancionadosAnnos.jspx,goCargaArchivoSancionados,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,458" />
+      <AbsolutePoint location="-20,458" />
+      <AbsolutePoint location="-20,1148" />
+      <AbsolutePoint location="30,1148" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/registrarInfoCabezaPlancha.jspx,goRegistrarInfoCabezaPlancha,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,450" />
+      <AbsolutePoint location="780,450" />
+      <AbsolutePoint location="780,1148" />
+      <AbsolutePoint location="770,1148" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/elecciones2012/marcarPlanchaRecurso.jspx,goMarcarPlanchaRecurso,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,440" />
+      <AbsolutePoint location="825,440" />
+      <AbsolutePoint location="825,1248" />
+      <AbsolutePoint location="815,1248" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/generarNumeracionPlanchas.jspx,goGenerarNumeracionPlanchas,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="524,466" />
+      <AbsolutePoint location="524,548" />
+      <AbsolutePoint location="630,548" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/generarNumeracionPlanchasRecurso.jspx,goGenerarNumeracionPlanchasRecurso,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="521,466" />
+      <AbsolutePoint location="521,830" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/registrarVotante.jspx,goRegistroVotantes,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,453" />
+      <AbsolutePoint location="-60,453" />
+      <AbsolutePoint location="-60,1548" />
+      <AbsolutePoint location="30,1548" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/generarReportesJuegos.jspx,goReporteJuego,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,463" />
+      <AbsolutePoint location="456,463" />
+      <AbsolutePoint location="456,1530" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/registroNovedadesHabilidad.jspx,goRegistroNovedadesHabilidad,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="514,466" />
+      <AbsolutePoint location="514,513" />
+      <AbsolutePoint location="324,513" />
+      <AbsolutePoint location="324,1648" />
+      <AbsolutePoint location="330,1648" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/formularioReportesComite.jspx,goFormularioReportesComite,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="511,466" />
+      <AbsolutePoint location="511,503" />
+      <AbsolutePoint location="319,503" />
+      <AbsolutePoint location="319,1748" />
+      <AbsolutePoint location="330,1748" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/formularioReportes.jspx,goFormularioReportes,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="524,430" />
+      <AbsolutePoint location="524,408" />
+      <AbsolutePoint location="-80,408" />
+      <AbsolutePoint location="-80,1748" />
+      <AbsolutePoint location="30,1748" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/generarResolucionRechazo.jspx,irFormularioExpedirResolucionRechazo,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,455" />
+      <AbsolutePoint location="780,455" />
+      <AbsolutePoint location="780,1348" />
+      <AbsolutePoint location="768,1348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/ExpedirResolucionInabilidad.jspx,irFormularioExpedirResolucionInhabilidad,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,455" />
+      <AbsolutePoint location="-50,455" />
+      <AbsolutePoint location="-50,1448" />
+      <AbsolutePoint location="30,1448" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/planchas/generarAcreditacionOficio.jspx,goGenerarAcreditacionOficio,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="529,445" />
+      <AbsolutePoint location="790,445" />
+      <AbsolutePoint location="790,1448" />
+      <AbsolutePoint location="765,1448" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/inicioRegistroPlanchas.jspx,goModificacionPlanchas,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="519,466" />
+      <AbsolutePoint location="519,820" />
+      <AbsolutePoint location="136,820" />
+      <AbsolutePoint location="136,830" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="*,/gui/forms/inicioAdmHabilidad.jspx,goInicioMenu,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,450" />
+      <AbsolutePoint location="-70,450" />
+      <AbsolutePoint location="-70,1648" />
+      <AbsolutePoint location="30,1648" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+</JSFFlowViewLayout>
+

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteAsociadosHabiles" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.9313819845887326"/>
+	<property name="ireport.x" value="8"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT A.NUMERO_DOCUMENTO AS NUMINT,
+C.NOMCLI,
+A.DESC_ZONA_ASO ZONA,
+DB2UTIL.SIP_PROFESION(C.NUMINT,'AS') PROFESION,
+(SELECT (CASE WHEN A2.CODIGO_ASOCIADO IS NULL THEN '0' ELSE '1' END) HABILIDAD_ASOCIADO
+    FROM ELECDB.ELE_ASOCIADO A2 WHERE A2.NUMERO_DOCUMENTO = A.CODIGO_ASOCIADO
+    AND (A2.CODIGO_ASOCIADO NOT IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I
+    WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) OR (A2.CODIGO_ASOCIADO IN
+    (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)
+    AND (SELECT N.ESTADO_HABILIDAD FROM ELECDB.ELE_NOVEDAD N WHERE N.CONSECUTIVO_NOVEDAD =
+    (SELECT MAX(N2.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N2 WHERE N2.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)) = '1'))) HABILIDAD_ASOCIADO
+
+FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO
+
+WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO)
+OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO)
+AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO AND N4.ESTADO_HABILIDAD = '1')=
+(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO))))
+
+ORDER BY A.NUMERO_DOCUMENTO, ZONA ASC]]>
+	</queryString>
+	<field name="NUMINT" class="java.math.BigDecimal"/>
+	<field name="NOMCLI" class="java.lang.String"/>
+	<field name="ZONA" class="java.lang.String"/>
+	<field name="PROFESION" class="java.lang.String"/>
+	<field name="HABILIDAD_ASOCIADO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="105" y="16" width="411" height="38"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASOCIADOS HABILES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="53" width="109" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Número Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="53" width="190" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Nombre Completo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="105" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Zona Electoral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="53" width="116" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Profesión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="516" y="53" width="64" height="26"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="-1" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ZONA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="-1" width="109" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{NUMINT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="-1" width="190" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMCLI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="-1" width="116" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PROFESION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="516" y="-1" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{HABILIDAD_ASOCIADO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

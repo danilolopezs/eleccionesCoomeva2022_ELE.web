@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2012 06:02:14 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="co.com.coomeva.ele.entidades.habilidad.EleInhabilidad" table="ELE_INHABILIDAD" schema="ELECDB">
+        <id name="consecutivoInhabilidad" type="java.lang.Long">
+            <column name="CONSECUTIVO_INHABILIDAD" precision="15" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="eleProcesoRegla" class="co.com.coomeva.ele.entidades.habilidad.EleProcesoRegla" fetch="select">
+            <column name="CONSECUTIVO_PRO_REGLA" precision="5" scale="0" />
+        </many-to-one>
+        <many-to-one name="eleAsociado" class="co.com.coomeva.ele.entidades.habilidad.EleAsociado" fetch="select">
+            <column name="CODIGO_ASOCIADO" precision="17" scale="0" />
+        </many-to-one>
+        <property name="observaciones" type="java.lang.String">
+            <column name="OBSERVACIONES" length="2000" />
+        </property>
+        <property name="valorMoraFin" type="java.lang.Long">
+            <column name="VALOR_MORA_FIN" precision="10" scale="0" />
+        </property>
+        <property name="valorMoraMul" type="java.lang.Long">
+            <column name="VALOR_MORA_MUL" precision="10" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

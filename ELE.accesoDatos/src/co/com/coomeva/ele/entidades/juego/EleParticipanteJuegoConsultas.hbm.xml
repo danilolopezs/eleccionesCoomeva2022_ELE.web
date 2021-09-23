@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+
+
+	<!--
+		######################################################################
+		## 1. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-11-28 ## ##
+		Consulta el Consecutivo de la tabla ele_participante_juego ##
+		######################################################################
+	-->
+
+	<sql-query name="consultar.secuencia.ele.ele.participante.juego">
+		<return-scalar column="SEQ" type="java.lang.Long" />
+		<![CDATA[		
+			SELECT NEXT VALUE FOR ELECDB.ELE_PARTICIPANTE_JUEGO_SEQ SEQ FROM SYSIBM.SYSDUMMY1
+		]]>
+	</sql-query>
+
+	<!--
+		######################################################################
+		## 2. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-11-29 ## ##
+		Consulta de boletas asignadas a un jugador en juego de elecciones ##
+		######################################################################
+	-->
+	<sql-query name="consultar.boletas.asignadas.juego">
+		<return-scalar column="doc" type="java.lang.Long" />
+		<return-scalar column="fase" type="java.lang.Integer" />
+		<return-scalar column="zona_aso" type="java.lang.String" />
+		<return-scalar column="regional_aso" type="java.lang.String" />
+		<return-scalar column="boletas" type="java.lang.Integer" />
+	
+		<![CDATA[
+			SELECT J.NUMERO_DOCUMENTO doc,J.FASE_JUEGO fase,CONCAT(ZE.CODIGO_ZONA_ELE,CONCAT('-',ZE.DESCRIPCION_ZONA_ELE)) zona_aso,(SELECT DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM)) 
+			FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, MULCLIDAT.CLITAB ZN, ELECDB.ELE_ZONA_ELECTORAL ZE, ELECDB.ELE_ZONA ZI,MULCLIDAT.CLITAB CT
+			WHERE ZN.CODTAB = 908
+			AND RG.CODTAB = 907
+			AND ZN.CODINT = AG.CODZON
+			AND ZI.CODIGO_ZONA = AG.CODZON
+			AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE
+			AND CT.CODTAB = 608
+			AND CT.CODINT <> 0
+			AND CT.CODINT =AG.CODREG 
+			AND ZI.CODIGO_ZONA_ELE=(SELECT ZE.CODIGO_ZONA_ELE FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON A.COD_ZONA_ASO=Z.CODIGO_ZONA 
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE=ZE.CODIGO_ZONA_ELE
+			WHERE A.NUMERO_DOCUMENTO=J.NUMERO_DOCUMENTO)) regional_aso,COUNT(J.CONSECUTIVO) boletas
+			FROM ELECDB.ELE_PARTICIPANTE_JUEGO J
+			INNER JOIN ELECDB.ELE_ASOCIADO A ON A.NUMERO_DOCUMENTO=J.NUMERO_DOCUMENTO
+			INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA=A.COD_ZONA_ASO
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE			
+			WHERE J.NUMERO_DOCUMENTO = :numeroDocumento
+			GROUP by J.NUMERO_DOCUMENTO,J.FASE_JUEGO,J.ZONA_JUEGO,ZE.CODIGO_ZONA_ELE,ZE.DESCRIPCION_ZONA_ELE
+			ORDER BY J.NUMERO_DOCUMENTO,J.FASE_JUEGO,J.ZONA_JUEGO		
+    	]]>
+	</sql-query>
+
+	<!--
+		######################################################################
+		## 3. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-12-05 ## ##
+		Consulta para verificar si la zona de un asociado está habilitada para
+		votar ##
+		######################################################################
+	-->
+
+	<sql-query name="consultar.habilidad.asociado.zona.juego">
+		<return-scalar column="codZona" type="java.lang.String" />
+		<return-scalar column="descZona" type="java.lang.String" />
+		<![CDATA[		
+			SELECT ZE.CODIGO_ZONA_ELE codZona,ZE.DESCRIPCION_ZONA_ELE descZona FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON A.COD_ZONA_ASO=Z.CODIGO_ZONA 
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE=ZE.CODIGO_ZONA_ELE WHERE A.NUMERO_DOCUMENTO= :numeroDocumento
+		]]>
+	</sql-query>
+
+
+	<!--
+		######################################################################
+		## 4. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-12-18     ##
+		## Consulta del total de juegos                                     ##
+		######################################################################
+	-->
+
+	<sql-query name="consultar.total.juegos">
+		<return-scalar column="total" type="java.lang.Long" />
+		<return-scalar column="col" type="java.lang.String" />
+		<![CDATA[		
+			SELECT COUNT(CONSECUTIVO) TOTAL,1 COL FROM ELECDB.ELE_PARTICIPANTE_JUEGO 
+			UNION ALL
+			SELECT COUNT(DOCUMENTO_VOTANTE) TOTAL,2 COL FROM ELECDB.ELE_VOTANTE
+		]]>
+	</sql-query>
+
+</hibernate-mapping>

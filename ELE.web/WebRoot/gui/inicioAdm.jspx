@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<ice:outputDeclaration doctypeRoot="html"
+			doctypePublic="-//W3C//DTD HTML 4.01 Transitional//EN"
+			doctypeSystem="http://www.w3.org/TR/html4/loose.dtd" />
+		<html>
+			<head>
+				<title>Administraci&#243;n de Planchas e inhabilidad de Asociados - Inicio de Sesion de Usuarios</title>
+				<link rel="stylesheet" type="text/css"
+					href="./estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="./estilos/estiloPlanchas.css" />
+				<style id="antiClickjack">body{display:none !important;}</style>
+				<script type="text/javascript">
+				   if (self === top) {
+				       var antiClickjack = document.getElementById("antiClickjack");
+				       antiClickjack.parentNode.removeChild(antiClickjack);
+				   } else {
+				       top.location = self.location;
+				   }
+				</script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+				<ice:form partialSubmit="false">
+					<div align="center">
+						<table width="824" bgcolor="#FFFFFF">
+							<tr>
+								<td align="center" class="banner"></td>
+							</tr>
+							<tr>
+								<td align="center" style="background: white;">
+									<br />
+									<br />
+									<ice:panelCollapsible columns="1" id="pnlPrincipal"
+										expanded="true" toggleOnClick="false" style="width: 400px">
+
+										<f:facet name="header">
+											<ice:outputText id="lblTituloInicioSesion"
+												style="font-size: 13px"
+												value="#{etiquetas.ttlInicioUsuario}" styleClass="">
+											</ice:outputText>
+										</f:facet>
+
+										<br />
+
+										<div align="center">
+											<ice:panelGrid columns="2">
+												<ice:outputText id="msgLogin" value="#{etiquetas.lblLogin}" />
+												<ice:inputText id="txtLogin"
+													value="#{inicioSesionUsuariosVista.login}">
+												</ice:inputText>
+
+												<ice:outputText id="msgPass"
+													value="#{etiquetas.lblPassword}">
+												</ice:outputText>
+												<ice:inputSecret id="txtPass"
+													value="#{inicioSesionUsuariosVista.pass}" />
+											</ice:panelGrid>
+										</div>
+
+										<br />
+
+										<div align="center">
+											<ice:panelGrid columns="2">
+
+												<ice:commandButton id="btnLogin" styleClass="button"
+													value="#{etiquetas.lblIngresar}"
+													action="#{inicioSesionUsuariosVista.action_ingreso}">
+												</ice:commandButton>
+												<ice:commandButton id="btnLimpiar" styleClass="button"
+													value="#{etiquetas.lblLimpiar}"
+													action="#{inicioSesionUsuariosVista.action_limpiar}">
+												</ice:commandButton>
+
+											</ice:panelGrid>
+										</div>
+									</ice:panelCollapsible>
+									<br />
+									<br />
+								</td>
+							</tr>
+						</table>
+						<jsp:directive.include file="./popup/popupMensajeExcepcionInicio.jsp"/>
+					</div>
+					
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

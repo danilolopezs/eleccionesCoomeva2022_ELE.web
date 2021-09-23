@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.464100000000002"/>
+	<property name="ireport.x" value="67"/>
+	<property name="ireport.y" value="252"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="plancha" class="java.lang.String"/>
+	<parameter name="nombreRepresen" class="java.lang.String"/>
+	<parameter name="rutaImagen" class="java.lang.String"/>
+	<parameter name="1SI" class="java.lang.String"/>
+	<parameter name="1NO" class="java.lang.String"/>
+	<parameter name="2SI" class="java.lang.String"/>
+	<parameter name="2NO" class="java.lang.String"/>
+	<parameter name="3SI" class="java.lang.String"/>
+	<parameter name="3NO" class="java.lang.String"/>
+	<parameter name="4SI" class="java.lang.String"/>
+	<parameter name="4NO" class="java.lang.String"/>
+	<parameter name="5SI" class="java.lang.String"/>
+	<parameter name="5NO" class="java.lang.String"/>
+	<parameter name="6SI" class="java.lang.String"/>
+	<parameter name="6NO" class="java.lang.String"/>
+	<parameter name="7SI" class="java.lang.String"/>
+	<parameter name="7NO" class="java.lang.String"/>
+	<parameter name="8SI" class="java.lang.String"/>
+	<parameter name="8NO" class="java.lang.String"/>
+	<parameter name="9SI" class="java.lang.String"/>
+	<parameter name="9NO" class="java.lang.String"/>
+	<parameter name="10SI" class="java.lang.String"/>
+	<parameter name="10NO" class="java.lang.String"/>
+	<parameter name="11SI" class="java.lang.String"/>
+	<parameter name="11NO" class="java.lang.String"/>
+	<parameter name="12SI" class="java.lang.String"/>
+	<parameter name="12NO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#7D933C"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="25" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Elección de Delegados 2017-2020]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-21" y="47" width="595" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICACIÓN DE CUMPLIMIENTO PARA SER ELEGIDO DELEGADO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<image>
+				<reportElement x="225" y="4" width="127" height="36"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<rectangle>
+				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000" backcolor="#FFFFFF"/>
+			</rectangle>
+			<line>
+				<reportElement x="409" y="1" width="1" height="31" forecolor="#000000"/>
+			</line>
+			<staticText>
+				<reportElement x="49" y="5" width="360" height="11" forecolor="#000000"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Apellido(s) y Nombre(s) del Integrante de la Plancha]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="50" y="1" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="410" y="5" width="110" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Número de Plancha]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="16" width="359" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="17" width="110" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{plancha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="431" splitType="Stretch">
+			<rectangle>
+				<reportElement x="49" y="0" width="471" height="399" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-21" y="399" width="595" height="32" forecolor="#7D933C" backcolor="#7D933C"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="16" width="471" height="20" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="36" width="471" height="20" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="56" width="471" height="35" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="126" width="471" height="24" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="178" width="471" height="14" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="221" width="471" height="29" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="264" width="471" height="29" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="49" y="293" width="471" height="29" forecolor="#000000"/>
+			</rectangle>
+			<line>
+				<reportElement x="407" y="16" width="2" height="306" forecolor="#000000"/>
+			</line>
+			<line>
+				<reportElement x="467" y="16" width="1" height="306" forecolor="#000000"/>
+			</line>
+			<line>
+				<reportElement x="67" y="16" width="1" height="306" forecolor="#000000"/>
+			</line>
+			<staticText>
+				<reportElement x="407" y="0" width="60" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="0" width="53" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="16" width="337" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Es Asociado hábil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="36" width="336" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cuenta con Antigüedad como Asociado de tres (3) años]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="56" width="336" height="35"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Acredita Título Profesional u Ocupación mínima de tres (3) años.
+Nota: Para el caso de acreditación de ocupación los participantes deben anexar la Declaración para Acreditar Pcupuación y Cumplimiento de Requisitos (CO.FT-211)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="91" width="338" height="35"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[No presenta sanciones por la Cooperativa, durante los cinco(5) años anteriores a la nominación con suspensión o pérdida de sus derechos sociales, de acuerdo a los establecido en el estatuto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="126" width="336" height="24"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[No presenta sanciones con multa en los últimos cinco (5) años o con suspensión, destitución o remoción del cargo por un Organismo de Control Estatal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="399" width="555" height="32" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="150" width="337" height="28"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Actualmente no se encuentra incurso en las inhabilidades e incompatibilidades que estable la Ley y el Estatuto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="178" width="336" height="14"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[No se encuentra registrado en otra plancha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="192" width="339" height="29"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[La plancha se encuentra conformada en su totalidad por Asociados o en su totalidad por empleados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="221" width="338" height="29"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[No es miembro del Tribunal de Elecciones y Escrutinio, ni de la Comisión Electoral o de los Comités Auxiliares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="250" width="336" height="14"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Hay por lo menos un suplente inscrito en la plancha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="264" width="336" height="29"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[La cantidad de suplentes inscritos en la plancha no supera la cantidad de miembros principales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="293" width="336" height="29"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[El cabeza de plancha corresponde al primer rebglón de los miembros principales de la plancha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="335" width="221" height="13"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nombre del Representante de la Comisión Electoral:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="369" width="221" height="13"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Firma del Representante de la Comisión Electoral:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="279" y="345" width="214" height="1"/>
+			</line>
+			<line>
+				<reportElement x="279" y="381" width="214" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="49" y="16" width="18" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="36" width="18" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="56" width="18" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="91" width="17" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="126" width="18" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="150" width="19" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="178" width="17" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="192" width="18" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="221" width="18" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="250" width="17" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="264" width="17" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="293" width="17" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="407" y="16" width="61" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{1SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="407" y="36" width="61" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{2SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="407" y="56" width="60" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{3SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="407" y="91" width="60" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{4SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="126" width="58" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{5SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="150" width="58" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{6SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="178" width="57" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{7SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="192" width="58" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{8SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="221" width="58" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{9SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="250" width="58" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{10SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="264" width="58" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{11SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="293" width="58" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{12SI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="467" y="16" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{1NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="467" y="36" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{2NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="467" y="56" width="52" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{3NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="467" y="91" width="52" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{4NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="126" width="50" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{5NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="150" width="50" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{6NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="178" width="49" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{7NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="192" width="50" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{8NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="221" width="50" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{9NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="250" width="50" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{10NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="264" width="50" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{11NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="469" y="293" width="50" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{12NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="279" y="322" width="214" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreRepresen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

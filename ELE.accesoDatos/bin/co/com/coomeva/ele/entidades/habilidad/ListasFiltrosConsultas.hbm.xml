@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2012 06:02:14 PM by Hibernate Tools 3.2.4.GA -->
+
+
+<hibernate-mapping>	
+	
+	<!--
+		######################################################################################
+		## 1. Bernardo Lopez - Pragma S.A.  - 2012-11-08                                    ##
+    	##    Consulta las zonas, para depslegar en las listas seleccionables.				##
+    	######################################################################################
+	-->
+	<sql-query name="conulta.zonas.coomeva">
+	
+		<return-scalar column="CODZON" type="java.lang.Long" />
+		<return-scalar column="CODNOM" type="java.lang.String" />
+		<![CDATA[
+			SELECT DISTINCT PLT.CODZON, CTAB.CODNOM
+			FROM SEGURIDAD.PLTAGCORI PLT, MULCLIDAT.CLITAB CTAB
+			WHERE PLT.CODEMP = 67890
+			AND CTAB.CODTAB = 908
+			AND PLT.CODZON = CTAB.CODINT
+			ORDER BY PLT.CODZON					
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 2. Bernardo Lopez - Pragma S.A.  - 2012-11-08                                    ##
+    	##    Consulta las ciudades, para desplegar en las listas seleccionables.			##
+    	######################################################################################
+	-->
+	<sql-query name="conulta.ciudades.coomeva">
+	
+		<return-scalar column="CODCIU" type="java.lang.Long" />
+		<return-scalar column="NOMCIU" type="java.lang.String" />
+		<![CDATA[
+			SELECT DISTINCT A.CODCIU, C.NOMCIU
+			FROM MULCLIDAT.CLIDIR A, MULCLIDAT.CLICIUDAD C
+			WHERE A.TIPUBI = 'RE'
+			AND A.CODCIU = C.CODCIU
+			ORDER BY C.NOMCIU				
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 3. Bernardo Lopez - Pragma S.A.  - 2012-11-09                                    ##
+    	##    Consulta las ciudades, para desplegar en las listas seleccionables.			##
+    	######################################################################################
+	-->
+	<sql-query name="conulta.profesiones">
+	
+		<return-scalar column="CODINT" type="java.lang.Long" />
+		<return-scalar column="CODNOM" type="java.lang.String" />
+		<![CDATA[
+			SELECT CTAB.CODINT, CTAB.CODNOM 
+			FROM MULCLIDAT.CLITAB CTAB 
+			WHERE CTAB.CODTAB = 98	
+			AND CTAB.CODINT = CASE WHEN :codPro IS NULL THEN CTAB.CODINT ELSE :codPro END
+			AND CTAB.CODNOM = CASE WHEN :nomPro IS NULL THEN CTAB.CODNOM ELSE :nomPro END
+			ORDER BY CTAB.CODNOM			
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 3. Bernardo Lopez - Pragma S.A.  - 2012-11-09                                    ##
+    	##    Consulta las fechas de los procesos programados.								##
+    	######################################################################################
+	-->
+	<sql-query name="conulta.fechas.procesos.programados">
+	
+		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
+		<return-scalar column="FECHA_PROGRAMACION" type="java.util.Date" />
+		<![CDATA[
+			SELECT P.CODIGO_PROCESO, P.FECHA_PROGRAMACION 
+			FROM ELECDB.ELE_PROCESO P 
+			ORDER BY P.CODIGO_PROCESO
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## josel_gonzalez@coomeva.com.co
+		##
+    	##    Consulta las fechas de cortes de los procesos programados.								##
+    	######################################################################################
+	-->
+	<sql-query name="conulta.fechascorte.procesos.programados">
+	
+		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
+		<return-scalar column="FECHA_CORTE" type="java.util.Date" />
+		<![CDATA[
+			SELECT P.CODIGO_PROCESO, P.FECHA_CORTE 
+			FROM ELECDB.ELE_PROCESO P 
+			ORDER BY P.CODIGO_PROCESO
+		]]>
+	</sql-query>	
+	<!--
+		######################################################################################
+		## 4. Bernardo Lopez - Pragma S.A.  - 2012-11-26                                    ##
+    	##    Consulta regionales															##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.regionales">
+	
+		<return-scalar column="CODINT" type="java.lang.Long" />
+		<return-scalar column="CODNOM" type="java.lang.String" />
+		<![CDATA[
+			SELECT CT.CODINT, CT.CODNOM
+			FROM MULCLIDAT.CLITAB CT
+			WHERE CT.CODTAB = 608
+			AND CT.CODINT <> 0
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 5. Bernardo Lopez - Pragma S.A.  - 2012-11-26                                    ##
+    	##    Consulta zonas electorales por regional administrativa						##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.zonas.electorales.por.regional">
+	
+		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
+		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
+		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
+		<![CDATA[
+			SELECT DISTINCT ZE.CODIGO_ZONA_ELE, ZE.DESCRIPCION_ZONA_ELE, ZE.NUMERO_ZONA_ELE
+			FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, MULCLIDAT.CLITAB ZN, ELECDB.ELE_ZONA_ELECTORAL ZE, ELECDB.ELE_ZONA Z
+			WHERE ZN.CODTAB = 908
+			AND RG.CODTAB = 907
+			AND ZN.CODINT = AG.CODZON
+			AND AG.CODREG = :codRegional
+			AND Z.CODIGO_ZONA = AG.CODZON
+			AND ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
+			ORDER BY 2
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 6. Bernardo Lopez - Pragma S.A.  - 2012-11-26                                    ##
+    	##    Consulta zonas electorales 													##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.zonas.electorales">
+	
+		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
+		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
+		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
+		<![CDATA[
+			SELECT ZE.CODIGO_ZONA_ELE , ZE.DESCRIPCION_ZONA_ELE, ZE.NUMERO_ZONA_ELE
+			FROM ELECDB.ELE_ZONA_ELECTORAL ZE
+			WHERE ZONA_ESPECIAL = 'N'
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 7. Bernardo Lopez - Pragma S.A.  - 2012-12-06                                    ##
+    	##    Consulta zona electoral de un asociado										##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.zona.electorale.por.asociado">
+	
+		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
+		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
+		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
+		<![CDATA[
+			SELECT ZE.CODIGO_ZONA_ELE, ZE.DESCRIPCION_ZONA_ELE, ZE.NUMERO_ZONA_ELE
+			FROM ELECDB.ELE_ASOCIADO A 
+			    INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO
+			    INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
+			WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
+            	
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 7b. Bernardo Lopez - Pragma S.A.  - 2012-12-06                                   ##
+    	##    Consulta zona electoral de un asociado especial (asociado empleado)			##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.zona.electorale.por.asociado.especial">
+	
+		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
+		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
+		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
+		<![CDATA[
+			SELECT ZEE.CODIGO_ZONA_ELE, ZEE.DESCRIPCION_ZONA_ELE, ZEE.NUMERO_ZONA_ELE
+			FROM ELECDB.ELE_ASOCIADO A 
+			    INNER JOIN ELECDB.ELE_ZONA_ESPECIAL Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO
+			    INNER JOIN ELECDB.ELE_ZONA_ELECTORAL_ESPECIAL ZEE ON ZEE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
+			WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 8. Bernardo Lopez - Pragma S.A.  - 2012-12-07                                    ##
+    	##    Consulta fechas de cambio de estado planchas 									##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.fechas.marcar.recurso.plancha">
+		<return-scalar column="NOMBRE" type="java.lang.String" />
+		<![CDATA[
+			SELECT P.NOMBRE
+			FROM ELECDB.ELE_PARAMETRO P
+			WHERE P.TIP_COD = 4
+			ORDER BY P.CODIGO
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 9. Mario Alejandro Acevedo					                                    ##
+    	##    Consulta fechas de radicación admisión	 									##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.parametrizacion.fechas.admision">
+		<return-scalar column="NOMBRE" type="java.lang.String" />
+		<![CDATA[
+			SELECT P.NOMBRE
+			FROM ELECDB.ELE_PARAMETRO P
+			WHERE P.TIP_COD = 3 AND P.ESTADO = 1
+			ORDER BY P.CODIGO
+		]]>
+	</sql-query>
+	
+	<!--
+		######################################################################################
+		## 10. Mario Alejandro Acevedo					                                    ##
+    	##    Consulta fechas de constancia				 									##
+    	######################################################################################
+	-->
+	<sql-query name="consulta.parametrizacion.fechas.constancia">
+		<return-scalar column="NOMBRE" type="java.lang.String" />
+		<![CDATA[
+			SELECT P.NOMBRE
+			FROM ELECDB.ELE_PARAMETRO P
+			WHERE P.TIP_COD = 5 AND P.ESTADO = 1
+			ORDER BY P.CODIGO
+		]]>
+	</sql-query>	
+</hibernate-mapping>

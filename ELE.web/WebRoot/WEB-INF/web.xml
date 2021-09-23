@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="ELE.web" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>/WEB-INF/faces-config-planchas.xml,/WEB-INF/faces-config-adm.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.icesoft.faces.uploadDirectory</param-name>
+		<param-value>upload</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.icesoft.faces.uploadMaxFileSize</param-name>
+		<param-value>4048576</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.icesoft.faces.concurrentDOMViews</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.coomeva.elecciones.TIPO_ELECCIONES</param-name>
+		<param-value>delegados</param-value>
+	</context-param>
+
+	<session-config>
+		<session-timeout>240</session-timeout>
+	</session-config>
+	<!-- Fin Inicio Inicio sentencias sesion -->
+
+	<filter>
+		<filter-name>Filtro Asociado</filter-name>
+		<filter-class>co.com.coomeva.ele.util.filtro.FiltroRegistroPlanchas</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Filtro Asociado</filter-name>
+		<url-pattern>/gui/planchas/*</url-pattern>
+	</filter-mapping>
+<!-- 
+	<listener> 
+		<listener-class>
+			co.com.coomeva.util.resources.log4j.AppContextListener
+		</listener-class> 
+		</listener>
+	<listener>
+		<listener-class>
+			com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
+	</listener>
+	
+	-->
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Persistent Faces Servlet</servlet-name>
+		<servlet-class>com.icesoft.faces.webapp.xmlhttp.PersistentFacesServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Blocking Servlet</servlet-name>
+		<servlet-class>com.icesoft.faces.webapp.xmlhttp.BlockingServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>uploadServlet</servlet-name>
+		<servlet-class>com.icesoft.faces.component.inputfile.FileUploadServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>Servlet de Reporte de Asociados</description>
+		<display-name>Reporte de Asociados</display-name>
+		<servlet-name>ServletReporteAsociado</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteAsociado</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Servlet de Reporte de Log</description>
+		<display-name>Reporte de Log</display-name>
+		<servlet-name>ServletReporteLog</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteLog</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Servlet de inicializacion de componentes</description>
+		<display-name>ServletInicializacionComponentes</display-name>
+		<servlet-name>ServletInicializacionComponentes</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletInicializacionComponentes</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>Servlet de Reporte de Planchas</description>
+		<display-name>Reporte de Planchas</display-name>
+		<servlet-name>ServletReportePlanchas</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportePlanchas</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Servlet Cuadernillo</description>
+		<display-name>Servlet Cuadernillo</display-name>
+		<servlet-name>ServletCuadernillo</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletCuadernillo</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Servlet de Reporte de Log de Planchas</description>
+		<display-name>Reporte de Log de Planchas</display-name>
+		<servlet-name>ReportePlanLog</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteLogPlancha</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ArchivoXls</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.servletArchivoXls</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reportes Inhabilidades</description>
+		<display-name>Reportes Inhabilidades</display-name>
+		<servlet-name>ServletReportesInhabilidades</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesInhabilidades</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reporte Habilidades web</description>
+		<display-name>Reporte Habilidades web</display-name>
+		<servlet-name>ServletReportesHabilidadesWeb</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesHabilidadesWeb</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reportes Novedades</description>
+		<display-name>Reportes Novedades</display-name>
+		<servlet-name>ServletReportesNovedades</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesNovedades</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reportes Resumen Novedades</description>
+		<display-name>Reportes Resumen Novedades</display-name>
+		<servlet-name>ServletReporteResumenNovedades</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteResumenNovedades</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reportes Planchas Estados</description>
+		<display-name>Reportes Planchas Estados</display-name>
+		<servlet-name>ServletReportePlanchasEstado</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportePlanchasEstado</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Resumen Habilidades</description>
+		<display-name>Resumen Habilidades</display-name>
+		<servlet-name>ServletReportesResumenHab</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesResumenHab</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Delegados por Zona</description>
+		<display-name>Delegados por Zona</display-name>
+		<servlet-name>ServletReporteDelegadosZona</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteDelegadosZona</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Reporte para el proceso de marcacion</description>
+		<display-name>ServletReporteProcesoMarcacion</display-name>
+		<servlet-name>ServletReporteProcesoMarcacion</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReporteProcesoMarcacion</servlet-class>
+	</servlet>
+	<servlet>
+		<description>Servlet para procesar el informe de juegos de medios visuales</description>
+		<display-name>ServletReportesJuego</display-name>
+		<servlet-name>ServletReportesJuego</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesJuego</servlet-class>
+	</servlet>
+	<servlet>
+		<description>egenracion de diferentes reportes jasper.</description>
+		<display-name>ServletReportesJasper</display-name>
+		<servlet-name>ServletReportesJasper</servlet-name>
+		<servlet-class>co.com.coomeva.ele.servlets.ServletReportesJasper</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Persistent Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Persistent Faces Servlet</servlet-name>
+		<url-pattern>*.jspx</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Persistent Faces Servlet</servlet-name>
+		<url-pattern>*.iface</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Persistent Faces Servlet</servlet-name>
+		<url-pattern>/xmlhttp/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Blocking Servlet</servlet-name>
+		<url-pattern>/block/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>uploadServlet</servlet-name>
+		<url-pattern>/uploadHtml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReporteAsociado</servlet-name>
+		<url-pattern>/servlet/ReporteAsociado</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReporteLog</servlet-name>
+		<url-pattern>/servlet/ReporteLog</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportePlanchas</servlet-name>
+		<url-pattern>/servlet/ReportePlanchas</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletCuadernillo</servlet-name>
+		<url-pattern>/servlet/Cuadernillo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletInicializacionComponentes</servlet-name>
+		<url-pattern>/servlet/ServletInicializacionComponentes</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ReportePlanLog</servlet-name>
+		<url-pattern>/servlet/ReportePlanLog</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ArchivoXls</servlet-name>
+		<url-pattern>/servlet/ArchivoXls</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesInhabilidades</servlet-name>
+		<url-pattern>/servlet/ServletReportesInhabilidades</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesHabilidadesWeb</servlet-name>
+		<url-pattern>/servlet/ServletReportesHabilidadesWeb</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesNovedades</servlet-name>
+		<url-pattern>/servlet/ServletReportesNovedades</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReporteResumenNovedades</servlet-name>
+		<url-pattern>/servlet/ServletReporteResumenNovedades</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportePlanchasEstado</servlet-name>
+		<url-pattern>/servlet/ServletReportePlanchasEstado</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesResumenHab</servlet-name>
+		<url-pattern>/servlet/ServletReportesResumenHab</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReporteDelegadosZona</servlet-name>
+		<url-pattern>/servlet/ServletReporteDelegadosZona</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReporteProcesoMarcacion</servlet-name>
+		<url-pattern>/servlet/ServletReporteProcesoMarcacion</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesJuego</servlet-name>
+		<url-pattern>/servlet/ServletReportesJuego</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletReportesJasper</servlet-name>
+		<url-pattern>/servlet/ServletReportesJasper</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+	<error-page>
+		<!-- Missing login -->
+		<error-code>401</error-code>
+		<location>/general-error.html</location>
+	</error-page>
+	<error-page>
+		<!-- Forbidden directory listing -->
+		<error-code>403</error-code>
+		<location>/general-error.html</location>
+	</error-page>
+	<error-page>
+		<!-- Missing resource -->
+		<error-code>404</error-code>
+		<location>/general-error.html</location>
+	</error-page>
+	<error-page>
+		<!-- Uncaught exception -->
+		<error-code>500</error-code>
+		<location>/general-error.html</location>
+	</error-page>
+	<error-page>
+		<!-- Unsupported servlet method -->
+		<error-code>503</error-code>
+		<location>/general-error.html</location>
+	</error-page>
+</web-app>

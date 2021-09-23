@@ -1,0 +1,120 @@
+.textoTabla {
+	font: 11px tahoma;
+}
+
+.textoLabel {
+	font: 11px tahoma;
+	text-align: center;
+	color: #000033;
+}
+.textoLabelLeft {
+	font: 11px tahoma;
+	text-align: left;
+	color: #000033;
+}
+.textoLabel2 {
+	font: 11px tahoma;
+	text-align: right;
+	color: #000033;
+}
+.textoLabel3 {
+	font: 10px arial;
+	text-align: left;
+	color: #000033;
+}
+.textoConcepto{
+	font: 11px tahoma;
+	text-align: left;
+	color: #000033;
+	word-wrap: break-word; 
+	
+}
+.textoInput {
+	font: 11px tahoma;
+	text-align: left;
+	color: #000033;
+}
+
+.textoInputNumber{
+	font: 11px tahoma;
+	text-align: right;
+	color: #000033;
+}
+.textoLabelBold {
+	font: 11px tahoma;
+	text-align: center;
+	color: #000033;
+	font-weight: bold;
+}
+
+.textoLink {
+	font: 11px tahoma;
+	/*font-size: 11px;*/
+	text-align: center;
+}
+
+.tituloTabla {
+	font: 11px tahoma;
+	/*font-size: 11px;*/
+	font-weight: bold;
+	text-align: center;
+	color: #000033;
+	background-color: #99CC66;
+}
+.formularioTabla{
+	font: 11px tahoma;
+	/*font-size: 11px;*/
+	font-weight: bold;
+	text-align: left;
+	color: #FFFFFF;
+	background-color: #006633;
+}
+
+.fondoTabla {
+	background-color: #DFDFDF;
+	 font: 11px tahoma;
+	width: 100%;
+}
+
+.fondoApp {
+	background-color: #CCCCCC;
+}
+
+.link {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+.opcion1 {
+	background-color: #E8E8E8;
+}
+
+/* set the common attributes for the pagination numbers */
+.iceDtdPgrScrCol a, .iceDtdPgrCol a {
+    text-decoration: none;
+    font-weight: normal;
+    background-color: #FFFFFF;
+    color: #666666;
+    display: block;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #FFFFFF;
+    font: 11px tahoma;
+}
+.banner {
+	background-image: url('../imagenes/EncabezadoElec2022.png');
+	background-repeat: no-repeat;
+	height: 244px;
+	width: 829px;
+	margin: 0 auto;
+	float: left;
+}
+.bannerHabilidad {
+	background-image: url('../imagenes/EncabezadoElec2022.png');
+	background-repeat: no-repeat;
+	height: 244px;
+	width: 829px;
+	margin: 0 auto;
+	float: left;
+}

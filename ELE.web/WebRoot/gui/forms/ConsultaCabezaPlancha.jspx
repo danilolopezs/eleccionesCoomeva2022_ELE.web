@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software de Inscripci&#243;n de Planchas - Consulta
+					Cabeza Plancha</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<script type="text/javascript" src="../js/utilidades.js">
+				</script>
+				<script type="text/javascript" src="../js/servletInvoker.js"></script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+				<script type="text/javascript" language="JavaScript"
+					src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/gui/js/validaNumeroJSF.js">
+</script>
+			</head>
+			<body bgcolor="#DFDFDF">
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="center" class="banner"></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
+									<br />
+									<br />
+
+									<jsp:directive.include file="../general/menu.jsp" />
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;"
+									height="400">
+									<div
+										style="float: right; margin-right: 30px; margin-top: 30px;">
+										<ice:panelGrid>
+											<div align="center">
+												<ice:outputLabel value="Consulta Cabeza de Plancha"></ice:outputLabel>
+											</div>
+											<br />
+											<ice:panelGroup>
+												<div align="center">
+													<ice:panelGrid columns="3" styleClass="textoLabel2">
+														<ice:outputLabel
+															value="#{etiquetas.lblreporteNumeroDocumento} (Cabeza de Plancha)"></ice:outputLabel>
+														<ice:inputText id="txtNumDoc"
+															onkeypress="return keyCheck(event, this); "
+															binding="#{consultaCabezaPlanchaVista.txtNumDoc}"
+															value="#{consultaCabezaPlanchaVista.numCedula}">
+														</ice:inputText>
+														<ice:commandButton id="btnBuscar" styleClass="button"
+															value="Buscar"
+															action="#{consultaCabezaPlanchaVista.action_find}" />
+													</ice:panelGrid>
+												</div>
+											</ice:panelGroup>
+											<ice:panelGroup
+												rendered="#{consultaCabezaPlanchaVista.muestraInfoPlancha}"
+												styleClass="textoLabel2">
+												<ice:panelGroup>
+													<ice:outputLabel value="#{etiquetas.lblZona}: " />
+													<ice:outputText id="txtZona"
+														value="#{consultaCabezaPlanchaVista.infoPlancha.zona}" />
+													<ice:outputLabel value="#{etiquetas.lblFechaEnvio}: " />
+													<ice:outputText id="txtFecha"
+														value="#{consultaCabezaPlanchaVista.infoPlancha.fecha}" />
+													<ice:outputLabel value="#{etiquetas.lblEstado}: " />
+													<ice:outputText id="txtEstado"
+														value="#{consultaCabezaPlanchaVista.infoPlancha.estado}" />
+												</ice:panelGroup>
+
+											</ice:panelGroup>
+										</ice:panelGrid>
+
+										<ice:panelGroup
+											rendered="#{consultaCabezaPlanchaVista.muestraInfoPlancha}">
+											<div align="center">
+												<br />
+												<ice:outputLabel
+													value="#{etiquetas.lblCandidatosEncontrados}"
+													styleClass="textoLabelBold"></ice:outputLabel>
+												<br />
+											</div>
+											<div align="center">
+												<ice:dataTable id="tablaPrincipales" border="1" width="89%"
+													cellspacing="0" cellpadding="0"
+													value="#{consultaCabezaPlanchaVista.data}" var="principal"
+													sortAscending="#{consultaCabezaPlanchaVista.sortAscending}"
+													sortColumn="#{consultaCabezaPlanchaVista.sortColumnName}"
+													rows="#{consultaCabezaPlanchaVista.pageSize}"
+													rendered="#{not empty consultaCabezaPlanchaVista.data}">
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblTipoInscrito}" />
+														</f:facet>
+														<ice:outputText value="#{principal.tipoInscrito}" />
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblNumeroInscrito}" />
+														</f:facet>
+														<ice:outputText value="#{principal.numeroInscrito}" />
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblDocumento}" />
+														</f:facet>
+														<ice:outputText value="#{principal.identificacion}" />
+													</ice:column>
+													<ice:column styleClass="textoConcepto">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblNombres}" />
+														</f:facet>
+														<ice:outputText value="#{principal.nombres}" />
+													</ice:column>
+													<ice:column styleClass="textoConcepto">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblApellidos}" />
+														</f:facet>
+														<ice:outputText value="#{principal.apellidos}" />
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblreporteProfesion}" />
+														</f:facet>
+														<ice:outputText value="#{principal.profesion}" />
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+														</f:facet>
+														<ice:commandLink
+															value="#{etiquetas.lblreporteExcepciones}"
+															action="#{consultaCabezaPlanchaVista.consultarExcepciones}"
+															visible="#{principal.poseeExcepciones}">
+															<f:param name="identificacion"
+																value="#{principal.identificacion}" />
+															<f:param name="consecutivoPlancha"
+																value="#{consultaCabezaPlanchaVista.infoPlancha.consecutivoPlancha}" />
+														</ice:commandLink>
+													</ice:column>
+												</ice:dataTable>
+											</div>
+											<div align="center">
+												<ice:dataPaginator id="dataScroll" for="tablaPrincipales"
+													fastStep="3" paginator="true" rowsCountVar="rowsCount"
+													renderFacetsIfSinglePage="false"
+													displayedRowsCountVar="displayedRowsCountVar"
+													firstRowIndexVar="firstRowIndex"
+													lastRowIndexVar="lastRowIndex" pageCountVar="pageCount"
+													pageIndexVar="pageIndex"
+													styleClass="iceDatPgrScrBtn iceDatPgrScrOut iceDatPgrSrcCol iceDatPgrCol iceDatPgrTbl "
+													paginatorMaxPages="4"
+													binding="#{consultaCabezaPlanchaVista.dataPaginator}">
+													<f:facet name="first">
+														<ice:graphicImage id="firstpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-first.gif"
+															style="border:none;" title="#{etiqueta.pagPrimeraPagina}" />
+													</f:facet>
+													<f:facet name="last">
+														<ice:graphicImage id="lastpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-last.gif"
+															style="border:none;" title="#{etiqueta.pagUltimaPagina}" />
+													</f:facet>
+													<f:facet name="previous">
+														<ice:graphicImage id="previouspage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-previous.gif"
+															style="border:none;"
+															title="#{etiqueta.pagPaginaAnterior}" />
+													</f:facet>
+													<f:facet name="next">
+														<ice:graphicImage id="nextpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-next.gif"
+															style="border:none;" title="#{etiqueta.pagProximaPagina}" />
+													</f:facet>
+													<f:facet name="fastforward">
+														<ice:graphicImage id="fastforward_1"
+															url="/xmlhttp/css/rime/css-images/arrow-ff.gif"
+															style="border:none;" title="#{etiqueta.pagAvanceRapido}" />
+													</f:facet>
+													<f:facet name="fastrewind">
+														<ice:graphicImage id="fastrewind_1"
+															url="/xmlhttp/css/rime/css-images/arrow-fr.gif"
+															style="border:none;" title="#{etiqueta.pagRetornoRapido}" />
+													</f:facet>
+													<f:param value="#{rowsCount}" />
+													<f:param value="#{displayedRowsCountVar}" />
+													<f:param value="#{firstRowIndex}" />
+													<f:param value="#{lastRowIndex}" />
+													<f:param value="#{pageIndex}" />
+													<f:param value="#{pageCount}" />
+												</ice:dataPaginator>
+											</div>
+											<br />
+											<div align="center">
+												<ice:panelGroup>
+													<ice:commandButton id="btnPdf" styleClass="button"
+														visible="#{menuVista.pintarBotonGenerarReciboPlancha}"
+														value="Imprimir Constancia"
+														action="#{consultaCabezaPlanchaVista.actionConfirmarRadicacion}" />
+
+													<ice:commandButton id="btnPdf2" styleClass="button"
+														visible="#{menuVista.pintarBotonExpedirResolucionAdmision}"
+														value="#{etiquetas.lblResolAdmision}"
+														action="#{consultaCabezaPlanchaVista.actionExpedirResolucion}" />
+
+													<ice:commandButton id="btnResolInadmision"
+														styleClass="button"
+														visible="#{menuVista.pintarBotonExpedirResolucionInadmision}"
+														value="#{etiquetas.lblBtnResolInadmision}"
+														action="#{consultaCabezaPlanchaVista.actionExpedirResolucionInadmision}" />
+
+													<ice:commandButton id="btnResolucionRechazo"
+														styleClass="button"
+														visible="#{menuVista.pintarBotonExpedirResolucionRechazo}"
+														value="#{etiquetas.lblBtnRechazarPlancha}"
+														action="#{consultaCabezaPlanchaVista.actionIrFormularioResolucionRechazo}" />
+												</ice:panelGroup>
+												<ice:panelGroup visible="#{menuVista.pintarBotonGenerarArchivo}">
+													<ice:panelGrid columns="3" styleClass="textoLabel2">
+														<ice:outputLabel value="#{etiquetas.lblResoluciones}" />
+														<ice:selectOneMenu
+															binding="#{consultaCabezaPlanchaVista.selEstado}">
+															<f:selectItems
+																value="#{consultaCabezaPlanchaVista.itemsEstados}" />
+														</ice:selectOneMenu>
+														<ice:commandButton
+															value="#{etiquetas.lblImprimirResolucion}"
+															action="#{consultaCabezaPlanchaVista.actionResoluciones}" />
+													</ice:panelGrid>
+												</ice:panelGroup>
+											</div>
+										</ice:panelGroup>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<jsp:directive.include
+							file="../popup/popupMensajeExcepcionesHabilidad.jsp" />
+						<jsp:directive.include file="../popup/popupImprAdmision.jsp" />
+						<jsp:directive.include file="../popup/popupImprAdmisionFechas.jsp" />
+						<jsp:directive.include
+							file="../popup/popupImprConstanciaFechas.jsp" />
+						<jsp:directive.include file="../popup/popupMensajeExcepcion.jsp" />
+
+						<jsp:directive.include file="../popup/popupImprInadmision.jsp" />
+						<jsp:directive.include file="../popup/popupImprResolucion.jsp" />
+						<jsp:directive.include file="../popup/popupImprResolucionDelegados.jsp" />
+						<jsp:directive.include
+							file="../popup/popupImprApelacionFavorable.jsp" />
+					</div>
+
+
+					<ice:panelPopup id="mensajeE" draggable="true"
+						styleClass="formulario"
+						visible="#{consultaCabezaPlanchaVista.visible}" modal="true"
+						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 270px;">
+
+						<f:facet name="header">
+							<ice:panelGrid width="width: 280px;" cellpadding="0" cellspacing="0"
+								style="text-align: center;" headerClass="icePanelPopupHeader">
+								<ice:outputText style="color: #FFFFFF;" value="Mensaje" />
+							</ice:panelGrid>
+						</f:facet>
+
+						<f:facet name="body">
+							<ice:panelGrid width="width: 280px;" cellpadding="0" cellspacing="0"
+								styleClass="font: 11px / 17px tahoma;">
+								<center>
+									<ice:outputText value="#{consultaCabezaPlanchaVista.mensaje2}"
+										styleClass="textoLabel" />
+								</center>
+								<br />
+								<br />
+								<table border="0" align="center" cellpadding="0" cellspacing="0"
+									background="">
+									<tr>
+										<th width="width: 280px;" align="center" style="color: #D4D4D4">
+											<ice:commandButton image="../imagenes/boton_salir.gif"
+												action="#{consultaCabezaPlanchaVista.ocultarMensaje}" />
+										</th>
+									</tr>
+									<tr>
+									</tr>
+								</table>
+
+							</ice:panelGrid>
+						</f:facet>
+
+					</ice:panelPopup>
+
+					<ice:panelPopup id="confirmarRadicacion" draggable="true"
+						visible="#{consultaCabezaPlanchaVista.visibleConfirmarRadicacion}"
+						rendered="#{consultaCabezaPlanchaVista.visibleConfirmarRadicacion}" modal="true"
+						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
+
+						<f:facet name="header">
+							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+								style="text-align: center;" headerClass="icePanelPopupHeader">
+								<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+							</ice:panelGrid>
+						</f:facet>
+
+						<f:facet name="body">
+							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+								styleClass="font: 11px / 17px tahoma;">
+								<center>
+									<table>
+										<tr>
+											<td>
+												<ice:graphicImage
+													value="../imagenes/Symbol-Exclamation.png" />
+											</td>
+											<td>
+												<ice:outputText
+													value="#{consultaCabezaPlanchaVista.mensajeConfirmacion}"
+													styleClass="textoLabel" />
+											</td>
+										</tr>
+									</table>
+
+								</center>
+								<br />
+								<table border="0" align="center" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<ice:commandButton value="Si" style="padding-left:7px;padding-right:7px"
+												action="#{consultaCabezaPlanchaVista.actionImprimirFormatoPdf}"
+												onclick="disableButton(this);" />
+										</td>
+										<td style="padding-left:5px;padding-right:5px"></td>
+										<td>
+											<ice:commandButton style="padding-left:5px;padding-right:5px"
+												action="#{consultaCabezaPlanchaVista.actionCloseConfirmar}" value="No" />
+										</td>
+									</tr>
+								</table>
+
+							</ice:panelGrid>
+						</f:facet>
+					</ice:panelPopup>
+
+				</ice:form>
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

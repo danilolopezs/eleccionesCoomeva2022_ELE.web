@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://delegadoWS.wseleccionesintegracion.coomeva.com.co/" targetNamespace="http://delegadoWS.wseleccionesintegracion.coomeva.com.co/" version="1.0">
+
+  <xs:element name="Exception" type="tns:Exception"/>
+
+  <xs:element name="consultarJuego" type="tns:consultarJuego"/>
+
+  <xs:element name="consultarJuegoResponse" type="tns:consultarJuegoResponse"/>
+
+  <xs:element name="registrarJuego" type="tns:registrarJuego"/>
+
+  <xs:element name="registrarJuegoResponse" type="tns:registrarJuegoResponse"/>
+
+  <xs:complexType name="registrarJuego">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarJuegoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:respuestaWSI"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="respuestaWSI">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cedula" type="xs:long"/>
+      <xs:element minOccurs="0" name="codRespuesta" type="xs:string"/>
+      <xs:element minOccurs="0" name="descRespuesta" type="xs:string"/>
+      <xs:element minOccurs="0" name="fase" type="xs:int"/>
+      <xs:element minOccurs="0" name="zona" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarJuego">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long"/>
+      <xs:element name="arg1" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarJuegoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:respuestaWSI"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

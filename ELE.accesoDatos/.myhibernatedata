@@ -1,0 +1,25 @@
+#MyEclipse Hibernate Properties
+#Mon Aug 29 18:12:50 COT 2016
+sessionFactoryName=co.com.coomeva.ele.entidades.admhabilidad.HibernateSessionFactory
+genBasicCompId=true
+profile=
+daoSFId=
+version=3.0
+jndiPath=
+detectM2M=true
+reStrategyClass=
+detectO2O=true
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=lib
+addLibs2Project=true
+genVersionTag=true
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/ELE.accesoDatos/hibernate.reveng.xml
+configFile=/ELE.accesoDatos/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true
+baseDaoClass=co.com.coomeva.ele.entidades.planchas.dao.BaseHibernateDAO

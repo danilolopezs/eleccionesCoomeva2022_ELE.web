@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+   <!-- datasource on top of the oracle database -->
+    <local-tx-datasource>
+      <jndi-name>ElecDs</jndi-name>
+      <connection-url>jdbc:oracle:thin:@bdwfdes.intracoomeva.com.co:1534:WFDES</connection-url>
+      <driver-class>oracle.jdbc.driver.OracleDriver </driver-class>
+      <user-name>eleccion</user-name>
+      <password>elec.des09</password>
+           <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT 1 FROM DUAL</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+   <local-tx-datasource>
+      <jndi-name>HabDs</jndi-name>
+      <connection-url>jdbc:as400://10.51.34.51:8471</connection-url>
+      <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+      <user-name>userelec</user-name>
+      <password>userelec</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+   <local-tx-datasource>
+      <jndi-name>SaludDs</jndi-name>
+      <connection-url>jdbc:as400://192.1.4.164:8471</connection-url>
+      <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+      <user-name>clsiasweb</user-name>
+      <password>clsiasweb</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+   
+   <!-- Pruebas climae -->
+   <!--
+   <local-tx-datasource>
+      <jndi-name>ClimaeDs</jndi-name>
+      <connection-url>jdbc:as400://pruebasma.intracoomeva.com.co:8471</connection-url>
+      <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+      <user-name>usersipas</user-name>
+      <password>c0omeva</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+   -->
+   
+	   <local-tx-datasource>
+      <jndi-name>ClimaeDs</jndi-name>
+      <connection-url>jdbc:as400://multiactiva400.intracoomeva.com.co:8471</connection-url>
+      <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+      <user-name>USERWEB</user-name>
+      <password>c0m3v4w3b</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+    
+   
+   <local-tx-datasource>
+      <jndi-name>LicoDs</jndi-name>
+      <connection-url>jdbc:oracle:thin:@bdwfdes.intracoomeva.com.co:1534:WFDES</connection-url>
+      <driver-class>oracle.jdbc.OracleDriver</driver-class>
+      <user-name>lico</user-name>
+      <password>l1c-d3pr0</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT 1 FROM DUAL</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+    <local-tx-datasource>
+      <jndi-name>SieDs</jndi-name>
+      <connection-url>jdbc:oracle:thin:@bdwfdes.intracoomeva.com.co:1534:WFDES</connection-url>
+      <driver-class>oracle.jdbc.OracleDriver</driver-class>
+      <user-name>siepru</user-name>
+      <password>siepru</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT 1 FROM DUAL</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+   <local-tx-datasource>
+      <jndi-name>SrhDs</jndi-name>
+      <connection-url>jdbc:oracle:thin:@bdwfdes.intracoomeva.com.co:1534:WFDES</connection-url>
+      <driver-class>oracle.jdbc.OracleDriver</driver-class>
+      <user-name>srhpru</user-name>
+      <password>srhpru</password>
+      <min-pool-size>1</min-pool-size>
+      <max-pool-size>5</max-pool-size>
+      <idle-timeout-minutes>15</idle-timeout-minutes>
+      <check-valid-connection-sql>SELECT 1 FROM DUAL</check-valid-connection-sql>
+      <track-statements/>
+   </local-tx-datasource>
+ <!-- Pruebas-->
+<!--
+   <local-tx-datasource>
+	  <jndi-name>ElecDB2Ds</jndi-name>
+      <connection-url>jdbc:as400://pruebasma.intracoomeva.com.co:8471</connection-url>
+	  <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+	  <user-name>usersipas</user-name>
+	  <password>c0omeva</password>
+	  <min-pool-size>1</min-pool-size>
+	  <max-pool-size>5</max-pool-size>
+	  <idle-timeout-minutes>15</idle-timeout-minutes>
+	  <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+	  <track-statements/>
+	</local-tx-datasource>
+
+-->
+   <!--	produccion-->
+	
+	   <local-tx-datasource>
+	  <jndi-name>ElecDB2Ds</jndi-name>
+      <connection-url>jdbc:as400://multiactiva400.intracoomeva.com.co:8471</connection-url>
+	  <driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+	  <user-name>USERWEB</user-name>
+	  <password>c0m3v4w3b</password>
+	  <min-pool-size>1</min-pool-size>
+	  <max-pool-size>5</max-pool-size>
+	  <idle-timeout-minutes>15</idle-timeout-minutes>
+	  <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
+	  <track-statements/>
+	</local-tx-datasource>
+	
+	
+</datasources>

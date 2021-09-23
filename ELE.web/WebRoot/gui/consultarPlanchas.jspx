@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Consulta de Planchas</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="./estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css" href="./estilos/elec.css" />
+				<link rel="stylesheet" type="text/css"
+					href="./estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<script type="text/javascript" src="../js/servletInvoker.js"></script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body>
+				<div align="center">
+					<jsp:directive.include file="./general/Encabezado.jsp" />
+				</div>
+				<ice:form partialSubmit="true">
+					<div align="right">
+						<ice:panelGrid rendered="#{consultaDetallePlanchas.renderTable}"
+							style="height: 282px; width: 793px">
+							<table cellpadding="0" cellspacing="0" width="824">
+								<tr>
+									<td width="130" align="left" valign="top">
+										<br />
+										<br />
+										<ice:graphicImage value="./imagenes/i_eleccion.jpg"
+											style="height: 170px; width: 114px" />
+									</td>
+
+									<td align="left" style="width: 706px;" height="300"
+										valign="top">
+										<br />
+										<br />
+										<br />
+										<br />
+										<br />
+										<table border="1">
+											<tr>
+												<td class="textoBlanco" bgcolor="#447701">
+													<ice:outputText value="#{etiquetas.lblZona}"
+														style="color: white;" />
+												</td>
+												<td>
+													<ice:selectOneMenu
+														binding="#{consultaDetallePlanchas.zonaSelect}">
+														<f:selectItems value="#{consultaDetallePlanchas.zonas}" />
+													</ice:selectOneMenu>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" align="center" bgcolor="#447701">
+													<ice:commandButton value="#{etiquetas.lblConsultar}"
+														action="#{consultaDetallePlanchas.action_generarPDF}" />
+													<ice:commandButton value="#{etiquetas.lblLimpiar}"
+														action="#{consultaDetallePlanchas.action_limpiar}" />
+												</td>
+											</tr>
+
+										</table>
+										<br />
+										<table style="width: 257px">
+											<tr>
+												<td colspan="2" align="center">
+													<ice:outputConnectionStatus />
+												</td>
+											</tr>
+										</table>
+
+									</td>
+
+
+								</tr>
+							</table>
+						</ice:panelGrid>
+
+						<!-- Aquí empieza la parte dinamica -->
+
+
+						<div align="center">
+							<ice:panelGrid>
+								<table>
+									<tr>
+										<td>
+											<ice:dataTable id="tablePlanchasAceptadas" var="dataPlancha" rows="4"
+												rendered="#{consultaDetallePlanchas.renderTablePlanchas}"
+												value="#{consultaDetallePlanchas.listPlanchasDTO}">
+												<ice:column>
+													<f:facet name="header">
+														<ice:outputText value="#{etiquetas.lblNoDatos}"
+															styleClass="textoLabelBold" />
+													</f:facet>
+													<center>
+														<ice:outputText value="#{dataPlancha.numerarPlancha}"
+															styleClass="textoLabel" />
+													</center>
+												</ice:column>
+												<ice:column>
+													<f:facet name="header">
+														<ice:outputText value="#{etiquetas.lblNoPrincipales}"
+															styleClass="textoLabelBold" />
+													</f:facet>
+													<center>
+														<ice:outputText value="#{dataPlancha.noPrincipales}"
+															styleClass="textoLabel" />
+													</center>
+												</ice:column>
+												<ice:column>
+													<f:facet name="header">
+														<ice:outputText value="#{etiquetas.lblNoSuplentes}"
+															styleClass="textoLabelBold" />
+													</f:facet>
+													<center>
+														<ice:outputText value="#{dataPlancha.noSuplentes}"
+															styleClass="textoLabel" />
+													</center>
+												</ice:column>
+												<ice:column>
+													<f:facet name="header">
+														<ice:outputText value="#{etiquetas.lblNoPlancha}"
+															styleClass="textoLabelBold" />
+													</f:facet>
+													<center>
+														<ice:outputText value="#{dataPlancha.nombres}"
+															styleClass="textoLabel" />
+													</center>
+												</ice:column>
+												<ice:column rendered="false">
+													<f:facet name="header">
+														<ice:outputText value="#{etiquetas.lblNoPlancha}"
+															styleClass="textoLabelBold" />
+													</f:facet>
+													<center>
+														<ice:outputText value="#{dataPlancha.noCabezaPlancha}"
+															styleClass="textoLabel" />
+													</center>
+												</ice:column>
+												<ice:column>
+													<f:facet name="header">
+														<div align="center">
+															<ice:outputText value="#{etiquetas.lblDetalles}"
+																styleClass="textoLabelBold" />
+														</div>
+													</f:facet>
+													<center>
+														<ice:commandLink
+															action="#{consultaDetallePlanchas.action_verDetalle}">
+															<f:param name="idPlancha"
+																value="#{dataPlancha.noCabezaPlancha}" />
+															<f:param name="idIndex" value="#{dataPlancha.index}" />
+															<ice:graphicImage value="./imagenes/Search.png"
+																style="border: none;" />
+														</ice:commandLink>
+													</center>
+												</ice:column>
+											</ice:dataTable>
+											<center>
+												<ice:dataPaginator id="dataScroll"
+													for="tablePlanchasAceptadas" fastStep="3" paginator="true"
+													rendered="#{consultaDetallePlanchas.renderTablePlanchas}">
+
+													<f:facet name="first">
+														<ice:graphicImage id="firstpage_1"
+															url="./estilos/rime/css-images/arrow-first-copia.gif"
+															style="border:none;" />
+													</f:facet>
+													<f:facet name="last">
+														<ice:graphicImage id="lastpage_1"
+															url="./estilos/rime/css-images/arrow-last-copia.gif"
+															style="border:none;" />
+													</f:facet>
+													<f:facet name="previous">
+														<ice:graphicImage id="previouspage_1"
+															url="./estilos/rime/css-images/arrow-previous-copia.gif"
+															style="border:none;" />
+													</f:facet>
+													<f:facet name="next">
+														<ice:graphicImage id="nextpage_1"
+															url="./estilos/rime/css-images/arrow-next-copia.gif"
+															style="border:none;" />
+													</f:facet>
+													<f:facet name="fastforward">
+														<ice:graphicImage id="fastforward_1"
+															url="./estilos/rime/css-images/arrow-ff-copia.gif"
+															style="border:none;" />
+													</f:facet>
+													<f:facet name="fastrewind">
+														<ice:graphicImage id="fastrewind_1"
+															url="./estilos/rime/css-images/arrow-fr-copia.gif"
+															style="border:none;" />
+													</f:facet>
+												</ice:dataPaginator>
+											</center>
+										</td>
+									</tr>
+								</table>
+							</ice:panelGrid>
+							<br />
+							<br />
+							<br />
+						</div>
+						<div align="center">
+
+							<jsp:directive.include
+								file="./popup/popupMensajeExcepcionWeb.jsp" />
+							<jsp:directive.include file="./general/PiePagina.jsp" />
+							<jsp:directive.include
+								file="./popup/popupDetalleConsultaPlancha.jsp" />
+						</div>
+					</div>
+
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

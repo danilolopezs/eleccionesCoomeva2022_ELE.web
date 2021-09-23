@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSFFlowViewLayout version="1.0">
+  <Drawing gridVisible="true" snapOn="true" />
+  <JSFFlowResource path="/gui/forms/inscripcion/crearPlancha.jspx" location="30,330" dimension="261,36" />
+  <JSFFlowResource path="/gui/forms/inscripcion/verificarPlancha.jspx" location="420,360" dimension="277,36" />
+  <JSFFlowResource path="/gui/forms/inscripcion/planchaCreada.jspx" location="30,430" dimension="272,36" />
+  <JSFFlowResource path="/gui/inicioAdm.jspx" location="0,0" dimension="134,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx" location="180,230" dimension="337,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/inicioAdmPlanchas.jspx" location="480,730" dimension="336,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/admHabilidad.jspx" location="30,830" dimension="313,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/repHabilidad.jspx" location="480,830" dimension="309,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/repLog.jspx" location="30,930" dimension="283,36" />
+  <JSFFlowResource path="/gui/forms/administracion/habilidades/cargueDatos.jspx" location="480,930" dimension="311,36" />
+  <JSFFlowResource path="/gui/forms/inscripcion/inicioAsociado.jspx" location="30,530" dimension="271,36" />
+  <JSFFlowResource path="/gui/forms/inscripcion/modificarPlancha.jspx" location="480,530" dimension="286,36" />
+  <JSFFlowNavigationCase id="/gui/forms/inscripcion/crearPlancha.jspx,/gui/forms/inscripcion/verificarPlancha.jspx,verificado,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="160,366" />
+      <AbsolutePoint location="160,378" />
+      <AbsolutePoint location="420,378" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/inscripcion/verificarPlancha.jspx,/gui/forms/inscripcion/planchaCreada.jspx,planchaCreada,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="558,396" />
+      <AbsolutePoint location="558,448" />
+      <AbsolutePoint location="302,448" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/inicioAdm.jspx,/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,goHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="134,33" />
+      <AbsolutePoint location="348,33" />
+      <AbsolutePoint location="348,230" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/inicioAdm.jspx,/gui/forms/administracion/habilidades/inicioAdmPlanchas.jspx,goPlanchas,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="22,36" />
+      <AbsolutePoint location="22,748" />
+      <AbsolutePoint location="480,748" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,/gui/forms/administracion/habilidades/admHabilidad.jspx,goAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="335,266" />
+      <AbsolutePoint location="335,830" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,/gui/forms/administracion/habilidades/repHabilidad.jspx,goRepHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="410,266" />
+      <AbsolutePoint location="410,833" />
+      <AbsolutePoint location="480,833" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,/gui/inicioAdm.jspx,goLogin,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="180,248" />
+      <AbsolutePoint location="67,248" />
+      <AbsolutePoint location="67,36" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,/gui/forms/administracion/habilidades/repLog.jspx,goRepLog,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,266" />
+      <AbsolutePoint location="350,933" />
+      <AbsolutePoint location="313,933" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,/gui/forms/administracion/habilidades/cargueDatos.jspx,goCargueDatos,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="380,266" />
+      <AbsolutePoint location="380,933" />
+      <AbsolutePoint location="480,933" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/admHabilidad.jspx,/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,goInicioAdmHab,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="309,830" />
+      <AbsolutePoint location="309,266" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/admHabilidad.jspx,/gui/inicioAdm.jspx,goLogin,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="30,848" />
+      <AbsolutePoint location="-22,848" />
+      <AbsolutePoint location="-22,18" />
+      <AbsolutePoint location="0,18" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/admHabilidad.jspx,/gui/forms/administracion/habilidades/repHabilidad.jspx,goRepHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="201,830" />
+      <AbsolutePoint location="201,803" />
+      <AbsolutePoint location="634,803" />
+      <AbsolutePoint location="634,830" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/admHabilidad.jspx,/gui/forms/administracion/habilidades/repLog.jspx,goRepLog,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="186,866" />
+      <AbsolutePoint location="186,930" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/admHabilidad.jspx,/gui/forms/administracion/habilidades/cargueDatos.jspx,goCargueDatos,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="201,866" />
+      <AbsolutePoint location="201,908" />
+      <AbsolutePoint location="620,908" />
+      <AbsolutePoint location="620,930" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repHabilidad.jspx,/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,goInicioAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,848" />
+      <AbsolutePoint location="395,848" />
+      <AbsolutePoint location="395,266" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repHabilidad.jspx,/gui/inicioAdm.jspx,goLogin,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="789,848" />
+      <AbsolutePoint location="868,848" />
+      <AbsolutePoint location="868,3" />
+      <AbsolutePoint location="134,3" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repHabilidad.jspx,/gui/forms/administracion/habilidades/admHabilidad.jspx,goAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="649,830" />
+      <AbsolutePoint location="649,788" />
+      <AbsolutePoint location="186,788" />
+      <AbsolutePoint location="186,830" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repHabilidad.jspx,/gui/forms/administracion/habilidades/repLog.jspx,goRepLog,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,863" />
+      <AbsolutePoint location="442,863" />
+      <AbsolutePoint location="442,978" />
+      <AbsolutePoint location="186,978" />
+      <AbsolutePoint location="186,966" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repHabilidad.jspx,/gui/forms/administracion/habilidades/cargueDatos.jspx,goCargueDatos,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="665,866" />
+      <AbsolutePoint location="665,930" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repLog.jspx,/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,goInicioAdmHab,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="313,948" />
+      <AbsolutePoint location="365,948" />
+      <AbsolutePoint location="365,266" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repLog.jspx,/gui/forms/administracion/habilidades/admHabilidad.jspx,goAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="171,930" />
+      <AbsolutePoint location="171,866" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repLog.jspx,/gui/inicioAdm.jspx,goLogin,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="30,948" />
+      <AbsolutePoint location="7,948" />
+      <AbsolutePoint location="7,36" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repLog.jspx,/gui/forms/administracion/habilidades/repHabilidad.jspx,goRepHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="156,930" />
+      <AbsolutePoint location="156,878" />
+      <AbsolutePoint location="620,878" />
+      <AbsolutePoint location="620,866" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/repLog.jspx,/gui/forms/administracion/habilidades/cargueDatos.jspx,goCargueDatos,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="171,966" />
+      <AbsolutePoint location="171,1008" />
+      <AbsolutePoint location="635,1008" />
+      <AbsolutePoint location="635,966" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/cargueDatos.jspx,/gui/forms/administracion/habilidades/inicioAdmHabilidad.jspx,goInicioAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="791,963" />
+      <AbsolutePoint location="853,963" />
+      <AbsolutePoint location="853,248" />
+      <AbsolutePoint location="517,248" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/cargueDatos.jspx,/gui/inicioAdm.jspx,goLogin,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="791,948" />
+      <AbsolutePoint location="823,948" />
+      <AbsolutePoint location="823,18" />
+      <AbsolutePoint location="134,18" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/cargueDatos.jspx,/gui/forms/administracion/habilidades/repHabilidad.jspx,goRepHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,930" />
+      <AbsolutePoint location="650,866" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/cargueDatos.jspx,/gui/forms/administracion/habilidades/repLog.jspx,goRepLog,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="480,963" />
+      <AbsolutePoint location="313,963" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/administracion/habilidades/cargueDatos.jspx,/gui/forms/administracion/habilidades/admHabilidad.jspx,goAdmHabilidad,null" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="635,930" />
+      <AbsolutePoint location="635,893" />
+      <AbsolutePoint location="216,893" />
+      <AbsolutePoint location="216,866" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/inscripcion/inicioAsociado.jspx,/gui/forms/inscripcion/crearPlancha.jspx,null,goCrearPlancha" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="30,548" />
+      <AbsolutePoint location="-37,548" />
+      <AbsolutePoint location="-37,348" />
+      <AbsolutePoint location="30,348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/gui/forms/inscripcion/inicioAsociado.jspx,/gui/forms/inscripcion/modificarPlancha.jspx,null,goModificarPlancha" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="301,548" />
+      <AbsolutePoint location="480,548" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+</JSFFlowViewLayout>
+

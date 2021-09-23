@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000055"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="zona" class="java.lang.String"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="fechaActual" class="java.util.Date"/>
+	<parameter name="rutaImagen" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\AVRESPALDO\\backupcmtc4227\\ELECCIONES\\Reportes IReport\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="miembrosPrincipal" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="miembrosSuplentes" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="124" splitType="Stretch">
+			<image>
+				<reportElement x="219" y="80" width="127" height="36"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"\\icono_coomeva.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="-22" y="-19" width="595" height="94" forecolor="#00834C" backcolor="#00834C"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="161" y="0" width="243" height="25" forecolor="#FFFFFF"/>
+				<textElement markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Elección de Delegados 2017-2020]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="25" width="216" height="20" forecolor="#FFFFFF"/>
+				<textElement markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSCRIPCIÓN DE PLANCHAS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="1" width="545" height="31" forecolor="#00834C"/>
+			</rectangle>
+			<line>
+				<reportElement x="430" y="1" width="1" height="31" forecolor="#00834C"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="5" width="70" height="14" forecolor="#00834C"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Zonal Electoral No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="5" width="29" height="14" forecolor="#00834C"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="5" width="26" height="14" forecolor="#00834C"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="1" width="545" height="4" forecolor="#00834C" backcolor="#00834C"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="19" width="119" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="5" width="70" height="14" forecolor="#00834C"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ciudad]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="150" y="17" width="147" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="297" y="1" width="1" height="31" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="133" y="5" width="1" height="27" forecolor="#00834C"/>
+			</line>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+				<reportElement x="298" y="17" width="133" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a" isBlankWhenNull="true">
+				<reportElement x="431" y="17" width="122" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="645" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="27" width="545" height="598" forecolor="#00834C"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="625" width="99" height="20" forecolor="#00834C"/>
+				<textElement/>
+				<text><![CDATA[CO-FT-210 (Anverso)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="625" width="74" height="20" forecolor="#00834C"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mod. Nov./2012]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="10" height="271" forecolor="#00834C"/>
+				<textElement textAlignment="Center" rotation="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="0" width="545" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
+			</rectangle>
+			<subreport>
+				<reportElement x="12" y="27" width="543" height="598"/>
+				<dataSourceExpression><![CDATA[$F{miembrosPrincipal}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="12" y="0" width="543" height="27" forecolor="#00834D"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MIEMBROS PRINCIPALES]]></text>
+			</staticText>
+		</band>
+		<band height="645">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="625" forecolor="#00834C"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834D"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MIEMBROS SUPLENTES]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="27" width="555" height="555"/>
+				<dataSourceExpression><![CDATA[$F{miembrosSuplentes}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="625" width="98" height="20" forecolor="#00834C"/>
+				<textElement/>
+				<text><![CDATA[CO-FT-210 (Reverso)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="625" width="74" height="20" forecolor="#00834C"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mod. Nov./2012]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="582" width="555" height="43" forecolor="#00834C"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="606" width="236" height="19" forecolor="#00834C"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Apellido(s) y Nombre(s) de quién inscribe la Plancha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="606" width="154" height="19" forecolor="#00834C"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="604" width="250" height="1" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="276" y="604" width="250" height="1" forecolor="#00834C"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

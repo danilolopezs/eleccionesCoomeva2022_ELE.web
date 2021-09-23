@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="config.files"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.genuitec.eclipse.j2eedt.core.J2EE14_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.jsf.MYECLIPSE_JSF_RI_1_1_01"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/backport-util-concurrent.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/commons-collections.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/commons-digester.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/commons-fileupload.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/el-api.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/el-ri.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/icefaces-comps.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/icefaces.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/krysalis-jCharts-1.0.0-alpha-1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ICEfaces Library v1.8.1/xml-apis.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/axis-ant.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/axis.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/saaj.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/xalan.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Axis/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/coomeva-utilidades-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/axis2-1.5.1.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_JAXWS_API"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.ws.xfire.MYECLIPSE_METRO_IMPL"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/axis-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/filters-2.0.235.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcaptcha-2.0-alpha-1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcaptcha-api-1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcaptcha-integration-simple-servlet-2.0-alpha-1-SNAPSHOT.jar"/>
+	<classpathentry kind="src" path="/ELE.Principal"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 4.2 Runtime"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

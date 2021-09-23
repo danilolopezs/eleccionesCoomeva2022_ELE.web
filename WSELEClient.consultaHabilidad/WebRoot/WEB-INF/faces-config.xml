@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN" "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+	<managed-bean>
+		<managed-bean-name>mensajesVista</managed-bean-name>
+		<managed-bean-class>
+			co.com.coomeva.wseleconsultahab.vista.MensajesVista
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaHabilidadVista</managed-bean-name>
+		<managed-bean-class>
+			co.com.coomeva.wseleconsultahab.vista.ConsultaHabilidadVista
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaBoletasAsignadasVista</managed-bean-name>
+		<managed-bean-class>
+			co.com.coomeva.eleccionesjuego.vista.ConsultaBoletasAsignadasVista
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+ <navigation-rule>
+  <from-view-id>/gui/forms/consultarHabilidad.jspx</from-view-id>
+  <navigation-case>
+   <from-outcome>goConsultaHabilidad</from-outcome>
+   <to-view-id>/gui/forms/consultarHabilidad.jspx</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ 
+ </faces-config>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+	<managed-bean>
+		<managed-bean-name>inicioSesionAsociadoVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.InicioSesionAsociadoVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>modificarPlanchaVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ModificarPlanchaVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>crearPlanchaVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.CrearPlanchaVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>verPlanchaVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.VerPlanchaVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>resumenPlancha</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ResumenPlancha</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>verModPlanchaVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.VerModPlanchaVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>menuVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.MenuVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generaXLS</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.GeneraXLS</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaDetallePlanchas</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ConsultaDetallePlanchas</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>ejecutarProcesoVerificacion</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.habilidad.asociados.EjecutarProcesoVerificacion</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>ejecutarProcesoMarcacionAsos</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.EjecutarProcesoMarcacionAsos</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cargarArchivoVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.CargarArchivoVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaNovedadesAplicadasVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ConsultaNovedadesAplicadasVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>resumenNovedades</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ResumenNovedades</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>validacionIngreso</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.seguridad.ValidacionIngreso</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>menuPlanchaAsociado</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.MenuPlanchaAsociado</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarPlancha</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.RegistrarPlancha</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaCabezaPlanchaVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ConsultaCabezaPlanchaVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaPlanchaEstadoVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ConsultaPlanchaEstadoVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cuocienteElectoral</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.cuociente.CuocienteElectoral</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>delegadosZona</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.cuociente.DelegadosZona</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cargarArchivoOtrasEntElectVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.CargarArchivoOtrasEntElectVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cargarArchivoSancionadosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.CargarArchivoSancionadosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>marcarPlanchaRecursoVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.MarcarPlanchaRecursoVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarNumeracionPlanchas</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.GenerarNumeracionPlanchas</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarResolucionRechazo</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.GenerarResolucionRechazo</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarAcreditacionOficio</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.GenerarAcreditacionOficio</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>expedirResolucionInadmision</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ExpedirResolucionInadmision</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarReportesJuegosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.GenerarReportesJuegosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarVotanteVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.RegistrarVotanteVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>menuVistaAsociado</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.MenuVistaAsociado</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarNovedadesHabilidadVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.RegistrarNovedadesHabilidadVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>formularioReporteVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.FormularioReportesVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	
+	<navigation-rule>
+		<from-view-id>/gui/forms/crearPlancha.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>verificado</from-outcome>
+			<to-view-id>/gui/forms/verPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAsociado</from-outcome>
+			<to-view-id>/gui/inicioAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/verPlancha.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAsociado</from-outcome>
+			<to-view-id>/gui/inicioAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCrearPlancha</from-outcome>
+			<to-view-id>/gui/forms/crearPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/inicioAsociado.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goCrearPlancha</from-outcome>
+			<to-view-id>/gui/forms/crearPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenPlancha</from-outcome>
+			<to-view-id>/gui/forms/resumenPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/ConsultaPlanchaEstado.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goConsultaCabezaPlancha</from-outcome>
+			<to-view-id>/gui/forms/ConsultaCabezaPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/resumenPlancha.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goModPlancha</from-outcome>
+			<to-view-id>/gui/forms/modificarPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAsociado</from-outcome>
+			<to-view-id>/gui/inicioAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/verModPlancha.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAsociado</from-outcome>
+			<to-view-id>/gui/inicioAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModPlancha</from-outcome>
+			<to-view-id>/gui/forms/modificarPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEjecutarProcesoHabilidad</from-outcome>
+			<to-view-id>/gui/forms/ejecutarProcesoHabilidadAsos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/modificarPlancha.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goVerModPlancha</from-outcome>
+			<to-view-id>/gui/forms/verModPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenPlancha</from-outcome>
+			<to-view-id>/gui/forms/resumenPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/consultaHabilidadAsociados.jspx</from-view-id>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>
+				goGenerarReportesHabilidades</from-outcome>
+			<to-view-id>/gui/forms/generarReportesHabilidades.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goProcesoHabilidad</from-outcome>
+			<to-view-id>/gui/forms/ejecutarProcesoHabilidadAsos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>verificado</from-outcome>
+			<to-view-id>/gui/forms/verPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAsociado</from-outcome>
+			<to-view-id>/gui/inicioAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCrearPlancha</from-outcome>
+			<to-view-id>/gui/forms/crearPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenPlancha</from-outcome>
+			<to-view-id>/gui/forms/resumenPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModPlancha</from-outcome>
+			<to-view-id>/gui/forms/modificarPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goVerModPlancha</from-outcome>
+			<to-view-id>/gui/forms/verModPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultaNovedadesAplicadas</from-outcome>
+			<to-view-id>/gui/forms/consultarNovedadesAplicadas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenNovedades</from-outcome>
+			<to-view-id>/gui/forms/resumenNovedades.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioMenuAsociado</from-outcome>
+			<to-view-id>/gui/planchas/inicioMenuAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLInicioRegitroPlanchas</from-outcome>
+			<to-view-id>/gui/inicioRegistroPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRegistroPlanchaAsociado</from-outcome>
+			<to-view-id>/gui/planchas/registrarPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchaAsociado</from-outcome>
+			<to-view-id>/gui/planchas/consultaPlanchaAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCuocienteElectoral</from-outcome>
+			<to-view-id>/gui/forms/cuociente/cuocienteElectoral.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultaCabezaPlancha</from-outcome>
+			<to-view-id>/gui/forms/ConsultaCabezaPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultaPlanchaEstado</from-outcome>
+			<to-view-id>/gui/forms/ConsultaPlanchaEstado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goDelegadosZona</from-outcome>
+			<to-view-id>/gui/forms/cuociente/delegadosZona.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCargaArchivoOtrasEntElect</from-outcome>
+			<to-view-id>/gui/forms/cargarArchivoOtrasEntElect.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCargaArchivoSancionados</from-outcome>
+			<to-view-id>/gui/forms/cargarArchivoSancionadosAnnos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRegistrarInfoCabezaPlancha</from-outcome>
+			<to-view-id>/gui/planchas/registrarInfoCabezaPlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goMarcarPlanchaRecurso</from-outcome>
+			<to-view-id>/gui/forms/elecciones2012/marcarPlanchaRecurso.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarNumeracionPlanchas</from-outcome>
+			<to-view-id>/gui/planchas/generarNumeracionPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarNumeracionPlanchasRecurso</from-outcome>
+			<to-view-id>/gui/planchas/generarNumeracionPlanchasRecurso.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRegistroVotantes</from-outcome>
+			<to-view-id>/gui/forms/registrarVotante.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteJuego</from-outcome>
+			<to-view-id>/gui/forms/generarReportesJuegos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRegistroNovedadesHabilidad</from-outcome>
+			<to-view-id>/gui/forms/registroNovedadesHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goFormularioReportesComite</from-outcome>
+			<to-view-id>/gui/forms/formularioReportesComite.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goFormularioReportes</from-outcome>
+			<to-view-id>/gui/forms/formularioReportes.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>irFormularioExpedirResolucionRechazo</from-outcome>
+			<to-view-id>/gui/planchas/generarResolucionRechazo.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>irFormularioExpedirResolucionInhabilidad</from-outcome>
+			<to-view-id>/gui/forms/ExpedirResolucionInabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarAcreditacionOficio</from-outcome>
+			<to-view-id>/gui/planchas/generarAcreditacionOficio.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificacionPlanchas</from-outcome>
+			<to-view-id>/gui/inicioRegistroPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioMenu</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+	</navigation-rule>
+</faces-config>

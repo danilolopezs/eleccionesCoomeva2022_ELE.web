@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software Administraci&#243;n de Planchas e inhabilidades - Bienvenida</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache"/>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0"  width="824">
+							<tr>
+								<td colspan="2">
+									<div align="left" class="banner"></div>
+								</td>
+							</tr>
+							<tr>
+								<td width="130" align="left" valign="top"
+									bgcolor="#FFFFFF">
+									<br />
+									<br />
+									<jsp:directive.include file="../general/menu.jsp"/>
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;" height="400" valign="top">
+									<br />
+									<br />
+									<h3>
+										<ice:outputText value="#{etiquetas.saludoAdmPlancha}" style="width = 300px;"/>
+									</h3>
+
+								</td>
+							</tr>
+						</table>
+						<!--<jsp:directive.include
+							file="../popup/popupVerInhabilidad.jsp" />-->
+						<jsp:directive.include
+							file="../popup/popupCncpCambioEstadoHab.jsp" />
+
+						<jsp:directive.include file="../popup/popupMensajeExcepcion.jsp" />
+					</div>
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

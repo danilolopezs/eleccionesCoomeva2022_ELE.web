@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software Administraci&#243;n de Planchas e inhabilidades - Reportes</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache"/>
+				<script type="text/javascript" src="../js/servletInvoker.js"></script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="left" class="bannerHabilidad"></div>
+								</td>
+							</tr>
+							<tr>
+								<td width="130" align="left" valign="top" bgcolor="#FFFFFF">
+									<br />
+									<br />
+									<jsp:directive.include file="../general/menu.jsp" />
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;"
+									height="300" valign="top">
+									<br />
+									<br />
+									<table border="1">
+										<tr>
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblRegional}" />
+											</td>
+											<td>
+												<ice:selectOneMenu
+													valueChangeListener="#{reportesInhabilidades.listener_regional}"
+													binding="#{reportesInhabilidades.regionalSelect}">
+													<f:selectItems value="#{reportesInhabilidades.regionales}" />
+												</ice:selectOneMenu>
+											</td>
+										</tr>
+										<tr>
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblZona}" />
+											</td>
+											<td>
+												<ice:selectOneMenu
+													valueChangeListener="#{reportesInhabilidades.listener_zona}"
+													binding="#{reportesInhabilidades.zonaSelect}" >
+													<f:selectItems value="#{reportesInhabilidades.zonas}" />
+												</ice:selectOneMenu>
+											</td>
+										</tr>
+										<tr >
+											<td class="formularioTabla" >
+												<ice:outputText value="#{etiquetas.lblOficina}"  />
+											</td>
+											<td>
+												<ice:selectOneMenu
+													binding="#{reportesInhabilidades.oficinaSelect}">
+													<f:selectItems value="#{reportesInhabilidades.oficinas}" />
+												</ice:selectOneMenu>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblEstadoAsociado}" />
+											</td>
+											<td>
+												<ice:selectOneMenu
+													binding="#{reportesInhabilidades.estadoSelect}">
+													<f:selectItems value="#{reportesInhabilidades.estados}" />
+												</ice:selectOneMenu>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" align="center">
+												<ice:commandButton value="#{etiquetas.lblConsultar}"
+													action="#{reportesInhabilidades.action_verConfirmacion}" />
+											</td>
+										</tr>
+									</table>
+
+
+								</td>
+							</tr>
+						</table>
+
+
+
+						<jsp:directive.include
+							file="../popup/popupMensajeExcepcion.jsp" />
+						<jsp:directive.include
+							file="../popup/popupRepConfirmarHab.jsp" />
+					</div>
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

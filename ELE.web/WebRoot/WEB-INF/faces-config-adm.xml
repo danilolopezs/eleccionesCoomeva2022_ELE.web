@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+	<managed-bean>
+		<managed-bean-name>mensajesVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.MensajesVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>recibirPlanchaUGA</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.RecibirPlanchaUGA</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>habilidadAsociadosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.HabilidadAsociadosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>reportesInhabilidades</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ReportesInhabilidades</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>reportesLog</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ReportesLog</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>inicioSesionUsuariosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.InicioSesionUsuariosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>modificarPlanchaUGA</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ModificarPlanchaUGA</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>sanearPlanchaUGA</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.SanearPlanchaUGA</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>sanearPlanchaOkUGA</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.SanearPlanchaOkUGA</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>verSanearPlanchaUGA</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.VerSanearPlanchaUGA</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>evaluarPlanchaCCEE</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.EvaluarPlanchaCCEE</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>numerarPlanchasCCEE</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.NumerarPlanchasCCEE</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>reportesPlanchas</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ReportesPlanchas</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>reportesPlanchasLog</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ReportesPlanchasLog</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>consultaHabilidadAsociadosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.ConsultaHabilidadAsociadosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarReportesHabilidadesVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.GenerarReportesHabilidadesVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarReportesResumenHabilidades</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.GenerarReportesResumenHabilidades</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarInfoCabezaPlancha</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.planchas.RegistrarInfoCabezaPlancha</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>generarReportesJuegosVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.GenerarReportesJuegosVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registrarVotanteVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.RegistrarVotanteVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>desbloqueoUsuarioVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.seguridad.DesbloqueoUsuarioVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>goDesbloUser</from-outcome>
+			<to-view-id>/gui/forms/desbloUser.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/inicioAdm.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goHabilidad</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/admHabilidad.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmHab</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepHabilidad</from-outcome>
+			<to-view-id>/gui/forms/repHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepLog</from-outcome>
+			<to-view-id>/gui/forms/repLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>		
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/inicioAdmHabilidad.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goAdmHabilidad</from-outcome>
+			<to-view-id>/gui/forms/admHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goDesbloUser</from-outcome>
+			<to-view-id>/gui/forms/desbloUser.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepHabilidad</from-outcome>
+			<to-view-id>/gui/forms/repHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepLog</from-outcome>
+			<to-view-id>/gui/forms/repLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCargueSuspendidos</from-outcome>
+			<to-view-id>/gui/forms/cargarArchivo.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/repHabilidad.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmHabilidad</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goAdmHabilidad</from-outcome>
+			<to-view-id>/gui/forms/admHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepLog</from-outcome>
+			<to-view-id>/gui/forms/repLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/repLog.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmHab</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goAdmHabilidad</from-outcome>
+			<to-view-id>/gui/forms/admHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepHabilidad</from-outcome>
+			<to-view-id>/gui/forms/repHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/inicioAdmPlanchas.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/consultarPlanchasCCEE.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/modificarPlanchasUGA.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/numerarPlanchasCCEE.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/recibirPlanchasUGA.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/sanearPlanchasUGA.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goSanearPlanchaOkUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasOkUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/sanearPlanchasOkUGA.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goVerPlanchaSaneada</from-outcome>
+			<to-view-id>/gui/forms/verSanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/verSanearPlanchasUGA.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasOkUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasOkUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goVerPlanchaSaneada</from-outcome>
+			<to-view-id>/gui/forms/verSanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/repPlanchasLog.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchaUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchaUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/generarXLS.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goProcesoHabilidad</from-outcome>
+			<to-view-id>/gui/forms/ejecutarProcesoHabilidadAsos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/gui/forms/generarXLS.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goProcesoHabilidad</from-outcome>
+			<to-view-id>/gui/forms/ejecutarProcesoHabilidadAsos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>goInicioAdmPlanchas</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmPlanchas.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarArchivo</from-outcome>
+			<to-view-id>/gui/forms/generarXLS.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchaUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchaUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/gui/inicioAdm.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goNumerarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/numerarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goModificarPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/modificarPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goEvaluarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/evaluarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRecibirPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/recibirPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultarPlanchasCCEE</from-outcome>
+			<to-view-id>/gui/forms/consultarPlanchasCCEE.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goProcesoHabilidad</from-outcome>
+			<to-view-id>/gui/forms/ejecutarProcesoHabilidadAsos.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioAdmHab</from-outcome>
+			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goAdmHabilidad</from-outcome>
+			<to-view-id>/gui/forms/admHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepHabilidad</from-outcome>
+			<to-view-id>/gui/forms/repHabilidad.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goRepLog</from-outcome>
+			<to-view-id>/gui/forms/repLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goSanearPlanchasUGA</from-outcome>
+			<to-view-id>/gui/forms/sanearPlanchasUGA.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goReporteLog</from-outcome>
+			<to-view-id>/gui/forms/repPlanchasLog.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goCargueSuspendidos</from-outcome>
+			<to-view-id>/gui/forms/cargarArchivo.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goGenerarReportesHabilidades</from-outcome>
+			<to-view-id>/gui/forms/generarReportesHabilidades.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goConsultaHabilidadAsociados</from-outcome>
+			<to-view-id>/gui/forms/consultaHabilidadAsociados.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenHabilidad</from-outcome>
+			<to-view-id>/gui/forms/generarReportesResumenHabilidades.jspx</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>goResumenNovedades</from-outcome>
+			<to-view-id>/gui/forms/resumenNovedades.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+
+	<!--
+		######################################################################
+		## 1. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-12-11     ##
+		##    Consulta para verificar si un asociado ya ha votado           ##
+		######################################################################
+	-->
+
+	<sql-query name="consultar.votante.primera.vez">
+		<return-scalar column="doc" type="java.lang.Long" />
+		<return-scalar column="nombres" type="java.lang.String" />
+		<return-scalar column="codZona" type="java.lang.String" />
+		<return-scalar column="desZona" type="java.lang.String" />
+		<return-scalar column="codAgencia" type="java.lang.String" />
+		<return-scalar column="desAgencia" type="java.lang.String" />
+		<![CDATA[		
+			SELECT DISTINCT V.DOCUMENTO_VOTANTE doc,C.NOMCLI nombres,V.ZONA_USUARIO_REGISTRO codZona,Z.DESCRIPCION_ZONA_ELE desZona,V.AGENCIA_USUARIO_REGISTRO codAgencia,P.NOMAGC desAgencia
+			FROM ELECDB.ELE_VOTANTE V 
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL Z ON V.ZONA_USUARIO_REGISTRO=Z.CODIGO_ZONA_ELE
+			INNER JOIN SEGURIDAD.PLTAGCORI P ON V.AGENCIA_USUARIO_REGISTRO = P.AGCORI
+			INNER JOIN ELECDB.CLIMAE C ON V.DOCUMENTO_VOTANTE = C.NITCLI
+			WHERE V.DOCUMENTO_VOTANTE= :numeroDocumento
+		]]>
+	</sql-query>
+
+	<!--
+		######################################################################
+		## 2. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-12-12     ##
+		##    Consulta los datos del usuario que registra los votantes      ##
+		######################################################################
+	-->
+
+	<sql-query name="consultar.votante.usuario.que.registra">
+		<return-scalar column="id" type="java.lang.String" />
+		<return-scalar column="codZona" type="java.lang.String" />
+		<return-scalar column="desZona" type="java.lang.String" />
+		<return-scalar column="codAgencia" type="java.lang.Integer" />
+		<return-scalar column="desAgencia" type="java.lang.String" />
+		<![CDATA[		
+			SELECT DISTINCT U.ID_USUARIO id,U.CODIGO_ZONA_ELE codZona,Z.DESCRIPCION_ZONA_ELE desZona,U.AGENCIA_USUARIO codAgencia,P.NOMAGC desAgencia 
+			FROM ELECDB.ELE_USUARIO_COMISION U
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL Z ON U.CODIGO_ZONA_ELE=Z.CODIGO_ZONA_ELE 
+			INNER JOIN SEGURIDAD.PLTAGCORI P ON U.AGENCIA_USUARIO = P.AGCORI WHERE U.ID_USUARIO= :idUsuario
+		]]>
+	</sql-query>
+
+
+	<!--
+		##################################################################################
+		## 3. Carlos Ernesto Ortega Q. Contratista Coomeva - 2013-12-12                 ##
+		## Consulta los datos básicos de un votante                                     ##
+		##################################################################################
+	-->
+
+	<sql-query name="consultar.datos.votante">
+		<return-scalar column="doc" type="java.lang.Long" />
+		<return-scalar column="nombres" type="java.lang.String" />
+		<return-scalar column="codZona" type="java.lang.String" />
+		<return-scalar column="descZona" type="java.lang.String" />
+		<![CDATA[		
+			SELECT A.NUMERO_DOCUMENTO doc,C.NOMCLI nombres,ZE.CODIGO_ZONA_ELE codZona,ZE.DESCRIPCION_ZONA_ELE descZona FROM ELECDB.ELE_ASOCIADO A 
+			INNER JOIN ELECDB.CLIMAE C ON A.NUMERO_DOCUMENTO = C.NITCLI
+			INNER JOIN ELECDB.ELE_ZONA Z ON A.COD_ZONA_ASO=Z.CODIGO_ZONA 
+			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE=ZE.CODIGO_ZONA_ELE WHERE A.NUMERO_DOCUMENTO= :numeroDocumento
+		]]>
+	</sql-query>
+
+</hibernate-mapping>

@@ -1,0 +1,151 @@
+a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #0066CC;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #0066CC;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #009900;
+}
+
+a:active {
+	text-decoration: none;
+	color: #009900;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 16px;
+	color: #006600;
+}
+
+h2 {
+	font-size: 18px;
+	color: #006600;
+}
+
+h3 {
+	font-size: 24px;
+	color: #006600;
+}
+
+.textoGral {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #003333;
+}
+
+.textoBlanco {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #ffffff;
+}
+
+TR.campoGral {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 11px;
+	COLOR: #003333;
+	FONT-FAMILY: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	BACKGROUND-COLOR: #ECF2E6;
+}
+
+TR.campoDif {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 11px;
+	COLOR: #003333;
+	FONT-FAMILY: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	BACKGROUND-COLOR: #CEDABC;
+}
+
+TR.campoTitulo {
+	FONT-WEIGHT: bold;
+	text-transform: uppercase;
+	FONT-SIZE: 11px;
+	COLOR: #FFFFFF;
+	FONT-FAMILY: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	BACKGROUND-COLOR: #6CA000;
+	padding: 2px 2px 2px 2px;
+}
+
+.ingresos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #006600;
+	background-color: #FBFCF8;
+}
+
+.tituloGral {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	color: #006600;
+}
+
+TR.campoTitulo2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 2px;
+	padding: 5px;
+	height: 5px;
+	width: 5px;
+	border: solid #C1D1AB;
+}
+
+table.border {
+	padding: 5px;
+	border-bottom: thin #6CA000 solid;
+	border-left: thin #6CA000 solid;
+	border-right: thin #6CA000 solid;
+	border-top: thin #6CA000 solid;
+}
+
+.boton {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #006600;
+}
+
+.banner {
+	background-image: url('../imagenes/EncabezadoElec2016.png');
+	height: 280px;
+	width: 829px;
+	margin: 0 auto;
+	float: left;
+	background-repeat:no-repeat;
+} 
+
+.bannerBoletas {
+	background-image: url('../imagenes/EncabezadoBoletasElec2014.png');
+	height: 280px;
+	width: 829px;
+	margin: 0 auto;
+	float: left;
+	background-repeat:no-repeat;
+}
+
+
+table.boletasAsignadas {
+	border-collapse: collapse;
+	margin-top: 15px;
+	margin-bottom: 20px
+}
+
+table.boletasAsignadas td,table.boletasAsignadas th {
+	border: 1px solid black;
+	padding: 5px;
+}

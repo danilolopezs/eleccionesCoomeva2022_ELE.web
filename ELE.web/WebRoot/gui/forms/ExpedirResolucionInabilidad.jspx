@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software de Inscripci&#243;n de Planchas - Consulta
+					Cabeza Plancha</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<script type="text/javascript" src="../js/utilidades.js"></script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+				<script type="text/javascript" language="JavaScript"
+					src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/gui/js/validaNumeroJSF.js"></script>
+			</head>
+			<body bgcolor="#DFDFDF">
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="center" class="banner"></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" valign="top" bgcolor="#FFFFFF" width="130">
+									<br />
+									<br />
+
+									<jsp:directive.include file="../general/menu.jsp" />
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;"
+									height="300">
+									<h3>
+										<ice:outputLabel value="#{etiquetas.btnGenerarReporteInhabilidad}" />
+									</h3>
+									<table border="0" style="width: 500px">
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblreporteNumeroDocumento} (Cabeza de Plancha)" />
+											</td>
+											<td>
+												<ice:panelGroup>
+													<ice:inputText id="txtNumDoc"
+														onkeypress="return keyCheck(event, this); "
+														value="#{expedirResolucionInadmision.cabezaPlancha}">
+													</ice:inputText>
+													<ice:commandButton id="btnBuscar" styleClass="button"
+														action="#{expedirResolucionInadmision.consultarCabezaPlancha}"
+														image="../imagenes/Search.png"
+														style="height: 15px; width: 15px">
+													</ice:commandButton>
+												</ice:panelGroup>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText id="txtNombreLbl" value="Nombre:" />
+											</td>
+											<td class="formularioTabla">
+												<ice:outputText id="txtNombre"
+													value="#{expedirResolucionInadmision.nombreAsociado}" />
+											</td>
+										</tr>
+										<!-- 
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText
+													value="#{etiquetas.lblFormatoInhResolucionNro}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="6" onkeypress="return keyCheck(event, this); "
+													value="#{expedirResolucionInadmision.resolucionNro}">
+												</ice:inputText>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhActNro}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="6" onkeypress="return keyCheck(event, this); "
+													value="#{expedirResolucionInadmision.actNro}">
+												</ice:inputText>
+											</td>
+										</tr> 
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhCuidad}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="40"
+													value="#{expedirResolucionInadmision.cuidad}">
+												</ice:inputText>
+											</td>
+										</tr>
+										-->
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhRazon1}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="150"
+													value="#{expedirResolucionInadmision.razon1}"
+													style="width: 358px">
+												</ice:inputText>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhRazon2}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="150"
+													value="#{expedirResolucionInadmision.razon2}"
+													style="width: 358px">
+												</ice:inputText>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhRazon3}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="150"
+													value="#{expedirResolucionInadmision.razon3}"
+													style="width: 358px">
+												</ice:inputText>
+											</td>
+										</tr>
+										<tr align="left">
+											<td class="formularioTabla">
+												<ice:outputText value="#{etiquetas.lblFormatoInhRazon4}" />
+											</td>
+											<td>
+												<ice:inputText maxlength="150"
+													value="#{expedirResolucionInadmision.razon4}"
+													style="width: 358px">
+												</ice:inputText>
+											</td>
+										</tr>
+										<tr>
+											<td>
+
+
+											</td>
+											<td>
+												<ice:commandButton id="btnLogin" styleClass="button"
+													value="#{etiquetas.btnGenerarReporteDelegadosZona}"
+													action="#{expedirResolucionInadmision.generarReporte}">
+												</ice:commandButton>
+												<ice:commandButton id="btnLimpiar" styleClass="button"
+													value="Limpiar"
+													action="#{expedirResolucionInadmision.limpiar_formulario}">
+												</ice:commandButton>
+											</td>
+										</tr>
+
+									</table>
+									<br />
+								</td>
+							</tr>
+
+						</table>
+
+						<jsp:directive.include file="../popup/popupImprAdmision.jsp" />
+						<jsp:directive.include file="../popup/popupMensajeExcepcion.jsp" />
+					</div>
+				</ice:form>
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

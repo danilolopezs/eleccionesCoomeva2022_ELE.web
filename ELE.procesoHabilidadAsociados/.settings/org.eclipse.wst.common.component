@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ELE.procesoHabilidadAsociados">
+        <wb-resource deploy-path="/" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/resources"/>
+        <dependent-module archiveName="ELE.accesoDatos.jar" deploy-path="/" handle="module:/resource/ELE.accesoDatos/ELE.accesoDatos">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=utf-8"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<html>
+			<head>
+				<title>Software de Inscripci&#243;n de Planchas - Cargar Archivo Suspendidos</title>
+
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/rime/rime-portlet.css" />
+				<link rel="stylesheet" type="text/css"
+					href="../estilos/estiloPlanchas.css" />
+				<meta http-equiv="Cache-Control" content="no-cache" />
+				<script type="text/javascript" src="../js/utilidades.js"></script>
+				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+					var="etiquetas" />
+			</head>
+			<body bgcolor="#DFDFDF">
+				<ice:form partialSubmit="true">
+					<div align="center">
+						<table cellpadding="0" cellspacing="0" width="824">
+							<tr>
+								<td colspan="2">
+									<div align="center" class="bannerHabilidad"></div>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
+									<br />
+									<br />
+									
+									<jsp:directive.include file="../general/menu.jsp" />
+
+								</td>
+
+								<td align="center" style="background: white; width: 706px;"
+									height="400">
+									
+									
+									
+									<ice:panelGrid>
+										<div align="center">
+											<ice:outputLabel value="Cargue de Archivos de Suspendidos"></ice:outputLabel>
+										</div>
+										<br/>
+									<ice:panelGroup>
+										<div align="center">
+										<ice:panelGrid>
+											<ice:inputFile id="inputFileName"  width="410"
+					                                    	progressListener="#{cargarArchivoVista.actionFileUploadProgress}"
+					                                    	actionListener="#{cargarArchivoVista.actionUploadFile}"
+					                                    	submitOnUpload="preUpload"  />
+					                                    	
+					                                    	<ice:outputProgress value="#{cargarArchivoVista.fileProgress}"  
+					                                        styleClass="uploadProgressBar"/>
+										</ice:panelGrid>
+										</div>
+									</ice:panelGroup>
+									
+									
+									
+									<ice:panelGroup rendered="#{cargarArchivoVista.renderDataTable}">
+										<div align="center">
+											<br/>
+											<ice:outputLabel value="#{etiquetas.lblResultSuspendidos}" styleClass="textoLabelBold"></ice:outputLabel>
+										</div>
+									
+											<div align="center">
+												<ice:dataTable id="tableSuspendidos"
+													border="1"
+													value="#{cargarArchivoVista.data}" var="suspendido"
+													sortAscending="#{cargarArchivoVista.sortAscending}"
+													sortColumn="#{cargarArchivoVista.sortColumnName}"
+													rows="#{cargarArchivoVista.pageSize}"
+													rendered="#{not empty cargarArchivoVista.data}">
+													
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblDocumento}" />
+														</f:facet>
+														<ice:outputText value="#{suspendido.identificacion}" style="font: 11px tahoma;	text-align: right;	color: #000033;;" />
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblMotivo}" />
+														</f:facet>
+														<ice:outputText value="#{suspendido.motivo}"  styleClass="textoLabel2"/>
+													</ice:column>
+													<ice:column styleClass="textoLabel2">
+														<f:facet name="header">
+															<ice:outputText value="#{etiquetas.lblFechaSupencion}" />
+														</f:facet>
+														<ice:outputText value="#{suspendido.fechaRegistro}" styleClass="textoLabel2"/>
+													</ice:column>									
+												</ice:dataTable>
+											</div>
+											
+											<div align="center">
+												<ice:dataPaginator id="dataScroll" for="tableSuspendidos"
+													fastStep="3" paginator="true" rowsCountVar="rowsCount"
+													renderFacetsIfSinglePage="false"
+													displayedRowsCountVar="displayedRowsCountVar"
+													firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+													pageCountVar="pageCount" pageIndexVar="pageIndex" styleClass="iceDatPgrScrBtn iceDatPgrScrOut iceDatPgrSrcCol iceDatPgrCol iceDatPgrTbl "
+													paginatorMaxPages="4" binding="#{cargarArchivoVista.dataPaginator}">
+													<f:facet name="first">
+														<ice:graphicImage id="firstpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-first.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagPrimeraPagina}"/>
+													</f:facet>
+													<f:facet name="last">
+														<ice:graphicImage id="lastpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-last.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagUltimaPagina}"/>
+													</f:facet>
+													<f:facet name="previous">
+														<ice:graphicImage id="previouspage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-previous.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagPaginaAnterior}"/>
+													</f:facet>
+													<f:facet name="next">
+														<ice:graphicImage id="nextpage_1"
+															url="/xmlhttp/css/rime/css-images/arrow-next.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagProximaPagina}"/>
+													</f:facet>
+													<f:facet name="fastforward">
+														<ice:graphicImage id="fastforward_1"
+															url="/xmlhttp/css/rime/css-images/arrow-ff.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagAvanceRapido}"/>
+													</f:facet>
+													<f:facet name="fastrewind">
+														<ice:graphicImage id="fastrewind_1"
+															url="/xmlhttp/css/rime/css-images/arrow-fr.gif"
+															style="border:none;" 
+															title="#{etiqueta.pagRetornoRapido}"/>
+													</f:facet>
+													<f:param value="#{rowsCount}" />
+													<f:param value="#{displayedRowsCountVar}" />
+													<f:param value="#{firstRowIndex}" />
+													<f:param value="#{lastRowIndex}" />
+													<f:param value="#{pageIndex}" />
+													<f:param value="#{pageCount}" />
+												</ice:dataPaginator>
+											</div>
+									</ice:panelGroup>
+						</ice:panelGrid>
+						
+									
+								</td>	
+							</tr>
+						</table>
+						
+						<ice:panelPopup id="mensaje" draggable="true"
+							styleClass="formulario"
+							visible="#{cargarArchivoVista.mostrarPopupErrorCargaArchivo}"
+							modal="true"
+							style="z-index: 1000000; top: 30%; left: 35%; position: absolute; width: 280px;">
+							
+							<f:facet name="header">
+								<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"
+									style="text-align: center;" headerClass="icePanelPopupHeader">
+									<ice:outputText style="color: #FFFFFF;" value="Error" />
+								</ice:panelGrid>
+							</f:facet>
+
+							<f:facet name="body">
+								<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"
+									styleClass="font: 11px / 17px tahoma;">
+									<center>
+										<ice:outputText
+											value="#{cargarArchivoVista.mensajePopupErrorCargaArchivo}"
+											styleClass="textoLabel" />
+									</center>
+									<br />
+									<br />
+									<table border="0" align="center" cellpadding="0"
+										cellspacing="0" background="">
+										<tr>
+											<th width="70px" align="center" style="color: #D4D4D4">
+												<ice:commandButton image="../imagenes/boton_salir.gif"
+													action="#{cargarArchivoVista.ocultarMensajePopupErrorCargaArchivo}" />
+											</th>
+										</tr>
+										<tr>
+										</tr>
+									</table>
+
+								</ice:panelGrid>
+							</f:facet>
+						</ice:panelPopup>
+						
+						<jsp:directive.include
+							file="../popup/popupCncpCambioEstadoHab.jsp" />
+						<jsp:directive.include
+							file="../popup/popupMensajeExcepcion.jsp" />
+						
+					
+						
+					</div>
+				</ice:form>
+			</body>
+		</html>
+	</f:view>
+</jsp:root>
