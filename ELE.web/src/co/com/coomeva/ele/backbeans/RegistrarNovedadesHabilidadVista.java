@@ -35,6 +35,13 @@ public class RegistrarNovedadesHabilidadVista extends BaseVista {
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"codigo.tipo.parametro.fecha.registro.novedades.habilidad"));
 
+	
+	private final static Long CODIGO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD = new Long(
+			UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					"codigo.parametro.fecha.registro.novedades.habilidad"));
+	
+	
 	private final static Long CODIGO_TIPO_PARAMETRO_LISTA__CORREOS_NOTIFICACION_CAMBIO_HABILIDAD = new Long(
 			UtilAcceso
 					.getParametroFuenteS(
@@ -92,7 +99,7 @@ public class RegistrarNovedadesHabilidadVista extends BaseVista {
 
 			dtoHabilidadAsociado = new DTOHabilidadAsociado();
 			ParametroPlanchaDTO parametroFechaInicial = LectorParametros
-					.obtenerParametrosCodigoTipo(1L,
+					.obtenerParametrosCodigoTipo(CODIGO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD,
 							CODIGO_TIPO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD);
 			ParametroPlanchaDTO parametroFechaFinal = LectorParametros
 					.obtenerParametrosCodigoTipo(2L,

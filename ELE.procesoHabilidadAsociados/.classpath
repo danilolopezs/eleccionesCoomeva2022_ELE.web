@@ -13,6 +13,6 @@
 			<attribute name="owner.project.facets" value="jst.utility"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Coomeva Copia/ELE.Principal/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
