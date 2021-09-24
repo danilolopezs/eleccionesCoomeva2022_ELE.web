@@ -42,6 +42,24 @@ public class RegistrarNovedadesHabilidadVista extends BaseVista {
 					"codigo.parametro.fecha.registro.novedades.habilidad"));
 	
 	
+	
+	/**
+	 * 
+	 */
+	private final static Long CODIGO_TIPO_PARAMETRO_FECHA_INICIAL_REGISTRO_NOVEDADES_HABILIDAD = new Long(
+			UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					"codigo.parametro.fecha.inicial.registro.novedades.habilidad"));
+
+	
+	private final static Long CODIGO_PARAMETRO_FECHA_FINAL_REGISTRO_NOVEDADES_HABILIDAD = new Long(
+			UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					"codigo.parametro.fecha.final.registro.novedades.habilidad"));
+					
+	
+	
+	
 	private final static Long CODIGO_TIPO_PARAMETRO_LISTA__CORREOS_NOTIFICACION_CAMBIO_HABILIDAD = new Long(
 			UtilAcceso
 					.getParametroFuenteS(
@@ -99,16 +117,16 @@ public class RegistrarNovedadesHabilidadVista extends BaseVista {
 
 			dtoHabilidadAsociado = new DTOHabilidadAsociado();
 			ParametroPlanchaDTO parametroFechaInicial = LectorParametros
-					.obtenerParametrosCodigoTipo(CODIGO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD,
+					.obtenerParametrosCodigoTipo(CODIGO_TIPO_PARAMETRO_FECHA_INICIAL_REGISTRO_NOVEDADES_HABILIDAD,
 							CODIGO_TIPO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD);
 			ParametroPlanchaDTO parametroFechaFinal = LectorParametros
-					.obtenerParametrosCodigoTipo(2L,
+					.obtenerParametrosCodigoTipo(CODIGO_PARAMETRO_FECHA_FINAL_REGISTRO_NOVEDADES_HABILIDAD,
 							CODIGO_TIPO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD);
 			Date dateToday = new Date();
 			Date dateFechaIni = ManipulacionFechas.stringToDate(
-					parametroFechaInicial.getStrValor(), "yyyy-MM-dd hh:mm:ss");
+					parametroFechaInicial.getStrValor(), "yyyy-MM-dd");
 			Date dateFechaFin = ManipulacionFechas.stringToDate(
-					parametroFechaFinal.getStrValor(), "yyyy-MM-dd hh:mm:ss");
+					parametroFechaFinal.getStrValor(), "yyyy-MM-dd");
 
 			SimpleDateFormat formatterFecha = new SimpleDateFormat(
 					"yyyy/MM/dd HH:mm");
