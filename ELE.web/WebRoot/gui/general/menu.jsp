@@ -62,8 +62,11 @@
 				<ice:menuItem value="Resumen Novedades" rendered="true"
 					action="goResumenNovedades" />
 			</ice:menuItem>
+			<!-- Se supriume la vista ejecutar proceso -->
+			<!-- 
 			<ice:menuItem value="#{etiquetas.mnuEjecutarProcesoHabilidad}"
 				rendered="#{menuVista.indicadorVisibilidadOpcionHabilidad[0]}" action="goProcesoHabilidad" />
+				 -->
 			<ice:menuItem value="#{etiquetas.mnuRegistroNovedadesHabilidad}"
 				rendered="#{menuVista.renderRegistroNovedadesHabilidad}" action="goRegistroNovedadesHabilidad" />
 
