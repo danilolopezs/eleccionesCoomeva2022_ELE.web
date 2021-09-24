@@ -258,21 +258,15 @@
 								</td>
 
 								<td align="center" bgcolor="#ABD673">
-									<br />
-									<br />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div align="center">
-										<jsp:directive.include
+									<jsp:directive.include
 											file="../popup/popupMensajeExcepcionPlanchas.jsp" />
-										<jsp:directive.include file="../general/PiePagina.jsp" />
-									</div>
+									<jsp:directive.include file="../general/PiePagina.jsp" />
 								</td>
 							</tr>
-
 						</table>
+						<div align="center">
+										
+						</div>
 					</div>
 					<ice:panelPopup id="confirmarPopup" draggable="true"
 						visible="#{registrarNovedadesHabilidadVista.visibleConfirmarRegistrar}"
