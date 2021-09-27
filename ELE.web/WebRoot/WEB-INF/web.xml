@@ -41,18 +41,21 @@
 		<filter-name>Filtro Asociado</filter-name>
 		<url-pattern>/gui/planchas/*</url-pattern>
 	</filter-mapping>
+
 <!-- 
-	<listener> 
-		<listener-class>
-			co.com.coomeva.util.resources.log4j.AppContextListener
-		</listener-class> 
-		</listener>
 	<listener>
 		<listener-class>
-			com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
+			co.com.coomeva.util.resources.log4j.AppContextListener</listener-class>
+	</listener>
+-->
+	
+	<listener>
+		<listener-class>
+			com.icesoft.faces.util.event.servlet.ContextEventRepeater
+		</listener-class>
 	</listener>
 	
-	-->
+
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

@@ -5,9 +5,9 @@
 	<projects>
 		<project>ELE.accesoDatos</project>
 		<project>ELE.procesoHabilidadAsociados</project>
-		<project>ELEclienteWSEmpleados</project>
 		<project>ELE.Principal</project>
 		<project>ELE.generarArchivo</project>
+		<project>ELEclienteWSEmpleados</project>
 		<project>co.com.coomeva.utilidades</project>
 	</projects>
 	<buildSpec>

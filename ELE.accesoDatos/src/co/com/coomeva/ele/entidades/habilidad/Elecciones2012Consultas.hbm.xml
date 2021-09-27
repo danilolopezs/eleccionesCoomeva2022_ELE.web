@@ -276,23 +276,13 @@
 	<sql-query name="consulta.observaciones.inhabilidades.asociado">
 		<return-scalar column="OBSERVACIONES" type="java.lang.String" />
 		<![CDATA[
-			SELECT
-    	        	EI.OBSERVACIONES
+			SELECT 
+				EI.OBSERVACIONES
 			FROM
-    			ELECDB.ELE_PROCESO_REGLA EPR
-                	INNER JOIN
-        			(SELECT
-                	 	MAX(EP1.CODIGO_PROCESO) COD_PROCESO
-                	 	FROM
-                	 	ELECDB.ELE_PROCESO EP1
-                	 	WHERE EP1.ESTADO_PROCESO = 2) ULT_PROCESO_EXEC
-        				ON EPR.CODIGO_PROCESO = ULT_PROCESO_EXEC.COD_PROCESO
-                	INNER JOIN ELECDB.ELE_INHABILIDAD EI
-                 		ON EPR.CONSECUTIVO_PRO_REGLA = EI.CONSECUTIVO_PRO_REGLA
-    				INNER JOIN ELECDB.ELE_ASOCIADO EA
-        				ON EI.CODIGO_ASOCIADO = EA.CODIGO_ASOCIADO
+				ELECDB.ELE_INHABILIDAD EI INNER JOIN ELECDB.ELEASOCIA EA 
+					ON (EI.CODIGO_ASOCIADO = EA.CODIGO_ASOCIADO)
 			WHERE
-    			EA.NUMERO_DOCUMENTO = :numIdAsociado
+				EA.NUMERO_DOCUMENTO = :numIdAsociado
     	]]>
 	</sql-query>
 
