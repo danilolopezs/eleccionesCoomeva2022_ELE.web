@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
 public class FiltroRegistroPlanchas implements Filter{
 
 	public void doFilter(ServletRequest request, ServletResponse response,     
-			FilterChain chain) throws IOException, ServletException {     
+			FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest req = (HttpServletRequest) request;     
-		HttpServletResponse resp = (HttpServletResponse) response;     
-		HttpSession session = req.getSession(false);         
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+		HttpSession session = req.getSession(false);
 
-		if(session==null){        
+		if(session==null){
 			session = req.getSession(true);
 			resp.sendRedirect("../inicioRegistroPlanchas.jspx");
 		}else{
@@ -32,10 +32,10 @@ public class FiltroRegistroPlanchas implements Filter{
 	}
 
 	public void destroy() {
+		
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-	}       
-
-
+		
+	}
 }

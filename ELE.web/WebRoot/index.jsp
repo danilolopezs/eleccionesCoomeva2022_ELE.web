@@ -18,11 +18,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<meta http-equiv="refresh" content="10; url=gui/inicioAdm.jspx">
   </head>
   
   <body>
     <script>
-			window.open("gui/inicioAdm.jspx","","toolbar=no,status=yes,scrollbars=yes,location=no,menubar=no,directories=no,width=950,height=550,left=50,top=0,resizable=0");
+			<!--
+				window.open("gui/inicioAdm.jspx","","toolbar=no,status=yes,scrollbars=yes,menubar=no,directories=no,width=950,height=550,left=50,top=0,resizable=0");
+			-->
+			<% response.sendRedirect("./gui/inicioAdm.jspx"); %>
 			
 	</script>
   </body>

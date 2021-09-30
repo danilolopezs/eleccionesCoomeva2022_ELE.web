@@ -9,10 +9,11 @@ public class EleNovedadDTO {
 	private String novedadAplicada;
 	private Date fechaAplicacionNovedad;
 	private String zona;
+	private String regional;
 	private Date fechaCorte;
 	
 	public EleNovedadDTO (){
-		
+		super();
 	}
 
 	public EleNovedadDTO(String numeroDocumento, String nombreCompletoAsociado,
@@ -22,6 +23,16 @@ public class EleNovedadDTO {
 		this.novedadAplicada = novedadAplicada;
 		this.fechaAplicacionNovedad = fechaAplicacionNovedad;
 		this.zona = zona;
+	}
+	
+	public EleNovedadDTO(String numeroDocumento, String nombreCompletoAsociado,
+			String novedadAplicada, Date fechaAplicacionNovedad, String zona, String regional) {
+		this.numeroDocumento = numeroDocumento;
+		this.nombreCompletoAsociado = nombreCompletoAsociado;
+		this.novedadAplicada = novedadAplicada;
+		this.fechaAplicacionNovedad = fechaAplicacionNovedad;
+		this.zona = zona;
+		this.regional = regional;
 	}
 
 	public String getNumeroDocumento() {
@@ -72,5 +83,11 @@ public class EleNovedadDTO {
 		this.fechaCorte = fechaCorte;
 	}
 
+	public String getRegional() {
+		return regional;
+	}
 
+	public void setRegional(String regional) {
+		this.regional = regional;
+	}
 }

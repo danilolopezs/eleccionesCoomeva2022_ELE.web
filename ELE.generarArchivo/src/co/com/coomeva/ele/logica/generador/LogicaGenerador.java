@@ -327,10 +327,7 @@ public class LogicaGenerador {
 	public ByteArrayOutputStream generarReporteNovedadesExcel(List<EleNovedadDTO> list) throws Exception{
 		ByteArrayOutputStream file = new ByteArrayOutputStream();
 		try {
-
 			WritableWorkbook  workbook = Workbook.createWorkbook(file);
-
-			
 
 			WritableFont arial10fontBlackBold = new WritableFont(WritableFont.ARIAL, 10);
 			arial10fontBlackBold.setBoldStyle(WritableFont.BOLD);
@@ -340,7 +337,6 @@ public class LogicaGenerador {
 			WritableFont arial10fontWhite = new WritableFont(WritableFont.ARIAL, 10);
 			arial10fontWhite.setColour(Colour.WHITE);
 			arial10fontWhite.setBoldStyle(WritableFont.BOLD);		
-
 
 			WritableCellFormat cellhdFormatBold =  new WritableCellFormat();
 			cellhdFormatBold.setWrap(true);
@@ -371,13 +367,13 @@ public class LogicaGenerador {
 			cellhdFormatNumero.setAlignment(Alignment.CENTRE);
 			cellhdFormatNumero.setBorder(Border.ALL, BorderLineStyle.THIN);
 
-
 			String ttlNumeroDocumento = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteNumeroCedula");
 			String ttlNombreCompleto = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteNombreCompleto");
 			String ttlNovedadAplicada = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblNovedadAplicada");
 			String ttlFechaProceso = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblReporteFechaNovedad");
 			String ttlZona = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZona");			
-			String ttlFechaCorte = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblFechaCorte");
+			//String ttlFechaCorte = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblFechaCorte");
+			String ttlRegional = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional");
 			String ttlTitulo = "INFORME NOVEDADES APLICADAS";
 			
 			WritableSheet sheet = null;
@@ -400,7 +396,7 @@ public class LogicaGenerador {
 			sheet.addCell(new Label(2,cont+1,ttlNovedadAplicada,cellhdFormatBold));
 			sheet.addCell(new Label(3,cont+1,ttlFechaProceso,cellhdFormatBold));
 			sheet.addCell(new Label(4,cont+1,ttlZona,cellhdFormatBold));
-			sheet.addCell(new Label(5,cont+1,ttlFechaCorte,cellhdFormatBold));
+			sheet.addCell(new Label(5,cont+1,ttlRegional,cellhdFormatBold));
 			cont++;
 				
 			for (EleNovedadDTO dtoList : list) {
@@ -409,7 +405,8 @@ public class LogicaGenerador {
 				sheet.addCell(new Label(2,cont+1,dtoList.getNovedadAplicada(),cellhdFormat));
 				sheet.addCell(new Label(3,cont+1,ManipulacionFechas.dateToString(dtoList.getFechaAplicacionNovedad()),cellhdFormat));
 				sheet.addCell(new Label(4,cont+1,dtoList.getZona(),cellhdFormat));
-				sheet.addCell(new Label(5,cont+1,ManipulacionFechas.dateToString(dtoList.getFechaCorte()),cellhdFormat));
+				sheet.addCell(new Label(5,cont+1,dtoList.getRegional(),cellhdFormat));
+				//sheet.addCell(new Label(5,cont+1,ManipulacionFechas.dateToString(dtoList.getFechaCorte()),cellhdFormat));
 				cont++;	
 			}														
 

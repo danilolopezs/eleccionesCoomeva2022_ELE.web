@@ -43,6 +43,10 @@ h3 {
 	font-size: 12px;
 	color: #ffffff;
 }
+
+left
+
+
 TR.campoGral {
 	FONT-WEIGHT: normal; FONT-SIZE: 11px; 
 	COLOR: #003333; 
@@ -116,4 +120,9 @@ table.registroVotantes td,table.registroVotantes th {
 
 td {
 height: 500px;
+}
+
+.iceMnuBarVrtSubMenu {
+	left: 157px !important;
+    top: 28px !important;
 }

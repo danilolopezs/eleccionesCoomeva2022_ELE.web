@@ -52,7 +52,10 @@
 
 		<ice:menuItem value="#{etiquetas.lblMenuHabilidadAsociados}"
 			rendered="#{menuVista.indicadorVisibilidadHabilidad}">
-			<ice:menuItem value="#{etiquetas.lblMenuReportes}" rendered="#{menuVista.indicadorVisibilidadOpcionHabilidad[2]}">
+			
+			<ice:menuItem value="#{etiquetas.lblMenuReportes}" 
+				rendered="#{menuVista.indicadorVisibilidadOpcionHabilidad[2]}">
+				
 				<ice:menuItem value="#{etiquetas.lblSubMenuRepAsosHabinhab}"
 					rendered="true" action="goGenerarReportesHabilidades" />
 				<ice:menuItem value="#{etiquetas.lblReporteNovedades}"

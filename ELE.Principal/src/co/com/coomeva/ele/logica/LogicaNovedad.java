@@ -75,7 +75,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 			StringBuffer sql = new StringBuffer(
 					"SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_NOVEDADES ");
 			sql
-					.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+					.append("FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
 
 			if (tipoNovedad != null) {
 				sql.append("WHERE N.ESTADO_HABILIDAD = " + tipoNovedad + " ");
@@ -138,12 +138,13 @@ public class LogicaNovedad extends EleNovedadDAO {
 		try {
 			StringBuffer sql = new StringBuffer(
 					"SELECT DISTINCT * FROM(SELECT A.NUMERO_DOCUMENTO, C.NOMCLI, N.ESTADO_HABILIDAD, N.FECHA_REGISTRO, A.DESC_ZONA_ASO, ");
-			sql
-					.append("SUBSTR(C.NOMCL1,(LOCATE('2',C.NOMCL1)+1),(LOCATE('3',C.NOMCL1)-LOCATE('2',C.NOMCL1))-1) AS NOMBRE1 ");
-			sql
-					.append("FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
-			sql
-					.append("INNER JOIN ELECDB.ELEASOMUL C ON A.CODIGO_ASOCIADO = C.NUMINT ");
+			sql.append(
+					"SUBSTR(C.NOMCL1,(LOCATE('2',C.NOMCL1)+1),(LOCATE('3',C.NOMCL1)-LOCATE('2',C.NOMCL1))-1) AS NOMBRE1, ");
+
+			sql.append("(" +getSubconsultaRegional()+ ") REGIONAL ");
+			sql.append(
+					"FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+			sql.append("INNER JOIN ELECDB.ELEASOMUL C ON A.CODIGO_ASOCIADO = C.NUMINT ");
 
 			if (tipoNovedad != null) {
 				sql.append("WHERE N.ESTADO_HABILIDAD = " + tipoNovedad + " ");
@@ -194,6 +195,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 								.getDate("FECHA_REGISTRO"));
 						dto.setZona(rs.getString("DESC_ZONA_ASO").trim());
 						dto.setFechaCorte(fechaCorte);
+						dto.setRegional(rs.getString("REGIONAL").trim());
 						list.add(dto);
 						cont++;
 					} while (rs.next() && (cont <= numRegistros));
@@ -227,6 +229,30 @@ public class LogicaNovedad extends EleNovedadDAO {
 		}
 
 		return list;
+	}
+	
+	private String getSubconsultaRegional() {
+		StringBuilder q = new StringBuilder();
+		q.append("SELECT DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM)) ");
+		q.append("FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, "
+				+ "MULCLIDAT.CLITAB ZN, ELECDB .ELE_ZONA_ELECTORAL ZE, "
+				+ "ELECDB.ELE_ZONA ZI, MULCLIDAT.CLITAB CT ");
+		q.append("WHERE ZN.CODTAB = 908 AND RG.CODTAB = 907 "
+				+ "AND ZN.CODINT = AG.CODZON AND ZI.CODIGO_ZONA = AG.CODZON "
+				+ "AND CT.CODTAB = 608 AND CT.CODINT <> 0 "
+				+ "AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE "
+				+ "AND CT.CODINT = AG.CODREG "
+				+ "AND ZI.CODIGO_ZONA_ELE = (" +getConsultaZona()+ ")");
+		return q.toString();
+	}
+	
+	private String getConsultaZona() {
+		StringBuffer q = new StringBuffer();
+		q.append("SELECT  ZE.CODIGO_ZONA_ELE FROM ELECDB.ELEASOCIA A ");
+		q.append("INNER JOIN ELECDB.ELE_ZONA Z ON  A.COD_ZONA_ASO = Z.CODIGO_ZONA ");
+		q.append("INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE = ZE.CODIGO_ZONA_ELE ");
+		q.append("WHERE A.NUMERO_DOCUMENTO = C.nitcli");
+		return q.toString();
 	}
 
 	/**
@@ -334,7 +360,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 					"SELECT COUNT(N.CODIGO_ASOCIADO) TOTAL_INHABILES ");
 			sql.append("FROM ELECDB.ELE_NOVEDAD N ");
 			sql
-					.append("INNER JOIN ELECDB.ELE_ASOCIADO A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+					.append("INNER JOIN ELECDB.ELEASOCIA A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
 			sql
 					.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
 			sql

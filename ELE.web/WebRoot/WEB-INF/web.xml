@@ -45,15 +45,16 @@
 <!-- 
 	<listener>
 		<listener-class>
-			co.com.coomeva.util.resources.log4j.AppContextListener</listener-class>
-	</listener>
--->
+			co.com.coomeva.util.resources.log4j.AppContextListener
+		</listener-class>
+	</listener>-->
+<!--  -->
 	
 	<listener>
 		<listener-class>
 			com.icesoft.faces.util.event.servlet.ContextEventRepeater
 		</listener-class>
-	</listener>
+	</listener>-->
 	
 
 
