@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.mail.internet.InternetAddress;
 
@@ -261,6 +264,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 	 * 
 	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
 	 *         - Pragma S.A. <br>
+	 * @edited Danilo L\u00F3pez Sandoval
 	 * @date 26/11/2012
 	 * @return
 	 */
@@ -292,12 +296,11 @@ public class LogicaNovedad extends EleNovedadDAO {
 				Double totalAociados = logicaAsociado
 						.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
 								
-				DecimalFormat df = new DecimalFormat("###.#####");
-				String porcentaje = df.format((numeroNovedades / totalAociados) * 100);
-				String regional = "";
+				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / totalAociados) * 100, 5));
+				String regional = consultarRegional(zona.getCodigoFiltro());
 				
 				//fijar valores de inhabilidades
-				dto.setRegional(regional);				
+				dto.setRegional(regional != null ? regional : "");				
 				dto.setZona(zona.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje.toString());
@@ -309,7 +312,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 			dtoList.setList(listInforme);
 			dtoList.setTotalNumeroNov(totalNumero.toString());
 			totalPorcentaje = (totalNumero / totalAsociados) * 100;
-			dtoList.setTotalPorcentajeNov(totalPorcentaje.toString());
+			dtoList.setTotalPorcentajeNov(String.valueOf(redondearNumero(totalPorcentaje, 5)));
 
 			list.add(dtoList);
 
@@ -326,12 +329,13 @@ public class LogicaNovedad extends EleNovedadDAO {
 						l.getCodigoFiltro());
 				Double totalAociados = logicaAsociado
 						.totalAsociadosHabilesPorZona(l.getCodigoFiltro());
-				DecimalFormat df = new DecimalFormat("###.#####");
-				String porcentaje = df.format((numeroNovedades / totalAociados) * 100);
-				String regional = "";
+				
+				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / totalAociados) * 100, 5));
+			
+				String regional = consultarRegional(l.getCodigoFiltro());
 				
 				//fijar valores de inhabilidades
-				dto.setRegional(regional);
+				dto.setRegional(regional != null ? regional : "");
 				dto.setZona(l.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje);
@@ -343,7 +347,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 			dtoList.setList(listInforme);
 			dtoList.setTotalNumeroNov(totalNumero.toString());
 			totalPorcentaje = (totalNumero / totalAsociados) * 100;
-			dtoList.setTotalPorcentajeNov(totalPorcentaje.toString());
+			dtoList.setTotalPorcentajeNov(String.valueOf(redondearNumero(totalPorcentaje, 5)));
 
 			list.add(dtoList);
 
@@ -360,6 +364,14 @@ public class LogicaNovedad extends EleNovedadDAO {
 		return list;
 	}
 	
+	public double redondearNumero(Double numero, int digitos) {
+		double resultado;
+		resultado = numero * Math.pow(10, digitos);
+		resultado = Math.round(resultado);
+		resultado = resultado / Math.pow(10, digitos);
+		return resultado;
+	}
+	 
 	// Me entrega el número de novedades de los asociados especiales
 	public Double consultarNumeroNovAsocEsp(String fechaProceso, String tipoNovdedad,
 			Long zona) throws Exception {
@@ -436,6 +448,24 @@ public class LogicaNovedad extends EleNovedadDAO {
 			session.close();
 		}
 		return numeroNovedades;
+	}
+	
+	public String consultarRegional(Long zona) throws Exception {
+		Session session = HibernateSessionFactoryElecciones2012.getSession();
+		try {
+			StringBuffer sql = new StringBuffer("SELECT r.descripcion_regional regional "
+					+ "FROM ELECDB.ele_regional r " + "INNER JOIN ELECDB.ele_zona_electoral z "
+					+ "ON r.codigo_regional = z.regional " + "WHERE z.codigo_zona_ele = " + zona);
+			SQLQuery query = session.createSQLQuery(sql.toString());
+			return (String) query.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.regional.zona") + " - "
+					+ e.getMessage());
+		} finally {
+			session.close();
+		}
 	}
 
 	public void registrarNovedad(String estadoHabilidad, String documento,

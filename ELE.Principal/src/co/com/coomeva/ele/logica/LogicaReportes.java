@@ -9,6 +9,24 @@ import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.List;
 
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Cell;
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.HeaderFooter;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfWriter;
+
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.entidades.admhabilidad.LogTransacciones;
 import co.com.coomeva.ele.entidades.planchas.EleCabPlancha;
@@ -31,24 +49,6 @@ import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
 import co.com.coomeva.util.resources.LoaderResourceElements;
-
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.Cell;
-import com.lowagie.text.Document;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.HeaderFooter;
-import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Table;
-import com.lowagie.text.pdf.AcroFields;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
-import com.lowagie.text.pdf.PdfWriter;
 
 
 public class LogicaReportes {
@@ -1302,15 +1302,14 @@ public class LogicaReportes {
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);									
 			
+			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
+			cell.setBackgroundColor(HdColor);
+			table.addCell(cell);
+			
 			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaRegional"),font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);								
 
-			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
-			cell.setBackgroundColor(HdColor);
-			table.addCell(cell);								
-		
-			
 			for (EleNovedadDTO dto : list) {
 				table.addCell(dto.getNumeroDocumento());				
 				table.addCell(dto.getNombreCompletoAsociado());
@@ -1506,7 +1505,7 @@ public class LogicaReportes {
 			font.setColor(Color.white);
 
 
-			float[] colsWidth = {1f, 1f, 1f, 1f, 1f};
+			float[] colsWidth = {1f, 1f, 1f, 1f, 1f, 1f};
 			PdfPTable table = new PdfPTable(colsWidth);
 
 			PdfPCell cell =	new PdfPCell();
@@ -1517,6 +1516,11 @@ public class LogicaReportes {
 			table.addCell(cell);
 			
 			cell =	new PdfPCell(new Paragraph("Tipo Novedad",font));
+			cell.setBackgroundColor(HdColor);
+			table.addCell(cell);
+			
+
+			cell =	new PdfPCell(new Paragraph("Regional",font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
@@ -1541,11 +1545,13 @@ public class LogicaReportes {
 						table.addCell(" ");
 						table.addCell(" ");
 					}
+					table.addCell(informe.getRegional());
 					table.addCell(informe.getZona());
 					table.addCell(informe.getNumeroNovedades());
-					table.addCell(informe.getPorcentajeNovedades());
+					table.addCell(informe.getPorcentajeNovedades() + "%");
 					c++;
 				}
+				table.addCell(" ");
 				table.addCell(" ");
 				table.addCell("Total "+dto.getTipoNovedad());
 				table.addCell(" ");
