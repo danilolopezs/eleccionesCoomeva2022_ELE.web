@@ -69,7 +69,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int consultaTotalNovedaesAplicadas(Long tipoNovedad,
+	public int consultaTotalNovedadesAplicadas(Long tipoNovedad,
 			String fechaProceso, Long zonaElectoral) throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
@@ -132,7 +132,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 		List<EleNovedadDTO> list = new ArrayList<EleNovedadDTO>();
 
 		int startRow = 1;
-		int total = consultaTotalNovedaesAplicadas(tipoNovedad, fechaProceso,
+		int total = consultaTotalNovedadesAplicadas(tipoNovedad, fechaProceso,
 				zonaElectoral);
 		int numRegistros = ConstantesProperties.NUMERO_REGISTROS_POR_PAGINA_NOVEDADES;
 

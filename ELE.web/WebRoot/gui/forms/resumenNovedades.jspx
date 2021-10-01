@@ -34,27 +34,18 @@
 								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
 									<br />
 									<br />
-									
 									<jsp:directive.include file="../general/menu.jsp" />
-
 								</td>
 								
-
 								<td align="center" style="background: white; width: 706px;"
 									height="300">
-
-								
-									<h3>
-										<ice:outputText value="RESUMEN DE NOVEDADES"/>
-									</h3>
-
-								
-
+									<h4>
+										<ice:outputText value="#{etiquetas.lblResumenNovedades}"/>
+									</h4>
 									<table border="1">
 										<tr align="left">
 											<td class="formularioTabla">
-												<ice:outputText value="#{etiquetas.lblTipoReporte}" 
-													 />
+												<ice:outputText value="#{etiquetas.lblTipoReporte}"/>
 											</td>
 											<td>
 												<ice:selectOneRadio binding="#{resumenNovedades.txtTipoReporte}"
