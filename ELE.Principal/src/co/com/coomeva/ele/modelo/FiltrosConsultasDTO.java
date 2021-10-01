@@ -4,6 +4,7 @@ public class FiltrosConsultasDTO {
 	
 	private Long codigoFiltro;
 	private String descripcionFiltro;
+	private String regional;
 	
 	public FiltrosConsultasDTO(){
 	}
@@ -12,6 +13,13 @@ public class FiltrosConsultasDTO {
 		super();
 		this.codigoFiltro = codigoFiltro;
 		this.descripcionFiltro = descripcionFiltro;
+	}
+	
+	public FiltrosConsultasDTO(Long codigoFiltro, String descripcionFiltro, String regional) {
+		super();
+		this.codigoFiltro = codigoFiltro;
+		this.descripcionFiltro = descripcionFiltro;
+		this.regional = regional;
 	}
 
 	public Long getCodigoFiltro() {
@@ -29,7 +37,12 @@ public class FiltrosConsultasDTO {
 	public void setDescripcionFiltro(String descripcionFiltro) {
 		this.descripcionFiltro = descripcionFiltro;
 	}
-	
-	
 
+	public String getRegional() {
+		return regional;
+	}
+
+	public void setRegional(String regional) {
+		this.regional = regional;
+	}
 }

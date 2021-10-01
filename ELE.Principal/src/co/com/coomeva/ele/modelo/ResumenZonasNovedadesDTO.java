@@ -5,6 +5,7 @@ public class ResumenZonasNovedadesDTO {
 	private String zona;
 	private String numeroNovedades;
 	private String porcentajeNovedades;
+	private String regional;
 	
 	public ResumenZonasNovedadesDTO(){
 		
@@ -33,7 +34,12 @@ public class ResumenZonasNovedadesDTO {
 	public void setPorcentajeNovedades(String porcentajeNovedades) {
 		this.porcentajeNovedades = porcentajeNovedades;
 	}
-	
-	
 
+	public String getRegional() {
+		return regional;
+	}
+
+	public void setRegional(String regional) {
+		this.regional = regional;
+	}
 }

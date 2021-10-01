@@ -1302,11 +1302,11 @@ public class LogicaReportes {
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);									
 			
-			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZona"),font));
+			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaRegional"),font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);								
 
-			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblFechaCorte"),font));
+			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);								
 		
@@ -1317,7 +1317,8 @@ public class LogicaReportes {
 				table.addCell(dto.getNovedadAplicada());
 				table.addCell(ManipulacionFechas.dateToString(dto.getFechaAplicacionNovedad()));
 				table.addCell(dto.getZona());
-				table.addCell(ManipulacionFechas.dateToString(dto.getFechaCorte()));
+				table.addCell(dto.getRegional());
+				//table.addCell(ManipulacionFechas.dateToString(dto.getFechaCorte()));
 			}
 			
 			table.setHeaderRows(1);
@@ -1527,7 +1528,7 @@ public class LogicaReportes {
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Porcetnaje Novedades",font));
+			cell =	new PdfPCell(new Paragraph("Porcentaje Novedades",font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);						
 			

@@ -59,7 +59,7 @@
 														value="#{cuocienteElectoral.periodoElectoral}" />
 													<ice:commandButton id="btnBuscar" styleClass="button" 
 														action="#{cuocienteElectoral.consultarCuociente}"
-														image="../../imagenes/Search.png"
+														image="../../imagenes/iconoBuscar.png"
 														style="height: 15px; width: 15px">
 													</ice:commandButton>
 												</ice:panelGroup>

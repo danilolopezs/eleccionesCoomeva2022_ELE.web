@@ -1,4 +1,4 @@
-<div style="float: left; position: absolute; z-index: 9999;">
+<div style="float: left; z-index: 9999;">
 	<ice:menuBar orientation="vertical">
 
 		<ice:menuItem value="#{etiquetas.mnuInicio}"
@@ -71,7 +71,8 @@
 				rendered="#{menuVista.indicadorVisibilidadOpcionHabilidad[0]}" action="goProcesoHabilidad" />
 				 -->
 			<ice:menuItem value="#{etiquetas.mnuRegistroNovedadesHabilidad}"
-				rendered="#{menuVista.renderRegistroNovedadesHabilidad}" action="goRegistroNovedadesHabilidad" />
+				rendered="#{menuVista.renderRegistroNovedadesHabilidad}" 
+				action="goRegistroNovedadesHabilidad" />
 
 		</ice:menuItem>
 

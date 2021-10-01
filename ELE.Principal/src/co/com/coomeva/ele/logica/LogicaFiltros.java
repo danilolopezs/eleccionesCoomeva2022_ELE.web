@@ -314,6 +314,7 @@ public class LogicaFiltros {
 		List<Object[]> elements = null;
 		FiltrosConsultasDTO dto = null;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
+		//retorna N\u00B0, equibale a N°xx
 		String cadenaZonaEle = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, 
 				ConstantesProperties.CADENA_ZONA_NUM),
 				cadenaZonaEleEspecial = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, 

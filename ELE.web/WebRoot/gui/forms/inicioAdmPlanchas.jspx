@@ -29,11 +29,14 @@
 								</td>
 							</tr>
 							<tr>
-								<td width="130" align="left" valign="top"
+								<td width="129" align="left" valign="top"
 									bgcolor="#FFFFFF">
 									<br />
 									<br />
-									<jsp:directive.include file="../general/menu.jsp"/>
+									
+									
+										<jsp:directive.include file="../general/menu.jsp"/>
+								
 
 								</td>
 

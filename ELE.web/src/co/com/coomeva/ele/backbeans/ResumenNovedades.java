@@ -16,61 +16,64 @@ import com.icesoft.faces.component.ext.HtmlSelectOneMenu;
 import com.icesoft.faces.component.ext.HtmlSelectOneRadio;
 import com.icesoft.faces.context.effects.JavascriptContext;
 
-public class ResumenNovedades extends BaseVista{
-	
+public class ResumenNovedades extends BaseVista {
+
 	private HtmlSelectOneRadio txtTipoReporte;
-	
+
 	private SelectItem[] losTipoReportes;
-	
+
 	private HtmlCommandButton btnGenerarReporte;
 	private HtmlCommandButton btnLimpiar;
-	
+
 	private LoaderResourceElements loaderResourceElements = LoaderResourceElements.getInstance();
-	
+
 	private boolean visibleConfirmar;
-	
-	public ResumenNovedades(){
-		
+
+	public ResumenNovedades() {
+
 	}
-	
-	public String action_limpiar(){
+
+	public String action_limpiar() {
 		limpiar();
 		return "";
 	}
-	
-	public void limpiar(){
+
+	public void limpiar() {
 		txtTipoReporte.setValue(null);
 	}
-	
-	public String action_generarReporte(){
+
+	public String action_generarReporte() {
 		try {
-			
+
 			action_closeConfirmar();
-			
+
 			if (txtTipoReporte.getValue() == null) {
-				throw new Exception(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "mensaje.tipo.reporte"));
+				throw new Exception(loaderResourceElements.getKeyResourceValue(
+						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "mensaje.tipo.reporte"));
 			}
-						
-			
-			if (FacesUtils.checkLong(txtTipoReporte, loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"tipoReporteHabilidadExcel")) == 0) {
-				FacesUtils.getSession().setAttribute("tipoReporteResNov", loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-						"tipoReporteHabilidadExcel").toString());
-			}else{
-				FacesUtils.getSession().setAttribute("tipoReporteResNov", loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-						"tipoReporteHabilidadPdf").toString());
-			}			
-			
-			
-			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(),"ServletReporteResumenNovedades();");
-			
-			
+
+			if (FacesUtils.checkLong(txtTipoReporte, loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "tipoReporteHabilidadExcel")) == 0) {
+				FacesUtils.getSession().setAttribute("tipoReporteResNov",
+						loaderResourceElements
+								.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+										"tipoReporteHabilidadExcel")
+								.toString());
+			} else {
+				FacesUtils.getSession().setAttribute("tipoReporteResNov",
+						loaderResourceElements
+								.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+										"tipoReporteHabilidadPdf")
+								.toString());
+			}
+
+			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReporteResumenNovedades();");
+
 		} catch (Exception e) {
-			getMensaje().mostrarMensaje(e.getMessage());			
+			getMensaje().mostrarMensaje(e.getMessage());
 		}
 		return "";
 	}
-	
 
 	public HtmlCommandButton getBtnGenerarReporte() {
 		return btnGenerarReporte;
@@ -98,12 +101,12 @@ public class ResumenNovedades extends BaseVista{
 
 	public SelectItem[] getLosTipoReportes() {
 		losTipoReportes = new SelectItem[2];
-		
+
 		try {
-			losTipoReportes[0] = new SelectItem(0, loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
-					"lblGenerarExcel"));
-			losTipoReportes[1] = new SelectItem(1, loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
-					"lblGenerarPdf"));
+			losTipoReportes[0] = new SelectItem(0, loaderResourceElements
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblGenerarExcel"));
+			losTipoReportes[1] = new SelectItem(1, loaderResourceElements
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblGenerarPdf"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,7 +116,7 @@ public class ResumenNovedades extends BaseVista{
 	public void setLosTipoReportes(SelectItem[] losTipoReportes) {
 		this.losTipoReportes = losTipoReportes;
 	}
-	
+
 	public boolean isVisibleConfirmar() {
 		return visibleConfirmar;
 	}
@@ -121,16 +124,15 @@ public class ResumenNovedades extends BaseVista{
 	public void setVisibleConfirmar(boolean visibleConfirmar) {
 		this.visibleConfirmar = visibleConfirmar;
 	}
-	
-	public String action_verConfirmacion(){
+
+	public String action_verConfirmacion() {
 		visibleConfirmar = true;
 		return "";
 	}
 
-	public String action_closeConfirmar(){
+	public String action_closeConfirmar() {
 		visibleConfirmar = false;
 		return "";
 	}
-	
 
 }

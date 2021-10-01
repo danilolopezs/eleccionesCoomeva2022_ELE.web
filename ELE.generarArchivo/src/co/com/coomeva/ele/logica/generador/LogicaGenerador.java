@@ -371,7 +371,7 @@ public class LogicaGenerador {
 			String ttlNombreCompleto = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteNombreCompleto");
 			String ttlNovedadAplicada = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblNovedadAplicada");
 			String ttlFechaProceso = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblReporteFechaNovedad");
-			String ttlZona = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZona");			
+			String ttlZona = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaRegional");			
 			//String ttlFechaCorte = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblFechaCorte");
 			String ttlRegional = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional");
 			String ttlTitulo = "INFORME NOVEDADES APLICADAS";
@@ -878,11 +878,11 @@ public class LogicaGenerador {
 			String ttlZona = loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteZona");
 			String ttlAsoHabiles = "Asociados Hábiles";
 			String ttlTotalAsoHabil = "Total Asociados Hábiles";
-			String ttlNovedadesAsoHabiles = "Novedades al corte de cada cogelamiento de BD";
+			String ttlNovedadesAsoHabiles = "Novedades al corte de cada congelamiento de BD";
 			String ttlTotalAsoHabiles = "Total Asociados Hábiles a la Fecha";
 			String ttlAsoEspHabil = "Asociados Especiales (Empleados y Promotores)";
 			String ttlTotalAsoEspHabil = "Total Asociados Especiales Hábiles";
-			String ttlNovedadesAsoEspHabiles = "Novedades al corte de cada cogelamiento de BD";
+			String ttlNovedadesAsoEspHabiles = "Novedades al corte de cada congelamiento de BD";
 			String ttlTotalAsoEspHabiles = "Total Asociados Hábiles a la Fecha";
 			String ttlSumaHabiles = "Suma Hábiles";
 			String ttlFraccionDelegados = "Fracción Delegados x Zona Electoral";

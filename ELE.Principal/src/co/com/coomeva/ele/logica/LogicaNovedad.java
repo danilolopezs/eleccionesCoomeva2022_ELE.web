@@ -3,6 +3,7 @@ package co.com.coomeva.ele.logica;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -271,6 +272,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 		String fechaProceso = logicaProceso
 				.consultaFechaUltimoProcesoEjecutado();
 
+		//248740 NUMERO ASOCIADOS
 		Double totalNumero = 0d, totalPorcentaje = 0d, totalAsociados = logicaAsociado
 				.totalAsociados();
 
@@ -283,15 +285,17 @@ public class LogicaNovedad extends EleNovedadDAO {
 			dtoList.setFechaProceso(fechaProceso);
 			dtoList.setTipoNovedad("Habilidad");
 
-			for (FiltrosConsultasDTO l : zonas) {
+			for (FiltrosConsultasDTO zona : zonas) {
 				dto = new ResumenZonasNovedadesDTO();
 				Double numeroNovedades = consultarNumeroNov(fechaProceso, "1",
-						l.getCodigoFiltro());
+						zona.getCodigoFiltro());
 				Double totalAociados = logicaAsociado
-						.totalAsociadosHabilesPorZona(l.getCodigoFiltro());
+						.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
 				Double porcentaje = (numeroNovedades / totalAociados) * 100;
-
-				dto.setZona(l.getDescripcionFiltro());
+				
+				
+				
+				dto.setZona(zona.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje.toString());
 
@@ -319,11 +323,13 @@ public class LogicaNovedad extends EleNovedadDAO {
 						l.getCodigoFiltro());
 				Double totalAociados = logicaAsociado
 						.totalAsociadosHabilesPorZona(l.getCodigoFiltro());
-				Double porcentaje = (numeroNovedades / totalAociados) * 100;
-
+				DecimalFormat df = new DecimalFormat("###.#####");
+				String porcentaje = df.format((numeroNovedades / totalAociados) * 100);
+				String regional = "";
+				dto.setRegional(regional);
 				dto.setZona(l.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
-				dto.setPorcentajeNovedades(porcentaje.toString());
+				dto.setPorcentajeNovedades(porcentaje);
 
 				listInforme.add(dto);
 				totalNumero += numeroNovedades;
