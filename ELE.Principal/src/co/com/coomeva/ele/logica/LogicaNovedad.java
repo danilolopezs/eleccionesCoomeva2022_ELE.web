@@ -291,10 +291,13 @@ public class LogicaNovedad extends EleNovedadDAO {
 						zona.getCodigoFiltro());
 				Double totalAociados = logicaAsociado
 						.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
-				Double porcentaje = (numeroNovedades / totalAociados) * 100;
+								
+				DecimalFormat df = new DecimalFormat("###.#####");
+				String porcentaje = df.format((numeroNovedades / totalAociados) * 100);
+				String regional = "";
 				
-				
-				
+				//fijar valores de inhabilidades
+				dto.setRegional(regional);				
 				dto.setZona(zona.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje.toString());
@@ -326,6 +329,8 @@ public class LogicaNovedad extends EleNovedadDAO {
 				DecimalFormat df = new DecimalFormat("###.#####");
 				String porcentaje = df.format((numeroNovedades / totalAociados) * 100);
 				String regional = "";
+				
+				//fijar valores de inhabilidades
 				dto.setRegional(regional);
 				dto.setZona(l.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
