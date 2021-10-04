@@ -58,7 +58,7 @@ public class LogicaInformeResumen {
 			List<FiltrosConsultasDTO> listRegionales = logicaFiltros.consultarRegionales();
 			List<FiltrosConsultasDTO> listZonas = null;
 			
-			for (FiltrosConsultasDTO regional : listRegionales) {
+			for (FiltrosConsultasDTO regional : listRegionales) {	
 				listZonas = logicaFiltros.consultarZonasPorRegional(regional.getCodigoFiltro());
 				dto = new ResumenHabilidadDTO();
 				listInformeZona = new ArrayList<ResumenZonaHabilidadDTO>();

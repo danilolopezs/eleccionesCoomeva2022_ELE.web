@@ -576,8 +576,13 @@ public class LogicaGenerador {
 			sheet.addCell(new Label(8, cont + 1, porcentajeMuestra, cellhdFormatBold));
 			cont++;
 
-			Double totalAsociados = 0d, totalHabiles = 0d, totalInhabiles = 0d, totalPorcentajeHab = 0d,
-					totalPorcentajeInhab = 0d, totalMuestra = 0d, totalPorcentajeMuestra = 0d;
+			Double totalAsociados = 0d;
+			Double totalHabiles = 0d;
+			Double totalInhabiles = 0d;
+			Double totalPorcentajeHab = 0d;
+			Double totalPorcentajeInhab = 0d;
+			Double totalMuestra = 0d;
+			Double totalPorcentajeMuestra = 0d;
 
 			for (ResumenHabilidadDTO dto : list) {
 				sheet.addCell(new Label(0, cont + 1, dto.getRegional(), cellhdFormatLeft));

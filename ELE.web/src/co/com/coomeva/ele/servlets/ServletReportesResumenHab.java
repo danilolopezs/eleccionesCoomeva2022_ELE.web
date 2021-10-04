@@ -72,7 +72,7 @@ public class ServletReportesResumenHab extends HttpServlet {
 		ServletOutputStream toClient=  null;
 		boolean flag = false;
 		
-		try {						
+		try {
 			String tipoReporte = (String)req.getSession().getAttribute("tipoReporteRes");
 			String nombreArchivo = "ReporteResumenHabilidades";
 			

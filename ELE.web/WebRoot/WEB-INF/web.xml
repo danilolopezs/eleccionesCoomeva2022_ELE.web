@@ -54,7 +54,7 @@
 		<listener-class>
 			com.icesoft.faces.util.event.servlet.ContextEventRepeater
 		</listener-class>
-	</listener>-->
+	</listener>
 	
 
 
