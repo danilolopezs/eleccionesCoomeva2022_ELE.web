@@ -42,8 +42,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 	private LogicaFiltros logicaFiltros = LogicaFiltros.getInstance();
 	private LogicaProceso logicaProceso = LogicaProceso.getInstance();
 	private LogicaAsociado logicaAsociado = LogicaAsociado.getInstance();
-	private LoaderResourceElements loaderResourceElements = LoaderResourceElements
-			.getInstance();
+	private LoaderResourceElements loaderResourceElements = LoaderResourceElements.getInstance();
 
 	private LogicaNovedad() {
 	}
@@ -57,11 +56,11 @@ public class LogicaNovedad extends EleNovedadDAO {
 	}
 
 	/**
-	 * Metodo que consulta el total de novedades aplicadas, filtradas por el
-	 * tipo de novedad, fecha del porceso o zona electoral del asociado.
+	 * Metodo que consulta el total de novedades aplicadas, filtradas por el tipo de
+	 * novedad, fecha del porceso o zona electoral del asociado.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 19/11/2012
 	 * @param tipoNovedad
 	 * @param fechaProceso
@@ -69,17 +68,16 @@ public class LogicaNovedad extends EleNovedadDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int consultaTotalNovedadesAplicadas(Long tipoNovedad,
-			String fechaProceso, Long zonaElectoral) throws Exception {
+	public int consultaTotalNovedadesAplicadas(Long tipoNovedad, String fechaProceso, Long zonaElectoral)
+			throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 
 		try {
 
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_NOVEDADES ");
-			sql
-					.append("FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_NOVEDADES ");
+			sql.append(
+					"FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
 
 			if (tipoNovedad != null) {
 				sql.append("WHERE N.ESTADO_HABILIDAD = " + tipoNovedad + " ");
@@ -99,14 +97,10 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out
-					.println("Error consultando el total de asociados habiles: "
-							+ e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.novedades.aplicadas"));
+			System.out.println("Error consultando el total de asociados habiles: " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.novedades.aplicadas"));
 		} finally {
 			session.close();
 		}
@@ -118,8 +112,8 @@ public class LogicaNovedad extends EleNovedadDAO {
 	 * Metodo que consulta las novedades aplicadas, filtradas por el tipo de
 	 * novedad, fecha del porceso o zona electoral del asociado.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 19/11/2012
 	 * @param tipoNovedad
 	 * @param fechaProceso
@@ -127,13 +121,12 @@ public class LogicaNovedad extends EleNovedadDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<EleNovedadDTO> consultaNovedadesAplicadas(Long tipoNovedad,
-			String fechaProceso, Long zonaElectoral) throws Exception {
+	public List<EleNovedadDTO> consultaNovedadesAplicadas(Long tipoNovedad, String fechaProceso, Long zonaElectoral)
+			throws Exception {
 		List<EleNovedadDTO> list = new ArrayList<EleNovedadDTO>();
 
 		int startRow = 1;
-		int total = consultaTotalNovedadesAplicadas(tipoNovedad, fechaProceso,
-				zonaElectoral);
+		int total = consultaTotalNovedadesAplicadas(tipoNovedad, fechaProceso, zonaElectoral);
 		int numRegistros = ConstantesProperties.NUMERO_REGISTROS_POR_PAGINA_NOVEDADES;
 
 		EleNovedadDTO dto = null;
@@ -145,7 +138,7 @@ public class LogicaNovedad extends EleNovedadDAO {
 			sql.append(
 					"SUBSTR(C.NOMCL1,(LOCATE('2',C.NOMCL1)+1),(LOCATE('3',C.NOMCL1)-LOCATE('2',C.NOMCL1))-1) AS NOMBRE1, ");
 
-			sql.append("(" +getSubconsultaRegional()+ ") REGIONAL ");
+			sql.append("(" + getSubconsultaRegional() + ") REGIONAL ");
 			sql.append(
 					"FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_NOVEDAD N ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
 			sql.append("INNER JOIN ELECDB.ELEASOMUL C ON A.CODIGO_ASOCIADO = C.NUMINT ");
@@ -163,22 +156,18 @@ public class LogicaNovedad extends EleNovedadDAO {
 			sql.append(")AS todo ORDER BY todo.NOMCLI ASC");
 
 			ResultSet rs = null;
-			Connection con = HibernateSessionFactoryElecciones2012.getSession()
-					.connection();
-			Statement st = con.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+			Connection con = HibernateSessionFactoryElecciones2012.getSession().connection();
+			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 			// convertimos la fecha de corte para presentarla en el reporte
 			// formato que viene yyyy-MM-dd
 
-			Date fechaCorte = ManipulacionFechas.stringToDate(fechaProceso,
-					ConstantesProperties.FORMATO_FECHA);
-			//System.out.println("Fecha proceso " + fechaProceso);
-			//System.out.println("Fecha corte " + fechaCorte.toString());
+			Date fechaCorte = ManipulacionFechas.stringToDate(fechaProceso, ConstantesProperties.FORMATO_FECHA);
+			// System.out.println("Fecha proceso " + fechaProceso);
+			// System.out.println("Fecha corte " + fechaCorte.toString());
 			int j = 1;
 			while (startRow <= total) {
-				//System.out.println("Consulta novedad número: " + j);
+				// System.out.println("Consulta novedad número: " + j);
 
 				st.setFetchSize(numRegistros);
 				rs = st.executeQuery(sql.toString());
@@ -188,15 +177,11 @@ public class LogicaNovedad extends EleNovedadDAO {
 				if (rs.absolute(startRow)) {
 					do {
 						dto = new EleNovedadDTO();
-						dto.setNumeroDocumento(rs.getString("NUMERO_DOCUMENTO")
-								.trim());
-						dto.setNombreCompletoAsociado(rs.getString("NOMCLI")
-								.trim());
-						String novedad = rs.getString("ESTADO_HABILIDAD")
-								.trim().equals("1") ? "Hábil" : "Inhábil";
+						dto.setNumeroDocumento(rs.getString("NUMERO_DOCUMENTO").trim());
+						dto.setNombreCompletoAsociado(rs.getString("NOMCLI").trim());
+						String novedad = rs.getString("ESTADO_HABILIDAD").trim().equals("1") ? "Hábil" : "Inhábil";
 						dto.setNovedadAplicada(novedad);
-						dto.setFechaAplicacionNovedad(rs
-								.getDate("FECHA_REGISTRO"));
+						dto.setFechaAplicacionNovedad(rs.getDate("FECHA_REGISTRO"));
 						dto.setZona(rs.getString("DESC_ZONA_ASO").trim());
 						dto.setFechaCorte(fechaCorte);
 						dto.setRegional(rs.getString("REGIONAL").trim());
@@ -221,35 +206,28 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Error generando reporte asociados habiles: "
-					+ e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.novedades.aplicadas"));
+			System.out.println("Error generando reporte asociados habiles: " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.novedades.aplicadas"));
 		} finally {
 			session.close();
 		}
 
 		return list;
 	}
-	
+
 	private String getSubconsultaRegional() {
 		StringBuilder q = new StringBuilder();
 		q.append("SELECT DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM)) ");
 		q.append("FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, "
-				+ "MULCLIDAT.CLITAB ZN, ELECDB .ELE_ZONA_ELECTORAL ZE, "
-				+ "ELECDB.ELE_ZONA ZI, MULCLIDAT.CLITAB CT ");
+				+ "MULCLIDAT.CLITAB ZN, ELECDB .ELE_ZONA_ELECTORAL ZE, " + "ELECDB.ELE_ZONA ZI, MULCLIDAT.CLITAB CT ");
 		q.append("WHERE ZN.CODTAB = 908 AND RG.CODTAB = 907 "
 				+ "AND ZN.CODINT = AG.CODZON AND ZI.CODIGO_ZONA = AG.CODZON "
-				+ "AND CT.CODTAB = 608 AND CT.CODINT <> 0 "
-				+ "AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE "
-				+ "AND CT.CODINT = AG.CODREG "
-				+ "AND ZI.CODIGO_ZONA_ELE = (" +getConsultaZona()+ ")");
+				+ "AND CT.CODTAB = 608 AND CT.CODINT <> 0 " + "AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE "
+				+ "AND CT.CODINT = AG.CODREG " + "AND ZI.CODIGO_ZONA_ELE = (" + getConsultaZona() + ")");
 		return q.toString();
 	}
-	
+
 	private String getConsultaZona() {
 		StringBuffer q = new StringBuffer();
 		q.append("SELECT  ZE.CODIGO_ZONA_ELE FROM ELECDB.ELEASOCIA A ");
@@ -262,27 +240,25 @@ public class LogicaNovedad extends EleNovedadDAO {
 	/**
 	 * Metodo que consulta la informacion para generar el resumen de novedades.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @edited Danilo L\u00F3pez Sandoval
-	 * @date 26/11/2012
+	 * @date 26/11/2012 - 04/10/2021
 	 * @return
 	 */
-	public List<ResumenNovedadesDTO> generarInformacionResumenNovedades()
-			throws Exception {
+	public List<ResumenNovedadesDTO> generarInformacionResumenNovedades() throws Exception {
 		List<ResumenNovedadesDTO> list = new ArrayList<ResumenNovedadesDTO>();
 		ResumenNovedadesDTO dtoList = null;
 		ResumenZonasNovedadesDTO dto = null;
-		String fechaProceso = logicaProceso
-				.consultaFechaUltimoProcesoEjecutado();
+		String fechaProceso = logicaProceso.consultaFechaUltimoProcesoEjecutado();
 
-		//248740 NUMERO ASOCIADOS
-		Double totalNumero = 0d, totalPorcentaje = 0d, totalAsociados = logicaAsociado
-				.totalAsociados();
+		// 248740 NUMERO ASOCIADOS
+		Double totalNumero = 0d;
+		Double totalPorcentaje = 0d; 
+		Double totalAsociados = logicaAsociado.totalAsociados();
 
 		try {
-			List<FiltrosConsultasDTO> zonas = logicaFiltros
-					.consultarZonasElectorales();
+			List<FiltrosConsultasDTO> zonas = logicaFiltros.consultarZonasElectorales();
 			List<ResumenZonasNovedadesDTO> listInforme = new ArrayList<ResumenZonasNovedadesDTO>();
 
 			dtoList = new ResumenNovedadesDTO();
@@ -291,16 +267,14 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 			for (FiltrosConsultasDTO zona : zonas) {
 				dto = new ResumenZonasNovedadesDTO();
-				Double numeroNovedades = consultarNumeroNov(fechaProceso, "1",
-						zona.getCodigoFiltro());
-				Double totalAociados = logicaAsociado
-						.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
-								
-				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / totalAociados) * 100, 5));
+				Double numeroNovedades = consultarNumeroNov(fechaProceso, "1", zona.getCodigoFiltro());
+				Double cantAsociados = logicaAsociado.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
+
+				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / cantAsociados) * 100, 5));
 				String regional = consultarRegional(zona.getCodigoFiltro());
-				
-				//fijar valores de inhabilidades
-				dto.setRegional(regional != null ? regional : "");				
+
+				// fijar valores de inhabilidades
+				dto.setRegional(regional != null ? regional : "");
 				dto.setZona(zona.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje.toString());
@@ -323,20 +297,16 @@ public class LogicaNovedad extends EleNovedadDAO {
 			dtoList.setFechaProceso(fechaProceso);
 			dtoList.setTipoNovedad("Inhabilidad");
 
-			for (FiltrosConsultasDTO l : zonas) {
+			for (FiltrosConsultasDTO zona : zonas) {
 				dto = new ResumenZonasNovedadesDTO();
-				Double numeroNovedades = consultarNumeroNov(fechaProceso, "0",
-						l.getCodigoFiltro());
-				Double totalAociados = logicaAsociado
-						.totalAsociadosHabilesPorZona(l.getCodigoFiltro());
-				
-				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / totalAociados) * 100, 5));
-			
-				String regional = consultarRegional(l.getCodigoFiltro());
-				
-				//fijar valores de inhabilidades
+				Double numeroNovedades = consultarNumeroNov(fechaProceso, "0", zona.getCodigoFiltro());
+				Double cantAsociados = logicaAsociado.totalAsociadosHabilesPorZona(zona.getCodigoFiltro());
+				String porcentaje = String.valueOf(redondearNumero((numeroNovedades / cantAsociados) * 100, 5));
+				String regional = consultarRegional(zona.getCodigoFiltro());
+
+				// fijar valores de inhabilidades
 				dto.setRegional(regional != null ? regional : "");
-				dto.setZona(l.getDescripcionFiltro());
+				dto.setZona(zona.getDescripcionFiltro());
 				dto.setNumeroNovedades(numeroNovedades.toString());
 				dto.setPorcentajeNovedades(porcentaje);
 
@@ -353,45 +323,44 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.informacion.resumen.novedades")
-							+ " - " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.informacion.resumen.novedades") + " - " + e.getMessage());
 		}
 
 		return list;
 	}
-	
-	public double redondearNumero(Double numero, int digitos) {
-		double resultado;
-		resultado = numero * Math.pow(10, digitos);
-		resultado = Math.round(resultado);
-		resultado = resultado / Math.pow(10, digitos);
-		return resultado;
+
+	/**
+	 * Redondear numero deacuerdo a la precision solicitada
+	 * 
+	 * @author Danilo L\u00F3pez Sandoval.
+	 * @date 04/10/2021
+	 * @param value
+	 * @param precision
+	 * @return value aplicando redondeo
+	 */
+	public double redondearNumero(Double value, int precision) {
+		int scale = (int) Math.pow(10, precision);
+		return (double) Math.round(value * scale) / scale;
 	}
-	 
+
 	// Me entrega el número de novedades de los asociados especiales
-	public Double consultarNumeroNovAsocEsp(String fechaProceso, String tipoNovdedad,
-			Long zona) throws Exception {
+	public Double consultarNumeroNovAsocEsp(String fechaProceso, String tipoNovdedad, Long zona) throws Exception {
 		Double numeroNovedades = null;
 
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(N.CODIGO_ASOCIADO) TOTAL_INHABILES ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(N.CODIGO_ASOCIADO) TOTAL_INHABILES ");
 			sql.append("FROM ELECDB.ELE_NOVEDAD N ");
-			sql
-					.append("INNER JOIN ELECDB.ELEASOCIA A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE ");
+			sql.append("INNER JOIN ELECDB.ELEASOCIA A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+			sql.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
+			sql.append("INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE ");
 			sql.append("WHERE Z.CODIGO_ZONA_ELE = " + zona + " ");
 			sql.append("AND N.ESTADO_HABILIDAD = '" + tipoNovdedad + "' ");
 			sql.append("AND N.FECHA_REGISTRO = '" + fechaProceso + "'");
-			sql.append("AND EXISTS (SELECT * FROM   ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where A.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO )");
+			sql.append(
+					"AND EXISTS (SELECT * FROM   ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where A.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO )");
 
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_INHABILES", Hibernate.DOUBLE);
@@ -400,33 +369,25 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.numero.novedades")
-							+ " - " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.numero.novedades") + " - "
+					+ e.getMessage());
 		} finally {
 			session.close();
 		}
 		return numeroNovedades;
 	}
 
-	public Double consultarNumeroNov(String fechaProceso, String tipoNovdedad,
-			Long zona) throws Exception {
+	public Double consultarNumeroNov(String fechaProceso, String tipoNovdedad, Long zona) throws Exception {
 		Double numeroNovedades = null;
 
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(N.CODIGO_ASOCIADO) TOTAL_INHABILES ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(N.CODIGO_ASOCIADO) TOTAL_INHABILES ");
 			sql.append("FROM ELECDB.ELE_NOVEDAD N ");
-			sql
-					.append("INNER JOIN ELECDB.ELEASOCIA A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE ");
+			sql.append("INNER JOIN ELECDB.ELEASOCIA A ON N.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+			sql.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
+			sql.append("INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE ");
 			sql.append("WHERE Z.CODIGO_ZONA_ELE = " + zona + " ");
 			sql.append("AND N.ESTADO_HABILIDAD = '" + tipoNovdedad + "' ");
 			sql.append("AND N.FECHA_REGISTRO = '" + fechaProceso + "'");
@@ -438,18 +399,15 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.numero.novedades")
-							+ " - " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.numero.novedades") + " - "
+					+ e.getMessage());
 		} finally {
 			session.close();
 		}
 		return numeroNovedades;
 	}
-	
+
 	public String consultarRegional(Long zona) throws Exception {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
@@ -468,15 +426,14 @@ public class LogicaNovedad extends EleNovedadDAO {
 		}
 	}
 
-	public void registrarNovedad(String estadoHabilidad, String documento,
-			String observaciones, String usuarioRegistro) throws Exception {
+	public void registrarNovedad(String estadoHabilidad, String documento, String observaciones, String usuarioRegistro)
+			throws Exception {
 
 		if (observaciones.isEmpty() || observaciones == null) {
 			throw new Exception("No hay observaciones");
 		}
 		if (observaciones.length() > 2001) {
-			throw new Exception(
-					"Solo se permiten 2000 caracteres para la observación");
+			throw new Exception("Solo se permiten 2000 caracteres para la observación");
 		}
 
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
@@ -485,15 +442,13 @@ public class LogicaNovedad extends EleNovedadDAO {
 		try {
 			java.util.Date utilDate = new java.util.Date(); // fecha actual
 			long lnMilisegundos = utilDate.getTime();
-			java.sql.Timestamp fechaRegistroAud = new java.sql.Timestamp(
-					lnMilisegundos);
+			java.sql.Timestamp fechaRegistroAud = new java.sql.Timestamp(lnMilisegundos);
 			java.sql.Date fechaRegistro = new java.sql.Date(lnMilisegundos);
 			EleNovedad instancia = new EleNovedad();
 			instancia.setConsecutivoNovedad(consecutivo());
 			EleAsociado eleAsociado = new EleAsociado();
 			LogicaAsociado logicaAsociado = LogicaAsociado.getInstance();
-			eleAsociado.setCodigoAsociado(logicaAsociado
-					.obtieneCodAsociado(Long.valueOf(documento)));
+			eleAsociado.setCodigoAsociado(logicaAsociado.obtieneCodAsociado(Long.valueOf(documento)));
 			instancia.setEleAsociado(eleAsociado);
 			instancia.setEstadoHabilidad(estadoHabilidad);
 			instancia.setFechaRegistroAud(fechaRegistroAud);
@@ -512,41 +467,42 @@ public class LogicaNovedad extends EleNovedadDAO {
 
 	private long consecutivo() {
 		long consecutivo = GeneradorConsecutivos.getInstance().getConsecutivo(
-				ConstantesNamedQueries.QUERY_SEQ_ELE_NOVEDAD,
-				HibernateSessionFactoryElecciones2012.getSession());
+				ConstantesNamedQueries.QUERY_SEQ_ELE_NOVEDAD, HibernateSessionFactoryElecciones2012.getSession());
 		return consecutivo;
 	}
 
-	public void notificarCambioHabilidad(String asunto, String mensaje,
-			Long codigoParametroListaCorreos) throws Exception {
+	public void notificarCambioHabilidad(String asunto, String mensaje, Long codigoParametroListaCorreos)
+			throws Exception {
 		List<Object[]> elements = null;
 		String correoDestino = null;
 		java.util.Date utilDate = new java.util.Date(); // fecha actual
 		long lnMilisegundos = utilDate.getTime();
-		java.sql.Timestamp fechaRegistroAud = new java.sql.Timestamp(
-				lnMilisegundos);
+		java.sql.Timestamp fechaRegistroAud = new java.sql.Timestamp(lnMilisegundos);
 		SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		mensaje += ". Fecha y hora de registro: "
-				+ formateador.format(fechaRegistroAud);
+		mensaje += ". Fecha y hora de registro: " + formateador.format(fechaRegistroAud);
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		SendMail2 mail = null;
 		StringBuffer cuerpoCorreo = new StringBuffer();
-		/*cuerpoCorreo
-				.append("<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'></head><body><table>");
-		cuerpoCorreo.append("<tr><td colspan='2'>" + asunto
-				+ "</b></td></tr><tr><td colspan='2'>&nbsp;</td></tr>");
-		cuerpoCorreo.append("<tr><td colspan='2'>" + mensaje
-				+ "</b></td></tr><tr><td colspan='2'>&nbsp;</td></tr>");
-		cuerpoCorreo.append("</table></body></html>");*/
-		
+		/*
+		 * cuerpoCorreo
+		 * .append("<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'></head><body><table>"
+		 * ); cuerpoCorreo.append("<tr><td colspan='2'>" + asunto +
+		 * "</b></td></tr><tr><td colspan='2'>&nbsp;</td></tr>");
+		 * cuerpoCorreo.append("<tr><td colspan='2'>" + mensaje +
+		 * "</b></td></tr><tr><td colspan='2'>&nbsp;</td></tr>");
+		 * cuerpoCorreo.append("</table></body></html>");
+		 */
+
 		cuerpoCorreo.append(mensaje);
 
-		//StringBuffer mensajeSolicitante = new StringBuffer();
-		/*mensajeSolicitante.append(cuerpoCorreo.toString().replace("ó",
-				"&oacute;").replace("é", "&eacute;").replace("í", "&iacute;")
-				.replace("á", "&aacute;").replace("ú", "&uacute;").replace("ñ",
-						"&ntilde;").replace("Ñ", "&Ntilde;"));*/
-		//mensajeSolicitante.append(cuerpoCorreo.toString());
+		// StringBuffer mensajeSolicitante = new StringBuffer();
+		/*
+		 * mensajeSolicitante.append(cuerpoCorreo.toString().replace("ó",
+		 * "&oacute;").replace("é", "&eacute;").replace("í", "&iacute;") .replace("á",
+		 * "&aacute;").replace("ú", "&uacute;").replace("ñ", "&ntilde;").replace("Ñ",
+		 * "&Ntilde;"));
+		 */
+		// mensajeSolicitante.append(cuerpoCorreo.toString());
 
 		try {
 			Query query = session.getNamedQuery("consultar.lista.correos");

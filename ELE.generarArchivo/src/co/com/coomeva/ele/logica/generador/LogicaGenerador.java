@@ -755,11 +755,7 @@ public class LogicaGenerador {
 					sheet.addCell(new Label(2, cont + 1, informe.getRegional().toString(), cellhdFormatLeft));
 					sheet.addCell(new Label(3, cont + 1, informe.getZona().toString(), cellhdFormatLeft));
 					sheet.addCell(new Label(4, cont + 1, informe.getNumeroNovedades().toString(), cellhdFormat));
-					sheet.addCell(
-							new Label(
-									5, cont + 1, LogicaInformeResumen
-											.round((Double.valueOf(informe.getPorcentajeNovedades()) * 100), 2) + "%",
-									cellhdFormat));
+					sheet.addCell(new Label(5, cont + 1, informe.getPorcentajeNovedades()+" %", cellhdFormat));
 					cont++;
 				}
 				sheet.addCell(new Label(0, cont + 1, "Total " + dto.getTipoNovedad().toString(), cellhdFormatBold));
@@ -768,9 +764,7 @@ public class LogicaGenerador {
 				sheet.addCell(new Label(3, cont + 1, "", cellhdFormatBold));
 				sheet.mergeCells(0, cont + 1, 3, cont + 1);
 				sheet.addCell(new Label(4, cont + 1, dto.getTotalNumeroNov().toString(), cellhdFormatBold));
-				sheet.addCell(new Label(5, cont + 1,
-						LogicaInformeResumen.round(Double.valueOf(dto.getTotalPorcentajeNov()) * 100, 2) + "%",
-						cellhdFormatBold));
+				sheet.addCell(new Label(5, cont + 1, dto.getTotalPorcentajeNov() + " %", cellhdFormatBold));
 
 				cont += 2;
 				if (showTitle) {
