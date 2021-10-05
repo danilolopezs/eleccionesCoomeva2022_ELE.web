@@ -142,24 +142,7 @@ public class CuocienteElectoral extends BaseVista {
 	public String crearCuociente() {
 
 		try {
-			if(periodoElectoral== null || periodoElectoral.trim().isEmpty() || periodoElectoral.trim().length()!=4 ){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.delegadoZona.periodoEelctoral"));
-			}
-				
-			if(totalDelegadosElegir==null || totalDelegadosElegir.trim().isEmpty()){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.cuociente.totalDelegadosElegir"));
-			}
-			
-			if (totalDelegadosEspeciales==null || totalDelegadosEspeciales.trim().isEmpty()){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.cuociente.totalDelegadosEspeciales"));
-			}
-			
+			validaciones();			
 			finalTotalDelegadosElegir = "0";
 			cuocienteElectoral = "0";
 			
@@ -199,6 +182,26 @@ public class CuocienteElectoral extends BaseVista {
 			getMensaje().mostrarMensaje(mensaje);
 		}
 		return "";
+	}
+	
+	private void validaciones() throws Exception {
+		if(periodoElectoral== null || periodoElectoral.trim().isEmpty() || periodoElectoral.trim().length()!=4 ){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.delegadoZona.periodoEelctoral"));
+		}
+			
+		if(totalDelegadosElegir==null || totalDelegadosElegir.trim().isEmpty()){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.cuociente.totalDelegadosElegir"));
+		}
+		
+		if (totalDelegadosEspeciales==null || totalDelegadosEspeciales.trim().isEmpty()){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.cuociente.totalDelegadosEspeciales"));
+		}
 	}
 	
 	private void eliminarCuociente(EleCuocienteElectoral eleCuocienteElectoral) {

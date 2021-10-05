@@ -596,8 +596,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		 * Se consulta los delegados de la zona y regional entregados por
 		 * parámetro
 		 */
-		Criteria crit = getSession().createCriteria(
-				EleCuocienteDelegadosZona.class);
+		Criteria crit = getSession().createCriteria(EleCuocienteDelegadosZona.class);
 		crit.add(Restrictions.eq("periodoElectoral", periodoElectoral));
 
 		if (ordenarPor != null

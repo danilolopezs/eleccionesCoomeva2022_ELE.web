@@ -38,8 +38,8 @@ import co.com.coomeva.util.resources.LoaderResourceElements;
 
 public class LogicaAsociado extends AsoelecfDAO {
 
-	private final int COD_HABIL = 2;
-	private final int COD_INHABIL = 1;
+	private final int COD_HABIL = 1;
+	private final int COD_INHABIL = 2;
 	
 	private static LogicaAsociado instance;
 	private LogicaProceso logicaProceso = LogicaProceso.getInstance();
