@@ -10,7 +10,7 @@ import org.hibernate.Session;
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.usuario.EleUsuarioLogin;
 
-public class EleUsuarioLoginDAO implements IEleUsuarioLoginDAO{
+public class EleUsuarioLoginDAO  implements IEleUsuarioLoginDAO{
 	
 	private static final Log log = LogFactory.getLog(EleUsuarioLoginDAO.class);
 	

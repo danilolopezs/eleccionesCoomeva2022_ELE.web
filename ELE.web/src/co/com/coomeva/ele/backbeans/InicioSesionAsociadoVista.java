@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.hssf.record.formula.functions.If;
 
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
@@ -19,6 +20,9 @@ import co.com.coomeva.ele.entidades.planchas.EleExperienciaLaboral;
 import co.com.coomeva.ele.entidades.planchas.ElePParametros;
 import co.com.coomeva.ele.entidades.planchas.ElePlanchas;
 import co.com.coomeva.ele.entidades.planchas.EleZonas;
+import co.com.coomeva.ele.json.RequestBodyVO;
+import co.com.coomeva.ele.json.RequestRest;
+import co.com.coomeva.ele.json.RespuestaWS;
 import co.com.coomeva.ele.logica.LogicaAutenticacion;
 import co.com.coomeva.ele.modelo.EleAsociadoDTO;
 import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
@@ -26,90 +30,122 @@ import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
 import co.com.coomeva.ele.modelo.Parametro;
+import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
+import net.sf.cglib.asm.attrs.RuntimeInvisibleAnnotations;
 
-public class InicioSesionAsociadoVista extends BaseVista
-{
+public class InicioSesionAsociadoVista extends BaseVista {
 	private String documento;
 	private boolean visible = false;
+	private boolean valid = false;
 	private String msgEntrada;
 	private String returnString;
 	private String bienvenido;
 	private String btnCerrar;
-	private final Log log  = LogFactory.getLog(InicioSesionAsociadoVista.class);
-	private String login;
-	private String password;
-	
-	
-	
+	private final Log log = LogFactory.getLog(InicioSesionAsociadoVista.class);
+	private java.lang.String login = "";
+	private java.lang.String password = "";
+	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
+	private String url = "https://secure.coomeva.com.co/pasaporte-Autenticacion-1/rest/";
+
 	/**
-	 * Metodo que obtiene el numero de documento y verifica que el asociado exista y 
+	 * Metodo que obtiene el numero de documento y verifica que el asociado exista y
 	 * que si es o no cabeza de plancha
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
-	public String action_ingreso() 
-	{
+	public String action_ingreso() {
 		Long idLong = 0L;
-		visible = true;
-		//int validador = UtilAcceso.getParametroFuenteI("parametros", "maxNoDoc");
-		//int validado = documento.length();
-		
-		LogicaAutenticacion logicaAutenticacion = LogicaAutenticacion.getInstace();
-		UserVo userVo;
+		visible = false;
+		valid = validaCampos();
+		if (valid) {
+			try {
+				RequestBodyVO body = new RequestBodyVO(token, login, password);
+				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
+				RespuestaWS respuestaWS = request.getRespuesta();
+				System.out.println(respuestaWS.toString());
+				if (respuestaWS.getStatusCode().equals("0")) {
+					if (respuestaWS.getClient() != null) {
+						visible = true;
+						msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
+						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
+						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
+					//	returnString = "goCrearPlancha";
+					}
+				} else {
+					exceptionGenery(respuestaWS.getDescStatusCode());
+					returnString = "";
+				}
+			} catch (CoomevaRuntimeException e) {
+				exceptionGenery(e.getMessage());
+			} catch (Exception e) {
+				exceptionGenery(e.getMessage());
+			}
+		} else {
+			returnString = "";
+		}
+		return "";
+	}
 
-		try 
-		{
-			//validarMaximo(validado, validador, false, UtilAcceso.getParametroFuenteS("mensajes", "excedioNoDoc"));
+	private void validacionInformacionPlanchas(String identificacion) {
+		int validador = UtilAcceso.getParametroFuenteI("parametros", "maxNoDoc");
+		int validado = documento.length();
 
-			//validarNumLong(documento);
-			
-			userVo = logicaAutenticacion.autenDirectorioOpenLDAP(login, password);			
+		try {
+			// validarMaximo(validado, validador, false,
+			// UtilAcceso.getParametroFuenteS("mensajes", "excedioNoDoc"));
 
-			idLong = Long.valueOf(userVo.getId());
-			documento = userVo.getId();
+			// validarNumLong(documento);
 
+			// userVo = logicaAutenticacion.autenDirectorioOpenLDAP(login, password);
 
-			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(documento);
+			Long idLong = Long.parseLong(identificacion);
+			documento = identificacion;
 
-			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(documento,elZona,documento);
+			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(identificacion);
+
+			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(documento, elZona,
+					documento);
 
 			Date dateToday = new Date();
 
-			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros", "codFechaIniInscripcion");
-			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros", "codFechaFinInscripcion");
+			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+					"codFechaIniInscripcion");
+			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+					"codFechaFinInscripcion");
 
 			ElePParametros elePParametrosIni = parametroIni.getParametro();
 			ElePParametros elePParametrosFin = parametroFin.getParametro();
 
-			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),"dd-MM-yyyy hh:mm:ss a");
-			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),"dd-MM-yyyy hh:mm:ss a");
+			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
+					"dd-MM-yyyy hh:mm:ss a");
+			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
+					"dd-MM-yyyy hh:mm:ss a");
 
-			/*
-			 * se comenta mientras se prueba el ingreso
-			 * if (elePParametrosIni != null && elePParametrosFin !=null) 
-			{
-				if (dateToday.compareTo(dateFechaIniInscrpcion)<0) {
+			// se comenta mientras se prueba el ingreso
+			if (elePParametrosIni != null && elePParametrosFin != null) {
+				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
 				}
 
-				if (dateToday.compareTo(dateFechaFinInscrpcion)>0) {
+				if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) {
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
 				}
-			}*/
+			}
 
-			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", " + asociadoDTO.getNombre().toString();
+			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
+					+ asociadoDTO.getNombre().toString();
 
-			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(documento); 
-			//Verifica que el Usuario Exista
+			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(documento);
+			// Verifica que el Usuario Exista
 			if (asociadoDTO != null) {
-				if (asociadoDTO.getNombre() != null && !asociadoDTO.getNombre().equalsIgnoreCase("")) 
-				{
+				if (asociadoDTO.getNombre() != null && !asociadoDTO.getNombre().equalsIgnoreCase("")) {
 					EleCabPlanchaDTO eleCabPlanchaDTO = new EleCabPlanchaDTO();
-					eleCabPlanchaDTO.setNroIdentificacion(""+idLong);
+					eleCabPlanchaDTO.setNroIdentificacion("" + idLong);
 					eleCabPlanchaDTO.setNombreCompleto(asociadoDTO.getNombre());
 					eleCabPlanchaDTO.setAntiguedad(new Long(asociadoDTO.getAntiguedad()));
 					eleCabPlanchaDTO.setProfesion(asociadoDTO.getProfesion());
@@ -120,31 +156,35 @@ public class InicioSesionAsociadoVista extends BaseVista
 					eleCabPlanchaDTO.setPrimerApellido(asociadoDTO.getPrimerApellido());
 					eleCabPlanchaDTO.setSegundoApellido(asociadoDTO.getSegundoApellido());
 
-					if (asociadoDTO.isEstadoHabilidad())
-					{
-						//Verifica que el usuario es cabeza
-						if (elePlanchas != null)
-						{
+					if (asociadoDTO.isEstadoHabilidad()) {
+						// Verifica que el usuario es cabeza
+						if (elePlanchas != null) {
 							msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 
-							List<ElePrincipalesDTO> listaPrincipales = DelegadoPrincipal.getInstance().consultarPrincipales(documento);
+							List<ElePrincipalesDTO> listaPrincipales = DelegadoPrincipal.getInstance()
+									.consultarPrincipales(documento);
 
-							List<EleSuplentesDTO> listaSuplentes = DelegadoSuplente.getInstance().consultarSuplentes(documento);
+							List<EleSuplentesDTO> listaSuplentes = DelegadoSuplente.getInstance()
+									.consultarSuplentes(documento);
 
-							ElePlanchaDTO elePlanchaDTO  = new ElePlanchaDTO();
+							ElePlanchaDTO elePlanchaDTO = new ElePlanchaDTO();
 
 							elePlanchaDTO.setListaPrincipales(listaPrincipales);
 							elePlanchaDTO.setListaSuplentes(listaSuplentes);
 
-							EleCabPlancha cabPlancha = DelegadoCabezaPlancha.getInstance().consultarCabezaPlancha(documento);
+							EleCabPlancha cabPlancha = DelegadoCabezaPlancha.getInstance()
+									.consultarCabezaPlancha(documento);
 
-
-							if (!elePlanchas.getEstado().equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha1")) && !elePlanchas.getEstado().equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha3"))) {
+							if (!elePlanchas.getEstado()
+									.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha1"))
+									&& !elePlanchas.getEstado().equalsIgnoreCase(
+											UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha3"))) {
 								throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "planchaEnProceso"));
 							}
-							
-							List<EleExperienciaLaboral> listExperienciaLaboral = DelegadoExperienciaLaboral.getInstance().consultaExperienciaLaborales(documento);
+
+							List<EleExperienciaLaboral> listExperienciaLaboral = DelegadoExperienciaLaboral
+									.getInstance().consultaExperienciaLaborales(documento);
 
 							eleCabPlanchaDTO = new EleCabPlanchaDTO(cabPlancha);
 
@@ -160,8 +200,7 @@ public class InicioSesionAsociadoVista extends BaseVista
 							FacesUtils.setSessionParameter("userPlancha", elePlanchaDTO);
 
 							returnString = "goResumenPlancha";
-						}else
-						{
+						} else {
 							msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 							ElePlanchaDTO elePlanchaDTO = new ElePlanchaDTO();
@@ -172,16 +211,14 @@ public class InicioSesionAsociadoVista extends BaseVista
 
 							returnString = "goCrearPlancha";
 						}
-					}else{
+					} else {
 						msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
 						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblCerrar");
 						returnString = "";
 					}
 				}
 			}
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			visible = false;
 			String mensaje = e.getMessage();
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
@@ -190,120 +227,175 @@ public class InicioSesionAsociadoVista extends BaseVista
 			log.error("Error", e);
 			getMensaje().mostrarMensaje(mensaje);
 		}
+	}
+
+	private void exceptionGenery(String mensaje) {
+		if (mensaje == null || mensaje.equalsIgnoreCase("")) {
+			mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
+		}
+		getMensaje().mostrarMensaje(mensaje);
+	}
+
+	private boolean validaCampos() {
+		boolean val = true;
+		try {
+			if (login == null || login.equals("") || login.contains(" ")) {
+				val = false;
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noUsuario"));
+			}
+			if (password == null || password.equals("")) {
+				val = false;
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noPassword"));
+			}
+		} catch (Exception e) {
+			String mensaje = e.getMessage();
+			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
+				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
+			}
+			// log.error("Error", e);
+			getMensaje().mostrarMensaje(mensaje);
+		}
+		return val;
+	}
+
+	/*
+	 * /** Metodo de Acceso
+	 * 
+	 * @author Manuel Galvez, Ricardo Chiriboga
+	 * 
+	 * @
+	 */
+	public String action_limpiar() {
+		documento = "";
+//		password = "";
+//		login = "";
 		return "";
 	}
-	
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
-	public String action_limpiar()
-	{
-		documento = null;
-		return "";
-	}
-	/**
-	 * Metodo de Acceso
-	 * @author Manuel Galvez, Ricardo Chiriboga
-	 * @return String
-	 */
-	public String action_redireccion()
-	{
+	public String action_redireccion() {
 		visible = false;
 		return returnString;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
 	public String getBtnCerrar() {
 		return btnCerrar;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param btnCerrar
 	 */
 	public void setBtnCerrar(String btnCerrar) {
 		this.btnCerrar = btnCerrar;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
 	public String getReturnString() {
 		return returnString;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param returnString
 	 */
 	public void setReturnString(String returnString) {
 		this.returnString = returnString;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
-	public String getBienvenido() 
-	{
+	public String getBienvenido() {
 		return bienvenido;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param bienvenido
 	 */
 	public void setBienvenido(String bienvenido) {
 		this.bienvenido = bienvenido;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
 	public String getMsgEntrada() {
 		return msgEntrada;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param msgEntrada
 	 */
 	public void setMsgEntrada(String msgEntrada) {
 		this.msgEntrada = msgEntrada;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return boolean
 	 */
 	public boolean isVisible() {
 		return visible;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param visible
 	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return Srting
 	 */
 	public String getDocumento() {
 		return documento;
 	}
+
 	/**
 	 * Metodo de Acceso
+	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @param documento
 	 */
