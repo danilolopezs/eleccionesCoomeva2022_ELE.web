@@ -3,7 +3,6 @@ package co.com.coomeva.ele.servlets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,23 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.com.coomeva.delegado.reportesToExcel.DelegadoReportesToExcel;
-import co.com.coomeva.ele.backbeans.cuociente.CuocienteElectoral;
-import co.com.coomeva.ele.delegado.DelegadoCuocienteElectoral;
 import co.com.coomeva.ele.delegado.generador.DelegadoGenerador;
-import co.com.coomeva.ele.delegado.habilidad.DelegadoNovedad;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteDelegadosZona;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteElectoral;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteRegional;
-import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
-import co.com.coomeva.ele.modelo.ResumenCuocienteDTO;
-import co.com.coomeva.ele.modelo.ResumenNovedadesDTO;
-import co.com.coomeva.ele.util.UtilNumber;
-import co.com.coomeva.modelo.reportesToExcel.ReporteExcel;
 import co.com.coomeva.util.acceso.UtilAcceso;
-import co.com.coomeva.util.resources.LoaderResourceElements;
 
 public class ServletReporteDelegadosZona extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final String REPORTE_CUOCIENTE_ELECTORAL = "ReporteCuocienteElectoral";
 
 	/**
 	 * Constructor of the object.
@@ -80,10 +71,6 @@ public class ServletReporteDelegadosZona extends HttpServlet {
 	 */
 	public void executeReport(HttpServletRequest req, HttpServletResponse resp)
 	throws Exception {
-		String reporte = "ReporteCuocienteElectoral";
-		
-
-		
 		ByteArrayOutputStream byteArrayOutputStream = null;
 		ServletOutputStream toClient = null;
 		boolean flag = false;
@@ -112,7 +99,7 @@ public class ServletReporteDelegadosZona extends HttpServlet {
 		
 		byteArrayOutputStream = DelegadoGenerador.getInstance().generarCoucienteElectoral(delegadosRegional,delegadosZona, cuocienteElectoral);
 		resp.setContentType("application/vnd.ms-excel");
-		resp.setHeader("Content-disposition", "inline; filename=\""+reporte+".xls\"");
+		resp.setHeader("Content-disposition", "inline; filename=\"" +REPORTE_CUOCIENTE_ELECTORAL+ ".xls\"");
 		resp.setCharacterEncoding("iso-8859-1");
 		toClient = resp.getOutputStream();
 		byteArrayOutputStream.writeTo(toClient);
