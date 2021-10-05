@@ -7,129 +7,139 @@
 		pageEncoding="UTF-8" />
 	<f:view>
 		<html>
-			<head>
-				<title>Software de Inscripci&#243;n de Planchas - Crear Plancha</title>
+<head>
+<title>Software de Inscripci&#243;n de Planchas - Crear Plancha</title>
 
-				<link rel="stylesheet" type="text/css"
-					href="./estilos/rime/rime-portlet.css" />
-				<link rel="stylesheet" type="text/css"
-					href="./estilos/estiloPlanchas.css" />
-				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
-					var="etiquetas" />
-				<script type="text/javascript">
-					function abrirVentana(url) {
-						newwindow = window.open (url,""," width = 800, height = 600"+"toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=no,copyhistory=no, modal=yes, dialog=yes" ); 
-						newwindow.creator = self;
-					}  
-				</script>
-				<!--/* POP UP Aplicativos */-->
-				
-				<script type='text/javascript'><!--//<![CDATA[
-				   var ox_u = 'http://d1.openx.org/al.php?zoneid=288738&cb=66454521215&layerstyle=simple&align=right&valign=top&padding=0&padding=0&shifth=0&shiftv=0&closebutton=t&nobg=t&noborder=t';
-				   if (document.context) ox_u += '&context=' + escape(document.context);
-				   document.write("<scr"+"ipt type='text/javascript' src='" + ox_u + "'></scr"+"ipt>");
-				//]]>--></script>				
-			</head>
-			<body bgcolor="#DFDFDF">
+<link rel="stylesheet" type="text/css"
+	href="./estilos/rime/rime-portlet.css" />
+<link rel="stylesheet" type="text/css"
+	href="./estilos/estiloPlanchas.css" />
+<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+	var="etiquetas" />
+<script type="text/javascript">
+	function abrirVentana(url) {
+		newwindow = window
+				.open(
+						url,
+						"",
+						" width = 800, height = 600"
+								+ "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=no,copyhistory=no, modal=yes, dialog=yes");
+		newwindow.creator = self;
+	}
+</script>
+<!--/* POP UP Aplicativos */-->
+
+<script type='text/javascript'>
+<!--//<![CDATA[
+	var ox_u = 'http://d1.openx.org/al.php?zoneid=288738&cb=66454521215&layerstyle=simple&align=right&valign=top&padding=0&padding=0&shifth=0&shiftv=0&closebutton=t&nobg=t&noborder=t';
+	if (document.context)
+		ox_u += '&context=' + escape(document.context);
+	document
+			.write("<scr"+"ipt type='text/javascript' src='" + ox_u + "'></scr"+"ipt>");
+//]]>-->
+</script>
+</head>
+<body bgcolor="#DFDFDF">
 
 
 
-				<ice:form partialSubmit="true">
-					<div align="center">
-						<table cellpadding="0" cellspacing="0" width="824">
+	<ice:form partialSubmit="true">
+		<div align="center">
+			<table cellpadding="0" cellspacing="0" width="824">
+				<tr>
+					<td colspan="2">
+						<div align="left" class="banner"></div>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" style="background: white;" height="300"><ice:panelCollapsible
+							columns="1" id="pnlPrincipal" expanded="true"
+							toggleOnClick="false" style="width: 300px">
+
+							<f:facet name="header">
+								<ice:outputText id="lblTituloInicioSesion"
+									style="font-size: 13px" value="#{etiquetas.ttlIngreseNoDoc}"
+									styleClass="">
+								</ice:outputText>
+							</f:facet>
+
+							<br />
+
+							<div align="center">
+								<ice:panelGrid columns="2">
+									<ice:outputText id="msgLogin" value="#{etiquetas.lblLogin}" />
+									<ice:inputText id="txtLogin"
+										value="#{inicioSesionAsociadoVista.login}" />
+
+									<ice:outputText id="msgPass" value="#{etiquetas.lblPassword}">
+									</ice:outputText>
+									<ice:inputSecret id="txtPass"
+										value="#{inicioSesionAsociadoVista.password}" />
+
+								</ice:panelGrid>
+							</div>
+
+							<br />
+
+							<div align="center">
+
+								<ice:panelGrid columns="2">
+
+									<ice:commandButton id="btnLogin" styleClass="button"
+										value="#{etiquetas.lblIngresar}"
+										action="#{inicioSesionAsociadoVista.action_ingreso}">
+									</ice:commandButton>
+									<ice:commandButton id="btnLimpiar" styleClass="button"
+										value="#{etiquetas.lblLimpiar}"
+										action="#{inicioSesionAsociadoVista.action_limpiar}">
+									</ice:commandButton>
+
+								</ice:panelGrid>
+							</div>
+						</ice:panelCollapsible>
+						<table width="50%" border="0" cellspacing="5" cellpadding="0"
+							align="center">
 							<tr>
-								<td colspan="2">
-									<div align="left" class="banner"></div>
-								</td>
+								<td nowrap="nowrap"><span class="Estilo9">* Para
+										Ingresar al sistema debe de digitar el usuario y contraseña de
+										su Cuenta Coomeva.</span></td>
 							</tr>
 							<tr>
-								<td align="center" style="background: white;" height="300">
-									<ice:panelCollapsible columns="1" id="pnlPrincipal"
-										expanded="true" toggleOnClick="false" style="width: 300px">
-
-										<f:facet name="header">
-											<ice:outputText id="lblTituloInicioSesion"
-												style="font-size: 13px" value="#{etiquetas.ttlIngreseNoDoc}"
-												styleClass="">
-											</ice:outputText>
-										</f:facet>
-
-										<br />
-
-										<div align="center">
-											<ice:panelGrid columns="2">
-												<ice:outputText id="msgLogin"
-													value="#{etiquetas.lblLogin}" />
-												<ice:inputText id="txtLogin"
-													value="#{inicioSesionAsociadoVista.login}" />
-												
-												<ice:outputText id="msgPass"
-													value="#{etiquetas.lblPassword}">
-												</ice:outputText>
-												<ice:inputSecret id="txtPass"
-													value="#{inicioSesionAsociadoVista.password}" />	
-													
-											</ice:panelGrid>
-										</div>
-
-										<br />
-
-										<div align="center">
-										
-											<ice:panelGrid columns="2">
-
-												<ice:commandButton id="btnLogin" styleClass="button"
-													value="#{etiquetas.lblIngresar}"
-													action="#{inicioSesionAsociadoVista.action_ingreso}">
-												</ice:commandButton>
-												<ice:commandButton id="btnLimpiar" styleClass="button"
-													value="#{etiquetas.lblLimpiar}"
-													action="#{inicioSesionAsociadoVista.action_limpiar}">
-												</ice:commandButton>
-					
-											</ice:panelGrid>
-										</div>
-									</ice:panelCollapsible>									
-						<table width="50%" border="0" cellspacing="5" cellpadding="0" align="center">
-                        <tr>
-                            <td nowrap = "nowrap">
-                            <span class="Estilo9">¿Olvidó su contraseña?. Recupérela fácilmente</span><span class="Estilo11">
-						<font onclick="abrirVentana('http://10.11.34.71:9092/pasaporte-web/JSPX/recordarUsuAso.jspx')" style="cursor:hand;text-decoration: underline;color: green;"  class="Estilo11"> Aquí</font></span>
-                            </td>
-                          </tr>  
-                          <tr>
-                            <td nowrap = "nowrap"><span class="Estilo11">* </span>
-                                <span class="Estilo27">
-                            	<span class="Estilo29">Si es Asociado Coomeva y no tiene su usuario y clave de Pasaporte Coomeva, regístrese
-                            	</span> 
-                            	<font onclick="abrirVentana('http://10.11.34.71:9092/pasaporte-web/JSPX/creacionUsuAso.jspx')" style="cursor:hand;text-decoration: underline;color: green;"  class="Estilo11">Aquí</font> 
-                            	</span>
-                            </td>
-                          </tr>                          
-                          <tr>
-                            <td nowrap = "nowrap">
-                            	<span class="Estilo27"><span class="Estilo11">* </span> 
-                            		<span class="Estilo29">Cambie su contraseña periódicamente 
-                            		<font onclick="abrirVentana('http://10.11.34.71:9092/pasaporte-web/JSPX/modificarUsuAso.jspx')" style="cursor:hand;text-decoration: underline;color: green;"  class="Estilo11">Aquí</font></span>
-                            	</span>
-                            </td>
-                          </tr>                    
-                          <tr>
-                            <td nowrap = "nowrap"><span class="Estilo27"><span class="Estilo11">* </span>¿Problemas para ingresar al sistema?. </span><span class="Estilo11">
-                            <font onclick="abrirVentana('http://atentosinternet.coomeva.com.co/atentos/php/view/atencion_cliente/verRegsCasoCliente.php?empresa=1')" style="cursor:hand;text-decoration: underline;color: green;"  class="Estilo11">Contáctenos </font></span></td>
-                          </tr>
-                        </table>
-								</td>
+								<td nowrap="nowrap"><span class="Estilo9">* Si Usted
+										es Asociado a Coomeva y aún no tiene "Cuenta Coomeva" puede
+										resgistrarse desde </span><span class="Estilo11"> <font
+										onclick="abrirVentana('https://secure.coomeva.com.co/CuentaCoomeva/#/registro/1/1/FF3FD5gffd5iojbet78398bndWPLIO767HYhu')"
+										style="cursor: hand; text-decoration: underline; color: green;"
+										class="Estilo11"> Aquí</font>
+								</span></td>
 							</tr>
-						</table>
-							<jsp:directive.include
-							file="./popup/popupAsociadoInicio.jsp" />
-						<jsp:directive.include
-							file="./popup/popupMensajeExcepcionInicio.jsp" />
-					</div>
-				</ice:form>
+							<tr>
+								<td nowrap="nowrap"><span class="Estilo9">* Si
+										olvidó su contraseña recupérala facílmente desde </span><span
+									class="Estilo11"> <font
+										onclick="abrirVentana('https://secure.coomeva.com.co/CuentaCoomeva/#/registro/1/2/FF3FD5gffd5iojbet78398bndWPLIO767HYhu')"
+										style="cursor: hand; text-decoration: underline; color: green;"
+										class="Estilo11"> Aquí</font>
+								</span></td>
+							</tr>
+							<tr>
+								<td nowrap="nowrap"><span class="Estilo27"><span
+										class="Estilo11">* </span>Si tiene inconvenientes para
+										ingresar al sistema, por favor pongase en contacto con
+										nosotros a través de </span><span class="Estilo11"> <font
+										onclick="abrirVentana('http://atentosinternet.coomeva.com.co/atentos/php/view/atencion_cliente/verRegsCasoCliente.php?empresa=1')"
+										style="cursor: hand; text-decoration: underline; color: green;"
+										class="Estilo11">Contáctenos </font></span></td>
+							</tr>
+						</table></td>
+				</tr>
+			</table>
+			<jsp:directive.include file="./popup/popupAsociadoInicio.jsp" />
+			<jsp:directive.include file="./popup/popupMensajeExcepcionInicio.jsp" />
+		</div>
+	</ice:form>
 
-			</body>
+</body>
 		</html>
 	</f:view>
 </jsp:root>
