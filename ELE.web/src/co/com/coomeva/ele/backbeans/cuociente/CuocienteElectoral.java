@@ -75,23 +75,26 @@ public class CuocienteElectoral extends BaseVista {
 	}*/
 	
 	public String consultarCuociente() {
-		
-		
-		if(periodoElectoral!= null && !periodoElectoral.isEmpty() && periodoElectoral.trim().length()==4 ){
+		if (validarPeriodoElectoral()) {
 			String periodo = periodoElectoral;
 			actionLimpiar();
 			periodoElectoral = periodo;
 			consultarCuociente(periodoElectoral);
 		} else {
-			getMensaje().mostrarMensaje(UtilAcceso.getParametroFuenteS("mensajes",
-			"campo.obligatorio.cuociente.periodo"));
+			getMensaje()
+					.mostrarMensaje(UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.cuociente.periodo"));
 		}
-		
-		
 		return "";
 	}
 	
-	// Cargar informacion cuociente, lista delegados x regional y lista delegados x zona 
+	private boolean validarPeriodoElectoral() {
+		return periodoElectoral != null && !periodoElectoral.isEmpty() && periodoElectoral.trim().length() == 4;
+	}
+
+	/**
+	 * Cargar informacion cuociente, lista delegados x regional y lista delegados x zona
+	 * @param periodo
+	 */
 	public void consultarCuociente(String periodo) {
 		
 		Boolean recalcular = Boolean.valueOf(UtilAcceso.getParametroFuenteS("parametros",

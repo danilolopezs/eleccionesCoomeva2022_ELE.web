@@ -82,19 +82,17 @@ public class EleCuocienteElectoralDAO extends BaseHibernateDAO  {
         }
     }    
     
-    public List findByProperty(String propertyName, Object value) {
-      log.debug("finding EleCuocienteElectoral instance with property: " + propertyName
-            + ", value: " + value);
-      try {
-         String queryString = "from EleCuocienteElectoral as model where model." 
-         						+ propertyName + "= ?";
-         Query queryObject = getSession().createQuery(queryString);
-		 queryObject.setParameter(0, value);
-		 return queryObject.list();
-      } catch (RuntimeException re) {
-         log.error("find by property name failed", re);
-         throw re;
-      }
+	public List findByProperty(String propertyName, Object value) {
+		log.debug("finding EleCuocienteElectoral instance with property: " + propertyName + ", value: " + value);
+		try {
+			String queryString = "from EleCuocienteElectoral as model where model." + propertyName + "= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
 	}
 
 	public List findByPeriodoElectoral(Object periodoElectoral

@@ -42,7 +42,7 @@
 									<div style="clear: left; margin-left: 8%; margin-top: 30px">
 										<table width="90%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
-												<td style="background-color: #006633; color: White">
+												<td style="background-color: #009933; color: White">
 													<ice:outputLabel style="color: White"
 														value="#{etiquetas.lblProcesoNumeracionPlanchas2}" />
 												</td>

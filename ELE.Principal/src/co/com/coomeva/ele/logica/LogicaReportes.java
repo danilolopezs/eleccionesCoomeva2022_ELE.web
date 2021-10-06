@@ -581,10 +581,10 @@ public class LogicaReportes {
 			reporteAsociado.add(tableImagenSuplentes);
 
 			Font fontBold = new Font();
-			fontBold.setColor(Color.decode("#006633"));
+			fontBold.setColor(Color.decode("#009933"));
 			fontBold.setStyle(Font.BOLD);
 			Font font = new Font();
-			font.setColor(Color.decode("#006633"));
+			font.setColor(Color.decode("#009933"));
 			font.setSize(9f);
 			Font fontInt = new Font();
 			fontInt.setSize(9f);
@@ -595,7 +595,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfZonaNo"),font));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_TOP);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -603,7 +603,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(plancha.getEleZonas().getCodZona(),fontInt));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_CENTER);
 			cell.disableBorderSide(Cell.LEFT);
@@ -612,7 +612,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfCiudad"),font));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_TOP);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -623,7 +623,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(zonaFin.getNomZonaFin(),fontInt));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.disableBorderSide(Cell.LEFT);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -631,7 +631,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfFechaIns"),font));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_TOP);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -653,14 +653,14 @@ public class LogicaReportes {
 			pdfInte.addCell(cell);
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfAno"),font));
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.TOP);
 			cell.disableBorderSide(Cell.BOTTOM);
 			pdfInte.addCell(cell);
 			cell =  new PdfPCell();
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setBorderWidthTop(2);
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.LEFT);
@@ -676,7 +676,7 @@ public class LogicaReportes {
 			pdfInte.addCell(cell);
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfMes"),font));
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.TOP);
@@ -684,7 +684,7 @@ public class LogicaReportes {
 			pdfInte.addCell(cell);
 			cell =  new PdfPCell();
 			cell.addElement(pdfInte);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setBorderWidthTop(2);
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.LEFT);
@@ -699,7 +699,7 @@ public class LogicaReportes {
 			pdfInte.addCell(cell);
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfDia"),font));
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.TOP);
@@ -708,7 +708,7 @@ public class LogicaReportes {
 			cell =  new PdfPCell();
 			cell.addElement(pdfInte);
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setVerticalAlignment(Element.ALIGN_BASELINE);
 			cell.disableBorderSide(Cell.LEFT);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -716,7 +716,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfHora"),font));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_TOP);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -724,14 +724,14 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(hora+":"+minutos+":"+segundos,fontInt));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.disableBorderSide(Cell.LEFT);
 			tablaInformacion.addCell(cell);
 			
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "pdfPlanchaNo"),font));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setVerticalAlignment(Element.ALIGN_TOP);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -739,7 +739,7 @@ public class LogicaReportes {
 			
 			cell =	new PdfPCell(new Paragraph(" ",fontInt));
 			cell.setBorderWidthTop(2);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.disableBorderSide(Cell.LEFT);
 			tablaInformacion.addCell(cell);
@@ -755,31 +755,31 @@ public class LogicaReportes {
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 //			cell.setBorderWidthTop(2);
 			cell.setColspan(5);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tablePrincipal.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrNumero"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tablePrincipal.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrNombreApellidos"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tablePrincipal.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrProfesion"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tablePrincipal.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrCedulaCiudadania"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tablePrincipal.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrFirma"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tablePrincipal.addCell(cell);
 
@@ -790,19 +790,19 @@ public class LogicaReportes {
 
 			for (ElePrincipalesDTO principal : listaPrincipales) {
 				cell =	new PdfPCell(new Paragraph(cont+"",fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tablePrincipal.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(principal.getNombreCompleto(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tablePrincipal.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(principal.getProfesion(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tablePrincipal.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(principal.getNroPriIdentificacion(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tablePrincipal.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(" "));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tablePrincipal.addCell(cell);
 				cont++;
 			}
@@ -815,32 +815,32 @@ public class LogicaReportes {
 			cell.setBackgroundColor(Color.decode("#99CCCC"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setColspan(5);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tableSuplentes.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrNumero"),font));
 			cell.setBackgroundColor(HdColor);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tableSuplentes.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrNombreApellidos"),font));
 			cell.setBackgroundColor(HdColor);
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tableSuplentes.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrProfesion"),font));
 			cell.setBackgroundColor(HdColor);
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tableSuplentes.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrCedulaCiudadania"),font));
 			cell.setBackgroundColor(HdColor);
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tableSuplentes.addCell(cell);
 			cell =	new PdfPCell(new Paragraph(UtilAcceso.getParametroFuenteS("parametros", "hdrFirma"),font));
 			cell.setBackgroundColor(HdColor);
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			tableSuplentes.addCell(cell);
 
 
@@ -849,19 +849,19 @@ public class LogicaReportes {
 
 			for (EleSuplentesDTO suplente : listaSuplentes) {
 				cell =	new PdfPCell(new Paragraph(cont+"",fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tableSuplentes.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(suplente.getNombreCompleto(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tableSuplentes.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(suplente.getProfesion(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tableSuplentes.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(suplente.getNroSuIdentificacion(),fontInt));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tableSuplentes.addCell(cell);
 				cell =	new PdfPCell(new Paragraph(" "));
-				cell.setBorderColor(Color.decode("#006633"));
+				cell.setBorderColor(Color.decode("#009933"));
 				tableSuplentes.addCell(cell);
 				cont++;
 			}
@@ -890,7 +890,7 @@ public class LogicaReportes {
 			cell.setBorder(0);
 			tableNomIns.addCell(cell);
 			cell =	new PdfPCell(new Paragraph("",font));
-			cell.setBorderColor(Color.decode("#006633"));
+			cell.setBorderColor(Color.decode("#009933"));
 			cell.disableBorderSide(Cell.TOP);
 			cell.disableBorderSide(Cell.LEFT);
 			cell.disableBorderSide(Cell.RIGHT);
@@ -1564,7 +1564,7 @@ public class LogicaReportes {
 				table.addCell(getCell("Total "+dto.getTipoNovedad(), HdColor, font));
 				table.addCell(getCell(" ", HdColor, font));
 				table.addCell(getCell(dto.getTotalNumeroNov(), HdColor, font));
-				table.addCell(getCell(dto.getTotalPorcentajeNov(), HdColor, font));				
+				table.addCell(getCell(dto.getTotalPorcentajeNov() + " %", HdColor, font));				
 				c=0;
 			}
 			
