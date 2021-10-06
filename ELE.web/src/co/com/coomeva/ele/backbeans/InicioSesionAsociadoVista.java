@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.poi.hssf.record.formula.functions.If;
-
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
@@ -59,7 +57,6 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	 * @return String
 	 */
 	public String action_ingreso() {
-		Long idLong = 0L;
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -71,10 +68,10 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				if (respuestaWS.getStatusCode().equals("0")) {
 					if (respuestaWS.getClient() != null) {
 						visible = true;
-						msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
-						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
-					//	returnString = "goCrearPlancha";
+						//msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
+//						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
+//						returnString = "goCrearPlancha";
 					}
 				} else {
 					exceptionGenery(respuestaWS.getDescStatusCode());
@@ -92,24 +89,12 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {
-		int validador = UtilAcceso.getParametroFuenteI("parametros", "maxNoDoc");
-		int validado = documento.length();
-
 		try {
-			// validarMaximo(validado, validador, false,
-			// UtilAcceso.getParametroFuenteS("mensajes", "excedioNoDoc"));
-
-			// validarNumLong(documento);
-
-			// userVo = logicaAutenticacion.autenDirectorioOpenLDAP(login, password);
-
-			Long idLong = Long.parseLong(identificacion);
-			documento = identificacion;
 
 			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(identificacion);
 
-			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(documento, elZona,
-					documento);
+			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
+					identificacion);
 
 			Date dateToday = new Date();
 
@@ -126,26 +111,26 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
 					"dd-MM-yyyy hh:mm:ss a");
 
-			// se comenta mientras se prueba el ingreso
-			if (elePParametrosIni != null && elePParametrosFin != null) {
-				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
-				}
-
-				if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
-				}
-			}
+			/*
+			 * // se comenta mientras se prueba el ingreso if (elePParametrosIni != null &&
+			 * elePParametrosFin != null) { if (dateToday.compareTo(dateFechaIniInscrpcion)
+			 * < 0) { throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
+			 * "msgFechaInscrpcionExpired")); }
+			 * 
+			 * if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) { throw new
+			 * Exception(UtilAcceso.getParametroFuenteS("mensajes",
+			 * "msgFechaInscrpcionExpired")); } }
+			 */
 
 			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
 					+ asociadoDTO.getNombre().toString();
 
-			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(documento);
+			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(identificacion);
 			// Verifica que el Usuario Exista
 			if (asociadoDTO != null) {
 				if (asociadoDTO.getNombre() != null && !asociadoDTO.getNombre().equalsIgnoreCase("")) {
 					EleCabPlanchaDTO eleCabPlanchaDTO = new EleCabPlanchaDTO();
-					eleCabPlanchaDTO.setNroIdentificacion("" + idLong);
+					eleCabPlanchaDTO.setNroIdentificacion(identificacion);
 					eleCabPlanchaDTO.setNombreCompleto(asociadoDTO.getNombre());
 					eleCabPlanchaDTO.setAntiguedad(new Long(asociadoDTO.getAntiguedad()));
 					eleCabPlanchaDTO.setProfesion(asociadoDTO.getProfesion());
@@ -163,10 +148,10 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 
 							List<ElePrincipalesDTO> listaPrincipales = DelegadoPrincipal.getInstance()
-									.consultarPrincipales(documento);
+									.consultarPrincipales(identificacion);
 
 							List<EleSuplentesDTO> listaSuplentes = DelegadoSuplente.getInstance()
-									.consultarSuplentes(documento);
+									.consultarSuplentes(identificacion);
 
 							ElePlanchaDTO elePlanchaDTO = new ElePlanchaDTO();
 
@@ -174,7 +159,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							elePlanchaDTO.setListaSuplentes(listaSuplentes);
 
 							EleCabPlancha cabPlancha = DelegadoCabezaPlancha.getInstance()
-									.consultarCabezaPlancha(documento);
+									.consultarCabezaPlancha(identificacion);
 
 							if (!elePlanchas.getEstado()
 									.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha1"))
@@ -184,7 +169,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							}
 
 							List<EleExperienciaLaboral> listExperienciaLaboral = DelegadoExperienciaLaboral
-									.getInstance().consultaExperienciaLaborales(documento);
+									.getInstance().consultaExperienciaLaborales(identificacion);
 
 							eleCabPlanchaDTO = new EleCabPlanchaDTO(cabPlancha);
 
@@ -205,7 +190,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 							ElePlanchaDTO elePlanchaDTO = new ElePlanchaDTO();
 							elePlanchaDTO.setEleCabPlanchaDTO(eleCabPlanchaDTO);
-							elePlanchaDTO.setNroCabPlancha(documento);
+							elePlanchaDTO.setNroCabPlancha(identificacion);
 							elePlanchaDTO.setEleZonas(elZona);
 							FacesUtils.setSessionParameter("userPlancha", elePlanchaDTO);
 
@@ -224,7 +209,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
 				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 			}
-			log.error("Error", e);
+			//log.error("Error", e);
 			getMensaje().mostrarMensaje(mensaje);
 		}
 	}

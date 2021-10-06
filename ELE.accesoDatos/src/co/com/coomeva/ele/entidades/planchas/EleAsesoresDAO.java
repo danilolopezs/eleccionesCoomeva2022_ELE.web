@@ -48,13 +48,13 @@ public class EleAsesoresDAO extends BaseHibernateDAOPlanchas {
 	}
 
 	public EleAsesores findById(java.lang.String id) {
-		log.debug("getting EleAsesores instance with id: " + id);
+		//log.debug("getting EleAsesores instance with id: " + id);
 		try {
 			EleAsesores instance = (EleAsesores) getSession().get(
 					"co.com.coomeva.ele.entidades.planchas.EleAsesores", id);
 			return instance;
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			//log.error("get failed", re);
 			throw re;
 		}
 	}

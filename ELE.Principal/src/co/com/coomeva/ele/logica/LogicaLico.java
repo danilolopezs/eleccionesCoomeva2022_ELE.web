@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
 import co.com.coomeva.ele.entidades.salud.HibernateSessionFactorySalud;
 import co.com.coomeva.util.acceso.UtilAcceso;
@@ -37,12 +38,12 @@ public class LogicaLico {
 
 		Session session=null;
 		Query query=null;
-		session= HibernateSessionFactoryLico.getSession();
-		query = session.getNamedQuery("asesor.getAsesorLico");
-
+		session= HibernateSessionFactoryElecciones2012.getSession();//GENERANDO CONFLICTO
+		query = session.getNamedQuery("asesor.getAsesor");
 		query.setString(0, nroIdentificacion);
-		
+
 		List<Object[]> returnList = new ArrayList<Object[]>();
+		returnList=	query.list();
 		
 		if (returnList.size() == 0) {
 			return false;

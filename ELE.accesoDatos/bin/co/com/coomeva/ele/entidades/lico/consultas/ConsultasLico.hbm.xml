@@ -19,7 +19,8 @@
 		<return-scalar column="anosRetiro" type="java.lang.String" />
 			
 			<![CDATA[
-			   		SELECT cdgo,epr_cdgo,months_between (sysdate,FCHARTRO)/12 anosRetiro FROM LC_PRO_PROMOTOR WHERE cdgo =?
+			   		SELECT E.PRO_IDENTIFICACION,E.PRO_ESTADO,ROUND(months_between(CURRENT_DATE,E.PRO_FECHA_RETIRO)/12) anosRetiro 
+			   		FROM ELECDB.ELEPROMOT E WHERE E.PRO_IDENTIFICACION =?
 				]]>
 	</sql-query>
 

@@ -17,7 +17,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import co.com.coomeva.ele.delegado.DelegadoLogHab;
-import co.com.coomeva.ele.delegado.DelegadoZona;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoZonaElectoral;
 import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.entidades.admhabilidad.Asoelecf;
@@ -27,7 +26,6 @@ import co.com.coomeva.ele.entidades.climae.HibernateSessionFactoryClimae;
 import co.com.coomeva.ele.entidades.habilidad.EleAsociado;
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.habilidad.dao.EleAsociadoDAO;
-import co.com.coomeva.ele.entidades.planchas.EleZonas;
 import co.com.coomeva.ele.modelo.AsociadoReporteDTO;
 import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
 import co.com.coomeva.ele.modelo.FiltrosConsultasDTO;
@@ -40,15 +38,13 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	private static LogicaAsociado instance;
 	private LogicaProceso logicaProceso = LogicaProceso.getInstance();
-	private LoaderResourceElements loaderResourceElements = LoaderResourceElements
-			.getInstance();
+	private LoaderResourceElements loaderResourceElements = LoaderResourceElements.getInstance();
 	private EleAsociadoDAO dao = new EleAsociadoDAO();
 	private List<FiltrosConsultasDTO> zonasElectorales;
 	private HashMap<Long, String> zonasHash;
 
-	private Long CODIGO_FORMATO_INSCRIPCION_PLANCHA = new Long(UtilAcceso
-			.getParametroFuenteL(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+	private Long CODIGO_FORMATO_INSCRIPCION_PLANCHA = new Long(
+			UtilAcceso.getParametroFuenteL(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_FORMATO_INSCRIPCION_PLANCHA));
 
 	/**
@@ -60,8 +56,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	public void cargarZonasElectorales() {
 		try {
-			zonasElectorales = DelegadoZonaElectoral.getInstance()
-					.consultarZonasElectorales();
+			zonasElectorales = DelegadoZonaElectoral.getInstance().consultarZonasElectorales();
 			if (zonasElectorales != null) {
 				zonasHash = new HashMap<Long, String>();
 				for (int i = 0; i < zonasElectorales.size(); i++) {
@@ -88,8 +83,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 	}
 
 	/**
-	 * Metodo de consulta usado por el WS para la habilidad financiera del
-	 * Asociado
+	 * Metodo de consulta usado por el WS para la habilidad financiera del Asociado
 	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param identificacion
@@ -99,19 +93,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	public Asoelecf findAsoHabFinWS(Long identificacion) throws Exception {
 		if (identificacion == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noNumIdentificacion"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
-		Criteria criteria = HibernateSessionFactoryHab.getSession()
-				.createCriteria(Asoelecf.class);
+		Criteria criteria = HibernateSessionFactoryHab.getSession().createCriteria(Asoelecf.class);
 		criteria.add(Restrictions.eq("wnitcli", identificacion));
 		Asoelecf aso = null;
 		try {
 			aso = (Asoelecf) criteria.uniqueResult();
 
 			if (aso == null) {
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						"mensajesWs", "noAsociado"));
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajesWs", "noAsociado"));
 			}
 		} catch (Exception e) {
 			throw e;
@@ -133,19 +124,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	public Asoelecf findAsoHabFin(Long identificacion) throws Exception {
 		if (identificacion == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noNumIdentificacion"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
-		Criteria criteria = HibernateSessionFactoryHab.getSession()
-				.createCriteria(Asoelecf.class);
+		Criteria criteria = HibernateSessionFactoryHab.getSession().createCriteria(Asoelecf.class);
 		criteria.add(Restrictions.eq("wnitcli", identificacion));
 		Asoelecf aso = null;
 		try {
 			aso = (Asoelecf) criteria.uniqueResult();
 
 			if (aso == null) {
-				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-						"noAsociadoHabilidad"));
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociadoHabilidad"));
 			}
 		} catch (Exception e) {
 			throw e;
@@ -167,59 +155,47 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @throws Exception
 	 */
 
-	public void cambiarEstado(String estado, Long identificacion,
-			String concepto, String usuario) throws Exception {
+	public void cambiarEstado(String estado, Long identificacion, String concepto, String usuario) throws Exception {
 		if (identificacion == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noNumIdentificacion"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
 		if (estado == null || estado.trim().equalsIgnoreCase("")) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noEstadoAsociado"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noEstadoAsociado"));
 		}
 
 		if (concepto == null || concepto.trim().equalsIgnoreCase("")) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noConcepto"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noConcepto"));
 		}
 
 		boolean boEstado = false;
-		for (int j = 1; j <= UtilAcceso.getParametroFuenteI("parametros",
-				"numeroEstadosAsociado"); j++) {
-			if (estado.equalsIgnoreCase(UtilAcceso.getParametroFuenteS(
-					"parametros", "caracterEstadoAsociado" + j))) {
+		for (int j = 1; j <= UtilAcceso.getParametroFuenteI("parametros", "numeroEstadosAsociado"); j++) {
+			if (estado.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "caracterEstadoAsociado" + j))) {
 				boEstado = true;
 				break;
 			}
 		}
 
 		if (!boEstado) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noCreadoEstadoAsociado"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noCreadoEstadoAsociado"));
 		}
 
 		Asoelecf asociado = findAsoHabFinWS(identificacion);
 		HibernateSessionFactoryHab.getSession().refresh(asociado);
 
 		if (asociado == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noExisteAsociado"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noExisteAsociado"));
 		}
 
 		if (estado.trim().equalsIgnoreCase(asociado.getWindhab().trim())) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-					"noSeRealizoCambio"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noSeRealizoCambio"));
 		}
 		String antHabil = asociado.getWindhab().trim();
 		asociado.setWindhab(estado);
 		Transaction transaction = null;
 		try {
-			transaction = HibernateSessionFactoryHab.getSession()
-					.beginTransaction();
+			transaction = HibernateSessionFactoryHab.getSession().beginTransaction();
 			this.merge(asociado);
-			DelegadoLogHab.getInstance().registrarLog(
-					identificacion.toString(), antHabil, estado, concepto,
-					usuario);
+			DelegadoLogHab.getInstance().registrarLog(identificacion.toString(), antHabil, estado, concepto, usuario);
 			transaction.commit();
 
 		} catch (Exception e) {
@@ -235,8 +211,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	/**
 	 * Metodo que realiza una busqueda nativa en la base de datos con el fin de
-	 * retornar una lista de Asociados dependiendo de los criterios ingresados
-	 * como parametros el metodo realiza o no el filtro de la información
+	 * retornar una lista de Asociados dependiendo de los criterios ingresados como
+	 * parametros el metodo realiza o no el filtro de la información
 	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param zona
@@ -247,8 +223,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @throws Exception
 	 */
 
-	public List<AsociadoReporteDTO> findAsoHabFinNative(String zona,
-			String oficina, String regional, String estado) throws Exception {
+	public List<AsociadoReporteDTO> findAsoHabFinNative(String zona, String oficina, String regional, String estado)
+			throws Exception {
 
 		StringBuffer sql = new StringBuffer();
 		StringBuffer where = new StringBuffer(" WHERE ");
@@ -258,8 +234,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		List returnList = new ArrayList();
 		List<AsociadoReporteDTO> asociados = new ArrayList<AsociadoReporteDTO>();
 
-		sql
-				.append(" SELECT WNITCLI,WNOMCLI,WNOMREG,WNOMZON,WNOMAGC,WINDHAB,WMEDVOT,WINDRET ");
+		sql.append(" SELECT WNITCLI,WNOMCLI,WNOMREG,WNOMZON,WNOMAGC,WINDHAB,WMEDVOT,WINDRET ");
 		sql.append(" FROM ELECLIB.ASOELECF ");
 
 		if (zona != null && !zona.equals("")) {
@@ -342,44 +317,31 @@ public class LogicaAsociado extends AsoelecfDAO {
 					String nomAge = (String) elements[4];
 					String estadoCons = "";
 					if (elements[5].toString().trim().equalsIgnoreCase(
-							UtilAcceso.getParametroFuenteS("parametros",
-									"caracterEstadoAsociado1"))) {
-						estadoCons = UtilAcceso.getParametroFuenteS(
-								"parametros", "estadoAsociado1");
+							UtilAcceso.getParametroFuenteS("parametros", "caracterEstadoAsociado1"))) {
+						estadoCons = UtilAcceso.getParametroFuenteS("parametros", "estadoAsociado1");
 					} else
-						estadoCons = UtilAcceso.getParametroFuenteS(
-								"parametros", "estadoAsociado2");
+						estadoCons = UtilAcceso.getParametroFuenteS("parametros", "estadoAsociado2");
 
 					String medio = "";
-					if (elements[6].toString().equalsIgnoreCase(
-							UtilAcceso.getParametroFuenteS("parametros",
-									"idMedioUrna"))) {
-						medio = UtilAcceso.getParametroFuenteS("parametros",
-								"medio1");
+					if (elements[6].toString()
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "idMedioUrna"))) {
+						medio = UtilAcceso.getParametroFuenteS("parametros", "medio1");
 					} else
-						medio = UtilAcceso.getParametroFuenteS("parametros",
-								"medio2");
+						medio = UtilAcceso.getParametroFuenteS("parametros", "medio2");
 
 					String actual = "";
 
 					if (elements[7].toString().trim().equalsIgnoreCase(
-							UtilAcceso.getParametroFuenteS("parametros",
-									"idEstadoActualFallecido"))) {
-						actual = UtilAcceso.getParametroFuenteS("parametros",
-								"estadoActualFallecido");
-					} else if (elements[7].toString().trim().equalsIgnoreCase(
-							UtilAcceso.getParametroFuenteS("parametros",
-									"idEstadoActualExcluido"))) {
-						actual = UtilAcceso.getParametroFuenteS("parametros",
-								"estadoActualExcluido");
-					} else if (elements[7].toString().trim().equalsIgnoreCase(
-							UtilAcceso.getParametroFuenteS("parametros",
-									"idEstadoActualRetirado"))) {
-						actual = UtilAcceso.getParametroFuenteS("parametros",
-								"estadoActualRetirado");
+							UtilAcceso.getParametroFuenteS("parametros", "idEstadoActualFallecido"))) {
+						actual = UtilAcceso.getParametroFuenteS("parametros", "estadoActualFallecido");
+					} else if (elements[7].toString().trim()
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "idEstadoActualExcluido"))) {
+						actual = UtilAcceso.getParametroFuenteS("parametros", "estadoActualExcluido");
+					} else if (elements[7].toString().trim()
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "idEstadoActualRetirado"))) {
+						actual = UtilAcceso.getParametroFuenteS("parametros", "estadoActualRetirado");
 					} else
-						actual = UtilAcceso.getParametroFuenteS("parametros",
-								"estadoActualActivo");
+						actual = UtilAcceso.getParametroFuenteS("parametros", "estadoActualActivo");
 
 					AsociadoReporteDTO asociadoReporteDTO = new AsociadoReporteDTO();
 					asociadoReporteDTO.setNitcli(nitcli);
@@ -392,8 +354,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 					asociadoReporteDTO.setEstadoAsociado(actual);
 					asociados.add(asociadoReporteDTO);
 
-				}// fin if
-			}// fin for
+				} // fin if
+			} // fin for
 
 		} catch (Exception e) {
 			throw e;
@@ -410,37 +372,33 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Consulta habilidad de un asociado
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 8/11/2012
 	 * @param numeroDocumento
 	 * @return
 	 * @throws Exception
 	 */
-	public DTOHabilidadAsociado consultarHabilidadAsociado(Long numeroDocumento)
-			throws Exception {
+	public DTOHabilidadAsociado consultarHabilidadAsociado(Long numeroDocumento) throws Exception {
 		Boolean habilidad = false;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		DTOHabilidadAsociado dtoHabilidadAsociado = new DTOHabilidadAsociado();
 		dtoHabilidadAsociado.setAsociadoHabil(Boolean.TRUE);
-		
-		
 
 		try {
-			Query query = session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_HABILIDAD_DE_ASOCIADO);
+			Query query = session.getNamedQuery(ConstantesNamedQueries.QUERY_HABILIDAD_DE_ASOCIADO);
 			query.setLong("numIdAsociado", numeroDocumento);
 
 			Object resultado = query.uniqueResult();
-			habilidad = (resultado == null || resultado.toString().equals("") || resultado
-					.toString().equals("0")) ? false : true;
+			habilidad = (resultado == null || resultado.toString().equals("") || resultado.toString().equals("0"))
+					? false
+					: true;
 			if (!habilidad) {
-				query = session
-						.getNamedQuery(ConstantesNamedQueries.QUERY_OBSERVACIONES_INHABILIDADES_ASOCIADO);
+				query = session.getNamedQuery(ConstantesNamedQueries.QUERY_OBSERVACIONES_INHABILIDADES_ASOCIADO);
 				query.setLong("numIdAsociado", numeroDocumento);
 				List<String> observaciones = (List<String>) query.list();
 				List<String> lstObservaciones = new ArrayList<String>();
-				if (observaciones.size()>0) {
+				if (observaciones.size() > 0) {
 					dtoHabilidadAsociado.setAsociadoHabil(Boolean.FALSE);
 					// Reviso si tiene inhabilidad por temas crediticios y separo los mensajes
 					for (String obs : observaciones) {
@@ -450,26 +408,20 @@ public class LogicaAsociado extends AsoelecfDAO {
 								lstObservaciones.add(obsSplit[0].trim());
 								lstObservaciones.add(obsSplit[1].trim());
 							}
-						}
-						else
-						{
+						} else {
 							lstObservaciones.add(obs);
 						}
 					}
-					dtoHabilidadAsociado
-							.setObservacionesInhabilidades(lstObservaciones);
+					dtoHabilidadAsociado.setObservacionesInhabilidades(lstObservaciones);
 				} else {
 					return null;
 				}
 
-			}			
+			}
 
 		} catch (Exception e) {
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.habilidad.asociado"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.habilidad.asociado"));
 		} finally {
 			if (session != null) {
 				session.close();
@@ -477,7 +429,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 			session = null;
 			habilidad = null;
 		}
-		
+
 		return dtoHabilidadAsociado;
 	}
 
@@ -502,8 +454,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * Metodo que consulta el total de los asociados habiles filtrados por
 	 * profesion, identificacion o zona.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -511,25 +463,21 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int consultarTotalAsociadosHabilesAsociado(Long codProfesion,
-			Long numeroDocumento, Long codZona) throws Exception {
+	public int consultarTotalAsociadosHabilesAsociado(Long codProfesion, Long numeroDocumento, Long codZona)
+			throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
 
-			sql
-					.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
-			sql
-					.append("WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql
-					.append("OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql
-					.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
+			sql.append(
+					"WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql.append(
+					"OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO AND N4.ESTADO_HABILIDAD = '1')= ");
-			sql
-					.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
+			sql.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO))))");
 
 			if (numeroDocumento != null) {
@@ -562,12 +510,10 @@ public class LogicaAsociado extends AsoelecfDAO {
 			total = (Integer) query.uniqueResult();
 
 		} catch (Exception e) {
-			// System.out.println("Error consultando el total de asociados habiles: "+e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.habiles"));
+			// System.out.println("Error consultando el total de asociados habiles:
+			// "+e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.total.asociados.habiles"));
 		} finally {
 			session.close();
 		}
@@ -578,8 +524,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * Metodo que consulta los asociados habiles filtrados por profesion,
 	 * identificacion o zona, consulta paginada para el reporte.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -587,13 +533,11 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<EleAsociadoDatosDTO> consultarAsociadosHabilesAsociado(
-			Long codProfesion, Long numeroDocumento, Long codZona)
-			throws Exception {
+	public List<EleAsociadoDatosDTO> consultarAsociadosHabilesAsociado(Long codProfesion, Long numeroDocumento,
+			Long codZona) throws Exception {
 		List<EleAsociadoDatosDTO> list = new ArrayList<EleAsociadoDatosDTO>();
 		int startRow = 1;
-		int total = consultarTotalAsociadosHabilesAsociado(codProfesion,
-				numeroDocumento, codZona);
+		int total = consultarTotalAsociadosHabilesAsociado(codProfesion, numeroDocumento, codZona);
 		int numRegistros = 100;
 		int maxResults = startRow + numRegistros;
 		List<Object[]> elements = null;
@@ -602,36 +546,32 @@ public class LogicaAsociado extends AsoelecfDAO {
 		try {
 			StringBuffer sql = new StringBuffer(
 					"SELECT DISTINCT A.NUMERO_DOCUMENTO AS NUMINT, C.NOMCLI, A.DESC_CIUDAD_ASO AS CIUDAD, ");
-			sql
-					.append("db2util.get_fecha_iso(C.FECCON) AS ECHA_NACIMIENTO, db2util.get_fecha_iso(C.FECING) AS FECHA_VINCULACION, ");
-			sql
-					.append("db2util.get_codnom_clitab(42, C.CODSEX) AS GENERO, DB2UTIL.SIP_PROFESION(C.NUMINT,'AS') AS PROFESION, ");
+			sql.append(
+					"db2util.get_fecha_iso(C.FECCON) AS ECHA_NACIMIENTO, db2util.get_fecha_iso(C.FECING) AS FECHA_VINCULACION, ");
+			sql.append(
+					"db2util.get_codnom_clitab(42, C.CODSEX) AS GENERO, DB2UTIL.SIP_PROFESION(C.NUMINT,'AS') AS PROFESION, ");
 			sql.append("A.DESC_ZONA_ASO AS ZONA, C.ESTRAT, ");
-			sql
-					.append("(SELECT (CASE WHEN A2.CODIGO_ASOCIADO IS NULL THEN '0' ELSE '1' END) AS HABILIDAD_ASOCIADO "
-							+ "FROM ELECDB.ELE_ASOCIADO A2 WHERE A2.NUMERO_DOCUMENTO = A.NUMERO_DOCUMENTO "
-							+ "AND (A2.CODIGO_ASOCIADO NOT IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I "
-							+ "WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) OR (A2.CODIGO_ASOCIADO IN "
-							+ "(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) "
-							+ "AND (SELECT N.ESTADO_HABILIDAD FROM ELECDB.ELE_NOVEDAD N WHERE N.CONSECUTIVO_NOVEDAD = "
-							+ "(SELECT MAX(N2.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N2 WHERE N2.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)) = '1'))) AS HABILIDAD_ASOCIADO, ");
-			sql
-					.append("(SELECT NOMAGC FROM SEGURIDAD . PLTAGCORI WHERE AGCORI = C.AGCVIN AND CODEMP = 67890 ) AS OFICINA, ");
-			sql
-					.append("(SELECT CTAB . CODNOM FROM SEGURIDAD . PLTAGCORI PLT , MULCLIDAT . CLITAB CTAB WHERE PLT . CODEMP = 67890 "
+			sql.append("(SELECT (CASE WHEN A2.CODIGO_ASOCIADO IS NULL THEN '0' ELSE '1' END) AS HABILIDAD_ASOCIADO "
+					+ "FROM ELECDB.ELE_ASOCIADO A2 WHERE A2.NUMERO_DOCUMENTO = A.NUMERO_DOCUMENTO "
+					+ "AND (A2.CODIGO_ASOCIADO NOT IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I "
+					+ "WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) OR (A2.CODIGO_ASOCIADO IN "
+					+ "(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) "
+					+ "AND (SELECT N.ESTADO_HABILIDAD FROM ELECDB.ELE_NOVEDAD N WHERE N.CONSECUTIVO_NOVEDAD = "
+					+ "(SELECT MAX(N2.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N2 WHERE N2.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)) = '1'))) AS HABILIDAD_ASOCIADO, ");
+			sql.append(
+					"(SELECT NOMAGC FROM SEGURIDAD . PLTAGCORI WHERE AGCORI = C.AGCVIN AND CODEMP = 67890 ) AS OFICINA, ");
+			sql.append(
+					"(SELECT CTAB . CODNOM FROM SEGURIDAD . PLTAGCORI PLT , MULCLIDAT . CLITAB CTAB WHERE PLT . CODEMP = 67890 "
 							+ "AND CTAB . CODTAB = 907 AND PLT . AGCORI = C.AGCVIN AND PLT . CODREG = CTAB . CODINT) AS REGIONAL ");
 
-			sql
-					.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
-			sql
-					.append("WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql
-					.append("OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql
-					.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
+			sql.append(
+					"WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql.append(
+					"OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO AND N4.ESTADO_HABILIDAD = '1')= ");
-			sql
-					.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
+			sql.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO))))");
 
 			if (numeroDocumento != null) {
@@ -675,8 +615,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 
 			while (startRow <= total) {
-				elements = query.setMaxResults(numRegistros).setFirstResult(
-						startRow).list();
+				elements = query.setMaxResults(numRegistros).setFirstResult(startRow).list();
 
 				if (elements != null && elements.size() > 0) {
 					for (Object[] object : elements) {
@@ -707,12 +646,10 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			// System.out.println("Error generando reporte asociados habiles: "+e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.asociados.habiles"));
+			// System.out.println("Error generando reporte asociados habiles:
+			// "+e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.asociados.habiles"));
 		} finally {
 			session.close();
 		}
@@ -722,8 +659,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de los asociados habiles
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -736,18 +673,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
 			/**
-			 * Se modifica la consulta para excluir los asociados que se
-			 * encuentran en la tabla ELE_ASOCIADO_ESPECIAL
+			 * Se modifica la consulta para excluir los asociados que se encuentran en la
+			 * tabla ELE_ASOCIADO_ESPECIAL
 			 */
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql
-					.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 "
-							+ "AND NOT EXISTS (SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO ) ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
+			sql.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 "
+					+ "AND NOT EXISTS (SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO ) ");
 
 			if (zona != null) {
-				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona)
-						+ "'");
+				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona) + "'");
 				// System.out.println("Zona: "+zonasHash.get(zona));
 			}
 
@@ -758,20 +692,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 			total = valor.intValue();
 			// System.out.println("Total: "+total);
 		} catch (Exception e) {
-			System.out
-					.println("Error consultando el total de asociados habiles: "
-							+ e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.habiles"));
+			System.out.println("Error consultando el total de asociados habiles: " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.total.asociados.habiles"));
 		} finally {
 			session.flush();
 		}
 		return total;
 	}
-	
+
 	/**
 	 * Metodo que consulta el total de los asociados especiales habiles
 	 * 
@@ -788,18 +717,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
 			/**
-			 * Se modifica la consulta para excluir los asociados que se
-			 * encuentran en la tabla ELE_ASOCIADO_ESPECIAL
+			 * Se modifica la consulta para excluir los asociados que se encuentran en la
+			 * tabla ELE_ASOCIADO_ESPECIAL
 			 */
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql
-					.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 "
-							+ "AND EXISTS (SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO ) ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
+			sql.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 "
+					+ "AND EXISTS (SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO ) ");
 
 			if (zona != null) {
-				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona)
-						+ "'");
+				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona) + "'");
 				// System.out.println("Zona: "+zonasHash.get(zona));
 			}
 
@@ -810,14 +736,10 @@ public class LogicaAsociado extends AsoelecfDAO {
 			total = valor.intValue();
 			// System.out.println("Total: "+total);
 		} catch (Exception e) {
-			System.out
-					.println("Error consultando el total de asociados ESPECIALES habiles: "
-							+ e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.especiales.habiles.por.zona"));
+			System.out.println("Error consultando el total de asociados ESPECIALES habiles: " + e.getMessage());
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.especiales.habiles.por.zona"));
 		} finally {
 			session.flush();
 		}
@@ -840,19 +762,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 		try {
 			session = HibernateSessionFactoryElecciones2012.getSession();
-			Query query = session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_NOMBRES_APELLIDOS_ASOCIADO);
+			Query query = session.getNamedQuery(ConstantesNamedQueries.QUERY_NOMBRES_APELLIDOS_ASOCIADO);
 			query.setLong("numeroDocumento", numeroDocumento);
 			qList = query.list();
 			for (Iterator iter = qList.iterator(); iter.hasNext();) {
 				Object[] element = (Object[]) iter.next();
-				nombreCompletoAsociado = element[2] != null ? element[2]
-						.toString() : "";
+				nombreCompletoAsociado = element[2] != null ? element[2].toString() : "";
 			}
 
 		} catch (Exception e) {
-			System.out.println("No se logro consultar el asociado: "
-					+ e.toString());
+			System.out.println("No se logro consultar el asociado: " + e.toString());
 		} finally {
 			if (session != null) {
 				session.close();
@@ -867,8 +786,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de asociados inhabiles
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -880,10 +799,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
-			sql
-					.append("FROM ELECDB.ELE_REPORTE_HABIL WHERE TIPO_VALIDACION = 2 ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
+			sql.append("FROM ELECDB.ELE_REPORTE_HABIL WHERE TIPO_VALIDACION = 2 ");
 
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.LONG);
@@ -893,11 +810,9 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.inhabiles"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.inhabiles"));
 		} finally {
 			session.close();
 		}
@@ -907,8 +822,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta los asociados inhabiles
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -916,8 +831,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<EleAsociadoDatosDTO> consultarAsociadosInhabilesNativa()
-			throws Exception {
+	public List<EleAsociadoDatosDTO> consultarAsociadosInhabilesNativa() throws Exception {
 		List<EleAsociadoDatosDTO> list = new ArrayList<EleAsociadoDatosDTO>();
 
 		int startRow = 1;
@@ -933,16 +847,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 			sql.append("FROM ELECDB.ELE_REPORTE_HABIL RH ");
 			sql.append("INNER JOIN ELECDB.CLIMAE CLI ON RH.NUMERO_DOCUMENTO = CLI.NITCLI AND RH.TIPO_VALIDACION = 2 ");
 			sql.append("INNER JOIN SEGURIDAD.PLTAGCORI AGC ON AGC.AGCORI = CLI.AGCVIN  AND AGC.CODEMP = 67890 ");
-			sql.append("LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 907) REG ON AGC.CODREG = REG.CODINT ");
-			sql.append("LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 908) ZON ON AGC.CODZON = ZON.CODINT ");
+			sql.append(
+					"LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 907) REG ON AGC.CODREG = REG.CODINT ");
+			sql.append(
+					"LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 908) ZON ON AGC.CODZON = ZON.CODINT ");
 			sql.append("ORDER BY 3, 1, 2 ASC");
 
 			ResultSet rs = null;
-			Connection con = HibernateSessionFactoryElecciones2012.getSession()
-					.connection();
-			Statement st = con.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+			Connection con = HibernateSessionFactoryElecciones2012.getSession().connection();
+			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 			int j = 1;
 			while (startRow <= total) {
@@ -956,23 +869,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 					do {
 						dto = new EleAsociadoDatosDTO();
 						dto.setNitcli(rs.getString("NUMERO_DOCUMENTO").trim());
-						dto.setNombreCompleto(rs.getString("NOMBRE_ASOCIADO")
-								.trim());
-						dto
-								.setProfesion(rs
-										.getString("PROFESION_ASOCIADO") == null ? null
-										: rs.getString("PROFESION_ASOCIADO")
-												.trim());
-						dto
-								.setZonaElectoral(rs.getString("ZONA_ASOCIADO") == null ? null
-										: rs.getString("ZONA_ASOCIADO").trim());
+						dto.setNombreCompleto(rs.getString("NOMBRE_ASOCIADO").trim());
+						dto.setProfesion(rs.getString("PROFESION_ASOCIADO") == null ? null
+								: rs.getString("PROFESION_ASOCIADO").trim());
+						dto.setZonaElectoral(
+								rs.getString("ZONA_ASOCIADO") == null ? null : rs.getString("ZONA_ASOCIADO").trim());
 						dto.setEstadoHabilidad("Inhábil");
-						dto.setRegional(rs.getString("REGIONAL") == null ? null
-								: rs.getString("REGIONAL").trim());
-						dto.setCiudad(rs.getString("ZONA") == null ? null
-								: rs.getString("ZONA").trim());
-						dto.setOficina(rs.getString("OFICINA") == null ? null
-								: rs.getString("OFICINA").trim());
+						dto.setRegional(rs.getString("REGIONAL") == null ? null : rs.getString("REGIONAL").trim());
+						dto.setCiudad(rs.getString("ZONA") == null ? null : rs.getString("ZONA").trim());
+						dto.setOficina(rs.getString("OFICINA") == null ? null : rs.getString("OFICINA").trim());
 						list.add(dto);
 						cont++;
 					} while (rs.next() && (cont <= numRegistros));
@@ -993,11 +898,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.asociados.inhabiles"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.asociados.inhabiles"));
 		} finally {
 			session.close();
 		}
@@ -1007,8 +909,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta los asociados habiles
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 14/11/2012
 	 * @param codProfesion
 	 * @param numeroDocumento
@@ -1016,8 +918,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<EleAsociadoDatosDTO> consultarAsociadosHabilesNativa()
-			throws Exception {
+	public List<EleAsociadoDatosDTO> consultarAsociadosHabilesNativa() throws Exception {
 		List<EleAsociadoDatosDTO> list = new ArrayList<EleAsociadoDatosDTO>();
 
 		int startRow = 1;
@@ -1028,21 +929,20 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
 			StringBuffer sql = new StringBuffer(
-			"SELECT RH.NUMERO_DOCUMENTO, RH.NOMBRE_ASOCIADO, RH.ZONA_ASOCIADO, RH.PROFESION_ASOCIADO, ");
-	sql.append("REG.CODNOM AS REGIONAL, ZON.CODNOM AS ZONA, AGC.NOMAGC AS OFICINA ");
-	sql.append("FROM ELECDB.ELE_REPORTE_HABIL RH ");
-	sql.append("INNER JOIN ELECDB.CLIMAE CLI ON RH.NUMERO_DOCUMENTO = CLI.NITCLI AND RH.TIPO_VALIDACION = 1 ");
-	sql.append("INNER JOIN SEGURIDAD.PLTAGCORI AGC ON AGC.AGCORI = CLI.AGCVIN  AND AGC.CODEMP = 67890 ");
-	sql.append("LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 907) REG ON AGC.CODREG = REG.CODINT ");
-	sql.append("LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 908) ZON ON AGC.CODZON = ZON.CODINT ");
-	sql.append("ORDER BY 3, 1, 2 ASC");
+					"SELECT RH.NUMERO_DOCUMENTO, RH.NOMBRE_ASOCIADO, RH.ZONA_ASOCIADO, RH.PROFESION_ASOCIADO, ");
+			sql.append("REG.CODNOM AS REGIONAL, ZON.CODNOM AS ZONA, AGC.NOMAGC AS OFICINA ");
+			sql.append("FROM ELECDB.ELE_REPORTE_HABIL RH ");
+			sql.append("INNER JOIN ELECDB.CLIMAE CLI ON RH.NUMERO_DOCUMENTO = CLI.NITCLI AND RH.TIPO_VALIDACION = 1 ");
+			sql.append("INNER JOIN SEGURIDAD.PLTAGCORI AGC ON AGC.AGCORI = CLI.AGCVIN  AND AGC.CODEMP = 67890 ");
+			sql.append(
+					"LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 907) REG ON AGC.CODREG = REG.CODINT ");
+			sql.append(
+					"LEFT JOIN (SELECT CODTAB, CODINT, CODNOM FROM MULCLIDAT.CLITAB WHERE CODTAB = 908) ZON ON AGC.CODZON = ZON.CODINT ");
+			sql.append("ORDER BY 3, 1, 2 ASC");
 
 			ResultSet rs = null;
-			Connection con = HibernateSessionFactoryElecciones2012.getSession()
-					.connection();
-			Statement st = con.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+			Connection con = HibernateSessionFactoryElecciones2012.getSession().connection();
+			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 			int j = 1;
 			while (startRow <= total) {
@@ -1055,23 +955,15 @@ public class LogicaAsociado extends AsoelecfDAO {
 					do {
 						dto = new EleAsociadoDatosDTO();
 						dto.setNitcli(rs.getString("NUMERO_DOCUMENTO").trim());
-						dto.setNombreCompleto(rs.getString("NOMBRE_ASOCIADO")
-								.trim());
-						dto
-								.setProfesion(rs
-										.getString("PROFESION_ASOCIADO") == null ? null
-										: rs.getString("PROFESION_ASOCIADO")
-												.trim());
-						dto
-								.setZonaElectoral(rs.getString("ZONA_ASOCIADO") == null ? null
-										: rs.getString("ZONA_ASOCIADO").trim());
+						dto.setNombreCompleto(rs.getString("NOMBRE_ASOCIADO").trim());
+						dto.setProfesion(rs.getString("PROFESION_ASOCIADO") == null ? null
+								: rs.getString("PROFESION_ASOCIADO").trim());
+						dto.setZonaElectoral(
+								rs.getString("ZONA_ASOCIADO") == null ? null : rs.getString("ZONA_ASOCIADO").trim());
 						dto.setEstadoHabilidad("Hábil");
-						dto.setRegional(rs.getString("REGIONAL") == null ? null
-								: rs.getString("REGIONAL").trim());
-						dto.setCiudad(rs.getString("ZONA") == null ? null
-								: rs.getString("ZONA").trim());
-						dto.setOficina(rs.getString("OFICINA") == null ? null
-								: rs.getString("OFICINA").trim());
+						dto.setRegional(rs.getString("REGIONAL") == null ? null : rs.getString("REGIONAL").trim());
+						dto.setCiudad(rs.getString("ZONA") == null ? null : rs.getString("ZONA").trim());
+						dto.setOficina(rs.getString("OFICINA") == null ? null : rs.getString("OFICINA").trim());
 						list.add(dto);
 						cont++;
 					} while (rs.next() && (cont <= numRegistros));
@@ -1092,11 +984,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.asociados.habiles"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.asociados.habiles"));
 		} finally {
 			session.close();
 		}
@@ -1106,8 +995,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de asociados
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 22/11/2012
 	 * @param codZona
 	 * @return
@@ -1123,11 +1012,9 @@ public class LogicaAsociado extends AsoelecfDAO {
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.por.zona"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.por.zona"));
 		} finally {
 			session.close();
 		}
@@ -1138,8 +1025,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de asociados filtrados por zona.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 22/11/2012
 	 * @param codZona
 	 * @return
@@ -1151,17 +1038,14 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 
 		try {
-			Query query = session
-					.getNamedQuery("consulta.total.asociados.por.zona");
+			Query query = session.getNamedQuery("consulta.total.asociados.por.zona");
 			query.setLong("codZona", codZona);
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.por.zona"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.por.zona"));
 		} finally {
 			session.close();
 		}
@@ -1172,8 +1056,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de asociados habiles por zona.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 22/11/2012
 	 * @param codZona
 	 * @return
@@ -1182,24 +1066,18 @@ public class LogicaAsociado extends AsoelecfDAO {
 	public Double totalAsociadosHabilesPorZona(Long codZona) throws Exception {
 
 		Double total = null;
-		String fechaProceso = logicaProceso
-				.consultaFechaUltimoProcesoEjecutado();
+		String fechaProceso = logicaProceso.consultaFechaUltimoProcesoEjecutado();
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql
-					.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
+			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
 			sql.append("WHERE Z.CODIGO_ZONA_ELE = " + codZona + " ");
-			sql
-					.append("AND NOT EXISTS (SELECT 1 FROM ELECDB.ELE_INHABILIDAD I ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
-			sql.append("WHERE P.FECHA_PROGRAMACION = '" + fechaProceso
-					+ "' AND A.CODIGO_ASOCIADO = I.CODIGO_ASOCIADO)");
+			sql.append("AND NOT EXISTS (SELECT 1 FROM ELECDB.ELE_INHABILIDAD I ");
+			sql.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
+			sql.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
+			sql.append(
+					"WHERE P.FECHA_PROGRAMACION = '" + fechaProceso + "' AND A.CODIGO_ASOCIADO = I.CODIGO_ASOCIADO)");
 
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.DOUBLE);
@@ -1208,11 +1086,9 @@ public class LogicaAsociado extends AsoelecfDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.habiles.por.zona"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.habiles.por.zona"));
 		} finally {
 			session.close();
 		}
@@ -1223,8 +1099,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 	/**
 	 * Metodo que consulta el total de asociados inhabiles por zona.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 22/11/2012
 	 * @param codZona
 	 * @return
@@ -1233,22 +1109,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 	public Double totalAsociadosInhabilesPorZona(Long codZona) throws Exception {
 
 		Double total = null;
-		String fechaProceso = logicaProceso
-				.consultaFechaUltimoProcesoEjecutado();
+		String fechaProceso = logicaProceso.consultaFechaUltimoProcesoEjecutado();
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 
 		try {
-			StringBuffer sql = new StringBuffer(
-					"SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
+			StringBuffer sql = new StringBuffer("SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
 			sql.append("FROM ELECDB.ELE_ASOCIADO A ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_INHABILIDAD I ON I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
-			sql
-					.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
+			sql.append("INNER JOIN ELECDB.ELE_INHABILIDAD I ON I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
+			sql.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
+			sql.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
+			sql.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
 			sql.append("WHERE P.FECHA_PROGRAMACION = '" + fechaProceso + "'");
 			sql.append("AND Z.CODIGO_ZONA_ELE = " + codZona + "");
 
@@ -1259,11 +1129,9 @@ public class LogicaAsociado extends AsoelecfDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error: " + e.getMessage());
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.total.asociados.inhabiles.por.zona"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.total.asociados.inhabiles.por.zona"));
 		} finally {
 			session.close();
 		}
@@ -1284,16 +1152,14 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 		EleAsociadoDAO eleAsociadoDAO = new EleAsociadoDAO();
 		try {
-			List<EleAsociado> asociado = eleAsociadoDAO
-					.findByNumeroDocumento(id);
-			return asociado != null && !asociado.isEmpty() ? Boolean.TRUE
-					: Boolean.FALSE;
+			List<EleAsociado> asociado = eleAsociadoDAO.findByNumeroDocumento(id);
+			return asociado != null && !asociado.isEmpty() ? Boolean.TRUE : Boolean.FALSE;
 		} finally {
 			HibernateSessionFactoryElecciones2012.getSession().close();
 			eleAsociadoDAO = null;
 		}
 	}
-	
+
 	/**
 	 * Valida el estado del asociado para mostrar el mensaje adecuado.
 	 * 
@@ -1308,17 +1174,13 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 
 		try {
-			Query query = session
-					.getNamedQuery("consulta.estado.asociado");
+			Query query = session.getNamedQuery("consulta.estado.asociado");
 			query.setLong("id", id);
 			estadoAsociado = (Double) query.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.estado.asociado.por.id"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.estado.asociado.por.id"));
 		} finally {
 			session.close();
 		}
@@ -1327,20 +1189,19 @@ public class LogicaAsociado extends AsoelecfDAO {
 	}
 
 	/**
-	 * Valida que un asociado este vinculado a una zona donde habran elecciones.
-	 * id = numero documento identidad True = Si pertenece a una zona donde
-	 * habran elecciones.
+	 * Valida que un asociado este vinculado a una zona donde habran elecciones. id
+	 * = numero documento identidad True = Si pertenece a una zona donde habran
+	 * elecciones.
 	 */
 	public boolean asociadoPerteneceZonaHayEleccion(Long id) {
 		boolean resul = false;
 		Long valor;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
-		
+
 		SQLQuery query = null;
 		try {
-		
-			query = (SQLQuery) session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_VALIDACION_ZONA_HAY_VOTACION);
+
+			query = (SQLQuery) session.getNamedQuery(ConstantesNamedQueries.QUERY_VALIDACION_ZONA_HAY_VOTACION);
 			query.setLong("numIdAsociado", id);
 
 			Object resultado = query.uniqueResult();
@@ -1351,7 +1212,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 					resul = true;
 				}
 			}
-			
+
 		} finally {
 			if (session != null) {
 				session.close();
@@ -1377,8 +1238,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		Session session = HibernateSessionFactoryClimae.getSession();
 		SQLQuery query = null;
 		try {
-			query = (SQLQuery) session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTA_SI_ES_ASOCIADO);
+			query = (SQLQuery) session.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTA_SI_ES_ASOCIADO);
 			query.setLong("nitcli", id);
 
 			Object resultado = query.uniqueResult();
@@ -1420,49 +1280,43 @@ public class LogicaAsociado extends AsoelecfDAO {
 		}
 	}
 
-	public String consultarNombreAsociadoBuc(Long numintAsociado)
-			throws Exception {
-		
-
+	public String consultarNombreAsociadoBuc(Long numintAsociado) throws Exception {
 
 		List qList = null;
 		Session session = HibernateSessionFactoryClimae.getSession();
 		StringBuffer nombresApellidosAso = null;
 		try {
-			Query query = session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_NOMBRE_COMPLETO_ASOCIADO_BUC);
+			Query query = session.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_NOMBRE_COMPLETO_ASOCIADO_BUC);
 			query.setLong("nitcli", numintAsociado);
 			qList = query.list();
 
 			String nombreCompletoAsociado = null;
 			nombresApellidosAso = new StringBuffer();
-			
+
 			for (Iterator iter = qList.iterator(); iter.hasNext();) {
 				Object[] element = (Object[]) iter.next();
 				nombreCompletoAsociado = (String) element[3];
 
 				NombreAsociado nAsociado = new NombreAsociado();
 				nAsociado = setNombresApellidos(nombreCompletoAsociado);
-				nombresApellidosAso.append(nAsociado.getNombre1() != null
-						&& !"".equals(nAsociado.getNombre1()) ? nAsociado
-						.getNombre1() : "");
-				nombresApellidosAso.append(nAsociado.getNombre2() != null
-						&& !"".equals(nAsociado.getNombre2()) ? " "
-						+ nAsociado.getNombre2() : "");
-				nombresApellidosAso.append(nAsociado.getApellido1() != null
-						&& !"".equals(nAsociado.getApellido1()) ? " "
-						+ nAsociado.getApellido1() : "");
-				nombresApellidosAso.append(nAsociado.getApellido2() != null
-						&& !"".equals(nAsociado.getApellido2()) ? " "
-						+ nAsociado.getApellido2() : "");
+				nombresApellidosAso.append(
+						nAsociado.getNombre1() != null && !"".equals(nAsociado.getNombre1()) ? nAsociado.getNombre1()
+								: "");
+				nombresApellidosAso.append(nAsociado.getNombre2() != null && !"".equals(nAsociado.getNombre2())
+						? " " + nAsociado.getNombre2()
+						: "");
+				nombresApellidosAso.append(nAsociado.getApellido1() != null && !"".equals(nAsociado.getApellido1())
+						? " " + nAsociado.getApellido1()
+						: "");
+				nombresApellidosAso.append(nAsociado.getApellido2() != null && !"".equals(nAsociado.getApellido2())
+						? " " + nAsociado.getApellido2()
+						: "");
 			}
-			
 
 		} catch (Exception e) {
 			// System.out.println("No se logro consultar el asociado: "
 			// + e.toString());
-			throw new Exception("No se logro consultar el asociado: "
-					+ e.getMessage(), e);
+			throw new Exception("No se logro consultar el asociado: " + e.getMessage(), e);
 		} finally {
 			if (session != null) {
 				session.close();
@@ -1472,8 +1326,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		return nombresApellidosAso.toString();
 	}
 
-	public String[] consultarDatosAsociadoZonaBuc(Long numintAsociado)
-			throws Exception {
+	public String[] consultarDatosAsociadoZonaBuc(Long numintAsociado) throws Exception {
 
 		String[] Datos = new String[5];
 		List qList = null;
@@ -1481,8 +1334,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		StringBuffer nombresApellidosAso = null;
 
 		try {
-			Query query = session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_NOMBRE_ASOCIADO_ZONA_BUC);
+			Query query = session.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_NOMBRE_ASOCIADO_ZONA_BUC);
 			query.setLong("nitcli", numintAsociado);
 			qList = query.list();
 
@@ -1494,18 +1346,18 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 				NombreAsociado nAsociado = new NombreAsociado();
 				nAsociado = setNombresApellidos(nombreCompletoAsociado);
-				nombresApellidosAso.append(nAsociado.getNombre1() != null
-						&& !"".equals(nAsociado.getNombre1()) ? nAsociado
-						.getNombre1() : "");
-				nombresApellidosAso.append(nAsociado.getNombre2() != null
-						&& !"".equals(nAsociado.getNombre2()) ? " "
-						+ nAsociado.getNombre2() : "");
-				nombresApellidosAso.append(nAsociado.getApellido1() != null
-						&& !"".equals(nAsociado.getApellido1()) ? " "
-						+ nAsociado.getApellido1() : "");
-				nombresApellidosAso.append(nAsociado.getApellido2() != null
-						&& !"".equals(nAsociado.getApellido2()) ? " "
-						+ nAsociado.getApellido2() : "");
+				nombresApellidosAso.append(
+						nAsociado.getNombre1() != null && !"".equals(nAsociado.getNombre1()) ? nAsociado.getNombre1()
+								: "");
+				nombresApellidosAso.append(nAsociado.getNombre2() != null && !"".equals(nAsociado.getNombre2())
+						? " " + nAsociado.getNombre2()
+						: "");
+				nombresApellidosAso.append(nAsociado.getApellido1() != null && !"".equals(nAsociado.getApellido1())
+						? " " + nAsociado.getApellido1()
+						: "");
+				nombresApellidosAso.append(nAsociado.getApellido2() != null && !"".equals(nAsociado.getApellido2())
+						? " " + nAsociado.getApellido2()
+						: "");
 
 				Datos[0] = element[0].toString();// numint
 				Datos[1] = element[1].toString();// nitcli
@@ -1517,8 +1369,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		} catch (Exception e) {
 			// System.out.println("No se logro consultar el asociado: "
 			// + e.toString());
-			throw new Exception("No se logro consultar el asociado: "
-					+ e.getMessage(), e);
+			throw new Exception("No se logro consultar el asociado: " + e.getMessage(), e);
 		} finally {
 			if (session != null) {
 				session.close();
@@ -1541,19 +1392,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 		String apellidos2 = null;
 
 		if (arrayNombresApellidos != null && arrayNombresApellidos.length > 1) {
-			if (arrayNombresApellidos[1] != null
-					&& arrayNombresApellidos[1].indexOf("2") != -1
+			if (arrayNombresApellidos[1] != null && arrayNombresApellidos[1].indexOf("2") != -1
 					&& arrayNombresApellidos[1].trim().length() > 1) {
 				arrayNombresApellidos = arrayNombresApellidos[1].split("2");
 				apellidos2 = arrayNombresApellidos[0];
 			}
-			if (arrayNombresApellidos != null
-					&& arrayNombresApellidos.length > 1) {
+			if (arrayNombresApellidos != null && arrayNombresApellidos.length > 1) {
 				if (arrayNombresApellidos[1].indexOf("3") != -1) {
 					nombres = arrayNombresApellidos[1].split("3");
 					nombre1 = nombres[0];
-					if (nombres[1] != null && nombres[1].indexOf("4") != -1
-							&& nombres[1].trim().length() > 1) {
+					if (nombres[1] != null && nombres[1].indexOf("4") != -1 && nombres[1].trim().length() > 1) {
 						nombres = nombres[1].split("4");
 						nombre2 = nombres[0];
 					}
@@ -1561,8 +1409,8 @@ public class LogicaAsociado extends AsoelecfDAO {
 				nAsociado.setNombre1(nombre1.toString());
 				if (nombre2 != null)
 					nAsociado.setNombre2(nombre2.toString());
-			}// fin if
-		}// fin if
+			} // fin if
+		} // fin if
 		nAsociado.setApellido1(apellidos1);
 		if (apellidos2 != null)
 			nAsociado.setApellido2(apellidos2);
@@ -1611,22 +1459,17 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	}
 
-	public Long consultarCodigoAsociadoPorNumeroDocumento(Long numeroDocumento)
-			throws Exception {
+	public Long consultarCodigoAsociadoPorNumeroDocumento(Long numeroDocumento) throws Exception {
 		Long codigoAsociado = null;
 		try {
-			Session session = HibernateSessionFactoryElecciones2012
-					.getSession();
-			Query query = session
-					.getNamedQuery("consultar.codigo.asociado.por.documento");
+			Session session = HibernateSessionFactoryElecciones2012.getSession();
+			Query query = session.getNamedQuery("consultar.codigo.asociado.por.documento");
 			query.setLong("numeroDocumento", numeroDocumento);
 			codigoAsociado = (Long) query.uniqueResult();
 		} catch (Exception e) {
-			throw new Exception(
-					loaderResourceElements
-							.getKeyResourceValue(
-									ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-									"consulta.codigo.asociado.por.numero.documento"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+					"consulta.codigo.asociado.por.numero.documento"));
 		}
 		return codigoAsociado;
 	}
@@ -1642,24 +1485,22 @@ public class LogicaAsociado extends AsoelecfDAO {
 	}
 
 	/**
-	 * Metodo que consulta el codigo del cabeza de plancha filtrado por un
-	 * asociado inscrito a esta.
+	 * Metodo que consulta el codigo del cabeza de plancha filtrado por un asociado
+	 * inscrito a esta.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 6/12/2012
 	 * @param numeroDocumentoInscrito
 	 * @return
 	 * @throws Exception
 	 */
-	public Long[] consultaCabezaPlanchaPorInscrito(Long numeroDocumentoInscrito)
-			throws Exception {
+	public Long[] consultaCabezaPlanchaPorInscrito(Long numeroDocumentoInscrito) throws Exception {
 		Long[] resultado = new Long[3];
 		List<Object[]> element = null;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			Query query = session
-					.getNamedQuery("consultar.cabeza.plancha.por.inscrito");
+			Query query = session.getNamedQuery("consultar.cabeza.plancha.por.inscrito");
 			query.setLong("numeroDocumento", numeroDocumentoInscrito);
 			element = query.list();
 			if (element != null && element.size() > 0) {
@@ -1667,8 +1508,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 				resultado[1] = (Long) element.get(0)[1];
 				resultado[2] = (Long) element.get(0)[2];
 			} else {
-				throw new Exception(
-						"El asociado no esta inscrito a ninguna plancha.");
+				throw new Exception("El asociado no esta inscrito a ninguna plancha.");
 			}
 		} catch (Exception e) {
 			throw e;
@@ -1682,20 +1522,18 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * Metodo que consulta la cantidad de impresiones de formatos de una plancha
 	 * filtrado por el consecutivo de la plancha.
 	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a>
-	 *         - Pragma S.A. <br>
+	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
+	 *         Pragma S.A. <br>
 	 * @date 6/12/2012
 	 * @param consecutivoPlancha
 	 * @return
 	 * @throws Exception
 	 */
-	public Long consultaNumeroImpresionesFormatoPLancha(Long consecutivoPlancha)
-			throws Exception {
+	public Long consultaNumeroImpresionesFormatoPLancha(Long consecutivoPlancha) throws Exception {
 		Long resultado = null;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			Query query = session
-					.getNamedQuery("consultar.numero.impresiones.formato.plancha");
+			Query query = session.getNamedQuery("consultar.numero.impresiones.formato.plancha");
 			query.setLong("consecutivoPlancha", consecutivoPlancha);
 			query.setLong("codigoFormato", CODIGO_FORMATO_INSCRIPCION_PLANCHA);
 			resultado = (Long) query.uniqueResult();
@@ -1707,13 +1545,11 @@ public class LogicaAsociado extends AsoelecfDAO {
 		return resultado;
 	}
 
-	public EleAsociadoDatosDTO consultarInformacionBasicaAsociado(
-			Long numintAsociado) throws Exception {
+	public EleAsociadoDatosDTO consultarInformacionBasicaAsociado(Long numintAsociado) throws Exception {
 		List qList = null;
 		Session session = HibernateSessionFactoryClimae.getSession();
 		try {
-			Query query = session
-					.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_INFO_ASOCIADO);
+			Query query = session.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_INFO_ASOCIADO);
 			query.setLong("nitcli", numintAsociado);
 			qList = query.list();
 
@@ -1725,19 +1561,13 @@ public class LogicaAsociado extends AsoelecfDAO {
 				dto.setNombreCompleto((String) element[2]);
 				dto.setLugarExpedicion((String) element[4]);
 				dto.setFechaExpedicion((String) element[5]);
-				dto.setCiudadReside(element[6] != null ? (String) element[6]
-						: null);
-				dto
-						.setCodZonaAdministrativaAsociado(element[7] != null ? (String) element[7]
-								: null);
-				dto
-						.setDescripZonaAdministrativaAsociado(element[8] != null ? (String) element[8]
-								: null);
+				dto.setCiudadReside(element[6] != null ? (String) element[6] : null);
+				dto.setCodZonaAdministrativaAsociado(element[7] != null ? (String) element[7] : null);
+				dto.setDescripZonaAdministrativaAsociado(element[8] != null ? (String) element[8] : null);
 				return dto;
 			}
 		} catch (Exception e) {
-			System.out.println("No se logró consultar el asociado: "
-					+ e.toString());
+			System.out.println("No se logró consultar el asociado: " + e.toString());
 		} finally {
 			if (session != null) {
 				session.close();
@@ -1750,8 +1580,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 	public static void main(String[] args) {
 
 		try {
-			DTOHabilidadAsociado dto = LogicaAsociado.getInstance()
-					.consultarHabilidadAsociado(84036648L);
+			DTOHabilidadAsociado dto = LogicaAsociado.getInstance().consultarHabilidadAsociado(84036648L);
 			System.out.println(dto.getAsociadoHabil());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

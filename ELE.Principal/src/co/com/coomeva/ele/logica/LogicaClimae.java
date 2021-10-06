@@ -22,173 +22,156 @@ public class LogicaClimae {
 
 	private static LogicaClimae instance;
 
-	//Constructor de la clase
+	// Constructor de la clase
 	private LogicaClimae() {
 	}
 
-	//Patròn Singular
+	// Patròn Singular
 	public static LogicaClimae getInstance() {
 		if (instance == null) {
 			instance = new LogicaClimae();
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Metodo que realiza una consulta en el BUC el asociado y muestra sus valores
 	 * en un objecto EleAsociadoDTO
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param idAsociado
 	 * @return EleAsociadoDTO
 	 * @throws Exception
 	 */
 
-	public EleAsociadoDTO find(String idAsociado) throws Exception
-	{
-		Long identificion = 0L;
+	public EleAsociadoDTO find(String idAsociado) throws Exception {
 		EleAsociadoDTO asociadoDTO = new EleAsociadoDTO();
-
+		Long number = 0L;
+		number = (Long) Long.parseLong(idAsociado);
 		List<Object[]> listObject;
 
-		try 
-		{
-			identificion = Long.valueOf(idAsociado);
-		} 
-		catch (NumberFormatException e) 
-		{
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noFormatoNumeroID"));
-		}
-
-		Session session=null;
-		Query query=null;
-		session= HibernateSessionFactoryClimae.getSession();
+		Session session = null;
+		Query query = null;
+		session = HibernateSessionFactoryClimae.getSession();
 		query = session.getNamedQuery("asociado.find");
-		query.setInteger(0,0);
-		query.setInteger(1,1);
-		query.setLong(2,identificion);
-		query.setLong(3,10);
-		query.setLong(4,18);
-		query.setLong(5,2);
+		query.setInteger(0, 0);
+		query.setInteger(1, 1);
+		query.setLong(2, number);
+		query.setLong(3, 10);
+		query.setLong(4, 18);
+		query.setLong(5, 2);
 
 		listObject = query.list();
+		System.out.println(listObject.size());
 		if (listObject.size() == 0) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado")+ idAsociado+UtilAcceso.getParametroFuenteS("mensajes", "noAsociado1"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado") + idAsociado
+					+ UtilAcceso.getParametroFuenteS("mensajes", "noAsociado1"));
 		}
-		
+
 		String nombreBUC = "";
 
-		for (Object[] object : listObject) 
-		{
+		for (Object[] object : listObject) {
 			if (object[0] != null) {
 				asociadoDTO.setId(object[0].toString());
-			}else
-			{
+			} else {
 				asociadoDTO.setId("");
 			}
 			if (object[1] != null) {
 				nombreBUC = object[1].toString();
 
-			}else
-			{
+			} else {
 				nombreBUC = "";
 			}
-			if (object[2] != null&& !object[2].toString().equalsIgnoreCase("")) {
-				asociadoDTO.setProfesion(DelegadoPlanchas.getInstance().formatearCadena(object[2].toString()) );
-			}else
-			{
+			if (object[2] != null && !object[2].toString().equalsIgnoreCase("")) {
+				asociadoDTO.setProfesion(DelegadoPlanchas.getInstance().formatearCadena(object[2].toString()));
+			} else {
 				asociadoDTO.setProfesion(UtilAcceso.getParametroFuenteS("parametros", "noInscrito"));
 			}
 
-			asociadoDTO.setEdad(DelegadoSie.getInstance().calculateTime(object[3].toString()));
+//			asociadoDTO.setEdad(DelegadoSie.getInstance().calculateTime(object[3].toString()));
+			asociadoDTO.setEdad(0);
 			asociadoDTO.setFechaVinculacion(DateManipultate.stringToDate(object[4].toString(), "yyyyMMdd"));
-			
+
 			Date fechaIngreso = DateManipultate.stringToDate(object[4].toString(), "yyyyMMdd");
 			int annosAntiguedad = (ManipulacionFechas.calcularEdad(fechaIngreso, new Date()));
 			asociadoDTO.setAntiguedad(annosAntiguedad);
 
 			if (object[5] != null) {
 				asociadoDTO.setOficina(object[5].toString());
-			}else
-			{
+			} else {
 				asociadoDTO.setOficina("");
 			}
 			if (object[6] != null) {
 				asociadoDTO.setEmail(object[6].toString());
-			}else
-			{
-				asociadoDTO.setEmail(UtilAcceso.getParametroFuenteS("parametros", "noInscritoEmail"));
+			} else {
+				
+				asociadoDTO.setEmail("JOAN_FONSECA@GTCCORPORATION.COM");
+				//asociadoDTO.setEmail(UtilAcceso.getParametroFuenteS("parametros", "noInscritoEmail"));
 			}
-			
+
 			Long longFechaObtencionTitulo = obtenerFechaObtencionTitulo(Long.parseLong(idAsociado));
-			
-			if(longFechaObtencionTitulo != null && !new Long(0).equals(longFechaObtencionTitulo)){
-				Date fechaObtencionTitulo = DateManipultate.stringToDate(longFechaObtencionTitulo.toString(), "yyyyMMdd");
-				Long annosAntiguedadObtencionTitulo = (ManipulacionFechas.calculaTiempoTranascurridoDias(new Date(), fechaObtencionTitulo) / 365);
+
+			if (longFechaObtencionTitulo != null && !new Long(0).equals(longFechaObtencionTitulo)) {
+				Date fechaObtencionTitulo = DateManipultate.stringToDate(longFechaObtencionTitulo.toString(),
+						"yyyyMMdd");
+				Long annosAntiguedadObtencionTitulo = (ManipulacionFechas.calculaTiempoTranascurridoDias(new Date(),
+						fechaObtencionTitulo) / 365);
 				asociadoDTO.setAntiguedadDesdeObtencionTitulo(annosAntiguedadObtencionTitulo);
 				asociadoDTO.setFechaObtencionTitulo(fechaObtencionTitulo);
 			} else {
 				asociadoDTO.setAntiguedadDesdeObtencionTitulo(0L);
 			}
-			
+
 			break;
 		}
-		if (nombreBUC!=null&&!nombreBUC.equalsIgnoreCase("")) {
-			
-			StringBuffer nombreCompleto = new StringBuffer();
-			
-			try {
-				String primerNombre = (WorkStrigs.getValue(nombreBUC,"2","3"));
-				String segundoNombre = (WorkStrigs.getValue(nombreBUC,"3","4"));
-				String primerApellido = (WorkStrigs.getValue(nombreBUC,"0","1"));
-				String segundoApellido = (WorkStrigs.getValue(nombreBUC,"1","2"));
-				
+		if (nombreBUC != null && !nombreBUC.equalsIgnoreCase("")) {
+
+				String primerNombre = (WorkStrigs.getValue(nombreBUC, "2", "3"));
+				String segundoNombre = (WorkStrigs.getValue(nombreBUC, "3", "4"));
+				String primerApellido = (WorkStrigs.getValue(nombreBUC, "0", "1"));
+				String segundoApellido = (WorkStrigs.getValue(nombreBUC, "1", "2"));
+
 				primerNombre = DelegadoPlanchas.getInstance().formatearCadena(primerNombre);
 				segundoNombre = DelegadoPlanchas.getInstance().formatearCadena(segundoNombre);
 				primerApellido = DelegadoPlanchas.getInstance().formatearCadena(primerApellido);
 				segundoApellido = DelegadoPlanchas.getInstance().formatearCadena(segundoApellido);
 
-				nombreCompleto.append(primerNombre+" ");
-				nombreCompleto.append(segundoNombre+" ");
-				nombreCompleto.append(primerApellido+" ");
-				nombreCompleto.append(segundoApellido);
-
-				asociadoDTO.setNombre(nombreCompleto.toString());
+				asociadoDTO.setNombre(primerNombre + " "+segundoNombre + " "+primerApellido + " "+segundoApellido);
 				asociadoDTO.setPrimerNombre(primerNombre);
 				asociadoDTO.setSegundoNombre(segundoNombre);
 				asociadoDTO.setPrimerApellido(primerApellido);
 				asociadoDTO.setSegundoApellido(segundoApellido);
 
-			} catch (Exception e) {
-				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNombreBUC"));
-			}
-		}else
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado")); 
+			
+		} else
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado"));
 
 		return asociadoDTO;
 	}
-	
+
 	/**
 	 * Consulta la fecha de obtención del título de un asociado
-	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> - Premize SAS <br>
+	 * 
+	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> -
+	 *         Premize SAS <br>
 	 * @date 21/12/2012
 	 * @return Long
 	 */
-	private Long obtenerFechaObtencionTitulo(Long nitcli){
+	private Long obtenerFechaObtencionTitulo(Long nitcli) {
 		Session session = null;
 		Query query = null;
 		try {
 			session = HibernateSessionFactoryClimae.getSession();
-			query = session
-					.getNamedQuery("consultar.fecha.obtencion.titulo.asociado");
+			query = session.getNamedQuery("consultar.fecha.obtencion.titulo.asociado");
 			query.setLong("asocia", 1L);
 			query.setLong("nitcli", nitcli);
 			query.setLong("tipCli", 2L);
-			List<Long> fecha = (List<Long>)query.list();
-			
-			if(fecha != null && !fecha.isEmpty()){
+			List<Long> fecha = (List<Long>) query.list();
+
+			if (fecha != null && !fecha.isEmpty()) {
 				return fecha.get(0);
 			}
-			
+
 			return null;
 		} finally {
 			if (session != null) {
@@ -198,6 +181,5 @@ public class LogicaClimae {
 			query = null;
 		}
 	}
-	
-	
+
 }

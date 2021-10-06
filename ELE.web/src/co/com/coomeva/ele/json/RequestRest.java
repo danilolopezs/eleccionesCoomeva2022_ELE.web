@@ -12,12 +12,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
-
-//import co.com.coomeva.elecciones.consultarhabilidad.excepcion.CoomevaRuntimeException;
 
 /**
  * @author GTC CORPORATION - Danilo L\u00F3pez
@@ -65,11 +60,8 @@ public class RequestRest<T> {
 	}
 
 	public T getRespuesta() throws CoomevaRuntimeException {
-		System.out.println("LLega respuesta");
 		try {
-			System.out.println("1 respuesta");
 			// validate status response token
-			System.out.println("------------->"+conn.getResponseCode());
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				validarRespuesta();
 			}
@@ -85,8 +77,7 @@ public class RequestRest<T> {
 			in.close();
 			Gson gson = new Gson();
 			tokenResponse = gson.fromJson(output, typeTokenResponseClass);
-			System.out.println("2 respuesta");
-			return gson.fromJson(output, typeTokenResponseClass);
+			return tokenResponse;
 		} catch (IOException e) {
 			throw new CoomevaRuntimeException("Error en el ingreso de datos del Servicio Web.");
 		}

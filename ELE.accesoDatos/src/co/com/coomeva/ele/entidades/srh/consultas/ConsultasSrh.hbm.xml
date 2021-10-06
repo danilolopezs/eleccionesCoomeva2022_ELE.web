@@ -10,12 +10,14 @@
 		<return-scalar column="anos_retiro" type="java.lang.String" />
 		<return-scalar column="EMP_ESTADO" type="java.lang.String" />
 		<return-scalar column="EMP_CEDULA" type="java.lang.String" />
-		SELECT round((months_between(sysdate,EMP_FECHA_RETIRO)/12),2) anos_retiro,EMP_ESTADO,EMP_CEDULA FROM empleado a
-		WHERE emp_fecha_ingreso =
-		(select max(emp_fecha_ingreso) FROM empleado b WHERE
-		b.emp_cedula=a.emp_cedula)
-		AND a.emp_cedula=?
-
+		SELECT distinct CAST((CASE WHEN (ROUND(months_between(CURRENT_DATE,FECHA_RETIRO)/12)) < 0 THEN 0
+		WHEN FECHA_RETIRO IS NULL THEN 0 ELSE round((months_between(CURRENT_DATE,FECHA_RETIRO)/12),2) END) AS decimal(10,2)) anos_retiro , 
+		CASE WHEN (ROUND(months_between(CURRENT_DATE,FECHA_RETIRO)/12)) < 0 THEN 'A' ELSE 'R' END
+		,NUMERO_DOCUMENTO FROM elecdb.ELE_ASOCIADO_ESPECIAL a
+		WHERE a.fecha_ingreso =
+		(select max(b.fecha_ingreso) FROM elecdb.ELE_ASOCIADO_ESPECIAL b WHERE
+		b.NUMERO_DOCUMENTO= A.NUMERO_DOCUMENTO)
+		AND a.NUMERO_DOCUMENTO=?
 	</sql-query>
 
 </hibernate-mapping>

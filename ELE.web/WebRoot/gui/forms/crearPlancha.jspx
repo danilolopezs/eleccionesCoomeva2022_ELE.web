@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+	<?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -29,6 +29,7 @@
 		<div align="center">
 
 			<table cellpadding="0" cellspacing="0" width="824">
+			
 				<tr>
 					<td colspan="2">
 						<div align="left" class="banner"></div>

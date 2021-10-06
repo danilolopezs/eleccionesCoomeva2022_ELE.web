@@ -5,6 +5,24 @@
 
 
 <hibernate-mapping>
+<!--
+		######################################################################################
+		## 1. Javier Londoño - Premize SAS - 2012-11-01 ## ## Consulta los
+		asociados activos cuya fecha de ingreso es mayor a determinada ## ##
+		fecha. ##
+		######################################################################################
+	-->
+	<sql-query name="asesor.getAsesor">
+		<return-scalar column="cdgo" type="java.lang.String" />
+		<return-scalar column="epr_cdgo" type="java.lang.String" />
+		<return-scalar column="anosRetiro" type="java.lang.String" />
+			<![CDATA[
+			   		SELECT E.PRO_IDENTIFICACION,E.PRO_ESTADO,ROUND(months_between(CURRENT_DATE,E.PRO_FECHA_RETIRO)/12) anosRetiro 
+			   		FROM ELECDB.ELEPROMOT E WHERE E.PRO_IDENTIFICACION =?
+				]]>
+	</sql-query>
+
+
 
 	<!--
 		######################################################################################

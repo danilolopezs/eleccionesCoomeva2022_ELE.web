@@ -35,51 +35,50 @@ public class LogicaSrh {
 	 * @return boolean
 	 */
 	public boolean existEmpleado(String nroIdentificacion){
-		return Boolean.FALSE;
-//		Session session=null;
-//		Query query=null;
-//		session= HibernateSessionFactorySrh.getSession();
-//		query = session.getNamedQuery("empleado.consulta");
-//
-//		query.setString(0, nroIdentificacion);
-//
-//		String tiempoRetiro = "";
-//		String emp_estado = "";
-//
-//		List<Object[]> returnList = query.list();
-//
-//		if (returnList.size() == 0) {
-//			return false;
-//		}
-//
-//		for (Object[] objects : returnList) {
-//			if (objects[0] != null) {
-//				tiempoRetiro = objects[0].toString();
-//			}
-//			if (objects[1] != null) {
-//				emp_estado = objects[1].toString();
-//			}
-//
-//			break;
-//		}
-//		Double tiempoRetiroInt = 0d ;
-//
-//
-//		if (tiempoRetiro != null &&!tiempoRetiro.equalsIgnoreCase("")) {
-//			Double tiempoDouble = new Double(tiempoRetiro);
-//			tiempoDouble = Validador.Redondear( tiempoDouble, UtilAcceso.getParametroFuenteI("parametros", "maxDecimales"));
-//			
-//			tiempoRetiroInt = tiempoDouble;
-//
-//		}
-//
-//		if ((emp_estado.equals(UtilAcceso.getParametroFuenteS("parametros", "estadoRetiradoSrh"))))
-//		{
-//			if ( tiempoRetiroInt >3 )
-//				return false;
-//			else
-//				return true;
-//		}else
-//			return true;
+		Session session=null;
+		Query query=null;
+		session= HibernateSessionFactorySrh.getSession();
+		query = session.getNamedQuery("empleado.consulta");
+
+		query.setString(0, nroIdentificacion);
+
+		String tiempoRetiro = "";
+		String emp_estado = "";
+
+		List<Object[]> returnList = query.list();
+
+		if (returnList.size() == 0) {
+			return false;
+		}
+
+		for (Object[] objects : returnList) {
+			if (objects[0] != null) {
+				tiempoRetiro = objects[0].toString();
+			}
+			if (objects[1] != null) {
+				emp_estado = objects[1].toString();
+			}
+
+			break;
+		}
+		Double tiempoRetiroInt = 0d ;
+
+
+		if (tiempoRetiro != null &&!tiempoRetiro.equalsIgnoreCase("")) {
+			Double tiempoDouble = new Double(tiempoRetiro);
+			tiempoDouble = Validador.Redondear( tiempoDouble, UtilAcceso.getParametroFuenteI("parametros", "maxDecimales"));
+			
+			tiempoRetiroInt = tiempoDouble;
+
+		}
+
+		if ((emp_estado.equals(UtilAcceso.getParametroFuenteS("parametros", "estadoRetiradoSrh"))))
+		{
+			if ( tiempoRetiroInt >3 )
+				return false;
+			else
+				return true;
+		}else
+			return true;
 	}
 }
