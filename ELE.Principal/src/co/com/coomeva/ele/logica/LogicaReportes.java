@@ -20,6 +20,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfCell;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
@@ -1361,8 +1362,8 @@ public class LogicaReportes {
 			reporteAsociado.open();
 			reporteAsociado.addTitle("Resumen Habilidades");
 
-			Font font = new Font();
-			font.setColor(Color.white);
+			Font fontWhite = new Font();
+			fontWhite.setColor(Color.white);
 
 
 			float[] colsWidth = {1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f};
@@ -1371,39 +1372,39 @@ public class LogicaReportes {
 			PdfPCell cell =	new PdfPCell();
 			Color HdColor = Color.decode("#008000");
 			
-			cell =	new PdfPCell(new Paragraph("Regional",font));
+			cell =	new PdfPCell(new Paragraph("Regional",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Zona Electoral",font));
+			cell =	new PdfPCell(new Paragraph("Zona Electoral",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Total Asociados",font));
+			cell =	new PdfPCell(new Paragraph("Total Asociados",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Suma Hábiles",font));
+			cell =	new PdfPCell(new Paragraph("Suma Hábiles",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("% Hábiles",font));
+			cell =	new PdfPCell(new Paragraph("% Hábiles",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Suma Inhábiles",font));
+			cell =	new PdfPCell(new Paragraph("Suma Inhábiles",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("% Inhábiles",font));
+			cell =	new PdfPCell(new Paragraph("% Inhábiles",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("Muestra",font));
+			cell =	new PdfPCell(new Paragraph("Muestra",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph("%",font));
+			cell =	new PdfPCell(new Paragraph("%",fontWhite));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
@@ -1423,18 +1424,19 @@ public class LogicaReportes {
 					table.addCell(informe.getTotalInhabilesZona().toString());
 					table.addCell(informe.getPorcentajeInhabiles().toString() + "%");
 					table.addCell(informe.getMuestraZona().toString());
-					table.addCell(informe.getPorcentajeMuestra().toString());
+					table.addCell(informe.getPorcentajeMuestra().toString() + "%");
 					c++;
 				}
-				table.addCell("Total "+dto.getRegional());
-				table.addCell(" ");
-				table.addCell(dto.getTotalAsociadosZona().toString());
-				table.addCell(dto.getTotalHabilesZona().toString());
-				table.addCell(dto.getPorcentajeHabiles().toString() + "%");
-				table.addCell(dto.getTotalInhabilesZona().toString());
-				table.addCell(dto.getPorcentajeInhabiles().toString() + "%");
-				table.addCell(dto.getMuestraZona().toString());
-				table.addCell(dto.getPorcentajeMuestra().toString());
+				
+				table.addCell(getCell("Total " + dto.getRegional(), HdColor, fontWhite));
+				table.addCell(getCell(" ", HdColor, fontWhite));
+				table.addCell(getCell(dto.getTotalAsociadosZona().toString(), HdColor, fontWhite));
+				table.addCell(getCell(dto.getTotalHabilesZona().toString(), HdColor, fontWhite));
+				table.addCell(getCell(dto.getPorcentajeHabiles().toString() + "%", HdColor, fontWhite));
+				table.addCell(getCell(dto.getTotalInhabilesZona().toString(), HdColor, fontWhite));
+				table.addCell(getCell(dto.getPorcentajeInhabiles().toString() + "%", HdColor, fontWhite));
+				table.addCell(getCell(dto.getMuestraZona().toString(), HdColor, fontWhite));
+				table.addCell(getCell(dto.getPorcentajeMuestra() * 100 + "%", HdColor, fontWhite));
 				
 				totalAsociados += dto.getTotalAsociadosZona();
 				totalHabiles += dto.getTotalHabilesZona();
@@ -1448,17 +1450,17 @@ public class LogicaReportes {
 			totalPorcentajeInhab = LogicaInformeResumen.round(totalPorcentajeInhab, 2);
 			totalMuestra = totalInhabiles * ConstantesProperties.VALOR_PORCENTAJE_MUESTRA;
 			totalPorcentajeMuestra = totalMuestra / totalInhabiles;
-			totalPorcentajeMuestra = LogicaInformeResumen.round(totalPorcentajeMuestra, 2);
+			totalPorcentajeMuestra = LogicaInformeResumen.round(totalPorcentajeMuestra, 2)*100;
 			
-			table.addCell("Total general ");
-			table.addCell(" ");
-			table.addCell(totalAsociados.toString());
-			table.addCell(totalHabiles.toString());
-			table.addCell(totalPorcentajeHab.toString() + "%");
-			table.addCell(totalInhabiles.toString());
-			table.addCell(totalPorcentajeInhab.toString() + "%");
-			table.addCell(totalMuestra.toString());
-			table.addCell(totalPorcentajeMuestra.toString());
+			table.addCell(getCell("Total general", HdColor, fontWhite));
+			table.addCell(getCell(" ", HdColor, fontWhite));
+			table.addCell(getCell(totalAsociados.toString(), HdColor, fontWhite));
+			table.addCell(getCell(totalHabiles.toString(), HdColor, fontWhite));
+			table.addCell(getCell(totalPorcentajeHab.toString() + "%", HdColor, fontWhite));
+			table.addCell(getCell(totalInhabiles.toString(), HdColor, fontWhite));
+			table.addCell(getCell(totalPorcentajeInhab.toString() + "%", HdColor, fontWhite));
+			table.addCell(getCell(totalMuestra.toString(), HdColor, fontWhite));
+			table.addCell(getCell(totalPorcentajeMuestra.toString() + "%", HdColor, fontWhite));
 			
 			table.setHeaderRows(1);
 
@@ -1471,6 +1473,12 @@ public class LogicaReportes {
 		reporteAsociado.close(); 
 
 		return file;
+	}
+	
+	private PdfPCell getCell(String value, Color color, Font font) {
+		PdfPCell cell = new PdfPCell(new Paragraph(value, font));
+		cell.setBackgroundColor(color);
+		return cell;
 	}
 	
 	/**
@@ -1551,12 +1559,12 @@ public class LogicaReportes {
 					table.addCell(informe.getPorcentajeNovedades() + "%");
 					c++;
 				}
-				table.addCell(" ");
-				table.addCell(" ");
-				table.addCell("Total "+dto.getTipoNovedad());
-				table.addCell(" ");
-				table.addCell(dto.getTotalNumeroNov());
-				table.addCell(dto.getTotalPorcentajeNov());				
+				table.addCell(getCell(" ", HdColor, font));
+				table.addCell(getCell(" ", HdColor, font));
+				table.addCell(getCell("Total "+dto.getTipoNovedad(), HdColor, font));
+				table.addCell(getCell(" ", HdColor, font));
+				table.addCell(getCell(dto.getTotalNumeroNov(), HdColor, font));
+				table.addCell(getCell(dto.getTotalPorcentajeNov(), HdColor, font));				
 				c=0;
 			}
 			

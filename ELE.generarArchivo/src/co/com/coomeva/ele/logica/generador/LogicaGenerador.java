@@ -597,7 +597,7 @@ public class LogicaGenerador {
 					sheet.addCell(
 							new Label(6, cont + 1, informe.getPorcentajeInhabiles().toString() + "%", cellhdFormat));
 					sheet.addCell(new Label(7, cont + 1, informe.getMuestraZona().toString(), cellhdFormatCenter));
-					sheet.addCell(new Label(8, cont + 1, informe.getPorcentajeMuestra().toString(), cellhdFormat));
+					sheet.addCell(new Label(8, cont + 1, informe.getPorcentajeMuestra().toString() + "%", cellhdFormat));
 					cont++;
 				}
 				sheet.addCell(new Label(0, cont + 1, "Total " + dto.getRegional(), cellhdFormatBoldLeft));
@@ -611,7 +611,7 @@ public class LogicaGenerador {
 				sheet.addCell(
 						new Label(6, cont + 1, dto.getPorcentajeInhabiles().toString() + "%", cellhdFormatBoldRight));
 				sheet.addCell(new Label(7, cont + 1, dto.getMuestraZona().toString(), cellhdFormatBold));
-				sheet.addCell(new Label(8, cont + 1, dto.getPorcentajeMuestra().toString(), cellhdFormatBoldRight));
+				sheet.addCell(new Label(8, cont + 1, (dto.getPorcentajeMuestra()*100) + "%", cellhdFormatBoldRight));
 
 				totalAsociados += dto.getTotalAsociadosZona();
 				totalHabiles += dto.getTotalHabilesZona();
@@ -627,7 +627,7 @@ public class LogicaGenerador {
 			totalMuestra = totalInhabiles * ConstantesProperties.VALOR_PORCENTAJE_MUESTRA;
 			totalMuestra = LogicaInformeResumen.round(totalMuestra, 2);
 			totalPorcentajeMuestra = totalMuestra / totalInhabiles;
-			totalPorcentajeMuestra = LogicaInformeResumen.round(totalPorcentajeMuestra, 2);
+			totalPorcentajeMuestra = LogicaInformeResumen.round(totalPorcentajeMuestra, 2)*100;
 
 			sheet.addCell(new Label(0, cont + 1, "Total general ", cellhdFormatBoldLeft));
 			sheet.addCell(new Label(1, cont + 1, "", cellhdFormatBoldLeft));
@@ -638,7 +638,7 @@ public class LogicaGenerador {
 			sheet.addCell(new Label(5, cont + 1, totalInhabiles.toString(), cellhdFormatBoldRight));
 			sheet.addCell(new Label(6, cont + 1, totalPorcentajeInhab.toString() + "%", cellhdFormatBoldRight));
 			sheet.addCell(new Label(7, cont + 1, totalMuestra.toString(), cellhdFormatBold));
-			sheet.addCell(new Label(8, cont + 1, totalPorcentajeMuestra.toString(), cellhdFormatBoldRight));
+			sheet.addCell(new Label(8, cont + 1, totalPorcentajeMuestra.toString() + "%", cellhdFormatBoldRight));
 
 			workbook.write();
 			workbook.close();

@@ -24,6 +24,8 @@ import co.com.coomeva.util.resources.LoaderResourceElements;
 
 public class ServletReportesInhabilidades extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Constructor of the object.
 	 */

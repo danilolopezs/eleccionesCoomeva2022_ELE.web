@@ -77,7 +77,9 @@ public class LogicaInformeResumen {
 					dtoInformacion.setPorcentajeMuestra(round(((dtoInformacion.getMuestraZona() / dtoInformacion.getTotalInhabilesZona())*100), 2));
 					
 					listInformeZona.add(dtoInformacion);
-					dto.setTotalAsociadosZona(dto.getTotalAsociadosZona()==null?dtoInformacion.getTotalAsociadosZona():dto.getTotalAsociadosZona()+dtoInformacion.getTotalAsociadosZona());
+					dto.setTotalAsociadosZona(
+							dto.getTotalAsociadosZona() == null ? dtoInformacion.getTotalAsociadosZona()
+									: dto.getTotalAsociadosZona() + dtoInformacion.getTotalAsociadosZona());
 					dto.setTotalHabilesZona(dto.getTotalHabilesZona()==null?dtoInformacion.getTotalHabilesZona():dto.getTotalHabilesZona()+dtoInformacion.getTotalHabilesZona());
 					dto.setTotalInhabilesZona(dto.getTotalInhabilesZona()==null?dtoInformacion.getTotalInhabilesZona():dto.getTotalInhabilesZona()+dtoInformacion.getTotalInhabilesZona());					
 				}				
