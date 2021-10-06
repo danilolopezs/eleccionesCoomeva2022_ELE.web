@@ -69,7 +69,7 @@ public class LogicaZona extends EleZonasDAO {
 		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
 		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);//table="ELE_ASESORES" schema="ELECCION"
 		boolean existAsesorMP = false;//DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
-		boolean existAsesorSrh = DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
+		boolean existAsesorSrh = true;// DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
 
 		boolean isAsesor = false;
 		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {

@@ -126,7 +126,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		if (identificacion == null) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
-		Criteria criteria = HibernateSessionFactoryHab.getSession().createCriteria(Asoelecf.class);
+		Criteria criteria = HibernateSessionFactoryClimae.getSession().createCriteria(Asoelecf.class);
 		criteria.add(Restrictions.eq("wnitcli", identificacion));
 		Asoelecf aso = null;
 		try {
