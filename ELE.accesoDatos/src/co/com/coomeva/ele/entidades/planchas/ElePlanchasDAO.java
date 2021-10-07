@@ -51,7 +51,7 @@ public class ElePlanchasDAO extends BaseHibernateDAOPlanchas {
 	}
 
 	public ElePlanchas findById(java.lang.String id) {
-		log.debug("getting ElePlanchas instance with id: " + id);
+		//log.debug("getting ElePlanchas instance with id: " + id);
 		try {
 			ElePlanchas instance = (ElePlanchas) getSession().get(
 					"co.com.coomeva.ele.entidades.planchas.ElePlanchas", id);

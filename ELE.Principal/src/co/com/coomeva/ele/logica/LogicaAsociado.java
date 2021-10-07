@@ -126,21 +126,59 @@ public class LogicaAsociado extends AsoelecfDAO {
 		if (identificacion == null) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
-		Criteria criteria = HibernateSessionFactoryHab.getSession().createCriteria(Asoelecf.class);
-		criteria.add(Restrictions.eq("wnitcli", identificacion));
-		Asoelecf aso = null;
-		try {
-			aso = (Asoelecf) criteria.uniqueResult();
+//		Criteria criteria =  HibernateSessionFactoryElecciones2012.getSession().createCriteria(Asoelecf.class);
+//		criteria.add(Restrictions.eq("wnitcli", identificacion));
+		Session session = null;
+		Query query = null;
+		session = HibernateSessionFactoryElecciones2012.getSession();
+		query = session.getNamedQuery("asoelecf.consulta");
+		query.setLong(0, identificacion);
 
+		List<Object[]> obj = new ArrayList<Object[]>();
+		obj = query.list();
+
+		if (obj.size() == 0) {
+			return null;
+		}
+		Asoelecf aso = new Asoelecf();
+		for (Object[] object : obj) {
+			if (object[0] != null) {
+				aso.setWnitcli(Long.parseLong(object[0].toString()));
+			} else {
+				aso.setWnitcli(0L);
+			}
+			if (object[1] != null) {
+				aso.setWnomcli(object[1].toString());
+			} else {
+				aso.setWnomcli("");
+			}
+			if (object[2] != null) {
+				aso.setWedad(Long.parseLong(object[2].toString()));
+			} else {
+				aso.setWedad(0L);
+			}
+			if (object[3] != null) {
+				aso.setWantig(Long.parseLong(object[3].toString()));
+			} else {
+				aso.setWantig(0L);
+			}
+			if (object[4] != null) {
+				aso.setWindhab(object[4].toString());
+			} else {
+				aso.setWindhab("");
+			}
+			break;
+		}
+
+		try {
+
+			// aso = (Asoelecf) criteria.uniqueResult();
 			if (aso == null) {
 				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociadoHabilidad"));
 			}
 		} catch (Exception e) {
 			throw e;
-		} finally {
-			this.getSession().close();
 		}
-
 		return aso;
 	}
 

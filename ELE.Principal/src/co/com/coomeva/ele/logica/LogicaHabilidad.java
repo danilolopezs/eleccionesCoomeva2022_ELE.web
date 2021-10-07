@@ -32,52 +32,53 @@ import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
-public class LogicaHabilidad extends EleInhabilidadesDAO{
+public class LogicaHabilidad extends EleInhabilidadesDAO {
 	private static LogicaHabilidad instance;
 
-	//	Constructor de la clase
+	// Constructor de la clase
 	private LogicaHabilidad() {
 	}
 
-	//	Patròn Singular
+	// Patròn Singular
 	public static LogicaHabilidad getInstance() {
 		if (instance == null) {
 			instance = new LogicaHabilidad();
 		}
 		return instance;
 	}
+
 	/**
 	 * Valida la habilidad de una plancha
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param plancha
 	 * @return ElePlanchaDTO
 	 * @throws Exception
 	 */
-	public ElePlanchaDTO validatePlancha(ElePlanchaDTO plancha) throws Exception
-	{
+	public ElePlanchaDTO validatePlancha(ElePlanchaDTO plancha) throws Exception {
 
 		EleAsociadoDTO principalValidado;
 		EleAsociadoDTO suplenteValidado;
 		List<ElePrincipalesDTO> listaPrincipales = plancha.getListaPrincipales();
 		List<EleSuplentesDTO> listSuplentes = plancha.getListaSuplentes();
 		boolean planchaHabil = true;
-		ElePlanchas elePlanchas  = new ElePlanchas();
+		ElePlanchas elePlanchas = new ElePlanchas();
 		elePlanchas.setNroCabPlancha(plancha.getEleCabPlanchaDTO().getNroIdentificacion());
 
 		HashMap<String, String> listaAsociados = new HashMap<String, String>();
 		for (ElePrincipalesDTO elePrincipalesDTO : listaPrincipales) {
-			if (listaAsociados.get(elePrincipalesDTO.getNroPriIdentificacion())==null) {
+			if (listaAsociados.get(elePrincipalesDTO.getNroPriIdentificacion()) == null) {
 				principalValidado = new EleAsociadoDTO();
-				principalValidado = validateAsociadoDTO(elePrincipalesDTO.getNroPriIdentificacion(),plancha.getEleZonas(),plancha.getEleCabPlanchaDTO().getNroIdentificacion());
+				principalValidado = validateAsociadoDTO(elePrincipalesDTO.getNroPriIdentificacion(),
+						plancha.getEleZonas(), plancha.getEleCabPlanchaDTO().getNroIdentificacion());
 				elePrincipalesDTO.setEmail(principalValidado.getEmail());
-				elePrincipalesDTO.setAntiguedad(principalValidado.getAntiguedad()+" años");
+				elePrincipalesDTO.setAntiguedad(principalValidado.getAntiguedad() + " años");
 				elePrincipalesDTO.setEdad(principalValidado.getEdad());
 				elePrincipalesDTO.setElePlanchas(elePlanchas);
 
 				String nombreBUC = principalValidado.getNombre();
 
-				if (nombreBUC == null || nombreBUC.equalsIgnoreCase("")) 
-				{
+				if (nombreBUC == null || nombreBUC.equalsIgnoreCase("")) {
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado"));
 				}
 
@@ -86,32 +87,34 @@ public class LogicaHabilidad extends EleInhabilidadesDAO{
 				elePrincipalesDTO.setSegundoNombre(principalValidado.getSegundoNombre());
 				elePrincipalesDTO.setPrimerApellido(principalValidado.getPrimerApellido());
 				elePrincipalesDTO.setSegundoApellido(principalValidado.getSegundoApellido());
-				if (principalValidado.getListaInhabilidades().size()!=0) {
+				if (principalValidado.getListaInhabilidades().size() != 0) {
 					planchaHabil = false;
 					elePrincipalesDTO.setImagenEstado(UtilAcceso.getParametroFuenteS("parametros", "imagenEstadoNo"));
-				}else
+				} else
 					elePrincipalesDTO.setImagenEstado(UtilAcceso.getParametroFuenteS("parametros", "imagenEstadoOk"));
 
 				elePrincipalesDTO.setInhabilidades(principalValidado.getListaInhabilidades());
 				elePrincipalesDTO.setProfesion(principalValidado.getProfesion());
-				listaAsociados.put(elePrincipalesDTO.getNroPriIdentificacion(),elePrincipalesDTO.getNombreCompleto() );
-			}else
-				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado")+ elePrincipalesDTO.getNroPriIdentificacion()+UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado1"));
+				listaAsociados.put(elePrincipalesDTO.getNroPriIdentificacion(), elePrincipalesDTO.getNombreCompleto());
+			} else
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado")
+						+ elePrincipalesDTO.getNroPriIdentificacion()
+						+ UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado1"));
 
 		}
 		for (EleSuplentesDTO eleSuplentesDTO : listSuplentes) {
-			if (listaAsociados.get(eleSuplentesDTO.getNroSuIdentificacion())==null) {
+			if (listaAsociados.get(eleSuplentesDTO.getNroSuIdentificacion()) == null) {
 				suplenteValidado = new EleAsociadoDTO();
-				suplenteValidado = validateAsociadoDTO(eleSuplentesDTO.getNroSuIdentificacion(),plancha.getEleZonas(),plancha.getEleCabPlanchaDTO().getNroIdentificacion());
+				suplenteValidado = validateAsociadoDTO(eleSuplentesDTO.getNroSuIdentificacion(), plancha.getEleZonas(),
+						plancha.getEleCabPlanchaDTO().getNroIdentificacion());
 				eleSuplentesDTO.setEmail(suplenteValidado.getEmail());
-				eleSuplentesDTO.setAntiguedad(suplenteValidado.getAntiguedad()+" años");
+				eleSuplentesDTO.setAntiguedad(suplenteValidado.getAntiguedad() + " años");
 				eleSuplentesDTO.setEdad(suplenteValidado.getEdad());
 				eleSuplentesDTO.setElePlanchas(elePlanchas);
 
 				String nombreBUC = suplenteValidado.getNombre();
 
-				if (nombreBUC == null || nombreBUC.equalsIgnoreCase("")) 
-				{
+				if (nombreBUC == null || nombreBUC.equalsIgnoreCase("")) {
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado"));
 				}
 
@@ -120,33 +123,36 @@ public class LogicaHabilidad extends EleInhabilidadesDAO{
 				eleSuplentesDTO.setSegundoNombre(suplenteValidado.getSegundoNombre());
 				eleSuplentesDTO.setPrimerApellido(suplenteValidado.getPrimerApellido());
 				eleSuplentesDTO.setSegundoApellido(suplenteValidado.getSegundoApellido());
-				if (suplenteValidado.getListaInhabilidades().size()!=0) {
+				if (suplenteValidado.getListaInhabilidades().size() != 0) {
 					planchaHabil = false;
 					eleSuplentesDTO.setImagenEstado(UtilAcceso.getParametroFuenteS("parametros", "imagenEstadoNo"));
-				}else
+				} else
 					eleSuplentesDTO.setImagenEstado(UtilAcceso.getParametroFuenteS("parametros", "imagenEstadoOk"));
 
 				eleSuplentesDTO.setInhabilidades(suplenteValidado.getListaInhabilidades());
 				eleSuplentesDTO.setProfesion(suplenteValidado.getProfesion());
-				listaAsociados.put(eleSuplentesDTO.getNroSuIdentificacion(),eleSuplentesDTO.getNombreCompleto() );
-			}else
-				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado") + eleSuplentesDTO.getNroSuIdentificacion()+UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado1"));
+				listaAsociados.put(eleSuplentesDTO.getNroSuIdentificacion(), eleSuplentesDTO.getNombreCompleto());
+			} else
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado")
+						+ eleSuplentesDTO.getNroSuIdentificacion()
+						+ UtilAcceso.getParametroFuenteS("mensajes", "idDuplicado1"));
 
 		}
 
 		if (planchaHabil) {
 			plancha.setEstado(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha1"));
-		}else
+		} else
 			plancha.setEstado(UtilAcceso.getParametroFuenteS("parametros", "estadoPlancha3"));
 
 		plancha.setNroCabPlancha(plancha.getEleCabPlanchaDTO().getNroIdentificacion());
 
-
 		return plancha;
 
 	}
+
 	/**
 	 * Valida un asociado la habilidad de un asociado en la base de datos
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param nroIdentificacion
 	 * @param elZona
@@ -155,107 +161,112 @@ public class LogicaHabilidad extends EleInhabilidadesDAO{
 	 * @throws Exception
 	 */
 
-
-	public EleAsociadoDTO validateAsociadoDTO(String nroIdentificacion, EleZonas elZona,String nroCabPlancha) throws Exception
-	{
+	public EleAsociadoDTO validateAsociadoDTO(String nroIdentificacion, EleZonas elZona, String nroCabPlancha)
+			throws Exception {
 		EleAsociadoDTO asociado;
 		asociado = DelegadoClimae.getInstance().find(nroIdentificacion);
-
-
 
 		asociado.setZonaPlancha(elZona);
 
 		Asoelecf asohab = DelegadoAsociado.getInstance().findAsoHabFin(nroIdentificacion);
 		Long cons = 0l;
 		asociado.setEstadoHabilidad(true);
-		if (asociado.getAntiguedad() < UtilAcceso.getParametroFuenteI("parametros", "antiguedadMinima"))
-		{
+		if (asociado.getAntiguedad() < UtilAcceso.getParametroFuenteI("parametros", "antiguedadMinima")) {
 			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoMayor3")));
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoMayor3")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		if (elZona==null)
-		{
+		if (elZona == null) {
 			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldZonaValida")));
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldZonaValida")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		if(asohab == null)
-		{
+		if (asohab == null) {
 			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldAsoHab")));
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsoHab")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
-		}else
-			if(asohab.getWindhab().trim().equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "caracterEstadoAsociado2")))
-			{
-				cons++;
-				asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldAsoHab")));
+		} else if (asohab.getWindhab().trim()
+				.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "caracterEstadoAsociado2"))) {
+			cons++;
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsoHab")));
 //				asociado.setEstadoHabilidad(false);
-				asociado.setEstadoHabilidad(true);
-			}
-
-		if(DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion))
-		{
-			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
-		}
-		if (DelegadoSubcomision.getInstance().existSubcomision(nroIdentificacion))
-		{
-			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldSubComision")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
-		}
-		if (DelegadoPlanchas.getInstance().validarOtraPlancha(nroIdentificacion,nroCabPlancha))
-		{
-			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons,asociado.getId()) ,UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoOtraPlancha")));
-//			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
 
-		if (!DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion, elZona) && elZona.getZonEspecial().equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "esZonaEspecial"))) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural")+" "+nroIdentificacion+" "+UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural1"));
-		}else{
-			if (DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion, elZona)&&!elZona.getZonEspecial().equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "esZonaEspecial"))) {
-				//mario
-				//throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural")+" "+nroIdentificacion+" "+UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2"));
+		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
+			cons++;
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
+//			asociado.setEstadoHabilidad(false);
+			asociado.setEstadoHabilidad(true);
+		}
+		if (DelegadoSubcomision.getInstance().existSubcomision(nroIdentificacion)) {
+			cons++;
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldSubComision")));
+//			asociado.setEstadoHabilidad(false);
+			asociado.setEstadoHabilidad(true);
+		}
+		if (DelegadoPlanchas.getInstance().validarOtraPlancha(nroIdentificacion, nroCabPlancha)) {
+			cons++;
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoOtraPlancha")));
+//			asociado.setEstadoHabilidad(false);
+			asociado.setEstadoHabilidad(true);
+		}
+
+		if (!DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion, elZona) && elZona.getZonEspecial()
+				.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "esZonaEspecial"))) {
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural") + " "
+					+ nroIdentificacion + " " + UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural1"));
+		} else {
+			if (DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion, elZona) && !elZona.getZonEspecial()
+					.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "esZonaEspecial"))) {
+				// mario
+				// throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
+				// "msgNoEmpleadoNatural")+" "+nroIdentificacion+"
+				// "+UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2"));
 			}
 
 		}
 		EleZonas asoZona = DelegadoZona.getInstance().consultarZonaPlancha(nroIdentificacion);
 		if (!asoZona.getCodZona().equalsIgnoreCase(elZona.getCodZona())) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noZonaCabPla")+" "+nroIdentificacion+" "+UtilAcceso.getParametroFuenteS("mensajes", "noZonaCabPla2"));
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noZonaCabPla") + " " + nroIdentificacion
+					+ " " + UtilAcceso.getParametroFuenteS("mensajes", "noZonaCabPla2"));
 		}
 		return asociado;
 	}
 
 	/**
 	 * Metodo que incribe la inhabilidades de un asociado en la base de datos
-	 * @author Manuel Galvez y Ricardo Chiriboga 
+	 * 
+	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param listInhabilidades
 	 */
 
-	public void inscribirInhabilidades(List<EleInhabilidades> listInhabilidades){
+	public void inscribirInhabilidades(List<EleInhabilidades> listInhabilidades) {
 		if (listInhabilidades != null) {
 			for (EleInhabilidades eleInhabilidades : listInhabilidades) {
 				save(eleInhabilidades);
 			}
 		}
 
-
 	}
+
 	/**
 	 * Metodo que remueve las inhabilidades de la base de datos de un asociado
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param nroIdentificacion
 	 */
-	public void removerInhabilidades(String nroIdentificacion){
+	public void removerInhabilidades(String nroIdentificacion) {
 		Criteria criteria = getSession().createCriteria(EleInhabilidades.class);
 		criteria.add(Restrictions.eq("id.nroIdentificacion", nroIdentificacion));
 		List<EleInhabilidades> lista = criteria.list();
@@ -264,31 +275,33 @@ public class LogicaHabilidad extends EleInhabilidadesDAO{
 		}
 
 	}
+
 	/**
 	 * Metodo que busca todas las inhabilidades inscritas de un asociado
+	 * 
 	 * @param nroIdentificacion
 	 * @return List<EleInhabilidades>
 	 */
 
-	public List<EleInhabilidades> buscarInhabilidadesById(String nroIdentificacion) throws Exception
-	{
+	public List<EleInhabilidades> buscarInhabilidadesById(String nroIdentificacion) throws Exception {
 		Criteria criteria = getSession().createCriteria(EleInhabilidades.class);
-		List<EleInhabilidades> lista =  null;
+		List<EleInhabilidades> lista = null;
 		try {
 			criteria.add(Restrictions.eq("id.nroIdentificacion", nroIdentificacion));
 
 			lista = criteria.list();
 		} catch (Exception e) {
 			throw e;
-		}finally{
+		} finally {
 			this.getSession().flush();
 		}
 
-
 		return lista;
-	} 
+	}
+
 	/**
 	 * Valida si el asociado es empleado, asesor de coomeva
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param nroCabIdentificacion
 	 * @param elZona
@@ -296,40 +309,41 @@ public class LogicaHabilidad extends EleInhabilidadesDAO{
 	 * @throws Exception
 	 */
 
-	public boolean validateEmpleado(String nroCabIdentificacion, EleZonas elZona) throws Exception{
+	public boolean validateEmpleado(String nroCabIdentificacion, EleZonas elZona) throws Exception {
 
 		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
 		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);
-		boolean existAsesorMP = DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
+		boolean existAsesorMP = false;// DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
 		boolean existAsesorSrh = DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
 
 		boolean isAsesor = false;
-		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {
+		if (existAsesorSrh || existAsesorFin || existAsesorMP || existAsesorPla) {
 			isAsesor = true;
 		}
 
 		return isAsesor;
 
 	}
-	
+
 	/**
-	 * Indica si el número de identificación ingresado
-	 * corresponde a una persona que labora en el grupo empresarial
-	 * coomeva
-	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> - Premize SAS <br>
+	 * Indica si el número de identificación ingresado corresponde a una persona que
+	 * labora en el grupo empresarial coomeva
+	 * 
+	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> -
+	 *         Premize SAS <br>
 	 * @date 1/12/2012
 	 * @param nroCabIdentificacion
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean esEmpleadoGECoomeva(String nroCabIdentificacion) throws Exception{
+	public boolean esEmpleadoGECoomeva(String nroCabIdentificacion) throws Exception {
 
 		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
 		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);
 		boolean existAsesorMP = DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
 		boolean existAsesorSrh = DelegadoWsEmpleados.getInstance().existEmpleado(nroCabIdentificacion);
 
-		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {
+		if (existAsesorSrh || existAsesorFin || existAsesorMP || existAsesorPla) {
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;

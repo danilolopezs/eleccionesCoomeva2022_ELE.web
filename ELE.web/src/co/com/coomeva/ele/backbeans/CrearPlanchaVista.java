@@ -62,7 +62,7 @@ public class CrearPlanchaVista extends BaseVista
 	private String msgRestriccionesImagenes;
 
 	public CrearPlanchaVista() {
-		//init(); 
+		init(); 
 	}
 
 	/**

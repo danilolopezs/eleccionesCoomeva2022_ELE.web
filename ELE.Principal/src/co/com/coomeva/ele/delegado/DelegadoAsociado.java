@@ -41,7 +41,7 @@ public class DelegadoAsociado {
 	public Asoelecf findAsoHabFin(String identificacion) throws Exception{
 		Long idLong = 0l;
 		try {
-			idLong = Long.valueOf(identificacion);	
+			idLong =(Long) Long.parseLong(identificacion);	
 		} catch (NumberFormatException e) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noFormatoNumeroID"));
 		}
