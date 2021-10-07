@@ -1,6 +1,6 @@
 <ice:panelPopup id="popupFoto" draggable="true" styleClass="formulario"
 	visible="#{crearPlanchaVista.visibleFoto}" modal="true"
-	style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 280px;">
+	style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 460px;">
 
 	<f:facet name="header">
 		<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"
@@ -25,5 +25,4 @@
 
 		</ice:panelGrid>
 	</f:facet>
-
 </ice:panelPopup>
