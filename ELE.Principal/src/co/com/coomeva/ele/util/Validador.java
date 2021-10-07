@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Validador {
 
+	public final static String REGEX_USUARIO= "[a-zA-Z0-9]*";
+	
 	/**
 	 * Valida el email enviado
 	 * @param correo

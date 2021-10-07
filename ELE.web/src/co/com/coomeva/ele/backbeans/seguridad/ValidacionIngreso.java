@@ -16,6 +16,7 @@ import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.ele.util.LectorParametros;
 import co.com.coomeva.ele.util.ObtenerIP;
+import co.com.coomeva.ele.util.Validador;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
 import co.com.coomeva.ele.util.ConstantesProperties;
