@@ -94,9 +94,9 @@ ORDER BY
     
     
     
-    
+    --CONSULTA REGIONAL
      SELECT 
-            DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM))
+            DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM)) REGIONAL
         FROM 
             SEGURIDAD.PLTAGCORI        AG,
             MULCLIDAT.CLITAB           RG,
@@ -116,4 +116,5 @@ ORDER BY
                         INNER JOIN ELECDB.ELE_ZONA Z ON  A.COD_ZONA_ASO = Z.CODIGO_ZONA
                         INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE = ZE.CODIGO_ZONA_ELE 
                         WHERE A.NUMERO_DOCUMENTO = 94392852 
-                    )
+                    )
+

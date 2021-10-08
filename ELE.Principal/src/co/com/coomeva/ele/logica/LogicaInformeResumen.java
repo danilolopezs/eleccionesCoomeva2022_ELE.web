@@ -58,7 +58,7 @@ public class LogicaInformeResumen {
 			List<FiltrosConsultasDTO> listRegionales = logicaFiltros.consultarRegionales();
 			List<FiltrosConsultasDTO> listZonas = null;
 			
-			for (FiltrosConsultasDTO regional : listRegionales) {
+			for (FiltrosConsultasDTO regional : listRegionales) {	
 				listZonas = logicaFiltros.consultarZonasPorRegional(regional.getCodigoFiltro());
 				dto = new ResumenHabilidadDTO();
 				listInformeZona = new ArrayList<ResumenZonaHabilidadDTO>();
@@ -74,10 +74,12 @@ public class LogicaInformeResumen {
 					dtoInformacion.setPorcentajeHabiles(round(((dtoInformacion.getTotalHabilesZona()/dtoInformacion.getTotalAsociadosZona())*100), 2));
 					dtoInformacion.setPorcentajeInhabiles(round(((dtoInformacion.getTotalInhabilesZona()/dtoInformacion.getTotalAsociadosZona())*100), 2));
 					dtoInformacion.setMuestraZona(round((dtoInformacion.getTotalInhabilesZona()*ConstantesProperties.VALOR_PORCENTAJE_MUESTRA), 2));
-					dtoInformacion.setPorcentajeMuestra(round((dtoInformacion.getMuestraZona() / dtoInformacion.getTotalInhabilesZona()), 2));
+					dtoInformacion.setPorcentajeMuestra(round(((dtoInformacion.getMuestraZona() / dtoInformacion.getTotalInhabilesZona())*100), 2));
 					
 					listInformeZona.add(dtoInformacion);
-					dto.setTotalAsociadosZona(dto.getTotalAsociadosZona()==null?dtoInformacion.getTotalAsociadosZona():dto.getTotalAsociadosZona()+dtoInformacion.getTotalAsociadosZona());
+					dto.setTotalAsociadosZona(
+							dto.getTotalAsociadosZona() == null ? dtoInformacion.getTotalAsociadosZona()
+									: dto.getTotalAsociadosZona() + dtoInformacion.getTotalAsociadosZona());
 					dto.setTotalHabilesZona(dto.getTotalHabilesZona()==null?dtoInformacion.getTotalHabilesZona():dto.getTotalHabilesZona()+dtoInformacion.getTotalHabilesZona());
 					dto.setTotalInhabilesZona(dto.getTotalInhabilesZona()==null?dtoInformacion.getTotalInhabilesZona():dto.getTotalInhabilesZona()+dtoInformacion.getTotalInhabilesZona());					
 				}				

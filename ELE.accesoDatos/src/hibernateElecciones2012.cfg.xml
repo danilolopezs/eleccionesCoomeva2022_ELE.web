@@ -23,13 +23,12 @@
 			org.hibernate.transaction.JDBCTransactionFactory
 		</property>
 		<property name="connection.datasource">java:ElecDB2Ds</property>
-		<property
-			name="hibernate.transaction.flush_before_completion">
+		<property name="hibernate.transaction.flush_before_completion">
 			true
 		</property>
 		<property name="dialect">org.hibernate.dialect.DB2Dialect</property>
 		<property name="connection.autocommit">true</property>
-		<property name="show_sql">true</property>
+		<!-- <property name="show_sql">true</property>-->
 		<!-- FIN PARAMETROS DE CONEXION AL SERVER MEDIANTE EL DATASOURCE -->
 
 		<mapping
@@ -128,5 +127,4 @@
 			resource="co/com/coomeva/ele/entidades/planchas/dosmildoce/EleZonaElectoralEspecial.hbm.xml" />
 
 	</session-factory>
-
 </hibernate-configuration>

@@ -36,11 +36,15 @@ import co.com.coomeva.util.resources.LoaderResourceElements;
 
 public class LogicaAsociado extends AsoelecfDAO {
 
+	private final int COD_HABIL = 1;
+	private final int COD_INHABIL = 2;
+	
 	private static LogicaAsociado instance;
 	private LogicaProceso logicaProceso = LogicaProceso.getInstance();
 	private LoaderResourceElements loaderResourceElements = LoaderResourceElements.getInstance();
 	private EleAsociadoDAO dao = new EleAsociadoDAO();
 	private List<FiltrosConsultasDTO> zonasElectorales;
+
 	private HashMap<Long, String> zonasHash;
 
 	private Long CODIGO_FORMATO_INSCRIPCION_PLANCHA = new Long(
@@ -126,6 +130,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		if (identificacion == null) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
+
 //		Criteria criteria =  HibernateSessionFactoryElecciones2012.getSession().createCriteria(Asoelecf.class);
 //		criteria.add(Restrictions.eq("wnitcli", identificacion));
 		Session session = null;
@@ -169,7 +174,6 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 			break;
 		}
-
 		try {
 
 			// aso = (Asoelecf) criteria.uniqueResult();
@@ -506,14 +510,19 @@ public class LogicaAsociado extends AsoelecfDAO {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			StringBuffer sql = new StringBuffer("SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
 
-			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
-			sql.append(
-					"WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql.append(
-					"OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+			StringBuffer sql = new StringBuffer(
+					"SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
+
+			sql
+					.append("FROM ELECDB.ELEASOCIA A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
+			sql
+					.append("WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql
+					.append("OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql
+					.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+
 			sql.append("A.CODIGO_ASOCIADO AND N4.ESTADO_HABILIDAD = '1')= ");
 			sql.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO))))");
@@ -589,25 +598,30 @@ public class LogicaAsociado extends AsoelecfDAO {
 			sql.append(
 					"db2util.get_codnom_clitab(42, C.CODSEX) AS GENERO, DB2UTIL.SIP_PROFESION(C.NUMINT,'AS') AS PROFESION, ");
 			sql.append("A.DESC_ZONA_ASO AS ZONA, C.ESTRAT, ");
-			sql.append("(SELECT (CASE WHEN A2.CODIGO_ASOCIADO IS NULL THEN '0' ELSE '1' END) AS HABILIDAD_ASOCIADO "
-					+ "FROM ELECDB.ELE_ASOCIADO A2 WHERE A2.NUMERO_DOCUMENTO = A.NUMERO_DOCUMENTO "
-					+ "AND (A2.CODIGO_ASOCIADO NOT IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I "
-					+ "WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) OR (A2.CODIGO_ASOCIADO IN "
-					+ "(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) "
-					+ "AND (SELECT N.ESTADO_HABILIDAD FROM ELECDB.ELE_NOVEDAD N WHERE N.CONSECUTIVO_NOVEDAD = "
-					+ "(SELECT MAX(N2.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N2 WHERE N2.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)) = '1'))) AS HABILIDAD_ASOCIADO, ");
-			sql.append(
-					"(SELECT NOMAGC FROM SEGURIDAD . PLTAGCORI WHERE AGCORI = C.AGCVIN AND CODEMP = 67890 ) AS OFICINA, ");
-			sql.append(
-					"(SELECT CTAB . CODNOM FROM SEGURIDAD . PLTAGCORI PLT , MULCLIDAT . CLITAB CTAB WHERE PLT . CODEMP = 67890 "
+
+			sql
+					.append("(SELECT (CASE WHEN A2.CODIGO_ASOCIADO IS NULL THEN '0' ELSE '1' END) AS HABILIDAD_ASOCIADO "
+							+ "FROM ELECDB.ELEASOCIA A2 WHERE A2.NUMERO_DOCUMENTO = A.NUMERO_DOCUMENTO "
+							+ "AND (A2.CODIGO_ASOCIADO NOT IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I "
+							+ "WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) OR (A2.CODIGO_ASOCIADO IN "
+							+ "(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO) "
+							+ "AND (SELECT N.ESTADO_HABILIDAD FROM ELECDB.ELE_NOVEDAD N WHERE N.CONSECUTIVO_NOVEDAD = "
+							+ "(SELECT MAX(N2.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N2 WHERE N2.CODIGO_ASOCIADO = A2.CODIGO_ASOCIADO)) = '1'))) AS HABILIDAD_ASOCIADO, ");
+			sql
+					.append("(SELECT NOMAGC FROM SEGURIDAD . PLTAGCORI WHERE AGCORI = C.AGCVIN AND CODEMP = 67890 ) AS OFICINA, ");
+			sql
+					.append("(SELECT CTAB . CODNOM FROM SEGURIDAD . PLTAGCORI PLT , MULCLIDAT . CLITAB CTAB WHERE PLT . CODEMP = 67890 "
 							+ "AND CTAB . CODTAB = 907 AND PLT . AGCORI = C.AGCVIN AND PLT . CODREG = CTAB . CODINT) AS REGIONAL ");
 
-			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
-			sql.append(
-					"WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql.append(
-					"OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
-			sql.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+			sql
+					.append("FROM ELECDB.ELEASOCIA A INNER JOIN MULCLIDAT.CLIMAE C ON C.NUMINT = A.CODIGO_ASOCIADO ");
+			sql
+					.append("WHERE (A.CODIGO_ASOCIADO NOT IN(SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql
+					.append("OR (A.CODIGO_ASOCIADO IN (SELECT I.CODIGO_ASOCIADO FROM ELECDB.ELE_INHABILIDAD I WHERE I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO) ");
+			sql
+					.append("AND((SELECT N4.CONSECUTIVO_NOVEDAD FROM ELECDB.ELE_NOVEDAD N4 WHERE N4.CODIGO_ASOCIADO = ");
+
 			sql.append("A.CODIGO_ASOCIADO AND N4.ESTADO_HABILIDAD = '1')= ");
 			sql.append("(SELECT MAX(N3.CONSECUTIVO_NOVEDAD) FROM ELECDB.ELE_NOVEDAD N3 WHERE N3.CODIGO_ASOCIADO = ");
 			sql.append("A.CODIGO_ASOCIADO))))");
@@ -1022,8 +1036,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(loaderResourceElements.getKeyResourceValue(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.asociados.habiles"));
+			throw new Exception(getMensajeLogicaPrincipal("consulta.asociados.habiles"));
 		} finally {
 			session.close();
 		}
@@ -1049,10 +1062,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 			Query query = session.getNamedQuery("consulta.total.asociados");
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(loaderResourceElements.getKeyResourceValue(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-					"consulta.total.asociados.por.zona"));
+			throw new Exception(getMensajeLogicaPrincipal("consulta.total.asociados.por.zona"));
 		} finally {
 			session.close();
 		}
@@ -1081,13 +1091,10 @@ public class LogicaAsociado extends AsoelecfDAO {
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception(loaderResourceElements.getKeyResourceValue(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-					"consulta.total.asociados.por.zona"));
+			throw new Exception(getMensajeLogicaPrincipal("consulta.total.asociados.por.zona"));
 		} finally {
 			session.close();
 		}
-
 		return total;
 	}
 
@@ -1102,35 +1109,20 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @throws Exception
 	 */
 	public Double totalAsociadosHabilesPorZona(Long codZona) throws Exception {
-
 		Double total = null;
 		String fechaProceso = logicaProceso.consultaFechaUltimoProcesoEjecutado();
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
-
 		try {
-			StringBuffer sql = new StringBuffer("SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql.append("FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
-			sql.append("WHERE Z.CODIGO_ZONA_ELE = " + codZona + " ");
-			sql.append("AND NOT EXISTS (SELECT 1 FROM ELECDB.ELE_INHABILIDAD I ");
-			sql.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
-			sql.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
-			sql.append(
-					"WHERE P.FECHA_PROGRAMACION = '" + fechaProceso + "' AND A.CODIGO_ASOCIADO = I.CODIGO_ASOCIADO)");
-
+			StringBuffer sql = queryConsultaAsociadosZona(codZona, COD_HABIL);
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.DOUBLE);
-
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Error: " + e.getMessage());
-			throw new Exception(loaderResourceElements.getKeyResourceValue(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-					"consulta.total.asociados.habiles.por.zona"));
+			throw new Exception(getMensajeLogicaPrincipal("consulta.total.asociados.habiles.por.zona"));
 		} finally {
 			session.close();
 		}
-
 		return total;
 	}
 
@@ -1145,38 +1137,44 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @throws Exception
 	 */
 	public Double totalAsociadosInhabilesPorZona(Long codZona) throws Exception {
-
 		Double total = null;
 		String fechaProceso = logicaProceso.consultaFechaUltimoProcesoEjecutado();
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
-
 		try {
-			StringBuffer sql = new StringBuffer("SELECT COUNT(DISTINCT A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql.append("FROM ELECDB.ELE_ASOCIADO A ");
-			sql.append("INNER JOIN ELECDB.ELE_INHABILIDAD I ON I.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO ");
-			sql.append("INNER JOIN ELECDB.ELE_PROCESO_REGLA PR ON I.CONSECUTIVO_PRO_REGLA = PR.CONSECUTIVO_PRO_REGLA ");
-			sql.append("INNER JOIN ELECDB.ELE_PROCESO P ON PR.CODIGO_PROCESO = P.CODIGO_PROCESO ");
-			sql.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
-			sql.append("WHERE P.FECHA_PROGRAMACION = '" + fechaProceso + "'");
-			sql.append("AND Z.CODIGO_ZONA_ELE = " + codZona + "");
-
+			StringBuffer sql = queryConsultaAsociadosZona(codZona, COD_INHABIL);
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.DOUBLE);
-
 			total = (Double) query.uniqueResult();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error: " + e.getMessage());
-			throw new Exception(loaderResourceElements.getKeyResourceValue(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-					"consulta.total.asociados.inhabiles.por.zona"));
+			throw new Exception(getMensajeLogicaPrincipal("consulta.total.asociados.inhabiles.por.zona"));
 		} finally {
 			session.close();
 		}
-
 		return total;
 	}
+	
+	public String getMensajeLogicaPrincipal(String param) throws Exception {
+		return loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+				param);
+	}
 
+	/**
+	 * construye el sql necesario para consultar habilidad de asociados
+	 * @param codZona zona de asociados
+	 * @param tipoValidacion 1 asociados habiles, 2 asociados inhabiles
+	 * @return sql query
+	 */
+	private StringBuffer queryConsultaAsociadosZona(Long codZona, int tipoValidacion) {		
+		StringBuffer sql = new StringBuffer("");
+		sql.append("SELECT COUNT(A.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");		
+		sql.append("FROM ELECDB.ELEASOCIA A ");
+		sql.append("INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO ");
+		sql.append("INNER JOIN ELECDB.ELE_REPORTE_HABIL R ON A.NUMERO_DOCUMENTO = R.NUMERO_DOCUMENTO ");
+		sql.append("WHERE Z.CODIGO_ZONA_ELE = " +codZona+ " ");
+		sql.append("AND R.TIPO_VALIDACION = " +tipoValidacion );
+		return sql;
+	}
+	
 	/**
 	 * Consulta si un asociado se encuentra activo en la tabla ele_asociado
 	 * 

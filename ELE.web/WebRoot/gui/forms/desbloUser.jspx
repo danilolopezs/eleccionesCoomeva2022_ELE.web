@@ -89,32 +89,32 @@
 
 										<f:facet name="first">
 											<ice:graphicImage id="firstpage_1"
-												url="/xmlhttp/css/rime/css-images/arrow-first.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-first.gif"
 												style="border:none;" />
 										</f:facet>
 										<f:facet name="last">
 											<ice:graphicImage id="lastpage_1"
-												url="/xmlhttp/css/rime/css-images/arrow-last.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-last.gif"
 												style="border:none;" />
 										</f:facet>
 										<f:facet name="previous">
 											<ice:graphicImage id="previouspage_1"
-												url="/xmlhttp/css/rime/css-images/arrow-previous.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-previous.gif"
 												style="border:none;" />
 										</f:facet>
 										<f:facet name="next">
 											<ice:graphicImage id="nextpage_1"
-												url="/xmlhttp/css/rime/css-images/arrow-next.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-next.gif"
 												style="border:none;" />
 										</f:facet>
 										<f:facet name="fastforward">
 											<ice:graphicImage id="fastforward_1"
-												url="/xmlhttp/css/rime/css-images/arrow-ff.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-ff.gif"
 												style="border:none;" />
 										</f:facet>
 										<f:facet name="fastrewind">
 											<ice:graphicImage id="fastrewind_1"
-												url="/xmlhttp/css/rime/css-images/arrow-fr.gif"
+												url="/gui/estilos/xmlhttp/css/rime/css-images/arrow-fr.gif"
 												style="border:none;" />
 										</f:facet>
 

@@ -146,11 +146,11 @@
 															<td align="center">
 																<table width="90%" style="border: 1px solid black;">
 																	<tr>
-																		<td style="background-color: #006633; color: White">
+																		<td style="background-color: #009933; color: White">
 																			<div align="center">
 																				<ice:outputText
 																					value="#{etiquetas.ttlRegistroVotante}"
-																					style="background-color: #006633; color: White" />
+																					style="background-color: #009933; color: White" />
 																			</div>
 																		</td>
 																	</tr>

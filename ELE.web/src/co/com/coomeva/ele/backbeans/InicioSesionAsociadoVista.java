@@ -30,6 +30,7 @@ import co.com.coomeva.ele.modelo.EleSuplentesDTO;
 import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
+import co.com.coomeva.ele.util.Validador;
 import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
@@ -223,6 +224,11 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			if (login == null || login.equals("") || login.contains(" ")) {
 				val = false;
 				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noUsuario"));
+			}
+			if (!login.matches(Validador.REGEX_USUARIO)) {
+				val = false;
+				login=null;
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "usuarioInvalido"));
 			}
 			if (password == null || password.equals("")) {
 				val = false;

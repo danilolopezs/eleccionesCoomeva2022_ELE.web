@@ -41,13 +41,11 @@
 
 								<td align="center" style="background: white; width: 706px;"
 									height="400">
-
-
+									
 									<table border="1">
 										<tr align="left">
 											<td class="formularioTabla">
-												<ice:outputText value="#{etiquetas.lblTipoHabilidad}" 
-													 />
+												<ice:outputText value="#{etiquetas.lblTipoHabilidad}" />
 											</td>
 											<td>
 												<ice:selectOneMenu binding="#{generarReportesHabilidadesVista.txtTipoHabilidad}"

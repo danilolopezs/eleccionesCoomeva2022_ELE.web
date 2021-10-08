@@ -68,7 +68,7 @@
 
 								<td bgcolor="#FFFFFF" colspan="2" width="750" align="center">
 									<div align="center">
-										<ice:outputText style="color:#006633;"
+										<ice:outputText style="color:#009933;"
 											value="Miembros Principales" />
 
 										<ice:dataTable id="tablaIngreso" var="recordTitulares"
@@ -140,7 +140,7 @@
 										<br />
 										<ice:panelGrid rendered="#{initParam['com.coomeva.elecciones.TIPO_ELECCIONES'] != 'representantes'}" style="width:100%;">										
 											<div align="center">
-											<ice:outputText style="color:#006633; align:center"
+											<ice:outputText style="color:#009933; align:center"
 												value="Miembros Suplentes" />
 											
 											<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
@@ -249,7 +249,7 @@
 									<br />
 									<div align="right">
 										<ice:outputConnectionStatus
-											styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #006633"
+											styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #009933"
 											showPopupOnDisconnect="true" />
 									</div>
 								</td>
