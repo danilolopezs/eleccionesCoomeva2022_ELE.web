@@ -19,7 +19,7 @@
 		(select max(b.fecha_ingreso) FROM elecdb.ELE_ASOCIADO_ESPECIAL b WHERE
 		b.NUMERO_DOCUMENTO= A.NUMERO_DOCUMENTO)
 		AND a.NUMERO_DOCUMENTO=?]]>
-		</sql-query>
+		 </sql-query>
 
 </hibernate-mapping>
 
