@@ -206,7 +206,8 @@ public class CrearPlanchaVista extends BaseVista {
 			} else
 				imagenCabPlancha = cabezaPlancha.getRutaImagen();
 		} catch (Exception e) {
-			String mensaje = e.getMessage();
+			String mensaje = "No se ha encontrado sesion activa.";
+			System.out.print("---->>>>"+mensaje);
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
 				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 			}
@@ -228,7 +229,7 @@ public class CrearPlanchaVista extends BaseVista {
 	}
 
 	/**
-	 * Metodo que redirecciona a la paigna de inicio de l asociado
+	 * Metodo que redirecciona a la paigna de inicio del asociado
 	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
@@ -320,6 +321,7 @@ public class CrearPlanchaVista extends BaseVista {
 			}
 			getMensaje().mostrarMensaje(mensaje);
 		}
+	
 	}
 
 	/**

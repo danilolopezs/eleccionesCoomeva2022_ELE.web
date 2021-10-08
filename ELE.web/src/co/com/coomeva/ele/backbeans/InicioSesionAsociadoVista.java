@@ -70,7 +70,6 @@ public class InicioSesionAsociadoVista extends BaseVista {
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
 					}
 				} else {
-					System.out.println("Errooorrr");
 					exceptionGenery(respuestaWS.getDescStatusCode());
 					returnString = "";
 				}
