@@ -75,23 +75,26 @@ public class CuocienteElectoral extends BaseVista {
 	}*/
 	
 	public String consultarCuociente() {
-		
-		
-		if(periodoElectoral!= null && !periodoElectoral.isEmpty() && periodoElectoral.trim().length()==4 ){
+		if (validarPeriodoElectoral()) {
 			String periodo = periodoElectoral;
 			actionLimpiar();
 			periodoElectoral = periodo;
 			consultarCuociente(periodoElectoral);
 		} else {
-			getMensaje().mostrarMensaje(UtilAcceso.getParametroFuenteS("mensajes",
-			"campo.obligatorio.cuociente.periodo"));
+			getMensaje()
+					.mostrarMensaje(UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.cuociente.periodo"));
 		}
-		
-		
 		return "";
 	}
 	
-	// Cargar informacion cuociente, lista delegados x regional y lista delegados x zona 
+	private boolean validarPeriodoElectoral() {
+		return periodoElectoral != null && !periodoElectoral.isEmpty() && periodoElectoral.trim().length() == 4;
+	}
+
+	/**
+	 * Cargar informacion cuociente, lista delegados x regional y lista delegados x zona
+	 * @param periodo
+	 */
 	public void consultarCuociente(String periodo) {
 		
 		Boolean recalcular = Boolean.valueOf(UtilAcceso.getParametroFuenteS("parametros",
@@ -142,24 +145,7 @@ public class CuocienteElectoral extends BaseVista {
 	public String crearCuociente() {
 
 		try {
-			if(periodoElectoral== null || periodoElectoral.trim().isEmpty() || periodoElectoral.trim().length()!=4 ){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.delegadoZona.periodoEelctoral"));
-			}
-				
-			if(totalDelegadosElegir==null || totalDelegadosElegir.trim().isEmpty()){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.cuociente.totalDelegadosElegir"));
-			}
-			
-			if (totalDelegadosEspeciales==null || totalDelegadosEspeciales.trim().isEmpty()){
-				throw new Exception(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"campo.obligatorio.cuociente.totalDelegadosEspeciales"));
-			}
-			
+			validaciones();			
 			finalTotalDelegadosElegir = "0";
 			cuocienteElectoral = "0";
 			
@@ -199,6 +185,26 @@ public class CuocienteElectoral extends BaseVista {
 			getMensaje().mostrarMensaje(mensaje);
 		}
 		return "";
+	}
+	
+	private void validaciones() throws Exception {
+		if(periodoElectoral== null || periodoElectoral.trim().isEmpty() || periodoElectoral.trim().length()!=4 ){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.delegadoZona.periodoEelctoral"));
+		}
+			
+		if(totalDelegadosElegir==null || totalDelegadosElegir.trim().isEmpty()){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.cuociente.totalDelegadosElegir"));
+		}
+		
+		if (totalDelegadosEspeciales==null || totalDelegadosEspeciales.trim().isEmpty()){
+			throw new Exception(UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.cuociente.totalDelegadosEspeciales"));
+		}
 	}
 	
 	private void eliminarCuociente(EleCuocienteElectoral eleCuocienteElectoral) {

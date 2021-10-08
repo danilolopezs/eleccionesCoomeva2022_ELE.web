@@ -21,10 +21,8 @@ import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.resources.LoaderResourceElements;
 
 public class ServletReportesResumenHab extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Constructor of the object.
-	 */
 	public ServletReportesResumenHab() {
 		super();
 	}
@@ -72,7 +70,7 @@ public class ServletReportesResumenHab extends HttpServlet {
 		ServletOutputStream toClient=  null;
 		boolean flag = false;
 		
-		try {						
+		try {
 			String tipoReporte = (String)req.getSession().getAttribute("tipoReporteRes");
 			String nombreArchivo = "ReporteResumenHabilidades";
 			

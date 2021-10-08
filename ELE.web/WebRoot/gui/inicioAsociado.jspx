@@ -68,7 +68,7 @@
 							<div align="center">
 								<ice:panelGrid columns="2">
 									<ice:outputText id="msgLogin" value="#{etiquetas.lblLogin}" />
-									<ice:inputText id="txtLogin"
+									<ice:inputText id="txtLogin" 
 										value="#{inicioSesionAsociadoVista.login}" />
 
 									<ice:outputText id="msgPass" value="#{etiquetas.lblPassword}">

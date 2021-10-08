@@ -42,7 +42,9 @@
 								<td align="center" style="background: white; width: 706px;"
 									height="300">
 
-
+									<h4>
+										<ice:outputText value="#{etiquetas.lblResumenHabilidades}"/>
+									</h4>
 									<table border="1">
 										<tr align="left">
 											<td class="formularioTabla">

@@ -5,7 +5,7 @@ import java.util.List;
 
 import co.com.coomeva.ele.entidades.planchas.ElePValorParametros;
 import co.com.coomeva.ele.modelo.Parametro;
-import co.com.coomeva.ele.util.ConstantesProperties;
+import co.com.coomeva.ele.util.Validador;
 import co.com.coomeva.profile.client.delegate.DelegadoProfileManager;
 import co.com.coomeva.profile.ws.client.CaasStub.Application;
 import co.com.coomeva.profile.ws.client.CaasStub.Role;
@@ -37,13 +37,9 @@ public class LogicaAutenticacion {
 	// LogicaElePParametro.getInstance().getParametroFuenteP("propiedades_pm",
 	// "fuente_da");
 	public static String daS = UtilAcceso.getParametroFuenteS("parametros", "COD_PARAM_FUENTE_DA");
-
+	
 	private static ValidateUser valUser = new ValidateUser();
-
-	// private static CaasStub caasStub;
-
 	private static LogicaAutenticacion instance = null;
-
 	public static UserVo userVo = null;
 
 	/**
@@ -80,6 +76,9 @@ public class LogicaAutenticacion {
 	public UserVo autenDirectorioActivo(String login, String password) throws Exception {
 		if (login == null || login.equals(""))
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noUsuario"));
+		if (!login.matches(Validador.REGEX_USUARIO)) {
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "usuarioInvalido"));
+		}
 		if (password == null || password.equals("")) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noPassword"));
 		}

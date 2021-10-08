@@ -18,117 +18,83 @@ import co.com.coomeva.util.date.ManipulacionFechas;
 
 public class MenuVista {
 
-	public static final String CONSULTAR_CABEZA_POR_PLANCHA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CONSULTAR_CABEZA_POR_PLANCHA);
+	public static final String CONSULTAR_CABEZA_POR_PLANCHA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
+			ConstantesProperties.OPC_MENU_CONSULTAR_CABEZA_POR_PLANCHA);
 
-	public static final String CONSULTAR_PLANCHA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CONSULTAR_PLANCHA);
+	public static final String CONSULTAR_PLANCHA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_CONSULTAR_PLANCHA);
 
-	public static final String CARGAR_ENT_ELECTORALES = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CARGAR_ENT_ELECTORALES);
+	public static final String CARGAR_ENT_ELECTORALES = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_CARGAR_ENT_ELECTORALES);
 
-	public static final String CARGAR_SANCIONADOS = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CARGAR_SANCIONADOS);
+	public static final String CARGAR_SANCIONADOS = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_CARGAR_SANCIONADOS);
 
-	public static final String MARCAR_PLANCHA_RECURSO = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_MARCAR_PLANCHA_RECURSO);
+	public static final String MARCAR_PLANCHA_RECURSO = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_MARCAR_PLANCHA_RECURSO);
 
-	public static final String NUMERAR_PLANCHA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_NUMERAR_PLANCHA);
+	public static final String NUMERAR_PLANCHA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_NUMERAR_PLANCHA);
 
-	public static final String CUOCIENTE_ELECTORAL = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CUOCIENTE_ELECTORAL);
+	public static final String CUOCIENTE_ELECTORAL = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_CUOCIENTE_ELECTORAL);
 
-	public static final String CARGAR_SUSPENDIDOS = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_CARGAR_SUSPENDIDOS);
+	public static final String CARGAR_SUSPENDIDOS = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_CARGAR_SUSPENDIDOS);
 
-	public static final String EJECUTAR_PROCESO_HABILIDAD = UtilAcceso
-	.getParametroFuenteS(
+	public static final String EJECUTAR_PROCESO_HABILIDAD = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
 			ConstantesProperties.OPC_MENU_EJECUTAR_PROCESO_INHABILIDAD);
-	
-	public static final String REPORTES_HABILIDAD_ASOCIADOS = UtilAcceso
-	.getParametroFuenteS(
+
+	public static final String REPORTES_HABILIDAD_ASOCIADOS = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
 			ConstantesProperties.OPC_MENU_REPORTES_HABILIDAD_ASOCIADOS);
 
-	public static final String GENERAR_RECIBO_PLANCHA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_GENERAR_RECIBO_PLANCHA);
+	public static final String GENERAR_RECIBO_PLANCHA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_GENERAR_RECIBO_PLANCHA);
 
-	public static final String EXPEDIR_RESOLUCION_RECHAZO = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_RECHAZO);
-	
-	public static final String GENERAR_ARCHIVOS_RESOLUCION_RECURSOS = UtilAcceso
-	.getParametroFuenteS(
+	public static final String EXPEDIR_RESOLUCION_RECHAZO = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-			ConstantesProperties.OPC_MENU_GENERAR_ARCHIVO_PLANCHA);
+			ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_RECHAZO);
 
-	public static final String EXPEDIR_RESOLUCION_ADMISION = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_ADMISION);
+	public static final String GENERAR_ARCHIVOS_RESOLUCION_RECURSOS = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_GENERAR_ARCHIVO_PLANCHA);
 
-	public static final String EXPEDIR_RESOLUCION_INADMISION = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_INADMISION);
+	public static final String EXPEDIR_RESOLUCION_ADMISION = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
+			ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_ADMISION);
 
-	public static final String NUMERAR_PLANCHA_RECURSO = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_NUMERAR_PLANCHA_RECURSO);
+	public static final String EXPEDIR_RESOLUCION_INADMISION = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
+			ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_INADMISION);
 
-	public static final String ELECCIONES_REGISTRAR_VOTANTE = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_ELECCIONES_VOTANTES_REGISTRAR);
+	public static final String NUMERAR_PLANCHA_RECURSO = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_NUMERAR_PLANCHA_RECURSO);
 
-	public static final String ELECCIONES_REPORTE_JUEGO = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MENU_REPORTE_JUEGO);
+	public static final String ELECCIONES_REGISTRAR_VOTANTE = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
+			ConstantesProperties.OPC_MENU_ELECCIONES_VOTANTES_REGISTRAR);
 
-	public static final String MODIFICACION_PLANCHAS = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
-					ConstantesProperties.OPC_MODIFICACION_PLANCHAS);
+	public static final String ELECCIONES_REPORTE_JUEGO = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MENU_REPORTE_JUEGO);
 
-	private static final String[] OPCIONES_MENU_PLANCHAS = {
-			CONSULTAR_CABEZA_POR_PLANCHA, CONSULTAR_PLANCHA,
-			CARGAR_ENT_ELECTORALES, CARGAR_SANCIONADOS, MARCAR_PLANCHA_RECURSO,
-			NUMERAR_PLANCHA, CUOCIENTE_ELECTORAL, NUMERAR_PLANCHA_RECURSO,
-			ELECCIONES_REGISTRAR_VOTANTE, ELECCIONES_REPORTE_JUEGO,
-			MODIFICACION_PLANCHAS };
+	public static final String MODIFICACION_PLANCHAS = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM, ConstantesProperties.OPC_MODIFICACION_PLANCHAS);
 
-	private static final String[] OPCIONES_MENU_HABILIDAD = {
-			EJECUTAR_PROCESO_HABILIDAD, CARGAR_SUSPENDIDOS, REPORTES_HABILIDAD_ASOCIADOS };
+	private static final String[] OPCIONES_MENU_PLANCHAS = { CONSULTAR_CABEZA_POR_PLANCHA, CONSULTAR_PLANCHA,
+			CARGAR_ENT_ELECTORALES, CARGAR_SANCIONADOS, MARCAR_PLANCHA_RECURSO, NUMERAR_PLANCHA, CUOCIENTE_ELECTORAL,
+			NUMERAR_PLANCHA_RECURSO, ELECCIONES_REGISTRAR_VOTANTE, ELECCIONES_REPORTE_JUEGO, MODIFICACION_PLANCHAS };
+
+	private static final String[] OPCIONES_MENU_HABILIDAD = { EJECUTAR_PROCESO_HABILIDAD, CARGAR_SUSPENDIDOS,
+			REPORTES_HABILIDAD_ASOCIADOS };
 
 	public boolean[] indicadorVisibilidadOpcionPlanchas = new boolean[OPCIONES_MENU_PLANCHAS.length];
 	public boolean[] indicadorVisibilidadOpcionHabilidad = new boolean[OPCIONES_MENU_HABILIDAD.length];
-	
+
 	// Booleano que me dirá si debo o no visualizar el menu de "Habilidad Asociados"
 	public boolean indicadorVisibilidadHabilidad;
-	
+
 	private boolean renderAdmHabilidad;
 	private boolean renderSecReporte;
 	private boolean renderReporteHabilidad;
@@ -154,10 +120,11 @@ public class MenuVista {
 	private boolean pintarBotonExpedirResolucionRechazo;
 	private boolean pintarBotonExpedirResolucionAdmision;
 	private boolean pintarBotonExpedirResolucionInadmision;
-	
-	private boolean renderExpedirCumplimiento; 
-	
-	// varoable utilizada para ver la opción de generar archivos de resolucion de recursos
+
+	private boolean renderExpedirCumplimiento;
+
+	// varoable utilizada para ver la opción de generar archivos de resolucion de
+	// recursos
 	private boolean pintarBotonGenerarArchivo;
 
 	private Date dateToday = new Date();
@@ -169,7 +136,7 @@ public class MenuVista {
 
 	private boolean esUsuarioComision;// atributo para identificar si es un
 										// usuario de la comisión electoral
-	
+
 	private boolean renderDesbloUser;
 
 	public MenuVista() {
@@ -179,7 +146,7 @@ public class MenuVista {
 		} else {
 			esUsuarioComision = false;
 		}
-		
+
 		for (int i = 0; i < indicadorVisibilidadOpcionPlanchas.length; i++) {
 			indicadorVisibilidadOpcionPlanchas[i] = Boolean.FALSE;
 		}
@@ -194,8 +161,8 @@ public class MenuVista {
 	}
 
 	/**
-	 * Metodo que recibe las secciones de usuarios y dependiendo de las
-	 * secciones habilitadas renderiza el menu de las JSPX
+	 * Metodo que recibe las secciones de usuarios y dependiendo de las secciones
+	 * habilitadas renderiza el menu de las JSPX
 	 * 
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 */
@@ -220,48 +187,39 @@ public class MenuVista {
 			// renderEvaluarPlancha = false;
 			// renderReporteLog = false;
 			// renderGenerarArchivo = false;
-			//				
+			//
 			// }else
-			
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-			 		"secAdminUser"))!=null) {
-								
-				Section secAdminUser = secciones.get(UtilAcceso
-						.getParametroFuenteS("parametros", "secAdminUser"));
+
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secAdminUser")) != null) {
+
+				Section secAdminUser = secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secAdminUser"));
 				String[] acciones = secAdminUser.getActions();
-				for (int i = 0; i < acciones.length; i++) {					
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-							"accDesbloUser"))) {
+				for (int i = 0; i < acciones.length; i++) {
+					if (acciones[i].equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accDesbloUser"))) {
 						renderDesbloUser = true;
 					}
 				}
 			}
-			
+
 			this.indicadorVisibilidadHabilidad = false;
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-			 "secInhabilidad"))!=null) {
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secInhabilidad")) != null) {
 				renderInicioHab = true;
 				renderInicioPlanchas = false;
-				
+
 				renderRegistroNovedadesHabilidad = false;
 				this.indicadorVisibilidadHabilidad = true;
-				
-				Section secInhabilidad = secciones.get(UtilAcceso
-						.getParametroFuenteS("parametros", "secInhabilidad"));
+
+				Section secInhabilidad = secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secInhabilidad"));
 				String[] acciones = secInhabilidad.getActions();
-				for (int i = 0; i < acciones.length; i++) {					
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accRegistroNovedadesHabilidad"))) {
+				for (int i = 0; i < acciones.length; i++) {
+					if (acciones[i].equalsIgnoreCase(
+							UtilAcceso.getParametroFuenteS("parametros", "accRegistroNovedadesHabilidad"))) {
 						renderRegistroNovedadesHabilidad = true;
 					}
 				}
 			}
-			
-			
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-					"secPlancha")) != null) {
+
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secPlancha")) != null) {
 				renderInicioHab = false;
 				renderInicioPlanchas = true;
 				renderAdmHabilidad = false;
@@ -276,192 +234,129 @@ public class MenuVista {
 				renderModificacionPlanchas = false;
 				renderExpedirCumplimiento = false;
 
-				Section secPlanchas = secciones.get(UtilAcceso
-						.getParametroFuenteS("parametros", "secPlancha"));
+				Section secPlanchas = secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secPlancha"));
 				String[] acciones = secPlanchas.getActions();
 
 				for (int i = 0; i < acciones.length; i++) {
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accConsultarPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accConsultarPlancha"))) {
 						renderConsultarPlancha = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accEvaluarPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accEvaluarPlancha"))) {
 						renderEvaluarPlancha = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accModificarPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accModificarPlancha"))) {
 						renderModificarPlancha = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accRegistrarVotante"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accRegistrarVotante"))) {
 						renderRegistrarVotante = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accReporteJuego"))) {
+					if (acciones[i].equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accReporteJuego"))) {
 						renderReporteJuego = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accModificacionPlanchas"))) {
-/*
-						Date fechaInicioModificacion = ManipulacionFechas
-								.stringToDate(
-										UtilAcceso
-												.getParametroFuenteS(
-														ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-														"param.fecha.inicio.modificacion.planchas"),
-										"yyyy-MM-dd hh:mm:ss");
-
-						Date fechaFinalModificacion = ManipulacionFechas
-								.stringToDate(
-										UtilAcceso
-												.getParametroFuenteS(
-														ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-														"param.fecha.final.modificacion.planchas"),
-										"yyyy-MM-dd hh:mm:ss");
-
-						if (dateToday.getTime() >= fechaInicioModificacion
-								.getTime()
-								&& dateToday.getTime() <= fechaFinalModificacion
-										.getTime()) {
+					if (acciones[i].equalsIgnoreCase(
+							UtilAcceso.getParametroFuenteS("parametros", "accModificacionPlanchas"))) {
+						/*
+						 * Date fechaInicioModificacion = ManipulacionFechas .stringToDate( UtilAcceso
+						 * .getParametroFuenteS(
+						 * ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+						 * "param.fecha.inicio.modificacion.planchas"), "yyyy-MM-dd hh:mm:ss");
+						 * 
+						 * Date fechaFinalModificacion = ManipulacionFechas .stringToDate( UtilAcceso
+						 * .getParametroFuenteS(
+						 * ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+						 * "param.fecha.final.modificacion.planchas"), "yyyy-MM-dd hh:mm:ss");
+						 * 
+						 * if (dateToday.getTime() >= fechaInicioModificacion .getTime() &&
+						 * dateToday.getTime() <= fechaFinalModificacion .getTime()) {
+						 * renderModificacionPlanchas = true; } else { renderModificacionPlanchas =
+						 * false; }
+						 */
+						// Si es usuario de la comisón electoral visualizar el menú de modificación
+						// planchas:
+						if (esUsuarioComision) {
 							renderModificacionPlanchas = true;
 						} else {
 							renderModificacionPlanchas = false;
 						}
-*/						
-						//Si es usuario de la comisón electoral visualizar el menú de modificación planchas:
-						if(esUsuarioComision){
-							renderModificacionPlanchas = true;
-						}
-						else
-						{
-							renderModificacionPlanchas = false;
-						}
 					}
 
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accNumerarPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accNumerarPlancha"))) {
 						/**
-						 * Se debe validar si la fecha actual está dentro del
-						 * rango de fechas hábiles para la ejecución del proceso
-						 * de numeración de planchas
+						 * Se debe validar si la fecha actual está dentro del rango de fechas hábiles
+						 * para la ejecución del proceso de numeración de planchas
 						 */
-						parametroFechaInicial = LectorParametros
-								.obtenerParametrosCodigoTipo(
-										UtilAcceso
-												.getParametroFuenteL(
-														"parametros",
-														"campo.param.numeracion.inicio"),
-										UtilAcceso.getParametroFuenteL(
-												"parametros",
-												"campo.param.numeracion.tipo"));
-						parametroFechaFinal = LectorParametros
-								.obtenerParametrosCodigoTipo(UtilAcceso
-										.getParametroFuenteL("parametros",
-												"campo.param.numeracion.fin"),
-										UtilAcceso.getParametroFuenteL(
-												"parametros",
-												"campo.param.numeracion.tipo"));
+						parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.inicio"),
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.tipo"));
+						parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.fin"),
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.tipo"));
 
-						if (parametroFechaInicial == null
-								|| parametroFechaFinal == null) {
+						if (parametroFechaInicial == null || parametroFechaFinal == null) {
 							renderNumerarPlancha = false;
 						} else {
 							dateFechaIniInscrpcion = ManipulacionFechas
-									.stringToDate(parametroFechaInicial
-											.getStrValor(),
-											"yyyy-MM-dd hh:mm:ss");
-							dateFechaFinInscrpcion = ManipulacionFechas
-									.stringToDate(parametroFechaFinal
-											.getStrValor(),
-											"yyyy-MM-dd hh:mm:ss");
+									.stringToDate(parametroFechaInicial.getStrValor(), "yyyy-MM-dd hh:mm:ss");
+							dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(parametroFechaFinal.getStrValor(),
+									"yyyy-MM-dd hh:mm:ss");
 
-							if (dateToday.getTime() >= dateFechaIniInscrpcion
-									.getTime()
-									&& dateToday.getTime() <= dateFechaFinInscrpcion
-											.getTime()) {
+							if (dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
+									&& dateToday.getTime() <= dateFechaFinInscrpcion.getTime()) {
 								renderNumerarPlancha = true;
 							}
 						}
 					}
 
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accNumerarPlanchaRecurso"))) {
+					if (acciones[i].equalsIgnoreCase(
+							UtilAcceso.getParametroFuenteS("parametros", "accNumerarPlanchaRecurso"))) {
 						/**
-						 * Se debe validar si la fecha actual está dentro del
-						 * rango de fechas hábiles para la ejecución del proceso
-						 * de numeración de planchas
+						 * Se debe validar si la fecha actual está dentro del rango de fechas hábiles
+						 * para la ejecución del proceso de numeración de planchas
 						 */
-						parametroFechaInicial = LectorParametros
-								.obtenerParametrosCodigoTipo(
-										UtilAcceso
-												.getParametroFuenteL(
-														"parametros",
-														"campo.param.numeracion.inicio2"),
-										UtilAcceso.getParametroFuenteL(
-												"parametros",
-												"campo.param.numeracion.tipo"));
-						parametroFechaFinal = LectorParametros
-								.obtenerParametrosCodigoTipo(UtilAcceso
-										.getParametroFuenteL("parametros",
-												"campo.param.numeracion.fin2"),
-										UtilAcceso.getParametroFuenteL(
-												"parametros",
-												"campo.param.numeracion.tipo"));
+						parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.inicio2"),
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.tipo"));
+						parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.fin2"),
+								UtilAcceso.getParametroFuenteL("parametros", "campo.param.numeracion.tipo"));
 
-						if (parametroFechaInicial == null
-								|| parametroFechaFinal == null) {
+						if (parametroFechaInicial == null || parametroFechaFinal == null) {
 							renderNumerarPlanchaEnRecurso = false;
 						} else {
 							dateFechaIniInscrpcion = ManipulacionFechas
-									.stringToDate(parametroFechaInicial
-											.getStrValor(),
-											"yyyy-MM-dd hh:mm:ss");
-							dateFechaFinInscrpcion = ManipulacionFechas
-									.stringToDate(parametroFechaFinal
-											.getStrValor(),
-											"yyyy-MM-dd hh:mm:ss");
+									.stringToDate(parametroFechaInicial.getStrValor(), "yyyy-MM-dd hh:mm:ss");
+							dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(parametroFechaFinal.getStrValor(),
+									"yyyy-MM-dd hh:mm:ss");
 
-							if (dateToday.getTime() >= dateFechaIniInscrpcion
-									.getTime()
-									&& dateToday.getTime() <= dateFechaFinInscrpcion
-											.getTime()) {
+							if (dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
+									&& dateToday.getTime() <= dateFechaFinInscrpcion.getTime()) {
 								renderNumerarPlanchaEnRecurso = true;
 							}
 						}
 					}
 
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accRecibirPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accRecibirPlancha"))) {
 						renderRecibirPlancha = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accSanearPlancha"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accSanearPlancha"))) {
 						renderSanearPlancha = true;
 					}
-					if (acciones[i]
-							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS(
-									"parametros", "accReporteLog"))) {
+					if (acciones[i].equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accReporteLog"))) {
 						renderReporteLog = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accGenerarArchivo"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accGenerarArchivo"))) {
 						renderGenerarArchivo = true;
 					}
-					if (acciones[i].equalsIgnoreCase(UtilAcceso
-							.getParametroFuenteS("parametros",
-									"accRegistrarVotante"))) {
+					if (acciones[i]
+							.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "accRegistrarVotante"))) {
 						renderRegistrarVotante = true;
 					}
 				}
@@ -472,8 +367,8 @@ public class MenuVista {
 	}
 
 	/**
-	 * Renderiza las opciones del menú dependiendo de la parametrización del
-	 * profile manager
+	 * Renderiza las opciones del menú dependiendo de la parametrización del profile
+	 * manager
 	 * 
 	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> -
 	 *         Premize SAS <br>
@@ -484,19 +379,15 @@ public class MenuVista {
 		try {
 			HashMap<String, Section> secciones = (HashMap<String, Section>) FacesUtils
 					.getSessionParameter("userSeccions");
-			
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-					"secPlancha")) != null) {
 
-				Section secPlanchas = secciones.get(UtilAcceso
-						.getParametroFuenteS("parametros", "secPlancha"));
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secPlancha")) != null) {
+
+				Section secPlanchas = secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secPlancha"));
 
 				String[] acciones = secPlanchas.getActions();
 
-				List<String> listaAcciones = new ArrayList<String>(Arrays
-						.asList(acciones));
-				List<String> listaOpcionesMenuPlanchas = new ArrayList<String>(
-						Arrays.asList(OPCIONES_MENU_PLANCHAS));
+				List<String> listaAcciones = new ArrayList<String>(Arrays.asList(acciones));
+				List<String> listaOpcionesMenuPlanchas = new ArrayList<String>(Arrays.asList(OPCIONES_MENU_PLANCHAS));
 
 				int i = 0;
 				for (String opcion : listaOpcionesMenuPlanchas) {
@@ -505,14 +396,12 @@ public class MenuVista {
 					}
 
 					/**
-					 * TODO OJO QUITAR ESTO...!!!!!!!!!
-					 * indicadorVisibilidadOpcionPlanchas
-					 * [indicadorVisibilidadOpcionPlanchas.length-1] =
-					 * Boolean.TRUE; indicadorVisibilidadOpcionPlanchas[
-					 * indicadorVisibilidadOpcionPlanchas.length-3] =
-					 * Boolean.TRUE;
+					 * TODO OJO QUITAR ESTO...!!!!!!!!! indicadorVisibilidadOpcionPlanchas
+					 * [indicadorVisibilidadOpcionPlanchas.length-1] = Boolean.TRUE;
+					 * indicadorVisibilidadOpcionPlanchas[
+					 * indicadorVisibilidadOpcionPlanchas.length-3] = Boolean.TRUE;
 					 */
-					
+
 					if (listaAcciones.contains(GENERAR_RECIBO_PLANCHA)) {
 						this.pintarBotonGenerarReciboPlancha = Boolean.TRUE;
 					}
@@ -527,18 +416,14 @@ public class MenuVista {
 
 					if (listaAcciones.contains(EXPEDIR_RESOLUCION_RECHAZO)) {
 						this.pintarBotonExpedirResolucionRechazo = Boolean.TRUE;
-					}	
-					
-					if(listaAcciones.contains(GENERAR_ARCHIVOS_RESOLUCION_RECURSOS))
-					{
-						this.pintarBotonGenerarArchivo = Boolean.TRUE;
-					}				
+					}
 
-					
-					if( listaAcciones.contains(UtilAcceso
-							.getParametroFuenteS("parametros",
-							"accExpedirCumplimiento")))							
-					{
+					if (listaAcciones.contains(GENERAR_ARCHIVOS_RESOLUCION_RECURSOS)) {
+						this.pintarBotonGenerarArchivo = Boolean.TRUE;
+					}
+
+					if (listaAcciones
+							.contains(UtilAcceso.getParametroFuenteS("parametros", "accExpedirCumplimiento"))) {
 						renderExpedirCumplimiento = true;
 					}
 
@@ -546,18 +431,14 @@ public class MenuVista {
 				}
 			}
 
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-					"secInhabilidad")) != null) {
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secInhabilidad")) != null) {
 
-				Section secPlanchas = secciones.get(UtilAcceso
-						.getParametroFuenteS("parametros", "secInhabilidad"));
+				Section secPlanchas = secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secInhabilidad"));
 
 				String[] acciones = secPlanchas.getActions();
 
-				List<String> listaAcciones = new ArrayList<String>(Arrays
-						.asList(acciones));
-				List<String> listaOpcionesMenuHabilidad = new ArrayList<String>(
-						Arrays.asList(OPCIONES_MENU_HABILIDAD));
+				List<String> listaAcciones = new ArrayList<String>(Arrays.asList(acciones));
+				List<String> listaOpcionesMenuHabilidad = new ArrayList<String>(Arrays.asList(OPCIONES_MENU_HABILIDAD));
 
 				int i = 0;
 				for (String opcion : listaOpcionesMenuHabilidad) {
@@ -863,8 +744,7 @@ public class MenuVista {
 		return renderIniciarProcesoVerificacionHabilidad;
 	}
 
-	public void setRenderIniciarProcesoVerificacionHabilidad(
-			boolean renderIniciarProcesoVerificacionHabilidad) {
+	public void setRenderIniciarProcesoVerificacionHabilidad(boolean renderIniciarProcesoVerificacionHabilidad) {
 		this.renderIniciarProcesoVerificacionHabilidad = renderIniciarProcesoVerificacionHabilidad;
 	}
 
@@ -872,22 +752,19 @@ public class MenuVista {
 		return indicadorVisibilidadOpcionPlanchas;
 	}
 
-	public void setIndicadorVisibilidadOpcionPlanchas(
-			boolean[] indicadorVisibilidadOpcionPlanchas) {
+	public void setIndicadorVisibilidadOpcionPlanchas(boolean[] indicadorVisibilidadOpcionPlanchas) {
 		this.indicadorVisibilidadOpcionPlanchas = indicadorVisibilidadOpcionPlanchas;
 	}
 
 	public boolean[] getIndicadorVisibilidadOpcionHabilidad() {
 		return indicadorVisibilidadOpcionHabilidad;
 	}
-	
-	public boolean getIndicadorVisibilidadHabilidad()
-	{
+
+	public boolean getIndicadorVisibilidadHabilidad() {
 		return this.indicadorVisibilidadHabilidad;
 	}
 
-	public void setIndicadorVisibilidadOpcionHabilidad(
-			boolean[] indicadorVisibilidadOpcionHabilidad) {
+	public void setIndicadorVisibilidadOpcionHabilidad(boolean[] indicadorVisibilidadOpcionHabilidad) {
 		this.indicadorVisibilidadOpcionHabilidad = indicadorVisibilidadOpcionHabilidad;
 	}
 
@@ -895,32 +772,28 @@ public class MenuVista {
 		return pintarBotonGenerarReciboPlancha;
 	}
 
-	public void setPintarBotonGenerarReciboPlancha(
-			boolean pintarBotonGenerarReciboPlancha) {
+	public void setPintarBotonGenerarReciboPlancha(boolean pintarBotonGenerarReciboPlancha) {
 	}
 
 	public boolean isPintarBotonExpedirResolucionRechazo() {
 		return pintarBotonExpedirResolucionRechazo;
 	}
 
-	public void setPintarBotonExpedirResolucionRechazo(
-			boolean pintarBotonExpedirResolucionRechazo) {
+	public void setPintarBotonExpedirResolucionRechazo(boolean pintarBotonExpedirResolucionRechazo) {
 	}
 
 	public boolean isPintarBotonExpedirResolucionAdmision() {
 		return pintarBotonExpedirResolucionAdmision;
 	}
 
-	public void setPintarBotonExpedirResolucionAdmision(
-			boolean pintarBotonExpedirResolucionAdmision) {
+	public void setPintarBotonExpedirResolucionAdmision(boolean pintarBotonExpedirResolucionAdmision) {
 	}
 
 	public boolean isPintarBotonExpedirResolucionInadmision() {
 		return pintarBotonExpedirResolucionInadmision;
 	}
 
-	public void setPintarBotonExpedirResolucionInadmision(
-			boolean pintarBotonExpedirResolucionInadmision) {
+	public void setPintarBotonExpedirResolucionInadmision(boolean pintarBotonExpedirResolucionInadmision) {
 	}
 
 	public String actionClickCabezaPlancha() {
@@ -933,8 +806,7 @@ public class MenuVista {
 		return renderNumerarPlanchaEnRecurso;
 	}
 
-	public void setRenderNumerarPlanchaEnRecurso(
-			boolean renderNumerarPlanchaEnRecurso) {
+	public void setRenderNumerarPlanchaEnRecurso(boolean renderNumerarPlanchaEnRecurso) {
 		this.renderNumerarPlanchaEnRecurso = renderNumerarPlanchaEnRecurso;
 	}
 
@@ -961,7 +833,7 @@ public class MenuVista {
 	public void setRenderReporteJuego(boolean renderReporteJuego) {
 		this.renderReporteJuego = renderReporteJuego;
 	}
-	
+
 	public boolean isRenderModificacionPlanchas() {
 		return renderModificacionPlanchas;
 	}

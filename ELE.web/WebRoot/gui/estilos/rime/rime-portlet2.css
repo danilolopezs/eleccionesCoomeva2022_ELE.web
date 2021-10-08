@@ -364,7 +364,7 @@ table.iceSelInpDate tbody tr td table{
     color: white;
     font-weight: bold;
     /*background: #FFF url(css-images/table_col_header.gif) repeat-x bottom left;*/
-    background:#006633;
+    background:#009933;
     border: 1px solid #d9d9d9;
 }
 
@@ -1578,7 +1578,7 @@ table.iceSelInpDate tbody tr td table{
 /*Cambiar Menus*/
 .iceMnuBarItem a, .iceMnuBarVrtItem a {
     /*background-image: url(css-images/bottom_menu_bg.png);*/
-    background: #006633
+    background: #009933
 }
 
 .iceMnuBarItem a:hover, .iceMnuBarVrtItem a:hover {
@@ -1601,7 +1601,7 @@ table.iceSelInpDate tbody tr td table{
 
 .iceMnuBarSubMenu, .iceMnuBarVrtSubMenu {
     position: absolute;
-    background-color: #006633;
+    background-color: #009933;
     display: block;
     width: 145px;
     border-right: 1px solid #DBDBDB;
@@ -1632,7 +1632,7 @@ table.iceSelInpDate tbody tr td table{
 
 .iceMnuItm a, .iceMnuItmVrt a {
     /*background-color: #FCFCFC;*/
-    background-color: #006633;
+    background-color: #009933;
     color: #FFFFFF;
 }
 
@@ -1783,7 +1783,7 @@ table.iceSelInpDate tbody tr td table{
     height: 2.0em;
     font-weight: bold;
     /*background: #FFF url(css-images/PnlHdr_bgslice.gif) repeat-x top left;*/
-    background: #006633;
+    background: #009933;
     border-bottom: 1px solid #d9d9d9;
 }
 
@@ -2556,7 +2556,7 @@ Disabled classes for the calendar controls
     font-weight: bold;
     height: 20px;
     /*background: #FFF url(css-images/PnlHdr_bgslice.gif) repeat-x top left;*/
-    background: #006633;
+    background: #009933;
     border-bottom: 1px solid #d9d9d9;
 }
 
