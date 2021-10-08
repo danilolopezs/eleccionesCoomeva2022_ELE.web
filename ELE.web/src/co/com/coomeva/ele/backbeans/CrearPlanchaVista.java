@@ -76,7 +76,7 @@ public class CrearPlanchaVista extends BaseVista {
 			nroCabezaPlancha = cabezaPlancha.getNroIdentificacion();
 			profesion = cabezaPlancha.getProfesion();
 			Long ant = cabezaPlancha.getAntiguedad();
-			antiguedad = ant + " años";
+			antiguedad = ant + " meses";
 			zona = elePlanchaDTO.getEleZonas().getNomZona();
 
 			int numeroFilas = elePlanchaDTO.getEleZonas().getMaxPrincipales().intValue();

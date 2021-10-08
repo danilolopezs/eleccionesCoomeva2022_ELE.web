@@ -86,14 +86,17 @@ public class LogicaClimae {
 			} else {
 				asociadoDTO.setProfesion(UtilAcceso.getParametroFuenteS("parametros", "noInscrito"));
 			}
-
-//			asociadoDTO.setEdad(DelegadoSie.getInstance().calculateTime(object[3].toString()));
-			asociadoDTO.setEdad(0);
+			if (object[3] != null && !object[3].toString().equalsIgnoreCase("")
+					&& !object[3].toString().equalsIgnoreCase("0")) {
+				asociadoDTO.setEdad(DelegadoSie.getInstance().calculateTime(object[3].toString()));
+			} else {
+				asociadoDTO.setEdad(0);
+			}
 			asociadoDTO.setFechaVinculacion(DateManipultate.stringToDate(object[4].toString(), "yyyyMMdd"));
 
 			Date fechaIngreso = DateManipultate.stringToDate(object[4].toString(), "yyyyMMdd");
 			int annosAntiguedad = (ManipulacionFechas.calcularEdad(fechaIngreso, new Date()));
-			asociadoDTO.setAntiguedad(annosAntiguedad);
+			asociadoDTO.setAntiguedad(annosAntiguedad * 12);
 
 			if (object[5] != null) {
 				asociadoDTO.setOficina(object[5].toString());
@@ -103,8 +106,8 @@ public class LogicaClimae {
 			if (object[6] != null) {
 				asociadoDTO.setEmail(object[6].toString());
 			} else {
-				asociadoDTO.setEmail("No contiene");
-				//asociadoDTO.setEmail(UtilAcceso.getParametroFuenteS("parametros", "noInscritoEmail"));
+//				asociadoDTO.setEmail("No contiene");
+				asociadoDTO.setEmail(UtilAcceso.getParametroFuenteS("parametros", "noInscritoEmail"));
 			}
 
 			Long longFechaObtencionTitulo = obtenerFechaObtencionTitulo(Long.parseLong(idAsociado));
@@ -124,23 +127,22 @@ public class LogicaClimae {
 		}
 		if (nombreBUC != null && !nombreBUC.equalsIgnoreCase("")) {
 
-				String primerNombre = (WorkStrigs.getValue(nombreBUC, "2", "3"));
-				String segundoNombre = (WorkStrigs.getValue(nombreBUC, "3", "4"));
-				String primerApellido = (WorkStrigs.getValue(nombreBUC, "0", "1"));
-				String segundoApellido = (WorkStrigs.getValue(nombreBUC, "1", "2"));
+			String primerNombre = (WorkStrigs.getValue(nombreBUC, "2", "3"));
+			String segundoNombre = (WorkStrigs.getValue(nombreBUC, "3", "4"));
+			String primerApellido = (WorkStrigs.getValue(nombreBUC, "0", "1"));
+			String segundoApellido = (WorkStrigs.getValue(nombreBUC, "1", "2"));
 
-				primerNombre = DelegadoPlanchas.getInstance().formatearCadena(primerNombre);
-				segundoNombre = DelegadoPlanchas.getInstance().formatearCadena(segundoNombre);
-				primerApellido = DelegadoPlanchas.getInstance().formatearCadena(primerApellido);
-				segundoApellido = DelegadoPlanchas.getInstance().formatearCadena(segundoApellido);
+			primerNombre = DelegadoPlanchas.getInstance().formatearCadena(primerNombre);
+			segundoNombre = DelegadoPlanchas.getInstance().formatearCadena(segundoNombre);
+			primerApellido = DelegadoPlanchas.getInstance().formatearCadena(primerApellido);
+			segundoApellido = DelegadoPlanchas.getInstance().formatearCadena(segundoApellido);
 
-				asociadoDTO.setNombre(primerNombre + " "+segundoNombre + " "+primerApellido + " "+segundoApellido);
-				asociadoDTO.setPrimerNombre(primerNombre);
-				asociadoDTO.setSegundoNombre(segundoNombre);
-				asociadoDTO.setPrimerApellido(primerApellido);
-				asociadoDTO.setSegundoApellido(segundoApellido);
+			asociadoDTO.setNombre(primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido);
+			asociadoDTO.setPrimerNombre(primerNombre);
+			asociadoDTO.setSegundoNombre(segundoNombre);
+			asociadoDTO.setPrimerApellido(primerApellido);
+			asociadoDTO.setSegundoApellido(segundoApellido);
 
-			
 		} else
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado"));
 
