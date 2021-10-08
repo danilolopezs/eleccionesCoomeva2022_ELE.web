@@ -295,8 +295,7 @@
 	<sql-query name="consultaCodigoAsociado">
 		<return-scalar column="CODIGO_ASOCIADO" type="java.lang.Long" />
 		<![CDATA[
-			SELECT CODIGO_ASOCIADO FROM ELECDB.ELEASOCIA
-				WHERE NUMERO_DOCUMENTO = :documento
+			SELECT CODIGO_ASOCIADO FROM ELECDB.ELEASOCIA WHERE NUMERO_DOCUMENTO = :documento
 		]]>
 	</sql-query>
 

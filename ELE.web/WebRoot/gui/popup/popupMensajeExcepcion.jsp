@@ -1,4 +1,4 @@
-<ice:panelPopup id="mensaje" draggable="true" styleClass="formulario"
+<ice:panelPopup id="mensajeException" draggable="true" styleClass="formulario"
 	visible="#{mensajesVista.visible}" modal="true"
 	style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 400px;">
 

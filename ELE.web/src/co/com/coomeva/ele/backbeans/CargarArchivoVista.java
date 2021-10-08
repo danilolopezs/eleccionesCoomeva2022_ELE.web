@@ -156,7 +156,7 @@ public class CargarArchivoVista extends DataSource implements Renderable, Dispos
 					
 					//se obtienen los tokens y se arma y se inserta
 					//System.out.println("linea -> "+linea);
-					String[] tokens = linea.split("\\|", -1);
+					String[] tokens = linea.split("\\|", -1); 
 					
 					Long documento = new Long(tokens[0]);
 					String motivo = tokens[1].toString();					
