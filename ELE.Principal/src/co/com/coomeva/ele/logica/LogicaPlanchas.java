@@ -234,11 +234,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 			elPlancha = findById(nroCabezaPlancha);
 		} catch (Exception e) {
 			throw e;
-		} finally {
-			this.getSession().flush();
-
 		}
-
 		return elPlancha;
 	}
 

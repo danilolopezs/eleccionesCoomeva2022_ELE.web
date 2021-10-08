@@ -7,6 +7,38 @@
 <hibernate-mapping>
 <!--
 		######################################################################################
+		## 1.## ## Consulta los anños de retiro del asociado 
+		##  trae el estado del asociadiado r-> retirado A -> activo
+		##  y el documento
+		######################################################################################
+	-->
+	<sql-query name="asoelecf.consulta" >
+		<return-scalar column="WNITCLI" type="java.lang.Long" />
+		<return-scalar column="WNOMCLI" type="java.lang.String" />
+		<return-scalar column="WEDAD" type="java.lang.Long" />
+		<return-scalar column="WANTIG" type="java.lang.Long" />
+		<return-scalar column="WINDHAB" type="java.lang.String" />
+		<![CDATA[SELECT WNITCLI, trim(WNOMCLI) WNOMCLI ,WEDAD,WANTIG,WINDHAB FROM ELECLIB.ASOELECF WHERE WNITCLI=?]]>
+	</sql-query>
+<!--
+		######################################################################################
+		## 1.## ## Consulta los anños de retiro del asociado 
+		##  trae el estado del asociadiado r-> retirado A -> activo
+		##  y el documento
+		######################################################################################
+	-->
+	<sql-query name="empleado.consulta">
+		<return-scalar column="anos_retiro" type="java.lang.String" />
+		<return-scalar column="EMP_ESTADO" type="java.lang.String" />
+		<return-scalar column="EMP_CEDULA" type="java.lang.String" />
+		<![CDATA[SELECT distinct CAST((CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 0 WHEN a.FECHA_RETIRO IS NULL THEN 0 ELSE round((months_between(CURRENT_DATE,a.FECHA_RETIRO)/12),2) END) AS decimal(10,2)) anos_retiro, 
+		CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 'A' ELSE 'R' END EMP_ESTADO,
+		a.NUMERO_DOCUMENTO EMP_CEDULA FROM elecdb.ELE_ASOCIADO_ESPECIAL a
+		WHERE a.fecha_ingreso =(select max(b.fecha_ingreso) FROM elecdb.ELE_ASOCIADO_ESPECIAL b WHERE b.NUMERO_DOCUMENTO= A.NUMERO_DOCUMENTO)
+		AND a.NUMERO_DOCUMENTO=?]]>
+	</sql-query>
+<!--
+		######################################################################################
 		## 1. Javier Londoño - Premize SAS - 2012-11-01 ## ## Consulta los
 		asociados activos cuya fecha de ingreso es mayor a determinada ## ##
 		fecha. ##

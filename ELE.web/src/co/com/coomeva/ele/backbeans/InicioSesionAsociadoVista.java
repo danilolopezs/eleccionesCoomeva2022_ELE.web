@@ -65,16 +65,13 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				RequestBodyVO body = new RequestBodyVO(token, login, password);
 				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
 				RespuestaWS respuestaWS = request.getRespuesta();
-				System.out.println(respuestaWS.toString());
 				if (respuestaWS.getStatusCode().equals("0")) {
 					if (respuestaWS.getClient() != null) {
 						visible = true;
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
-						//msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
-//						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
-//						returnString = "goCrearPlancha";
 					}
 				} else {
+					System.out.println("Errooorrr");
 					exceptionGenery(respuestaWS.getDescStatusCode());
 					returnString = "";
 				}
@@ -97,12 +94,12 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
 					identificacion);
 
-			Date dateToday = new Date();
+			/*	Date dateToday = new Date();
 
 			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaIniInscripcion");
+					"codFechaIniInscripcion"); //envia 5 para traer la fecha
 			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaFinInscripcion");
+					"codFechaFinInscripcion");//envia 6 para traer la fecha
 
 			ElePParametros elePParametrosIni = parametroIni.getParametro();
 			ElePParametros elePParametrosFin = parametroFin.getParametro();
@@ -112,7 +109,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
 					"dd-MM-yyyy hh:mm:ss a");
 
-			/*
+		
 			 * // se comenta mientras se prueba el ingreso if (elePParametrosIni != null &&
 			 * elePParametrosFin != null) { if (dateToday.compareTo(dateFechaIniInscrpcion)
 			 * < 0) { throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
@@ -205,7 +202,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				}
 			}
 		} catch (Exception e) {
-			visible = false;
+ 			visible = false;
 			String mensaje = e.getMessage();
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
 				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");

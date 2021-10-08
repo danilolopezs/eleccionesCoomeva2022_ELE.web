@@ -51,7 +51,7 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 	}
 
 	public ElePParametros findById(java.lang.Long id) {
-		log.debug("getting ElePParametros instance with id: " + id);
+		//log.debug("getting ElePParametros instance with id: " + id);
 		try {
 			ElePParametros instance = (ElePParametros) getSession2012().get(
 					"co.com.coomeva.ele.entidades.planchas.ElePParametros", id);

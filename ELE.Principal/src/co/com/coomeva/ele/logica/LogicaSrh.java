@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
 import co.com.coomeva.ele.entidades.srh.HibernateSessionFactorySrh;
 import co.com.coomeva.ele.util.Validador;
@@ -37,7 +38,7 @@ public class LogicaSrh {
 	public boolean existEmpleado(String nroIdentificacion){
 		Session session=null;
 		Query query=null;
-		session= HibernateSessionFactorySrh.getSession();
+		session= HibernateSessionFactoryElecciones2012.getSession();
 		query = session.getNamedQuery("empleado.consulta");
 
 		query.setString(0, nroIdentificacion);
@@ -45,8 +46,8 @@ public class LogicaSrh {
 		String tiempoRetiro = "";
 		String emp_estado = "";
 
-		List<Object[]> returnList = query.list();
-
+		List<Object[]> returnList = new ArrayList<Object[]>();
+		returnList=query.list();
 		if (returnList.size() == 0) {
 			return false;
 		}

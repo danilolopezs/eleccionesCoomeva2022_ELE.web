@@ -42,7 +42,7 @@
 							<tr>
 								<td valign="top">
 									<div align="left">
-										<!--<jsp:directive.include file="../../menuPlanchasAsociado.jsp" />-->
+										<jsp:directive.include file="../../planchas/menuPlanchasAsociado.jsp" />
 									</div>
 								</td>
 							</tr>

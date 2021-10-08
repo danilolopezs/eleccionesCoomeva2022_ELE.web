@@ -62,7 +62,6 @@ public class LogicaClimae {
 		query.setLong(5, 2);
 
 		listObject = query.list();
-		System.out.println(listObject.size());
 		if (listObject.size() == 0) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado") + idAsociado
 					+ UtilAcceso.getParametroFuenteS("mensajes", "noAsociado1"));
@@ -104,8 +103,7 @@ public class LogicaClimae {
 			if (object[6] != null) {
 				asociadoDTO.setEmail(object[6].toString());
 			} else {
-				
-				asociadoDTO.setEmail("JOAN_FONSECA@GTCCORPORATION.COM");
+				asociadoDTO.setEmail("No contiene");
 				//asociadoDTO.setEmail(UtilAcceso.getParametroFuenteS("parametros", "noInscritoEmail"));
 			}
 
