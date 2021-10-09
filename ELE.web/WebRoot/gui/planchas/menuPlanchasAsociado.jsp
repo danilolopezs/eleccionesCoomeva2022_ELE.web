@@ -1,4 +1,4 @@
-<ice:menuBar orientation="horizontal" scrollableDivMode="true">
+<ice:menuBar orientation="Horizontal" scrollableDivMode="true">
 	<ice:menuItem value="#{etiquetas.mnuInicio}"
 		rendered="#{menuVistaAsociado.renderInicioMenu}"
 		action="goInicioMenu" />
@@ -13,4 +13,4 @@
 	<ice:menuItem value="4. #{etiquetas.mnuSalir}"
 		rendered="#{menuVistaAsociado.renderSalir}"
 		action="#{menuPlanchaAsociado.salir}" />
-</ice:menuBar>
+</ice:menuBar>	
