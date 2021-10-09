@@ -68,6 +68,8 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				if (respuestaWS.getStatusCode().equals("0")) {
 					if (respuestaWS.getClient() != null) {
 						visible = true;
+						FacesUtils.setSessionParameter("numeroDocAsociado",
+								Long.parseLong(respuestaWS.getClient().getUser()));
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
 					}
 				} else {
@@ -93,22 +95,26 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
 					identificacion);
 
-			/*	Date dateToday = new Date();
-
-			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaIniInscripcion"); //envia 5 para traer la fecha
-			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaFinInscripcion");//envia 6 para traer la fecha
-
-			ElePParametros elePParametrosIni = parametroIni.getParametro();
-			ElePParametros elePParametrosFin = parametroFin.getParametro();
-
-			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
-					"dd-MM-yyyy hh:mm:ss a");
-			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
-					"dd-MM-yyyy hh:mm:ss a");
-
-		
+			/*
+			 * Date dateToday = new Date();
+			 * 
+			 * Parametro parametroIni =
+			 * DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+			 * "codFechaIniInscripcion"); //envia 5 para traer la fecha Parametro
+			 * parametroFin =
+			 * DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+			 * "codFechaFinInscripcion");//envia 6 para traer la fecha
+			 * 
+			 * ElePParametros elePParametrosIni = parametroIni.getParametro();
+			 * ElePParametros elePParametrosFin = parametroFin.getParametro();
+			 * 
+			 * Date dateFechaIniInscrpcion =
+			 * ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
+			 * "dd-MM-yyyy hh:mm:ss a"); Date dateFechaFinInscrpcion =
+			 * ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
+			 * "dd-MM-yyyy hh:mm:ss a");
+			 * 
+			 * 
 			 * // se comenta mientras se prueba el ingreso if (elePParametrosIni != null &&
 			 * elePParametrosFin != null) { if (dateToday.compareTo(dateFechaIniInscrpcion)
 			 * < 0) { throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
@@ -191,6 +197,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							elePlanchaDTO.setEleZonas(elZona);
 							FacesUtils.setSessionParameter("userPlancha", elePlanchaDTO);
 
+//							returnString = "goCrearPlancha";
 							returnString = "goInicioMenuAsociado";
 						}
 					} else {
@@ -201,12 +208,12 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				}
 			}
 		} catch (Exception e) {
- 			visible = false;
+			visible = false;
 			String mensaje = e.getMessage();
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
 				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 			}
-			//log.error("Error", e);
+			// log.error("Error", e);
 			getMensaje().mostrarMensaje(mensaje);
 		}
 	}
@@ -227,7 +234,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			}
 			if (!login.matches(Validador.REGEX_USUARIO)) {
 				val = false;
-				login=null;
+				login = null;
 				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "usuarioInvalido"));
 			}
 			if (password == null || password.equals("")) {
