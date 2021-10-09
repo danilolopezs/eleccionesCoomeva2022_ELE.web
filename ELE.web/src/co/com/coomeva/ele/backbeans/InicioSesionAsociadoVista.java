@@ -191,7 +191,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							elePlanchaDTO.setEleZonas(elZona);
 							FacesUtils.setSessionParameter("userPlancha", elePlanchaDTO);
 
-							returnString = "goCrearPlancha";
+							returnString = "goInicioMenuAsociado";
 						}
 					} else {
 						msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");

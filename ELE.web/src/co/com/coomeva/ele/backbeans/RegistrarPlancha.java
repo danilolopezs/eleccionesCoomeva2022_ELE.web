@@ -39,49 +39,38 @@ import com.icesoft.faces.component.ext.HtmlInputText;
  */
 public class RegistrarPlancha extends BaseVista {
 
-	public static final String COD_ESTADO_PLANCHA_REGISTRADA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					ConstantesProperties.CODIGO_ESTADO_PLANCHA_REGISTRADA);
-	
-	public static final String COD_ESTADO_PLANCHA_MODIFICADA = UtilAcceso
-		.getParametroFuenteS(
-				ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-				ConstantesProperties.CODIGO_ESTADO_PLANCHA_MODIFICADA);
+	public static final String COD_ESTADO_PLANCHA_REGISTRADA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_REGISTRADA);
 
-	public static final String COD_ESTADO_PLANCHA_RECHAZADA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					ConstantesProperties.CODIGO_ESTADO_PLANCHA_RECHAZADA);
+	public static final String COD_ESTADO_PLANCHA_MODIFICADA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_MODIFICADA);
 
-	public static final String COD_ESTADO_PLANCHA_INADMITIDA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					ConstantesProperties.CODIGO_ESTADO_PLANCHA_INADMITIDA);
+	public static final String COD_ESTADO_PLANCHA_RECHAZADA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_RECHAZADA);
 
-	public static final String COD_ESTADO_PLANCHA_EN_RECURSO = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					ConstantesProperties.CODIGO_ESTADO_PLANCHA_EN_RECURSO);
+	public static final String COD_ESTADO_PLANCHA_INADMITIDA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_INADMITIDA);
 
-	public static final String COD_ESTADO_PLANCHA_INSCRITA = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					ConstantesProperties.CODIGO_ESTADO_PLANCHA_INSCRITA);
+	public static final String COD_ESTADO_PLANCHA_EN_RECURSO = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_EN_RECURSO);
 
-	public static final String TIPO_INSCRITO_TITULAR = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"param.tipo.inscrito.asociado.titular");
+	public static final String COD_ESTADO_PLANCHA_INSCRITA = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			ConstantesProperties.CODIGO_ESTADO_PLANCHA_INSCRITA);
 
-	public static final String TIPO_INSCRITO_SUPLENTE = UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"param.tipo.inscrito.asociado.suplente");
+	public static final String TIPO_INSCRITO_TITULAR = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.inscrito.asociado.titular");
+
+	public static final String TIPO_INSCRITO_SUPLENTE = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.inscrito.asociado.suplente");
 
 	private static final Long CODIGO_FORMATO_INSCRIPCION_PLANCHA = new Long(
-			UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_FORMATO_INSCRIPCION_PLANCHA));
 
 	private String numeroZonaElectoral;
@@ -109,13 +98,14 @@ public class RegistrarPlancha extends BaseVista {
 	private boolean esUsuarioComision;// Verifica si el usuario de la sesión es
 	// de la comisión
 	private boolean esSaneamiento;
-	
-	//variable usada para la modificacion de la plancha en estado inscirta y dentro de las fechas de 
+
+	// variable usada para la modificacion de la plancha en estado inscirta y dentro
+	// de las fechas de
 	// modificacion
 	private boolean esModificable;
 
 	public RegistrarPlancha() {
-
+		System.out.println("Leega plancha");
 		List<DTOPlanchaAsociado> planchaAsociado = null;
 
 		try {
@@ -126,11 +116,9 @@ public class RegistrarPlancha extends BaseVista {
 				esUsuarioComision = false;
 			}
 
-			this.tipoEleccionesSession = (String) FacesUtils
-					.getSessionParameter("tipoElecciones");
+			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
 			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"param.tipo.elecciones.representantes");
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");
 			if (tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
 				this.aplicaValidaciones = false;
 			} else {
@@ -138,31 +126,24 @@ public class RegistrarPlancha extends BaseVista {
 			}
 
 			if (FacesUtils.getSessionParameter("numeroDocAsociado") != null) {
-				numeroDocumentoUserEnSesion = (Long) FacesUtils
-						.getSessionParameter("numeroDocAsociado");
-				planchaAsociado = DelegadoPlancha.getInstance()
-						.asociadoPertenceOtraPlancha(
-								numeroDocumentoUserEnSesion,
-								this.consecutivoPlancha);
+				numeroDocumentoUserEnSesion = (Long) FacesUtils.getSessionParameter("numeroDocAsociado");
+				planchaAsociado = DelegadoPlancha.getInstance().asociadoPertenceOtraPlancha(numeroDocumentoUserEnSesion,
+						this.consecutivoPlancha);
 			}
 
 			if (planchaAsociado != null && !planchaAsociado.isEmpty()) {
-				DTOInformacionPlancha infoPlancha = DelegadoPlancha
-						.getInstance().consultarInformacionPlancha(
-								planchaAsociado.get(0).getConsecutivoPlancha());
+				DTOInformacionPlancha infoPlancha = DelegadoPlancha.getInstance()
+						.consultarInformacionPlancha(planchaAsociado.get(0).getConsecutivoPlancha());
 
 				consecutivoPlancha = infoPlancha.getConsecutivoPlancha();
 
-				FacesUtils.setSessionParameter("consecutivoPlancha",
-						consecutivoPlancha);
+				FacesUtils.setSessionParameter("consecutivoPlancha", consecutivoPlancha);
 				estadoPlancha = infoPlancha.getEstadoPlancha();
 
-				this.miembrosPrincipales = llenarDatatableMiembros(
-						this.miembrosPrincipales, infoPlancha
-								.getMiembrosTitulares(), TIPO_INSCRITO_TITULAR);
-				this.miembrosSuplentes = llenarDatatableMiembros(
-						this.miembrosSuplentes, infoPlancha
-								.getMiembrosSuplentes(), TIPO_INSCRITO_SUPLENTE);
+				this.miembrosPrincipales = llenarDatatableMiembros(this.miembrosPrincipales,
+						infoPlancha.getMiembrosTitulares(), TIPO_INSCRITO_TITULAR);
+				this.miembrosSuplentes = llenarDatatableMiembros(this.miembrosSuplentes,
+						infoPlancha.getMiembrosSuplentes(), TIPO_INSCRITO_SUPLENTE);
 
 			} else {
 				for (int i = 0; i < Constantes.CANTIDAD_REGISTROS_POR_DEFECTO_PLANCHA; i++) {
@@ -181,22 +162,19 @@ public class RegistrarPlancha extends BaseVista {
 			if (!COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
 					&& !COD_ESTADO_PLANCHA_RECHAZADA.equals(this.estadoPlancha)
 					&& !COD_ESTADO_PLANCHA_INSCRITA.equals(this.estadoPlancha)
-					&& !COD_ESTADO_PLANCHA_INADMITIDA
-							.equals(this.estadoPlancha)
-					&& !COD_ESTADO_PLANCHA_EN_RECURSO
-							.equals(this.estadoPlancha)) {
+					&& !COD_ESTADO_PLANCHA_INADMITIDA.equals(this.estadoPlancha)
+					&& !COD_ESTADO_PLANCHA_EN_RECURSO.equals(this.estadoPlancha)) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
-				this.mensajeVista.setMensaje(UtilAcceso.getParametroFuenteS(
-						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-						"msgInicioRegistroPlancha"));
+				this.mensajeVista.setMensaje(UtilAcceso
+						.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES, "msgInicioRegistroPlancha"));
 			}
 
 			if (validarSaneamiento()) {
 				this.esSaneamiento = true;
 			} else {
 				this.esSaneamiento = false;
-			}			
-			
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.mensajeVista.setVisible(Boolean.TRUE);
@@ -204,8 +182,7 @@ public class RegistrarPlancha extends BaseVista {
 		}
 	}
 
-	private List<DTOMiembroPlancha> llenarDatatableMiembros(
-			List<DTOMiembroPlancha> listaMiembrosDestino,
+	private List<DTOMiembroPlancha> llenarDatatableMiembros(List<DTOMiembroPlancha> listaMiembrosDestino,
 			List<DTOMiembroPlancha> listaMiembrosOrigen, String tipoMiembro) {
 
 		if (listaMiembrosOrigen == null || listaMiembrosOrigen.isEmpty()) {
@@ -219,32 +196,27 @@ public class RegistrarPlancha extends BaseVista {
 			return listaMiembrosDestino;
 		}
 
-		Long mayorNumeroPlancha = Long.parseLong(listaMiembrosOrigen.get(
-				listaMiembrosOrigen.size() - 1).getPosicionPlancha());
+		Long mayorNumeroPlancha = Long
+				.parseLong(listaMiembrosOrigen.get(listaMiembrosOrigen.size() - 1).getPosicionPlancha());
 		DTOZonaElectoral zonaElectoral = null;
 		try {
 			zonaElectoral = DelegadoPlancha.getInstance()
-					.consultarZonaElectoralAsociado(
-							this.numeroDocumentoUserEnSesion.toString());
+					.consultarZonaElectoralAsociado(this.numeroDocumentoUserEnSesion.toString());
 		} catch (EleccionesDelegadosException e) {
 		}
 
 		DTOMiembroPlancha[] arregloMiembros = null;
-		if (mayorNumeroPlancha.intValue() == zonaElectoral.getMaxPrincipales()
-				.intValue()) {
-			arregloMiembros = new DTOMiembroPlancha[mayorNumeroPlancha
-					.intValue()];
+		if (mayorNumeroPlancha.intValue() == zonaElectoral.getMaxPrincipales().intValue()) {
+			arregloMiembros = new DTOMiembroPlancha[mayorNumeroPlancha.intValue()];
 		} else {
-			arregloMiembros = new DTOMiembroPlancha[mayorNumeroPlancha
-					.intValue() + 1];
+			arregloMiembros = new DTOMiembroPlancha[mayorNumeroPlancha.intValue() + 1];
 		}
 
 		for (int i = 0; i < arregloMiembros.length; i++) {
 
 			if (i < listaMiembrosOrigen.size()) {
-				arregloMiembros[Integer.parseInt(listaMiembrosOrigen.get(i)
-						.getPosicionPlancha()) - 1] = listaMiembrosOrigen
-						.get(i);
+				arregloMiembros[Integer.parseInt(listaMiembrosOrigen.get(i).getPosicionPlancha())
+						- 1] = listaMiembrosOrigen.get(i);
 			}
 
 			if (arregloMiembros[i] == null) {
@@ -255,8 +227,7 @@ public class RegistrarPlancha extends BaseVista {
 			}
 		}
 
-		listaMiembrosDestino = new ArrayList<DTOMiembroPlancha>(Arrays
-				.asList(arregloMiembros));
+		listaMiembrosDestino = new ArrayList<DTOMiembroPlancha>(Arrays.asList(arregloMiembros));
 
 		return listaMiembrosDestino;
 	}
@@ -264,19 +235,15 @@ public class RegistrarPlancha extends BaseVista {
 	public void adicionarMiembroPrincipal(ValueChangeEvent v) {
 		HtmlInputText inputTextCedula = (HtmlInputText) v.getComponent();
 
-		if (v.getNewValue() != null
-				&& !"".equals(v.getNewValue().toString().trim())) {
+		if (v.getNewValue() != null && !"".equals(v.getNewValue().toString().trim())) {
 
 			try {
-				Long numeroDocumento = Long.parseLong(v.getNewValue()
-						.toString());
+				Long numeroDocumento = Long.parseLong(v.getNewValue().toString());
 
-				this.miembrosPrincipales = adicionarMiembro(
-						this.miembrosPrincipales, numeroDocumento, Integer
-								.parseInt(inputTextCedula.getAlt()));
+				this.miembrosPrincipales = adicionarMiembro(this.miembrosPrincipales, numeroDocumento,
+						Integer.parseInt(inputTextCedula.getAlt()));
 
-				String observacion = this.miembrosPrincipales.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
+				String observacion = this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1)
 						.getObservacionAdicionMiembro();
 
 				if (observacion != null && !"".equals(observacion)) {
@@ -285,51 +252,33 @@ public class RegistrarPlancha extends BaseVista {
 				}
 			} catch (EleccionesDelegadosException e) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
-				this.mensajeVista.setMensaje(e.getMessage() != null
-						&& !"".equals(e.getMessage()) ? e.getMessage()
-						: UtilAcceso.getParametroFuenteS(
-								ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+				this.mensajeVista.setMensaje(e.getMessage() != null && !"".equals(e.getMessage()) ? e.getMessage()
+						: UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorNullPointerException"));
-				this.miembrosPrincipales.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setNumeroDocumento(null);
-				this.miembrosPrincipales.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setApellidosNombres(null);
-				this.miembrosPrincipales.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setProfesion(null);
+				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
+				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
+				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
 			}
 		} else {
-			this.miembrosPrincipales.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setNumeroDocumento(null);
-			this.miembrosPrincipales.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setApellidosNombres(null);
-			this.miembrosPrincipales.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setProfesion(null);
+			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
+			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
+			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
 		}
 	}
 
 	public void adicionarMiembroSuplente(ValueChangeEvent v) {
 		HtmlInputText inputTextCedula = (HtmlInputText) v.getComponent();
 
-		if (v.getNewValue() != null
-				&& !"".equals(v.getNewValue().toString().trim())) {
+		if (v.getNewValue() != null && !"".equals(v.getNewValue().toString().trim())) {
 
 			try {
 
-				Long numeroDocumento = Long.parseLong(v.getNewValue()
-						.toString());
+				Long numeroDocumento = Long.parseLong(v.getNewValue().toString());
 
-				this.miembrosSuplentes = adicionarMiembro(
-						this.miembrosSuplentes, numeroDocumento, Integer
-								.parseInt(inputTextCedula.getAlt()));
+				this.miembrosSuplentes = adicionarMiembro(this.miembrosSuplentes, numeroDocumento,
+						Integer.parseInt(inputTextCedula.getAlt()));
 
-				String observacion = this.miembrosSuplentes.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
+				String observacion = this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1)
 						.getObservacionAdicionMiembro();
 
 				if (observacion != null && !"".equals(observacion)) {
@@ -338,45 +287,27 @@ public class RegistrarPlancha extends BaseVista {
 				}
 			} catch (EleccionesDelegadosException e) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
-				this.mensajeVista.setMensaje(e.getMessage() != null
-						&& !"".equals(e.getMessage()) ? e.getMessage()
-						: UtilAcceso.getParametroFuenteS(
-								ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+				this.mensajeVista.setMensaje(e.getMessage() != null && !"".equals(e.getMessage()) ? e.getMessage()
+						: UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorNullPointerException"));
-				this.miembrosSuplentes.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setNumeroDocumento(null);
-				this.miembrosSuplentes.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setApellidosNombres(null);
-				this.miembrosSuplentes.get(
-						Integer.parseInt(inputTextCedula.getAlt()) - 1)
-						.setProfesion(null);
+				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
+				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
+				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
 			}
 		} else {
-			this.miembrosSuplentes.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setNumeroDocumento(null);
-			this.miembrosSuplentes.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setApellidosNombres(null);
-			this.miembrosSuplentes.get(
-					Integer.parseInt(inputTextCedula.getAlt()) - 1)
-					.setProfesion(null);
+			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
+			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
+			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
 		}
 	}
 
-	private List<DTOMiembroPlancha> adicionarMiembro(
-			List<DTOMiembroPlancha> lista, Long numeroDocumento, int posicion)
+	private List<DTOMiembroPlancha> adicionarMiembro(List<DTOMiembroPlancha> lista, Long numeroDocumento, int posicion)
 			throws EleccionesDelegadosException {
-		
-		
-		lista = DelegadoPlancha.getInstance().adicionarMiembroPlancha(lista,
-				numeroDocumento, posicion, this.consecutivoPlancha,
-				this.aplicaValidaciones);
+
+		lista = DelegadoPlancha.getInstance().adicionarMiembroPlancha(lista, numeroDocumento, posicion,
+				this.consecutivoPlancha, this.aplicaValidaciones);
 		DTOZonaElectoral zonaElectoral = DelegadoPlancha.getInstance()
-				.consultarZonaElectoralAsociado(
-						this.numeroDocumentoUserEnSesion.toString());
+				.consultarZonaElectoralAsociado(this.numeroDocumentoUserEnSesion.toString());
 		if (zonaElectoral.getMaxPrincipales() != null) {
 			if (lista.size() < zonaElectoral.getMaxPrincipales().intValue()) {
 				DTOMiembroPlancha miembro = new DTOMiembroPlancha();
@@ -398,116 +329,94 @@ public class RegistrarPlancha extends BaseVista {
 
 		try {
 			this.visibleConfirmar = Boolean.FALSE;
-			
+
 			boolean usuarioQueRegistraEsTitular = Boolean.FALSE;
-			
+
 			List<DTOMiembroPlancha> listaRealMiembrosTitulares = obtenerListaRealMiembros(miembrosPrincipales);
 			List<DTOMiembroPlancha> listaRealMiembrosSuplentes = obtenerListaRealMiembros(miembrosSuplentes);
-			
-			if(miembrosPrincipales != null && !miembrosPrincipales.isEmpty())
-			{
+
+			if (miembrosPrincipales != null && !miembrosPrincipales.isEmpty()) {
 				for (DTOMiembroPlancha dtoMiembroPlancha : miembrosPrincipales) {
 					if (dtoMiembroPlancha.getNumeroDocumento() != null
-							&& dtoMiembroPlancha.getNumeroDocumento().equals(
-									numeroDocumentoUserEnSesion)
+							&& dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumentoUserEnSesion)
 							&& dtoMiembroPlancha.getPosicionPlancha() != null
-							&& dtoMiembroPlancha.getPosicionPlancha().equals("1") ) {
+							&& dtoMiembroPlancha.getPosicionPlancha().equals("1")) {
 						usuarioQueRegistraEsTitular = Boolean.TRUE;
 						break;
 					}
 				}
-				
+
 				if (!usuarioQueRegistraEsTitular) {
-					throw new EleccionesDelegadosException(
-							"Estimado Asociado, recuerde que el "
-									+ "formulario debe ser diligenciado únicamente por el cabeza de la plancha");
+					throw new EleccionesDelegadosException("Estimado Asociado, recuerde que el "
+							+ "formulario debe ser diligenciado únicamente por el cabeza de la plancha");
 				}
 			}
 			// validar si se puede modificar la plancha:
 			DTOZonaElectoral zonaElectoral = DelegadoPlancha.getInstance()
-					.consultarZonaElectoralAsociado(
-							numeroDocumentoUserEnSesion.toString());
+					.consultarZonaElectoralAsociado(numeroDocumentoUserEnSesion.toString());
 			if (zonaElectoral.getMaxPrincipales() != null) {
-				int maxPrincipales = Integer.parseInt(zonaElectoral
-						.getMaxPrincipales().toString());
+				int maxPrincipales = Integer.parseInt(zonaElectoral.getMaxPrincipales().toString());
 				if (listaRealMiembrosTitulares.size() > maxPrincipales) {
-					throw new EleccionesDelegadosException(
-							"La plancha excede el máximo de principales para esta zona. "
-									+ "El máximo de principales para esta zona es de "
-									+ maxPrincipales);
+					throw new EleccionesDelegadosException("La plancha excede el máximo de principales para esta zona. "
+							+ "El máximo de principales para esta zona es de " + maxPrincipales);
 				}
 			}
-			
+
 			if (this.consecutivoPlancha == null) {
 
-				DTOInformacionPlancha dtoInfoPlancha = DelegadoPlancha
-						.getInstance().registrarPlancha(
-								this.miembrosPrincipales,
-								this.miembrosSuplentes,
-								this.numeroDocumentoUserEnSesion,
-								this.aplicaValidaciones);
+				DTOInformacionPlancha dtoInfoPlancha = DelegadoPlancha.getInstance().registrarPlancha(
+						this.miembrosPrincipales, this.miembrosSuplentes, this.numeroDocumentoUserEnSesion,
+						this.aplicaValidaciones);
 
 				this.estadoPlancha = dtoInfoPlancha.getEstadoPlancha();
-				this.consecutivoPlancha = dtoInfoPlancha
-						.getConsecutivoPlancha();
+				this.consecutivoPlancha = dtoInfoPlancha.getConsecutivoPlancha();
 
 				if (dtoInfoPlancha.getDescripcionExcepciones() != null
-						&& !"".equals(dtoInfoPlancha
-								.getDescripcionExcepciones())) {
+						&& !"".equals(dtoInfoPlancha.getDescripcionExcepciones())) {
 					this.mostrarPopupExcepciones = Boolean.TRUE;
-					this.mensajePopupExcepciones = dtoInfoPlancha
-							.getDescripcionExcepciones();
+					this.mensajePopupExcepciones = dtoInfoPlancha.getDescripcionExcepciones();
 				} else {
 					this.mensajeVista.setVisible(Boolean.TRUE);
 				}
 
 			} else {
-				
-				if((listaRealMiembrosTitulares != null && listaRealMiembrosSuplentes != null)
-						&& (listaRealMiembrosSuplentes.size() > listaRealMiembrosTitulares.size()))
-				{
-					throw new EleccionesDelegadosException("Estimado Asociado, recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos");
+
+				if ((listaRealMiembrosTitulares != null && listaRealMiembrosSuplentes != null)
+						&& (listaRealMiembrosSuplentes.size() > listaRealMiembrosTitulares.size())) {
+					throw new EleccionesDelegadosException(
+							"Estimado Asociado, recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos");
 				}
-				
-				this.estadoPlancha = DelegadoPlancha.getInstance()
-						.modificarPlancha(this.miembrosPrincipales,
-								TIPO_INSCRITO_TITULAR, this.consecutivoPlancha, esModificable);
+
+				this.estadoPlancha = DelegadoPlancha.getInstance().modificarPlancha(this.miembrosPrincipales,
+						TIPO_INSCRITO_TITULAR, this.consecutivoPlancha, esModificable);
 
 				if (!tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
-					this.estadoPlancha = DelegadoPlancha.getInstance()
-							.modificarPlancha(this.miembrosSuplentes,
-									TIPO_INSCRITO_SUPLENTE,
-									this.consecutivoPlancha, esModificable);
+					this.estadoPlancha = DelegadoPlancha.getInstance().modificarPlancha(this.miembrosSuplentes,
+							TIPO_INSCRITO_SUPLENTE, this.consecutivoPlancha, esModificable);
 				}
 
 				this.mensajeVista.setVisible(Boolean.TRUE);
 			}
 
 			// this.mensajeVista.setVisible(Boolean.TRUE);
-			this.mensajeVista
-					.setMensaje("Se guardaron los datos del formulario. Recuerde "
-							+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo");
-		}
-		catch (EleccionesDelegadosException e)
-		{
+			this.mensajeVista.setMensaje("Se guardaron los datos del formulario. Recuerde "
+					+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo");
+		} catch (EleccionesDelegadosException e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje(e.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje("Se presento un error Inesperado");
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
-	private List<DTOMiembroPlancha> obtenerListaRealMiembros(
-			List<DTOMiembroPlancha> miembros) {
+
+	private List<DTOMiembroPlancha> obtenerListaRealMiembros(List<DTOMiembroPlancha> miembros) {
 		List<DTOMiembroPlancha> listaReal = new ArrayList<DTOMiembroPlancha>();
 
 		for (DTOMiembroPlancha dtoMiembroPlancha : miembros) {
-			if (dtoMiembroPlancha.getApellidosNombres() != null
-					&& !dtoMiembroPlancha.getApellidosNombres().isEmpty()) {
+			if (dtoMiembroPlancha.getApellidosNombres() != null && !dtoMiembroPlancha.getApellidosNombres().isEmpty()) {
 				listaReal.add(dtoMiembroPlancha);
 			}
 		}
@@ -525,16 +434,12 @@ public class RegistrarPlancha extends BaseVista {
 		try {
 			this.visibleConfirmarEnviar = Boolean.FALSE;
 			DTOZonaElectoral zonaElectoral = DelegadoPlancha.getInstance()
-					.consultarZonaElectoralAsociado(
-							numeroDocumentoUserEnSesion.toString());
+					.consultarZonaElectoralAsociado(numeroDocumentoUserEnSesion.toString());
 			if (zonaElectoral.getMaxPrincipales() != null) {
-				int maxPrincipales = Integer.parseInt(zonaElectoral
-						.getMaxPrincipales().toString());
+				int maxPrincipales = Integer.parseInt(zonaElectoral.getMaxPrincipales().toString());
 				if (miembrosPrincipales.size() > maxPrincipales) {
-					throw new Exception(
-							"La plancha excede el máximo de principales para esta zona. "
-									+ "El máximo de principales para esta zona es de "
-									+ maxPrincipales);
+					throw new Exception("La plancha excede el máximo de principales para esta zona. "
+							+ "El máximo de principales para esta zona es de " + maxPrincipales);
 				}
 			}
 
@@ -542,29 +447,23 @@ public class RegistrarPlancha extends BaseVista {
 				admiteSuplentes = true;
 			}
 
-			DTOInformacionPlancha dtoInformacionPlancha = DelegadoPlancha
-					.getInstance().finalizarEnviarPlancha(
-							this.miembrosPrincipales, this.miembrosSuplentes,
-							this.consecutivoPlancha,
-							this.numeroDocumentoUserEnSesion,
-							this.aplicaValidaciones, admiteSuplentes);
+			DTOInformacionPlancha dtoInformacionPlancha = DelegadoPlancha.getInstance().finalizarEnviarPlancha(
+					this.miembrosPrincipales, this.miembrosSuplentes, this.consecutivoPlancha,
+					this.numeroDocumentoUserEnSesion, this.aplicaValidaciones, admiteSuplentes);
 
 			this.estadoPlancha = dtoInformacionPlancha.getEstadoPlancha();
 
 			if (dtoInformacionPlancha.getDescripcionExcepciones() != null
-					&& !"".equals(dtoInformacionPlancha
-							.getDescripcionExcepciones())) {
+					&& !"".equals(dtoInformacionPlancha.getDescripcionExcepciones())) {
 				this.mostrarPopupExcepciones = Boolean.TRUE;
-				this.mensajePopupExcepciones = dtoInformacionPlancha
-						.getDescripcionExcepciones();
+				this.mensajePopupExcepciones = dtoInformacionPlancha.getDescripcionExcepciones();
 			} else {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 			}
 
-			this.mensajeVista
-					.setMensaje("Estimado asociado, ud. Finalizó el registro de la "
-							+ "plancha. Por favor, imprima el formato generado, fírmelo y entréguelo en "
-							+ "las oficinas indicadas en la dirección www.coomeva.com.co");
+			this.mensajeVista.setMensaje("Estimado asociado, ud. Finalizó el registro de la "
+					+ "plancha. Por favor, imprima el formato generado, fírmelo y entréguelo en "
+					+ "las oficinas indicadas en la dirección www.coomeva.com.co");
 		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje("Se presento un error Inesperado");
@@ -576,17 +475,16 @@ public class RegistrarPlancha extends BaseVista {
 	public String actionImprimirFormatoPdf() {
 		try {
 			this.visibleConfirmarImprimir = Boolean.FALSE;
-			formatoPdfInscripcionPlancha
-					.generarReporte(this.consecutivoPlancha);
+			formatoPdfInscripcionPlancha.generarReporte(this.consecutivoPlancha);
 
-			DelegadoFormatoPlancha.getInstance().registrarFormatoPlancha(
-					this.numeroDocumentoUserEnSesion.toString(),
+			DelegadoFormatoPlancha.getInstance().registrarFormatoPlancha(this.numeroDocumentoUserEnSesion.toString(),
 					CODIGO_FORMATO_INSCRIPCION_PLANCHA, consecutivoPlancha);
-			
+
 			DelegadoPlancha.getInstance().asignarEstadoRegistradoPlancha(this.consecutivoPlancha);
-			
+
 			this.mensajeVista.setVisible(Boolean.TRUE);
-			this.mensajeVista.setMensaje("Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
+			this.mensajeVista.setMensaje(
+					"Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
 
 		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
@@ -599,72 +497,58 @@ public class RegistrarPlancha extends BaseVista {
 
 		Date dateToday = new Date();
 
-		ParametroPlanchaDTO parametroFechaInicial = LectorParametros
-				.obtenerParametrosCodigoTipo(UtilAcceso.getParametroFuenteL(
-						"parametros", "campo.param.saneamiento.inicio"),
-						UtilAcceso.getParametroFuenteL("parametros",
-								"campo.param.saneamiento.tipo"));
-		ParametroPlanchaDTO parametroFechaFinal = LectorParametros
-				.obtenerParametrosCodigoTipo(UtilAcceso.getParametroFuenteL(
-						"parametros", "campo.param.saneamiento.fin"),
-						UtilAcceso.getParametroFuenteL("parametros",
-								"campo.param.saneamiento.tipo"));
+		ParametroPlanchaDTO parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.inicio"),
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.tipo"));
+		ParametroPlanchaDTO parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.fin"),
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.tipo"));
 
-		Date dateFechaIniSaneamiento = ManipulacionFechas.stringToDate(
-				parametroFechaInicial.getStrValor(), "yyyy-MM-dd hh:mm:ss");
-		Date dateFechaFinSaneamiento = ManipulacionFechas.stringToDate(
-				parametroFechaFinal.getStrValor(), "yyyy-MM-dd hh:mm:ss");
+		Date dateFechaIniSaneamiento = ManipulacionFechas.stringToDate(parametroFechaInicial.getStrValor(),
+				"yyyy-MM-dd hh:mm:ss");
+		Date dateFechaFinSaneamiento = ManipulacionFechas.stringToDate(parametroFechaFinal.getStrValor(),
+				"yyyy-MM-dd hh:mm:ss");
 
 		boolean cumpleFechaSaneamiento = false;
 		boolean cumpleEstadosModificables = false;
 
-		if (dateToday.getTime() >= dateFechaIniSaneamiento.getTime()
+	/*	if (dateToday.getTime() >= dateFechaIniSaneamiento.getTime()//-> fechas de saneamiento
 				&& dateToday.getTime() <= dateFechaFinSaneamiento.getTime()) {
 			cumpleFechaSaneamiento = true;
 		}
-
-		estadosPlanchaModificables = DelegadoPlanchas.getInstance()
-				.obtenerParametrosTipo(9L);
+*/
+		estadosPlanchaModificables = DelegadoPlanchas.getInstance().obtenerParametrosTipo(9L);
 		for (ParametroPlanchaDTO paraPlancha : estadosPlanchaModificables) {
-			if (this.estadoPlancha != null
-					&& paraPlancha.getValor().toString().equals(
-							this.estadoPlancha)) {
+			if (this.estadoPlancha != null && paraPlancha.getValor().toString().equals(this.estadoPlancha)) {
 				cumpleEstadosModificables = true;
 			}
 		}
-		
+
 		boolean esCabezaPlancha = false;
 		DTOInformacionPlancha planchaAsociado;
-		try 
-		{
-			if(consecutivoPlancha != null)
-			{
+		try {
+			if (consecutivoPlancha != null) {
 				planchaAsociado = DelegadoPlancha.getInstance().consultarInformacionPlancha(this.consecutivoPlancha);
-				
-				if(planchaAsociado != null)
-				{
-					if(numeroDocumentoUserEnSesion.toString().equalsIgnoreCase(planchaAsociado.getNumeroIdentificacionCabeza()))
-					{
+
+				if (planchaAsociado != null) {
+					if (numeroDocumentoUserEnSesion.toString()
+							.equalsIgnoreCase(planchaAsociado.getNumeroIdentificacionCabeza())) {
 						esCabezaPlancha = true;
 					}
 				}
-			}			
-			
+			}
+
 		} catch (EleccionesDelegadosException e) {
 			esCabezaPlancha = false;
-		}	
-		
-		//Si el estado es incrita y dentro de las fechas de saneamiento
-		// y la personas es cabeza de plancah se puede realizar modificacion
-		if(cumpleFechaSaneamiento && cumpleEstadosModificables && esCabezaPlancha)
-		{
-			this.esModificable = true;
 		}
-		else
-		{
+
+		// Si el estado es incrita y dentro de las fechas de saneamiento
+		// y la personas es cabeza de plancah se puede realizar modificacion
+		if (cumpleFechaSaneamiento && cumpleEstadosModificables && esCabezaPlancha) {
+			this.esModificable = true;
+		} else {
 			this.esModificable = false;
 		}
-		
 
 		if (cumpleFechaSaneamiento) {
 			return true;
@@ -691,8 +575,7 @@ public class RegistrarPlancha extends BaseVista {
 		return miembrosPrincipales;
 	}
 
-	public void setMiembrosPrincipales(
-			List<DTOMiembroPlancha> miembrosPrincipales) {
+	public void setMiembrosPrincipales(List<DTOMiembroPlancha> miembrosPrincipales) {
 		this.miembrosPrincipales = miembrosPrincipales;
 	}
 
@@ -733,8 +616,7 @@ public class RegistrarPlancha extends BaseVista {
 	}
 
 	public boolean isActivarBotonImprimir() {
-		if (this.estadoPlancha != null
-				&& COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)) {
+		if (this.estadoPlancha != null && COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)) {
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
@@ -748,20 +630,17 @@ public class RegistrarPlancha extends BaseVista {
 		try {
 			// Si la plancha está radicada no se puede modificar:
 			if (consecutivoPlancha != null
-					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(
-							consecutivoPlancha)) {
+					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(consecutivoPlancha)) {
 				return Boolean.FALSE;
 			}
 			// Si la plancha está registrada o inscrita pero sin estar radicada,
 			// se puede modificar:
-			if (this.estadoPlancha == null
-					|| COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
+			if (this.estadoPlancha == null || COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
 					|| COD_ESTADO_PLANCHA_INSCRITA.equals(this.estadoPlancha)) {
 				return Boolean.TRUE;
 			}
 			if (this.estadoPlancha != null
-					&& (COD_ESTADO_PLANCHA_REGISTRADA
-							.equals(this.estadoPlancha) || validarSaneamiento())) {
+					&& (COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha) || validarSaneamiento())) {
 				return Boolean.TRUE;
 			}
 		} catch (Exception e) {
@@ -769,8 +648,7 @@ public class RegistrarPlancha extends BaseVista {
 		return Boolean.FALSE;
 	}
 
-	public void setActivarBotonFinalizarEnviar(
-			boolean activarBotonFinalizarEnviar) {
+	public void setActivarBotonFinalizarEnviar(boolean activarBotonFinalizarEnviar) {
 	}
 
 	public boolean isActivarBotonRegistrar() {
@@ -780,35 +658,30 @@ public class RegistrarPlancha extends BaseVista {
 			if (esUsuarioComision && esSaneamiento) {
 				return Boolean.TRUE;
 			}
-			
-			//Si el estado es incrita y dentro de las fechas de saneamiento
+
+			// Si el estado es incrita y dentro de las fechas de saneamiento
 			// y la personas es cabeza de plancaha se puede realizar modificacion
-			if(esModificable)
-			{
+			if (esModificable) {
 				return Boolean.TRUE;
 			}
-			
+
 			// si la placha esta en estado modificado se puede guardar
-			if(estadoPlancha != null && estadoPlancha.equalsIgnoreCase(COD_ESTADO_PLANCHA_MODIFICADA))
-			{
+			if (estadoPlancha != null && estadoPlancha.equalsIgnoreCase(COD_ESTADO_PLANCHA_MODIFICADA)) {
 				return Boolean.TRUE;
 			}
 
 			// Si la plancha está radicada no se puede modificar:
 			if (consecutivoPlancha != null
-					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(
-							consecutivoPlancha)) {
+					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(consecutivoPlancha)) {
 				return Boolean.FALSE;
 			}
 			// Si la plancha está registrada o inscrita pero sin estar radicada,
 			// se puede modificar:
-			if (this.estadoPlancha == null
-					|| COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
+			if (this.estadoPlancha == null || COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
 					|| COD_ESTADO_PLANCHA_INSCRITA.equals(this.estadoPlancha)) {
 				return Boolean.TRUE;
 			}
-			if (this.estadoPlancha == null
-					|| COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
+			if (this.estadoPlancha == null || COD_ESTADO_PLANCHA_REGISTRADA.equals(this.estadoPlancha)
 					|| validarSaneamiento()) {
 				return Boolean.TRUE;
 			}
@@ -852,26 +725,23 @@ public class RegistrarPlancha extends BaseVista {
 		if (esUsuarioComision && esSaneamiento) {
 			return Boolean.FALSE;
 		}
-		
-		//Si el estado es incrita y dentro de las fechas de saneamiento
+
+		// Si el estado es incrita y dentro de las fechas de saneamiento
 		// y la personas es cabeza de plancaha se puede realizar modificacion
-		if(esModificable)
-		{
+		if (esModificable) {
 			return Boolean.FALSE;
 		}
 
 		try {
 			// Si la plancha está radicada no se puede modificar:
 			if (consecutivoPlancha != null
-					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(
-							consecutivoPlancha)) {
+					&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(consecutivoPlancha)) {
 				return Boolean.FALSE;
 			}
 		} catch (Exception e) {
 		}
 
-		if (this.estadoPlancha != null
-				&& COD_ESTADO_PLANCHA_INSCRITA.equals(this.estadoPlancha)) {
+		if (this.estadoPlancha != null && COD_ESTADO_PLANCHA_INSCRITA.equals(this.estadoPlancha)) {
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;

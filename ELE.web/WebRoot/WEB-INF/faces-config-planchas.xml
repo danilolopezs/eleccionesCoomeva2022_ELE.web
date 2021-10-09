@@ -207,6 +207,11 @@
 			<to-view-id>/gui/forms/resumenPlancha.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>goInicioMenuAsociado</from-outcome>
+			<to-view-id>/gui/planchas/inicioMenuAsociado.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/gui/forms/ConsultaPlanchaEstado.jspx</from-view-id>
