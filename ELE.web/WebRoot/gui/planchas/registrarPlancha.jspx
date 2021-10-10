@@ -68,7 +68,7 @@
 
 								<td bgcolor="#FFFFFF" colspan="2" width="750" align="center">
 									<div align="center">
-										<ice:outputText style="color:#009933;"
+										<ice:outputLabel
 											value="Miembros Principales" />
 
 										<ice:dataTable id="tablaIngreso" var="recordTitulares"
@@ -137,10 +137,10 @@
 										</ice:dataTable>
 
 										<br />
-										<br />
+										
 										<ice:panelGrid rendered="#{initParam['com.coomeva.elecciones.TIPO_ELECCIONES'] != 'representantes'}" style="width:100%;">										
 											<div align="center">
-											<ice:outputText style="color:#009933; align:center"
+											<ice:outputLabel	
 												value="Miembros Suplentes" />
 											
 											<ice:dataTable id="tablaSuplentes" var="recordSuplentes"

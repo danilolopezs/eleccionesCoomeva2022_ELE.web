@@ -121,34 +121,24 @@ public class LogicaPlancha implements ILogicaPlancha {
 			String nroIdentificacionMiembro = numeroDocumento.toString();
 			EleAsociadoDTO asociadoDTO = DelegadoClimae.getInstance().find(nroIdentificacionMiembro);
 
-			if (!aplicaValidaciones
-					&& DelegadoAsociado.getInstance()
-							.esAsociadoPersonaJuridica(numeroDocumento)) {
-				throw new EleccionesDelegadosException(
-						MessageFormat
-								.format(
-										UtilAcceso
-												.getParametroFuenteS(
-														"mensajes",
-														"msgErrorNoSePermitenPlanchasAsociadoJuridico"),
-										nroIdentificacionMiembro.toString()));
+			if (!aplicaValidaciones && DelegadoAsociado.getInstance().esAsociadoPersonaJuridica(numeroDocumento)) {
+				throw new EleccionesDelegadosException(MessageFormat.format(
+						UtilAcceso.getParametroFuenteS("mensajes", "msgErrorNoSePermitenPlanchasAsociadoJuridico"),
+						nroIdentificacionMiembro.toString()));
 
 			}
 
-			if (!aplicaValidaciones
-					&& DelegadoPlancha.getInstance().esColaboradorGECoomeva(
-							nroIdentificacionMiembro)) {
-				throw new EleccionesDelegadosException(MessageFormat.format(
-						UtilAcceso.getParametroFuenteS(
-								ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-								"msgErrorNoSePermitenPlanchasEmpleados"),
-						numeroDocumento.toString()));
+			boolean esColaboradorGECoopmeva = DelegadoPlancha.getInstance().esColaboradorGECoomeva(nroIdentificacionMiembro);
+			if (!aplicaValidaciones && esColaboradorGECoopmeva) {
+				throw new EleccionesDelegadosException(MessageFormat
+						.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+								"msgErrorNoSePermitenPlanchasEmpleados"), numeroDocumento.toString()));
 			}
 			
 			// si aplciaValidaciones = true son validaciones para delegados
 			else if(aplicaValidaciones)
 			{
-				if(!DelegadoPlancha.getInstance().esColaboradorGECoomeva(nroIdentificacionMiembro))
+				if(!esColaboradorGECoopmeva)
 				{
 					String msgValidacionEmpleadoFechaRetiro = validarEmpleadoFechaRetiro(Long
 							.parseLong(nroIdentificacionMiembro));

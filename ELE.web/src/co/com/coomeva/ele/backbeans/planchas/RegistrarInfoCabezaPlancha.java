@@ -122,37 +122,22 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	}
 
 	public boolean validarSaneamiento() {
-
 		Date dateToday = new Date();
+		// Fechas saneamiento para que se pueda modificar planchas
+		ParametroPlanchaDTO parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.inicio"),
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.tipo"));
+		ParametroPlanchaDTO parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.fin"),
+				UtilAcceso.getParametroFuenteL("parametros", "campo.param.saneamiento.tipo"));
 
-		ParametroPlanchaDTO parametroFechaInicial = LectorParametros
-				.obtenerParametrosCodigoTipo(UtilAcceso.getParametroFuenteL(
-						"parametros", "campo.param.saneamiento.inicio"),
-						UtilAcceso.getParametroFuenteL("parametros",
-								"campo.param.saneamiento.tipo"));
-		ParametroPlanchaDTO parametroFechaFinal = LectorParametros
-				.obtenerParametrosCodigoTipo(UtilAcceso.getParametroFuenteL(
-						"parametros", "campo.param.saneamiento.fin"),
-						UtilAcceso.getParametroFuenteL("parametros",
-								"campo.param.saneamiento.tipo"));
+		Date dateFechaIniSaneamiento = ManipulacionFechas.stringToDate(parametroFechaInicial.getStrValor(),
+				"yyyy-MM-dd hh:mm:ss");
+		Date dateFechaFinSaneamiento = ManipulacionFechas.stringToDate(parametroFechaFinal.getStrValor(),
+				"yyyy-MM-dd hh:mm:ss");
 
-		Date dateFechaIniSaneamiento = ManipulacionFechas.stringToDate(
-				parametroFechaInicial.getStrValor(), "yyyy-MM-dd hh:mm:ss");
-		Date dateFechaFinSaneamiento = ManipulacionFechas.stringToDate(
-				parametroFechaFinal.getStrValor(), "yyyy-MM-dd hh:mm:ss");
-
-		boolean cumpleFechaSaneamiento = false;
-
-		if (dateToday.getTime() >= dateFechaIniSaneamiento.getTime()
-				&& dateToday.getTime() <= dateFechaFinSaneamiento.getTime()) {
-			cumpleFechaSaneamiento = true;
-		}
-
-		if (cumpleFechaSaneamiento) {
-			return true;
-		} else {
-			return false;
-		}
+		return dateToday.getTime() >= dateFechaIniSaneamiento.getTime()
+				&& dateToday.getTime() <= dateFechaFinSaneamiento.getTime();
 	}
 
 	public void validacionInicial() {

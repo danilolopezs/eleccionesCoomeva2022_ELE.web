@@ -1075,11 +1075,11 @@
 	<sql-query name="consulta.asociados.empleados.activos">
 		<return-scalar column="NUMERO_DOCUMENTO" type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		DISTINCT NUMERO_DOCUMENTO
-			FROM
-    		ELECDB.ELEASOCIA_ESPECIAL
-    		WHERE FECHA_RETIRO IS NULL
+				SELECT
+	    		DISTINCT NUMERO_DOCUMENTO
+				FROM
+	    		ELECDB.ELE_ASOCIADO_ESPECIAL
+	    		WHERE FECHA_RETIRO IS NULL
     	]]>
 	</sql-query>
 
@@ -1096,7 +1096,7 @@
 			SELECT
     		DISTINCT NUMERO_DOCUMENTO, FECHA_RETIRO
 			FROM
-    		ELECDB.ELEASOCIA_ESPECIAL
+    		ELECDB.ELE_ASOCIADO_ESPECIAL
     		WHERE FECHA_RETIRO IS NOT NULL
     	]]>
 	</sql-query>

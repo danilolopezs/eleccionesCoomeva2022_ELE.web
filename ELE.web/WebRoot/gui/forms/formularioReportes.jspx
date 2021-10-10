@@ -18,7 +18,8 @@
 <script type="text/javascript" src="../js/servletInvoker.js"></script>
 <script type="text/javascript" language="JavaScript"
 	src="../js/validaNumeroJSF.js">
-				</script>
+	
+</script>
 <f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
 	var="etiquetas" />
 </head>
@@ -39,20 +40,23 @@
 					<td align="left" style="background: white" valign="top" colspan="2">
 						<ice:panelGrid columns="3">
 							<ice:outputText value="#{etiquetas.saludoRegistroPlanchas}"
-								style="font-size: 13px; font-weight: bold" />
+								style="font-size: 11px; font-weight: bold" />
 							<ice:outputText
 								value="#{validacionIngreso.asociado.nombreAsociado}"
-								style="font-size: 13px" />
+								style="font-size: 11px" />
 						</ice:panelGrid>
 					</td>
 				</tr>
-
+				<!-- MENU ASOCIADO -->
 				<tr>
-					<td align="center" style="background: white; width: 706px;">
-					<jsp:directive.include file="../planchas/menuPlanchasAsociado.jsp" />
-					</td>
+					<td align="center" style="background: white; width: 706px;"><jsp:directive.include
+							file="../planchas/menuPlanchasAsociado.jsp" /></td>
 				</tr>
-
+				<tr>
+					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
+				</tr>
+				
+				<!-- GENERACION DE REPORTE -->
 				<tr>
 					<td bgcolor="#FFFFFF">
 						<table align="right" width="100%" border="0" cellspacing="0"
