@@ -7,18 +7,22 @@
 		pageEncoding="ISO-8859-1" />
 	<f:view>
 		<html>
-			<head>
-				<title>Ejecuci&#243;n del proceso de verificaci&#243;n de
-					habilidad de asociados</title>
-				<script type="text/javascript" src="../js/servletInvoker.js"></script>
-				<link rel="stylesheet" type="text/css"
-					href="../estilos/rime/rime-portlet2.css" />
-				<link rel="stylesheet" type="text/css"
-					href="../estilos/estiloPlanchas.css" />
-				<meta http-equiv="Cache-Control" content="no-cache" />
-				<script type="text/javascript" src="../js/utilidades.js"></script>
-				<style id="antiClickjack">body{display:none !important;}</style>
-				<script type="text/javascript">
+<head>
+<title>Ejecuci&#243;n del proceso de verificaci&#243;n de
+	habilidad de asociados</title>
+<script type="text/javascript" src="../js/servletInvoker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../estilos/rime/rime-portlet2.css" />
+<link rel="stylesheet" type="text/css"
+	href="../estilos/estiloPlanchas.css" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<script type="text/javascript" src="../js/utilidades.js"></script>
+<style id="antiClickjack">
+body {
+	display: none !important;
+}
+</style>
+<script type="text/javascript">
 				   if (self === top) {
 				       var antiClickjack = document.getElementById("antiClickjack");
 				       antiClickjack.parentNode.removeChild(antiClickjack);
@@ -26,475 +30,447 @@
 				       top.location = self.location;
 				   }
 				</script>
-				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
-					var="etiquetas" />
-			</head>
-			<body bgcolor="#DFDFDF">
-				<ice:form partialSubmit="true">
-					<div align="center">
-						<table cellpadding="0" cellspacing="0" width="824" border="0"
-							bgcolor="#FFFFFF">
-							<tr>
-								<td colspan="2">
-									<div align="left" class="banner"></div>
-								</td>
-							</tr>
-							<tr>
-								<td align="left" style="background: white" valign="top"  colspan="2">
-									<ice:panelGrid columns="3">
-										<ice:outputText value="#{etiquetas.saludoRegistroPlanchas}"
-											style="font-size: 11px; font-weight: bold" />
-										<ice:outputText
-											value="#{validacionIngreso.asociado.nombreAsociado}"
-											style="font-size: 11px" />
+<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+	var="etiquetas" />
+</head>
+<body bgcolor="#DFDFDF">
+	<ice:form partialSubmit="true">
+		<div align="center">
+			<table cellpadding="0" cellspacing="0" width="824" border="0"
+				bgcolor="#FFFFFF">
+				<tr>
+					<td colspan="2">
+						<div align="left" class="banner"></div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" style="background: white" valign="top" colspan="2">
+						<ice:panelGrid columns="3">
+							<ice:outputText value="#{etiquetas.saludoRegistroPlanchas}"
+								style="font-size: 11px; font-weight: bold" />
+							<ice:outputText
+								value="#{validacionIngreso.asociado.nombreAsociado}"
+								style="font-size: 11px" />
 
-									</ice:panelGrid>
-								</td>
-							</tr>
-							<tr>
-								<td valign="top"  colspan="2">
-									<div align="left">
-										<jsp:directive.include
-											file="../planchas/menuPlanchasAsociado.jsp" />
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" bgcolor="#FFFFFF">
-									<br />
-								</td>
-							</tr>
-							<tr>
+						</ice:panelGrid>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" colspan="2">
+						<div align="left">
+							<jsp:directive.include
+								file="../planchas/menuPlanchasAsociado.jsp" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
+				</tr>
+				<tr>
 
-								<td bgcolor="#FFFFFF" colspan="2" width="750" align="center">
+					<td bgcolor="#FFFFFF" colspan="2" width="750" align="center">
+						<div align="center">
+							<ice:outputLabel value="Miembros Principales" />
+
+							<ice:dataTable id="tablaIngreso" var="recordTitulares"
+								value="#{registrarPlancha.miembrosPrincipales}"
+								style="width:100%; height:100%;align:center">
+
+								<ice:column>
+									<f:facet name="header">
+										<div align="center">
+											<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
+										</div>
+									</f:facet>
+
 									<div align="center">
-										<ice:outputLabel
-											value="Miembros Principales" />
+										<ice:inputText value="#{recordTitulares.posicionPlancha}"
+											partialSubmit="false" style="width:100%;"
+											styleClass="textoLabel" readonly="true" />
+									</div>
 
-										<ice:dataTable id="tablaIngreso" var="recordTitulares"
-											value="#{registrarPlancha.miembrosPrincipales}"
-											style="width:100%; height:100%;align:center">
+								</ice:column>
 
-											<ice:column>
-												<f:facet name="header">
-													<div align="center">
-														<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
-													</div>
-												</f:facet>
+								<ice:column>
+									<f:facet name="header">
+										<div align="center">
+											<ice:outputText value="#{etiquetas.lblCedulaCiudadania}" />
+										</div>
+									</f:facet>
+									<ice:setEventPhase events="ValueChangeEvent"
+										phase="INVOKE_APPLICATION">
+										<ice:inputText value="#{recordTitulares.numeroDocumento}"
+											alt="#{recordTitulares.posicionPlancha}" maxlength="15"
+											onkeypress="return keyCheck(event, this);"
+											onmousedown="return noCopyMouse(event);"
+											onkeydown="return noCopyKey(event);" partialSubmit="true"
+											style="width:100%;"
+											disabled="#{registrarPlancha.desactivarIngresoCedulas}"
+											valueChangeListener="#{registrarPlancha.adicionarMiembroPrincipal}" />
+									</ice:setEventPhase>
 
+								</ice:column>
+
+								<ice:column>
+									<f:facet name="header">
+										<div align="center">
+											<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
+										</div>
+									</f:facet>
+
+									<ice:inputText value="#{recordTitulares.apellidosNombres}"
+										partialSubmit="false" readonly="true" style="width:100%;" />
+
+								</ice:column>
+
+								<ice:column>
+									<f:facet name="header">
+										<div align="center">
+											<ice:outputText value="#{etiquetas.lblProfesion}" />
+										</div>
+									</f:facet>
+
+									<ice:inputText value="#{recordTitulares.profesion}"
+										partialSubmit="false"
+										readonly="#{recordTitulares.tieneProfesion}"
+										style="width:100%;" maxlength="28" />
+
+								</ice:column>
+
+							</ice:dataTable>
+
+							<br />
+
+							<ice:panelGrid
+								rendered="#{initParam['com.coomeva.elecciones.TIPO_ELECCIONES'] != 'representantes'}"
+								style="width:100%;">
+								<div align="center">
+									<ice:outputLabel value="Miembros Suplentes" />
+
+									<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
+										value="#{registrarPlancha.miembrosSuplentes}"
+										style="width:100%; height:100%;">
+
+										<ice:column>
+											<f:facet name="header">
 												<div align="center">
-													<ice:inputText value="#{recordTitulares.posicionPlancha}"
-														partialSubmit="false" style="width:100%;"
-														styleClass="textoLabel" readonly="true" />
+													<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
 												</div>
+											</f:facet>
 
-											</ice:column>
-
-											<ice:column>
-												<f:facet name="header">
-													<div align="center">
-														<ice:outputText value="#{etiquetas.lblCedulaCiudadania}" />
-													</div>
-												</f:facet>
-												<ice:setEventPhase events="ValueChangeEvent"
-													phase="INVOKE_APPLICATION">
-													<ice:inputText value="#{recordTitulares.numeroDocumento}"
-														alt="#{recordTitulares.posicionPlancha}" maxlength="15"
-														onkeypress="return keyCheck(event, this);"
-														onmousedown="return noCopyMouse(event);"
-														onkeydown="return noCopyKey(event);" partialSubmit="true"
-														style="width:100%;"
-														disabled="#{registrarPlancha.desactivarIngresoCedulas}"
-														valueChangeListener="#{registrarPlancha.adicionarMiembroPrincipal}"/>
-												</ice:setEventPhase>
-
-											</ice:column>
-
-											<ice:column>
-												<f:facet name="header">
-													<div align="center">
-														<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
-													</div>
-												</f:facet>
-
-												<ice:inputText value="#{recordTitulares.apellidosNombres}"
-													partialSubmit="false" readonly="true" style="width:100%;" />
-
-											</ice:column>
-
-											<ice:column>
-												<f:facet name="header">
-													<div align="center">
-														<ice:outputText value="#{etiquetas.lblProfesion}" />
-													</div>
-												</f:facet>
-
-												<ice:inputText value="#{recordTitulares.profesion}"
-													partialSubmit="false" readonly="#{recordTitulares.tieneProfesion}" style="width:100%;" maxlength="28"/>
-
-											</ice:column>
-
-										</ice:dataTable>
-
-										<br />
-										
-										<ice:panelGrid rendered="#{initParam['com.coomeva.elecciones.TIPO_ELECCIONES'] != 'representantes'}" style="width:100%;">										
 											<div align="center">
-											<ice:outputLabel	
-												value="Miembros Suplentes" />
-											
-											<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
-												value="#{registrarPlancha.miembrosSuplentes}"
-												style="width:100%; height:100%;">
-	
-												<ice:column>
-													<f:facet name="header">
-														<div align="center">
-															<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
-														</div>
-													</f:facet>
-	
-													<div align="center">
-														<ice:inputText value="#{recordSuplentes.posicionPlancha}"
-															partialSubmit="false" style="width:100%;"
-															styleClass="textoLabel" readonly="true" />
-													</div>
-	
-												</ice:column>
-	
-												<ice:column>
-													<f:facet name="header">
-														<div align="center">
-															<ice:outputText value="#{etiquetas.lblCedulaCiudadania}" />
-														</div>
-													</f:facet>
-													<ice:setEventPhase events="ValueChangeEvent"
-														phase="INVOKE_APPLICATION">
-	
-														<ice:inputText value="#{recordSuplentes.numeroDocumento}"
-															partialSubmit="true" style="width:100%;" maxlength="15"
-															alt="#{recordSuplentes.posicionPlancha}"
-															onkeypress="return keyCheck(event, this);"
-															onmousedown="return noCopyMouse(event);"
-															onkeydown="return noCopyKey(event);"
-															disabled="#{registrarPlancha.desactivarIngresoCedulas}"
-															valueChangeListener="#{registrarPlancha.adicionarMiembroSuplente}" />
-													</ice:setEventPhase>
-	
-												</ice:column>
-	
-												<ice:column>
-													<f:facet name="header">
-														<div align="center">
-															<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
-														</div>
-													</f:facet>
-	
-													<ice:inputText value="#{recordSuplentes.apellidosNombres}"
-														partialSubmit="false" style="width:100%;" readonly="true" />
-	
-												</ice:column>
-	
-												<ice:column>
-													<f:facet name="header">
-														<div align="center">
-															<ice:outputText value="#{etiquetas.lblProfesion}" />
-														</div>
-													</f:facet>
-	
-													<ice:inputText value="#{recordSuplentes.profesion}"
-														partialSubmit="false" readonly="#{recordTitulares.tieneProfesion}" style="width:100%;" maxlength="28" />
-	
-												</ice:column>
-	
-											</ice:dataTable>
+												<ice:inputText value="#{recordSuplentes.posicionPlancha}"
+													partialSubmit="false" style="width:100%;"
+													styleClass="textoLabel" readonly="true" />
 											</div>
-										</ice:panelGrid>
 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" bgcolor="#FFFFFF">
-									<br />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" bgcolor="#FFFFFF">
-									<center>
-										<ice:commandButton value="Guardar"
-											action="#{registrarPlancha.actionConfirmarRegistrarPlancha}"
-											disabled="#{!registrarPlancha.activarBotonRegistrar}" />										
+										</ice:column>
 
-										<ice:commandButton value="Imprimir"
-											action="#{registrarPlancha.actionConfirmarImprimirFormatoPlancha}"
-											disabled="#{!registrarPlancha.activarBotonImprimir}" />
-									</center>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" bgcolor="#FFFFFF">
-									<br />
-								</td>
-							</tr>
-							<tr>
-								<td width="130" align="left" valign="top" bgcolor="#ABD673">
-									<br />
-									<br />
+										<ice:column>
+											<f:facet name="header">
+												<div align="center">
+													<ice:outputText value="#{etiquetas.lblCedulaCiudadania}" />
+												</div>
+											</f:facet>
+											<ice:setEventPhase events="ValueChangeEvent"
+												phase="INVOKE_APPLICATION">
 
-								</td>
+												<ice:inputText value="#{recordSuplentes.numeroDocumento}"
+													partialSubmit="true" style="width:100%;" maxlength="15"
+													alt="#{recordSuplentes.posicionPlancha}"
+													onkeypress="return keyCheck(event, this);"
+													onmousedown="return noCopyMouse(event);"
+													onkeydown="return noCopyKey(event);"
+													disabled="#{registrarPlancha.desactivarIngresoCedulas}"
+													valueChangeListener="#{registrarPlancha.adicionarMiembroSuplente}" />
+											</ice:setEventPhase>
 
-								<td align="center" bgcolor="#ABD673">
-									<br />
-									<br />
-									<div align="right">
-										<ice:outputConnectionStatus
-											styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #009933"
-											showPopupOnDisconnect="true" />
-									</div>
-								</td>
+										</ice:column>
+
+										<ice:column>
+											<f:facet name="header">
+												<div align="center">
+													<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
+												</div>
+											</f:facet>
+
+											<ice:inputText value="#{recordSuplentes.apellidosNombres}"
+												partialSubmit="false" style="width:100%;" readonly="true" />
+
+										</ice:column>
+
+										<ice:column>
+											<f:facet name="header">
+												<div align="center">
+													<ice:outputText value="#{etiquetas.lblProfesion}" />
+												</div>
+											</f:facet>
+
+											<ice:inputText value="#{recordSuplentes.profesion}"
+												partialSubmit="false"
+												readonly="#{recordTitulares.tieneProfesion}"
+												style="width:100%;" maxlength="28" />
+
+										</ice:column>
+
+									</ice:dataTable>
+								</div>
+							</ice:panelGrid>
+
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
+				</tr>
+				<tr>
+					<td colspan="2" bgcolor="#FFFFFF">
+						<center>
+							<ice:commandButton value="Guardar"
+								action="#{registrarPlancha.actionConfirmarRegistrarPlancha}"
+								disabled="#{!registrarPlancha.activarBotonRegistrar}" />
+
+							<ice:commandButton value="Imprimir"
+								action="#{registrarPlancha.actionConfirmarImprimirFormatoPlancha}"
+								disabled="#{!registrarPlancha.activarBotonImprimir}" />
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
+				</tr>
+				<tr>
+					<td width="130" align="left" valign="top" bgcolor="#ABD673"><br />
+						<br /></td>
+
+					<td align="center" bgcolor="#ABD673"><br /> <br />
+						<div align="right">
+							<ice:outputConnectionStatus
+								styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #009933"
+								showPopupOnDisconnect="true" />
+						</div></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<!-- MENSAJES DE INFORMACION EMERGENTES -->
+		<ice:panelPopup id="mensaje" draggable="true" styleClass="formulario"
+			visible="#{registrarPlancha.mensajeVista.visible}" modal="true"
+			rendered="#{registrarPlancha.mensajeVista.visible}"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 620px;">
+
+			<f:facet name="header">
+				<ice:panelGrid width="600px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;width=600px" value="Mensaje" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid width="600px" cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<ice:outputText value="#{registrarPlancha.mensajeVista.mensaje}"
+							styleClass="textoLabelLeft" escape="false" />
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0"
+						background="">
+						<tr>
+							<th width="600px;" align="center" style="color: #D4D4D4"><ice:commandButton
+									image="../imagenes/boton_salir.gif"
+									action="#{registrarPlancha.mensajeVista.ocultarMensaje}" /></th>
+						</tr>
+						<tr>
+						</tr>
+					</table>
+
+				</ice:panelGrid>
+			</f:facet>
+
+		</ice:panelPopup>
+
+		<ice:panelPopup id="mensajeExcepcion" draggable="true"
+			styleClass="formulario"
+			visible="#{registrarPlancha.mostrarPopupExcepciones}" modal="true">
+
+			<f:facet name="header">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Mensaje" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<ice:outputText
+							value="#{registrarPlancha.mensajePopupExcepciones}"
+							styleClass="textoLabelLeft" escape="false" />
+					</center>
+					<br />
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0"
+						background="">
+						<tr>
+							<th align="center" style="color: #D4D4D4"><ice:commandButton
+									image="../imagenes/boton_salir.gif"
+									action="#{registrarPlancha.ocultarPopupExcepciones}" /></th>
+						</tr>
+						<tr>
+						</tr>
+					</table>
+
+				</ice:panelGrid>
+			</f:facet>
+
+		</ice:panelPopup>
+
+		<ice:panelPopup id="confirmarPopup" draggable="true"
+			visible="#{registrarPlancha.visibleConfirmar}" modal="true"
+			rendered="#{registrarPlancha.visibleConfirmar}"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
+
+			<f:facet name="header">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td><ice:graphicImage
+										value="../imagenes/Symbol-Exclamation.png" /></td>
+								<td><ice:outputText
+										value="#{registrarPlancha.mensajeConfirmacion}"
+										styleClass="textoLabel" /></td>
 							</tr>
 						</table>
 
-					</div>
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td><ice:commandButton value="Si"
+									style="padding-left:7px;padding-right:7px"
+									action="#{registrarPlancha.registrarPlancha}"
+									onclick="disableButton(this);" /></td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td><ice:commandButton
+									style="padding-left:5px;padding-right:5px"
+									action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
+							</td>
+						</tr>
+					</table>
 
-					<ice:panelPopup id="mensaje" draggable="true"
-						styleClass="formulario"
-						visible="#{registrarPlancha.mensajeVista.visible}" modal="true"
-						rendered="#{registrarPlancha.mensajeVista.visible}"
-						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 620px;">
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
 
-						<f:facet name="header">
-							<ice:panelGrid width="600px" cellpadding="0" cellspacing="0"
-								style="text-align: center;" headerClass="icePanelPopupHeader">
-								<ice:outputText style="color: #FFFFFF;width=600px" value="Mensaje" />
-							</ice:panelGrid>
-						</f:facet>
+		<ice:panelPopup id="confirmarEnviar" draggable="true"
+			visible="#{registrarPlancha.visibleConfirmarEnviar}"
+			rendered="#{registrarPlancha.visibleConfirmarEnviar}" modal="true"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
 
-						<f:facet name="body">
-							<ice:panelGrid width="600px" cellpadding="0" cellspacing="0"
-								styleClass="font: 11px / 17px tahoma;">
-								<center>
-									<ice:outputText
-										value="#{registrarPlancha.mensajeVista.mensaje}"
-										styleClass="textoLabelLeft" escape="false" />
-								</center>
-								<br />
-								<table border="0" align="center" cellpadding="0" cellspacing="0"
-									background="">
-									<tr>
-										<th width="600px;" align="center" style="color: #D4D4D4">
-											<ice:commandButton image="../imagenes/boton_salir.gif"
-												action="#{registrarPlancha.mensajeVista.ocultarMensaje}" />
-										</th>
-									</tr>
-									<tr>
-									</tr>
-								</table>
+			<f:facet name="header">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
 
-							</ice:panelGrid>
-						</f:facet>
+			<f:facet name="body">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td><ice:graphicImage
+										value="../imagenes/Symbol-Exclamation.png" /></td>
+								<td><ice:outputText
+										value="#{registrarPlancha.mensajeConfirmacion}"
+										styleClass="textoLabel" /></td>
+							</tr>
+						</table>
 
-					</ice:panelPopup>
-					
-					<ice:panelPopup id="mensajeExcepcion" draggable="true"
-						styleClass="formulario"
-						visible="#{registrarPlancha.mostrarPopupExcepciones}" modal="true"
-					>
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td><ice:commandButton value="Si"
+									style="padding-left:7px;padding-right:7px"
+									action="#{registrarPlancha.actionFinalizarEnviarPlancha}"
+									onclick="disableButton(this);" /></td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td><ice:commandButton
+									style="padding-left:5px;padding-right:5px"
+									action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
+							</td>
+						</tr>
+					</table>
 
-						<f:facet name="header">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								style="text-align: center;" headerClass="icePanelPopupHeader">
-								<ice:outputText style="color: #FFFFFF;" value="Mensaje" />
-							</ice:panelGrid>
-						</f:facet>
-
-						<f:facet name="body">
-							<ice:panelGrid cellpadding="0" cellspacing="0"
-								styleClass="font: 11px / 17px tahoma;">
-								<center>
-									<ice:outputText
-										value="#{registrarPlancha.mensajePopupExcepciones}"
-										styleClass="textoLabelLeft" escape="false" />
-								</center>
-								<br />
-								<br />
-								<table border="0" align="center" cellpadding="0" cellspacing="0"
-									background="">
-									<tr>
-										<th align="center" style="color: #D4D4D4">
-											<ice:commandButton image="../imagenes/boton_salir.gif"
-												action="#{registrarPlancha.ocultarPopupExcepciones}" />
-										</th>
-									</tr>
-									<tr>
-									</tr>
-								</table>
-
-							</ice:panelGrid>
-						</f:facet>
-
-					</ice:panelPopup>
-
-					<ice:panelPopup id="confirmarPopup" draggable="true"
-						visible="#{registrarPlancha.visibleConfirmar}" modal="true"
-						rendered="#{registrarPlancha.visibleConfirmar}"
-						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
-
-						<f:facet name="header">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								style="text-align: center;" headerClass="icePanelPopupHeader">
-								<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
-							</ice:panelGrid>
-						</f:facet>
-
-						<f:facet name="body">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								styleClass="font: 11px / 17px tahoma;">
-								<center>
-									<table>
-										<tr>
-											<td>
-												<ice:graphicImage
-													value="../imagenes/Symbol-Exclamation.png" />
-											</td>
-											<td>
-												<ice:outputText
-													value="#{registrarPlancha.mensajeConfirmacion}"
-													styleClass="textoLabel" />
-											</td>
-										</tr>
-									</table>
-
-								</center>
-								<br />
-								<table border="0" align="center" cellpadding="0" cellspacing="0">
-									<tr>
-										<td >
-											<ice:commandButton value="Si" style="padding-left:7px;padding-right:7px"
-												action="#{registrarPlancha.registrarPlancha}"
-												onclick="disableButton(this);" />
-										</td>
-										<td style="padding-left:5px;padding-right:5px"></td>
-										<td>
-											<ice:commandButton style="padding-left:5px;padding-right:5px"
-												action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
-										</td>
-									</tr>
-								</table>
-
-							</ice:panelGrid>
-						</f:facet>
-					</ice:panelPopup>
-
-					<ice:panelPopup id="confirmarEnviar" draggable="true"
-						visible="#{registrarPlancha.visibleConfirmarEnviar}"
-						rendered="#{registrarPlancha.visibleConfirmarEnviar}" modal="true"
-						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
-
-						<f:facet name="header">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								style="text-align: center;" headerClass="icePanelPopupHeader">
-								<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
-							</ice:panelGrid>
-						</f:facet>
-
-						<f:facet name="body">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								styleClass="font: 11px / 17px tahoma;">
-								<center>
-									<table>
-										<tr>
-											<td>
-												<ice:graphicImage
-													value="../imagenes/Symbol-Exclamation.png" />
-											</td>
-											<td>
-												<ice:outputText
-													value="#{registrarPlancha.mensajeConfirmacion}"
-													styleClass="textoLabel" />
-											</td>
-										</tr>
-									</table>
-
-								</center>
-								<br />
-								<table border="0" align="center" cellpadding="0" cellspacing="0">
-									<tr>
-										<td>
-											<ice:commandButton value="Si" style="padding-left:7px;padding-right:7px"
-												action="#{registrarPlancha.actionFinalizarEnviarPlancha}"
-												onclick="disableButton(this);" />
-										</td>
-										<td style="padding-left:5px;padding-right:5px"></td>
-										<td>
-											<ice:commandButton style="padding-left:5px;padding-right:5px"
-												action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
-										</td>
-									</tr>
-								</table>
-
-							</ice:panelGrid>
-						</f:facet>
-					</ice:panelPopup>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
 
 
 
-					<ice:panelPopup id="confirmarImprimir" draggable="true"
-						visible="#{registrarPlancha.visibleConfirmarImprimir}"
-						rendered="#{registrarPlancha.visibleConfirmarImprimir}"
-						modal="true"
-						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
+		<ice:panelPopup id="confirmarImprimir" draggable="true"
+			visible="#{registrarPlancha.visibleConfirmarImprimir}"
+			rendered="#{registrarPlancha.visibleConfirmarImprimir}" modal="true"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
 
-						<f:facet name="header">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								style="text-align: center;" headerClass="icePanelPopupHeader">
-								<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
-							</ice:panelGrid>
-						</f:facet>
+			<f:facet name="header">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
 
-						<f:facet name="body">
-							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
-								styleClass="font: 11px / 17px tahoma;">
-								<center>
-									<table>
-										<tr>
-											<td>
-												<ice:graphicImage
-													value="../imagenes/Symbol-Exclamation.png" />
-											</td>
-											<td>
-												<ice:outputText
-													value="#{registrarPlancha.mensajeConfirmacion}"
-													styleClass="textoLabel" />
-											</td>
-										</tr>
-									</table>
+			<f:facet name="body">
+				<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td><ice:graphicImage
+										value="../imagenes/Symbol-Exclamation.png" /></td>
+								<td><ice:outputText
+										value="#{registrarPlancha.mensajeConfirmacion}"
+										styleClass="textoLabel" /></td>
+							</tr>
+						</table>
 
-								</center>
-								<br />
-								<table border="0" align="center" cellpadding="0" cellspacing="0">
-									<tr>
-										<td>
-											<ice:commandButton value="Si" style="padding-left:7px;padding-right:7px"
-												action="#{registrarPlancha.actionImprimirFormatoPdf}"
-												onclick="disableButton(this);" />
-										</td>
-										<td style="padding-left:5px;padding-right:5px"></td>
-										<td>
-											<ice:commandButton style="padding-left:5px;padding-right:5px"
-												action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
-										</td>
-									</tr>
-								</table>
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td><ice:commandButton value="Si"
+									style="padding-left:7px;padding-right:7px"
+									action="#{registrarPlancha.actionImprimirFormatoPdf}"
+									onclick="disableButton(this);" /></td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td><ice:commandButton
+									style="padding-left:5px;padding-right:5px"
+									action="#{registrarPlancha.actionCloseConfirmar}" value="No" />
+							</td>
+						</tr>
+					</table>
 
-							</ice:panelGrid>
-						</f:facet>
-					</ice:panelPopup>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
 
 
-				</ice:form>
-			</body>
+	</ice:form>
+</body>
 		</html>
 	</f:view>
 </jsp:root>
