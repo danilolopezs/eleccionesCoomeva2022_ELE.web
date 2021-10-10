@@ -209,6 +209,7 @@
       <AbsolutePoint location="516,730" />
     </AutomaticBendpoints>
   </JSFFlowNavigationCase>
+
   <JSFFlowNavigationCase id="*,/gui/inicioRegistroPlanchas.jspx,goLInicioRegitroPlanchas,&lt;empty&gt;" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="509,430" />

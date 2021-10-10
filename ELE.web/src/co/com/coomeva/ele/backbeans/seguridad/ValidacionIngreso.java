@@ -38,21 +38,21 @@ public class ValidacionIngreso extends BaseVista {
 	private DTOHabilidadAsociado asociado;
 
 	public ValidacionIngreso() {
-		documento = (Long)  FacesUtils.getSessionParameter("numeroDocAsociado");
+		documento = (Long) FacesUtils.getSessionParameter("numeroDocAsociado");
 		action_ingreso();
-		/*
-		 * try { FacesUtils.setSessionParameter("tipoElecciones",
-		 * FacesUtils.getExternalCpntext().getInitParameter(
-		 * "com.coomeva.elecciones.TIPO_ELECCIONES"));
-		 * 
-		 * this.tipoEleccionesSession = (String)
-		 * FacesUtils.getSessionParameter("tipoElecciones");
-		 * this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
-		 * ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-		 * "param.tipo.elecciones.representantes"); } catch (Exception e) {
-		 * e.printStackTrace();
-		 * FacesUtils.addErrorMessage("Se presento un error Inesperado"); }
-		 */
+		try {
+
+			FacesUtils.setSessionParameter("tipoElecciones",
+					FacesUtils.getExternalCpntext().getInitParameter("com.coomeva.elecciones.TIPO_ELECCIONES"));
+
+			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
+			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesUtils.addErrorMessage("Se presento un error Inesperado");
+		}
+
 	}
 
 	/**
