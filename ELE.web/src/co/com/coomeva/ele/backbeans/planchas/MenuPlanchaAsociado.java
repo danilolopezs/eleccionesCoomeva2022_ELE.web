@@ -29,7 +29,9 @@ public class MenuPlanchaAsociado {
 	public String salir(){
 		FacesUtils.getSession().removeAttribute("asociado");
 		FacesUtils.getSession().removeAttribute("delegadosZona");
-		return "goLInicioRegitroPlanchas";
+		FacesUtils.getSession().removeAttribute("numeroDocAsociado");
+		return "goInicioAsociado";
+	//	return "goLInicioRegitroPlanchas";
 	}
 
 	public boolean isRenderRegistro() {
