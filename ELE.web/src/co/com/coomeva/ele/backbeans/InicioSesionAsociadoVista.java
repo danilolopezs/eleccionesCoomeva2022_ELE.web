@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
@@ -13,6 +15,7 @@ import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPrincipal;
 import co.com.coomeva.ele.delegado.DelegadoSuplente;
 import co.com.coomeva.ele.delegado.DelegadoZona;
+import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.entidades.planchas.EleCabPlancha;
 import co.com.coomeva.ele.entidades.planchas.EleExperienciaLaboral;
 import co.com.coomeva.ele.entidades.planchas.ElePParametros;
@@ -23,6 +26,7 @@ import co.com.coomeva.ele.json.RequestRest;
 import co.com.coomeva.ele.json.RespuestaWS;
 import co.com.coomeva.ele.logica.LogicaAutenticacion;
 import co.com.coomeva.ele.modelo.EleAsociadoDTO;
+import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
 import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
@@ -65,12 +69,18 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				RequestBodyVO body = new RequestBodyVO(token, login, password);
 				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
 				RespuestaWS respuestaWS = request.getRespuesta();
-				if (respuestaWS.getStatusCode().equals("0")) {
-					if (respuestaWS.getClient() != null) {
-						visible = true;
+				if (respuestaWS.getStatusCode().equals("0") || respuestaWS.getStatusCode().equals("770")
+						|| respuestaWS.getStatusCode().equals("1500")) {
+					visible = Boolean.TRUE;
+					if (respuestaWS.getClient() != null) {						
 						FacesUtils.setSessionParameter("numeroDocAsociado",
 								Long.parseLong(respuestaWS.getClient().getUser()));
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
+					} else {
+						if (existeUsuario()) {
+							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
+							validacionInformacionPlanchas(login);
+						}
 					}
 				} else {
 					exceptionGenery(respuestaWS.getDescStatusCode());
@@ -85,6 +95,10 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			returnString = "";
 		}
 		return "";
+	}
+	
+	private boolean existeUsuario() throws NumberFormatException, Exception {		
+		return DelegadoAsociado.getInstance().consultarInformacionBasicaAsociado(Long.parseLong(login)) != null;
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {
