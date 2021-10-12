@@ -78,10 +78,7 @@ public class LogicaZona extends EleZonasDAO {
 		if (isAsesor) {
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
-			//elZona = DelegadoZona.getInstance().consultarZona(elZona.getZonEspecial());
-			
-			//hay que quitarlo cuando se terminen las pruebas de ingreso
-			elZona = DelegadoZona.getInstance().consultarZona("05");
+			elZona = DelegadoZona.getInstance().consultarZona(elZona.getZonEspecial());
 		}else{
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());

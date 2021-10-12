@@ -95,35 +95,31 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
 					identificacion);
 
-			/*
-			 * Date dateToday = new Date();
-			 * 
-			 * Parametro parametroIni =
-			 * DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-			 * "codFechaIniInscripcion"); //envia 5 para traer la fecha Parametro
-			 * parametroFin =
-			 * DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-			 * "codFechaFinInscripcion");//envia 6 para traer la fecha
-			 * 
-			 * ElePParametros elePParametrosIni = parametroIni.getParametro();
-			 * ElePParametros elePParametrosFin = parametroFin.getParametro();
-			 * 
-			 * Date dateFechaIniInscrpcion =
-			 * ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
-			 * "dd-MM-yyyy hh:mm:ss a"); Date dateFechaFinInscrpcion =
-			 * ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
-			 * "dd-MM-yyyy hh:mm:ss a");
-			 * 
-			 * 
-			 * // se comenta mientras se prueba el ingreso if (elePParametrosIni != null &&
-			 * elePParametrosFin != null) { if (dateToday.compareTo(dateFechaIniInscrpcion)
-			 * < 0) { throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-			 * "msgFechaInscrpcionExpired")); }
-			 * 
-			 * if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) { throw new
-			 * Exception(UtilAcceso.getParametroFuenteS("mensajes",
-			 * "msgFechaInscrpcionExpired")); } }
-			 */
+			Date dateToday = new Date();
+
+			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+					"codFechaIniInscripcion"); // envia 5 para traer la fecha
+			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+					"codFechaFinInscripcion");// envia 6 para traer la fecha
+
+			ElePParametros elePParametrosIni = parametroIni.getParametro();
+			ElePParametros elePParametrosFin = parametroFin.getParametro();
+
+			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
+					"dd-MM-yyyy hh:mm:ss a");
+			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
+					"dd-MM-yyyy hh:mm:ss a");
+
+			// se comenta mientras se prueba el ingreso
+			if (elePParametrosIni != null && elePParametrosFin != null) {
+				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
+					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
+				}
+
+				if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) {
+					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
+				}
+			}
 
 			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
 					+ asociadoDTO.getNombre().toString();
