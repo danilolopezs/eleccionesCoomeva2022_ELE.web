@@ -35,9 +35,6 @@
 
 	<session-config>
 		<session-timeout>240</session-timeout>
-		 <cookie-config>
-	    <http-only>true</http-only>
-	   </cookie-config>
 	</session-config>
 	<!-- Fin Inicio Inicio sentencias sesion -->
 

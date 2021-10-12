@@ -404,7 +404,7 @@ public class LogicaGenerador {
 			// loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
 			// "lblFechaCorte");
 			String ttlRegional = loaderResourceElements
-					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional");
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblRegional");
 			String ttlTitulo = "INFORME NOVEDADES APLICADAS";
 
 			WritableSheet sheet = null;
@@ -708,7 +708,7 @@ public class LogicaGenerador {
 			String ttlFecha = "Fecha";
 			String ttlTipoNovedad = "Tipo Novedad";
 			String ttlRegional = loaderResourceElements
-					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaRegional");
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblRegional");
 			String ttlZona = loaderResourceElements
 					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZona");
 			String ttlNumeroNovedades = "Número Novedades";

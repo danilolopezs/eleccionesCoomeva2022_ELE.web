@@ -1041,7 +1041,7 @@ public class LogicaReportes {
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
-			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
+			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblRegional"),font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
@@ -1207,7 +1207,7 @@ public class LogicaReportes {
 					cell.setBackgroundColor(HdColor);
 					table.addCell(cell);
 					
-					cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
+					cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblRegional"),font));
 					cell.setBackgroundColor(HdColor);
 					table.addCell(cell);
 					
@@ -1303,7 +1303,7 @@ public class LogicaReportes {
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);									
 			
-			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteRegional"),font));
+			cell =	new PdfPCell(new Paragraph(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblRegional"),font));
 			cell.setBackgroundColor(HdColor);
 			table.addCell(cell);
 			
