@@ -8,6 +8,7 @@ import org.hibernate.criterion.Order;
 
 
 import co.com.coomeva.ele.delegado.DelegadoAsesor;
+import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoClimae;
 import co.com.coomeva.ele.delegado.DelegadoLico;
 import co.com.coomeva.ele.delegado.DelegadoSalud;
@@ -66,13 +67,12 @@ public class LogicaZona extends EleZonasDAO {
 		EleZonas elZona = new EleZonas();
 		EleZonasFinanciero eleZonasFinanciero = new EleZonasFinanciero();
 
-		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
-		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);//table="ELE_ASESORES" schema="ELECCION"
-		boolean existAsesorMP = false;//DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
-		boolean existAsesorSrh = false;// DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
+		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);//elepromot
+		boolean existAsesorSrh = DelegadoLico.getInstance().existAsesor(nroCabIdentificacion);// ele_asocia
+		boolean existAsesorPla = DelegadoAsociado.getInstance().existAsociadoEspecial(nroCabIdentificacion);//ele_asociado_especial
 
 		boolean isAsesor = false;
-		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {
+		if (existAsesorSrh||existAsesorFin||existAsesorPla) {
 			isAsesor = true;
 		}
 		if (isAsesor) {
