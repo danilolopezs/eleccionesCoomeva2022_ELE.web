@@ -23,5 +23,7 @@ public class DelegadoLico {
 		return logicaLico.existAsesorFin(nroIdentificacion);
 	}
 
-
+	public boolean existAsesor(String nroIdentificacion) {
+		return logicaLico.existAsesor(nroIdentificacion);
+	}
 }

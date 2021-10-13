@@ -12,63 +12,79 @@ import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
 import co.com.coomeva.ele.entidades.salud.HibernateSessionFactorySalud;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
-
 public class LogicaLico {
 
 	private static LogicaLico instance;
 
-	//Constructor de la clase
+	// Constructor de la clase
 	private LogicaLico() {
 	}
 
-	//Patròn Singular
+	// Patròn Singular
 	public static LogicaLico getInstance() {
 		if (instance == null) {
 			instance = new LogicaLico();
 		}
 		return instance;
 	}
+
 	/**
 	 * Valida si es asesor en financiera
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param nroIdentificacion
 	 * @return boolean
 	 */
-	public boolean existAsesorFin(String nroIdentificacion){
+	public boolean existAsesorFin(String nroIdentificacion) {
 
-		Session session=null;
-		Query query=null;
-		session= HibernateSessionFactoryElecciones2012.getSession();//GENERANDO CONFLICTO
+		Session session = null;
+		Query query = null;
+		session = HibernateSessionFactoryElecciones2012.getSession();// GENERANDO CONFLICTO
 		query = session.getNamedQuery("asesor.getAsesor");
 		query.setString(0, nroIdentificacion);
 
 		List<Object[]> returnList = new ArrayList<Object[]>();
-		returnList=	query.list();
-		
+		returnList = query.list();
+
 		if (returnList.size() == 0) {
 			return false;
 		}
-		
+
 		String eprcdgo = "";
 		Long tiempoRetiro = 0l;
-		
+
 		for (Object[] objects : returnList) {
-			if (objects[0]!=null) {
+			if (objects[0] != null) {
 				eprcdgo = objects[0].toString();
 			}
-			if (objects[2]!=null) {
+			if (objects[2] != null) {
 				tiempoRetiro = Long.valueOf(objects[2].toString());
 			}
 			break;
 		}
-		
-		
-		if (!(eprcdgo.equals("A")) && (tiempoRetiro >3))
-		{
+
+		if (!(eprcdgo.equals("A")) && (tiempoRetiro > 3)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
+	/**
+	 * Valida si es asesor
+	 * 
+	 * @author
+	 * @param nroIdentificacion
+	 * @return boolean
+	 */
+	public boolean existAsesor(String nroIdentificacion) {
+
+		Session session = null;
+		Query query = null;
+		session = HibernateSessionFactoryElecciones2012.getSession();
+		query = session.getNamedQuery("asesor.getAsesorActivo");
+		query.setString(0, nroIdentificacion);
+		return !query.list().isEmpty();
+	}
+
 }

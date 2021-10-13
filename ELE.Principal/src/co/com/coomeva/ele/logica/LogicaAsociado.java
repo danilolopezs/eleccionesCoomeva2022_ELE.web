@@ -1611,4 +1611,17 @@ public class LogicaAsociado extends AsoelecfDAO {
 		}
 	}
 
+
+
+	public boolean existAsociadoEspecial(String nroCabIdentificacion) {
+		Session session = null;
+		Query query = null;
+		session = HibernateSessionFactoryElecciones2012.getSession();
+		query = session.getNamedQuery("asesor.getAsociadoEspecial");
+		query.setString(0, nroCabIdentificacion);
+		return !query.list().isEmpty();
+	}
+	
+	
+
 }

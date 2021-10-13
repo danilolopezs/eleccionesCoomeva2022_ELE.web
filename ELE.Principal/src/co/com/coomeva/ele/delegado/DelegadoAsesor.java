@@ -14,25 +14,24 @@ public class DelegadoAsesor {
 	private static DelegadoAsesor instance;
 	private static LogicaAsesor logicaAsesor;
 
-	//Constructor de la clase
+	// Constructor de la clase
 	private DelegadoAsesor() {
 	}
 
-	//Patròn Singular
+	// Patròn Singular
 	public static DelegadoAsesor getInstance() {
 		if (instance == null) {
 			instance = new DelegadoAsesor();
 			logicaAsesor = LogicaAsesor.getInstance();
 		}
+		if (logicaAsesor == null) {
+			logicaAsesor = LogicaAsesor.getInstance();
+		}
 		return instance;
 	}
-
 
 	public boolean existAsesor(String nroIdentificacion) throws Exception {
 		return logicaAsesor.existAsesor(nroIdentificacion);
 	}
-	
-
-
 
 }
