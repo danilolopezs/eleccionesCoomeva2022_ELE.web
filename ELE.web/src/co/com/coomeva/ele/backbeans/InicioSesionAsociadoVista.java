@@ -79,7 +79,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
 							validacionInformacionPlanchas(login);
 						}else {
-							exceptionGenery("")
+							exceptionGenery("El usuario no se encuentra registrado.");
 						}
 					}
 				} else {
