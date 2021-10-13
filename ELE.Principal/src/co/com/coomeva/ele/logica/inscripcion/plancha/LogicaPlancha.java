@@ -274,12 +274,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 								+ "</br>");
 			}
 
-			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
-				// throw new
-				// EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes",
-				// "vldHorasDemocracia"));
-				excepciones.append("- " + UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia") + "</br>");
-			}
+//			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
+//				// throw new
+//				// EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes",
+//				// "vldHorasDemocracia"));
+//				excepciones.append("- " + UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia") + "</br>");
+//			}
 
 //			String msgValidacionEmpleadoFechaRetiro = validarEmpleadoFechaRetiro(Long
 //					.parseLong(nroIdentificacionMiembro));
@@ -1505,7 +1505,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 	 * @return
 	 * @throws Exception
 	 */
-	public Long obtenerConsecutivoElePlanchaAsociadoAud() throws Exception {
+	private Long obtenerConsecutivoElePlanchaAsociadoAud() throws Exception {
 		Long consecutivo = null;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
@@ -1513,9 +1513,10 @@ public class LogicaPlancha implements ILogicaPlancha {
 			consecutivo = (Long) query.uniqueResult();
 		} catch (Exception e) {
 			throw e;
-		} finally {
-			session.close();
-		}
+		} 
+//		finally {
+//			session.close();
+//		}
 		return consecutivo;
 	}
 
