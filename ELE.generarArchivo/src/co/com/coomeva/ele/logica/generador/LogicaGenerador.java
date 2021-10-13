@@ -399,7 +399,7 @@ public class LogicaGenerador {
 			String ttlFechaProceso = loaderResourceElements
 					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblReporteFechaNovedad");
 			String ttlZona = loaderResourceElements
-					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaRegional");
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZonaElectoral");
 			// String ttlFechaCorte =
 			// loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
 			// "lblFechaCorte");
