@@ -230,9 +230,9 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 			if (DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion, elZona) && !elZona.getZonEspecial()
 					.equalsIgnoreCase(UtilAcceso.getParametroFuenteS("parametros", "esZonaEspecial"))) {
 				// mario
-				// throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
-				// "msgNoEmpleadoNatural")+" "+nroIdentificacion+"
-				// "+UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2"));
+//				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural") + " "
+//						+ nroIdentificacion + "				 "
+//						+ UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2"));
 			}
 
 		}

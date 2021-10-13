@@ -130,9 +130,6 @@ public class LogicaAsociado extends AsoelecfDAO {
 		if (identificacion == null) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noNumIdentificacion"));
 		}
-
-//		Criteria criteria =  HibernateSessionFactoryElecciones2012.getSession().createCriteria(Asoelecf.class);
-//		criteria.add(Restrictions.eq("wnitcli", identificacion));
 		Session session = null;
 		Query query = null;
 		session = HibernateSessionFactoryElecciones2012.getSession();
@@ -173,15 +170,6 @@ public class LogicaAsociado extends AsoelecfDAO {
 				aso.setWindhab("");
 			}
 			break;
-		}
-		try {
-
-			// aso = (Asoelecf) criteria.uniqueResult();
-			if (aso == null) {
-				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociadoHabilidad"));
-			}
-		} catch (Exception e) {
-			throw e;
 		}
 		return aso;
 	}

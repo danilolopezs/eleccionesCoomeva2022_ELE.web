@@ -69,7 +69,7 @@ public class LogicaZona extends EleZonasDAO {
 		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
 		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);//table="ELE_ASESORES" schema="ELECCION"
 		boolean existAsesorMP = false;//DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
-		boolean existAsesorSrh = true;// DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
+		boolean existAsesorSrh = false;// DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
 
 		boolean isAsesor = false;
 		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {
@@ -78,7 +78,6 @@ public class LogicaZona extends EleZonasDAO {
 		if (isAsesor) {
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
-			elZona = DelegadoZona.getInstance().consultarZona(elZona.getZonEspecial());
 		}else{
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());

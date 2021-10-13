@@ -1,5 +1,6 @@
 package co.com.coomeva.ele.backbeans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				if (respuestaWS.getStatusCode().equals("0") || respuestaWS.getStatusCode().equals("770")
 						|| respuestaWS.getStatusCode().equals("1500")) {
 					visible = Boolean.TRUE;
-					if (respuestaWS.getClient() != null) {						
+					if (respuestaWS.getClient() != null) {
 						FacesUtils.setSessionParameter("numeroDocAsociado",
 								Long.parseLong(respuestaWS.getClient().getUser()));
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
@@ -96,8 +97,8 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		}
 		return "";
 	}
-	
-	private boolean existeUsuario() throws NumberFormatException, Exception {		
+
+	private boolean existeUsuario() throws NumberFormatException, Exception {
 		return DelegadoAsociado.getInstance().consultarInformacionBasicaAsociado(Long.parseLong(login)) != null;
 	}
 
@@ -112,21 +113,23 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			Date dateToday = new Date();
 
 			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaIniInscripcion"); // envia 5 para traer la fecha
+					"codFechaIniInscripcion");
 			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaFinInscripcion");// envia 6 para traer la fecha
+					"codFechaFinInscripcion");
 
 			ElePParametros elePParametrosIni = parametroIni.getParametro();
-			ElePParametros elePParametrosFin = parametroFin.getParametro();
 
-			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getValorParametro(),
-					"dd-MM-yyyy hh:mm:ss a");
-			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getValorParametro(),
-					"dd-MM-yyyy hh:mm:ss a");
+			ElePParametros elePParametrosFin = parametroFin.getParametro();
+			Date dateFechaIniInscrpcion =null;
+			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
+					"dd-MM-yyyy hh:mm:ss");
 
 			// se comenta mientras se prueba el ingreso
 			if (elePParametrosIni != null && elePParametrosFin != null) {
 				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
+					msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
+					btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblCerrar");
+					returnString = "";
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
 				}
 

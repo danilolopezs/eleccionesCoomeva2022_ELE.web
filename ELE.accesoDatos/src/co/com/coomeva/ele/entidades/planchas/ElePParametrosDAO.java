@@ -1,12 +1,14 @@
 package co.com.coomeva.ele.entidades.planchas;
 
 import java.util.List;
-import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+
+import co.com.coomeva.ele.entidades.climae.HibernateSessionFactoryClimae;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -51,10 +53,28 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 	}
 
 	public ElePParametros findById(java.lang.Long id) {
-		//log.debug("getting ElePParametros instance with id: " + id);
+		// log.debug("getting ElePParametros instance with id: " + id);
 		try {
-			ElePParametros instance = (ElePParametros) getSession2012().get(
-					"co.com.coomeva.ele.entidades.planchas.ElePParametros", id);
+			Session session = null;
+			Query query = null;
+			session = HibernateSessionFactoryClimae.getSession();
+			query = session.getNamedQuery("asociado.eleparametro");
+			query.setLong(0, id);
+
+			List<Object[]> listObject;
+			listObject = query.list();
+			if (listObject.size() == 0) {
+				return null;
+			}
+			ElePParametros instance = null;
+			for (Object[] object : listObject) {
+				instance = new ElePParametros();
+				instance.setCodigoParametro(Long.parseLong(object[0].toString()));
+				instance.setNombreParametro(object[2].toString());
+				instance.setTipoParametro(object[1].toString());
+				instance.setCodigoEstado(Long.parseLong( object[3].toString()));
+				break;
+			}
 			return instance;
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -62,12 +82,12 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 			throw re;
 		}
 	}
-	
+
 	public ElePParametros findById2012(java.lang.Long id) {
 		log.debug("getting ElePParametros instance with id: " + id);
 		try {
-			ElePParametros instance = (ElePParametros) getSession2012().get(
-					"co.com.coomeva.ele.entidades.planchas.ElePParametros", id);
+			ElePParametros instance = (ElePParametros) getSession2012()
+					.get("co.com.coomeva.ele.entidades.planchas.ElePParametros", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -78,11 +98,9 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 	public List findByExample(ElePParametros instance) {
 		log.debug("finding ElePParametros instance by example");
 		try {
-			List results = getSession().createCriteria(
-					"co.com.coomeva.ele.entidades.planchas.ElePParametros")
+			List results = getSession().createCriteria("co.com.coomeva.ele.entidades.planchas.ElePParametros")
 					.add(Example.create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -91,11 +109,9 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding ElePParametros instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding ElePParametros instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from ElePParametros as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from ElePParametros as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -136,8 +152,7 @@ public class ElePParametrosDAO extends BaseHibernateDAOPlanchas {
 	public ElePParametros merge(ElePParametros detachedInstance) {
 		log.debug("merging ElePParametros instance");
 		try {
-			ElePParametros result = (ElePParametros) getSession().merge(
-					detachedInstance);
+			ElePParametros result = (ElePParametros) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
