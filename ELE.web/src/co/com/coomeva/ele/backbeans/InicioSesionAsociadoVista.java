@@ -1,6 +1,5 @@
 package co.com.coomeva.ele.backbeans;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -10,37 +9,31 @@ import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
-import co.com.coomeva.ele.delegado.DelegadoParametros;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPrincipal;
 import co.com.coomeva.ele.delegado.DelegadoSuplente;
 import co.com.coomeva.ele.delegado.DelegadoZona;
-import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.entidades.planchas.EleCabPlancha;
 import co.com.coomeva.ele.entidades.planchas.EleExperienciaLaboral;
-import co.com.coomeva.ele.entidades.planchas.ElePParametros;
 import co.com.coomeva.ele.entidades.planchas.ElePlanchas;
 import co.com.coomeva.ele.entidades.planchas.EleZonas;
 import co.com.coomeva.ele.json.RequestBodyVO;
 import co.com.coomeva.ele.json.RequestRest;
 import co.com.coomeva.ele.json.RespuestaWS;
-import co.com.coomeva.ele.logica.LogicaAutenticacion;
 import co.com.coomeva.ele.modelo.EleAsociadoDTO;
-import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
 import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
-import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.ele.util.Validador;
-import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
-import co.com.coomeva.util.date.ManipulacionFechas;
-import net.sf.cglib.asm.attrs.RuntimeInvisibleAnnotations;
 
 public class InicioSesionAsociadoVista extends BaseVista {
+	
+	private final Log log = LogFactory.getLog(InicioSesionAsociadoVista.class);
+	
 	private String documento;
 	private boolean visible = false;
 	private boolean valid = false;
@@ -48,7 +41,6 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private String returnString;
 	private String bienvenido;
 	private String btnCerrar;
-	private final Log log = LogFactory.getLog(InicioSesionAsociadoVista.class);
 	private java.lang.String login = "";
 	private java.lang.String password = "";
 	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
