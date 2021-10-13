@@ -274,12 +274,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 								+ "</br>");
 			}
 
-			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
-				// throw new
-				// EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes",
-				// "vldHorasDemocracia"));
-				excepciones.append("- " + UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia") + "</br>");
-			}
+//			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
+//				// throw new
+//				// EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes",
+//				// "vldHorasDemocracia"));
+//				excepciones.append("- " + UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia") + "</br>");
+//			}
 
 //			String msgValidacionEmpleadoFechaRetiro = validarEmpleadoFechaRetiro(Long
 //					.parseLong(nroIdentificacionMiembro));
