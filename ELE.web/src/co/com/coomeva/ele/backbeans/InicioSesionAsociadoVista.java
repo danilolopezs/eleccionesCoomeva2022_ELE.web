@@ -67,21 +67,11 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				RequestBodyVO body = new RequestBodyVO(token, login, password);
 				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
 				RespuestaWS respuestaWS = request.getRespuesta();
-				if (respuestaWS.getStatusCode().equals("0") || respuestaWS.getStatusCode().equals("770")
-						|| respuestaWS.getStatusCode().equals("1500")) {
-					visible = Boolean.TRUE;
-					if (respuestaWS.getClient() != null) {
-						FacesUtils.setSessionParameter("numeroDocAsociado",
-								Long.parseLong(respuestaWS.getClient().getUser()));
-						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
-					} else {
-						if (existeUsuario()) {							
-							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
-							validacionInformacionPlanchas(login);
-						}else {
-							exceptionGenery("")
-						}
-					}
+				if (respuestaWS.getStatusCode().equals("0")) {
+					visible = Boolean.TRUE;					
+					FacesUtils.setSessionParameter("numeroDocAsociado",
+							Long.parseLong(respuestaWS.getClient().getUser()));
+					validacionInformacionPlanchas(respuestaWS.getClient().getUser());
 				} else {
 					exceptionGenery(respuestaWS.getDescStatusCode());
 					returnString = "";
