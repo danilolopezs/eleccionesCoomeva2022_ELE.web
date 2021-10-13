@@ -5,9 +5,9 @@
 
 
 <hibernate-mapping>
-<!--
+	<!--
 		######################################################################################
-		## 1.## ## Consulta los anños de retiro del asociado 
+		## 1.## ## Consulta los años de retiro del asociado 
 		##  trae el estado del asociadiado r-> retirado A -> activo
 		##  y el documento
 		######################################################################################
@@ -1338,4 +1338,24 @@
 		]]>
 	</sql-query>
 
+		<!-- ##################################################### 
+	##### Consulta de información basica de un Asociado   ####
+	######################################################*-->
+	<sql-query name="asociado.find">
+		<return-scalar column="NITCLI" type="java.lang.String" />
+		<return-scalar column="NOMCLI" type="java.lang.String" />
+		<return-scalar column="NOMTIT" type="java.lang.String" />
+		<return-scalar column="FECCON" type="java.lang.String" />
+		<return-scalar column="FECING" type="java.lang.String" />
+		<return-scalar column="AGCVIN" type="java.lang.String" />
+		<return-scalar column="EMAIL" type="java.lang.String" />
+		<![CDATA[
+		SELECT a.nitcli NITCLI, trim(a.nomcl1) NOMCLI, a.feccon FECCON, a.fecing FECING,trim(b.nomtit) NOMTIT, 
+        trim(db2util.getdir(dec(a.nitcli),char('DIN')))EMAIL,
+        CASE a.codcii WHEN ? THEN trim(DB2UTIL.GETZONA(a.AGCVIN)) ELSE trim(DB2UTIL.GETZONA(a.AGCVIN))END AGCVIN
+		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT = B.NUMINT
+		WHERE a.asocia = ? AND a.nitcli = ? AND a.estaso >=? AND a.estaso <=? AND a.tipcli = ?
+		]]>
+	</sql-query>
+	
 </hibernate-mapping>
