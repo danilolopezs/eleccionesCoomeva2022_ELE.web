@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.faces.event.ValueChangeEvent;
 
+import org.apache.log4j.Logger;
+
 import co.com.coomeva.ele.delegado.DelegadoFormatoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoFormatoPlancha;
@@ -38,6 +40,8 @@ import com.icesoft.faces.component.ext.HtmlInputText;
  * 
  */
 public class RegistrarPlancha extends BaseVista {
+	
+	Logger log = Logger.getLogger(RegistrarPlancha.class);
 
 	public static final String COD_ESTADO_PLANCHA_REGISTRADA = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
@@ -105,7 +109,7 @@ public class RegistrarPlancha extends BaseVista {
 	private boolean esModificable;
 
 	public RegistrarPlancha() {
-		System.out.println("Leega plancha");
+		log.info("Leega plancha");
 		List<DTOPlanchaAsociado> planchaAsociado = null;
 
 		try {
@@ -176,7 +180,7 @@ public class RegistrarPlancha extends BaseVista {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje("Se presento un error Inesperado");
 		}

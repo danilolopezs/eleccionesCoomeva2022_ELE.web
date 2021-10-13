@@ -22,10 +22,10 @@ public class FiltroRegistroPlanchas implements Filter {
 
 		if (session == null) {
 			session = req.getSession(true);
-			resp.sendRedirect("../inicioRegistroPlanchas.jspx");
+			resp.sendRedirect("../inicioAsociado.jspx");
 		} else {
 			if ((session.getAttribute("asociado") == null) && (session.getAttribute("numeroDocAsociado") == null))
-				resp.sendRedirect("../inicioRegistroPlanchas.jspx");
+				resp.sendRedirect("../inicioAsociado.jspx");
 		}
 		chain.doFilter(request, response); // continue filtering
 	}

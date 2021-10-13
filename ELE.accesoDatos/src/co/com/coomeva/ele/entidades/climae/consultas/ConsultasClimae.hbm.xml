@@ -187,10 +187,8 @@
 	<sql-query name="consulta.si.es.asociado.persona.juridica">
 		<return-scalar column="NUMINT" type="java.lang.Long" />
 		<![CDATA[
-			SELECT CL.NUMINT
-			FROM ELECDB.CLIMAE CL
-			WHERE CL.NITCLI = :nitcli
-			AND CL.TIPCLI = 1									
+			SELECT CL.NUMINT FROM ELECDB.ELEASOMUL CL WHERE CL.NITCLI = :nitcli
+			AND CL.TIPCLI = 1
 		]]>
 	</sql-query>
 

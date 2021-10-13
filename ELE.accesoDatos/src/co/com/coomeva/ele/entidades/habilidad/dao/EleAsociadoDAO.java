@@ -199,7 +199,7 @@ public class EleAsociadoDAO implements IEleAsociadoDAO {
             propertyName + ", value: " + value);
 
         try {
-            String queryString = "from EleAsociado as model where model." +
+            String queryString = "FROM ELEASOCIA as model where model." +
                 propertyName + "= ?";
             Query queryObject = getSession().createQuery(queryString);
             queryObject.setParameter(0, value);

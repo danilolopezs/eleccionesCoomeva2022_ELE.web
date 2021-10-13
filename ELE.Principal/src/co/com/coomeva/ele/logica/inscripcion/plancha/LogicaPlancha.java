@@ -1650,6 +1650,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 		for (Object[] objects : empleadosActivosGEC) {
 			if (objects != null && numeroDocumento.equals((Long) objects[0])) {
 				fechaRetiro = (Date) objects[1];
+				break;
 			}
 		}
 

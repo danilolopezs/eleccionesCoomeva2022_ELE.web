@@ -75,9 +75,11 @@ public class InicioSesionAsociadoVista extends BaseVista {
 								Long.parseLong(respuestaWS.getClient().getUser()));
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
 					} else {
-						if (existeUsuario()) {
+						if (existeUsuario()) {							
 							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
 							validacionInformacionPlanchas(login);
+						}else {
+							exceptionGenery("")
 						}
 					}
 				} else {
