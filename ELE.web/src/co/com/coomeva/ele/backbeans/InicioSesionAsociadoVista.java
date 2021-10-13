@@ -67,6 +67,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 				RequestBodyVO body = new RequestBodyVO(token, login, password);
 				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
 				RespuestaWS respuestaWS = request.getRespuesta();
+
 				if (respuestaWS.getStatusCode().equals("0")) {
 					visible = Boolean.TRUE;					
 					FacesUtils.setSessionParameter("numeroDocAsociado",
