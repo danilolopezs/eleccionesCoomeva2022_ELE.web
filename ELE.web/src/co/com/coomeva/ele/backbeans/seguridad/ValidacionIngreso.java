@@ -9,11 +9,14 @@ import org.apache.commons.logging.LogFactory;
 import co.com.coomeva.ele.backbeans.BaseVista;
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoLogAsociado;
+import co.com.coomeva.ele.delegado.DelegadoParametros;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
 import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
+import co.com.coomeva.ele.entidades.planchas.ElePParametros;
 import co.com.coomeva.ele.exception.EleccionesDelegadosException;
 import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePlanchaDTO;
+import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.ele.util.LectorParametros;
@@ -132,18 +135,19 @@ public class ValidacionIngreso extends BaseVista {
 				 */
 				Date dateToday = new Date();
 
-				ParametroPlanchaDTO parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(
-						UtilAcceso.getParametroFuenteL("parametros", "campo.param.registro.inicio"),
-						UtilAcceso.getParametroFuenteL("parametros", "campo.param.registro.tipo"));
-				ParametroPlanchaDTO parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(
-						UtilAcceso.getParametroFuenteL("parametros", "campo.param.registro.fin"),
-						UtilAcceso.getParametroFuenteL("parametros", "campo.param.registro.tipo"));
+				Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+						"codFechaIniInscripcion");
+				Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+						"codFechaFinInscripcion");
 
-				Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(parametroFechaInicial.getStrValor(),
-						"yyyy-MM-dd hh:mm:ss");
-				Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(parametroFechaFinal.getStrValor(),
-						"yyyy-MM-dd hh:mm:ss");
+				ElePParametros elePParametrosIni = parametroIni.getParametro();
 
+				ElePParametros elePParametrosFin = parametroFin.getParametro();
+				Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getNombreParametro(),
+						"dd-MM-yyyy hh:mm:ss");
+				Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
+						"dd-MM-yyyy hh:mm:ss");
+			
 				boolean habilidad = false;
 
 				if (dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
@@ -162,7 +166,7 @@ public class ValidacionIngreso extends BaseVista {
 					return "goInicioMenuAsociado";
 				} else {
 					throw new EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes", "fechaFueraRango")
-							+ ": [" + parametroFechaInicial.getStrValor() + "  -  " + parametroFechaFinal.getStrValor()
+							+ ": [" + elePParametrosIni.getNombreParametro() + "  -  " + elePParametrosFin.getNombreParametro()
 							+ "]");
 				}
 			} else {

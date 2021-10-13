@@ -120,16 +120,14 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			ElePParametros elePParametrosIni = parametroIni.getParametro();
 
 			ElePParametros elePParametrosFin = parametroFin.getParametro();
-			Date dateFechaIniInscrpcion =null;
+			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getNombreParametro(),
+					"dd-MM-yyyy hh:mm:ss");
 			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
 					"dd-MM-yyyy hh:mm:ss");
 
 			// se comenta mientras se prueba el ingreso
 			if (elePParametrosIni != null && elePParametrosFin != null) {
 				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
-					msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
-					btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblCerrar");
-					returnString = "";
 					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
 				}
 
