@@ -148,14 +148,14 @@ public class ValidacionIngreso extends BaseVista {
 				Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
 						"dd-MM-yyyy hh:mm:ss");
 			
-				boolean habilidad = false;
+				boolean validacionFecha = false;
 
 				if (dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
 						&& dateToday.getTime() <= dateFechaFinInscrpcion.getTime()) {
-					habilidad = true;
+					validacionFecha = true;
 				}
 
-				if (habilidad) {
+				if (validacionFecha) {
 					DelegadoLogAsociado.getInstance().crearRegistroLogAsociado(null,
 							UtilAcceso.getParametroFuenteS("parametros", "tipTrn_autenticacion"),
 							ObtenerIP.getInstance().getIP(), null, String.valueOf(documento), null);
