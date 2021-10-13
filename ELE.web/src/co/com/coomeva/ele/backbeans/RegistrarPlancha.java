@@ -266,6 +266,12 @@ public class RegistrarPlancha extends BaseVista {
 		}
 	}
 
+	/**
+	 * metodo que recibe un evento de cambio de estado en el valor del 
+	 * componente desde donde se invoca. 
+	 * adicionar o modificar el numero de documento de un suplente
+	 * @param v event 
+	 */
 	public void adicionarMiembroSuplente(ValueChangeEvent v) {
 		HtmlInputText inputTextCedula = (HtmlInputText) v.getComponent();
 

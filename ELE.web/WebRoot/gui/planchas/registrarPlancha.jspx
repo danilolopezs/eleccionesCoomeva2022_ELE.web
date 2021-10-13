@@ -23,13 +23,13 @@ body {
 }
 </style>
 <script type="text/javascript">
-				   if (self === top) {
-				       var antiClickjack = document.getElementById("antiClickjack");
-				       antiClickjack.parentNode.removeChild(antiClickjack);
-				   } else {
-				       top.location = self.location;
-				   }
-				</script>
+	if (self === top) {
+		var antiClickjack = document.getElementById("antiClickjack");
+		antiClickjack.parentNode.removeChild(antiClickjack);
+	} else {
+		top.location = self.location;
+	}
+</script>
 <f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
 	var="etiquetas" />
 </head>
@@ -240,21 +240,23 @@ body {
 					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
 				</tr>
 				<tr>
-					<td width="130" align="left" valign="top" bgcolor="#ABD673"><br />
-						<br /></td>
-
-					<td align="center" bgcolor="#ABD673"><br /> <br />
+					<td width="130" align="left" valign="top"> <br /></td>
+					<td align="center"><br />
 						<div align="right">
 							<ice:outputConnectionStatus
 								styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #009933"
-								showPopupOnDisconnect="true" />
-						</div></td>
+								showPopupOnDisconnect="true">
+							</ice:outputConnectionStatus>
+						</div>
+					</td>
 				</tr>
 			</table>
 
 		</div>
-
-		<!-- MENSAJES DE INFORMACION EMERGENTES -->
+		
+		<!-- ********************************************* -->
+		<!--  MENSAJES DE INFORMACION EMERGENTES - POPUPS  -->
+		<!-- ********************************************* -->
 		<ice:panelPopup id="mensaje" draggable="true" styleClass="formulario"
 			visible="#{registrarPlancha.mensajeVista.visible}" modal="true"
 			rendered="#{registrarPlancha.mensajeVista.visible}"

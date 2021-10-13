@@ -25,6 +25,11 @@ public class DelegadoPlancha {
 	private DelegadoPlancha() {
 	}
 
+	/**
+	 * singleton pattern
+	 * 
+	 * @return
+	 */
 	public static DelegadoPlancha getInstance() {
 		if (instance == null) {
 			instance = new DelegadoPlancha();
@@ -32,70 +37,62 @@ public class DelegadoPlancha {
 		return instance;
 	}
 
-	public List<DTOMiembroPlancha> adicionarMiembroPlancha(
-			List<DTOMiembroPlancha> miembros, Long numeroDocumento,
-			int posicionPlancha, Long consecutivoPlancha,
-			boolean aplicaValidaciones) throws EleccionesDelegadosException {
+	public List<DTOMiembroPlancha> adicionarMiembroPlancha(List<DTOMiembroPlancha> miembros, Long numeroDocumento,
+			int posicionPlancha, Long consecutivoPlancha, boolean aplicaValidaciones)
+			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.adicionarMiembroPlancha(miembros,
-					numeroDocumento, posicionPlancha, consecutivoPlancha,
+			return logicaPlancha.adicionarMiembroPlancha(miembros, numeroDocumento, posicionPlancha, consecutivoPlancha,
 					aplicaValidaciones);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public DTOInformacionPlancha consultarInformacionPlancha(
-			Long consecutivoPlancha) throws EleccionesDelegadosException {
+	public DTOInformacionPlancha consultarInformacionPlancha(Long consecutivoPlancha)
+			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha
-					.consultarInformacionPlancha(consecutivoPlancha);
+			return logicaPlancha.consultarInformacionPlancha(consecutivoPlancha);
+		} finally {
+			logicaPlancha = null;
+		}
+
+	}
+
+	public List<DTOPlanchaAsociado> asociadoPertenceOtraPlancha(Long numeroDocumento, Long consecutivoPlancha)
+			throws EleccionesDelegadosException {
+		try {
+			logicaPlancha = new LogicaPlancha();
+			return logicaPlancha.asociadoPertenceOtraPlancha(numeroDocumento.toString(), consecutivoPlancha);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public List<DTOPlanchaAsociado> asociadoPertenceOtraPlancha(
-			Long numeroDocumento, Long consecutivoPlancha)
+	public DTOInformacionPlancha registrarPlancha(List<DTOMiembroPlancha> miembrosTitulares,
+			List<DTOMiembroPlancha> miembrosSuplentes, Long numeroDocumento, boolean aplicaValidaciones)
 			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.asociadoPertenceOtraPlancha(numeroDocumento
-					.toString(), consecutivoPlancha);
+			return logicaPlancha.registrarPlancha(miembrosTitulares, miembrosSuplentes, numeroDocumento,
+					aplicaValidaciones);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public DTOInformacionPlancha registrarPlancha(
-			List<DTOMiembroPlancha> miembrosTitulares,
-			List<DTOMiembroPlancha> miembrosSuplentes, Long numeroDocumento,
-			boolean aplicaValidaciones) throws EleccionesDelegadosException {
+	public String modificarPlancha(List<DTOMiembroPlancha> miembros, String tipoInscrito, Long consecutivoPlancha,
+			boolean esModificable) throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.registrarPlancha(miembrosTitulares,
-					miembrosSuplentes, numeroDocumento, aplicaValidaciones);
+			return logicaPlancha.modificarMiembrosPlanchas(miembros, tipoInscrito, consecutivoPlancha, esModificable);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public String modificarPlancha(List<DTOMiembroPlancha> miembros,
-			String tipoInscrito, Long consecutivoPlancha, boolean esModificable)
-			throws EleccionesDelegadosException {
-		try {
-			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.modificarMiembrosPlanchas(miembros,
-					tipoInscrito, consecutivoPlancha, esModificable);
-		} finally {
-			logicaPlancha = null;
-		}
-	}
-	
-	public void asignarEstadoRegistradoPlancha(Long consecutivoPlancha)
-			throws EleccionesDelegadosException {
+	public void asignarEstadoRegistradoPlancha(Long consecutivoPlancha) throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
 			logicaPlancha.asignarEstadoRegistradoPlancha(consecutivoPlancha);
@@ -103,64 +100,54 @@ public class DelegadoPlancha {
 			logicaPlancha = null;
 		}
 	}
-	
 
-	public DTOInformacionPlancha finalizarEnviarPlancha(
-			List<DTOMiembroPlancha> miembrosTitulares,
-			List<DTOMiembroPlancha> miembrosSuplentes, Long consecutivoPlancha,
-			Long numDocUsuarioRegistra, boolean aplicaValidaciones,
-			boolean admiteSuplentes) throws EleccionesDelegadosException {
+	public DTOInformacionPlancha finalizarEnviarPlancha(List<DTOMiembroPlancha> miembrosTitulares,
+			List<DTOMiembroPlancha> miembrosSuplentes, Long consecutivoPlancha, Long numDocUsuarioRegistra,
+			boolean aplicaValidaciones, boolean admiteSuplentes) throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.finalizarEnviarPlancha(miembrosTitulares,
-					miembrosSuplentes, consecutivoPlancha,
+			return logicaPlancha.finalizarEnviarPlancha(miembrosTitulares, miembrosSuplentes, consecutivoPlancha,
 					numDocUsuarioRegistra, aplicaValidaciones, admiteSuplentes);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public String obtenerHtmlPlanchasAdmitidasPorRegional(Long codigoZonaElect,
-			String idUsuario, int indicador)
+	public String obtenerHtmlPlanchasAdmitidasPorRegional(Long codigoZonaElect, String idUsuario, int indicador)
 			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.obtenerHtmlPlanchasAdmitidasPorRegional(
-					codigoZonaElect, idUsuario, indicador);
-		} finally {
-			logicaPlancha = null;
-		}
-	}
-	
-	public String obtenerHtmlPlanchasAdmitidasPorZonaEspec(Long codigoZonaElect,
-			String idUsuario, int indicador)
-			throws EleccionesDelegadosException {
-		try {
-			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha.obtenerHtmlPlanchasAdmitidasPorZonaEspec(
-					codigoZonaElect, idUsuario, indicador);
+			return logicaPlancha.obtenerHtmlPlanchasAdmitidasPorRegional(codigoZonaElect, idUsuario, indicador);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public void generarNumeracionPlanchas(Long codZonaElectoral,
-			String idUsuario, boolean esZonaEspecial) throws EleccionesDelegadosException {
+	public String obtenerHtmlPlanchasAdmitidasPorZonaEspec(Long codigoZonaElect, String idUsuario, int indicador)
+			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			logicaPlancha
-					.generarNumeracionPlanchas(codZonaElectoral, idUsuario, esZonaEspecial);
+			return logicaPlancha.obtenerHtmlPlanchasAdmitidasPorZonaEspec(codigoZonaElect, idUsuario, indicador);
 		} finally {
 			logicaPlancha = null;
 		}
 	}
 
-	public void generarNumeracionPlanchasRecurso(Long codZonaElectoral,
-			String idUsuario, boolean esZonaEspecial) throws EleccionesDelegadosException {
+	public void generarNumeracionPlanchas(Long codZonaElectoral, String idUsuario, boolean esZonaEspecial)
+			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			logicaPlancha.generarNumeracionPlanchasRecurso(codZonaElectoral,
-					idUsuario, esZonaEspecial);
+			logicaPlancha.generarNumeracionPlanchas(codZonaElectoral, idUsuario, esZonaEspecial);
+		} finally {
+			logicaPlancha = null;
+		}
+	}
+
+	public void generarNumeracionPlanchasRecurso(Long codZonaElectoral, String idUsuario, boolean esZonaEspecial)
+			throws EleccionesDelegadosException {
+		try {
+			logicaPlancha = new LogicaPlancha();
+			logicaPlancha.generarNumeracionPlanchasRecurso(codZonaElectoral, idUsuario, esZonaEspecial);
 		} finally {
 			logicaPlancha = null;
 		}
@@ -177,8 +164,7 @@ public class DelegadoPlancha {
 		}
 	}
 
-	public boolean actualizarFechaEnvio(Long consecPlancha)
-			throws EleccionesDelegadosException, Exception {
+	public boolean actualizarFechaEnvio(Long consecPlancha) throws EleccionesDelegadosException, Exception {
 		try {
 			logicaPlancha = new LogicaPlancha();
 			return logicaPlancha.actualizarFechaEnvio(consecPlancha);
@@ -187,12 +173,11 @@ public class DelegadoPlancha {
 		}
 	}
 
-	public DTOZonaElectoral consultarZonaElectoralAsociado(
-			String nroIdentificacion) throws EleccionesDelegadosException {
+	public DTOZonaElectoral consultarZonaElectoralAsociado(String nroIdentificacion)
+			throws EleccionesDelegadosException {
 		try {
 			logicaPlancha = new LogicaPlancha();
-			return logicaPlancha
-					.consultarZonaElectoralAsociado(nroIdentificacion);
+			return logicaPlancha.consultarZonaElectoralAsociado(nroIdentificacion);
 		} finally {
 			logicaPlancha = null;
 		}
@@ -207,10 +192,8 @@ public class DelegadoPlancha {
 		}
 	}
 
-	public boolean perteneceInstitucionesElectoralesGECoomeva(
-			String identificacionMiembro) {
+	public boolean perteneceInstitucionesElectoralesGECoomeva(String identificacionMiembro) {
 		logicaPlancha = new LogicaPlancha();
-		return logicaPlancha
-				.perteneceInstitucionesElectoralesGECoomeva(identificacionMiembro);
+		return logicaPlancha.perteneceInstitucionesElectoralesGECoomeva(identificacionMiembro);
 	}
 }

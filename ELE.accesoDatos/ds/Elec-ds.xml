@@ -106,7 +106,7 @@
       <track-statements/>
    </local-tx-datasource>
  <!-- Pruebas-->
-<!--
+
    <local-tx-datasource>
 	  <jndi-name>ElecDB2Ds</jndi-name>
       <connection-url>jdbc:as400://pruebasma.intracoomeva.com.co:8471</connection-url>
@@ -120,9 +120,10 @@
 	  <track-statements/>
 	</local-tx-datasource>
 
--->
+
    <!--	produccion-->
-	
+		
+	<!-- 
 	   <local-tx-datasource>
 	  <jndi-name>ElecDB2Ds</jndi-name>
       <connection-url>jdbc:as400://multiactiva400.intracoomeva.com.co:8471</connection-url>
@@ -135,6 +136,6 @@
 	  <check-valid-connection-sql>SELECT current date FROM sysibm.sysdummy1</check-valid-connection-sql>
 	  <track-statements/>
 	</local-tx-datasource>
-	
+	 -->
 	
 </datasources>
