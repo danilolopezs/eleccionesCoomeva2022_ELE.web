@@ -18,12 +18,13 @@
 			<property name="hibernate.transaction.flush_before_completion"> true </property> -->
 		<!-- FIN PARAMETROS DE CONEXION DIRECTA A LA BD PARA PRUEBAS EN JUNIT -->
 
-		<!--  PARAMETROS DE CONEXION AL SERVER MEDIANTE EL DATASOURCE -->
+		<!-- PARAMETROS DE CONEXION AL SERVER MEDIANTE EL DATASOURCE -->
 		<property name="transaction.factory_class">
 			org.hibernate.transaction.JDBCTransactionFactory
 		</property>
-		<property name="connection.datasource">java:ElecDB2Ds</property>
-		<property name="hibernate.transaction.flush_before_completion">
+		<property name="connection.datasource">java:ClimaeDs</property>
+		<property
+			name="hibernate.transaction.flush_before_completion">
 			true
 		</property>
 		<property name="dialect">org.hibernate.dialect.DB2Dialect</property>
