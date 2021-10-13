@@ -997,17 +997,16 @@
 					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
 				</tr>
 				<tr>
-					<td width="130" align="left" valign="top" bgcolor="#ABD673"><br />
+					<td width="130" align="left" valign="top" bgcolor="#FFFFFF"><br />
 						<br /></td>
 
-					<td align="center" bgcolor="#ABD673"><br /> <br /></td>
+					<td align="center" bgcolor="#FFFFFF"><br /> <br /></td>
 				</tr>
 				<tr>
 					<td>
 						<div align="center">
 							<jsp:directive.include
 								file="../popup/popupMensajeExcepcionPlanchas.jsp" />
-							<jsp:directive.include file="../general/PiePagina.jsp" />
 						</div>
 					</td>
 				</tr>

@@ -16,14 +16,25 @@
 		</check-valid-connection-sql>
 		<track-statements />
 	</local-tx-datasource>
-
-	<!-- produccion new 20211013 -->
-	<!-- <local-tx-datasource> <jndi-name>ClimaeDs</jndi-name> <connection-url>jdbc:as400://multiactiva400.intracoomeva.com.co:8471</connection-url> 
-		<driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class> <user-name>USRELEREP</user-name> 
-		<password>R3PELC10N4</password> <min-pool-size>1</min-pool-size> <max-pool-size>5</max-pool-size> 
-		<idle-timeout-minutes>15</idle-timeout-minutes> <check-valid-connection-sql>SELECT 
-		current date FROM sysibm.sysdummy1</check-valid-connection-sql> <track-statements/> 
-		</local-tx-datasource> -->
+	
+	
+	<!-- produccion new 20211013 
+	<local-tx-datasource>
+		<jndi-name>ClimaeDs</jndi-name>
+		<connection-url>jdbc:as400://multiactiva400.intracoomeva.com.co:8471
+		</connection-url>
+		<driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+		<user-name>USRELEREP</user-name>
+		<password>R3PELC10N4</password>
+		<min-pool-size>1</min-pool-size>
+		<max-pool-size>5</max-pool-size>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<check-valid-connection-sql>SELECT
+			current date FROM sysibm.sysdummy1
+		</check-valid-connection-sql>
+		<track-statements />
+	</local-tx-datasource> 
+	-->
 
 	<local-tx-datasource>
 		<jndi-name>LicoDs</jndi-name>
