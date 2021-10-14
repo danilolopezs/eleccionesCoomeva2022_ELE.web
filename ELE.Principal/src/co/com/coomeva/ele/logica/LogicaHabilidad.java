@@ -171,12 +171,13 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		Long cons = 0l;
 		asociado.setEstadoHabilidad(true);
 
-		cons = validaAntiguedadAsociado(asociado, cons);
-		cons = validaZonaAsociado(elZona, asociado, cons);
-		cons = validadHorasDemocracia(nroIdentificacion, asociado, cons);
-		cons = validaSubComision(nroIdentificacion, asociado, cons);
+		asociado = validaAntiguedadAsociado(asociado, cons++);
+		asociado = validaZonaAsociado(elZona, asociado, cons++);
+		
+		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
+		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
 
-		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons);
+		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons++);
 
 		/*
 		 * if (!DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion,
@@ -197,18 +198,18 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		return asociado;
 	}
 
-	private void validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado, Long cons)
+	private EleAsociadoDTO validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado, Long cons)
 			throws Exception {
 		if (DelegadoPlanchas.getInstance().validarOtraPlancha(nroIdentificacion, nroCabPlancha)) {
-			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoOtraPlancha")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
+		return asociado;
 	}
 
-	private Long validaSubComision(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
+	private EleAsociadoDTO validaSubComision(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
 		if (DelegadoSubcomision.getInstance().existSubcomision(nroIdentificacion)) {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
@@ -216,10 +217,10 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		return cons;
+		return asociado;
 	}
 
-	private Long validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
+	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
 		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
@@ -227,29 +228,27 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		return cons;
+		return asociado;
 	}
 
-	private Long validaZonaAsociado(EleZonas elZona, EleAsociadoDTO asociado, Long cons) {
+	private EleAsociadoDTO validaZonaAsociado(EleZonas elZona, EleAsociadoDTO asociado, Long cons) {
 		if (elZona == null) {
-			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldZonaValida")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		return cons;
+		return asociado;
 	}
 
-	private Long validaAntiguedadAsociado(EleAsociadoDTO asociado, Long cons) {
+	private EleAsociadoDTO validaAntiguedadAsociado(EleAsociadoDTO asociado, Long cons) {
 		if (asociado.getAntiguedad() < UtilAcceso.getParametroFuenteI("parametros", "antiguedadMinima")) {
-			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoMayor3")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
-		return cons;
+		return asociado;
 	}
 
 	/**
