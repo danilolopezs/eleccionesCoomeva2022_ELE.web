@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 
-
 import co.com.coomeva.ele.delegado.DelegadoAsesor;
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoClimae;
@@ -24,11 +23,11 @@ import co.com.coomeva.util.acceso.UtilAcceso;
 public class LogicaZona extends EleZonasDAO {
 	private static LogicaZona instance;
 
-	//Constructor de la clase
+	// Constructor de la clase
 	private LogicaZona() {
 	}
 
-	//Patròn Singular
+	// Patròn Singular
 	public static LogicaZona getInstance() {
 		if (instance == null) {
 			instance = new LogicaZona();
@@ -36,9 +35,9 @@ public class LogicaZona extends EleZonasDAO {
 		return instance;
 	}
 
-
 	/**
 	 * Consulta una zona mediante el codigo de la zona
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param zona
 	 * @return EleZonas
@@ -46,62 +45,65 @@ public class LogicaZona extends EleZonasDAO {
 	 */
 
 	public EleZonas consultarZona(String zona) throws Exception {
-		if (zona == null|| zona.equalsIgnoreCase("")) {
+		if (zona == null || zona.equalsIgnoreCase("")) {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noCodZona"));
 		}
 
-		EleZonas elZona = findById(zona); 
+		EleZonas elZona = findById(zona);
 		return elZona;
 	}
+
 	/**
 	 * Consulta que zona a la cual se va a matricular la plancha
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @param nroCabIdentificacion
 	 * @return EleZonas
 	 * @throws Exception
 	 */
 
-	public EleZonas consultarZonaPlancha(String nroCabIdentificacion) throws Exception
-	{
-		EleAsociadoDTO asociadoDTO =  DelegadoClimae.getInstance().find(nroCabIdentificacion);
+	public EleZonas consultarZonaPlancha(String nroCabIdentificacion) throws Exception {
+		EleAsociadoDTO asociadoDTO = DelegadoClimae.getInstance().find(nroCabIdentificacion);
 		EleZonas elZona = new EleZonas();
 		EleZonasFinanciero eleZonasFinanciero = new EleZonasFinanciero();
 
-		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);//elepromot
+		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);// elepromot
 		boolean existAsesorSrh = DelegadoLico.getInstance().existAsesor(nroCabIdentificacion);// ele_asocia
-		boolean existAsesorPla = DelegadoAsociado.getInstance().existAsociadoEspecial(nroCabIdentificacion);//ele_asociado_especial
+		boolean existAsesorPla = DelegadoAsociado.getInstance().existAsociadoEspecial(nroCabIdentificacion);// ele_asociado_especial
 
 		boolean isAsesor = false;
-		if (existAsesorSrh||existAsesorFin||existAsesorPla) {
+		if (existAsesorSrh || existAsesorFin || existAsesorPla) {
 			isAsesor = true;
 		}
 		if (isAsesor) {
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
-		}else{
+		} else {
 			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
 			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
 		}
 
 		return elZona;
 	}
+
 	/**
 	 * Consulta todas la zonas que estan en la tabla ELEZONAS
+	 * 
 	 * @author Manuel Galvez y Ricardo Chiriboga
 	 * @return
 	 * @throws Exception
 	 */
 
-	public List<EleZonas> consultarZonas() throws Exception{
+	public List<EleZonas> consultarZonas() throws Exception {
 		List<EleZonas> listZonas = new ArrayList<EleZonas>();
 
 		Criteria crit = this.getSession().createCriteria(EleZonas.class);
 		crit.addOrder(Order.asc("nomZona"));
 		try {
-			listZonas =  crit.list();
+			listZonas = crit.list();
 		} catch (Exception e) {
 			throw e;
-		}finally{
+		} finally {
 			this.getSession().flush();
 		}
 

@@ -37,9 +37,9 @@ import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
 
 public class InicioSesionAsociadoVista extends BaseVista {
-	
+
 	private final Log log = LogFactory.getLog(InicioSesionAsociadoVista.class);
-	
+
 	private String documento;
 	private boolean visible = false;
 	private boolean valid = false;
@@ -75,10 +75,10 @@ public class InicioSesionAsociadoVista extends BaseVista {
 								Long.parseLong(respuestaWS.getClient().getUser()));
 						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
 					} else {
-						if (existeUsuario()) {							
+						if (existeUsuario()) {
 							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
 							validacionInformacionPlanchas(login);
-						}else {
+						} else {
 							exceptionGenery("El usuario no existe.");
 						}
 					}
@@ -109,31 +109,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
 					identificacion);
 
-			Date dateToday = new Date();
-
-			Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaIniInscripcion");
-			Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
-					"codFechaFinInscripcion");
-
-			ElePParametros elePParametrosIni = parametroIni.getParametro();
-
-			ElePParametros elePParametrosFin = parametroFin.getParametro();
-			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getNombreParametro(),
-					"dd-MM-yyyy hh:mm:ss");
-			Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
-					"dd-MM-yyyy hh:mm:ss");
-
-			// se comenta mientras se prueba el ingreso
-			if (elePParametrosIni != null && elePParametrosFin != null) {
-				if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
-				}
-
-				if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
-				}
-			}
+			verificarFechaInscripcion();
 
 			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
 					+ asociadoDTO.getNombre().toString();
@@ -225,6 +201,34 @@ public class InicioSesionAsociadoVista extends BaseVista {
 			}
 			// log.error("Error", e);
 			getMensaje().mostrarMensaje(mensaje);
+		}
+	}
+
+	private void verificarFechaInscripcion() throws Exception {
+		Date dateToday = new Date();
+
+		Parametro parametroIni = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+				"codFechaIniInscripcion");
+		Parametro parametroFin = DelegadoParametros.getInstance().getParametroFuenteP("parametros",
+				"codFechaFinInscripcion");
+
+		ElePParametros elePParametrosIni = parametroIni.getParametro();
+
+		ElePParametros elePParametrosFin = parametroFin.getParametro();
+		Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(elePParametrosIni.getNombreParametro(),
+				"dd-MM-yyyy hh:mm:ss");
+		Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
+				"dd-MM-yyyy hh:mm:ss");
+
+		// se comenta mientras se prueba el ingreso
+		if (elePParametrosIni != null && elePParametrosFin != null) {
+			if (dateToday.compareTo(dateFechaIniInscrpcion) < 0) {
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
+			}
+
+			if (dateToday.compareTo(dateFechaFinInscrpcion) > 0) {
+				throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "msgFechaInscrpcionExpired"));
+			}
 		}
 	}
 
