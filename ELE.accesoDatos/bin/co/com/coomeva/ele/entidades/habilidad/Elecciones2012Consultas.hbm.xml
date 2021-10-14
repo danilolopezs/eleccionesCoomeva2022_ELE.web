@@ -17,7 +17,8 @@
 
 	<!-- ###################################################################################### 
 		## 1.## ## Consulta los años de retiro del asociado ## trae el estado del 
-		asociadiado r-> retirado A -> activo ## y el documento ###################################################################################### -->
+		asociadiado r-> retirado A -> activo ## y el documento 
+		###################################################################################### -->
 	<sql-query name="asoelecf.consulta">
 		<return-scalar column="WNITCLI" type="java.lang.Long" />
 		<return-scalar column="WNOMCLI" type="java.lang.String" />
@@ -615,7 +616,8 @@
 
 	<!-- ###################################################################################### 
 		## 29. Javier Londoño - Premize SAS - 2012-12-01 ## ## Consulta las planchas 
-		en las que se encuentra un asociado ## ###################################################################################### -->
+		en las que se encuentra un asociado ## 
+		###################################################################################### -->
 	<sql-query name="consulta.planchas.asociado">
 		<return-scalar column="CONSECUTIVO_PLANCHA_ASO"
 			type="java.lang.Long" />
@@ -630,26 +632,18 @@
 		<return-scalar column="CONSECUTIVO_PLANCHA"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		EPA.CONSECUTIVO_PLANCHA_ASO,
-    		EPA.NUMERO_INSCRITO,
-    		EPA.TIPO_INSCRITO,
-    		EPA.FECHA_INSCRIPCION,
-    		EPA.CODIGO_ASOCIADO,
-    		EPA.CONSECUTIVO_PLANCHA
-			FROM
-    		ELECDB.ELE_PLANCHA_ASOCIADO EPA
-        		INNER JOIN ELECDB.ELEASOCIA EA ON
-       			EA.CODIGO_ASOCIADO = EPA.CODIGO_ASOCIADO
-			WHERE
-    		EA.NUMERO_DOCUMENTO = :numDocumentoAso
-    		AND EPA.CONSECUTIVO_PLANCHA <> :consecutivoPlanchaActual
+			SELECT EPA.CONSECUTIVO_PLANCHA_ASO,	EPA.NUMERO_INSCRITO, EPA.TIPO_INSCRITO,
+    			EPA.FECHA_INSCRIPCION, EPA.CODIGO_ASOCIADO, EPA.CONSECUTIVO_PLANCHA
+			FROM ELECDB.ELE_PLANCHA_ASOCIADO EPA
+        		INNER JOIN ELECDB.ELEASOCIA EA ON EA.CODIGO_ASOCIADO = EPA.CODIGO_ASOCIADO
+			WHERE EA.NUMERO_DOCUMENTO = :numDocumentoAso AND EPA.CONSECUTIVO_PLANCHA <> :consecutivoPlanchaActual
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 30. Javier Londoño - Premize SAS - 2012-12-01 ## ## Consulta las zona 
-		electoral a la cual se encuentra relacionado un asociado ## ###################################################################################### -->
+		electoral a la cual se encuentra relacionado un asociado ## 
+		###################################################################################### -->
 	<sql-query name="consulta.zona.electoral.asociado">
 		<return-scalar column="CODIGO_ZONA_ELE"
 			type="java.lang.String" />
@@ -713,12 +707,9 @@
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		EA.NUMERO_DOCUMENTO
-			FROM
-   			ELECDB.ELE_ASOC_SANCIONADOS_5_ANNOS EAS5AA
-				INNER JOIN ELECDB.ELEASOCIA EA
-				ON EAS5AA.NUMERO_DOCUMENTO = EA.CODIGO_ASOCIADO
+			SELECT EA.NUMERO_DOCUMENTO
+			FROM ELECDB.ELE_ASOC_SANCIONADOS_5_ANNOS EAS5AA
+				INNER JOIN ELECDB.ELEASOCIA EA ON EAS5AA.NUMERO_DOCUMENTO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 

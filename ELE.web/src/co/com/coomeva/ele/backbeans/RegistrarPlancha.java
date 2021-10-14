@@ -111,23 +111,12 @@ public class RegistrarPlancha extends BaseVista {
 	public RegistrarPlancha() {
 		log.info("Leega plancha");
 		List<DTOPlanchaAsociado> planchaAsociado = null;
-
 		try {
-
-			if (FacesUtils.getSessionParameter("userComision") != null) {
-				esUsuarioComision = true;
-			} else {
-				esUsuarioComision = false;
-			}
-
+			this.esUsuarioComision = FacesUtils.getSessionParameter("userComision") != null;			
 			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
 			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");
-			if (tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
-				this.aplicaValidaciones = false;
-			} else {
-				this.aplicaValidaciones = true;
-			}
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");			
+			this.aplicaValidaciones = !tipoEleccionesRepresentantes.equals(tipoEleccionesSession);
 
 			if (FacesUtils.getSessionParameter("numeroDocAsociado") != null) {
 				numeroDocumentoUserEnSesion = (Long) FacesUtils.getSessionParameter("numeroDocAsociado");
@@ -236,6 +225,10 @@ public class RegistrarPlancha extends BaseVista {
 		return listaMiembrosDestino;
 	}
 
+	/**
+	 * Se realiza la validaci\u00F3n de asociados para ingresar un miembro principal
+	 * @param v
+	 */
 	public void adicionarMiembroPrincipal(ValueChangeEvent v) {
 		HtmlInputText inputTextCedula = (HtmlInputText) v.getComponent();
 

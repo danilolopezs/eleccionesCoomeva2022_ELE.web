@@ -44,6 +44,7 @@ import co.com.coomeva.ele.exception.EleccionesDelegadosException;
 import co.com.coomeva.ele.logica.LogicaAsociado;
 import co.com.coomeva.ele.logica.LogicaEstadoPlancha;
 import co.com.coomeva.ele.logica.LogicaFiltros;
+import co.com.coomeva.ele.modelo.AsociadoDTO;
 import co.com.coomeva.ele.modelo.EleAsociadoDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.ele.utilidades.ConstantesNamedQueries;
@@ -133,12 +134,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 
 					if (msgValidacionEmpleadoFechaRetiro != null && !msgValidacionEmpleadoFechaRetiro.isEmpty()) {
 						excepciones.append("- " + msgValidacionEmpleadoFechaRetiro);
-					} else {
-//						excepciones.append("- "+ MessageFormat.format(UtilAcceso.getParametroFuenteS(
-//								ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-//								"msgErrorEmpleadoRetiradoMenos3Annos"), numeroDocumento
-//								.toString())
-//								+ "<br/>");
 					}
 				}
 
@@ -184,12 +179,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 
 			DTOHabilidadAsociado habilidadAso = LogicaAsociado.getInstance()
 					.consultarHabilidadAsociado(numeroDocumento);
-
-			if (habilidadAso != null) {
-				esAsociadoHabil = habilidadAso.getAsociadoHabil();
-			} else {
-				esAsociadoHabil = false;
-			}
+			esAsociadoHabil = (habilidadAso != null) ? habilidadAso.getAsociadoHabil() : Boolean.FALSE;
 
 			if (!esAsociadoHabil) {
 				throw new EleccionesDelegadosException(MessageFormat
@@ -220,8 +210,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			Date fechaMaximaVinculacion = DateManipultate.stringToDate(
 					UtilAcceso.getParametroFuenteS("parametros", "fechaMaximaVinculacionAntiguedadPlancha"),
 					"yyyyMMdd");
-			// Si fecha de vinculacion es mayor o igual a la fecha maxima
-			// vinculacion
+			// Si fecha de vinculacion es mayor o igual a la fecha maxima de vinculacion
 			if (asociadoDTO.getFechaVinculacion().compareTo(fechaMaximaVinculacion) >= 0) {
 				excepciones.append("- "
 						+ MessageFormat
@@ -274,6 +263,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 								+ "</br>");
 			}
 
+			// SE DEBE VALIDAR CON JULIAN DE QUE DS SE TRAEN LOS DATOS
 //			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
 //				// throw new
 //				// EleccionesDelegadosException(UtilAcceso.getParametroFuenteS("mensajes",
@@ -314,7 +304,11 @@ public class LogicaPlancha implements ILogicaPlancha {
 				// UtilAcceso.getParametroFuenteS(
 				// ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 				// "msgAsociadoDebeAcreditarOficio"));
-
+				
+				// VALIDAR CON JULIAN
+//				EleAsociado eleAsociado = new EleAsociadoDAO().findById(asociado.getEleAsociado().getCodigoAsociado());
+//				miembroPlancha.setProfesion(eleAsociado.getDescProfesion());
+				
 				excepciones.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 						"msgAsociadoDebeAcreditarOficio"));
 
@@ -439,19 +433,13 @@ public class LogicaPlancha implements ILogicaPlancha {
 			session = HibernateSessionFactoryElecciones2012.getSession();
 			query = session.getNamedQuery(ConstantesNamedQueries.QUERY_PLANCHAS_POR_ASOCIADO);
 			query.setLong("numDocumentoAso", Long.parseLong(nroIdentificacion));
-
-			if (consecutivoPlancha != null) {
-				query.setLong("consecutivoPlanchaActual", consecutivoPlancha);
-			} else {
-				query.setLong("consecutivoPlanchaActual", 0L);
-			}
+			query.setLong("consecutivoPlanchaActual", (consecutivoPlancha != null) ? consecutivoPlancha : 0L);
 
 			List<Object[]> datosConsulta = query.list();
 
 			datos = new ArrayList<DTOPlanchaAsociado>();
-			DTOPlanchaAsociado planchaAsociado = null;
 			for (Object[] object : datosConsulta) {
-				planchaAsociado = new DTOPlanchaAsociado();
+				DTOPlanchaAsociado planchaAsociado = new DTOPlanchaAsociado();
 				planchaAsociado.setConsecutivoPlanchaAso(object[0] != null ? (Long) object[0] : null);
 				planchaAsociado.setNumeroInscrito(object[1] != null ? (Long) object[1] : null);
 				planchaAsociado.setTipoInscrito(object[2] != null ? object[2].toString() : null);
@@ -467,7 +455,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 			session = null;
 			query = null;
 		}
-
 		return datos;
 	}
 
@@ -550,14 +537,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 		DTOInformacionPlancha info = new DTOInformacionPlancha();
 		info.setNumeroZonaElectoral(numeroZona.toString());
 		info.setConsecutivoPlancha(consecutivoPlancha);
+		 
 		// 12/01/2012 Se cambia. la ciudad es la ciudad de la zona. no la ciudad
-		// de residencia del asociado.
-		if (elezonaelectoralEspecial != null) {
-			info.setCiudad(elezonaelectoralEspecial.getDescripcionZonaEle());
-		} else {
-			info.setCiudad(elezonaelectoral.getDescripcionZonaEle());
-		}
-
+		// de residencia del asociado.		
+		info.setCiudad((elezonaelectoralEspecial != null) ? elezonaelectoralEspecial.getDescripcionZonaEle()
+				: elezonaelectoral.getDescripcionZonaEle());
+		
 		Timestamp fechaRegistro = plancha.getFechaRegistro();
 		info.setEstadoPlancha(plancha.getEstadoPlancha());
 
@@ -592,11 +577,10 @@ public class LogicaPlancha implements ILogicaPlancha {
 		String tipoInscritoSuplente = UtilAcceso.getParametroFuenteS(
 				ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.inscrito.asociado.suplente");
 
-		DTOMiembroPlancha miembroPlancha = null;
 		Long numeroDocumentoAsociadoCabezaPlancha = null;
 		for (ElePlanchaAsociado asociado : asociadosPlancha) {
 
-			miembroPlancha = new DTOMiembroPlancha();
+			DTOMiembroPlancha miembroPlancha = new DTOMiembroPlancha();
 			miembroPlancha.setPosicionPlancha(asociado.getNumeroInscrito().toString());
 			miembroPlancha.setNumeroDocumento(asociado.getEleAsociado().getNumeroDocumento());
 
@@ -608,25 +592,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				throw new EleccionesDelegadosException(e);
 			}
 
-			StringBuffer apellidosNombresAsociado = new StringBuffer();
-			apellidosNombresAsociado
-					.append(asociadoDTO.getPrimerNombre() != null && !"".equals(asociadoDTO.getPrimerNombre())
-							? " " + asociadoDTO.getPrimerNombre()
-							: "");
-			apellidosNombresAsociado
-					.append(asociadoDTO.getSegundoNombre() != null && !"".equals(asociadoDTO.getSegundoNombre())
-							? " " + asociadoDTO.getSegundoNombre()
-							: "");
-			apellidosNombresAsociado
-					.append(asociadoDTO.getPrimerApellido() != null && !"".equals(asociadoDTO.getPrimerApellido())
-							? asociadoDTO.getPrimerApellido()
-							: "");
-			apellidosNombresAsociado
-					.append(asociadoDTO.getSegundoApellido() != null && !"".equals(asociadoDTO.getSegundoApellido())
-							? " " + asociadoDTO.getSegundoApellido()
-							: "");
-
-			miembroPlancha.setApellidosNombres(apellidosNombresAsociado.toString());
+			miembroPlancha.setApellidosNombres(getNombreAsociadoConFormato(asociadoDTO));
 
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
@@ -673,6 +639,27 @@ public class LogicaPlancha implements ILogicaPlancha {
 		info.setMiembrosSuplentes(miembrosSuplentes);
 
 		return info;
+	}
+	
+	private String getNombreAsociadoConFormato(EleAsociadoDTO asociadoDTO) {
+		StringBuffer apellidosNombresAsociado = new StringBuffer();
+		apellidosNombresAsociado
+				.append(asociadoDTO.getPrimerNombre() != null && !"".equals(asociadoDTO.getPrimerNombre())
+						? " " + asociadoDTO.getPrimerNombre()
+						: "");
+		apellidosNombresAsociado
+				.append(asociadoDTO.getSegundoNombre() != null && !"".equals(asociadoDTO.getSegundoNombre())
+						? " " + asociadoDTO.getSegundoNombre()
+						: "");
+		apellidosNombresAsociado
+				.append(asociadoDTO.getPrimerApellido() != null && !"".equals(asociadoDTO.getPrimerApellido())
+						? asociadoDTO.getPrimerApellido()
+						: "");
+		apellidosNombresAsociado
+				.append(asociadoDTO.getSegundoApellido() != null && !"".equals(asociadoDTO.getSegundoApellido())
+						? " " + asociadoDTO.getSegundoApellido()
+						: "");
+		return apellidosNombresAsociado.toString();
 	}
 
 	/**
