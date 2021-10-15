@@ -23,4 +23,7 @@ public class DelegadoClimae {
 	public EleAsociadoDTO find(String idAsociado) throws Exception {
 		return logicaClimae.find(idAsociado);
 	}
+	public boolean validaSancion(String idAsociado) throws Exception {
+		return logicaClimae.validaSancion(idAsociado);
+	}
 }
