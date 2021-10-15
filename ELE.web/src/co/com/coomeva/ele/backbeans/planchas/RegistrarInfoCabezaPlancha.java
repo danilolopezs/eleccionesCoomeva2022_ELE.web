@@ -72,36 +72,33 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	Long numeroDocumentoCabezaPlancha = null;
 	Long numeroDocumentoAsociado = null;
 	Long consecutivoPlancha = null;
-	
-	/** Variables para el suplente cabeza de placha;*/
-	boolean esSuplente = false;	
+
+	/** Variables para el suplente cabeza de placha; */
+	boolean esSuplente = false;
 	boolean esCabezaPlancha = false;
 	Long numintSuplenteCabezaPlancha = null;
-	
+
 	private int fileProgress;
 	private List<InputFileDataDTO> fileList = null;
 
 	boolean modificarRegistro = false;
 
-	Long CODIGO_FORMATO_INSCRIPCION_CABEZA_PLANCHA = new Long(UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+	Long CODIGO_FORMATO_INSCRIPCION_CABEZA_PLANCHA = new Long(
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_FORMATO_INSCRIPCION_PLANCHA));
 	String CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA = new String(
-			UtilAcceso
-					.getParametroFuenteS(
-							ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-							ConstantesProperties.CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA));
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					ConstantesProperties.CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA));
 
 	private FormatoPdfInfoCabezaPlancha formatoPdfInfoCabezaPlancha = new FormatoPdfInfoCabezaPlancha();
 	private boolean esUsuarioComision;// Verifica si el usuario de la sesión es
 	// de la comisión
 	private boolean esSaneamiento;
-	
+
 	private String lblPanelInfoCabezaPlancha;
-	
+
 	private boolean visibleConsultarSuplente;
-	
+
 	private String mensajeExito;
 	private boolean visiblemensajeExito;
 
@@ -143,22 +140,17 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public void validacionInicial() {
 		try {
 			if (FacesUtils.getSessionParameter("numeroDocAsociado") != null) {
-				numeroDocumentoAsociado = (Long) FacesUtils
-						.getSessionParameter("numeroDocAsociado");
+				numeroDocumentoAsociado = (Long) FacesUtils.getSessionParameter("numeroDocAsociado");
 				Long[] resultado = DelegadoAsociado.getInstance()
-						.consultaCabezaPlanchaPorInscrito(
-								numeroDocumentoAsociado);
+						.consultaCabezaPlanchaPorInscrito(numeroDocumentoAsociado);
 				numintCabezaPlancha = resultado[0];
 				consecutivoPlancha = resultado[1];
 				numeroDocumentoCabezaPlancha = resultado[2];
-				Long numeroImpresionesPorFormato = DelegadoAsociado
-						.getInstance().consultaNumeroImpresionesFormatoPLancha(
-								consecutivoPlancha);
+				Long numeroImpresionesPorFormato = DelegadoAsociado.getInstance()
+						.consultaNumeroImpresionesFormatoPLancha(consecutivoPlancha);
 
-				Boolean existeRegistro = DelegadoCabezaPlancha.getInstance()
-						.validarRegistroDetalleFormatoPlancha(
-								numeroDocumentoAsociado,
-								CODIGO_FORMATO_INSCRIPCION_CABEZA_PLANCHA);
+				Boolean existeRegistro = DelegadoCabezaPlancha.getInstance().validarRegistroDetalleFormatoPlancha(
+						numeroDocumentoAsociado, CODIGO_FORMATO_INSCRIPCION_CABEZA_PLANCHA);
 				if (numintCabezaPlancha != null
 						&& (numeroImpresionesPorFormato != null && numeroImpresionesPorFormato > 0)
 						&& !existeRegistro) {
@@ -176,62 +168,48 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public String consultarInformacionCabezaPlancha() throws Exception {
 		try {
 //			limpiarCampos();
-		   /**
-			 *  Si el numero del asociado en sesion es igual al numero
-			 *  del cambeza de plancha se consulta la informacion
-			 *  del cabeza de plancha.
-			 *  
-			 *  En caso contrario se consulta la informacion de la persona en sesion.
+			/**
+			 * Si el numero del asociado en sesion es igual al numero del cambeza de plancha
+			 * se consulta la informacion del cabeza de plancha.
+			 * 
+			 * En caso contrario se consulta la informacion de la persona en sesion.
 			 */
-			if(numeroDocumentoAsociado.equals(numeroDocumentoCabezaPlancha))
-			{
+			if (numeroDocumentoAsociado.equals(numeroDocumentoCabezaPlancha)) {
 				dto = DelegadoCabezaPlancha.getInstance()
-				.consultarInformacionCabezaPlancha(
-						numeroDocumentoCabezaPlancha);
-				esSuplente= false;
+						.consultarInformacionCabezaPlancha(numeroDocumentoCabezaPlancha);
+				esSuplente = false;
 				esCabezaPlancha = true;
-			}
-			else
-			{
-				dto = DelegadoCabezaPlancha.getInstance()
-					.consultarInformacionCabezaPlancha(
-							numeroDocumentoAsociado);
-				
-				if(dto == null)
-				{
+			} else {
+				dto = DelegadoCabezaPlancha.getInstance().consultarInformacionCabezaPlancha(numeroDocumentoAsociado);
+
+				if (dto == null) {
 					action_mostrar_mensaje_ingreso();
 					return "";
 				}
-				DTOInformacionPlancha infoPlancha = DelegadoPlancha
-					.getInstance().consultarInformacionPlancha(consecutivoPlancha);
-				
+				DTOInformacionPlancha infoPlancha = DelegadoPlancha.getInstance()
+						.consultarInformacionPlancha(consecutivoPlancha);
+
 				List<DTOMiembroPlancha> miembrosSuplentes = infoPlancha.getMiembrosSuplentes();
-				
-				if(miembrosSuplentes != null)
-				{
+
+				if (miembrosSuplentes != null) {
 					for (DTOMiembroPlancha dtoMiembroPlancha : miembrosSuplentes) {
-						if(dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumentoAsociado)
-								&& dtoMiembroPlancha.getPosicionPlancha().equalsIgnoreCase("1"))
-						{
+						if (dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumentoAsociado)
+								&& dtoMiembroPlancha.getPosicionPlancha().equalsIgnoreCase("1")) {
 							esSuplente = true;
 							esCabezaPlancha = false;
 							break;
 						}
 					}
 				}
-				
-				if(!esSuplente)
-				{
+
+				if (!esSuplente) {
 					action_mostrar_mensaje_ingreso();
-					return"";
-				}
-				else
-				{
-					EleAsociadoDatosDTO asociadoDTO = DelegadoAsociado
-						.getInstance().consultarInformacionBasicaAsociado(numeroDocumentoAsociado);
-					
-					if(asociadoDTO != null)
-					{
+					return "";
+				} else {
+					EleAsociadoDatosDTO asociadoDTO = DelegadoAsociado.getInstance()
+							.consultarInformacionBasicaAsociado(numeroDocumentoAsociado);
+
+					if (asociadoDTO != null) {
 						numintSuplenteCabezaPlancha = Long.valueOf(asociadoDTO.getAsonumint());
 					}
 				}
@@ -241,65 +219,50 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			 * .obtieneFechaGradoAsociado(new Long(dto.getCodAsociado())); if
 			 * (fechaGradoLong != null && fechaGradoLong != 0L) {
 			 * 
-			 * String anno = fechaGradoLong.toString().substring(0, 4); String
-			 * mes = fechaGradoLong.toString().substring(4, 6); String dia =
+			 * String anno = fechaGradoLong.toString().substring(0, 4); String mes =
+			 * fechaGradoLong.toString().substring(4, 6); String dia =
 			 * fechaGradoLong.toString().substring(6, 8);
 			 * 
 			 * // Date fechaGradoAsoBUC = //
-			 * DateManipultate.stringToDate(fechaGradoLong.toString(), //
-			 * "yyyyMMdd"); // dto.setFechaGrado(fechaGradoAso.toString());
-			 * dto.setFechaGrado(anno + "/" + mes + "/" + dia); }
+			 * DateManipultate.stringToDate(fechaGradoLong.toString(), // "yyyyMMdd"); //
+			 * dto.setFechaGrado(fechaGradoAso.toString()); dto.setFechaGrado(anno + "/" +
+			 * mes + "/" + dia); }
 			 */
-			
+
 			EleDetalleFormatoPlancha entity = null;
 			EleFotoFormatoPlancha fotoPlancha = null;
-			if(esSuplente)
-			{
-				entity = DelegadoCabezaPlancha
-				.getInstance().consultarDetalleFormatoPlanchaPorId(
-						numintSuplenteCabezaPlancha);
-				fotoPlancha = DelegadoCabezaPlancha
-						.getInstance().consultarFotoCabezaPlancha(
-								numintSuplenteCabezaPlancha);
-				
+			if (esSuplente) {
+				entity = DelegadoCabezaPlancha.getInstance()
+						.consultarDetalleFormatoPlanchaPorId(numintSuplenteCabezaPlancha);
+				fotoPlancha = DelegadoCabezaPlancha.getInstance()
+						.consultarFotoCabezaPlancha(numintSuplenteCabezaPlancha);
+
 				lblPanelInfoCabezaPlancha = "Informaci\u00F3n cabeza de plancha Suplente";
-			}
-			else
-			{
-				entity = DelegadoCabezaPlancha
-				.getInstance().consultarDetalleFormatoPlanchaPorId(
-						numintCabezaPlancha);
-				fotoPlancha = DelegadoCabezaPlancha
-						.getInstance().consultarFotoCabezaPlancha(
-								numintCabezaPlancha);
-				
+			} else {
+				entity = DelegadoCabezaPlancha.getInstance().consultarDetalleFormatoPlanchaPorId(numintCabezaPlancha);
+				fotoPlancha = DelegadoCabezaPlancha.getInstance().consultarFotoCabezaPlancha(numintCabezaPlancha);
+
 				lblPanelInfoCabezaPlancha = "Informaci\u00F3n cabeza de plancha Principal";
 			}
-			
+
 			if (entity != null) {
 				dtoInfo.setCargoActual(entity.getCargoActual());
 				dtoInfo.setEmpresaActual(entity.getEmpresaActual());
-				if(esSuplente)
-				{
+				if (esSuplente) {
 					dtoInfo.setNumeroDocumento(numintSuplenteCabezaPlancha);
-				}
-				else
-				{
+				} else {
 					dtoInfo.setNumeroDocumento(numintCabezaPlancha);
 				}
 
 				dtoInfo.setOtrosEstudios(entity.getOtrosEstudios());
-				dtoInfo.setUltimoCargoDirectivoCoomeva(entity
-						.getUltimoCargoCoomeva());
+				dtoInfo.setUltimoCargoDirectivoCoomeva(entity.getUltimoCargoCoomeva());
 				dtoInfo.setOtrosEstudiosDos(entity.getOtrosEstudiosDos());
 				dtoInfo.setAntigLaboral(entity.getAntigLaboral());
 				dtoInfo.setPerfilCandidatoUno(entity.getPerfilCandidatoUno());
 				dtoInfo.setPerfilCandidatoDos(null);
 				dtoInfo.setCuentaPersonalMail(entity.getCuentaPersonalMail());
-				dtoInfo.setCuentaPersonalTwitter(entity
-						.getCuentaPersonalTwitter());
-				dtoInfo.setCuentaPersonalFacebook(entity
-						.getCuentaPersonalFacebook());
+				dtoInfo.setCuentaPersonalTwitter(entity.getCuentaPersonalTwitter());
+				dtoInfo.setCuentaPersonalFacebook(entity.getCuentaPersonalFacebook());
 				dtoInfo.setEstado(entity.getEstado());
 				dtoInfo.setFechaGrado(entity.getFechaGradoMod());
 				dtoInfo.setNumeroActa(entity.getNumeroActa());
@@ -308,10 +271,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 				}
 				// Si los detalles del formato no se pueden modificar:
 				if (dtoInfo.getEstado() != null
-						&& dtoInfo
-								.getEstado()
-								.equals(
-										CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA)) {
+						&& dtoInfo.getEstado().equals(CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA)) {
 					this.disabledFinalizar = true;
 					this.disabledGuardar = true;
 					this.disabledImprimir = false;
@@ -325,33 +285,29 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 
 				// Si la plancha está radicada no se puede modificar:
 				if (consecutivoPlancha != null
-						&& DelegadoFormatoPlanchas.getInstance()
-								.esPlanchaRadicada(consecutivoPlancha)) {
+						&& DelegadoFormatoPlanchas.getInstance().esPlanchaRadicada(consecutivoPlancha)) {
 					this.disabledGuardar = true;
 				}
 
 				// Si es usuario de la comisión puede hacer modificaciones en fechas
 				// de saneamiento:
 				if (esUsuarioComision && esSaneamiento) {
-					this.disabledGuardar=false;
+					this.disabledGuardar = false;
 				}
-				
-			}
-			else
-			{
+
+			} else {
 				modificarRegistro = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		return"";
+		return "";
 	}
-	
-	public void actionConsultarSuplente(ActionEvent evento)
-	{
+
+	public void actionConsultarSuplente(ActionEvent evento) {
 		try {
-			limpiarCampos();			
+			limpiarCampos();
 			consultarInformacionCabezaPlancha();
 			esCabezaPlancha = true;
 			visibleConsultarSuplente = false;
@@ -360,14 +316,12 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			e.printStackTrace();
 		}
 	}
-	
-	public void action_mostrarConsulta()
-	{
+
+	public void action_mostrarConsulta() {
 		visibleConsultarSuplente = true;
 	}
 
-	private void limpiarCampos() 
-	{
+	private void limpiarCampos() {
 		dto = new InformacionCabezaPlanchaDTO();
 		dtoInfo = new InfoDetalleFormatoPlanchaDTO();
 		esSuplente = false;
@@ -378,34 +332,26 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		try {
 			dtoInfo.setNumeroDocumento(new Long(dto.getNumeroDocumento()));
 
-			if (numeroDocumentoAsociado.longValue() != numeroDocumentoCabezaPlancha
-					.longValue()) {
-				if(!esSuplente)
-				{
+			if (numeroDocumentoAsociado.longValue() != numeroDocumentoCabezaPlancha.longValue()) {
+				if (!esSuplente) {
 					throw new Exception(
-					"Estimado asociado, Solo el cabeza de plancha principal y el cabeza de plancha Suplente pueden registrar esta información.");
-				}				
+							"Estimado asociado, Solo el cabeza de plancha principal y el cabeza de plancha Suplente pueden registrar esta información.");
+				}
 			}
-			
-			if(dto.getProfesion() == null)
-			{
-				if (dtoInfo.getFechaGrado() == null ) {
-					throw new Exception(
-							loaderResourceElements
-									.getKeyResourceValue(
-											ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-											"campo.obligatorio.fecha.estudios"));
+
+			if (dto.getProfesion() == null) {
+				if (dtoInfo.getFechaGrado() == null) {
+					throw new Exception(loaderResourceElements.getKeyResourceValue(
+							ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
+							"campo.obligatorio.fecha.estudios"));
 				}
 			}
 
 			if (modificarRegistro) {
-				DelegadoCabezaPlancha.getInstance()
-						.modificarInformacionCabezaPlancha(dtoInfo,
-								this.imageToBase64String);
+				DelegadoCabezaPlancha.getInstance().modificarInformacionCabezaPlancha(dtoInfo,
+						this.imageToBase64String);
 			} else {
-				DelegadoCabezaPlancha.getInstance()
-						.guardarInformacionCabezaPlancha(dtoInfo,
-								this.imageToBase64String);
+				DelegadoCabezaPlancha.getInstance().guardarInformacionCabezaPlancha(dtoInfo, this.imageToBase64String);
 				modificarRegistro = true;
 			}
 			mensajeExito = "Se guardó satisfactoriamente la información del asociado cabeza de plancha";
@@ -413,7 +359,8 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			this.disabledFinalizar = false;
 			this.disabledImprimir = false;
 
-			// getMensaje().mostrarMensaje("Se guardó satisfactoriamente la información del asociado"
+			// getMensaje().mostrarMensaje("Se guardó satisfactoriamente la información del
+			// asociado"
 			// +
 			// " cabeza de plancha");
 		} catch (Exception e) {
@@ -431,19 +378,17 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public String action_finalizar_enviar() {
 		try {
 			dtoInfo.setNumeroDocumento(new Long(dto.getNumeroDocumento()));
-			if (numeroDocumentoAsociado.longValue() != numeroDocumentoCabezaPlancha
-					.longValue()) {
-				throw new Exception(
-						"Estimado asociado, Solo el cabeza de plancha puede registrar esta información.");
+			if (numeroDocumentoAsociado.longValue() != numeroDocumentoCabezaPlancha.longValue()) {
+				throw new Exception("Estimado asociado, Solo el cabeza de plancha puede registrar esta información.");
 			}
-			DelegadoCabezaPlancha.getInstance()
-					.finalizarEnviarInformacionCabezaPlancha(dtoInfo,
-							this.imageToBase64String);
+			DelegadoCabezaPlancha.getInstance().finalizarEnviarInformacionCabezaPlancha(dtoInfo,
+					this.imageToBase64String);
 			mensajeIngresoInfoCabezaPlancha = "Finalizó el registro de la información del asociado cabeza de plancha. Por favor imprima.";
 			this.mensajeInformativo = true;
 			this.disabledGuardar = true;
 			this.disabledFinalizar = true;
-			// getMensaje().mostrarMensaje("Finalizó el registro de la información del asociado cabeza de plancha. Por favor imprima.");
+			// getMensaje().mostrarMensaje("Finalizó el registro de la información del
+			// asociado cabeza de plancha. Por favor imprima.");
 		} catch (Exception e) {
 			// getMensaje().mostrarMensaje(e.getMessage());
 			mensajeIngresoInfoCabezaPlancha = e.getMessage();
@@ -455,38 +400,33 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public String action_imprimir_formato() {
 		try {
 			dtoInfo.setNumeroDocumento(new Long(dto.getNumeroDocumento()));
-			DelegadoCabezaPlancha.getInstance()
-					.imprimirEnviarInformacionCabezaPlancha(dtoInfo,
-							consecutivoPlancha, this.imageToBase64String);
+			DelegadoCabezaPlancha.getInstance().imprimirEnviarInformacionCabezaPlancha(dtoInfo, consecutivoPlancha,
+					this.imageToBase64String);
 //			Object[] params = new Object[3];
 //			params[0] = this.numeroDocumentoCabezaPlancha;
 //			params[1] = this.numintCabezaPlancha;
 //			params[2] = this.imageToBase64String;
 
 //			formatoPdfInfoCabezaPlancha.generarReporte(params);
-			
+
 			String realpath = FacesUtils.getServletContext().getRealPath("gui");
-			String dirDestino = UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+			String dirDestino = UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"param.url.ubicacion.plantillas");
 			File imageDecoding = null;
 			if (imageToBase64String != null) {
 				byte[] bytearray = Base64.decode(imageToBase64String);
-				BufferedImage imag = ImageIO.read(new ByteArrayInputStream(
-						bytearray));
-				imageDecoding = new File(realpath + dirDestino, "foto"
-						+ numeroDocumentoCabezaPlancha + ".jpg");
+				BufferedImage imag = ImageIO.read(new ByteArrayInputStream(bytearray));
+				imageDecoding = new File(realpath + dirDestino, "foto" + numeroDocumentoCabezaPlancha + ".jpg");
 				int index = imageDecoding.getName().lastIndexOf('.');
-				String extensionFoto = imageDecoding.getName().substring(
-						index + 1);
+				String extensionFoto = imageDecoding.getName().substring(index + 1);
 				ImageIO.write(imag, extensionFoto, imageDecoding);
 			}
-			
-			HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-			
+
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+					.getRequest();
+
 			request.getSession().setAttribute("codigoReporte", "174");
-			
-			
+
 			request.getSession().setAttribute("plancha", dto.getNumeroPlancha());
 			request.getSession().setAttribute("zonaElectoral", dto.getZonaElectoral());
 			request.getSession().setAttribute("nombreAsociado", dto.getNombreCompleto());
@@ -494,16 +434,16 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			request.getSession().setAttribute("fechaAntiguedad", dto.getAntiguedadMeses());
 			request.getSession().setAttribute("profesion", dto.getProfesion());
 			request.getSession().setAttribute("fechaTitulo", dtoInfo.getFechaGrado());
-			request.getSession().setAttribute("estudios", dtoInfo.getOtrosEstudios());  
-			request.getSession().setAttribute("empresa", dtoInfo.getEmpresaActual()); 
-			request.getSession().setAttribute("cargo", dtoInfo.getCargoActual());  
-			request.getSession().setAttribute("antiguedad", String.valueOf(dtoInfo.getAntigLaboral()));					
+			request.getSession().setAttribute("estudios", dtoInfo.getOtrosEstudios());
+			request.getSession().setAttribute("empresa", dtoInfo.getEmpresaActual());
+			request.getSession().setAttribute("cargo", dtoInfo.getCargoActual());
+			request.getSession().setAttribute("antiguedad", String.valueOf(dtoInfo.getAntigLaboral()));
 			request.getSession().setAttribute("ultimoCargo", dtoInfo.getUltimoCargoDirectivoCoomeva());
 			request.getSession().setAttribute("foto", String.valueOf(numeroDocumentoCabezaPlancha));
 			request.getSession().setAttribute("esSuplente", new Boolean(esSuplente));
-			
+
 			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
-			
+
 			this.visiblemensajeExito = true;
 			this.mensajeExito = "Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co";
 
@@ -515,7 +455,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		}
 		return "";
 	}
-	
+
 	public void actionFileUploadProgress(EventObject event) {
 		InputFile ifile = (InputFile) event.getSource();
 		this.fileProgress = ifile.getFileInfo().getPercent();
@@ -524,13 +464,10 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public void actionUploadFile(ActionEvent event) {
 		InputFile inputFile = (InputFile) event.getSource();
 		FileInfo fileInfo = inputFile.getFileInfo();
-		
-		String tipoContenido = fileInfo.getContentType();		 
-		if(!InputFileData.validarArchivoImagen(tipoContenido))
-		{
+		String tipoContenido = fileInfo.getContentType();
+		if (!InputFileData.validarArchivoImagen(tipoContenido)) {
 			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
-		
 		if (fileInfo.getStatus() == FileInfo.INVALID_CONTENT_TYPE) {
 			mensajeIngresoInfoCabezaPlancha = "Solo Se permite imagenes";
 			this.mensajeInformativo = true;
@@ -539,14 +476,13 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			this.currentFile = new InputFileDataDTO(fileInfo);
 			// Antes de usar cualquier cosa limpiamos los componentes para
 			// realizar los Uploads
-			this.fileList = Collections
-					.synchronizedList(new ArrayList<InputFileDataDTO>());
+			this.fileList = Collections.synchronizedList(new ArrayList<InputFileDataDTO>());
 			this.imageProcess(currentFile);
 		}
 		if (fileInfo.getStatus() == FileInfo.SIZE_LIMIT_EXCEEDED) {
 			mensajeIngresoInfoCabezaPlancha = "El archivo excede el tamaño máximo permitido";
 			this.mensajeInformativo = true;
-		}	
+		}
 	}
 
 	private void imageProcess(InputFileDataDTO inputFile) {
@@ -581,7 +517,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		mensajeIngreso = true;
 		return "";
 	}
-	
+
 	public void action_cerrar_mensaje_exito() {
 		mensajeExito = "";
 		visiblemensajeExito = false;
@@ -666,8 +602,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		return mensajeIngresoInfoCabezaPlancha;
 	}
 
-	public void setMensajeIngresoInfoCabezaPlancha(
-			String mensajeIngresoInfoCabezaPlancha) {
+	public void setMensajeIngresoInfoCabezaPlancha(String mensajeIngresoInfoCabezaPlancha) {
 		this.mensajeIngresoInfoCabezaPlancha = mensajeIngresoInfoCabezaPlancha;
 	}
 
