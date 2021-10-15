@@ -96,7 +96,7 @@ public class LogicaClimae {
 
 			Date fechaIngreso = DateManipultate.stringToDate(object[4].toString(), "yyyyMMdd");
 			int annosAntiguedad = (ManipulacionFechas.calcularEdad(fechaIngreso, new Date()));
-			asociadoDTO.setAntiguedad(annosAntiguedad * 12);
+			asociadoDTO.setAntiguedad(annosAntiguedad);
 
 			if (object[5] != null) {
 				asociadoDTO.setOficina(object[5].toString());
@@ -147,6 +147,46 @@ public class LogicaClimae {
 			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado"));
 
 		return asociadoDTO;
+	}
+
+	/**
+	 * Consulta la fecha de obtención del título de un asociado
+	 * 
+	 * @author <a href="mailto:javiero.londono@premize.com">Javier Londoño</a> -
+	 *         Premize SAS <br>
+	 * @date 21/12/2012
+	 * @return Long
+	 * @throws Exception
+	 */
+	public boolean validaSancion(String nitcli) throws Exception {
+		Session session = null;
+		Query query = null;
+		List<Object> listObject;
+
+		session = HibernateSessionFactoryElecciones2012.getSession();
+		query = session.getNamedQuery("consultar.fecha.sancion");
+		query.setLong(0, Long.parseLong(nitcli));
+		listObject = query.list();
+
+		if (listObject.size() == 0) {
+			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado") + nitcli
+					+ UtilAcceso.getParametroFuenteS("mensajes", "noAsociado1"));
+		}
+		if (!listObject.isEmpty()) {
+			for (Object object : listObject) {
+				String dat = (String) object;
+				String[] vector = dat.split("/");
+				Date fechaIngreso = DateManipultate.stringToDate(vector[0] + vector[1] + vector[2], "yyMMdd");
+				int anios = (ManipulacionFechas.calcularEdad(fechaIngreso, new Date()));
+				if (anios >= 5) {
+					return true;
+				}
+			}
+		} else {
+			return false;
+		}
+		return false;
+
 	}
 
 	/**

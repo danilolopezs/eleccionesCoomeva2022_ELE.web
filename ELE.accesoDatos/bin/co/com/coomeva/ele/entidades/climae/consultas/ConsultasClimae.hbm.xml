@@ -179,6 +179,7 @@
         AND b.INDREG = 'AS'
 	]]>
 	</sql-query>
+	
 
 	<!-- ###################################################################################### 
 		## 7. Carlos Ernesto Ortega Q - Contratista Coomeva - 2014-01-13 ## ## Consulta 

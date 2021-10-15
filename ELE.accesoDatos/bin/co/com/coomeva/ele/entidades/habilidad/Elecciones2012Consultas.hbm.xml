@@ -5,6 +5,14 @@
 
 
 <hibernate-mapping>
+<!-- ###################################################################################### 
+		## . consulta la fehca de sancion y la extrae SIDCO-> ELE_SANCIONADO   
+		## ###################################################################################### -->
+	<sql-query name="consultar.fecha.sancion">
+		<return-scalar column="FECHA_SUSPENSION" type="java.lang.String" />
+		<![CDATA[SELECT FECHA_SUSPENSION FROM ELECDB.ELE_ASOC_SANCIONADOS_5_ANNOS WHERE NUMERO_DOCUMENTO=?]]>
+	</sql-query>
+	
 	<sql-query name="asesor.getAsociadoEspecial">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />

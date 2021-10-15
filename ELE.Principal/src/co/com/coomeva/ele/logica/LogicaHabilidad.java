@@ -1,5 +1,6 @@
 package co.com.coomeva.ele.logica;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
 import co.com.coomeva.util.acceso.UtilAcceso;
+import co.com.coomeva.util.date.ManipulacionFechas;
 
 public class LogicaHabilidad extends EleInhabilidadesDAO {
 	private static LogicaHabilidad instance;
@@ -170,10 +172,12 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 
 		Long cons = 0l;
 		asociado.setEstadoHabilidad(true);
-
+		asociado = validaSancion(asociado, nroIdentificacion, cons++);
 		asociado = validaAntiguedadAsociado(asociado, cons++);
+		asociado = validaAntiguedadTitulo(asociado, cons++);
+
 		asociado = validaZonaAsociado(elZona, asociado, cons++);
-		
+
 		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
 		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
 
@@ -198,8 +202,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		return asociado;
 	}
 
-	private EleAsociadoDTO validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado, Long cons)
-			throws Exception {
+	private EleAsociadoDTO validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado,
+			Long cons) throws Exception {
 		if (DelegadoPlanchas.getInstance().validarOtraPlancha(nroIdentificacion, nroCabPlancha)) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoOtraPlancha")));
@@ -209,7 +213,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		return asociado;
 	}
 
-	private EleAsociadoDTO validaSubComision(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
+	private EleAsociadoDTO validaSubComision(String nroIdentificacion, EleAsociadoDTO asociado, Long cons)
+			throws Exception {
 		if (DelegadoSubcomision.getInstance().existSubcomision(nroIdentificacion)) {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
@@ -220,7 +225,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		return asociado;
 	}
 
-	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons) throws Exception {
+	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons)
+			throws Exception {
 		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
@@ -245,6 +251,30 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		if (asociado.getAntiguedad() < UtilAcceso.getParametroFuenteI("parametros", "antiguedadMinima")) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoMayor3")));
+//			asociado.setEstadoHabilidad(false);
+			asociado.setEstadoHabilidad(true);
+		}
+		return asociado;
+	}
+
+	private EleAsociadoDTO validaAntiguedadTitulo(EleAsociadoDTO asociado, Long cons) {
+		if (asociado.getAntiguedadDesdeObtencionTitulo() < UtilAcceso.getParametroFuenteI("parametros",
+				"antiguedadMinima")) {
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoFechaObtencionTitulo")));
+//			asociado.setEstadoHabilidad(false);
+			asociado.setEstadoHabilidad(true);
+		}
+		return asociado;
+	}
+
+	private EleAsociadoDTO validaSancion(EleAsociadoDTO asociado, String nroIdentificacion, Long cons)
+			throws Exception {
+		boolean isValid = DelegadoClimae.getInstance().validaSancion(nroIdentificacion);
+
+		if (isValid) {
+			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoFechaObtencionTitulo")));
 //			asociado.setEstadoHabilidad(false);
 			asociado.setEstadoHabilidad(true);
 		}
