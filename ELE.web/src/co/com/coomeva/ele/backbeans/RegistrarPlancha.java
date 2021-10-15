@@ -351,7 +351,7 @@ public class RegistrarPlancha extends BaseVista {
 
 				if (!usuarioQueRegistraEsTitular) {
 					throw new EleccionesDelegadosException("Estimado Asociado, recuerde que el "
-							+ "formulario debe ser diligenciado únicamente por el cabeza de la plancha");
+							+ "formulario debe ser diligenciado únicamente por el cabeza de la plancha.");
 				}
 			}
 			// validar si se puede modificar la plancha:
@@ -361,7 +361,7 @@ public class RegistrarPlancha extends BaseVista {
 				int maxPrincipales = Integer.parseInt(zonaElectoral.getMaxPrincipales().toString());
 				if (listaRealMiembrosTitulares.size() > maxPrincipales) {
 					throw new EleccionesDelegadosException("La plancha excede el máximo de principales para esta zona. "
-							+ "El máximo de principales para esta zona es de " + maxPrincipales);
+							+ "El máximo de principales para esta zona es de " + maxPrincipales + ".");
 				}
 			}
 
@@ -387,7 +387,7 @@ public class RegistrarPlancha extends BaseVista {
 				if ((listaRealMiembrosTitulares != null && listaRealMiembrosSuplentes != null)
 						&& (listaRealMiembrosSuplentes.size() > listaRealMiembrosTitulares.size())) {
 					throw new EleccionesDelegadosException(
-							"Estimado Asociado, recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos");
+							"Estimado Asociado, recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos.");
 				}
 
 				this.estadoPlancha = DelegadoPlancha.getInstance().modificarPlancha(this.miembrosPrincipales,
@@ -403,13 +403,13 @@ public class RegistrarPlancha extends BaseVista {
 
 			// this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje("Se guardaron los datos del formulario. Recuerde "
-					+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo");
+					+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo.");
 		} catch (EleccionesDelegadosException e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje(e.getMessage());
 		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
-			this.mensajeVista.setMensaje("Se presento un error Inesperado");
+			this.mensajeVista.setMensaje("Se presento un error Inesperado.");
 			e.printStackTrace();
 		}
 		return "";
