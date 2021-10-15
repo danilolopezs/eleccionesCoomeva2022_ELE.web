@@ -168,10 +168,6 @@ public class LogicaClimae {
 		query.setLong(0, Long.parseLong(nitcli));
 		listObject = query.list();
 
-		if (listObject.size() == 0) {
-			throw new Exception(UtilAcceso.getParametroFuenteS("mensajes", "noAsociado") + nitcli
-					+ UtilAcceso.getParametroFuenteS("mensajes", "noAsociado1"));
-		}
 		if (!listObject.isEmpty()) {
 			for (Object object : listObject) {
 				String dat = (String) object;

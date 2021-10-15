@@ -18,7 +18,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.xerces.impl.dv.util.Base64;
-
 import co.com.coomeva.ele.backbeans.BaseVista;
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
@@ -31,7 +30,6 @@ import co.com.coomeva.ele.dto.InformacionCabezaPlanchaDTO;
 import co.com.coomeva.ele.dto.InputFileDataDTO;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlancha;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleFotoFormatoPlancha;
-import co.com.coomeva.ele.formatos.pdf.inscripcion.plancha.FormatoPdfInfoCabezaPlancha;
 import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
 import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
@@ -90,7 +88,6 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_ESTADO_DETALLE_FORMATO_PLANCHA_FINALIZADA));
 
-	private FormatoPdfInfoCabezaPlancha formatoPdfInfoCabezaPlancha = new FormatoPdfInfoCabezaPlancha();
 	private boolean esUsuarioComision;// Verifica si el usuario de la sesión es
 	// de la comisión
 	private boolean esSaneamiento;
