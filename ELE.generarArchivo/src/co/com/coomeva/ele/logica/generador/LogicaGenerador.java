@@ -894,13 +894,12 @@ public class LogicaGenerador {
 			cellhdFormatAsociados.setVerticalAlignment(VerticalAlignment.CENTRE);
 
 			WritableCellFormat cellhdFormatAsociadosEspeciales = new WritableCellFormat();
-			cellhdFormatAsociadosEspeciales.setWrap(true);
+			cellhdFormatAsociadosEspeciales.setWrap(Boolean.TRUE);
 			cellhdFormatAsociadosEspeciales.setFont(arial10fontBlackBold);
 			cellhdFormatAsociadosEspeciales.setAlignment(Alignment.CENTRE);
 			cellhdFormatAsociadosEspeciales.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellhdFormatAsociadosEspeciales.setBackground(Colour.ORANGE);
-			cellhdFormatAsociadosEspeciales.setVerticalAlignment(VerticalAlignment.CENTRE);
-			cellhdFormatAsociadosEspeciales.setWrap(Boolean.TRUE);
+			cellhdFormatAsociadosEspeciales.setVerticalAlignment(VerticalAlignment.CENTRE);			
 
 			WritableCellFormat cellhdFormatCuo = new WritableCellFormat();
 			cellhdFormatCuo.setWrap(true);
