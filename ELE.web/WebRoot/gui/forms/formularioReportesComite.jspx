@@ -33,19 +33,14 @@
 									<div align="left" class="banner"></div>
 								</td>
 							</tr>
+							
 							<tr>
-								<td align="left" style="background: white" valign="top"  colspan="2">									
+								<td align="left" valign="top" bgcolor="#FFFFFF" width="130">
+									<br /><br />
+									<jsp:directive.include file="../general/menu.jsp" />
 								</td>
-							</tr>
-							<tr>
-								<td valign="top" colspan="1" >																	
-										<jsp:directive.include  
-											file="../general/menu.jsp" />									
-								</td>
-							</tr>
-							<tr>
 								<td bgcolor="#FFFFFF">									
-									<table align="right" width="75%" border="0" cellspacing="0"
+									<table align="right" width="706px" border="0" cellspacing="0"
 										cellpadding="0">
 										<tr>
 											<td>
@@ -860,28 +855,6 @@
 									<br />
 								</td>
 							</tr>
-							<tr>
-								<td width="130" align="left" valign="top" bgcolor="#ABD673">
-									<br />
-									<br />
-
-								</td>
-
-								<td align="center" bgcolor="#ABD673">
-									<br />
-									<br />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div align="center">
-										<jsp:directive.include
-											file="../popup/popupMensajeExcepcionPlanchas.jsp" />
-										<jsp:directive.include file="../general/PiePagina.jsp" />
-									</div>
-								</td>
-							</tr>
-
 						</table>
 					</div>					
 				</ice:form>

@@ -63,16 +63,14 @@ public class LogicaDelegadosRegional extends EleCuocienteRegionalDAO implements 
 		}
 	}
 	
-	public List<EleCuocienteRegional> consultarDelegadosRegionales(
-			String periodoElectoral, String ordenarPor) throws Exception {
-		
-		Criteria crit = getSession().createCriteria(
-				EleCuocienteRegional.class);
+	public List<EleCuocienteRegional> consultarDelegadosRegionales(String periodoElectoral, String ordenarPor)
+			throws Exception {
+
+		Criteria crit = getSession().createCriteria(EleCuocienteRegional.class);
 		crit.add(Restrictions.eq("periodoElectoral", periodoElectoral));
 
 		if (ordenarPor != null
-				&& !ordenarPor.equals(UtilAcceso.getParametroFuenteS(
-						"parametros", "selectValueDefault"))) {
+				&& !ordenarPor.equals(UtilAcceso.getParametroFuenteS("parametros", "selectValueDefault"))) {
 			crit.addOrder(Order.desc(ordenarPor.toString()));
 		}
 

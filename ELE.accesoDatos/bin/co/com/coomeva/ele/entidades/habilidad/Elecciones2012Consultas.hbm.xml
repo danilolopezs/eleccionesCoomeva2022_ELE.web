@@ -1241,8 +1241,9 @@
 		]]>
 	</sql-query>
 
-	<!-- ##################################################### ##### Consulta 
-		de información basica de un Asociado #### ######################################################* -->
+	<!-- ##################################################### 
+		##### Consulta de información basica de un Asociado ##
+		##################################################### -->
 	<sql-query name="asociado.find">
 		<return-scalar column="NITCLI" type="java.lang.String" />
 		<return-scalar column="NOMCLI" type="java.lang.String" />
@@ -1258,6 +1259,15 @@
 		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT = B.NUMINT
 		WHERE a.asocia = ? AND a.nitcli = ? AND a.estaso >=? AND a.estaso <=? AND a.tipcli = ?
 		]]>
+	</sql-query>
+	
+	<!-- ################################################################################
+		## Danilo Lopez 2021-10-19 ## ## Consulta codigos de Zona Electoral y Regional ## 
+		################################################################################ -->
+	<sql-query name="consulta.regionales.zona.electoral">
+		<return-scalar column="CODREG" type="java.lang.Long" />
+		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
+		<![CDATA[select ze.regional as CODREG, ze.codigo_zona_ele from elecdb.ele_zona_electoral ze]]>
 	</sql-query>
 
 </hibernate-mapping>

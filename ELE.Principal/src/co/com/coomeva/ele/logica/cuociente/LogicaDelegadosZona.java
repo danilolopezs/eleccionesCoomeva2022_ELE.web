@@ -27,15 +27,14 @@ import co.com.coomeva.ele.utilidades.GeneradorConsecutivos;
 import co.com.coomeva.ele.utilidades.UtilNumber;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
-public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
-		ILogicaDelegadosZona {
+public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements ILogicaDelegadosZona {
 
 	private static LogicaDelegadosZona instance;
 	private Double totalHabiles;
 	private Double totalDirectos = 0d;
 	private Double totalReciduo = 0d;
 	private Double totalDelegados = 0d;
-	
+
 	private static HashMap<String, String> regionales;
 	private static HashMap<String, String> zonas;
 	private static HashMap<String, Integer> delegadosRegional;
@@ -52,23 +51,19 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 
 	private static void cargarRegionales() {
 		try {
-			List<FiltrosConsultasDTO> listadoRegionales = DelegadoFiltros
-					.getInstance().consultarRegionales();
-			List<FiltrosConsultasDTO> listadoZonas = DelegadoFiltros
-					.getInstance().consultarZonasElectorales();
+			List<FiltrosConsultasDTO> listadoRegionales = DelegadoFiltros.getInstance().consultarRegionales();
+			List<FiltrosConsultasDTO> listadoZonas = DelegadoFiltros.getInstance().consultarZonasElectorales();
 
 			regionales = new HashMap<String, String>();
 			for (int i = 0; i < listadoRegionales.size(); i++) {
-				regionales.put(listadoRegionales.get(i).getCodigoFiltro()
-						.toString(), listadoRegionales.get(i)
-						.getDescripcionFiltro().toUpperCase());
+				regionales.put(listadoRegionales.get(i).getCodigoFiltro().toString(),
+						listadoRegionales.get(i).getDescripcionFiltro().toUpperCase());
 			}
 
 			zonas = new HashMap<String, String>();
 			for (int i = 0; i < listadoZonas.size(); i++) {
 				zonas.put(listadoZonas.get(i).getCodigoFiltro().toString(),
-						listadoZonas.get(i).getDescripcionFiltro()
-								.toUpperCase());
+						listadoZonas.get(i).getDescripcionFiltro().toUpperCase());
 			}
 
 		} catch (Exception e) {
@@ -76,30 +71,25 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		}
 	}
 
-	public EleCuocienteDelegadosZona calcularDelegadosZona(
-			String periodoElectoral, String codRegional, String codZona,
+	public EleCuocienteDelegadosZona calcularDelegadosZona(String periodoElectoral, String codRegional, String codZona,
 			Double sumaHabiles) throws Exception {
 
-		boolean nuevo = true;
+		boolean nuevo = Boolean.TRUE;
 		Double sumaEspHabiles;
-		/**
-		 * Se validan los campos requeridos para el calculo
-		 */
+
+		// Se validan los campos requeridos para el calculo
 		if (periodoElectoral == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.periodoEelctoral"));
 		}
 
 		if (codRegional == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.regional"));
 		}
 
 		if (codZona == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.zona"));
 		}
 
@@ -110,16 +100,16 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			// List<EleCuocienteDelegadosZona> listado;
 
 			// Se consulta el total de asociados por zona.
-			sumaHabiles = new Double(DelegadoAsociado.getInstance()
-					.consultarTotalAsociadosHabilesAsociado(new Long(codZona)));
+			sumaHabiles = new Double(
+					DelegadoAsociado.getInstance().consultarTotalAsociadosHabilesAsociado(new Long(codZona)));
 			// sumaHabiles =
 			// DelegadoAsociado.getInstance().totalAsociadosPorZona(new
 			// Long(codZona));
 
 			/*
-			 * listado = consultarDelegadosZona(periodoElectoral,codRegional,
-			 * codZona); if(listado != null && listado.size() == 1){ sumaHabiles
-			 * = listado.get(0).getSumaHabiles(); }
+			 * listado = consultarDelegadosZona(periodoElectoral,codRegional, codZona);
+			 * if(listado != null && listado.size() == 1){ sumaHabiles =
+			 * listado.get(0).getSumaHabiles(); }
 			 */
 			/*
 			 * throw new Exception(UtilAcceso.getParametroFuenteS(
@@ -127,8 +117,9 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			 * "campo.obligatorio.delegadoZona.habiles"));
 			 */
 		}
-		
-		sumaEspHabiles = new Double(DelegadoAsociado.getInstance().consultarTotalAsociadosEspecialesHabilesAsociado(new Long(codZona)));
+
+		sumaEspHabiles = new Double(
+				DelegadoAsociado.getInstance().consultarTotalAsociadosEspecialesHabilesAsociado(new Long(codZona)));
 
 		/**
 		 * Se debe consultar si existe el registro de delegados por Zona
@@ -145,31 +136,27 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			nuevo = true;
 			cuocienteDelegadosZona = new EleCuocienteDelegadosZona();
 
-			Integer idRegistro = new Integer(
-					GeneradorConsecutivos
-							.getInstance()
-							.getConsecutivo(
-									ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA,
-									this.getSession()).toString());
+			Integer idRegistro = new Integer(GeneradorConsecutivos.getInstance()
+					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA, this.getSession())
+					.toString());
 			cuocienteDelegadosZona.setIdRegistro(idRegistro);
 		} else {
 			nuevo = false;
 		}
 
 		/**
-		 * Se consulta el cuociente electoral para realizar el calculo de
-		 * delegados directos y por residuo
+		 * Se consulta el cuociente electoral para realizar el calculo de delegados
+		 * directos y por residuo
 		 */
-		EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral
-				.getInstance().getConsultarCuocienteElectoral(periodoElectoral);
+		EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral.getInstance()
+				.getConsultarCuocienteElectoral(periodoElectoral);
 
 		/**
 		 * Se valida que exista un cuociente para el periodo ingresado
 		 */
 		if (cuocienteElectoral == null) {
 
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.noCuociente"));
 		}
 
@@ -181,25 +168,25 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		// DelegadoAsociado.getInstance().totalAsociadosPorZona(new
 		// Long(codZona));
 
-		
-		/* 
-		 * Modificado: Juliana Nobile
-		 * Se comenta esta validacion, porque aveces una zona electoral puede no tener asociados habiles.
+		/*
+		 * Modificado: Juliana Nobile Se comenta esta validacion, porque aveces una zona
+		 * electoral puede no tener asociados habiles.
 		 */
-		/*if (sumaHabiles == 0) {
-			throw new Exception("campo.obligatorio.delegadoZona.asociadosHabi");
-		}*/
+		/*
+		 * if (sumaHabiles == 0) { throw new
+		 * Exception("campo.obligatorio.delegadoZona.asociadosHabi"); }
+		 */
 
 		// TODO JD : Agregar aquí las novedades, restar al sumaHabiles
-		
+
 		String fechaProceso = LogicaProceso.getInstance().consultaFechaUltimoProcesoEjecutado();
 		Double novedades = LogicaNovedad.getInstance().consultarNumeroNov(fechaProceso, "1", new Long(codZona));
-		Double novedadesEsp = LogicaNovedad.getInstance().consultarNumeroNovAsocEsp(fechaProceso, "1", new Long(codZona));
-		
-		//TODO novedades especiales
-		//Double novedadesEsp;
-		
-		
+		Double novedadesEsp = LogicaNovedad.getInstance().consultarNumeroNovAsocEsp(fechaProceso, "1",
+				new Long(codZona));
+
+		// TODO novedades especiales
+		// Double novedadesEsp;
+
 		double delegados = sumaHabiles / cuocienteElectoral.getCuocienteElectoral();
 		delegados = UtilNumber.getInstance().redondear(delegados, 4);
 		cuocienteDelegadosZona.setDelegados(delegados);
@@ -213,8 +200,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		cuocienteDelegadosZona.setCodRegional(codRegional);
 		cuocienteDelegadosZona.setCodZona(codZona);
 		cuocienteDelegadosZona.setSumaHabiles(sumaHabiles - novedades);
-		
-		
+
 		cuocienteDelegadosZona.setSumaNovedades(novedades);
 		cuocienteDelegadosZona.setSumaEspHabiles(sumaEspHabiles);
 		cuocienteDelegadosZona.setSumaNovedadesEsp(novedadesEsp);
@@ -249,29 +235,25 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		}
 	}
 
-	public EleCuocienteDelegadosZona calcularDelegadosZonaSinTr(
-			String periodoElectoral, String codRegional, String codZona,
-			Double sumaHabiles) throws Exception {
+	public EleCuocienteDelegadosZona calcularDelegadosZonaSinTr(String periodoElectoral, String codRegional,
+			String codZona, Double sumaHabiles) throws Exception {
 
 		boolean nuevo = true;
 		/**
 		 * Se validan los campos requeridos para el calculo
 		 */
 		if (periodoElectoral == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.periodoEelctoral"));
 		}
 
 		if (codRegional == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.regional"));
 		}
 
 		if (codZona == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.zona"));
 		}
 
@@ -282,16 +264,16 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			// List<EleCuocienteDelegadosZona> listado;
 
 			// Se consulta el total de asociados por zona.
-			sumaHabiles = new Double(DelegadoAsociado.getInstance()
-					.consultarTotalAsociadosHabilesAsociado(new Long(codZona)));
+			sumaHabiles = new Double(
+					DelegadoAsociado.getInstance().consultarTotalAsociadosHabilesAsociado(new Long(codZona)));
 			// sumaHabiles =
 			// DelegadoAsociado.getInstance().totalAsociadosPorZona(new
 			// Long(codZona));
 
 			/*
-			 * listado = consultarDelegadosZona(periodoElectoral,codRegional,
-			 * codZona); if(listado != null && listado.size() == 1){ sumaHabiles
-			 * = listado.get(0).getSumaHabiles(); }
+			 * listado = consultarDelegadosZona(periodoElectoral,codRegional, codZona);
+			 * if(listado != null && listado.size() == 1){ sumaHabiles =
+			 * listado.get(0).getSumaHabiles(); }
 			 */
 			/*
 			 * throw new Exception(UtilAcceso.getParametroFuenteS(
@@ -315,31 +297,27 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			nuevo = true;
 			cuocienteDelegadosZona = new EleCuocienteDelegadosZona();
 
-			Integer idRegistro = new Integer(
-					GeneradorConsecutivos
-							.getInstance()
-							.getConsecutivo(
-									ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA,
-									this.getSession()).toString());
+			Integer idRegistro = new Integer(GeneradorConsecutivos.getInstance()
+					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA, this.getSession())
+					.toString());
 			cuocienteDelegadosZona.setIdRegistro(idRegistro);
 		} else {
 			nuevo = false;
 		}
 
 		/**
-		 * Se consulta el cuociente electoral para realizar el calculo de
-		 * delegados directos y por residuo
+		 * Se consulta el cuociente electoral para realizar el calculo de delegados
+		 * directos y por residuo
 		 */
-		EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral
-				.getInstance().getConsultarCuocienteElectoral(periodoElectoral);
+		EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral.getInstance()
+				.getConsultarCuocienteElectoral(periodoElectoral);
 
 		/**
 		 * Se valida que exista un cuociente para el periodo ingresado
 		 */
 		if (cuocienteElectoral == null) {
 
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.noCuociente"));
 		}
 
@@ -352,9 +330,10 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		// Long(codZona));
 
 		// Se comenta porque es posible que una zona no tenga asociados habiles
-		/*if (sumaHabiles == 0) {
-			throw new Exception("campo.obligatorio.delegadoZona.asociadosHabi");
-		}*/
+		/*
+		 * if (sumaHabiles == 0) { throw new
+		 * Exception("campo.obligatorio.delegadoZona.asociadosHabi"); }
+		 */
 		double delegados = sumaHabiles / cuocienteElectoral.getCuocienteElectoral();
 		delegados = UtilNumber.getInstance().redondear(delegados, 4);
 		cuocienteDelegadosZona.setDelegados(delegados);
@@ -396,10 +375,8 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 	 * 
 	 * @throws Exception
 	 */
-	public List<EleCuocienteDelegadosZona> calcularDelegadosZonaFinal(
-			String periodoElectoral) throws Exception {
-		List<EleCuocienteDelegadosZona> resultado = consultarDelegadosZona(
-				periodoElectoral, "fraccion");
+	public List<EleCuocienteDelegadosZona> calcularDelegadosZonaFinal(String periodoElectoral) throws Exception {
+		List<EleCuocienteDelegadosZona> resultado = consultarDelegadosZona(periodoElectoral, "fraccion");
 
 		Double delegadosAElegir = 0d;
 		Double delegadosElegidos = 0d;
@@ -411,70 +388,51 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 
 		if (resultado != null) {
 			/**
-			 * Se consulta el cuociente electoral para realizar el calculo de
-			 * delegados directos y por residuo
+			 * Se consulta el cuociente electoral para realizar el calculo de delegados
+			 * directos y por residuo
 			 */
 			Transaction transaction = null;
 
 			try {
-				EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral
-						.getInstance().getConsultarCuocienteElectoral(
-								periodoElectoral);
+				EleCuocienteElectoral cuocienteElectoral = DelegadoCuocienteElectoral.getInstance()
+						.getConsultarCuocienteElectoral(periodoElectoral);
 
 				if (cuocienteElectoral != null) {
 					transaction = this.getSession().beginTransaction();
-					
-					delegadosAElegir = cuocienteElectoral
-							.getFinalTotalDelegadosElegir();
+
+					delegadosAElegir = cuocienteElectoral.getFinalTotalDelegadosElegir();
 
 					for (int i = 0; i < resultado.size(); i++) {
 						// Se recalculan los valores de cada zona
-						resultado.set(i, calcularDelegadosZonaSinTr(
-								periodoElectoral, resultado.get(i)
-										.getCodRegional(), resultado.get(i)
-										.getCodZona(), null));
-						delegadosElegidos = delegadosElegidos
-								+ resultado.get(i).getDelegadosDirectos();
-						delegadosElegidos = delegadosElegidos
-								+ resultado.get(i).getDelegadosResiduo();
+						resultado.set(i, calcularDelegadosZonaSinTr(periodoElectoral, resultado.get(i).getCodRegional(),
+								resultado.get(i).getCodZona(), null));
+						delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosDirectos();
+						delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosResiduo();
 
 						/**
-						 * Se ajustó esta parte para que durante el proceso del
-						 * calculo de los delegados por zona se calculara los
-						 * asociados hábiles por zona
+						 * Se ajustó esta parte para que durante el proceso del calculo de los delegados
+						 * por zona se calculara los asociados hábiles por zona
 						 */
-						resultado
-								.get(i)
-								.setSumaHabiles(
-										new Double(
-												DelegadoAsociado
-														.getInstance()
-														.consultarTotalAsociadosHabilesAsociado(
-																new Long(
-																		resultado
-																				.get(
-																						i)
-																				.getCodZona()))));
-						totalHabiles = (totalHabiles
-								+ resultado.get(i).getSumaHabiles());
-						totalDirectos = totalDirectos
-								+ resultado.get(i).getDelegadosDirectos();
+						resultado.get(i).setSumaHabiles(new Double(DelegadoAsociado.getInstance()
+								.consultarTotalAsociadosHabilesAsociado(new Long(resultado.get(i).getCodZona()))));
+						totalHabiles = (totalHabiles + resultado.get(i).getSumaHabiles());
+						totalDirectos = totalDirectos + resultado.get(i).getDelegadosDirectos();
 					}
 
 					for (int i = 0; (i < resultado.size()); i++) {
-
 						if (delegadosElegidos < delegadosAElegir) {
 							// Se suma el nuevo delegado correspondiente al
 							// cuociente.
 							resultado.get(i).setDelegadosResiduo(resultado.get(i).getDelegadosResiduo() + 1);
 							delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosResiduo();
-							Double total = resultado.get(i).getDelegadosDirectos() + resultado.get(i).getDelegadosResiduo();
+							Double total = resultado.get(i).getDelegadosDirectos()
+									+ resultado.get(i).getDelegadosResiduo();
 							resultado.get(i).setTotalDelegadosZona(total);
-						}else{
-							Double total = resultado.get(i).getDelegadosDirectos() + resultado.get(i).getDelegadosResiduo();
+						} else {
+							Double total = resultado.get(i).getDelegadosDirectos()
+									+ resultado.get(i).getDelegadosResiduo();
 							resultado.get(i).setTotalDelegadosZona(total);
 						}
-
 						totalReciduo = totalReciduo + resultado.get(i).getDelegadosResiduo();
 						totalDelegados = totalDelegados + resultado.get(i).getTotalDelegadosZona();
 					}
@@ -485,11 +443,12 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 					Integer valor;
 					delegadosRegional = new HashMap<String, Integer>(0);
 					for (int z = 0; z < resultado.size(); z++) {
-						
-						if( resultado.get(z) != null ){
-							if( delegadosRegional.get(resultado.get(z).getCodRegional()) == null){
-								delegadosRegional.put(resultado.get(z).getCodRegional(), new Integer(resultado.get(z).getTotalDelegadosZona().intValue()));
-							}else{
+
+						if (resultado.get(z) != null) {
+							if (delegadosRegional.get(resultado.get(z).getCodRegional()) == null) {
+								delegadosRegional.put(resultado.get(z).getCodRegional(),
+										new Integer(resultado.get(z).getTotalDelegadosZona().intValue()));
+							} else {
 								valor = resultado.get(z).getTotalDelegadosZona().intValue();
 								valor = valor + delegadosRegional.get(resultado.get(z).getCodRegional());
 								delegadosRegional.put(resultado.get(z).getCodRegional(), valor);
@@ -497,11 +456,12 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 						}
 						guardarDelegadosZona(resultado.get(z));
 					}
-					
+
 					/**
 					 * Se registran los delegados por Regional
 					 */
-					DelegadoDelegadosRegional.getInstance().registrarDelegadosRegional(delegadosRegional, cuocienteElectoral);
+					DelegadoDelegadosRegional.getInstance().registrarDelegadosRegional(delegadosRegional,
+							cuocienteElectoral);
 					this.getSession().flush();
 					transaction.commit();
 				}
@@ -535,37 +495,25 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 	/**
 	 * Consulta del cuociente electoral
 	 */
-	public List<EleCuocienteDelegadosZona> consultarDelegadosZona(
-			String periodoElectoral, String codRegional, String codZona)
-			throws Exception {
-		/**
-		 * Se validan los campos requeridos para el calculo
-		 */
+	public List<EleCuocienteDelegadosZona> consultarDelegadosZona(String periodoElectoral, String codRegional,
+			String codZona) throws Exception {
+
+		// Se validan los campos requeridos para el calculo
 		if (periodoElectoral == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.periodoEelctoral"));
 		}
-
 		if (codRegional == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.regional"));
 		}
+		if (codZona == null) {
+			throw new Exception(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+					"campo.obligatorio.delegadoZona.zona"));
+		}
 
-		/*
-		 * if (codZona == null) { throw new
-		 * Exception(UtilAcceso.getParametroFuenteS(
-		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-		 * "campo.obligatorio.delegadoZona.zona")); }
-		 */
-
-		/**
-		 * Se consulta los delegados de la zona y regional entregados por
-		 * parámetro
-		 */
-		Criteria crit = getSession().createCriteria(
-				EleCuocienteDelegadosZona.class);
+		// Se consulta los delegados de la zona y regional entregados por parámetro
+		Criteria crit = getSession().createCriteria(EleCuocienteDelegadosZona.class);
 		crit.add(Restrictions.eq("periodoElectoral", periodoElectoral));
 		crit.add(Restrictions.eq("codRegional", codRegional));
 
@@ -581,27 +529,24 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 	/**
 	 * Consulta del cuociente electoral
 	 */
-	public List<EleCuocienteDelegadosZona> consultarDelegadosZona(
-			String periodoElectoral, String ordenarPor) throws Exception {
+	public List<EleCuocienteDelegadosZona> consultarDelegadosZona(String periodoElectoral, String ordenarPor)
+			throws Exception {
 		/**
 		 * Se validan los campos requeridos para el calculo
 		 */
 		if (periodoElectoral == null) {
-			UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.delegadoZona.periodoEelctoral");
 		}
 
 		/**
-		 * Se consulta los delegados de la zona y regional entregados por
-		 * parámetro
+		 * Se consulta los delegados de la zona y regional entregados por parámetro
 		 */
 		Criteria crit = getSession().createCriteria(EleCuocienteDelegadosZona.class);
 		crit.add(Restrictions.eq("periodoElectoral", periodoElectoral));
 
 		if (ordenarPor != null
-				&& !ordenarPor.equals(UtilAcceso.getParametroFuenteS(
-						"parametros", "selectValueDefault"))) {
+				&& !ordenarPor.equals(UtilAcceso.getParametroFuenteS("parametros", "selectValueDefault"))) {
 			crit.addOrder(Order.desc(ordenarPor.toString()));
 		}
 
@@ -610,143 +555,120 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		return cuocienteDelegadosZona;
 	}
 
-	public void guardarDelegadosZona(
-			EleCuocienteDelegadosZona eleCuocienteDelegadosZona)
-			throws Exception {
+	public void guardarDelegadosZona(EleCuocienteDelegadosZona eleCuocienteDelegadosZona) throws Exception {
 		/**
 		 * Se validan los campos requeridos para el calculo
-		 
-		if (eleCuocienteDelegadosZona.getIdRegistro() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.periodoEelctoral"));
-		}
-		if (eleCuocienteDelegadosZona.getPeriodoElectoral() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.periodoEelctoral"));
-		}
-
-		if (eleCuocienteDelegadosZona.getCodRegional() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.regional"));
-		}
-
-		if (eleCuocienteDelegadosZona.getCodZona() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.zona"));
-		}
-
-		List<EleCuocienteDelegadosZona> listado;
-		EleCuocienteDelegadosZona cuocienteDelegadosZona = null;
-		listado = consultarDelegadosZona(eleCuocienteDelegadosZona
-				.getPeriodoElectoral(), eleCuocienteDelegadosZona
-				.getCodRegional(), eleCuocienteDelegadosZona.getCodZona());
-
-		if (listado != null && listado.size() == 1) {
-			cuocienteDelegadosZona = listado.get(0);
-		}
-
-		if (cuocienteDelegadosZona == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.noExiste"));
-		}
-
-		if (eleCuocienteDelegadosZona.getSumaHabiles() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.sumaHabiles"));
-		}
-
-		if (eleCuocienteDelegadosZona.getDelegados() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.delegados"));
-		}
-
-		if (eleCuocienteDelegadosZona.getDelegadosDirectos() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.delegadosDirectos"));
-		}
-
-		if (eleCuocienteDelegadosZona.getFraccion() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.fraccion"));
-		}
-
-		if (eleCuocienteDelegadosZona.getDelegadosResiduo() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.delegadosReciduo"));
-		}
-		if (eleCuocienteDelegadosZona.getDistribuidosRestantes() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.distribuidosRestantes"));
-		}
-		if (eleCuocienteDelegadosZona.getTotalDelegadosZona() == null) {
-			throw new Exception(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-					"campo.obligatorio.delegadoZona.totalDelegadosZona"));
-		}*/
+		 * 
+		 * if (eleCuocienteDelegadosZona.getIdRegistro() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.periodoEelctoral")); } if
+		 * (eleCuocienteDelegadosZona.getPeriodoElectoral() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.periodoEelctoral")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getCodRegional() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.regional")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getCodZona() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.zona")); }
+		 * 
+		 * List<EleCuocienteDelegadosZona> listado; EleCuocienteDelegadosZona
+		 * cuocienteDelegadosZona = null; listado =
+		 * consultarDelegadosZona(eleCuocienteDelegadosZona .getPeriodoElectoral(),
+		 * eleCuocienteDelegadosZona .getCodRegional(),
+		 * eleCuocienteDelegadosZona.getCodZona());
+		 * 
+		 * if (listado != null && listado.size() == 1) { cuocienteDelegadosZona =
+		 * listado.get(0); }
+		 * 
+		 * if (cuocienteDelegadosZona == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.noExiste")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getSumaHabiles() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.sumaHabiles")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getDelegados() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.delegados")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getDelegadosDirectos() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.delegadosDirectos")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getFraccion() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.fraccion")); }
+		 * 
+		 * if (eleCuocienteDelegadosZona.getDelegadosResiduo() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.delegadosReciduo")); } if
+		 * (eleCuocienteDelegadosZona.getDistribuidosRestantes() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.distribuidosRestantes")); } if
+		 * (eleCuocienteDelegadosZona.getTotalDelegadosZona() == null) { throw new
+		 * Exception(UtilAcceso.getParametroFuenteS(
+		 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+		 * "campo.obligatorio.delegadoZona.totalDelegadosZona")); }
+		 */
 
 		merge(eleCuocienteDelegadosZona);
 	}
-	
-	public void eliminarDelegadosZona(String periodo){
-		
-		Session session=null;
-		Query query=null;
-		
-    	try {
 
-    		session= HibernateSessionFactoryElecciones2012.getSession();
-    		query = session.createQuery("DELETE FROM EleCuocienteDelegadosZona dz	WHERE dz.periodoElectoral = :periodo");
-    		query.setParameter("periodo", periodo);
-    		int result = query.executeUpdate();
+	public void eliminarDelegadosZona(String periodo) {
+
+		Session session = null;
+		Query query = null;
+
+		try {
+
+			session = HibernateSessionFactoryElecciones2012.getSession();
+			query = session
+					.createQuery("DELETE FROM EleCuocienteDelegadosZona dz	WHERE dz.periodoElectoral = :periodo");
+			query.setParameter("periodo", periodo);
+			int result = query.executeUpdate();
 
 			query.executeUpdate();
-        } catch (RuntimeException re) {
-            throw re;
-        }
-    }
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 
-	public List<EleCuocienteDelegadosZona> cargarDescripciones(
-			List<EleCuocienteDelegadosZona> cuocienteDelegadosZona) {
+	public List<EleCuocienteDelegadosZona> cargarDescripciones(List<EleCuocienteDelegadosZona> cuocienteDelegadosZona) {
 		if (cuocienteDelegadosZona != null) {
 			for (int i = 0; i < cuocienteDelegadosZona.size(); i++) {
-				cuocienteDelegadosZona.get(i).setDescCodRegional(
-						regionales.get(cuocienteDelegadosZona.get(i)
-								.getCodRegional()));
-				cuocienteDelegadosZona.get(i).setDescCodZona(
-						zonas.get(cuocienteDelegadosZona.get(i).getCodZona()));
+				cuocienteDelegadosZona.get(i)
+						.setDescCodRegional(regionales.get(cuocienteDelegadosZona.get(i).getCodRegional()));
+				cuocienteDelegadosZona.get(i).setDescCodZona(zonas.get(cuocienteDelegadosZona.get(i).getCodZona()));
 			}
 		}
 		return cuocienteDelegadosZona;
 	}
-	
-	
-	public List<EleCuocienteDelegadosZona> cargarNovedadesZona(
-			List<EleCuocienteDelegadosZona> cuocienteDelegadosZona) {
-		if (cuocienteDelegadosZona != null) 
-		{
-			for (int i = 0; i < cuocienteDelegadosZona.size(); i++) 
-			{
-				try 
-				{
+
+	public List<EleCuocienteDelegadosZona> cargarNovedadesZona(List<EleCuocienteDelegadosZona> cuocienteDelegadosZona) {
+		if (cuocienteDelegadosZona != null) {
+			for (int i = 0; i < cuocienteDelegadosZona.size(); i++) {
+				try {
 					String fechaProceso = LogicaProceso.getInstance().consultaFechaUltimoProcesoEjecutado();
-					Double numeroNovedades = LogicaNovedad.getInstance().consultarNumeroNov(fechaProceso, "1", new Long(cuocienteDelegadosZona.get(i).getCodZona()));
-					if (!numeroNovedades.equals(null)) 
-					{
+					Double numeroNovedades = LogicaNovedad.getInstance().consultarNumeroNov(fechaProceso, "1",
+							new Long(cuocienteDelegadosZona.get(i).getCodZona()));
+					if (!numeroNovedades.equals(null)) {
 						cuocienteDelegadosZona.get(i).setSumaNovedades(numeroNovedades);
-					}
-					else
-					{
+					} else {
 						cuocienteDelegadosZona.get(i).setSumaNovedades(new Double(0));
 					}
 				} catch (Exception e) {

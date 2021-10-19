@@ -521,7 +521,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			}
 
 			miembroPlancha.setApellidosNombres(
-					getNombreAsociadoConFormato(asociadoDTO) + " " + getApellidoAsociadoConFormato(asociadoDTO));
+					getApellidoAsociadoConFormato(asociadoDTO) + " " + getNombreAsociadoConFormato(asociadoDTO));
 
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
@@ -580,7 +580,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				.append(asociadoDTO.getSegundoNombre() != null && !"".equals(asociadoDTO.getSegundoNombre())
 						? " " + asociadoDTO.getSegundoNombre()
 						: "");
-		return nombresAsociado.toString();
+		return nombresAsociado.toString().trim();
 	}
 	
 	private String getApellidoAsociadoConFormato(EleAsociadoDTO asociadoDTO) {
@@ -593,7 +593,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				.append(asociadoDTO.getSegundoApellido() != null && !"".equals(asociadoDTO.getSegundoApellido())
 						? " " + asociadoDTO.getSegundoApellido()
 						: "");
-		return apellidosAsociado.toString();
+		return apellidosAsociado.toString().trim();
 	}
 
 	/**

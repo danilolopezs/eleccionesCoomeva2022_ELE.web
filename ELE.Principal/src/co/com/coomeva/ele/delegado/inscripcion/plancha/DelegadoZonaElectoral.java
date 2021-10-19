@@ -12,25 +12,23 @@ import co.com.coomeva.ele.modelo.EleZonaElectoralRegionalDTO;
 import co.com.coomeva.ele.modelo.FiltrosConsultasDTO;
 
 public class DelegadoZonaElectoral {
-	
+
 	private ILogicaZonaElectoral logicaZonaElectoral;
 	private ILogicaZonaElectoralEspecial logicaZonaElectoralEspecial;
-	
+
 	public static DelegadoZonaElectoral instance;
-	
-	private DelegadoZonaElectoral(){
+
+	private DelegadoZonaElectoral() {
 	}
-	
-	public static DelegadoZonaElectoral getInstance(){
-		if(instance == null){
+
+	public static DelegadoZonaElectoral getInstance() {
+		if (instance == null) {
 			instance = new DelegadoZonaElectoral();
 		}
 		return instance;
 	}
 
-	public List<FiltrosConsultasDTO> consultarZonasElectorales()
-		throws EleccionesDelegadosException {
-		
+	public List<FiltrosConsultasDTO> consultarZonasElectorales() throws EleccionesDelegadosException {
 		try {
 			logicaZonaElectoral = new LogicaZonaElectoral();
 			return logicaZonaElectoral.consultarZonasElectorales();
@@ -38,27 +36,34 @@ public class DelegadoZonaElectoral {
 			logicaZonaElectoral = null;
 		}
 	}
-	
-	public List<FiltrosConsultasDTO> consultarZonasElectoralesEspecial()
-	throws EleccionesDelegadosException {
-	
-	try {
-		logicaZonaElectoralEspecial = new LogicaZonaElectoralEspecial();
-		return logicaZonaElectoralEspecial.consultarZonasElectoralesEspeciales();
-	} finally {
-		logicaZonaElectoral = null;
+
+	public List<FiltrosConsultasDTO> consultarZonasElectoralesEspecial() throws EleccionesDelegadosException {
+		try {
+			logicaZonaElectoralEspecial = new LogicaZonaElectoralEspecial();
+			return logicaZonaElectoralEspecial.consultarZonasElectoralesEspeciales();
+		} finally {
+			logicaZonaElectoral = null;
+		}
 	}
-}
-	
-	public List<EleZonaElectoralRegionalDTO>  consultarCodigosZonasElectoralesRegionales()
-	throws EleccionesDelegadosException {
-	
-	try {
-		logicaZonaElectoral = new LogicaZonaElectoral();
-		return logicaZonaElectoral.consultarCodigosZonasElectoralesRegionales();
-	} finally {
-		logicaZonaElectoral = null;
+
+	public List<EleZonaElectoralRegionalDTO> consultarCodigosZonasElectoralesRegionales()
+			throws EleccionesDelegadosException {
+		try {
+			logicaZonaElectoral = new LogicaZonaElectoral();
+			return logicaZonaElectoral.consultarCodigosZonasElectoralesRegionales();
+		} finally {
+			logicaZonaElectoral = null;
+		}
 	}
-}
 	
+	public List<EleZonaElectoralRegionalDTO> consultarCodigosRegionalDeZonaElectoral()
+			throws EleccionesDelegadosException {
+		try {
+			logicaZonaElectoral = new LogicaZonaElectoral();
+			return logicaZonaElectoral.consultarCodigosRegionalDeZonaElectoral();
+		} finally {
+			logicaZonaElectoral = null;	
+		}
+	}
+
 }

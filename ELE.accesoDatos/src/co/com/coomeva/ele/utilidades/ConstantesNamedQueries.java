@@ -66,4 +66,5 @@ public interface ConstantesNamedQueries {
 	String QUERY_CONSULTAR_NOVEDAD_HABILIDAD_ASOCIADO = "consultar.novedad.habilidad.asociado";
 	String QUERY_SEQ_ELE_NOVEDAD = "consultar.secuencia.ele.novedad";
 	String QUERY_CONSULTAR_ZONAS_ELECTORALES_REGIONAL = "consulta.zonas.electorales.con.regional";
+	String QUERY_CONSULTAR_REGIONALES_DE_ZONA_ELECTORAL = "consulta.regionales.zona.electoral";
 }

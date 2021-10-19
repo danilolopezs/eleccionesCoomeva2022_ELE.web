@@ -15,4 +15,6 @@ public interface ILogicaZonaElectoral {
 	List<EleZonaElectoralRegionalDTO> consultarCodigosZonasElectoralesRegionales()
 			throws EleccionesDelegadosException;
 	
+	List<EleZonaElectoralRegionalDTO> consultarCodigosRegionalDeZonaElectoral()
+			throws EleccionesDelegadosException;
 }

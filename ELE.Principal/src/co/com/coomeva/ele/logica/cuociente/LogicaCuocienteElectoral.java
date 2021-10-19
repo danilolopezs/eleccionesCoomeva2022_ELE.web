@@ -50,62 +50,36 @@ public class LogicaCuocienteElectoral extends EleCuocienteElectoralDAO implement
 	/**
 	 * Lógica para calcular el cuociente electoral
 	 */
-	public EleCuocienteElectoral calcularCuocienteElectoral(Integer idRegistro,
-			String periodoElectoral, Double totalAsocHabiles,
-			Double totalDelegadosElegir, Double totalDelegadosEspeciales,
-			Double finalTotalDelegadosElegir, Double cuocienteElectoral)
-			throws Exception {
+	public EleCuocienteElectoral calcularCuocienteElectoral(Integer idRegistro, String periodoElectoral,
+			Double totalAsocHabiles, Double totalDelegadosElegir, Double totalDelegadosEspeciales,
+			Double finalTotalDelegadosElegir, Double cuocienteElectoral) throws Exception {
 		
-		boolean nuevo = true;
-		EleCuocienteElectoral eleCuocienteElectoral = null;
-		eleCuocienteElectoral = getConsultarCuocienteElectoral(periodoElectoral);
+		EleCuocienteElectoral eleCuocienteElectoral = getConsultarCuocienteElectoral(periodoElectoral);
+		boolean nuevo = eleCuocienteElectoral == null;
 		
-		/**
-		 * Si no existe el cuociente se obtiene el nuevo consecutivo.
-		 */
-		if( eleCuocienteElectoral == null ){
-			nuevo = true;
-			if (idRegistro == null) {
-				idRegistro = new Integer(GeneradorConsecutivos
-				.getInstance().getConsecutivo(
-						ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_ELECTORAL, this.getSession()).toString());
-			}
-		}else{
-			nuevo = false;
-			idRegistro = eleCuocienteElectoral.getIdRegistro();
-		}
+		// Si no existe el cuociente se obtiene el nuevo consecutivo.
+		idRegistro = (nuevo && idRegistro == null) ? new Integer(GeneradorConsecutivos.getInstance()
+				.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_ELECTORAL, this.getSession()).toString())
+				: eleCuocienteElectoral.getIdRegistro();
 		
 		/**
-		 * Se validan los campos requeridos para el calculo
+		 * Se validan los campos requeridos para el calculo 
 		 */
+		 
 		if (periodoElectoral == null) {
-			UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.cuociente.periodoElectoral");
 		}
-		/**
-		 * Se validan los campos requeridos para el calculo
-		 */
 		if (totalAsocHabiles == null) {
-			UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.cuociente.totalAsocHabiles");
 		}
-		/**
-		 * Se validan los campos requeridos para el calculo
-		 */
 		if (totalDelegadosElegir == null) {
-			UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.cuociente.totalDelegadosElegir");
 		}
 		if (totalDelegadosEspeciales == null) {
-			UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.cuociente.totalDelegadosEspeciales");
 		}
 		
@@ -132,9 +106,7 @@ public class LogicaCuocienteElectoral extends EleCuocienteElectoralDAO implement
 			eleCuocienteElectoral.setTotalDelegadosElegir(totalDelegadosElegir);
 			eleCuocienteElectoral.setTotalDelegadosEspeciales(totalDelegadosEspeciales);
 			
-			/**
-			 * Se valida si es un nuevo registro o es un cuociente.
-			 */
+			// Se valida si es un nuevo registro o es un cuociente. 
 			if( nuevo ){
 				save(eleCuocienteElectoral);
 			}else{
@@ -164,20 +136,14 @@ public class LogicaCuocienteElectoral extends EleCuocienteElectoralDAO implement
 		return findAll();
 	}
 
-	public EleCuocienteElectoral getConsultarCuocienteElectoral(
-			String periodoElectoral) {
-		/**
-		 * Se validan los campos requeridos para el calculo
-		 */
+	public EleCuocienteElectoral getConsultarCuocienteElectoral(String periodoElectoral) {
 		if (periodoElectoral == null) {
-			UtilAcceso
-			.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 					"campo.obligatorio.cuociente.periodoEelctoral");
 		}
-		
+
 		List<EleCuocienteElectoral> resultado = findByPeriodoElectoral(periodoElectoral);
-		if( resultado != null && resultado.size() > 0){
+		if (!resultado.isEmpty()) {
 			return resultado.get(0);
 		}
 		return null;

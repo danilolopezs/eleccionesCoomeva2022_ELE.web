@@ -10,7 +10,7 @@
 	<property name="transaction.factory_class">
 		org.hibernate.transaction.JDBCTransactionFactory
 	</property>
-	<property name="connection.datasource">java:HabDs</property>
+	<property name="connection.datasource">java:ClimaeDs</property>
 	<property name="hibernate.transaction.flush_before_completion">
 		true
 	</property>

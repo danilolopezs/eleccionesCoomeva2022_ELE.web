@@ -81,37 +81,33 @@ public class ServletInicializacionComponentes extends HttpServlet {
 	 */
 	public void init() throws ServletException 
 	{
-		System.out.println("##########################################################");
-		System.out.println("         INICIALIZANDO COMPONENTES");
-		//System.out.println("##########################################################");
-		//System.out.println("         [INICIALIZANDO SESSION DE BD HABILIDADES....]");
-		//HibernateSessionFactoryHab.getSession();
+		System.out.println("######################################################################");
+		System.out.println("    INICIALIZANDO COMPONENTES");
+		System.out.println("######################################################################");
+		System.out.println("        INICIALIZANDO SESSION DE BD [HABILIDADES, CLIMAE, ELECDB...]  ");
+		System.out.println("######################################################################");
+		HibernateSessionFactoryHab.getSession();
+		HibernateSessionFactoryClimae.getSession();		
+		HibernateSessionFactoryElecciones2012.getSession();
+		System.out.println("######################################################################");
+		System.out.println("        COMPONENTES INCIALIZADOS CORRECTAMENTE");
+		System.out.println("######################################################################");
 		//System.out.println("##########################################################");
 		//System.out.println("         [INICIALIZANDO SESSION DE BD PLANCHAS....]");
-		//HibernateSessionFactoryPlanchas.getSession();
-		System.out.println("############################################################");
-		System.out.println("         [INICIALIZANDO SESSION DE BD CLIMAE....]");
-		HibernateSessionFactoryClimae.getSession();
+		//HibernateSessionFactoryPlanchas.getSession();		
 		//System.out.println("############################################################");
 		//System.out.println("         [INICIALIZANDO SESSION DE BD LICO....]");
 		//HibernateSessionFactoryLico.getSession();
 		//System.out.println("############################################################");
 		//System.out.println("         [INICIALIZANDO SESSION DE BD SALUD....]");
 		//HibernateSessionFactorySalud.getSession();
-		System.out.println("############################################################");
-		System.out.println("         [INICIALIZANDO SESSION DE BD SIE....]");
-		HibernateSessionFactorySie.getSession();
+		//System.out.println("############################################################");
+		//System.out.println("         [INICIALIZANDO SESSION DE BD SIE....]");
+		//HibernateSessionFactorySie.getSession();
 		//System.out.println("############################################################");
 		//System.out.println("         [INICIALIZANDO SESSION DE BD SRH....]");
 		//HibernateSessionFactorySrh.getSession();
 		//System.out.println("         [SESSION COMENTADA PORQUE LA CUENTA NO EXISTE, AHORA PEOPLEnet]");
-		//HibernateSessionFactorySrh.getSession();
-		System.out.println("############################################################");
-		System.out.println("         [INICIALIZANDO SESSION DE BD ELECCIONES DB2....]");
-		HibernateSessionFactoryElecciones2012.getSession();
-		System.out.println("############################################################");
-		System.out.println("         COMPONENTES INCIALIZADOS CORRECTAMENTE");
-		System.out.println("############################################################");
-		
+		//HibernateSessionFactorySrh.getSession();	
 	}
 }

@@ -421,9 +421,9 @@ public class ProcesoAsociadoEspecial {
 			System.out.println("  [CREANDO CONEXIÓN CON LA BASE DE DATOS DB2....");
 			Class.forName("com.ibm.as400.access.AS400JDBCDriver");
 			//PRUEBAS
-			con = DriverManager.getConnection("jdbc:as400://pruebasma.intracoomeva.com.co:8471","usersipas", "c0omeva");
+			//con = DriverManager.getConnection("jdbc:as400://pruebasma.intracoomeva.com.co:8471","usersipas", "c0omeva");
 			//PRODUCCION
-			//con = DriverManager.getConnection("jdbc:as400://multiactiva400.intracoomeva.com.co:8471","USERWEB", "c0m3v4w3b");
+			con = DriverManager.getConnection("jdbc:as400://multiactiva400.intracoomeva.com.co:8471","USERELEC", "P4EL3CI0NS");
 			con.setAutoCommit(false);
 		}catch (Exception e) {
 			throw new Exception("[ERROR CREANDO LA CONEXIÓN DE DB2 -----------> "+e.getMessage()+"]");
