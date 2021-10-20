@@ -11,13 +11,12 @@ public class EleCuocienteDelegadosZona implements java.io.Serializable {
 	private String periodoElectoral;
 	private String codRegional;
 	private String codZona;
-
 	private String descCodRegional;
 	private String descCodZona;
-	
+
 	// Agrego los nuevos campos solicitados para similitud con la matriz
 	// Juan Diego Montoya
-	
+
 	private Double sumaNovedades;
 	private Double sumaEspHabiles;
 	private Double sumaNovedadesEsp;
@@ -37,11 +36,10 @@ public class EleCuocienteDelegadosZona implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public EleCuocienteDelegadosZona(Integer idRegistro,
-			String periodoElectoral, String codRegional, String codZona,
-			Double sumaHabiles, Double sumaNovedades, Double sumaEspHabiles, Double sumaNovedadesEsp, Double sumaTotalHabiles, Double delegados, Double delegadosDirectos,
-			Double fraccion, Double delegadosResiduo,
-			Double distribuidosRestantes, Double totalDelegadosZona) {
+	public EleCuocienteDelegadosZona(Integer idRegistro, String periodoElectoral, String codRegional, String codZona,
+			Double sumaHabiles, Double sumaNovedades, Double sumaEspHabiles, Double sumaNovedadesEsp,
+			Double sumaTotalHabiles, Double delegados, Double delegadosDirectos, Double fraccion,
+			Double delegadosResiduo, Double distribuidosRestantes, Double totalDelegadosZona) {
 		this.idRegistro = idRegistro;
 		this.periodoElectoral = periodoElectoral;
 		this.codRegional = codRegional;
@@ -196,7 +194,4 @@ public class EleCuocienteDelegadosZona implements java.io.Serializable {
 	public void setSumaTotalHabiles(Double sumaTotalHabiles) {
 		this.sumaTotalHabiles = sumaTotalHabiles;
 	}
-	
-	
-	
 }

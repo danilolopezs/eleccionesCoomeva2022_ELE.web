@@ -2,6 +2,9 @@ package co.com.coomeva.ele.backbeans;
 
 import java.util.HashMap;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import co.com.coomeva.ele.delegado.DelegadoAutenticacion;
 import co.com.coomeva.ele.delegado.DelegadoSubcomision;
 import co.com.coomeva.ele.delegado.DelegadoVotante;
@@ -19,6 +22,7 @@ import co.com.coomeva.util.acceso.UtilAcceso;
 
 public class InicioSesionUsuariosVista extends BaseVista {
 
+	private Logger log = LogManager.getLogger(this.getClass().getName());
 	private String login;
 	private String pass;
 
@@ -31,39 +35,29 @@ public class InicioSesionUsuariosVista extends BaseVista {
 	 */
 	public String action_ingreso() {
 		try {
-			UserVo user = DelegadoAutenticacion.getInstance()
-					.autenDirectorioActivo(login, pass);
-			HashMap<String, Section> secciones = DelegadoAutenticacion
-					.getInstance().getSecciones(user);
+			UserVo user = DelegadoAutenticacion.getInstance().autenDirectorioActivo(login, pass);
+			HashMap<String, Section> secciones = DelegadoAutenticacion.getInstance().getSecciones(user);
 			FacesUtils.setSessionParameter("user", user);
 			FacesUtils.setSessionParameter("userSeccions", secciones);
-			
+
 			String login = user.getUserId();
 			// Se identifica si el usuario es funcionario de la comisión
 			// electoral:
-			try {
-				if (DelegadoVotante.getInstance().consultarUsuarioComision(
-						login) != null) {
-					FacesUtils.setSessionParameter("userComision", login);
-				} else {
-					FacesUtils.getSession().removeAttribute("userComision");
-				}
-			} catch (Exception e) {
+			if (DelegadoVotante.getInstance().consultarUsuarioComision(login) != null) {
+				FacesUtils.setSessionParameter("userComision", login);
+			} else {
+				FacesUtils.getSession().removeAttribute("userComision");
 			}
 			
-			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros",
-					"secInhabilidad")) != null) {
+			if (secciones.get(UtilAcceso.getParametroFuenteS("parametros", "secInhabilidad")) != null) {
 
 				// Montamos estas variables en sesión con cualquier valor para
 				// que el filtro
 				// nos deje ir a través de las páginas
-				FacesUtils.setSessionParameter("asociado",
-						new DTOHabilidadAsociado());
-				FacesUtils.setSessionParameter("numeroDocAsociado", Long
-						.parseLong(String.valueOf(user.getId())));
-				FacesUtils.setSessionParameter("tipoElecciones", FacesUtils
-						.getExternalCpntext().getInitParameter(
-								"com.coomeva.elecciones.TIPO_ELECCIONES"));
+				FacesUtils.setSessionParameter("asociado", new DTOHabilidadAsociado());
+				FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(String.valueOf(user.getId())));
+				FacesUtils.setSessionParameter("tipoElecciones",
+						FacesUtils.getExternalCpntext().getInitParameter("com.coomeva.elecciones.TIPO_ELECCIONES"));
 
 				return "goHabilidad";
 			}
@@ -92,13 +86,10 @@ public class InicioSesionUsuariosVista extends BaseVista {
 				// Montamos estas variables en sesión con cualquier valor para
 				// que el filtro
 				// nos deje ir a través de las páginas
-				FacesUtils.setSessionParameter("asociado",
-						new DTOHabilidadAsociado());
-				FacesUtils.setSessionParameter("numeroDocAsociado", Long
-						.parseLong(String.valueOf(user.getId())));
-				FacesUtils.setSessionParameter("tipoElecciones", FacesUtils
-						.getExternalCpntext().getInitParameter(
-								"com.coomeva.elecciones.TIPO_ELECCIONES"));
+				FacesUtils.setSessionParameter("asociado", new DTOHabilidadAsociado());
+				FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(String.valueOf(user.getId())));
+				FacesUtils.setSessionParameter("tipoElecciones",
+						FacesUtils.getExternalCpntext().getInitParameter("com.coomeva.elecciones.TIPO_ELECCIONES"));
 
 				return "goPlanchas";
 			}
@@ -106,8 +97,7 @@ public class InicioSesionUsuariosVista extends BaseVista {
 		} catch (Exception e) {
 			String mensaje = e.getMessage();
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
-				mensaje = UtilAcceso.getParametroFuenteS("mensajes",
-						"nullException");
+				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 			}
 			getMensaje().mostrarMensaje(mensaje);
 		}

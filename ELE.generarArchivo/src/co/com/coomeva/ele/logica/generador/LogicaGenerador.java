@@ -49,7 +49,7 @@ import co.com.coomeva.util.resources.LoaderResourceElements;
 public class LogicaGenerador {
 
 	private static LogicaGenerador instance;
-
+	private static final String REGIONAL = "REGIONAL ";
 	private LoaderResourceElements loaderResourceElements = LoaderResourceElements.getInstance();
 
 	private LogicaGenerador() {
@@ -810,6 +810,10 @@ public class LogicaGenerador {
 			WritableFont arial13fontBlackBold = new WritableFont(WritableFont.ARIAL, 13);
 			arial13fontBlackBold.setBoldStyle(WritableFont.BOLD);
 			arial13fontBlackBold.setColour(Colour.BLACK);
+			
+			WritableFont arial13fontWhiteBold = new WritableFont(WritableFont.ARIAL, 13);
+			arial13fontWhiteBold.setBoldStyle(WritableFont.BOLD);
+			arial13fontWhiteBold.setColour(Colour.WHITE);
 
 			WritableCellFormat cellhdFormatBoldRight = new WritableCellFormat();
 			cellhdFormatBoldRight.setWrap(true);
@@ -839,7 +843,7 @@ public class LogicaGenerador {
 
 			WritableCellFormat cellhdFormatBoldRightGreen = new WritableCellFormat();
 			cellhdFormatBoldRightGreen.setWrap(true);
-			cellhdFormatBoldRightGreen.setFont(arial10fontBlackBold);
+			cellhdFormatBoldRightGreen.setFont(arial10fontWhite);
 			cellhdFormatBoldRightGreen.setAlignment(Alignment.RIGHT);
 			cellhdFormatBoldRightGreen.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellhdFormatBoldRightGreen.setBackground(Colour.GREEN);
@@ -852,10 +856,11 @@ public class LogicaGenerador {
 
 			WritableCellFormat cellhdFormatTitle = new WritableCellFormat();
 			cellhdFormatTitle.setWrap(true);
-			cellhdFormatTitle.setFont(arial13fontBlackBold);
+			cellhdFormatTitle.setFont(arial13fontWhiteBold);
 			cellhdFormatTitle.setAlignment(Alignment.CENTRE);
 			cellhdFormatTitle.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellhdFormatTitle.setVerticalAlignment(VerticalAlignment.CENTRE);
+			cellhdFormatTitle.setBackground(Colour.GREEN);
 
 			WritableCellFormat cellhdFormatBoldCenterGreen = new WritableCellFormat();
 			cellhdFormatBoldCenterGreen.setWrap(true);
@@ -881,8 +886,9 @@ public class LogicaGenerador {
 
 			WritableCellFormat cellhdFormatBoldCenterNoBorders = new WritableCellFormat();
 			cellhdFormatBoldCenterNoBorders.setWrap(true);
-			cellhdFormatBoldCenterNoBorders.setFont(arial10fontBlackBold);
+			cellhdFormatBoldCenterNoBorders.setFont(arial10fontWhite);
 			cellhdFormatBoldCenterNoBorders.setAlignment(Alignment.CENTRE);
+			cellhdFormatBoldCenterNoBorders.setBackground(Colour.GREEN);
 			cellhdFormatBoldCenterNoBorders.setVerticalAlignment(VerticalAlignment.CENTRE);
 
 			WritableCellFormat cellhdFormatAsociados = new WritableCellFormat();
@@ -917,204 +923,133 @@ public class LogicaGenerador {
 			String ttlTotalFinalDeleg = "Final Total Delegados a Elegir";
 			String ttlCuociente = "Cuociente";
 
+			String ttlNoZonaElectoral = "No Zona Electoral";
 			String ttlRegional = "Regional";
 			String ttlZona = loaderResourceElements
-					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblreporteZona");
-			String ttlAsoHabiles = "Asociados Hábiles";
-			String ttlTotalAsoHabil = "Total Asociados Hábiles";
-			//String ttlNovedadesAsoHabiles = "Novedades al corte de cada congelamiento de BD";
+					.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "lblZona");
+			String ttlTotalAsoHabil = "Total Asociados Hábiles (Asociados y Empleados)";
 			String ttlTotalAsoHabiles = "Total Asociados Hábiles a la Fecha";
-			String ttlAsoEspHabil = "Asociados Especiales (Empleados y Promotores)";
-			//String ttlTotalAsoEspHabil = "Total Asociados Especiales Hábiles";
-			//String ttlNovedadesAsoEspHabiles = "Novedades al corte de cada congelamiento de BD";
-			String ttlTotalAsoEspHabiles = "Total Asociados Hábiles a la Fecha";
-			//String ttlSumaHabiles = "Suma Hábiles";
-			String ttlFraccionDelegados = "Fracción Delegados x Zona Electoral";
-			String ttlTotalDelegadosZona = "Total Delegados x Zona Electoral";
-			String ttlFraccionRestantes = "Fracción Distribución de Restantes (Ordenar de Mayor a Menor)";
-			String ttlTotalDelegadosRestantes = "Total Delegados (distribución restantes)";
+			String ttlTotalAsoEspHabiles = "Total de Asociados empleados y corredores hábiles";
+			String ttlFraccionDelegados = "Cuociente por Zona Electoral";
+			String ttlTotalDelegadosZona = "Delegados por cuociente X Zona Electoral";
+			String ttlFraccionRestantes = "Fracción de Residuo por Zona Electoral (Ordenar de Mayor a Menor)";
+			String ttlTotalDelegadosRestantes = "Delegados por residuo por Zona Electoral (Ordenar de Mayor a Menor)";
 			String ttlSumaTotalDelegados = "TOTAL DELEGADOS POR ZONA";
 			String totalDelegados = "TOTAL DELEGADOS";
 			String ttlTotal = "Total";
 			String ttlValidacion = "Validación 33%";
 			String ttlMsgValidacion = "Ninguna regional se pasa del 33% del total de delegados,  no se debe redistribuir.";
-			String ttlAsoEsp = "Empleados Asociados Especiales";
-
-			// Sumatorias para el cuadrado de abajo con los resultados finales
-
-			Double sumTotalAso = 0d;
-			//Double sumNovAso = 0d;
-			Double sumTotalAsoHab = 0d;
-			//Double sumTotalAsoEsp = 0d;
-			//Double sumNovAsoEsp = 0d;
-			Double sumTotalAsoHabEsp = 0d;
-			//Double sumTotalSumHab = 0d;
-			Double sumTotalDelegZona = 0d;
-			Double sumTotalDelegRest = 0d;
-			Double sumTotalFinalDeleg = 0d;
+			String ttlAsoEsp = "Empleados Asociados Especiales";			
 
 			WritableSheet sheet = workbook.createSheet("Cuociente Electoral", 0);
 
 			// Ajusto el ancho de las columnas
-			sheet.setColumnView(0, 50);
-			sheet.setColumnView(1, 22);
-			sheet.setColumnView(2, 25);
-			int indx = 13;
+			sheet.setColumnView(0, 15);
+			sheet.setColumnView(1, 33);
+			sheet.setColumnView(2, 30);
+			int indx = 9;
 			for (int i = 3; i <= indx; i++) {
-				sheet.setColumnView(i, 15);
-
+				sheet.setColumnView(i, 25);
 			}
-			sheet.setColumnView(7, 25);
-			int cont = 10;
-
-			sheet.addCell(new Label(0, 0, ttlTitulo, cellhdFormatTitle));
-			sheet.addCell(new Label(1, 0, "", cellhdFormatTitle));
-			sheet.mergeCells(0, 0, 1, 0);
-
-			sheet.addCell(new Label(0, 2, ttlTotalAsoHab, cellhdFormat));
-			sheet.addCell(new Label(1, 2, cuocienteElectoral.getTotalAsocHabiles().toString(), cellhdFormatBoldRight));
-			sheet.addCell(new Label(0, 3, ttlTotalDelegElegir, cellhdFormat));
-			sheet.addCell(new Label(1, 3, cuocienteElectoral.getTotalDelegadosElegir().toString(), cellhdFormatRight));
-			sheet.addCell(new Label(0, 4, ttlTotalDelegEspElegir, cellhdFormat));
-			sheet.addCell(
-					new Label(1, 4, cuocienteElectoral.getTotalDelegadosEspeciales().toString(), cellhdFormatRight));
-			sheet.addCell(new Label(0, 5, ttlTotalFinalDeleg, cellhdFormat));
-			sheet.addCell(new Label(1, 5, cuocienteElectoral.getFinalTotalDelegadosElegir().toString(),
-					cellhdFormatBoldRight));
-			sheet.addCell(new Label(0, 6, ttlCuociente, cellhdFormatCuo));
-			sheet.addCell(new Label(1, 6, cuocienteElectoral.getCuocienteElectoral().toString(), cellhdFormatCuo));
-
-			sheet.addCell(new Label(0, cont, ttlRegional, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(0, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(0, cont, 0, cont + 1);
+			sheet.setColumnView(10, 15);			
 			
-			sheet.addCell(new Label(1, cont, ttlZona, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(1, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(1, cont, 1, cont + 1);
+			//se fijan los datos
+			sheet.mergeCells(0, 0, 2, 0);
+			sheet.addCell(new Label(0, 0, ttlTitulo, cellhdFormatTitle));
+			
+			sheet.mergeCells(0, 1, 1, 1);
+			sheet.addCell(new Label(0, 1, ttlTotalAsoHab, cellhdFormat));
+			sheet.addCell(new Label(2, 1, cuocienteElectoral.getTotalAsocHabiles().toString(), cellhdFormatBoldRight));
+			
+			sheet.mergeCells(0, 2, 1, 2);
+			sheet.addCell(new Label(0, 2, ttlTotalDelegElegir, cellhdFormat));
+			sheet.addCell(new Label(2, 2, cuocienteElectoral.getTotalDelegadosElegir().toString(), cellhdFormatRight));
+			
+			sheet.mergeCells(0, 3, 1, 3);
+			sheet.addCell(new Label(0, 3, ttlTotalDelegEspElegir, cellhdFormat));
+			sheet.addCell(new Label(2, 3, cuocienteElectoral.getTotalDelegadosEspeciales().toString(), cellhdFormatRight));
+			
+			sheet.mergeCells(0, 4, 1, 4);
+			sheet.addCell(new Label(0, 4, ttlTotalFinalDeleg, cellhdFormat));
+			sheet.addCell(new Label(2, 4, cuocienteElectoral.getFinalTotalDelegadosElegir().toString(), cellhdFormatBoldRight));
+			
+			sheet.mergeCells(0, 5, 1, 5);
+			sheet.addCell(new Label(0, 5, ttlCuociente, cellhdFormatCuo));
+			sheet.addCell(new Label(2, 5, cuocienteElectoral.getCuocienteElectoral().toString(), cellhdFormatCuo));
 
-			sheet.addCell(new Label(2, cont, ttlAsoHabiles, cellhdFormatAsociados));
-			sheet.addCell(new Label(3, cont, "", cellhdFormatAsociados));
-			//sheet.addCell(new Label(4, cont, "", cellhdFormatAsociados));
-			sheet.mergeCells(2, cont, 3, cont);
-
-			sheet.addCell(new Label(2, cont + 1, ttlTotalAsoHabil, cellhdFormatAsociados));
-			//sheet.addCell(new Label(3, cont + 1, ttlNovedadesAsoHabiles, cellhdFormatAsociados));
-			sheet.addCell(new Label(3, cont + 1, ttlTotalAsoHabiles, cellhdFormatAsociados));
-
-			sheet.addCell(new Label(4, cont, ttlAsoEspHabil, cellhdFormatAsociadosEspeciales));
-//			sheet.addCell(new Label(6, cont, "", cellhdFormatAsociadosEspeciales));
-//			sheet.addCell(new Label(7, cont, "", cellhdFormatAsociadosEspeciales));
-			sheet.mergeCells(4, cont, 4, cont);
-
-			//sheet.addCell(new Label(5, cont + 1, ttlTotalAsoEspHabil, cellhdFormatAsociadosEspeciales));
-			//sheet.addCell(new Label(6, cont + 1, ttlNovedadesAsoEspHabiles, cellhdFormatAsociadosEspeciales));
-			sheet.addCell(new Label(4, cont + 1, ttlTotalAsoEspHabiles, cellhdFormatAsociadosEspeciales));
-
-			//sheet.addCell(new Label(8, cont, ttlSumaHabiles, cellhdFormatBoldCenterGreen));
-//			sheet.addCell(new Label(8, cont + 1, "", cellhdFormatBoldCenterGreen));
-//			sheet.mergeCells(8, cont, 8, cont + 1);
-
-			sheet.addCell(new Label(5, cont, ttlFraccionDelegados, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(5, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(5, cont, 5, cont + 1);
-
-			sheet.addCell(new Label(6, cont, ttlTotalDelegadosZona, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(6, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(6, cont, 6, cont + 1);
-
-			sheet.addCell(new Label(7, cont, ttlFraccionRestantes, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(7, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(7, cont, 7, cont + 1);
-
-			sheet.addCell(new Label(8, cont, ttlTotalDelegadosRestantes, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(8, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(8, cont, 8, cont + 1);
-
-			sheet.addCell(new Label(9, cont, ttlSumaTotalDelegados, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(9, cont + 1, "", cellhdFormatBoldCenterGreen));
-			sheet.mergeCells(9, cont, 9, cont + 1);
+			int cont = 7;
+			sheet.addCell(new Label(0, cont, ttlNoZonaElectoral, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(1, cont, ttlRegional, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(2, cont, ttlZona, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(3, cont, ttlTotalAsoHabil, cellhdFormatAsociados));
+			sheet.addCell(new Label(4, cont, ttlTotalAsoHabiles, cellhdFormatAsociados));
+			sheet.addCell(new Label(5, cont, ttlTotalAsoEspHabiles, cellhdFormatAsociadosEspeciales));
+			sheet.addCell(new Label(6, cont, ttlFraccionDelegados, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(7, cont, ttlTotalDelegadosZona, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(8, cont, ttlFraccionRestantes, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(9, cont, ttlTotalDelegadosRestantes, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(10, cont, ttlSumaTotalDelegados, cellhdFormatBoldCenterGreen));
 			cont++;
-			cont++;
-
 			sheet.getSettings().setVerticalFreeze(cont);
 
+			Double sumTotalAso = 0d;
+			Double sumTotalAsoHab = 0d;
+			Double sumTotalAsoHabEsp = 0d;
+			Double sumTotalDelegZona = 0d;
+			Double sumTotalDelegRest = 0d;
+			Double sumTotalFinalDeleg = 0d;
 			for (EleCuocienteDelegadosZona dto : list) {
-				sheet.addCell(new Label(0, cont, "REGIONAL " + dto.getDescCodRegional(), cellhdFormat));
-				sheet.addCell(new Label(1, cont, dto.getDescCodZona(), cellhdFormat));
-
-				sheet.addCell(new Label(2, cont,
+				sheet.addCell(new Label(0, cont, "No. ", cellhdFormat));
+				sheet.addCell(new Label(1, cont, REGIONAL + dto.getDescCodRegional(), cellhdFormat));
+				sheet.addCell(new Label(2, cont, dto.getDescCodZona(), cellhdFormat));
+				sheet.addCell(new Label(3, cont,
 						String.valueOf((dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles())),
 						cellhdFormatRight));
-				//sheet.addCell(new Label(3, cont, dto.getSumaNovedades().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(3, cont, String.valueOf(dto.getSumaHabiles() + dto.getSumaEspHabiles()),
+				sheet.addCell(new Label(4, cont, String.valueOf(dto.getSumaHabiles() + dto.getSumaEspHabiles()),
 						cellhdFormatRight));
-
-//				sheet.addCell(new Label(5, cont, String.valueOf((dto.getSumaEspHabiles() - dto.getSumaNovedadesEsp())),
-//						cellhdFormatRight));
-//				sheet.addCell(new Label(6, cont, dto.getSumaNovedadesEsp().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(4, cont, dto.getSumaEspHabiles().toString(), cellhdFormatRight));
-
-				//sheet.addCell(new Label(8, cont, dto.getSumaTotalHabiles().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(5, cont,
+				sheet.addCell(new Label(5, cont, dto.getSumaEspHabiles().toString(), cellhdFormatRight));
+				sheet.addCell(new Label(6, cont,
 						String.valueOf(LogicaInformeResumen.round(dto.getFraccion() + dto.getDelegadosDirectos(), 4)),
 						cellhdFormatRight));
-				sheet.addCell(new Label(6, cont, dto.getDelegadosDirectos().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(7, cont, dto.getFraccion().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(8, cont, dto.getDelegadosResiduo().toString(), cellhdFormatRight));
-				sheet.addCell(new Label(9, cont, dto.getTotalDelegadosZona().toString(), cellhdFormatRight));
+				sheet.addCell(new Label(7, cont, dto.getDelegadosDirectos().toString(), cellhdFormatRight));
+				sheet.addCell(new Label(8, cont, dto.getFraccion().toString(), cellhdFormatRight));
+				sheet.addCell(new Label(9, cont, dto.getDelegadosResiduo().toString(), cellhdFormatRight));
+				sheet.addCell(new Label(10, cont, dto.getTotalDelegadosZona().toString(), cellhdFormatRight));
 
 				sumTotalAso += (dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles());
-				//sumNovAso += dto.getSumaNovedades();
 				sumTotalAsoHab += (dto.getSumaHabiles() + dto.getSumaEspHabiles());
-				//sumTotalAsoEsp += (dto.getSumaEspHabiles() - dto.getSumaNovedadesEsp());
-				//sumNovAsoEsp += dto.getSumaNovedadesEsp();
 				sumTotalAsoHabEsp += dto.getSumaEspHabiles();
-				//sumTotalSumHab += dto.getSumaTotalHabiles();
 				sumTotalDelegZona += dto.getDelegadosDirectos();
 				sumTotalDelegRest += dto.getDelegadosResiduo();
 				sumTotalFinalDeleg += dto.getTotalDelegadosZona();
-
 				cont++;
 			}
 			sheet.addCell(new Label(0, cont, "", cellhdFormat));
-			sheet.addCell(new Label(1, cont, totalDelegados, cellhdFormatBoldLeftYellow));
-			sheet.addCell(new Label(2, cont, sumTotalAso.toString(), cellhdFormatBoldRightYellow));
-			//sheet.addCell(new Label(3, cont, sumNovAso.toString(), cellhdFormatBoldRightYellow));
-			sheet.addCell(new Label(3, cont, sumTotalAsoHab.toString(), cellhdFormatBoldRightYellow));
-			//sheet.addCell(new Label(5, cont, sumTotalAsoEsp.toString(), cellhdFormatBoldRightYellow));
-			//sheet.addCell(new Label(6, cont, sumNovAsoEsp.toString(), cellhdFormatBoldRightYellow));
-			sheet.addCell(new Label(4, cont, sumTotalAsoHabEsp.toString(), cellhdFormatBoldRightYellow));
-			//sheet.addCell(new Label(8, cont, sumTotalSumHab.toString(), cellhdFormatBoldRightYellow));
-			sheet.addCell(new Label(5, cont, "", cellhdFormatBoldRight));
-			sheet.addCell(new Label(6, cont, sumTotalDelegZona.toString(), cellhdFormatBoldRightGreen));
-			sheet.addCell(new Label(7, cont, "", cellhdFormatBoldRight));
-			sheet.addCell(new Label(8, cont, sumTotalDelegRest.toString(), cellhdFormatBoldRightGreen));
-			sheet.addCell(new Label(9, cont, sumTotalFinalDeleg.toString(), cellhdFormatBoldRightGreen));
+			sheet.addCell(new Label(1, cont, "", cellhdFormat));
+			sheet.addCell(new Label(2, cont, totalDelegados, cellhdFormatBoldLeftYellow));
+			sheet.addCell(new Label(3, cont, sumTotalAso.toString(), cellhdFormatBoldRightYellow));
+			sheet.addCell(new Label(4, cont, sumTotalAsoHab.toString(), cellhdFormatBoldRightYellow));
+			sheet.addCell(new Label(5, cont, sumTotalAsoHabEsp.toString(), cellhdFormatBoldRightYellow));
+			sheet.addCell(new Label(6, cont, "", cellhdFormatBoldRight));
+			sheet.addCell(new Label(7, cont, sumTotalDelegZona.toString(), cellhdFormatBoldRightGreen));
+			sheet.addCell(new Label(8, cont, "", cellhdFormatBoldRight));
+			sheet.addCell(new Label(9, cont, sumTotalDelegRest.toString(), cellhdFormatBoldRightGreen));
+			sheet.addCell(new Label(10, cont, sumTotalFinalDeleg.toString(), cellhdFormatBoldRightGreen));
 
 			cont += 2;
 			indx = 1;
 
 			sheet.addCell(new Label(indx, cont, ttlRegional, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 1, cont, "", cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 2, cont, ttlTotal, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 3, cont, ttlValidacion, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 4, cont, ttlMsgValidacion, cellhdFormatCenter));
-			sheet.addCell(new Label(indx + 6, cont, ttlAsoEsp, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 7, cont, ttlTotal, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 8, cont, ttlValidacion, cellhdFormatBoldCenterGreen));
-			sheet.addCell(new Label(indx + 9, cont, ttlMsgValidacion, cellhdFormatCenter));
-			// Creo las celdas vacías para agruparlas
-			for (int i = 1; i < 7; i++) {
-				sheet.addCell(new Label(indx + 4, cont + i, "", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 5, cont + i, "", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 9, cont + i, "", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 10, cont + i, "", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 1, cont + i, "", cellhdFormat));
-
-			}
-			sheet.mergeCells(indx + 9, cont, indx + 10, cont + 6);
-			sheet.mergeCells(indx + 4, cont, indx + 5, cont + 6);
-			sheet.mergeCells(indx, cont, indx + 1, cont);
+			sheet.addCell(new Label(indx + 1, cont, ttlTotal, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(indx + 2, cont, ttlValidacion, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(indx + 3, cont, ttlMsgValidacion, cellhdFormatCenter));
+			sheet.addCell(new Label(indx + 4, cont, ttlAsoEsp, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(indx + 5, cont, ttlTotal, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(indx + 6, cont, ttlValidacion, cellhdFormatBoldCenterGreen));
+			sheet.addCell(new Label(indx + 7, cont, ttlMsgValidacion, cellhdFormatCenter));
+			
+			sheet.mergeCells(indx + 7, cont, indx + 7, cont + 6);
+			sheet.mergeCells(indx + 3, cont, indx + 3, cont + 6);
 
 			cont++;
 			// Agrego las regionales
@@ -1123,28 +1058,29 @@ public class LogicaGenerador {
 			Double sumaRelacionPorc = 0d;
 			int sumaHabiles = 0;
 			for (EleCuocienteRegional dto : regList) {
-
 				sheet.addCell(new Label(indx, cont, "TOTAL " + dto.getDesRegional(), cellhdFormat));
-				sheet.mergeCells(indx, cont, indx + 1, cont);
-				sheet.addCell(new Label(indx + 2, cont, dto.getTotalDelegados().toString(), cellhdFormatCenter));
+				sheet.addCell(new Label(indx + 1, cont, dto.getTotalDelegados().toString(), cellhdFormatCenter));
 				sheet.addCell(
-						new Label(indx + 3, cont, dto.getRelacionDelegados().toString() + "%", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 6, cont, "1", cellhdFormatCenter));
-				sheet.addCell(new Label(indx + 7, cont, String.valueOf(dto.getTotalDelegados().intValue() + 1),
+						new Label(indx + 2, cont, dto.getRelacionDelegados().toString() + "%", cellhdFormatCenter));
+				sheet.addCell(new Label(indx + 4, cont, "1", cellhdFormatCenter));
+				
+				sheet.addCell(new Label(indx + 5, cont, String.valueOf(dto.getTotalDelegados().intValue() + 1),
 						cellhdFormatBoldCenter));
-				sheet.addCell(new Label(indx + 8, cont,
+				
+				sheet.addCell(new Label(indx + 6, cont,
 						String.valueOf((dto.getTotalDelegados().intValue() + 1)) + ",00%", cellhdFormatRight));
+				
 				sumaTotal += dto.getTotalDelegados().intValue();
 				sumaRelacionPorc += dto.getRelacionDelegados();
 				sumaHabiles += (dto.getTotalDelegados() + 1);
 				cont++;
 			}
 
-			sheet.addCell(new Label(indx + 2, cont, String.valueOf(sumaTotal), cellhdFormatBoldCenterNoBorders));
-			sheet.addCell(new Label(indx + 3, cont,
+			sheet.addCell(new Label(indx + 1, cont, String.valueOf(sumaTotal), cellhdFormatBoldCenterNoBorders));
+			sheet.addCell(new Label(indx + 2, cont,
 					String.valueOf((int) LogicaInformeResumen.round(sumaRelacionPorc, 0)) + "%",
 					cellhdFormatBoldCenterNoBorders));
-			sheet.addCell(new Label(indx + 7, cont, String.valueOf(sumaHabiles), cellhdFormatBoldCenterNoBorders));
+			sheet.addCell(new Label(indx + 5, cont, String.valueOf(sumaHabiles), cellhdFormatBoldCenterNoBorders));
 
 			workbook.write();
 			workbook.close();
