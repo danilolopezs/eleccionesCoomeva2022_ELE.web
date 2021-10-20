@@ -26,6 +26,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
+import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoZonaElectoral;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteDelegadosZona;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteElectoral;
 import co.com.coomeva.ele.entidades.cuociente.EleCuocienteRegional;
@@ -999,9 +1000,9 @@ public class LogicaGenerador {
 			Double sumTotalDelegRest = 0d;
 			Double sumTotalFinalDeleg = 0d;
 			for (EleCuocienteDelegadosZona dto : list) {
-				sheet.addCell(new Label(0, cont, "No. ", cellhdFormat));
+				sheet.addCell(new Label(0, cont, splitDescCodZona(dto.getDescCodZona(), Boolean.TRUE), cellhdFormatCenter));
 				sheet.addCell(new Label(1, cont, REGIONAL + dto.getDescCodRegional(), cellhdFormat));
-				sheet.addCell(new Label(2, cont, dto.getDescCodZona(), cellhdFormat));
+				sheet.addCell(new Label(2, cont, splitDescCodZona(dto.getDescCodZona(), Boolean.FALSE), cellhdFormat));
 				sheet.addCell(new Label(3, cont,
 						String.valueOf((dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles())),
 						cellhdFormatRight));
@@ -1091,6 +1092,19 @@ public class LogicaGenerador {
 
 		return file;
 
+	}
+	
+	private String splitDescCodZona(String value, boolean esNumero) {
+		if(esNumero)
+			return value.split(" ")[0].trim();
+		else {
+			String[] split = value.split(" ");
+			String desc = "";
+			for (int i = 1; i < split.length; i++) {
+				desc = desc + " " + split[i]; 
+			}
+			return desc.trim();
+		}
 	}
 
 	public ByteArrayOutputStream generarReportePlanchasEstado(List<PlanchaPorEstadoDTO> list) throws Exception {
