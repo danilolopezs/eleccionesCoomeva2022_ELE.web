@@ -35,11 +35,7 @@
         trim(db2util.getdir(dec(a.nitcli),char('DIN')))EMAIL,
         CASE a.codcii WHEN ? THEN trim(DB2UTIL.GETZONA(a.AGCVIN)) ELSE trim(DB2UTIL.GETZONA(a.AGCVIN))END AGCVIN
 		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT = B.NUMINT
-		WHERE a.asocia = ?
-		AND a.nitcli = ?
-		AND a.estaso >=?
-		AND a.estaso <=?
-		AND a.tipcli = ?
+		WHERE a.asocia = ? AND a.nitcli = ? AND a.estaso >=? AND a.estaso <=? AND a.tipcli = ?
 		]]>
 	</sql-query>
 
@@ -52,11 +48,8 @@
 
 		<return-scalar column="numint" type="java.lang.Long" />
 		<![CDATA[
-			SELECT CL.NUMINT
-			FROM ELECDB.ELEASOMUL CL
-			WHERE CL.FECING > :fecha6MesesAntesVotacion
-			AND CL.ASOCIA = 1
-			AND CL.ESTASO = 10						
+			SELECT CL.NUMINT FROM ELECDB.ELEASOMUL CL WHERE CL.FECING > :fecha6MesesAntesVotacion
+			AND CL.ASOCIA = 1 AND CL.ESTASO = 10						
 		]]>
 	</sql-query>
 
@@ -67,10 +60,7 @@
 	<sql-query name="consulta.si.es.asociado">
 		<return-scalar column="NUMINT" type="java.lang.Long" />
 		<![CDATA[
-			SELECT CL.NUMINT
-			FROM ELECDB.ELEASOMUL CL
-			WHERE CL.NITCLI = :nitcli
-			AND CL.ASOCIA = 1									
+			SELECT CL.NUMINT FROM ELECDB.ELEASOMUL CL WHERE CL.NITCLI = :nitcli AND CL.ASOCIA = 1									
 		]]>
 	</sql-query>
 
@@ -85,9 +75,8 @@
 		<return-scalar column="nomCli" type="java.lang.String" />
 		<return-scalar column="nomCl1" type="java.lang.String" />
 		<![CDATA[
-		SELECT 	NUMINT numInt, NITCLI nitCli, NOMCLI nomCli, NOMCL1 nomCl1
-		FROM 	ELECDB.ELEASOMUL
-		WHERE	NITCLI = :nitcli
+		SELECT NUMINT numInt, NITCLI nitCli, NOMCLI nomCli, NOMCL1 nomCl1
+		FROM ELECDB.ELEASOMUL WHERE	NITCLI = :nitcli
 	]]>
 	</sql-query>
 
@@ -107,14 +96,8 @@
 		CONCAT('-',ZE.DESCRIPCION_ZONA_ELE)) zonaElectoral,
 		(SELECT DISTINCT CONCAT(AG.CODREG,CONCAT('-',CT.CODNOM)) 
 			FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, MULCLIDAT.CLITAB ZN, ELECDB.ELE_ZONA_ELECTORAL ZE, ELECDB.ELE_ZONA ZI,MULCLIDAT.CLITAB CT
-			WHERE ZN.CODTAB = 908
-			AND RG.CODTAB = 907
-			AND ZN.CODINT = AG.CODZON
-			AND ZI.CODIGO_ZONA = AG.CODZON
-			AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE
-			AND CT.CODTAB = 608
-			AND CT.CODINT <> 0
-			AND CT.CODINT =AG.CODREG 
+			WHERE ZN.CODTAB = 908 AND RG.CODTAB = 907 AND ZN.CODINT = AG.CODZON AND ZI.CODIGO_ZONA = AG.CODZON
+			AND ZE.CODIGO_ZONA_ELE = ZI.CODIGO_ZONA_ELE AND CT.CODTAB = 608 AND CT.CODINT <> 0 AND CT.CODINT =AG.CODREG 
 			AND ZI.CODIGO_ZONA_ELE=(SELECT ZE.CODIGO_ZONA_ELE FROM ELECDB.ELE_ASOCIADO A INNER JOIN ELECDB.ELE_ZONA Z ON A.COD_ZONA_ASO=Z.CODIGO_ZONA 
 			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON Z.CODIGO_ZONA_ELE=ZE.CODIGO_ZONA_ELE
 			WHERE A.NUMERO_DOCUMENTO=C.nitcli)) regional
@@ -126,8 +109,7 @@
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 5. Javier Londoño - Premize SAS - 2012-11-27 ## ## Consulta la informacion 
-		del asociado 
+		## 5. Javier Londoño - Premize SAS - 2012-11-27 ## ## Consulta la informacion del asociado 
 		###################################################################################### -->
 	<sql-query name="consultar.info.asociado">
 		<return-scalar column="numInt" type="java.lang.String" />
@@ -145,21 +127,12 @@
 			type="java.lang.String" />
 		<![CDATA[
 		SELECT
-			CL.NUMINT numInt, 
-			CL.NITCLI nitCli, 
-			CL.NOMCLI nomCli, 
-			CL.NOMCL1 nomCl1,
-			null lugarExpedicion,
-			null fechaExpedicion,
+			CL.NUMINT numInt, CL.NITCLI nitCli, CL.NOMCLI nomCli, CL.NOMCL1 nomCl1,
+			CL.LUGEXP lugarExpedicion, CL.FECESC fechaExpedicion,
 			DB2UTIL.SIP_CIUDAD(CL.NUMINT,char('RE')) desc_ciu_res,
-			EZ.CODIGO_ZONA cod_zona,
-			EZ.DESCRIPCION_ZONA descrip_zona
-		FROM ELECDB.ELEASOMUL CL,
-		ELECDB.ELEASOCIA EA,
-		ELECDB.ELE_ZONA EZ		
-		WHERE nitcli = :nitcli
-		AND CL.NUMINT = EA.CODIGO_ASOCIADO
-		AND EA.COD_ZONA_ASO = EZ.CODIGO_ZONA		
+			EZ.CODIGO_ZONA cod_zona, EZ.DESCRIPCION_ZONA descrip_zona
+		FROM ELECDB.ELEASOMUL CL, ELECDB.ELEASOCIA EA, ELECDB.ELE_ZONA EZ		
+		WHERE nitcli = :nitcli AND CL.NUMINT = EA.CODIGO_ASOCIADO AND EA.COD_ZONA_ASO = EZ.CODIGO_ZONA		
 		]]>
 	</sql-query>
 
@@ -172,12 +145,8 @@
 		<return-scalar column="fecha" type="java.lang.Long" />
 		<![CDATA[
 		SELECT b.fecha
-		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT =
-		B.NUMINT
-		WHERE a.asocia = :asocia
-		AND a.nitcli = :nitcli
-		AND a.tipcli = :tipCli
-        AND b.INDREG = 'AS'
+		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT = B.NUMINT
+		WHERE a.asocia = :asocia AND a.nitcli = :nitcli AND a.tipcli = :tipCli AND b.INDREG = 'AS'
 	]]>
 	</sql-query>
 	
@@ -189,8 +158,7 @@
 	<sql-query name="consulta.si.es.asociado.persona.juridica">
 		<return-scalar column="NUMINT" type="java.lang.Long" />
 		<![CDATA[
-			SELECT CL.NUMINT FROM ELECDB.ELEASOMUL CL WHERE CL.NITCLI = :nitcli
-			AND CL.TIPCLI = 1
+			SELECT CL.NUMINT FROM ELECDB.ELEASOMUL CL WHERE CL.NITCLI = :nitcli AND CL.TIPCLI = 1
 		]]>
 	</sql-query>
 

@@ -79,14 +79,14 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
 							validacionInformacionPlanchas(login);
 						} else {
-							validacionInformacionPlanchas(login);
-							//exceptionGenery("El usuario no existe.");
+							//validacionInformacionPlanchas(login);
+							exceptionGenery("El usuario no existe.");
 						}
 					}
 				} else {
 					FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
-					validacionInformacionPlanchas(login);
-					//exceptionGenery(respuestaWS.getDescStatusCode());
+					//validacionInformacionPlanchas(login);
+					exceptionGenery(respuestaWS.getDescStatusCode());
 					returnString = "";
 				}
 			} catch (CoomevaRuntimeException e) {

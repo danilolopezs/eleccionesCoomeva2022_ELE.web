@@ -1304,7 +1304,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 
 		StringBuffer sql = new StringBuffer("SELECT pl_aso.CONSECUTIVO_PLANCHA NUMPLANCHA, "
 				+ "pl.CODIGO_ZONA_ELE ZONA,  pl.FECHA_REGISTRO FECHA, aso.NUMERO_DOCUMENTO DOCUMENTO, "
-				+ "cl.NOMCL1 NOMBRES, null CIUDADEXP, null FECHAEXP, cl.NUMINT NUMINT, "
+				+ "cl.NOMCL1 NOMBRES, cl.LUGEXP CIUDADEXP, cl.FECESC FECHAEXP, cl.NUMINT NUMINT, "
 				+ "zona.DESCRIPCION_ZONA_ELE CIUZONA, zona.numero_zona_ele as NUMEROZONA FROM elecdb.ELE_ASOCIADO aso, elecdb.ELE_PLANCHA_ASOCIADO pl_aso, "
 				+ "elecdb.ELE_ZONA_ELECTORAL zona, elecdb.ELE_PLANCHA pl, elecdb.CLIMAE cl, "
 				+ "elecdb.ELE_PARAMETRO param, elecdb.ELE_PARAMETRO_TIPO paramT "
