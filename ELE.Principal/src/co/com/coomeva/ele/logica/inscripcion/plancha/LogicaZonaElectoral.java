@@ -102,8 +102,9 @@ public class LogicaZonaElectoral extends EleZonaElectoralDAO implements ILogicaZ
 					.getNamedQuery(ConstantesNamedQueries.QUERY_CONSULTAR_REGIONALES_DE_ZONA_ELECTORAL);
 			elements = queryObject.list();
 			if (!elements.isEmpty()) {
+				EleZonaElectoralRegionalDTO dto;
 				for (Object[] object : elements) {
-						EleZonaElectoralRegionalDTO dto = new EleZonaElectoralRegionalDTO();
+						dto = new EleZonaElectoralRegionalDTO();
 						dto.setCodigoZona((Long) object[1]);
 						dto.setCodigoRegional((Long) object[0]);
 						list.add(dto);

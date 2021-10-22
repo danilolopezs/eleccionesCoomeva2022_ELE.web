@@ -55,9 +55,9 @@ public class LogicaFormatoPlancha implements ILogicaFormatoPlancha {
 
 			Date dateToday = new Date();
 
-			ParametroPlanchaDTO parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(1L,
+			ParametroPlanchaDTO parametroFechaInicial = LectorParametros.obtenerParametrosCodigoTipo(19L,
 					CODIGO_TIPO_PARAMETRO_FECHAS_LIMITE_GENERACION_RECHAZO);
-			ParametroPlanchaDTO parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(2L,
+			ParametroPlanchaDTO parametroFechaFinal = LectorParametros.obtenerParametrosCodigoTipo(20L,
 					CODIGO_TIPO_PARAMETRO_FECHAS_LIMITE_GENERACION_RECHAZO);
 
 			Date dateFechaIniInscrpcion = ManipulacionFechas.stringToDate(parametroFechaInicial.getStrValor(),
@@ -119,7 +119,6 @@ public class LogicaFormatoPlancha implements ILogicaFormatoPlancha {
 			Long codigoAsociado = LogicaAsociado.getInstance()
 					.consultarCodigoAsociadoPorNumeroDocumento(dto.getNumeroDocumento());
 
-			HibernateSessionFactoryElecciones2012.getSession().beginTransaction();
 			EleDetalleFormatoPlancha entity = new EleDetalleFormatoPlancha();
 
 			EleDetalleFormatoPlanchaId id = new EleDetalleFormatoPlanchaId();

@@ -33,7 +33,7 @@ public class LogicaSie {
 		Session session=null;
 		Query query=null;	
 		session= HibernateSessionFactorySie.getSession();
-		query=session.getNamedQuery("asociado.calculateTime");
+		query=session.getNamedQuery("asociado.calculateTime1");
 
 		query.setString(0, time);
 

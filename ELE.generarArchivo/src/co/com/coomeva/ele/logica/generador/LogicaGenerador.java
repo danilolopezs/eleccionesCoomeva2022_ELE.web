@@ -1003,11 +1003,15 @@ public class LogicaGenerador {
 				sheet.addCell(new Label(0, cont, splitDescCodZona(dto.getDescCodZona(), Boolean.TRUE), cellhdFormatCenter));
 				sheet.addCell(new Label(1, cont, REGIONAL + dto.getDescCodRegional(), cellhdFormat));
 				sheet.addCell(new Label(2, cont, splitDescCodZona(dto.getDescCodZona(), Boolean.FALSE), cellhdFormat));
+//				sheet.addCell(new Label(3, cont,
+//						String.valueOf((dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles())),
+//						cellhdFormatRight));
 				sheet.addCell(new Label(3, cont,
-						String.valueOf((dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles())),
+						String.valueOf(dto.getSumaTotalHabiles()), cellhdFormatRight));
+				
+				sheet.addCell(new Label(4, cont, String.valueOf(dto.getSumaTotalHabiles() - dto.getSumaEspHabiles()),
 						cellhdFormatRight));
-				sheet.addCell(new Label(4, cont, String.valueOf(dto.getSumaHabiles() + dto.getSumaEspHabiles()),
-						cellhdFormatRight));
+				
 				sheet.addCell(new Label(5, cont, dto.getSumaEspHabiles().toString(), cellhdFormatRight));
 				sheet.addCell(new Label(6, cont,
 						String.valueOf(LogicaInformeResumen.round(dto.getFraccion() + dto.getDelegadosDirectos(), 4)),
@@ -1017,8 +1021,8 @@ public class LogicaGenerador {
 				sheet.addCell(new Label(9, cont, dto.getDelegadosResiduo().toString(), cellhdFormatRight));
 				sheet.addCell(new Label(10, cont, dto.getTotalDelegadosZona().toString(), cellhdFormatRight));
 
-				sumTotalAso += (dto.getSumaHabiles() - dto.getSumaNovedades() + dto.getSumaEspHabiles());
-				sumTotalAsoHab += (dto.getSumaHabiles() + dto.getSumaEspHabiles());
+				sumTotalAso += dto.getSumaTotalHabiles();
+				sumTotalAsoHab += dto.getSumaTotalHabiles() - dto.getSumaEspHabiles();
 				sumTotalAsoHabEsp += dto.getSumaEspHabiles();
 				sumTotalDelegZona += dto.getDelegadosDirectos();
 				sumTotalDelegRest += dto.getDelegadosResiduo();

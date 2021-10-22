@@ -692,40 +692,24 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	/**
 	 * Metodo que consulta el total de los asociados habiles
-	 * 
-	 * @author <a href="mailto:bernando.lopez@pragma.com.co">Bernardo López</a> -
-	 *         Pragma S.A. <br>
+	 * @author Bernardo López - Danilo L\u00F3pez Sandoval
 	 * @date 14/11/2012
+	 * @update 21/10/2021
 	 * @param codProfesion
 	 * @param numeroDocumento
 	 * @param codZona
-	 * @return
+	 * @return entero que indica lacantidad de asociados sin incluir los especiales
 	 * @throws Exception
 	 */
 	public int consultarTotalAsociadosHabiles(Long zona) throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			/**
-			 * Se modifica la consulta para excluir los asociados que se encuentran en la
-			 * tabla ELE_ASOCIADO_ESPECIAL
-			 */
-			StringBuffer sql = new StringBuffer("SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 AND NOT EXISTS "
-					+ "(SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp "
-					+ "where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO)");
-
-			if (zona != null) {
-				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona) + "'");
-				// System.out.println("Zona: "+zonasHash.get(zona));
-			}
-
-			SQLQuery query = session.createSQLQuery(sql.toString());
+			String sql = buildQueryCantidadAsociadosHabilesPorZona(zona, Boolean.FALSE);			
+			SQLQuery query = session.createSQLQuery(sql);
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.LONG);
-
 			Long valor = (Long) query.uniqueResult();
 			total = valor.intValue();
-			// System.out.println("Total: "+total);
 		} catch (Exception e) {
 			System.out.println("Error consultando el total de asociados habiles: " + e.getMessage());
 			throw new Exception(loaderResourceElements.getKeyResourceValue(
@@ -738,37 +722,24 @@ public class LogicaAsociado extends AsoelecfDAO {
 
 	/**
 	 * Metodo que consulta el total de los asociados especiales habiles
-	 * 
-	 * @author Juan Diego Montoya
+	 * @author Juan Diego Montoya - Danilo L\u00F3pez Sandoval
 	 * @date 05/09/2016
+	 * @update 21/10/2021
 	 * @param codProfesion
 	 * @param numeroDocumento
 	 * @param codZona
-	 * @return
+	 * @return entero que indica lacantidad de asociados especiales
 	 * @throws Exception
 	 */
 	public int consultarTotalAsociadosEspecialesHabiles(Long zona) throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
-			/**
-			 * Se modifica la consulta para excluir los asociados que se encuentran en la
-			 * tabla ELE_ASOCIADO_ESPECIAL
-			 */
-			StringBuffer sql = new StringBuffer("SELECT COUNT(repHabil.NUMERO_DOCUMENTO) TOTAL_ASOCIADOS ");
-			sql.append("FROM ELECDB.ELE_REPORTE_HABIL repHabil WHERE repHabil.TIPO_VALIDACION = 1 "
-					+ "AND EXISTS (SELECT * FROM  ELECDB.ELE_ASOCIADO_ESPECIAL asoEsp where repHabil.NUMERO_DOCUMENTO = asoEsp.NUMERO_DOCUMENTO ) ");
-
-			if (zona != null) {
-				sql.append("AND ZONA_ASOCIADO LIKE '" + zonasHash.get(zona) + "'");
-				// System.out.println("Zona: "+zonasHash.get(zona));
-			}
-
-			SQLQuery query = session.createSQLQuery(sql.toString());
+			String sql = buildQueryCantidadAsociadosHabilesPorZona(zona, Boolean.TRUE);
+			SQLQuery query = session.createSQLQuery(sql);
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.LONG);
-
 			Long valor = (Long) query.uniqueResult();
-			total = valor.intValue();
+			total = valor != null ? valor.intValue() : 0;
 			// System.out.println("Total: "+total);
 		} catch (Exception e) {
 			System.out.println("Error consultando el total de asociados ESPECIALES habiles: " + e.getMessage());
@@ -779,6 +750,34 @@ public class LogicaAsociado extends AsoelecfDAO {
 			session.flush();
 		}
 		return total;
+	}
+	
+	/**
+	 * metodo que construye la consulta de asociados habiles con o sin asociados especiales
+	 * @author GTC CORPORATION - Danilo L\u00F3pez Sandoval
+	 * @date 21/10/2021
+	 * @param zona numero de zona que se desea consultar
+	 * @param incluirEspeciales SI TRUE se incluyen los asociadosespeciaels; SI NO, no se incluyen
+	 * @return consulta de asociados habiles
+	 */
+	private String buildQueryCantidadAsociadosHabilesPorZona(Long zona, Boolean incluirEspeciales) {
+		String qryPromot = "(SELECT count(1) cantidad, zona_asociado FROM elecdb.ele_reporte_habil "
+				+ "WHERE numero_documento " + (incluirEspeciales ? "" : "NOT ")	+ "IN "
+				+ "(SELECT pro_identificacion FROM elecdb.ele_promotor WHERE pro_fecha_retiro IS NULL) "
+				+ "AND tipo_validacion = 1 GROUP BY zona_asociado)";
+		
+		String qryAsoEsp = "(SELECT count(1) cantidad, zona_asociado FROM elecdb.ele_reporte_habil "
+				+ "WHERE numero_documento " +(incluirEspeciales ? "" : "NOT ")+ "IN "
+				+ "(SELECT numero_documento FROM elecdb.ele_asociado_especial WHERE fecha_retiro IS NULL) "
+				+ "AND tipo_validacion = 1 GROUP BY zona_asociado)";
+		
+		StringBuffer sql = new StringBuffer("SELECT sum(cantidad) TOTAL_ASOCIADOS FROM "
+				+ "(" +qryAsoEsp+ " UNION ALL " + qryPromot + ") as todo ");
+		if (zona != null) {
+			sql.append("WHERE zona_asociado LIKE '" + zonasHash.get(zona) + "'");
+		}
+		
+		return sql.toString();
 	}
 
 	/**
@@ -830,12 +829,12 @@ public class LogicaAsociado extends AsoelecfDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public int consultarTotalAsociadosInhabiles() throws Exception {
+	public int consultarTotalAsociadosEmpleados(Boolean esHabil) throws Exception {
 		int total = 0;
 		Session session = HibernateSessionFactoryElecciones2012.getSession();
 		try {
 			StringBuffer sql = new StringBuffer("SELECT COUNT(NUMERO_DOCUMENTO)  TOTAL_ASOCIADOS ");
-			sql.append("FROM ELECDB.ELE_REPORTE_HABIL WHERE TIPO_VALIDACION = 2 ");
+			sql.append("FROM ELECDB.ELE_REPORTE_HABIL WHERE TIPO_VALIDACION = " +(esHabil ? 1 : 2));
 
 			SQLQuery query = session.createSQLQuery(sql.toString());
 			query.addScalar("TOTAL_ASOCIADOS", Hibernate.LONG);
@@ -870,7 +869,7 @@ public class LogicaAsociado extends AsoelecfDAO {
 		List<EleAsociadoDatosDTO> list = new ArrayList<EleAsociadoDatosDTO>();
 
 		int startRow = 1;
-		int total = consultarTotalAsociadosInhabiles();
+		int total = consultarTotalAsociadosEmpleados(Boolean.FALSE);
 		int numRegistros = ConstantesProperties.NUMERO_REGISTROS_POR_PAGINA_CONSULTAS;
 
 		EleAsociadoDatosDTO dto = null;

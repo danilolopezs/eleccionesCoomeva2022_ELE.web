@@ -46,12 +46,8 @@ public class LogicaDelegadosRegional extends EleCuocienteRegionalDAO implements 
 			// TODO: Buscar regional x periodo, si existe hacer merge, si no, guardar normal
 			eleCuocienteRegional = new EleCuocienteRegional();
 			// eleCuocienteRegional.setIdRegistro(i+1); se debe crear automaticamente
-			Integer idRegistro = new Integer(
-					GeneradorConsecutivos
-							.getInstance()
-							.getConsecutivo(
-									ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_REGIONAL,
-									this.getSession()).toString());
+			Integer idRegistro = new Integer(GeneradorConsecutivos.getInstance()
+					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_REGIONAL, this.getSession()).toString());
 			eleCuocienteRegional.setIdRegistro(idRegistro);
 			eleCuocienteRegional.setCodRegional(regional.getKey());
 			eleCuocienteRegional.setTotalDelegados(new Double(regional.getValue()));

@@ -76,17 +76,14 @@
 		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
 		<return-scalar column="FECHA_PROGRAMACION" type="java.util.Date" />
 		<![CDATA[
-			SELECT P.CODIGO_PROCESO, P.FECHA_PROGRAMACION 
-			FROM ELECDB.ELE_PROCESO P 
-			ORDER BY P.CODIGO_PROCESO
+			SELECT P.CODIGO_PROCESO, P.FECHA_PROGRAMACION FROM ELECDB.ELE_PROCESO P ORDER BY P.CODIGO_PROCESO
 		]]>
 	</sql-query>
 	
 	<!--
 		######################################################################################
 		## josel_gonzalez@coomeva.com.co
-		##
-    	##    Consulta las fechas de cortes de los procesos programados.								##
+    	##    Consulta las fechas de cortes de los procesos programados.					##
     	######################################################################################
 	-->
 	<sql-query name="conulta.fechascorte.procesos.programados">
@@ -94,15 +91,13 @@
 		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
 		<return-scalar column="FECHA_CORTE" type="java.util.Date" />
 		<![CDATA[
-			SELECT P.CODIGO_PROCESO, P.FECHA_CORTE 
-			FROM ELECDB.ELE_PROCESO P 
-			ORDER BY P.CODIGO_PROCESO
+			SELECT P.CODIGO_PROCESO, P.FECHA_CORTE FROM ELECDB.ELE_PROCESO P ORDER BY P.CODIGO_PROCESO
 		]]>
 	</sql-query>	
 	<!--
 		######################################################################################
-		## 4. Bernardo Lopez - Pragma S.A.  - 2012-11-26                                    ##
-    	##    Consulta regionales															##
+		##  Danilo López - 2021-10-22                                                       ##
+    	##  Consulta regionales  															##
     	######################################################################################
 	-->
 	<sql-query name="consulta.regionales">
@@ -110,10 +105,7 @@
 		<return-scalar column="CODINT" type="java.lang.Long" />
 		<return-scalar column="CODNOM" type="java.lang.String" />
 		<![CDATA[
-			SELECT CT.CODINT, CT.CODNOM
-			FROM MULCLIDAT.CLITAB CT
-			WHERE CT.CODTAB = 608
-			AND CT.CODINT <> 0
+			SELECT r.codigo_regional as CODINT, r.descripcion_regional as CODNOM FROM elecdb.ele_regional r
 		]]>
 	</sql-query>
 	

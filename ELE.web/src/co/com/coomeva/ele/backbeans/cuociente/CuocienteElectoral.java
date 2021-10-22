@@ -115,7 +115,7 @@ public class CuocienteElectoral extends BaseVista {
 			}
 		} else {
 			try {
-				int totalHabiles = DelegadoAsociado.getInstance().consultarTotalAsociadosHabilesAsociado(null);
+				int totalHabiles = DelegadoAsociado.getInstance().consultarTotalAsociadosEmpleados(Boolean.TRUE);
 				totalAsocHabiles = String.valueOf(totalHabiles);
 				renderDescargarReporte = false;
 			} catch (Exception e) {
@@ -148,7 +148,7 @@ public class CuocienteElectoral extends BaseVista {
 				eliminarCuociente(cuocienteElectoralObj);
 			}
 
-			int totalHabiles = DelegadoAsociado.getInstance().consultarTotalAsociadosHabilesAsociado(null);
+			int totalHabiles = DelegadoAsociado.getInstance().consultarTotalAsociadosEmpleados(Boolean.TRUE);
 			this.totalAsocHabiles = String.valueOf(totalHabiles);
 			cuocienteElectoralObj = DelegadoCuocienteElectoral.getInstance().calcularCuocienteElectoral(null,
 					periodoElectoral, new Double(totalAsocHabiles), new Double(totalDelegadosElegir),
@@ -254,31 +254,20 @@ public class CuocienteElectoral extends BaseVista {
 	 * @return void
 	 */
 	private void calcularDelegados(String periodoElectoral) throws Exception {
-
 		// Consultar las zonas
 		List<EleZonaElectoralRegionalDTO> listadoZonas = null;
-
 		listadoZonas = DelegadoZonaElectoral.getInstance().consultarCodigosRegionalDeZonaElectoral();
-
-		// System.out.println("Tamaño lista:" + listadoZonas.size());
-
-		// Recorrer las zonas
-
+		
 		for (EleZonaElectoralRegionalDTO zonaElectoralRegionalDTO : listadoZonas) {
-			// System.out.println("Regional: "+zonaElectoralRegionalDTO.getCodigoRegional()
-			// + " - Zona: " + zonaElectoralRegionalDTO.getCodigoZona());
-			Double sumaHabilesZona = null; // El calculo se hace en el metodo calcularDelegadosZona
-
 			// crear cuocienteDelegadosZona por cada zona
 			DelegadoCuocienteElectoral.getInstance().calcularDelegadosZona(periodoElectoral,
 					zonaElectoralRegionalDTO.getCodigoRegional().toString(),
-					zonaElectoralRegionalDTO.getCodigoZona().toString(), sumaHabilesZona);
+					zonaElectoralRegionalDTO.getCodigoZona().toString(), null);
 		}
 		// TODO FIRST
 		// Completar la matriz de delegados por zonas con los delegados del residuo y
 		// creaa matriz delegados por regionales.
 		DelegadoCuocienteElectoral.getInstance().calcularDelegadosZonaFinal(periodoElectoral);
-
 	}
 
 	public String actionLimpiar() {

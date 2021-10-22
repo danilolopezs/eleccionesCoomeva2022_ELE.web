@@ -5,21 +5,21 @@
 
 
 <hibernate-mapping>
-<!-- ###################################################################################### 
+	<!-- ###################################################################################### 
 		## . consulta la fehca de sancion y la extrae SIDCO-> ELE_SANCIONADO   
 		## ###################################################################################### -->
 	<sql-query name="consultar.fecha.sancion">
 		<return-scalar column="FECHA_SUSPENSION" type="java.lang.String" />
-		<![CDATA[SELECT FECHA_SUSPENSION FROM ELECDB.ELE_ASOC_SANCIONADOS_5_ANNOS WHERE NUMERO_DOCUMENTO=?]]>
+		<![CDATA[
+			SELECT FECHA_SUSPENSION FROM ELECDB.ELE_ASOC_SANCIONADOS_5_ANNOS WHERE NUMERO_DOCUMENTO=?
+		]]>
 	</sql-query>
 	
 	<sql-query name="asesor.getAsociadoEspecial">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT NUMERO_DOCUMENTO	
-			FROM ELECDB.ELE_ASOCIADO_ESPECIAL
-    		WHERE NUMERO_DOCUMENTO=?
+			SELECT NUMERO_DOCUMENTO	FROM ELECDB.ELE_ASOCIADO_ESPECIAL WHERE NUMERO_DOCUMENTO=?
     	]]>
 	</sql-query>
 
@@ -33,41 +33,49 @@
 		<return-scalar column="WEDAD" type="java.lang.Long" />
 		<return-scalar column="WANTIG" type="java.lang.Long" />
 		<return-scalar column="WINDHAB" type="java.lang.String" />
-		<![CDATA[SELECT WNITCLI, trim(WNOMCLI) WNOMCLI ,WEDAD,WANTIG,WINDHAB FROM ELECLIB.ASOELECF WHERE WNITCLI=?]]>
+		<![CDATA[
+			SELECT WNITCLI, trim(WNOMCLI) WNOMCLI ,WEDAD,WANTIG,WINDHAB FROM ELECLIB.ASOELECF WHERE WNITCLI=?
+		]]>
 	</sql-query>
+	
 	<!-- ###################################################################################### 
 		## 1.## ## Consulta los anños de retiro del asociado ## trae el estado del 
-		asociadiado r-> retirado A -> activo ## y el documento ###################################################################################### -->
+		asociadiado r-> retirado A -> activo ## y el documento 
+		###################################################################################### -->
 	<sql-query name="empleado.consulta">
-		<return-scalar column="anos_retiro"
-			type="java.lang.String" />
-		<return-scalar column="EMP_ESTADO"
-			type="java.lang.String" />
-		<return-scalar column="EMP_CEDULA"
-			type="java.lang.String" />
-		<![CDATA[SELECT distinct CAST((CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 0 WHEN a.FECHA_RETIRO IS NULL THEN 0 ELSE round((months_between(CURRENT_DATE,a.FECHA_RETIRO)/12),2) END) AS decimal(10,2)) anos_retiro, 
-		CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 'A' ELSE 'R' END EMP_ESTADO,
-		a.NUMERO_DOCUMENTO EMP_CEDULA FROM elecdb.ELE_ASOCIADO_ESPECIAL a
-		WHERE a.fecha_ingreso =(select max(b.fecha_ingreso) FROM elecdb.ELE_ASOCIADO_ESPECIAL b WHERE b.NUMERO_DOCUMENTO= A.NUMERO_DOCUMENTO)
-		AND a.NUMERO_DOCUMENTO=?]]>
+		<return-scalar column="anos_retiro" type="java.lang.String" />
+		<return-scalar column="EMP_ESTADO" type="java.lang.String" />
+		<return-scalar column="EMP_CEDULA" type="java.lang.String" />
+		<![CDATA[
+			SELECT distinct CAST((CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 0 WHEN a.FECHA_RETIRO IS NULL THEN 0 ELSE round((months_between(CURRENT_DATE,a.FECHA_RETIRO)/12),2) END) AS decimal(10,2)) anos_retiro, 
+			CASE WHEN (ROUND(months_between(CURRENT_DATE,a.FECHA_RETIRO)/12)) < 0 THEN 'A' ELSE 'R' END EMP_ESTADO,
+			a.NUMERO_DOCUMENTO EMP_CEDULA FROM elecdb.ELE_ASOCIADO_ESPECIAL a
+			WHERE a.fecha_ingreso =(select max(b.fecha_ingreso) FROM elecdb.ELE_ASOCIADO_ESPECIAL b WHERE b.NUMERO_DOCUMENTO= A.NUMERO_DOCUMENTO)
+			AND a.NUMERO_DOCUMENTO=?
+		]]>
 	</sql-query>
+	
 	<!-- ###################################################################################### 
-		## 1. Consulta un asociado si existe por documentro ###################################################################################### -->
+		## 1. Consulta un asociado si existe por documentro ##
+		#################################################################################### -->
 	<sql-query name="asesor.getAsesor">
 		<return-scalar column="cdgo" type="java.lang.String" />
 		<return-scalar column="epr_cdgo" type="java.lang.String" />
-		<return-scalar column="anosRetiro"
-			type="java.lang.String" />
-			<![CDATA[SELECT E.PRO_IDENTIFICACION,E.PRO_ESTADO,ROUND(months_between(CURRENT_DATE,E.PRO_FECHA_RETIRO)/12) anosRetiro FROM ELECDB.ELEPROMOT E WHERE E.PRO_IDENTIFICACION =?]]>
+		<return-scalar column="anosRetiro" type="java.lang.String" />
+		<![CDATA[
+			SELECT E.PRO_IDENTIFICACION,E.PRO_ESTADO,ROUND(months_between(CURRENT_DATE,E.PRO_FECHA_RETIRO)/12) anosRetiro 
+			FROM ELECDB.ELEPROMOT E WHERE E.PRO_IDENTIFICACION =?
+		]]>
 	</sql-query>
 	<!-- ###################################################################################### 
-		## 1. Consulta un asociado eleasocia si existe por documentro ###################################################################################### -->
+		## 1. Consulta un asociado eleasocia si existe por documentro ##
+		#################################################################################### -->
 	<sql-query name="asesor.getAsesorActivo">
 		<return-scalar column="NUMERO_DOCUMENTO" type="java.lang.Long" />
 		<return-scalar column="ESTADO_ASOCIADO" type="java.lang.Long" />
-			<![CDATA[
+		<![CDATA[
 			SELECT E.NUMERO_DOCUMENTO ,E.ESTADO_ASOCIADO FROM ELECDB.ELEASOCIA E WHERE E.NUMERO_DOCUMENTO = ?
-				]]>
+		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
@@ -77,16 +85,15 @@
 	<sql-query name="asociados.fecha.ingreso.superior.determinada.fecha">
 		<return-scalar column="CODIGO_ASOCIADO"
 			type="java.lang.Long" />
-		<![CDATA[SELECT EA.CODIGO_ASOCIADO
-			FROM ELECDB.ELEASOCIA EA 
+		<![CDATA[SELECT EA.CODIGO_ASOCIADO FROM ELECDB.ELEASOCIA EA 
 			WHERE EA.FECHA_INGRESO > :fecha6MesesAntesVotacion
 			]]>
 	</sql-query>
 
 	<!-- ###################################################################### 
 		## 2. Javier Londoño - Premize SAS - 2012-11-01 ## ## Consulta el Consecutivo 
-		de la tabla ele_inhabilidad ## ###################################################################### -->
-
+		de la tabla ele_inhabilidad ## 
+		###################################################################### -->
 	<sql-query name="consultar.secuencia.ele.ele.inhabilidad">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[		
@@ -99,7 +106,8 @@
 	<!-- ############################################################################# 
 		## 3. Javier Londoño - Premize SAS - 2012-11-01 ## ## Consulta que registra 
 		en la tabla ELEASOCIA todos los asociados ## ## activos de la cooperativa 
-		que están registrandos en el climae ## ############################################################################# -->
+		que están registrandos en el climae ## 
+		############################################################################# -->
 	<sql-query name="consulta.poblar.tabla.ele.asociado">
 		<![CDATA[
 			INSERT INTO ELECDB.ELEASOCIA
@@ -109,7 +117,7 @@
 			DB2UTIL.SIP_OBTENERZONA_ASOCIADO(CL.AGCVIN) DESC_ZONA_RES,
 			DB2UTIL.SIP_CIUDAD(CL.NUMINT,char('RE')) DESC_CIU_RES,
 			CL.ESTASO, CL.FECING, CT.TITULO
-			FROM ELECDB.CLIMAE CL, MULCLIDAT.CLITIT CT
+			FROM ELECDB.ELEASOMUL CL, MULCLIDAT.CLITIT CT
 			WHERE CL.ASOCIA = 1 AND CL.ESTASO BETWEEN 10 AND 18 AND	 CL.NUMINT = CT.NUMINT AND CT.INDREG = 'AS' AND NROCNS = 1	
 		]]>
 	</sql-query>
@@ -117,7 +125,8 @@
 	<!-- ############################################################################# 
 		## 4. Javier Londoño - Premize SAS - 2012-11-02 ## ## Consulta que registra 
 		en la tabla ELEASOCIA todos los asociados ## ## activos de la cooperativa 
-		que están registrandos en el climae ## ############################################################################# -->
+		que están registrandos en el climae ## 
+		############################################################################# -->
 	<sql-query
 		name="consulta.asociados.mora.obligaciones.financieras">
 		<return-scalar column="CODIGO_ASOCIADO"
@@ -143,28 +152,29 @@
 	<!-- ############################################################################## 
 		## 5. Javier Londoño - Premize SAS - 2012-11-06 ## ## Consulta que retorna 
 		todos los asociados suspendidos o retirados por ## ## la junta de vigilancia, 
-		que estén activos ## ############################################################################## -->
+		que estén activos ## 
+		############################################################################## -->
 	<sql-query
 		name="consulta.asociados.suspendidos.retirados.activos">
 		<return-scalar column="CODIGO_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT asoc.CODIGO_ASOCIADO
+			SELECT asoc.CODIGO_ASOCIADO 
 			FROM ELECDB.ELE_SUSPENDIDO assu
-			INNER JOIN ELECDB.ELEASOCIA asoc ON asoc.codigo_asociado = assu.codigo_asociado
-			AND assu.ESTADO = '1'
+				INNER JOIN ELECDB.ELEASOCIA asoc 
+					ON asoc.codigo_asociado = assu.codigo_asociado AND assu.ESTADO = '1'
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 6. Bernardo Lopez - Pragma S.A. 06/11/2012 ## ## consulta habilidad del 
-		asociado ## ###################################################################################### -->
+		## 6. Bernardo Lopez - Pragma S.A. 06/11/2012 ## ## consulta habilidad del asociado ## 
+		###################################################################################### -->
 	<sql-query name="consulta.habilidad.asociado">
 		<return-scalar column="HABILIDAD_ASOCIADO"
 			type="java.lang.String" />
 		<![CDATA[
 			SELECT (CASE WHEN RH.TIPO_VALIDACION = 1 THEN '1' ELSE '0' END) HABILIDAD_ASOCIADO
-			  FROM ELECDB.ELE_REPORTE_HABIL RH 
+			FROM ELECDB.ELE_REPORTE_HABIL RH 
 			WHERE RH.NUMERO_DOCUMENTO = :numIdAsociado
 		]]>
 	</sql-query>
@@ -201,11 +211,11 @@
 	<!-- ################################################################################ 
 		## 7. Javier Londoño - Premize SAS - 2012-11-06 ## ## Consulta que retorna 
 		todas las inhabilidades registradas en determinado## ## proceso y que poseen 
-		un valor menor o igual a cierto valor ## ################################################################################ -->
+		un valor menor o igual a cierto valor ## 
+		################################################################################ -->
 	<query name="consulta.inhabilidades.proceso.valor.mora.x">
 		<![CDATA[
-			select distinct i from EleInhabilidad i                
-			join i.eleProcesoRegla pr      
+			select distinct i from EleInhabilidad i join i.eleProcesoRegla pr      
 			where pr.eleProceso.codigoProceso = :codigoProceso and
 			(i.valorMoraFin + i.valorMoraMul) <= :maximoValorMoraPermitido
 		]]>
@@ -213,17 +223,15 @@
 
 	<!-- ################################################################################ 
 		## 8. Javier Londoño - Premize SAS - 2012-11-06 ## ## Consulta que retorna 
-		los asociados que presentan cheques devueltos ## ################################################################################ -->
+		los asociados que presentan cheques devueltos ## 
+		################################################################################ -->
 	<sql-query name="consulta.asociados.cheques.devueltos">
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		ACD.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_CHEQUES_DEV ACD 
-           		INNER JOIN ELECDB.ELEASOCIA EA
-                ON ACD.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ACD.NUMINT_ASOCIADO
+			FROM ELECDB.ELE_ASOC_CHEQUES_DEV ACD 
+           		INNER JOIN ELECDB.ELEASOCIA EA ON ACD.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
@@ -235,41 +243,36 @@
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		ACA.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_CUENTAS_AHOR ACA
-   				INNER JOIN ELECDB.ELEASOCIA EA
-                ON ACA.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ACA.NUMINT_ASOCIADO
+			FROM ELECDB.ELE_ASOC_CUENTAS_AHOR ACA
+   				INNER JOIN ELECDB.ELEASOCIA EA ON ACA.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
 	<!-- ################################################################################### 
 		## 10. Javier Londoño - Premize SAS - 2012-11-07 ## ## Consulta que retorna 
-		los asociados los cuales ssus cuentas son cubiertas ## ## por el fondo de 
-		calamidad ## ################################################################################### -->
+		los asociados los cuales ssus cuentas son cubiertas ## ## por el fondo de calamidad ## 
+		################################################################################### -->
 	<sql-query
 		name="consulta.asociados.cubiertos.fondo.calamidad">
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		AFC.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_FONDO_CAL AFC
-   				INNER JOIN ELECDB.ELEASOCIA EA
-                ON AFC.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT AFC.NUMINT_ASOCIADO
+			FROM ELECDB.ELE_ASOC_FONDO_CAL AFC
+   				INNER JOIN ELECDB.ELEASOCIA EA ON AFC.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
 	<!-- ################################################################################ 
 		## 11. Javier Londoño - Premize SAS - 2012-11-07 ## ## Consulta que retorna 
 		todas las inhabilidades registradas en determinado## ## proceso y que poseen 
-		un valor total de mora diferente de null ## ################################################################################ -->
+		un valor total de mora diferente de null ## 
+		################################################################################ -->
 	<query name="consulta.inhabilidades.proceso.valor.mora.no.null">
 		<![CDATA[
-			select distinct i from EleInhabilidad i                
-			join i.eleProcesoRegla pr      
+			select distinct i 
+			from EleInhabilidad i join i.eleProcesoRegla pr      
 			where pr.eleProceso.codigoProceso = :codigoProceso and
 			(i.valorMoraFin is not null or i.valorMoraMul is not null) 
 		]]>
@@ -286,15 +289,14 @@
 	<sql-query name="consultaNumintAsociado">
 		<return-scalar column="NUMINT" type="java.lang.Long" />
 		<![CDATA[
-			SELECT NUMINT FROM elecdb.CLIMAE
-				WHERE NITCLI = :documento
+			SELECT NUMINT FROM elecdb.CLIMAE WHERE NITCLI = :documento
 		]]>
 	</sql-query>
 
 	<sql-query name="consultar.secuencia.ele.ele.suspendido.aud">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
-		SELECT NEXT VALUE FOR ELECDB.ELE_SUSPENDIDO_AUD_SEQ SEQ FROM SYSIBM.SYSDUMMY1
+			SELECT NEXT VALUE FOR ELECDB.ELE_SUSPENDIDO_AUD_SEQ SEQ FROM SYSIBM.SYSDUMMY1
 		]]>
 	</sql-query>
 
@@ -308,28 +310,25 @@
 		<return-scalar column="OBSERVACIONES"
 			type="java.lang.String" />
 		<![CDATA[
-			SELECT 
-				EI.OBSERVACIONES
-			FROM
-				ELECDB.ELE_INHABILIDAD EI INNER JOIN ELECDB.ELEASOCIA EA 
-					ON (EI.CODIGO_ASOCIADO = EA.CODIGO_ASOCIADO)
-			WHERE
-				EA.NUMERO_DOCUMENTO = :numIdAsociado
+			SELECT EI.OBSERVACIONES
+			FROM ELECDB.ELE_INHABILIDAD EI 
+				INNER JOIN ELECDB.ELEASOCIA EA ON (EI.CODIGO_ASOCIADO = EA.CODIGO_ASOCIADO)
+			WHERE EA.NUMERO_DOCUMENTO = :numIdAsociado
     	]]>
 	</sql-query>
 
 	<!-- ################################################################################ 
 		## 15. Javier Londoño - Premize SAS - 2012-11-15 ## ## Consulta los nombres 
-		y apellidos del asociado ## ################################################################################ -->
+		y apellidos del asociado ## 
+		################################################################################ -->
 	<sql-query name="consultar.nombre.asociado">
 		<return-scalar column="numInt" type="java.lang.Long" />
 		<return-scalar column="nitCli" type="java.lang.Long" />
 		<return-scalar column="nomCli" type="java.lang.String" />
 		<return-scalar column="nomCl1" type="java.lang.String" />
 		<![CDATA[
-			SELECT 	NUMINT numInt, NITCLI nitCli, NOMCLI nomCli, NOMCL1 nomCl1
-			FROM 	elecdb.CLIMAE
-			WHERE	NITCLI = :numeroDocumento
+			SELECT NUMINT numInt, NITCLI nitCli, NOMCLI nomCli, NOMCL1 nomCl1
+			FROM elecdb.CLIMAE WHERE NITCLI = :numeroDocumento
     	]]>
 	</sql-query>
 
@@ -342,52 +341,41 @@
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		ARM.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_REESTRUC_MUL ARM
-   				INNER JOIN ELECDB.ELEASOCIA EA
-                ON ARM.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ARM.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_REESTRUC_MUL ARM
+   				INNER JOIN ELECDB.ELEASOCIA EA ON ARM.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
 	<!-- ##################################################################################### 
 		## 17. Javier Londoño - Premize SAS - 2012-11-16 ## ## Consulta que retorna 
-		los asociados los cuales sufrieron reestructuraciones ## ## en sus productos 
-		de financiera ## ##################################################################################### -->
+		los asociados los cuales sufrieron reestructuraciones ## ## en sus productos de financiera ## 
+		##################################################################################### -->
 	<sql-query
 		name="consulta.asociados.reestructurados.financiera">
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		ARF.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_REESTRUC_FINA ARF
-   				INNER JOIN ELECDB.ELEASOCIA EA
-                ON ARF.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ARF.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_REESTRUC_FINA ARF
+   				INNER JOIN ELECDB.ELEASOCIA EA ON ARF.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
 	<!-- ################################################################################### 
 		## 18. Javier Londoño - Premize SAS - 2012-11-16 ## ## Consulta que retorna 
-		los asociados los cuales realizaron pagos en otras ## ## entidades antes 
-		del 04/12/2012 ## ################################################################################### -->
+		los asociados los cuales realizaron pagos en otras ## ## entidades antes del 04/12/2012 ## 
+		################################################################################### -->
 	<sql-query name="consulta.asociados.pagos.otras.entidades">
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		APOE.NUMINT_ASOCIADO
-			FROM
-   			ELECDB.ELE_ASOC_PAG_OTRAS_ENT APOE
+			SELECT APOE.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_PAG_OTRAS_ENT APOE
 		]]>
 	</sql-query>
 
 	<!-- ################################################################################### 
 		## 19. Javier Londoño - Premize SAS - 2012-11-16 ## ## Consulta que retorna 
-		los asociados los cuales realizaron pagos en otras ## ## entidades antes 
-		del 04/12/2012 ## ################################################################################### -->
+		los asociados los cuales realizaron pagos en otras ## ## entidades antes del 04/12/2012 ## 
+		################################################################################### -->
 	<sql-query
 		name="consulta.asociados.inhabiles.anterior.proceso.por.regla">
 		<return-scalar column="CODIGO_ASOCIADO"
@@ -422,20 +410,20 @@
 	<!-- ###################################################################################### 
 		## 20. Javier Londoño - Premize SAS - 2012-11-19 ## ## Sentencia que registra 
 		automaticamente las inhabilides por cambio de estado ## ## del asociado en 
-		el BUC entre ejecuciones del proceso de verificación ## ###################################################################################### -->
+		el BUC entre ejecuciones del proceso de verificación ## 
+		###################################################################################### -->
 	<sql-query
 		name="consulta.registrar.inhabilidades.por.cambio.estado.buc">
 		<![CDATA[
 			INSERT INTO ELECDB.ELE_INHABILIDAD 
 			(CONSECUTIVO_INHABILIDAD, CODIGO_ASOCIADO, CONSECUTIVO_PRO_REGLA, OBSERVACIONES)
-			(SELECT NEXT VALUE FOR ELECDB.ELE_INHABILIDAD_SEQ, ASOS_RETIRADOS.CODIGO_ASOCIADO, consecutivoProregla, mensajeInhabilidad
-			FROM
-			(	SELECT EA.CODIGO_ASOCIADO
-				FROM ELECDB.ELEASOCIA EA
-				EXCEPT
-				SELECT CL.NUMINT
-				FROM ELECDB.CLIMAE CL         
-				WHERE CL.ASOCIA = 1 AND  CL.ESTASO BETWEEN 10 AND 18) ASOS_RETIRADOS)
+			(
+				SELECT NEXT VALUE FOR ELECDB.ELE_INHABILIDAD_SEQ, ASOS_RETIRADOS.CODIGO_ASOCIADO, consecutivoProregla, mensajeInhabilidad
+				FROM(
+					SELECT EA.CODIGO_ASOCIADO FROM ELECDB.ELEASOCIA EA EXCEPT SELECT CL.NUMINT
+					FROM ELECDB.CLIMAE CL WHERE CL.ASOCIA = 1 AND  CL.ESTASO BETWEEN 10 AND 18
+					) 
+			ASOS_RETIRADOS)
 		]]>
 	</sql-query>
 
@@ -444,7 +432,8 @@
 		## 21. Javier Londoño - Premize SAS - 2012-11-20 ## ## Sentencia que registra 
 		automaticamente novedades de habilidad a los asociados ## ## que en un proceso 
 		de verificación actual no presentaron inhabilidades comparado ## ## con el 
-		último proceso de verificación ejecutado ## ######################################################################################### -->
+		último proceso de verificación ejecutado ## 
+		######################################################################################### -->
 	<sql-query
 		name="consulta.registrar.novedad.asociados.habiles">
 		<![CDATA[
@@ -495,9 +484,7 @@
                 		WHERE EPR.CODIGO_PROCESO = codigoProcesoActual
                 EXCEPT
                 SELECT DISTINCT EI.CODIGO_ASOCIADO
-						FROM
-    					ELECDB.ELE_PROCESO_REGLA EPR
-                        	INNER JOIN
+						FROM ELECDB.ELE_PROCESO_REGLA EPR INNER JOIN
 						(SELECT
                         		MAX(EP1.CODIGO_PROCESO) COD_PROCESO
                         		FROM
@@ -511,15 +498,13 @@
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 23. Bernardo Lopez - Pragma S.A. - 2012-11-20 ## ## Consulta fecha proceso 
-		por codigo ## ###################################################################################### -->
+		## 23. Bernardo Lopez - Pragma S.A. - 2012-11-20 ## ## Consulta fecha proceso por codigo ## 
+		###################################################################################### -->
 	<sql-query name="consulta.fecha.proceso.por.codigo">
 		<return-scalar column="FECHA_PROGRAMACION"
 			type="java.util.Date" />
 		<![CDATA[
-			SELECT P.FECHA_PROGRAMACION
-			FROM ELECDB.ELE_PROCESO P
-			WHERE P.CODIGO_PROCESO = :codProceso
+			SELECT P.FECHA_PROGRAMACION FROM ELECDB.ELE_PROCESO P WHERE P.CODIGO_PROCESO = :codProceso
 		]]>
 	</sql-query>
 
@@ -530,58 +515,54 @@
 		<return-scalar column="FECHA_CORTE"
 			type="java.util.Date" />
 		<![CDATA[
-			SELECT P.FECHA_CORTE
-			FROM ELECDB.ELE_PROCESO P
-			WHERE P.CODIGO_PROCESO = :codProceso
+			SELECT P.FECHA_CORTE FROM ELECDB.ELE_PROCESO P WHERE P.CODIGO_PROCESO = :codProceso
 		]]>
 	</sql-query>
 
 
 	<!-- ###################################################################################### 
 		## 24. Bernardo Lopez - Pragma S.A. - 2012-11-22 ## ## Consulta total asociados 
-		filtrados por zona ## ###################################################################################### -->
+		filtrados por zona ## 
+		###################################################################################### -->
 	<sql-query name="consulta.total.asociados.por.zona">
 		<return-scalar column="TOTAL_ASOCIADOS"
 			type="java.lang.Double" />
 		<![CDATA[
-			SELECT COUNT(A.CODIGO_ASOCIADO) TOTAL_ASOCIADOS
-			FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO
-			WHERE Z.CODIGO_ZONA_ELE = :codZona
+			SELECT COUNT(A.CODIGO_ASOCIADO) TOTAL_ASOCIADOS FROM ELECDB.ELEASOCIA A 
+			INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO WHERE Z.CODIGO_ZONA_ELE = :codZona
 		]]>
 	</sql-query>
 
 
 	<!-- ###################################################################################### 
-		## 25. Bernardo Lopez - Pragma S.A. - 2012-11-23 ## ## Consulta fecha ultimo 
-		proceso ejecutado ## ###################################################################################### -->
+		## 25. Bernardo Lopez - Pragma S.A. - 2012-11-23 ## ## Consulta fecha ultimo proceso ejecutado ## 
+		###################################################################################### -->
 	<sql-query name="consulta.fecha.ultimo.proceso.ejecutado">
 		<return-scalar column="FECHA_PROGRAMACION"
 			type="java.util.Date" />
 		<![CDATA[			
-			SELECT P.FECHA_PROGRAMACION
-			FROM ELECDB.ELE_PROCESO P
-			WHERE P.CODIGO_PROCESO = (SELECT MAX(EP1.CODIGO_PROCESO) COD_PROCESO
-			FROM ELECDB.ELE_PROCESO EP1
-			WHERE EP1.ESTADO_PROCESO = 2)
+			SELECT P.FECHA_PROGRAMACION FROM ELECDB.ELE_PROCESO P WHERE P.CODIGO_PROCESO = (
+				SELECT MAX(EP1.CODIGO_PROCESO) COD_PROCESO FROM ELECDB.ELE_PROCESO EP1 WHERE EP1.ESTADO_PROCESO = 2)
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 26. Bernardo Lopez - Pragma S.A. - 2012-11-22 ## ## Consulta total asociados 
-		filtrados por zona ## ###################################################################################### -->
+		filtrados por zona ## 
+		###################################################################################### -->
 	<sql-query name="consulta.total.asociados">
 		<return-scalar column="TOTAL_ASOCIADOS"
 			type="java.lang.Double" />
 		<![CDATA[
-			SELECT COUNT(A.CODIGO_ASOCIADO) TOTAL_ASOCIADOS
-			FROM ELECDB.ELEASOCIA A
+			SELECT COUNT(A.CODIGO_ASOCIADO) TOTAL_ASOCIADOS FROM ELECDB.ELEASOCIA A
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 27. Bernardo Lopez - Pragma S.A. - 2012-11-30 ## ## Consulta informacion 
 		cabeza de plancha ## ## MODIFICADO POR Mario Alejandro Acevedo: se adicionan 
-		condiciones para obtener el## ## codigo de la zona electoral ## ###################################################################################### -->
+		condiciones para obtener el## ## codigo de la zona electoral ## 
+		###################################################################################### -->
 	<sql-query name="consulta.informacion.cabeza.plancha">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
@@ -595,11 +576,8 @@
 		<return-scalar column="CONSECUTIVO_PLANCHA"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT A.NUMERO_DOCUMENTO,
-			    C.NOMCL1,
-			    C.FECING,
-			    DB2UTIL.F_PROFESION(C.NUMINT) PROFESION, Z.CODIGO_ZONA_ELE ZONA, PL_ASO.CODIGO_ASOCIADO CODASOCIADO,
-			    PL.CONSECUTIVO_PLANCHA 
+			SELECT A.NUMERO_DOCUMENTO, C.NOMCL1, C.FECING, DB2UTIL.F_PROFESION(C.NUMINT) PROFESION, 
+				Z.CODIGO_ZONA_ELE ZONA, PL_ASO.CODIGO_ASOCIADO CODASOCIADO, PL.CONSECUTIVO_PLANCHA 
 			FROM ELECDB.ELEASOCIA A
 				INNER JOIN ELECDB.ELE_PLANCHA_ASOCIADO PL_ASO ON  PL_ASO.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO
 				INNER JOIN ELECDB.ELE_PLANCHA PL ON PL.CONSECUTIVO_PLANCHA = PL_ASO.CONSECUTIVO_PLANCHA
@@ -616,9 +594,7 @@
 		<return-scalar column="CODIGO_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[		
-			SELECT A.CODIGO_ASOCIADO 
-			FROM ELECDB.ELEASOCIA A
-			WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
+			SELECT A.CODIGO_ASOCIADO FROM ELECDB.ELEASOCIA A WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
 		]]>
 	</sql-query>
 
@@ -662,19 +638,11 @@
 		<return-scalar column="MAX_PRINCIPALES"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		ZE.CODIGO_ZONA_ELE,
-    		ZE.DESCRIPCION_ZONA_ELE,
-    		ZE.ZONA_ESPECIAL,
-    		ZE.MAX_PRINCIPALES
-			FROM
-    		ELECDB.ELEASOCIA EA
-    		INNER JOIN ELECDB.ELE_ZONA Z 
-        		ON Z.CODIGO_ZONA = EA.COD_ZONA_ASO
-    		INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE 
-        		ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
-			WHERE
-    		EA.NUMERO_DOCUMENTO = :numDocumentoAso
+			SELECT ZE.CODIGO_ZONA_ELE, ZE.DESCRIPCION_ZONA_ELE, ZE.ZONA_ESPECIAL, ZE.MAX_PRINCIPALES
+			FROM ELECDB.ELEASOCIA EA 
+				INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = EA.COD_ZONA_ASO
+    			INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
+			WHERE EA.NUMERO_DOCUMENTO = :numDocumentoAso
     	]]>
 	</sql-query>
 
@@ -692,24 +660,23 @@
 	<!-- #################################################################################### 
 		## 32. Javier Londoño - Premize SAS - 2012-12-03 ## ## Consulta que retorna 
 		los asociados los cuales pertenecen a otras entidades ## ## electorales como 
-		el tribunal de elecciones y las comisiones electorales ## #################################################################################### -->
+		el tribunal de elecciones y las comisiones electorales ## 
+		#################################################################################### -->
 	<sql-query
 		name="consulta.integrantes.otras.entidades.electorales">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-    		EA.NUMERO_DOCUMENTO
-			FROM
-   			ELECDB.ELE_ASOC_OTRAS_ENT_ELECT EAOEE
-				INNER JOIN ELECDB.ELEASOCIA EA
-				ON EAOEE.NUMERO_DOCUMENTO = EA.CODIGO_ASOCIADO
+			SELECT EA.NUMERO_DOCUMENTO
+			FROM ELECDB.ELE_ASOC_OTRAS_ENT_ELECT EAOEE
+				INNER JOIN ELECDB.ELEASOCIA EA ON EAOEE.NUMERO_DOCUMENTO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
 	<!-- #################################################################################### 
 		## 33. Javier Londoño - Premize SAS - 2012-12-03 ## ## Consulta que retorna 
-		los asociados que fueron sancionados 5 años atrúas ## #################################################################################### -->
+		los asociados que fueron sancionados 5 años atrúas ## 
+		#################################################################################### -->
 	<sql-query
 		name="consulta.asociados.sancionados.5.annos.atras">
 		<return-scalar column="NUMERO_DOCUMENTO"
@@ -722,8 +689,8 @@
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 34. Bernardo Lopez - Pragma S.A. - 2012-12-03 ## ## Consulta plancha por 
-		cabeza. ## ###################################################################################### -->
+		## 34. Bernardo Lopez - Pragma S.A. - 2012-12-03 ## ## Consulta plancha por cabeza. ## 
+		###################################################################################### -->
 	<sql-query name="consulta.lista.plancha.por.cabeza">
 		<return-scalar column="CONSECUTIVO_PLANCHA_ASO"
 			type="java.lang.Long" />
@@ -738,12 +705,8 @@
 		<return-scalar column="CONSECUTIVO_PLANCHA"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT P.CONSECUTIVO_PLANCHA_ASO,
-			    P.NUMERO_INSCRITO,
-			    P.TIPO_INSCRITO,
-			    P.FECHA_INSCRIPCION,
-			    P.CODIGO_ASOCIADO,
-			    P.CONSECUTIVO_PLANCHA
+			SELECT P.CONSECUTIVO_PLANCHA_ASO, P.NUMERO_INSCRITO, P.TIPO_INSCRITO,
+			    P.FECHA_INSCRIPCION, P.CODIGO_ASOCIADO, P.CONSECUTIVO_PLANCHA
 			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
 			WHERE P.CONSECUTIVO_PLANCHA = (
 			    SELECT PA.CONSECUTIVO_PLANCHA
@@ -755,7 +718,8 @@
 
 	<!-- ###################################################################### 
 		## 35. Bernardo Lopez - Pragma S.A.- 2012-12-03 ## ## Consulta el Consecutivo 
-		de la tabla ele_plancha_asociado_aud ## ###################################################################### -->
+		de la tabla ele_plancha_asociado_aud ## 
+		###################################################################### -->
 
 	<sql-query
 		name="consultar.secuencia.ele.plancha.asociado.aud">
@@ -767,7 +731,8 @@
 
 	<!-- ###################################################################### 
 		## 36. Oscar Javier Salzar - Coomeva - 2012-11-30 ## ## Consulta el Consecutivo 
-		de la tabla cuociente electoral ## ###################################################################### -->
+		de la tabla cuociente electoral ## 
+		###################################################################### -->
 	<sql-query
 		name="consultar.secuencia.ele.consec.cuociente.electoral">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -778,7 +743,8 @@
 
 	<!-- ###################################################################### 
 		## 36.1 Oscar Javier Salzar - Coomeva - 2012-11-30 ## ## Consulta el Consecutivo 
-		de la tabla delegados opr zona ## ###################################################################### -->
+		de la tabla delegados opr zona ## 
+		###################################################################### -->
 	<sql-query
 		name="consultar.secuencia.ele.consec.cuociente.delegados.zona">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -789,7 +755,8 @@
 
 	<!-- ###################################################################### 
 		## 36.2 Juliana Nobile - Coomeva - 2015-09-22 ## ## Consulta el Consecutivo 
-		de la tabla delegados regional ## ###################################################################### -->
+		de la tabla delegados regional ## 
+		###################################################################### -->
 	<sql-query
 		name="consultar.secuencia.ele.consec.cuociente.delegados.regional">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -800,7 +767,8 @@
 
 	<!-- ###################################################################### 
 		## 37. Javier Londoño - Premize SAS - 2012-12-03 ## ## Consulta el Consecutivo 
-		de la tabla ele_plancha_asociado ## ###################################################################### -->
+		de la tabla ele_plancha_asociado ## 
+		###################################################################### -->
 
 	<sql-query name="consultar.secuencia.ele.plancha.asociado">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -811,7 +779,8 @@
 
 	<!-- ###################################################################### 
 		## 38. Javier Londoño - Premize SAS - 2012-12-03 ## ## Consulta el Consecutivo 
-		de la tabla ele_plancha ## ###################################################################### -->
+		de la tabla ele_plancha ## 
+		###################################################################### -->
 
 	<sql-query name="consultar.secuencia.ele.plancha">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -822,7 +791,8 @@
 
 	<!-- ###################################################################################### 
 		## 39. Bernardo Lopez - Pragma S.A. - 2012-12-03 ## ## Consulta plancha asociado 
-		por codigo de plancha y de asociado ## ###################################################################################### -->
+		por codigo de plancha y de asociado ## 
+		###################################################################################### -->
 	<sql-query
 		name="consultar.plancha.asociado.por.asociado.plancha">
 		<return-scalar column="CONSECUTIVO_PLANCHA_ASO"
@@ -838,21 +808,17 @@
 		<return-scalar column="CONSECUTIVO_PLANCHA"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT P.CONSECUTIVO_PLANCHA_ASO,
-			    P.NUMERO_INSCRITO,
-			    P.TIPO_INSCRITO,
-			    P.FECHA_INSCRIPCION,
-			    P.CODIGO_ASOCIADO,
-			    P.CONSECUTIVO_PLANCHA
+			SELECT P.CONSECUTIVO_PLANCHA_ASO, P.NUMERO_INSCRITO, P.TIPO_INSCRITO,
+			    P.FECHA_INSCRIPCION, P.CODIGO_ASOCIADO, P.CONSECUTIVO_PLANCHA
 			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
-			WHERE P.CODIGO_ASOCIADO = :codigoAsociado
-			AND P.CONSECUTIVO_PLANCHA = :consecutivoPlancha
+			WHERE P.CODIGO_ASOCIADO = :codigoAsociado AND P.CONSECUTIVO_PLANCHA = :consecutivoPlancha
     	]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 40. Bernardo Lopez - Pragma S.A. - 2012-12-04 ## ## Consulta plancha asociado 
-		por codigo de plancha y Numero inscrito ## ###################################################################################### -->
+		por codigo de plancha y Numero inscrito ## 
+		###################################################################################### -->
 	<sql-query
 		name="consulta.plancha.asociado.por.plancha.num.insrcito">
 		<return-scalar column="CONSECUTIVO_PLANCHA_ASO"
@@ -868,16 +834,12 @@
 		<return-scalar column="CONSECUTIVO_PLANCHA"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT P.CONSECUTIVO_PLANCHA_ASO,
-			    P.NUMERO_INSCRITO,
-			    P.TIPO_INSCRITO,
-			    P.FECHA_INSCRIPCION,
-			    P.CODIGO_ASOCIADO,
-			    P.CONSECUTIVO_PLANCHA
+			SELECT P.CONSECUTIVO_PLANCHA_ASO, P.NUMERO_INSCRITO, P.TIPO_INSCRITO,
+			    P.FECHA_INSCRIPCION, P.CODIGO_ASOCIADO, P.CONSECUTIVO_PLANCHA
 			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
-			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha
-			AND P.NUMERO_INSCRITO = :numInscrito
-			AND P.TIPO_INSCRITO = :tipoInscrito
+			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha 
+				AND P.NUMERO_INSCRITO = :numInscrito
+				AND P.TIPO_INSCRITO = :tipoInscrito
     	]]>
 	</sql-query>
 
@@ -888,10 +850,8 @@
 		<return-scalar column="NUMERO_INSCRITO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT P.NUMERO_INSCRITO
-			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
-			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha
-			AND P.CODIGO_ASOCIADO = :codigoAsociado
+			SELECT P.NUMERO_INSCRITO FROM ELECDB.ELE_PLANCHA_ASOCIADO P
+			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha AND P.CODIGO_ASOCIADO = :codigoAsociado
     	]]>
 	</sql-query>
 
@@ -901,24 +861,23 @@
 	<sql-query name="consultar.si.es.posicion.nueva">
 		<return-scalar column="TOTAL" type="java.lang.Long" />
 		<![CDATA[
-			SELECT COUNT(P.NUMERO_INSCRITO) TOTAL
-			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
-			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha
-			AND P.NUMERO_INSCRITO = :numeroInscrito
-			AND P.TIPO_INSCRITO = :tipoInscrito
+			SELECT COUNT(P.NUMERO_INSCRITO) TOTAL FROM ELECDB.ELE_PLANCHA_ASOCIADO P
+			WHERE P.CONSECUTIVO_PLANCHA = :consecutivoPlancha AND P.NUMERO_INSCRITO = :numeroInscrito
+				AND P.TIPO_INSCRITO = :tipoInscrito
     	]]>
 	</sql-query>
 
 	<sql-query name="consultarSecuenciaAuditoriaExcepcion">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
-		SELECT NEXT VALUE FOR ELECDB.ELE_AUDITORIA_EXCEPCION_AUD_SEQ SEQ FROM SYSIBM.SYSDUMMY1
+			SELECT NEXT VALUE FOR ELECDB.ELE_AUDITORIA_EXCEPCION_AUD_SEQ SEQ FROM SYSIBM.SYSDUMMY1
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 44. Bernardo Lopez - Pragma S.A. - 2012-12-04 ## ## Consulta codigo cabeza 
-		de plancha a la que pertenece un inscrito ## ###################################################################################### -->
+		de plancha a la que pertenece un inscrito ## 
+		###################################################################################### -->
 	<sql-query name="consultar.cabeza.plancha.por.inscrito">
 		<return-scalar column="CODIGO_ASOCIADO"
 			type="java.lang.Long" />
@@ -947,21 +906,21 @@
 
 	<!-- ###################################################################################### 
 		## 45. Bernardo Lopez - Pragma S.A. - 2012-12-04 ## ## Consulta si para una 
-		plancha ya existe impresion de formato ## ###################################################################################### -->
+		plancha ya existe impresion de formato ## 
+		###################################################################################### -->
 	<sql-query
 		name="consultar.numero.impresiones.formato.plancha">
 		<return-scalar column="TOTAL" type="java.lang.Long" />
 		<![CDATA[
-			SELECT COUNT(FP.CONSECUTIVO) TOTAL
-			FROM ELECDB.ELE_FORMATO_PLANCHA FP
-			WHERE FP.CONSECUTIVO_PLANCHA = :consecutivoPlancha
-			AND FP.CODIGO_FORMATO = :codigoFormato
+			SELECT COUNT(FP.CONSECUTIVO) TOTAL FROM ELECDB.ELE_FORMATO_PLANCHA FP
+			WHERE FP.CONSECUTIVO_PLANCHA = :consecutivoPlancha AND FP.CODIGO_FORMATO = :codigoFormato
     	]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
 		## 46. Bernardo Lopez - Pragma S.A. - 2012-12-07 ## ## Consulta el consecutivo 
-		de ELE_ESTADO_PLANCHA. ## ###################################################################################### -->
+		de ELE_ESTADO_PLANCHA. ## 
+		###################################################################################### -->
 	<sql-query name="obtener.consecutivo.estado.plancha">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
@@ -971,7 +930,8 @@
 
 	<!-- ###################################################################################### 
 		## 48. Bernardo Lopez - Pragma S.A. - 2012-12-07 ## ## Consulta el consecutivo 
-		de ELE_FORMATO_PLANCHA. ## ###################################################################################### -->
+		de ELE_FORMATO_PLANCHA. ## 
+		###################################################################################### -->
 	<sql-query name="obtener.consecutivo.formato.plancha">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
@@ -981,16 +941,16 @@
 
 	<!-- ###################################################################################### 
 		## 49. Bernardo Lopez - Pragma S.A. - 2012-12-11 ## ## Consulta registros 
-		hay en detalle formato plancha por codigo y asonumint ## ###################################################################################### -->
+		hay en detalle formato plancha por codigo y asonumint ## 
+		###################################################################################### -->
 	<sql-query
 		name="consultar.numero.registros.detalle.formato.plancha">
 		<return-scalar column="TOTAL" type="java.lang.Long" />
 		<![CDATA[
-			SELECT COUNT(D.CODIGO_ASOCIADO) TOTAL
-			FROM ELECDB.ELE_DETALLE_FORMATO_PLANCHA D
-			WHERE D.CODIGO_ASOCIADO = :codigoAsociado
-			AND D.CODIGO_FORMATO = :codigoFormato
-			AND D.FECHA_IMPRESION IS NOT NULL
+			SELECT COUNT(D.CODIGO_ASOCIADO) TOTAL FROM ELECDB.ELE_DETALLE_FORMATO_PLANCHA D
+			WHERE D.CODIGO_ASOCIADO = :codigoAsociado 
+				AND D.CODIGO_FORMATO = :codigoFormato
+				AND D.FECHA_IMPRESION IS NOT NULL
     	]]>
 	</sql-query>
 
@@ -1001,10 +961,8 @@
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-				SELECT
-	    		DISTINCT NUMERO_DOCUMENTO
-				FROM
-	    		ELECDB.ELE_ASOCIADO_ESPECIAL
+				SELECT DISTINCT NUMERO_DOCUMENTO
+				FROM ELECDB.ELE_ASOCIADO_ESPECIAL
 	    		WHERE FECHA_RETIRO IS NULL
     	]]>
 	</sql-query>
@@ -1018,10 +976,8 @@
 		<return-scalar column="FECHA_RETIRO"
 			type="java.sql.Timestamp" />
 		<![CDATA[
-			SELECT
-    		DISTINCT NUMERO_DOCUMENTO, FECHA_RETIRO
-			FROM
-    		ELECDB.ELE_ASOCIADO_ESPECIAL
+			SELECT DISTINCT NUMERO_DOCUMENTO, FECHA_RETIRO
+			FROM ELECDB.ELE_ASOCIADO_ESPECIAL
     		WHERE FECHA_RETIRO IS NOT NULL
     	]]>
 	</sql-query>
@@ -1034,34 +990,28 @@
 		<return-scalar column="FECHA" type="java.lang.Long" />
 		<![CDATA[
 			SELECT FECHA FROM MULCLIDAT.CLITIT 
-			WHERE NUMINT = :codAsociado AND 
-			NROCNS = 1 AND 
-			INDREG = 'AS'
+			WHERE NUMINT = :codAsociado AND NROCNS = 1 AND INDREG = 'AS'
     	]]>
 	</sql-query>
 
 	<!-- #################################################################################### 
 		## 53. Javier Londoño - Premize SAS - 2012-12-26 ## ## Consulta las zonas 
-		electorales a las que pertence un usuario ## #################################################################################### -->
+		electorales a las que pertence un usuario ## 
+		#################################################################################### -->
 	<sql-query
 		name="consulta.zona.electoral.por.usuario.comision">
 		<return-scalar column="CODIGO_ZONA_ELE"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-   	 		EZE.CODIGO_ZONA_ELE
-			FROM
-    		ELECDB.ELE_ZONA_ELECTORAL EZE
-        		INNER JOIN ELECDB.ELE_USUARIO_COMISION EUC
-        		ON EZE.CODIGO_ZONA_ELE = EUC.CODIGO_ZONA_ELE
-			WHERE
-			LOWER(EUC.ID_USUARIO) = LOWER(:idUsuario)
+			SELECT EZE.CODIGO_ZONA_ELE FROM ELECDB.ELE_ZONA_ELECTORAL EZE
+        		INNER JOIN ELECDB.ELE_USUARIO_COMISION EUC ON EZE.CODIGO_ZONA_ELE = EUC.CODIGO_ZONA_ELE
+			WHERE LOWER(EUC.ID_USUARIO) = LOWER(:idUsuario)
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 54. Javier Londoño - Premize SAS - 2013-01-11 ## ## Consulta el consecutivo 
-		de ELE_PLANCHA_EXCEPCION. ## ###################################################################################### -->
+		## 54. Javier Londoño - Premize SAS - 2013-01-11 ## ## Consulta el consecutivo de ELE_PLANCHA_EXCEPCION. 
+		###################################################################################### -->
 	<sql-query name="consultar.secuencia.ele.plancha.excepcion">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
@@ -1070,24 +1020,23 @@
 	</sql-query>
 
 	<!-- ###################################################################################### 
-		## 55. jose luis ## ## Consulta el numero de la plancha ## ###################################################################################### -->
+		## 55. jose luis ## ## Consulta el numero de la plancha ## 
+		###################################################################################### -->
 
 	<sql-query
 		name="consulta.zona.electoral.numero.por.codigozona">
 		<return-scalar column="NUMERO_ZONA_ELE"
 			type="java.lang.String" />
 		<![CDATA[
-    	   SELECT
-   	 		EZE.NUMERO_ZONA_ELE
-			FROM
-    		   ELECDB.ELE_ZONA_ELECTORAL EZE
+    		SELECT EZE.NUMERO_ZONA_ELE FROM ELECDB.ELE_ZONA_ELECTORAL EZE
 			WHERE EZE.CODIGO_ZONA_ELE = :codigoZona
 		]]>
 	</sql-query>
 
 	<!-- #################################################################################### 
 		## 56. Javier Londoño - Premize SAS - 2013-02-12 ## ## Consulta los asociados 
-		marcados en el proceso de escrutinios ## #################################################################################### -->
+		marcados en el proceso de escrutinios ## 
+		#################################################################################### -->
 	<sql-query name="consulta.marcacion.asociados.escrutinios">
 		<return-scalar column="CODIGO_ZONA_ELE"
 			type="java.lang.String" />
@@ -1140,7 +1089,8 @@
 
 	<!-- ###################################################################################### 
 		## 57. Javier Londoño - Premize SAS - 2013-02-13 ## ## Consulta el consecutivo 
-		de ELE_PROCESO_LOG. ## ###################################################################################### -->
+		de ELE_PROCESO_LOG. ## 
+		###################################################################################### -->
 	<sql-query name="consultar.secuencia.ele.proceso.log">
 		<return-scalar column="SEQ" type="java.lang.Long" />
 		<![CDATA[
@@ -1150,19 +1100,22 @@
 
 	<!-- ###################################################################### 
 		## 58. Carlos Ernesto Ortega Q. Contratista Coomeva - 2014-01-14 ## ## Consulta 
-		para verificar si una plancha ha sido radicada ## ###################################################################### -->
+		para verificar si una plancha ha sido radicada ## 
+		###################################################################### -->
 
 	<sql-query name="consultar.es.plancha.radicada">
 		<return-scalar column="consec" type="java.lang.Long" />
 		<return-scalar column="plancha" type="java.lang.Long" />
 		<![CDATA[		
-			SELECT FP.CONSECUTIVO CONSEC,FP.CONSECUTIVO_PLANCHA PLANCHA FROM ELECDB.ELE_FORMATO_PLANCHA FP where FP.CODIGO_FORMATO='5' and FP.CONSECUTIVO_PLANCHA= :consecutivoPlancha
+			SELECT FP.CONSECUTIVO CONSEC,FP.CONSECUTIVO_PLANCHA PLANCHA 
+			FROM ELECDB.ELE_FORMATO_PLANCHA FP where FP.CODIGO_FORMATO='5' and FP.CONSECUTIVO_PLANCHA= :consecutivoPlancha
 		]]>
 	</sql-query>
 
 	<!-- ###################################################################### 
 		## 59. Carlos Ernesto Ortega Q. Contratista Coomeva - 2015-09-24 ## ## Consulta 
-		el Consecutivo de la tabla ele_novedad ## ###################################################################### -->
+		el Consecutivo de la tabla ele_novedad ## 
+		###################################################################### -->
 
 	<sql-query name="consultar.secuencia.ele.novedad">
 		<return-scalar column="SEQ" type="java.lang.Long" />
@@ -1173,7 +1126,8 @@
 
 	<!-- ###################################################################### 
 		## 60. Carlos Ernesto Ortega Q. Contratista Coomeva - 2015-09-25 ## ## Consulta 
-		lista de correos ## ###################################################################### -->
+		lista de correos ##
+		###################################################################### -->
 
 	<sql-query name="consultar.lista.correos">
 		<return-scalar column="CORREO" type="java.lang.String" />
@@ -1185,7 +1139,8 @@
 
 	<!-- ###################################################################################### 
 		## 61. Juliana Nobile - Coomeva - 2015-09-21 ## ## Consulta zonas electorales 
-		con regional administrativa ## ###################################################################################### -->
+		con regional administrativa ## 
+		###################################################################################### -->
 	<sql-query name="consulta.zonas.electorales.con.regional">
 
 		<return-scalar column="CODREG" type="java.lang.Long" />
@@ -1201,13 +1156,12 @@
 
 	<!-- ###################################################################################### 
 		## 62. Juan Diego Montoya - Coomeva - 2016-09-09 ## ## Consulta el estado 
-		del asociado dada su cédula ## ###################################################################################### -->
+		del asociado dada su cédula ## 
+		###################################################################################### -->
 	<sql-query name="consulta.estado.asociado">
 		<return-scalar column="ESTASO" type="java.lang.Double" />
 		<![CDATA[			
-			SELECT CLI.ESTASO 
-			FROM ELECDB.CLIMAE CLI 
-			WHERE CLI.NITCLI = :id
+			SELECT CLI.ESTASO FROM ELECDB.CLIMAE CLI WHERE CLI.NITCLI = :id
 		]]>
 	</sql-query>
 
@@ -1218,26 +1172,25 @@
 	<sql-query name="consultar.ruta.reportes.habilidad">
 		<return-scalar column="NOMBRE" type="java.lang.String" />
 		<![CDATA[		
-			SELECT P.NOMBRE NOMBRE FROM ELECDB.ELE_PARAMETRO P INNER JOIN ELECDB.ELE_PARAMETRO_TIPO PT ON PT.TIP_COD=P.TIP_COD WHERE PT.TIP_COD=:tipCodigo
+			SELECT P.NOMBRE NOMBRE FROM ELECDB.ELE_PARAMETRO P 
+			INNER JOIN ELECDB.ELE_PARAMETRO_TIPO PT ON PT.TIP_COD=P.TIP_COD WHERE PT.TIP_COD=:tipCodigo
 		]]>
 	</sql-query>
 
 	<!-- #################################################################################### 
 		## 64. Christina Tanagrife - Coomeva - 2012-12-26 ## ## Consulta las zonas 
-		electorales Especiales a las que pertence un usuario ## #################################################################################### -->
+		electorales Especiales a las que pertence un usuario ## 
+		#################################################################################### -->
 	<sql-query
 		name="consulta.zona.electoral.espe.por.usuario.comision">
 		<return-scalar column="CODIGO_ZONA_ELE"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT
-   	 		EZE.CODIGO_ZONA_ELE
-			FROM
-    		ELECDB.ELE_ZONA_ELECTORAL_ESPECIAL EZE
-        		INNER JOIN ELECDB.ELE_USUARIO_COMISION EUC
+			SELECT EZE.CODIGO_ZONA_ELE
+			FROM ELECDB.ELE_ZONA_ELECTORAL_ESPECIAL EZE
+        		INNER JOIN ELECDB.ELE_USUARIO_COMISION EUC 
         		ON EZE.CODIGO_ZONA_ELE = EUC.CODIGO_ZONA_ELE_ESPE
-			WHERE
-			LOWER(EUC.ID_USUARIO) = LOWER(:idUsuario)
+			WHERE LOWER(EUC.ID_USUARIO) = LOWER(:idUsuario)
 		]]>
 	</sql-query>
 
@@ -1267,7 +1220,9 @@
 	<sql-query name="consulta.regionales.zona.electoral">
 		<return-scalar column="CODREG" type="java.lang.Long" />
 		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
-		<![CDATA[select ze.regional as CODREG, ze.codigo_zona_ele from elecdb.ele_zona_electoral ze]]>
+		<![CDATA[
+			select ze.regional as CODREG, ze.codigo_zona_ele from elecdb.ele_zona_electoral ze
+		]]>
 	</sql-query>
 
 </hibernate-mapping>

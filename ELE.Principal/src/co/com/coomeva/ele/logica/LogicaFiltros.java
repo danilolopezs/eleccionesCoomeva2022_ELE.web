@@ -227,28 +227,32 @@ public class LogicaFiltros {
 			Query query = session.getNamedQuery("consulta.regionales");
 			elements = query.list();
 			if (elements != null && elements.size() > 0) {
+				/**
+				 * se modifica esta implementacion debido a que se cambia la libreria y la tabla
+				 * donde se consulta de regionales de mulclidat a elecdb.ele_regional 22/10/2021
+				 */
 				for (Object[] object : elements) {
 					//Se modifica para que únicamente me aparezca el nombre de la regional sin el Reg.
 					//Modificado por: Juan Diego Montoya
 					String regional = object[1].toString();
-					descRegional = regional.split("\\.");
+					//descRegional = regional.split("\\.");
 					//Quito los espacios extra
-					regional = descRegional[1].replaceAll("\\W", "");
+					//regional = descRegional[1].replaceAll("\\W", "");
 					dto = new FiltrosConsultasDTO();
 					dto.setCodigoFiltro((Long)object[0]);
 					//TODO JD: Mappear mediante properties
-					if (regional.equals(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
-					"lbl.nombre.regional.EjeCafetero").toString())) 
-					{
-						regional = "Eje Cafetero";
-					}
+					//if (regional.equals(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
+					//"lbl.nombre.regional.EjeCafetero").toString())) 
+					//{
+						//regional = "Eje Cafetero";
+					//}
 					dto.setDescripcionFiltro(regional);					
 					list.add(dto);
 				}
 			}
 		} catch (Exception e) {
-			throw new Exception(loaderResourceElements.getKeyResourceValue(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
-					"consulta.regionales"));
+			throw new Exception(loaderResourceElements.getKeyResourceValue(
+					ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL, "consulta.regionales"));
 		} finally{
 			session.close();
 		}

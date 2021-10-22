@@ -251,6 +251,22 @@ public class DelegadoAsociado {
 	}
 
 	/**
+	 * Metodo encargado de consultar el total de asociados y empleados hábiles 
+	 * @throws Exception 
+	 */
+	public int consultarTotalAsociadosEmpleados(Boolean esHabil) throws Exception {
+		return logicaAsociado.consultarTotalAsociadosEmpleados(esHabil);
+	}
+	
+	/**
+	 * Metodo encargado de consultar el total de asociados y empleados hábiles 
+	 * @throws Exception 
+	 */
+	public Double consultarTotalAsociadosEmpleadosHabilesZona(Long zona) throws Exception {
+		return logicaAsociado.totalAsociadosHabilesPorZona(zona);
+	}
+	
+	/**
 	 * Metodo encargado de consultar el total de asociados especiales hábiles a la
 	 * fecha
 	 */

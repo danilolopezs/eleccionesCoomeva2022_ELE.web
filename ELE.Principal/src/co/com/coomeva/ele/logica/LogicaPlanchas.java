@@ -937,17 +937,17 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 		logicaUsuarioComision = new LogicaUsuarioComision();
 
 		List<Long> zonasElectoralesUsuario = logicaUsuarioComision.consultarZonaElectUsuarioComision(idUsuario);
-
+		
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT DISTINCT pl_aso.CONSECUTIVO_PLANCHA NUMPLANCHA, ");
 		sql.append(
 				"zona.DESCRIPCION_ZONA_ELE ZONA, param.NOMBRE ESTADO, pl.FECHA_ENVIO FECHA, pl.CONSECUTIVO_PLANCHA, ");
 		sql.append(
 				"pl_aso.CODIGO_ASOCIADO CODASOCIADO, zona.CODIGO_ZONA_ELE COD_ZONA, pl.ESTADO_PLANCHA, zona.NUMERO_ZONA_ELE NUMEROZONA ");
-		sql.append("FROM elecdb.ELE_ASOCIADO aso, ");
+		sql.append("FROM elecdb.ELEASOCIA aso, ");
 		sql.append("elecdb.ELE_PLANCHA_ASOCIADO pl_aso, elecdb.ELE_ZONA_ELECTORAL zona, ");
 		sql.append(
-				"elecdb.ELE_PLANCHA pl, elecdb.CLIMAE cl, elecdb.ELE_PARAMETRO param, elecdb.ELE_PARAMETRO_TIPO paramT ");
+				"elecdb.ELE_PLANCHA pl, elecdb.ELEASOMUL cl, elecdb.ELE_PARAMETRO param, elecdb.ELE_PARAMETRO_TIPO paramT ");
 
 		if (zonasElectoralesUsuario != null && !zonasElectoralesUsuario.isEmpty()) {
 			sql.append(", elecdb.ELE_USUARIO_COMISION euc ");
@@ -1304,7 +1304,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 
 		StringBuffer sql = new StringBuffer("SELECT pl_aso.CONSECUTIVO_PLANCHA NUMPLANCHA, "
 				+ "pl.CODIGO_ZONA_ELE ZONA,  pl.FECHA_REGISTRO FECHA, aso.NUMERO_DOCUMENTO DOCUMENTO, "
-				+ "cl.NOMCL1 NOMBRES, db2util.get_cliciudad(cl.LUGEXP) CIUDADEXP, cl.FECESC FECHAEXP, cl.NUMINT NUMINT, "
+				+ "cl.NOMCL1 NOMBRES, null CIUDADEXP, null FECHAEXP, cl.NUMINT NUMINT, "
 				+ "zona.DESCRIPCION_ZONA_ELE CIUZONA, zona.numero_zona_ele as NUMEROZONA FROM elecdb.ELE_ASOCIADO aso, elecdb.ELE_PLANCHA_ASOCIADO pl_aso, "
 				+ "elecdb.ELE_ZONA_ELECTORAL zona, elecdb.ELE_PLANCHA pl, elecdb.CLIMAE cl, "
 				+ "elecdb.ELE_PARAMETRO param, elecdb.ELE_PARAMETRO_TIPO paramT "
@@ -1599,7 +1599,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 
 		StringBuffer sql = new StringBuffer(" SELECT pl_aso.CONSECUTIVO_PLANCHA NUMPLANCHA, "
 				+ "pl.CODIGO_ZONA_ELE ZONA,  pl.FECHA_REGISTRO FECHA, aso.NUMERO_DOCUMENTO DOCUMENTO, "
-				+ "cl.NOMCL1 NOMBRES, db2util.get_cliciudad(cl.LUGEXP) CIUDADEXP, cl.FECESC FECHAEXP, "
+				+ "cl.NOMCL1 NOMBRES, null CIUDADEXP, null FECHAEXP, "
 				+ "cl.NUMINT NUMINT, zona.NUMERO_ZONA_ELE NUMEROZONA,zona.DESCRIPCION_ZONA_ELE DESZONA FROM elecdb.ELE_ASOCIADO aso, elecdb.ELE_PLANCHA_ASOCIADO pl_aso, "
 				+ "elecdb.ELE_ZONA_ELECTORAL zona, elecdb.ELE_PLANCHA pl, elecdb.CLIMAE cl, elecdb.ELE_PARAMETRO param, "
 				+ "elecdb.ELE_PARAMETRO_TIPO paramT WHERE pl.CONSECUTIVO_PLANCHA = :numPlancha and  "

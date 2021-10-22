@@ -76,6 +76,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 
 		boolean nuevo = Boolean.TRUE;
 		Double sumaEspHabiles;
+		Double sumaAsociadosEmpleadosHabilesZona;
 
 		// Se validan los campos requeridos para el calculo
 		if (periodoElectoral == null) {
@@ -93,37 +94,16 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 					"campo.obligatorio.delegadoZona.zona"));
 		}
 
+		// consultas de asociados y asociados especiales habiles por Zona
 		if (sumaHabiles == null) {
-			// totalAsociadosPorZona
-			// sumaHabiles = consultarDelegadosZona(periodoElectoral,
-			// codRegional, codZona);
-			// List<EleCuocienteDelegadosZona> listado;
-
-			// Se consulta el total de asociados por zona.
 			sumaHabiles = new Double(
 					DelegadoAsociado.getInstance().consultarTotalAsociadosHabilesAsociado(new Long(codZona)));
-			// sumaHabiles =
-			// DelegadoAsociado.getInstance().totalAsociadosPorZona(new
-			// Long(codZona));
-
-			/*
-			 * listado = consultarDelegadosZona(periodoElectoral,codRegional, codZona);
-			 * if(listado != null && listado.size() == 1){ sumaHabiles =
-			 * listado.get(0).getSumaHabiles(); }
-			 */
-			/*
-			 * throw new Exception(UtilAcceso.getParametroFuenteS(
-			 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-			 * "campo.obligatorio.delegadoZona.habiles"));
-			 */
 		}
-
 		sumaEspHabiles = new Double(
 				DelegadoAsociado.getInstance().consultarTotalAsociadosEspecialesHabilesAsociado(new Long(codZona)));
 
-		/**
-		 * Se debe consultar si existe el registro de delegados por Zona
-		 */
+		sumaAsociadosEmpleadosHabilesZona = DelegadoAsociado.getInstance().consultarTotalAsociadosEmpleadosHabilesZona(new Long(codZona));
+		// Se debe consultar si existe el registro de delegados por Zona
 		List<EleCuocienteDelegadosZona> listado;
 		EleCuocienteDelegadosZona cuocienteDelegadosZona = null;
 		listado = consultarDelegadosZona(periodoElectoral, codRegional, codZona);
@@ -131,17 +111,13 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		if (listado != null && listado.size() == 1) {
 			cuocienteDelegadosZona = listado.get(0);
 		}
-
-		if (cuocienteDelegadosZona == null) {
-			nuevo = true;
+		nuevo = cuocienteDelegadosZona == null;
+		if (nuevo) {
 			cuocienteDelegadosZona = new EleCuocienteDelegadosZona();
-
 			Integer idRegistro = new Integer(GeneradorConsecutivos.getInstance()
 					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA, this.getSession())
 					.toString());
 			cuocienteDelegadosZona.setIdRegistro(idRegistro);
-		} else {
-			nuevo = false;
 		}
 
 		/**
@@ -204,7 +180,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		cuocienteDelegadosZona.setSumaNovedades(novedades);
 		cuocienteDelegadosZona.setSumaEspHabiles(sumaEspHabiles);
 		cuocienteDelegadosZona.setSumaNovedadesEsp(novedadesEsp);
-		cuocienteDelegadosZona.setSumaTotalHabiles(sumaHabiles);
+		cuocienteDelegadosZona.setSumaTotalHabiles(sumaAsociadosEmpleadosHabilesZona);
 		cuocienteDelegadosZona.setDelegados(delegados);
 		cuocienteDelegadosZona.setDelegadosDirectos(0d);
 		cuocienteDelegadosZona.setDelegadosResiduo(0d);
@@ -292,8 +268,8 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		if (listado != null && listado.size() == 1) {
 			cuocienteDelegadosZona = listado.get(0);
 		}
-
-		if (cuocienteDelegadosZona == null) {
+		nuevo = cuocienteDelegadosZona == null;
+		if (nuevo) {
 			nuevo = true;
 			cuocienteDelegadosZona = new EleCuocienteDelegadosZona();
 
@@ -301,8 +277,6 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_CUOCIENTE_DELEGADOS_ZONA, this.getSession())
 					.toString());
 			cuocienteDelegadosZona.setIdRegistro(idRegistro);
-		} else {
-			nuevo = false;
 		}
 
 		/**
@@ -376,7 +350,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 	 * @throws Exception
 	 */
 	public List<EleCuocienteDelegadosZona> calcularDelegadosZonaFinal(String periodoElectoral) throws Exception {
-		List<EleCuocienteDelegadosZona> resultado = consultarDelegadosZona(periodoElectoral, "fraccion");
+		List<EleCuocienteDelegadosZona> listaDelegadosZona = consultarDelegadosZona(periodoElectoral, "fraccion");
 
 		Double delegadosAElegir = 0d;
 		Double delegadosElegidos = 0d;
@@ -386,7 +360,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 		totalHabiles = 0d;
 		totalDelegados = 0d;
 
-		if (resultado != null) {
+		if (listaDelegadosZona != null) {
 			/**
 			 * Se consulta el cuociente electoral para realizar el calculo de delegados
 			 * directos y por residuo
@@ -402,39 +376,41 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 
 					delegadosAElegir = cuocienteElectoral.getFinalTotalDelegadosElegir();
 
-					for (int i = 0; i < resultado.size(); i++) {
-						// Se recalculan los valores de cada zona
-						resultado.set(i, calcularDelegadosZonaSinTr(periodoElectoral, resultado.get(i).getCodRegional(),
-								resultado.get(i).getCodZona(), null));
-						delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosDirectos();
-						delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosResiduo();
+					for (int i = 0; i < listaDelegadosZona.size(); i++) {
+						/* TODO revisar si se debe recalcular*/  
+						//Se recalculan los valores de cada zona
+						listaDelegadosZona.set(i, calcularDelegadosZonaSinTr(periodoElectoral, listaDelegadosZona.get(i).getCodRegional(),
+								listaDelegadosZona.get(i).getCodZona(), null));
+						delegadosElegidos = delegadosElegidos + listaDelegadosZona.get(i).getDelegadosDirectos();
+						delegadosElegidos = delegadosElegidos + listaDelegadosZona.get(i).getDelegadosResiduo();
 
 						/**
 						 * Se ajustó esta parte para que durante el proceso del calculo de los delegados
 						 * por zona se calculara los asociados hábiles por zona
 						 */
-						resultado.get(i).setSumaHabiles(new Double(DelegadoAsociado.getInstance()
-								.consultarTotalAsociadosHabilesAsociado(new Long(resultado.get(i).getCodZona()))));
-						totalHabiles = (totalHabiles + resultado.get(i).getSumaHabiles());
-						totalDirectos = totalDirectos + resultado.get(i).getDelegadosDirectos();
+						listaDelegadosZona.get(i).setSumaHabiles(new Double(DelegadoAsociado.getInstance()
+								.consultarTotalAsociadosHabilesAsociado(new Long(listaDelegadosZona.get(i).getCodZona()))));
+						totalHabiles = (totalHabiles + listaDelegadosZona.get(i).getSumaHabiles());
+						totalDirectos = totalDirectos + listaDelegadosZona.get(i).getDelegadosDirectos();
 					}
 
-					for (int i = 0; (i < resultado.size()); i++) {
+					for (int i = 0; (i < listaDelegadosZona.size()); i++) {
 						if (delegadosElegidos < delegadosAElegir) {
 							// Se suma el nuevo delegado correspondiente al
 							// cuociente.
-							resultado.get(i).setDelegadosResiduo(resultado.get(i).getDelegadosResiduo() + 1);
-							delegadosElegidos = delegadosElegidos + resultado.get(i).getDelegadosResiduo();
-							Double total = resultado.get(i).getDelegadosDirectos()
-									+ resultado.get(i).getDelegadosResiduo();
-							resultado.get(i).setTotalDelegadosZona(total);
+							listaDelegadosZona.get(i)
+									.setDelegadosResiduo(listaDelegadosZona.get(i).getDelegadosResiduo() + 1);
+							delegadosElegidos = delegadosElegidos + listaDelegadosZona.get(i).getDelegadosResiduo();
+							Double total = listaDelegadosZona.get(i).getDelegadosDirectos()
+									+ listaDelegadosZona.get(i).getDelegadosResiduo();
+							listaDelegadosZona.get(i).setTotalDelegadosZona(total);
 						} else {
-							Double total = resultado.get(i).getDelegadosDirectos()
-									+ resultado.get(i).getDelegadosResiduo();
-							resultado.get(i).setTotalDelegadosZona(total);
+							Double total = listaDelegadosZona.get(i).getDelegadosDirectos()
+									+ listaDelegadosZona.get(i).getDelegadosResiduo();
+							listaDelegadosZona.get(i).setTotalDelegadosZona(total);
 						}
-						totalReciduo = totalReciduo + resultado.get(i).getDelegadosResiduo();
-						totalDelegados = totalDelegados + resultado.get(i).getTotalDelegadosZona();
+						totalReciduo = totalReciduo + listaDelegadosZona.get(i).getDelegadosResiduo();
+						totalDelegados = totalDelegados + listaDelegadosZona.get(i).getTotalDelegadosZona();
 					}
 
 					/**
@@ -442,19 +418,19 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 					 */
 					Integer valor;
 					delegadosRegional = new HashMap<String, Integer>(0);
-					for (int z = 0; z < resultado.size(); z++) {
+					for (int z = 0; z < listaDelegadosZona.size(); z++) {
 
-						if (resultado.get(z) != null) {
-							if (delegadosRegional.get(resultado.get(z).getCodRegional()) == null) {
-								delegadosRegional.put(resultado.get(z).getCodRegional(),
-										new Integer(resultado.get(z).getTotalDelegadosZona().intValue()));
+						if (listaDelegadosZona.get(z) != null) {
+							if (delegadosRegional.get(listaDelegadosZona.get(z).getCodRegional()) == null) {
+								delegadosRegional.put(listaDelegadosZona.get(z).getCodRegional(),
+										new Integer(listaDelegadosZona.get(z).getTotalDelegadosZona().intValue()));
 							} else {
-								valor = resultado.get(z).getTotalDelegadosZona().intValue();
-								valor = valor + delegadosRegional.get(resultado.get(z).getCodRegional());
-								delegadosRegional.put(resultado.get(z).getCodRegional(), valor);
+								valor = listaDelegadosZona.get(z).getTotalDelegadosZona().intValue();
+								valor = valor + delegadosRegional.get(listaDelegadosZona.get(z).getCodRegional());
+								delegadosRegional.put(listaDelegadosZona.get(z).getCodRegional(), valor);
 							}
 						}
-						guardarDelegadosZona(resultado.get(z));
+						guardarDelegadosZona(listaDelegadosZona.get(z));
 					}
 
 					/**
@@ -476,7 +452,7 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 				this.getSession().close();
 			}
 
-			resultado = cargarDescripciones(resultado);
+			listaDelegadosZona = cargarDescripciones(listaDelegadosZona);
 
 			EleCuocienteDelegadosZona cuocienteDelegadosZona;
 			cuocienteDelegadosZona = new EleCuocienteDelegadosZona();
@@ -486,10 +462,10 @@ public class LogicaDelegadosZona extends EleCuocienteDelegadosZonaDAO implements
 			cuocienteDelegadosZona.setSumaHabiles(totalHabiles);
 			cuocienteDelegadosZona.setSumaTotalHabiles(totalHabiles);
 			cuocienteDelegadosZona.setTotalDelegadosZona(totalDelegados);
-			resultado.add(cuocienteDelegadosZona);
+			listaDelegadosZona.add(cuocienteDelegadosZona);
 		}
 
-		return resultado;
+		return listaDelegadosZona;
 	}
 
 	/**
