@@ -65,7 +65,7 @@
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="305" y="5" width="29" height="14" forecolor="#000000" uuid="42adda31-3475-4c07-b28b-9aa06d217334"/>
+				<reportElement x="301" y="5" width="29" height="14" forecolor="#000000" uuid="42adda31-3475-4c07-b28b-9aa06d217334"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
@@ -80,9 +80,26 @@
 				<textFieldExpression><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="336" y="12" width="174" height="20" uuid="25bc76c7-3fa6-4c47-8ce9-c122da6f966d"/>
+				<reportElement x="330" y="12" width="92" height="20" uuid="25bc76c7-3fa6-4c47-8ce9-c122da6f966d"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaActa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="423" y="2" width="1" height="31" forecolor="#000000" uuid="44557617-9ade-42c8-9b62-cab3f30a8c83"/>
+			</line>
+			<staticText>
+				<reportElement x="427" y="5" width="26" height="14" forecolor="#00834C" uuid="3dc2203b-99f7-4836-88ec-021190c7826d"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<textField pattern="h.mm a" isBlankWhenNull="true">
+				<reportElement x="456" y="13" width="64" height="19" uuid="a6a0bc5c-af8b-4a9c-ad6c-cc0564ab0726"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fechaActa}]]></textFieldExpression>
 			</textField>
