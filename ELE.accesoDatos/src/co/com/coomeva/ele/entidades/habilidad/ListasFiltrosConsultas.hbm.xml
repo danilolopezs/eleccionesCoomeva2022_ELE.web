@@ -3,9 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29/10/2012 06:02:14 PM by Hibernate Tools 3.2.4.GA -->
 
-
-<hibernate-mapping>	
-	
+<hibernate-mapping>		
 	<!--
 		######################################################################################
 		## 1. Bernardo Lopez - Pragma S.A.  - 2012-11-08                                    ##
@@ -19,9 +17,7 @@
 		<![CDATA[
 			SELECT DISTINCT PLT.CODZON, CTAB.CODNOM
 			FROM SEGURIDAD.PLTAGCORI PLT, MULCLIDAT.CLITAB CTAB
-			WHERE PLT.CODEMP = 67890
-			AND CTAB.CODTAB = 908
-			AND PLT.CODZON = CTAB.CODINT
+			WHERE PLT.CODEMP = 67890 AND CTAB.CODTAB = 908 AND PLT.CODZON = CTAB.CODINT
 			ORDER BY PLT.CODZON					
 		]]>
 	</sql-query>
@@ -33,15 +29,11 @@
     	######################################################################################
 	-->
 	<sql-query name="conulta.ciudades.coomeva">
-	
 		<return-scalar column="CODCIU" type="java.lang.Long" />
 		<return-scalar column="NOMCIU" type="java.lang.String" />
 		<![CDATA[
-			SELECT DISTINCT A.CODCIU, C.NOMCIU
-			FROM MULCLIDAT.CLIDIR A, MULCLIDAT.CLICIUDAD C
-			WHERE A.TIPUBI = 'RE'
-			AND A.CODCIU = C.CODCIU
-			ORDER BY C.NOMCIU				
+			SELECT DISTINCT A.CODCIU, C.NOMCIU FROM MULCLIDAT.CLIDIR A, MULCLIDAT.CLICIUDAD C
+			WHERE A.TIPUBI = 'RE' AND A.CODCIU = C.CODCIU ORDER BY C.NOMCIU				
 		]]>
 	</sql-query>
 	
@@ -52,13 +44,11 @@
     	######################################################################################
 	-->
 	<sql-query name="conulta.profesiones">
-	
 		<return-scalar column="CODINT" type="java.lang.Long" />
 		<return-scalar column="CODNOM" type="java.lang.String" />
 		<![CDATA[
 			SELECT CTAB.CODINT, CTAB.CODNOM 
-			FROM MULCLIDAT.CLITAB CTAB 
-			WHERE CTAB.CODTAB = 98	
+			FROM MULCLIDAT.CLITAB CTAB WHERE CTAB.CODTAB = 98	
 			AND CTAB.CODINT = CASE WHEN :codPro IS NULL THEN CTAB.CODINT ELSE :codPro END
 			AND CTAB.CODNOM = CASE WHEN :nomPro IS NULL THEN CTAB.CODNOM ELSE :nomPro END
 			ORDER BY CTAB.CODNOM			
@@ -72,7 +62,6 @@
     	######################################################################################
 	-->
 	<sql-query name="conulta.fechas.procesos.programados">
-	
 		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
 		<return-scalar column="FECHA_PROGRAMACION" type="java.util.Date" />
 		<![CDATA[
@@ -87,7 +76,6 @@
     	######################################################################################
 	-->
 	<sql-query name="conulta.fechascorte.procesos.programados">
-	
 		<return-scalar column="CODIGO_PROCESO" type="java.lang.Long" />
 		<return-scalar column="FECHA_CORTE" type="java.util.Date" />
 		<![CDATA[
@@ -101,7 +89,6 @@
     	######################################################################################
 	-->
 	<sql-query name="consulta.regionales">
-	
 		<return-scalar column="CODINT" type="java.lang.Long" />
 		<return-scalar column="CODNOM" type="java.lang.String" />
 		<![CDATA[
@@ -116,20 +103,14 @@
     	######################################################################################
 	-->
 	<sql-query name="consulta.zonas.electorales.por.regional">
-	
 		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
 		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
 		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
 		<![CDATA[
 			SELECT DISTINCT ZE.CODIGO_ZONA_ELE, ZE.DESCRIPCION_ZONA_ELE, ZE.NUMERO_ZONA_ELE
 			FROM SEGURIDAD.PLTAGCORI AG, MULCLIDAT.CLITAB RG, MULCLIDAT.CLITAB ZN, ELECDB.ELE_ZONA_ELECTORAL ZE, ELECDB.ELE_ZONA Z
-			WHERE ZN.CODTAB = 908
-			AND RG.CODTAB = 907
-			AND ZN.CODINT = AG.CODZON
-			AND AG.CODREG = :codRegional
-			AND Z.CODIGO_ZONA = AG.CODZON
-			AND ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
-			ORDER BY 2
+			WHERE ZN.CODTAB = 908 AND RG.CODTAB = 907 AND ZN.CODINT = AG.CODZON	AND AG.CODREG = :codRegional 
+			AND Z.CODIGO_ZONA = AG.CODZON AND ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE ORDER BY 2
 		]]>
 	</sql-query>
 	
@@ -140,14 +121,12 @@
     	######################################################################################
 	-->
 	<sql-query name="consulta.zonas.electorales">
-	
 		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
 		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
 		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
 		<![CDATA[
 			SELECT ZE.CODIGO_ZONA_ELE , ZE.DESCRIPCION_ZONA_ELE, ZE.NUMERO_ZONA_ELE
-			FROM ELECDB.ELE_ZONA_ELECTORAL ZE
-			WHERE ZONA_ESPECIAL = 'N'
+			FROM ELECDB.ELE_ZONA_ELECTORAL ZE WHERE ZONA_ESPECIAL = 'N'
 		]]>
 	</sql-query>
 	
@@ -158,7 +137,6 @@
     	######################################################################################
 	-->
 	<sql-query name="consulta.zona.electorale.por.asociado">
-	
 		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
 		<return-scalar column="DESCRIPCION_ZONA_ELE" type="java.lang.String" />
 		<return-scalar column="NUMERO_ZONA_ELE" type="java.lang.String" />
@@ -168,7 +146,6 @@
 			    INNER JOIN ELECDB.ELE_ZONA Z ON Z.CODIGO_ZONA = A.COD_ZONA_ASO
 			    INNER JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
 			WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
-            	
 		]]>
 	</sql-query>
 	
@@ -201,10 +178,7 @@
 	<sql-query name="consulta.fechas.marcar.recurso.plancha">
 		<return-scalar column="NOMBRE" type="java.lang.String" />
 		<![CDATA[
-			SELECT P.NOMBRE
-			FROM ELECDB.ELE_PARAMETRO P
-			WHERE P.TIP_COD = 4
-			ORDER BY P.CODIGO
+			SELECT P.NOMBRE FROM ELECDB.ELE_PARAMETRO P WHERE P.TIP_COD = 4 ORDER BY P.CODIGO
 		]]>
 	</sql-query>
 	
@@ -217,10 +191,8 @@
 	<sql-query name="consulta.parametrizacion.fechas.admision">
 		<return-scalar column="NOMBRE" type="java.lang.String" />
 		<![CDATA[
-			SELECT P.NOMBRE
-			FROM ELECDB.ELE_PARAMETRO P
-			WHERE P.TIP_COD = 3 AND P.ESTADO = 1
-			ORDER BY P.CODIGO
+			SELECT P.NOMBRE FROM ELECDB.ELE_PARAMETRO P 
+			WHERE P.TIP_COD = 3 AND P.ESTADO = 1 ORDER BY P.CODIGO
 		]]>
 	</sql-query>
 	
@@ -233,10 +205,8 @@
 	<sql-query name="consulta.parametrizacion.fechas.constancia">
 		<return-scalar column="NOMBRE" type="java.lang.String" />
 		<![CDATA[
-			SELECT P.NOMBRE
-			FROM ELECDB.ELE_PARAMETRO P
-			WHERE P.TIP_COD = 5 AND P.ESTADO = 1
-			ORDER BY P.CODIGO
+			SELECT P.NOMBRE FROM ELECDB.ELE_PARAMETRO P	
+			WHERE P.TIP_COD = 5 AND P.ESTADO = 1 ORDER BY P.CODIGO
 		]]>
 	</sql-query>	
 </hibernate-mapping>

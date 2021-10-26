@@ -565,6 +565,16 @@ public class RegistrarPlancha extends BaseVista {
 		this.mensajeConfirmacion = "¿Esta seguro que desea imprimir el formato de plancha?";
 		return "";
 	}
+	
+	public String actionDescargarFormato() {
+		log.error(">>> accion Descargar formato");
+		return "";
+	}
+	
+	public String actionCargarFormato() {
+		log.info(">>>accion Cargar formato");
+		return "";
+	}
 
 	public String getNumeroZonaElectoral() {
 		return numeroZonaElectoral;

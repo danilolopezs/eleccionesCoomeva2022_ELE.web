@@ -30,6 +30,7 @@ import co.com.coomeva.ele.dto.InformacionCabezaPlanchaDTO;
 import co.com.coomeva.ele.dto.InputFileDataDTO;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlancha;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleFotoFormatoPlancha;
+import co.com.coomeva.ele.logica.LogicaAsociado;
 import co.com.coomeva.ele.modelo.EleAsociadoDatosDTO;
 import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
@@ -100,19 +101,9 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	private boolean visiblemensajeExito;
 
 	public RegistrarInfoCabezaPlancha() {
-		if (FacesUtils.getSessionParameter("userComision") != null) {
-			esUsuarioComision = true;
-		} else {
-			esUsuarioComision = false;
-		}
+		esUsuarioComision = FacesUtils.getSessionParameter("userComision") != null;
 		action_mostrar_mensaje_informativo();
-
-		if (validarSaneamiento()) {
-			this.esSaneamiento = true;
-		} else {
-			this.esSaneamiento = false;
-		}
-
+		this.esSaneamiento = validarSaneamiento();
 	}
 
 	public boolean validarSaneamiento() {
@@ -341,6 +332,9 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 					throw new Exception(loaderResourceElements.getKeyResourceValue(
 							ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES_LOGICA_PRINCIPAL,
 							"campo.obligatorio.fecha.estudios"));
+				} else {
+					String correo = LogicaAsociado.getInstance().consultarCorreoAsociadoPorId(numeroDocumentoAsociado);
+					dto.setProfesion(correo);
 				}
 			}
 
@@ -466,7 +460,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
 		if (fileInfo.getStatus() == FileInfo.INVALID_CONTENT_TYPE) {
-			mensajeIngresoInfoCabezaPlancha = "Solo Se permite imagenes";
+			mensajeIngresoInfoCabezaPlancha = "Solo Se permiten imagenes.";
 			this.mensajeInformativo = true;
 		}
 		if (fileInfo.getStatus() == FileInfo.SAVED) {
@@ -477,7 +471,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			this.imageProcess(currentFile);
 		}
 		if (fileInfo.getStatus() == FileInfo.SIZE_LIMIT_EXCEEDED) {
-			mensajeIngresoInfoCabezaPlancha = "El archivo excede el tamaño máximo permitido";
+			mensajeIngresoInfoCabezaPlancha = "El archivo excede el tamaño máximo permitido.";
 			this.mensajeInformativo = true;
 		}
 	}

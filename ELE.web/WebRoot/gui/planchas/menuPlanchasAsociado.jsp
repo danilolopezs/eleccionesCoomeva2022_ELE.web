@@ -4,10 +4,12 @@
 		action="goInicioMenu" />
 	<ice:menuItem value="1. #{etiquetas.lblMnuRegistrarPlancha}"
 		action="goRegistroPlanchaAsociado" />
-	<!--<ice:menuItem value="#{etiquetas.lblMnuConsultarPlancha}"
-		action="goConsultarPlanchaAsociado" />-->
+	<!-- <ice:menuItem value="#{etiquetas.lblMnuConsultarPlancha}"
+		action="goConsultarPlanchaAsociado" /> -->
 	<ice:menuItem value="2. #{etiquetas.mnuinfocabezaplancha}"
 		action="goRegistrarInfoCabezaPlancha" />
+	<!--<ice:menuItem value="2. #{etiquetas.mnuinfosuplentePlancha}"
+		action="goRegistrarInfoCabezaPlancha" />-->
 	<ice:menuItem value="3. #{etiquetas.mnuCertificado}"
 		action="goFormularioReportes" />
 	<ice:menuItem value="4. #{etiquetas.mnuSalir}"

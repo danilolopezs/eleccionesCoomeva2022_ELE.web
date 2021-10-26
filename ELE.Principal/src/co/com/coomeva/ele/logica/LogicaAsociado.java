@@ -1597,7 +1597,6 @@ public class LogicaAsociado extends AsoelecfDAO {
 	}
 
 	public static void main(String[] args) {
-
 		try {
 			DTOHabilidadAsociado dto = LogicaAsociado.getInstance().consultarHabilidadAsociado(84036648L);
 			System.out.println(dto.getAsociadoHabil());
@@ -1615,4 +1614,21 @@ public class LogicaAsociado extends AsoelecfDAO {
 		return !query.list().isEmpty();
 	}
 
+	public String consultarCorreoAsociadoPorId(Long numeroDocumento) {
+		Session session = null;
+		String correo = null;
+		try {
+			session = HibernateSessionFactoryElecciones2012.getSession();
+			Query query = session.getNamedQuery("consultar.correo.asociado.por.documento");
+			query.setLong("numeroDocumento", numeroDocumento);
+			correo = (String) query.uniqueResult();
+		}catch (Exception e) {
+			System.out.println("Error consultando correo electronico del asociado. " + e.getMessage());
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return correo;
+	}
 }

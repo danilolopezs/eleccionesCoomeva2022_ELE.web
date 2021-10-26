@@ -450,7 +450,6 @@ if (self === top) {
 							</f:facet>
 						</ice:panelPopup>
 
-
 						<jsp:directive.include
 							file="../popup/popupMensajeIngresoInfoCabezaPlancha.jsp" />
 

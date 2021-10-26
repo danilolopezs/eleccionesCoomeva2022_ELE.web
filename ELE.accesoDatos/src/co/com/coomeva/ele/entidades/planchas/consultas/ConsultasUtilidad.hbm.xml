@@ -9,14 +9,8 @@
 	<sql-query name="formatear.cadena">
 		<return-scalar column="formato" type="java.lang.String" />
 
-		<![CDATA[
-		   		SELECT initCap(?) formato FROM DUAL 
-			]]>
+		<![CDATA[SELECT initCap(?) formato FROM DUAL]]>
 	</sql-query>
-
-
-
-
 </hibernate-mapping>
 
 

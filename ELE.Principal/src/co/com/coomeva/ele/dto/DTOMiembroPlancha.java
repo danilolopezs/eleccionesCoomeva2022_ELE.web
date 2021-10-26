@@ -9,6 +9,7 @@ public class DTOMiembroPlancha implements Comparable{
 	public String observacionAdicionMiembro;
 	public String tipoMiembro;
 	public boolean tieneProfesion = Boolean.TRUE;
+	public String correo;
 	
 	public String getPosicionPlancha() {
 		return posicionPlancha;
@@ -61,5 +62,11 @@ public class DTOMiembroPlancha implements Comparable{
 	}
 	public void setTieneProfesion(boolean tieneProfesion) {
 		this.tieneProfesion = tieneProfesion;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 }

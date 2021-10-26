@@ -115,7 +115,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 				throw new EleccionesDelegadosException(MessageFormat.format(
 						UtilAcceso.getParametroFuenteS("mensajes", "msgErrorNoSePermitenPlanchasAsociadoJuridico"),
 						nroIdentificacionMiembro.toString()));
-
 			}
 
 			boolean esColaboradorGECoopmeva = DelegadoPlancha.getInstance()
@@ -126,7 +125,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 								"msgErrorNoSePermitenPlanchasEmpleados"), numeroDocumento.toString()));
 			}
 
-			// si aplciaValidaciones = true son validaciones para delegados
+			// si aplicaValidaciones = true son validaciones para delegados
 			else if (aplicaValidaciones) {
 				if (!esColaboradorGECoopmeva) {
 					String msgValidacionEmpleadoFechaRetiro = validarEmpleadoFechaRetiro(
@@ -187,8 +186,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 								"msgErrorAsociadoPerteneceOtraPlancha"), nroIdentificacionMiembro));
 			}
 			// Cambio 20122013 :
-			// Se valida frente a una fecha limite de vinculacion segun
-			// requerimiento
+			// Se valida frente a una fecha limite de vinculacion segun requerimiento
 			Date fechaMaximaVinculacion = DateManipultate.stringToDate(
 					UtilAcceso.getParametroFuenteS("parametros", "fechaMaximaVinculacionAntiguedadPlancha"),
 					"yyyyMMdd");
@@ -247,8 +245,16 @@ public class LogicaPlancha implements ILogicaPlancha {
 //					+ msgValidacionEmpleadoFechaRetiro : "");
 
 			miembros.get(posicionPlancha - 1).setApellidosNombres(
-					getApellidoAsociadoConFormato(asociadoDTO) + " " + getNombreAsociadoConFormato(asociadoDTO));
+					getNombreAsociadoConFormato(asociadoDTO)+ " " +getApellidoAsociadoConFormato(asociadoDTO));
 
+			if(!UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscritoEmail")
+					.equals(asociadoDTO.getEmail())) {
+				miembros.get(posicionPlancha -1).setCorreo(asociadoDTO.getEmail());
+			} else {
+				String correo = logicaAsociado.consultarCorreoAsociadoPorId(Long.parseLong(nroIdentificacionMiembro));
+				miembros.get(posicionPlancha -1).setCorreo(correo);
+			}
+			
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
 				
@@ -258,25 +264,20 @@ public class LogicaPlancha implements ILogicaPlancha {
 				} else {				
 					excepciones.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 							"msgAsociadoDebeAcreditarOficio"));
-					
 					miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
 							"Por favor tener en cuenta las siguientes observaciones: </br>" + excepciones.toString());
 					miembros.get(posicionPlancha - 1).setTieneProfesion(Boolean.FALSE);
 				}
 			} else {
 				miembros.get(posicionPlancha - 1).setProfesion(asociadoDTO.getProfesion());
-
 				String mensajesExcepciones = excepciones.toString();
-
 				if (mensajesExcepciones != null && !"".equals(mensajesExcepciones)) {
 					// Eliminamos la coma seguida de un espacio que siempre se
-					// pone al final
-					// de las excepciones que se concatenan
+					// pone al final de las excepciones que se concatenan
 					miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
 							"Por favor tener en cuenta las siguientes observaciones: </br>" + mensajesExcepciones);
 				}
 			}
-
 		} catch (Exception e) {
 			throw new EleccionesDelegadosException(e.getMessage(), e);
 		}
@@ -382,7 +383,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 				session.close();
 			}
 			session = null;
-			query = null;
 		}
 		return datos;
 	}
@@ -417,14 +417,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 				zonaElectoralAsociado.setZonaEspecial(objects[2] != null ? (String) objects[2] : null);
 				zonaElectoralAsociado.setMaxPrincipales(objects[3] != null ? (Long) objects[3] : null);
 			}
-
 			return zonaElectoralAsociado;
 		} finally {
 			if (session != null) {
 				session.close();
 			}
 			session = null;
-			query = null;
 		}
 	}
 
@@ -520,14 +518,24 @@ public class LogicaPlancha implements ILogicaPlancha {
 				throw new EleccionesDelegadosException(e);
 			}
 
+			// se fija el nombre del asociado
 			miembroPlancha.setApellidosNombres(
-					getApellidoAsociadoConFormato(asociadoDTO) + " " + getNombreAsociadoConFormato(asociadoDTO));
+					getNombreAsociadoConFormato(asociadoDTO)+ " " +getApellidoAsociadoConFormato(asociadoDTO));
 
+			// se fija el correo del asociado
+			if(!UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscritoEmail")
+					.equals(asociadoDTO.getEmail())) {
+				miembroPlancha.setCorreo(asociadoDTO.getEmail());
+			} else {
+				String correo = logicaAsociado.consultarCorreoAsociadoPorId(asociado.getEleAsociado().getNumeroDocumento());
+				miembroPlancha.setCorreo(correo);
+			}
+			
+			// se fija la profesion del asociado
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
 				EleAsociado eleAsociado = new EleAsociadoDAO().findById(asociado.getEleAsociado().getCodigoAsociado());
 				miembroPlancha.setProfesion(eleAsociado.getDescProfesion());
-
 			} else {
 				miembroPlancha.setProfesion(asociadoDTO.getProfesion());
 			}
@@ -570,6 +578,15 @@ public class LogicaPlancha implements ILogicaPlancha {
 		return info;
 	}
 	
+
+	/**
+	 * Se construye el nombre del Asociado a partir de un DTO
+	 * 
+	 * @author GTC CORPORATION - Danilo Lopez Sandoval
+	 * @date 25/10/2021
+	 * @param asociadoDTO
+	 * @return String - nombre del Asociado
+	 */
 	private String getNombreAsociadoConFormato(EleAsociadoDTO asociadoDTO) {
 		StringBuffer nombresAsociado = new StringBuffer();
 		nombresAsociado
@@ -583,6 +600,14 @@ public class LogicaPlancha implements ILogicaPlancha {
 		return nombresAsociado.toString().trim();
 	}
 	
+	/**
+	 * Se construye el apellido del Asociado a partir de un DTO
+	 * 
+	 * @author GTC CORPORATION - Danilo Lopez Sandoval
+	 * @date 25/10/2021
+	 * @param asociadoDTO
+	 * @return String - apellido del Asociado
+	 */
 	private String getApellidoAsociadoConFormato(EleAsociadoDTO asociadoDTO) {
 		StringBuffer apellidosAsociado = new StringBuffer();
 		apellidosAsociado

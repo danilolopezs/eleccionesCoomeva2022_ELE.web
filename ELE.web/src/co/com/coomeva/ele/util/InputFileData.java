@@ -50,11 +50,7 @@ public class InputFileData {
     
     public static boolean validarArchivoImagen(String tipoContenido)
     {
-    	if(tipoContenido.contains("image"))
-    	{
-    		return true;
-    	}
-    	return false;
+    	return tipoContenido.contains("image");
     }
     
    

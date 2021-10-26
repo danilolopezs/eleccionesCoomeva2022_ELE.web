@@ -589,7 +589,8 @@
 
 	<!-- ###################################################################################### 
 		## 28. Bernardo Lopez - Pragma S.A. - 2012-12-01 ## ## Consulta el codigo 
-		del asociado por numero de domuento ## ###################################################################################### -->
+		del asociado por numero de domuento ## 
+		###################################################################################### -->
 	<sql-query name="consultar.codigo.asociado.por.documento">
 		<return-scalar column="CODIGO_ASOCIADO"
 			type="java.lang.Long" />
@@ -784,9 +785,7 @@
 
 	<sql-query name="consultar.secuencia.ele.plancha">
 		<return-scalar column="SEQ" type="java.lang.Long" />
-		<![CDATA[		
-			SELECT NEXT VALUE FOR ELECDB.ELE_PLANCHA_SEQ SEQ FROM SYSIBM.SYSDUMMY1
-		]]>
+		<![CDATA[ SELECT NEXT VALUE FOR ELECDB.ELE_PLANCHA_SEQ SEQ FROM SYSIBM.SYSDUMMY1 ]]>
 	</sql-query>
 
 	<!-- ###################################################################################### 
@@ -845,7 +844,8 @@
 
 	<!-- ###################################################################################### 
 		## 41. Bernardo Lopez - Pragma S.A. - 2012-12-04 ## ## Consulta posicion 
-		por plancha asociado ## ###################################################################################### -->
+		por plancha asociado ## 
+		###################################################################################### -->
 	<sql-query name="consultar.posicion.por.plancha.asociado">
 		<return-scalar column="NUMERO_INSCRITO"
 			type="java.lang.Long" />
@@ -857,7 +857,8 @@
 
 	<!-- ###################################################################################### 
 		## 42. Bernardo Lopez - Pragma S.A. - 2012-12-04 ## ## Consulta si es posicion 
-		nueva ## ###################################################################################### -->
+		nueva ## 
+		###################################################################################### -->
 	<sql-query name="consultar.si.es.posicion.nueva">
 		<return-scalar column="TOTAL" type="java.lang.Long" />
 		<![CDATA[
@@ -886,12 +887,9 @@
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT P.CODIGO_ASOCIADO,
-				P.CONSECUTIVO_PLANCHA,
-				EA1.NUMERO_DOCUMENTO
+			SELECT P.CODIGO_ASOCIADO, P.CONSECUTIVO_PLANCHA, EA1.NUMERO_DOCUMENTO
 			FROM ELECDB.ELE_PLANCHA_ASOCIADO P
-					INNER JOIN ELECDB.ELEASOCIA EA1
-					ON P.CODIGO_ASOCIADO = EA1.CODIGO_ASOCIADO
+					INNER JOIN ELECDB.ELEASOCIA EA1 ON P.CODIGO_ASOCIADO = EA1.CODIGO_ASOCIADO
 			WHERE P.CONSECUTIVO_PLANCHA = (
 			    SELECT PA.CONSECUTIVO_PLANCHA
 			    FROM ELECDB.ELE_PLANCHA_ASOCIADO PA
@@ -899,8 +897,7 @@
                     ON EA.CODIGO_ASOCIADO = PA.CODIGO_ASOCIADO
 			    WHERE EA.NUMERO_DOCUMENTO = :numeroDocumento
 			)
-			AND P.NUMERO_INSCRITO = 1
-			AND P.TIPO_INSCRITO = 1
+			AND P.NUMERO_INSCRITO = 1 AND P.TIPO_INSCRITO = 1
     	]]>
 	</sql-query>
 
@@ -956,29 +953,28 @@
 
 	<!-- #################################################################################### 
 		## 50. Javier Londoño - Premize SAS - 2012-12-13 ## ## Consulta los asociados 
-		que también son empleados activos del GEC ## #################################################################################### -->
+		que también son empleados activos del GEC ## 
+		#################################################################################### -->
 	<sql-query name="consulta.asociados.empleados.activos">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<![CDATA[
-				SELECT DISTINCT NUMERO_DOCUMENTO
-				FROM ELECDB.ELE_ASOCIADO_ESPECIAL
-	    		WHERE FECHA_RETIRO IS NULL
+				SELECT DISTINCT NUMERO_DOCUMENTO FROM ELECDB.ELE_ASOCIADO_ESPECIAL WHERE FECHA_RETIRO IS NULL
     	]]>
 	</sql-query>
 
 	<!-- #################################################################################### 
 		## 51. Javier Londoño - Premize SAS - 2012-12-13 ## ## Consulta los asociados 
-		que son empleados RETIRADOS del GEC ## #################################################################################### -->
+		que son empleados RETIRADOS del GEC ## 
+		#################################################################################### -->
 	<sql-query name="consulta.asociados.empleados.retirados">
 		<return-scalar column="NUMERO_DOCUMENTO"
 			type="java.lang.Long" />
 		<return-scalar column="FECHA_RETIRO"
 			type="java.sql.Timestamp" />
 		<![CDATA[
-			SELECT DISTINCT NUMERO_DOCUMENTO, FECHA_RETIRO
-			FROM ELECDB.ELE_ASOCIADO_ESPECIAL
-    		WHERE FECHA_RETIRO IS NOT NULL
+			SELECT DISTINCT NUMERO_DOCUMENTO, FECHA_RETIRO	FROM ELECDB.ELE_ASOCIADO_ESPECIAL
+    		WHERE FECHA_RETIRO IS NOT NULL 
     	]]>
 	</sql-query>
 
@@ -989,8 +985,7 @@
 	<sql-query name="consultar.fechaGraduacion.asociado">
 		<return-scalar column="FECHA" type="java.lang.Long" />
 		<![CDATA[
-			SELECT FECHA FROM MULCLIDAT.CLITIT 
-			WHERE NUMINT = :codAsociado AND NROCNS = 1 AND INDREG = 'AS'
+			SELECT FECHA FROM MULCLIDAT.CLITIT WHERE NUMINT = :codAsociado AND NROCNS = 1 AND INDREG = 'AS'
     	]]>
 	</sql-query>
 
@@ -1062,12 +1057,8 @@
 			type="java.lang.String" />
 		<![CDATA[
 			SELECT
-			ZE.CODIGO_ZONA_ELE,
-			EP.CONSECUTIVO_PLANCHA,
-			ZE.NUMERO_ZONA_ELE AS NUMERO_ZONA,
-			ZE.DESCRIPCION_ZONA_ELE AS ZONA_ELECTORAL,
-			EP.NUMERO_PLANCHA,
-			CL.NITCLI AS NO_DOCUMENTO,
+			ZE.CODIGO_ZONA_ELE, EP.CONSECUTIVO_PLANCHA,	ZE.NUMERO_ZONA_ELE AS NUMERO_ZONA,
+			ZE.DESCRIPCION_ZONA_ELE AS ZONA_ELECTORAL, EP.NUMERO_PLANCHA, CL.NITCLI AS NO_DOCUMENTO,
 			upper(substr(SUBSTR(CL.NOMCL1,(LOCATE('2',CL.NOMCL1)+1),(LOCATE('3',CL.NOMCL1)-LOCATE('2',CL.NOMCL1))-1),1,1))|| lower(substr(SUBSTR(CL.NOMCL1,(LOCATE('2',CL.NOMCL1)+1),(LOCATE('3',CL.NOMCL1)-LOCATE('2',CL.NOMCL1))-1),2,length(SUBSTR(CL.NOMCL1,(LOCATE('2',CL.NOMCL1)+1),(LOCATE('3',CL.NOMCL1)-LOCATE('2',CL.NOMCL1))-1))))||' '||
 			upper(substr(COALESCE(SUBSTR(CL.NOMCL1,(LOCATE('3',CL.NOMCL1)+1),(LOCATE('4',CL.NOMCL1)-LOCATE('3',CL.NOMCL1))-1),''),1,1))|| lower(substr(COALESCE(SUBSTR(CL.NOMCL1,(LOCATE('3',CL.NOMCL1)+1),(LOCATE('4',CL.NOMCL1)-LOCATE('3',CL.NOMCL1))-1),''),2,length(COALESCE(SUBSTR(CL.NOMCL1,(LOCATE('3',CL.NOMCL1)+1),(LOCATE('4',CL.NOMCL1)-LOCATE('3',CL.NOMCL1))-1),''))))||' '||
 			upper(substr(SUBSTR(CL.NOMCL1,1,(LOCATE('1',CL.NOMCL1))-1),1,1))|| lower(substr(SUBSTR(CL.NOMCL1,1,(LOCATE('1',CL.NOMCL1))-1),2,length(SUBSTR(CL.NOMCL1,1,(LOCATE('1',CL.NOMCL1))-1))))||' '||
@@ -1075,13 +1066,11 @@
 			(CASE tipo_inscrito WHEN '1' THEN 'PRINCIPAL' ELSE 'SUPLENTE' END) TIPO,
 			EPA.NUMERO_INSCRITO AS POSICION,
 			(CASE EPA.NUMERO_INSCRITO WHEN 1 THEN CASE tipo_inscrito WHEN 1 THEN 'Cabeza Plancha' ELSE '' END ELSE '' END)AS CABEZA_PLANCHA,
-			EPA.OBSERVACION_VIOLACION,
-			EPA.COD_VIOLACION
-			FROM
-			ELECDB.ELE_PLANCHA EP
-			INNER JOIN ELECDB.ELE_PLANCHA_ASOCIADO EPA ON EP.CONSECUTIVO_PLANCHA = EPA.CONSECUTIVO_PLANCHA
-			INNER JOIN elecdb.CLIMAE CL ON EPA.CODIGO_ASOCIADO = CL.NUMINT
-			JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = EP.CODIGO_ZONA_ELE
+			EPA.OBSERVACION_VIOLACION, EPA.COD_VIOLACION
+			FROM ELECDB.ELE_PLANCHA EP
+				INNER JOIN ELECDB.ELE_PLANCHA_ASOCIADO EPA ON EP.CONSECUTIVO_PLANCHA = EPA.CONSECUTIVO_PLANCHA
+				INNER JOIN elecdb.CLIMAE CL ON EPA.CODIGO_ASOCIADO = CL.NUMINT
+				JOIN ELECDB.ELE_ZONA_ELECTORAL ZE ON ZE.CODIGO_ZONA_ELE = EP.CODIGO_ZONA_ELE
 			WHERE EP.ESTADO_PLANCHA = 3
 			ORDER BY int(ZE.CODIGO_ZONA_ELE),EP.NUMERO_PLANCHA, EPA.TIPO_INSCRITO, EPA.NUMERO_INSCRITO
 		]]>
@@ -1093,9 +1082,7 @@
 		###################################################################################### -->
 	<sql-query name="consultar.secuencia.ele.proceso.log">
 		<return-scalar column="SEQ" type="java.lang.Long" />
-		<![CDATA[
-			SELECT NEXT VALUE FOR ELECDB.ELE_PROCESO_LOG_SEQ SEQ FROM SYSIBM.SYSDUMMY1
-    	]]>
+		<![CDATA[SELECT NEXT VALUE FOR ELECDB.ELE_PROCESO_LOG_SEQ SEQ FROM SYSIBM.SYSDUMMY1]]>
 	</sql-query>
 
 	<!-- ###################################################################### 
@@ -1107,8 +1094,8 @@
 		<return-scalar column="consec" type="java.lang.Long" />
 		<return-scalar column="plancha" type="java.lang.Long" />
 		<![CDATA[		
-			SELECT FP.CONSECUTIVO CONSEC,FP.CONSECUTIVO_PLANCHA PLANCHA 
-			FROM ELECDB.ELE_FORMATO_PLANCHA FP where FP.CODIGO_FORMATO='5' and FP.CONSECUTIVO_PLANCHA= :consecutivoPlancha
+			SELECT FP.CONSECUTIVO CONSEC,FP.CONSECUTIVO_PLANCHA PLANCHA FROM ELECDB.ELE_FORMATO_PLANCHA FP 
+			WHERE FP.CODIGO_FORMATO='5' and FP.CONSECUTIVO_PLANCHA= :consecutivoPlancha
 		]]>
 	</sql-query>
 
@@ -1119,9 +1106,7 @@
 
 	<sql-query name="consultar.secuencia.ele.novedad">
 		<return-scalar column="SEQ" type="java.lang.Long" />
-		<![CDATA[		
-			SELECT NEXT VALUE FOR ELECDB.ELE_NOVEDAD_SEQ SEQ FROM SYSIBM.SYSDUMMY1
-		]]>
+		<![CDATA[SELECT NEXT VALUE FOR ELECDB.ELE_NOVEDAD_SEQ SEQ FROM SYSIBM.SYSDUMMY1]]>
 	</sql-query>
 
 	<!-- ###################################################################### 
@@ -1133,7 +1118,8 @@
 		<return-scalar column="CORREO" type="java.lang.String" />
 		<return-scalar column="CODIGO" type="java.lang.Long" />
 		<![CDATA[		
-			SELECT P.NOMBRE CORREO,P.CODIGO CODIGO FROM ELECDB.ELE_PARAMETRO_TIPO PT INNER JOIN ELECDB.ELE_PARAMETRO P ON PT.TIP_COD=P.TIP_COD WHERE PT.TIP_COD= :tipCodigo
+			SELECT P.NOMBRE CORREO,P.CODIGO CODIGO FROM ELECDB.ELE_PARAMETRO_TIPO PT 
+			INNER JOIN ELECDB.ELE_PARAMETRO P ON PT.TIP_COD=P.TIP_COD WHERE PT.TIP_COD= :tipCodigo
 		]]>
 	</sql-query>
 
@@ -1150,7 +1136,7 @@
 			SELECT DISTINCT AG.CODREG, ZE.CODIGO_ZONA_ELE 
 			FROM SEGURIDAD.PLTAGCORI AG, ELECDB.ELE_ZONA_ELECTORAL ZE, ELECDB.ELE_ZONA Z
 			WHERE Z.CODIGO_ZONA = AG.CODZON
-			AND ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
+				AND ZE.CODIGO_ZONA_ELE = Z.CODIGO_ZONA_ELE
 		]]>
 	</sql-query>
 
@@ -1160,9 +1146,7 @@
 		###################################################################################### -->
 	<sql-query name="consulta.estado.asociado">
 		<return-scalar column="ESTASO" type="java.lang.Double" />
-		<![CDATA[			
-			SELECT CLI.ESTASO FROM ELECDB.CLIMAE CLI WHERE CLI.NITCLI = :id
-		]]>
+		<![CDATA[SELECT CLI.ESTASO FROM ELECDB.CLIMAE CLI WHERE CLI.NITCLI = :id]]>
 	</sql-query>
 
 	<!-- ###################################################################### 
@@ -1222,6 +1206,19 @@
 		<return-scalar column="CODIGO_ZONA_ELE" type="java.lang.Long" />
 		<![CDATA[
 			select ze.regional as CODREG, ze.codigo_zona_ele from elecdb.ele_zona_electoral ze
+		]]>
+	</sql-query>
+	
+	<!-- ###################################################################################### 
+		## Danilo Lopez - GTC CORPORATION. - 2021-10-25 ## 
+		## Consulta el correo electrónico del Asociado por número de documento ## 
+		###################################################################################### -->
+	<sql-query name="consultar.correo.asociado.por.documento">
+		<return-scalar column="CORREO_ASOCIADO"
+			type="java.lang.String" />
+		<![CDATA[
+			SELECT nomdir AS correo_asociado FROM mulclidat.clidir cldi 
+			WHERE cldi.numint = :numeroDocumento and cldi.tipubi = 'DIN' FETCH FIRST 1 ROWS ONLY	
 		]]>
 	</sql-query>
 

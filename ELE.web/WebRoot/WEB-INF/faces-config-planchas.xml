@@ -377,6 +377,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>goRegistrarInfoSuplentePlancha</from-outcome>
+			<to-view-id>/gui/planchas/registrarInfoSuplentePlancha.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>goMarcarPlanchaRecurso</from-outcome>
 			<to-view-id>/gui/forms/elecciones2012/marcarPlanchaRecurso.jspx</to-view-id>
 			<redirect />

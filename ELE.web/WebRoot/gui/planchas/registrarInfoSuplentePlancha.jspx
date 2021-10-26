@@ -82,11 +82,13 @@ body {
 											<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
 										</div>
 									</f:facet>
-									<center>
+
+									<div align="center">
 										<ice:inputText value="#{recordTitulares.posicionPlancha}"
 											partialSubmit="false" style="width:100%;"
 											styleClass="textoLabel" readonly="true" />
-									</center>
+									</div>
+
 								</ice:column>
 
 								<ice:column>
@@ -106,27 +108,19 @@ body {
 											disabled="#{registrarPlancha.desactivarIngresoCedulas}"
 											valueChangeListener="#{registrarPlancha.adicionarMiembroPrincipal}" />
 									</ice:setEventPhase>
+
 								</ice:column>
 
 								<ice:column>
 									<f:facet name="header">
 										<div align="center">
-											<ice:outputText value="#{etiquetas.lblNombresApellidos}" />
+											<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
 										</div>
 									</f:facet>
+
 									<ice:inputText value="#{recordTitulares.apellidosNombres}"
 										partialSubmit="false" readonly="true" style="width:100%;" />
-								</ice:column>
 
-								<ice:column>
-									<f:facet name="header">
-										<div align="center">
-											<ice:outputText
-												value="#{etiquetas.lblCuentaPersonalCorreoElectronico}" />
-										</div>
-									</f:facet>
-									<ice:inputText value="#{recordTitulares.correo}"
-										partialSubmit="false" style="width:100%;" readonly="true" />
 								</ice:column>
 
 								<ice:column>
@@ -143,30 +137,6 @@ body {
 
 								</ice:column>
 
-								<ice:column>
-									<f:facet name="header">
-										<div align="center">
-											<ice:outputText value="#{etiquetas.lblCertificado}" />
-										</div>
-									</f:facet>
-									<center>
-										<ice:commandButton id="btnDescargarFormato"
-											styleClass="button"
-											action="#{registrarPlancha.actionDescargarFormato}"
-											image="../imagenes/iconoDescargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Descargar formato de Ocupaci&#243;n." />
-										<ice:outputText value="  " />
-										<ice:commandButton id="btnCargarFormato" styleClass="button"
-											action="#{registrarPlancha.actionCargarFormato}"
-											image="../imagenes/iconoCargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Cargar formato de Ocupaci&#243;n." />
-									</center>
-								</ice:column>
-
 							</ice:dataTable>
 
 							<br />
@@ -180,20 +150,22 @@ body {
 									<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
 										value="#{registrarPlancha.miembrosSuplentes}"
 										style="width:100%; height:100%;">
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
 													<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
 												</div>
 											</f:facet>
-											<center>
+
+											<div align="center">
 												<ice:inputText value="#{recordSuplentes.posicionPlancha}"
 													partialSubmit="false" style="width:100%;"
 													styleClass="textoLabel" readonly="true" />
-											</center>
+											</div>
+
 										</ice:column>
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
@@ -202,6 +174,7 @@ body {
 											</f:facet>
 											<ice:setEventPhase events="ValueChangeEvent"
 												phase="INVOKE_APPLICATION">
+
 												<ice:inputText value="#{recordSuplentes.numeroDocumento}"
 													partialSubmit="true" style="width:100%;" maxlength="15"
 													alt="#{recordSuplentes.posicionPlancha}"
@@ -211,27 +184,19 @@ body {
 													disabled="#{registrarPlancha.desactivarIngresoCedulas}"
 													valueChangeListener="#{registrarPlancha.adicionarMiembroSuplente}" />
 											</ice:setEventPhase>
+
 										</ice:column>
 
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
-													<ice:outputText value="#{etiquetas.lblNombresApellidos}" />
+													<ice:outputText value="#{etiquetas.lblApellidosNombres}" />
 												</div>
 											</f:facet>
+
 											<ice:inputText value="#{recordSuplentes.apellidosNombres}"
 												partialSubmit="false" style="width:100%;" readonly="true" />
-										</ice:column>
 
-										<ice:column>
-											<f:facet name="header">
-												<div align="center">
-													<ice:outputText
-														value="#{etiquetas.lblCuentaPersonalCorreoElectronico}" />
-												</div>
-											</f:facet>
-											<ice:inputText value="#{recordSuplentes.correo}"
-												partialSubmit="false" style="width:100%;" readonly="true" />
 										</ice:column>
 
 										<ice:column>
@@ -240,34 +205,12 @@ body {
 													<ice:outputText value="#{etiquetas.lblProfesion}" />
 												</div>
 											</f:facet>
+
 											<ice:inputText value="#{recordSuplentes.profesion}"
 												partialSubmit="false"
 												readonly="#{recordTitulares.tieneProfesion}"
 												style="width:100%;" maxlength="28" />
-										</ice:column>
 
-										<ice:column>
-											<f:facet name="header">
-												<div align="center">
-													<ice:outputText value="#{etiquetas.lblCertificado}" />
-												</div>
-											</f:facet>
-											<center>
-												<ice:commandButton id="btnDescargarFormato"
-													styleClass="button"
-													action="#{registrarPlancha.actionDescargarFormato}"
-													image="../imagenes/iconoDescargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Descargar formato de Ocupaci&#243;n." />
-												<ice:outputText value="  " />
-												<ice:commandButton id="btnCargarFormato" styleClass="button"
-													action="#{registrarPlancha.actionCargarFormato}"
-													image="../imagenes/iconoCargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Cargar formato de Ocupaci&#243;n." />
-											</center>
 										</ice:column>
 
 									</ice:dataTable>
@@ -297,19 +240,20 @@ body {
 					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
 				</tr>
 				<tr>
-					<td width="130" align="left" valign="top"><br /></td>
+					<td width="130" align="left" valign="top"> <br /></td>
 					<td align="center"><br />
 						<div align="right">
 							<ice:outputConnectionStatus
 								styleClass="FONT-WEIGHT: bolder;FONT-SIZE: 11px;COLOR: #009933"
 								showPopupOnDisconnect="true">
 							</ice:outputConnectionStatus>
-						</div></td>
+						</div>
+					</td>
 				</tr>
 			</table>
 
 		</div>
-
+		
 		<!-- ********************************************* -->
 		<!--  MENSAJES DE INFORMACION EMERGENTES - POPUPS  -->
 		<!-- ********************************************* -->
@@ -478,6 +422,8 @@ body {
 			</f:facet>
 		</ice:panelPopup>
 
+
+
 		<ice:panelPopup id="confirmarImprimir" draggable="true"
 			visible="#{registrarPlancha.visibleConfirmarImprimir}"
 			rendered="#{registrarPlancha.visibleConfirmarImprimir}" modal="true"
@@ -523,6 +469,7 @@ body {
 				</ice:panelGrid>
 			</f:facet>
 		</ice:panelPopup>
+
 
 	</ice:form>
 </body>
