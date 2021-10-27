@@ -176,9 +176,9 @@ public class DelegadoGenerador {
 			String ciudad, String anio, String mes, String dia,
 			String nombreAsociado, String cedulaAsociado, String ciudadCedula,
 			String ciudadFirma, String diaFirma, String mesFirma,
-			String anioFirma, String formulario, String rutaReporte) throws Exception {
+			String anioFirma, String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteCertificadoAcreditaOcupacion_FT_211(ciudad, anio, mes, dia, nombreAsociado, cedulaAsociado, ciudadCedula, ciudadFirma, diaFirma, mesFirma, anioFirma, formulario, rutaReporte);
+		return logicaGenerador.reporteCertificadoAcreditaOcupacion_FT_211(ciudad, anio, mes, dia, nombreAsociado, cedulaAsociado, ciudadCedula, ciudadFirma, diaFirma, mesFirma, anioFirma, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteResolucionDeniega_FT_459(

@@ -34,518 +34,437 @@ import co.com.coomeva.util.acceso.UtilAcceso;
 import com.icesoft.faces.context.effects.JavascriptContext;
 
 /**
- * Modificación 28/08/2016
+ * @author Carlos Ernesto Ortega Q.
+ * 
+ * @update 28/08/2016
  * @author Christian Mauricio Tangarife Colorado cmtc4227
+ * 
+ * @update 26/10/2021
+ * @author GTC CORPORATION - Danilo López Sandoval
  */
 public class FormularioReportesVista extends BaseVista {
-	
-	private String tipoReporte;
-	
-	private List<SelectItem> listaFormulario;
-
 	private String nombreAspirante;
 	private boolean verNombreAspirante;
-	
 	private String firmaCandidato;
 	private boolean verFirmaCadidato;
-	
 	private File fotoCabezaPlancha;
 	private boolean verFotoCabezaPlancha;
-	
 	private String profesionApirante;
 	private boolean verProfesionAspirante;
-	
 	private String profesionCabezaPlancha;
 	private boolean verProfesionCabezaPlancha;
-	
 	private String tipoIdentAspirante;
 	private boolean verTipoIdentAspirante;
-	
 	private String numeroDocuemtoAspirante;
 	private boolean verNumeroDocumentoAspirante;
-	
 	private String zonaExpedicionDocumento;
 	private boolean verZonaExpedicionDocumento;
-	
 	private Date fechaExpedicionDocumento;
 	private boolean verFechaExpedicionDocumento;
-	
 	private String nombreCabezaPlancha;
 	private boolean verNombreCabezaPlancha;
-	
 	private String firmaCabezaPlancha;
 	private boolean verFirmaCabezaPlancha;
-	
 	private String tipoIdentCabezaPlancha;
 	private boolean verTipoIdentCabezaPlancha;
-	
 	private String numeroDocuemtoCabezaPlancha;
 	private boolean verNumeroDocumentoCabezaPlancha;
-	
 	private String nombreIncribePlancha;
 	private boolean verNombreIncribePlancha;
-	
 	private String firmaIncribePlancha;
 	private boolean verFirmaIncribePlancha;
-	
 	private String tipoIdentIncribePlancha;
 	private boolean verTipoIdentIncribePlancha;
-	
 	private String numeroDocuemtoIncribePlancha;
 	private boolean verNumeroDocumentoIncribePlancha;
-	
 	private String numZonaElectroral;
 	private boolean verNumZonaElectroral;
-	
 	private String nombreComicion;
 	private boolean verNombreComicion;
-	
 	private String numComicion;
 	private boolean verNumComicion;
-	
 	private String ciudad;
 	private boolean verCiudad;
-	
 	private String ciudadComicion;
 	private boolean verCiudadComicion;
-	
 	private Date fechaElaboracionDoc;
 	private boolean verFechaElaboracionDoc;
-	
 	private String hora;
 	private boolean verHora;
-	
 	private String numPlancha;
 	private boolean verNumPlancha;
-	
 	private String numResolucionRechazoComision;
 	private boolean verNumResolucionRechazoComision;
-
 	private String numResolucionApelada;
 	private boolean verNumResolucionApelada;
-	
 	private String numResolucionImpugnada;
 	private boolean verNumResolucionImpugnada;
-	
 	private String numResolucionExtemporaneamente;
 	private boolean verNumResolucionExtemporaneamente;
-	
 	private String numResolucionDecisionComision;
 	private boolean verNumResolucionDecisionComision;
-	
 	private String nombreRespresenateComision;
 	private boolean verNombreRespresenateComision;
-	
 	private String firmaRespresenateComision;
 	private boolean verFirmaRespresenateComision;
-	
 	private String numResolucionAdmisionPlancha;
 	private boolean verNumResolucionAdmisionPlancha;
-	
 	private String numResolucionInadmisionPlancha;
 	private boolean verNumResolucionInadmisionPlancha;
-	
 	private String numResolucionCodigo;
 	private boolean verNumResolucionCodigo;
-	
 	private Date fechaResolucionCodigo;
 	private boolean verFechaResolucionCodigo;
-	
 	private String numResolucionReglamento;
 	private boolean verNumResolucionReglamento;
-	
 	private Date fechaResolucionReglamento;
 	private boolean verFechaResolucionReglamento;
-	
 	private String numActaTribunal;
 	private boolean verNumActaTribunal;
-	
 	private String numActa;
 	private boolean verNumActa;
-	
 	private Date fechaActa;
 	private boolean verFechaActa;
-	
 	private String nombrePresidente;
 	private boolean verNombrePresidente;
-	
 	private String firmaPresidente;
 	private boolean verFirmaPresidente;
-	
 	private String nombreSecretario;
 	private boolean verNombreSecretario;
-	
 	private String firmaSecretario;
 	private boolean verFirmSecretario;
-	
 	private String firmaEntrega;
 	private boolean verFirmEntrega;
-	
 	private String tipoDocEntrega;
 	private boolean verTipoDocEntrega;
-	
 	private String numDocEntrega;
 	private boolean verNumDocEntrega;
-	
 	private String nombreEntrega;
 	private boolean verNombreEntrega;
-	
 	private String anioSuspension;
 	private boolean verAnioSuspension;
-	
 	private String nombreRecibe;
 	private boolean verNombreRecibe;
-	
 	private String firmaRecibe;
 	private boolean verFirmRecibe;
-	
 	private String tipoDocRecibe;
 	private boolean verTipoDocRecibe;
-	
 	private String numDocRecibe;
 	private boolean verNumDocRecibe;
-
 	private String argApelacion;
 	private boolean verArgApelacion;
-	
 	private String antiguedad;
 	private boolean verAntiguedad;
-	
 	private String anioExpedicionTitulo;
 	private boolean verAnioExpedicionTitulo;
-	
 	private String otrosEstudios;
 	private boolean verOtrosEstudios;
-	
 	private String experienciaLaboral;
 	private boolean verExperienciaLaboral;
-	
 	private String ultimoCargo;
 	private boolean verultimoCargo;
-	
 	private Date fechaPresentacion;
 	private boolean verFechaPresentacion;
-	
 	private String razones;
 	private boolean verRazones;
-	
 	private String razon1;
 	private boolean verRazon1;
-	
 	private String razon2;
 	private boolean verRazon2;
-	
 	private String razon3;
 	private boolean verRazon3;
-	
 	private String razon4;
 	private boolean verRazon4;
-	
 	private Date fechaFirma;
 	private boolean verFechaFirma;
-	
 	private String desicion;
 	private boolean verDesicion;
-	
 	private String nombreAccionante;
 	private boolean verNombreAccionante;
-	
 	private String argReposicion;
 	private boolean verArgReposicion;
-	
+
+	private String tipoReporte;
 	private boolean isReporte176;
-	private List<PreguntasFormulario176DTO> listaPreguntas; 
-	private List<SelectItem> listRespuesta;
-	
 	private boolean esReporte211;
 	
+	private List<SelectItem> listaFormulario;
+	private List<PreguntasFormulario176DTO> listaPreguntas;
+	private List<SelectItem> listRespuesta;
+
 	private MensajesVista mensajeVista = getMensaje();
 
 	public FormularioReportesVista() {
 		init();
 	}
-
-	/**
-	 * Método que recibe la información de la sesión e inicializa los
-	 * componentes
-	 * 
-	 * @author Carlos Ernesto Ortega Q.
-	 */
 	private void init() {
 		try {
-
-			
 
 		} catch (Exception e) {
 			String mensaje = e.getMessage();
 			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
-				mensaje = UtilAcceso.getParametroFuenteS("mensajes",
-						"nullException");
+				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 			}
 			getMensaje().mostrarMensaje(mensaje);
 		}
 	}
-	
-	public String selecionarFormularioListener(ValueChangeEvent evento)
-	{
-		if(evento != null && evento.getNewValue() != null)
-		{
-			if(evento.getNewValue().toString().equals("-1"))
-			{
-				accionLimpiarCampos();
-			}
-			else
-			{
-				accionLimpiarCampos();
+
+	public String selecionarFormularioListener(ValueChangeEvent evento) {
+		if (evento != null && evento.getNewValue() != null) {
+			accionLimpiarCampos();
+			if (!evento.getNewValue().toString().equals("-1")) {
 				accionCargarCampos(evento.getNewValue().toString());
 			}
 		}
 		return "";
 	}
-	
-	public String consultarIntegrantePlanchaListener(ValueChangeEvent evento)
-	{
-		try
-		{
-			if(evento != null && evento.getNewValue() != null)
-			{
-				if(evento.getNewValue().toString().equals(""))
-				{
+
+	public String consultarIntegrantePlanchaListener(ValueChangeEvent evento) {
+		try {
+			if (evento != null && evento.getNewValue() != null) {
+				if (evento.getNewValue().toString().equals("")) {
 					numPlancha = "";
-					nombreAspirante ="";
-					numeroDocuemtoAspirante ="";
-					fechaElaboracionDoc = null; 
-				}
-				else
-				{
+					nombreAspirante = "";
+					numeroDocuemtoAspirante = "";
+					fechaElaboracionDoc = null;
+				} else {
 					this.numeroDocuemtoAspirante = evento.getNewValue().toString();
 					this.fechaElaboracionDoc = new Date();
-					
-					if(numeroDocuemtoAspirante != null && !numeroDocuemtoAspirante.isEmpty())
-					{
+
+					if (numeroDocuemtoAspirante != null && !numeroDocuemtoAspirante.isEmpty()) {
 						Long numeroDocumento = Long.valueOf(numeroDocuemtoAspirante);
-						List<DTOPlanchaAsociado> planchaAsociado = DelegadoPlancha.getInstance().asociadoPertenceOtraPlancha(
-								numeroDocumento, null);
-						
-						if(planchaAsociado != null && !planchaAsociado.isEmpty())
-						{
+						List<DTOPlanchaAsociado> planchaAsociado = DelegadoPlancha.getInstance()
+								.asociadoPertenceOtraPlancha(numeroDocumento, null);
+
+						if (planchaAsociado != null && !planchaAsociado.isEmpty()) {
 							numPlancha = planchaAsociado.get(0).getConsecutivoPlancha().toString();
-							
-							DTOInformacionPlancha infoPlancha = DelegadoPlancha
-							.getInstance().consultarInformacionPlancha(
-									planchaAsociado.get(0).getConsecutivoPlancha());
+
+							DTOInformacionPlancha infoPlancha = DelegadoPlancha.getInstance()
+									.consultarInformacionPlancha(planchaAsociado.get(0).getConsecutivoPlancha());
 							
 							boolean hayRegistro = false;
-							if(infoPlancha != null)								
-							{
-								if(infoPlancha.getMiembrosTitulares() != null 
-									&& !infoPlancha.getMiembrosTitulares().isEmpty())
-								{
-									for (DTOMiembroPlancha dtoMiembroPlancha: infoPlancha.getMiembrosTitulares()) {
-										
-										if(dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumento))
-										{
+							if (infoPlancha != null) {
+								if (infoPlancha.getMiembrosTitulares() != null
+										&& !infoPlancha.getMiembrosTitulares().isEmpty()) {
+									for (DTOMiembroPlancha dtoMiembroPlancha : infoPlancha.getMiembrosTitulares()) {
+
+										if (dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumento)) {
 											nombreAspirante = dtoMiembroPlancha.getApellidosNombres();
 											hayRegistro = true;
 											break;
 										}
 									}
 								}
-								
-								if(!hayRegistro 
-									&& infoPlancha.getMiembrosSuplentes() != null
-									&& !infoPlancha.getMiembrosSuplentes().isEmpty())
-								{
-										for (DTOMiembroPlancha dtoMiembroPlancha: infoPlancha.getMiembrosSuplentes()) {										
-										if(dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumento))
-										{
+								if (!hayRegistro && infoPlancha.getMiembrosSuplentes() != null
+										&& !infoPlancha.getMiembrosSuplentes().isEmpty()) {
+									for (DTOMiembroPlancha dtoMiembroPlancha : infoPlancha.getMiembrosSuplentes()) {
+										if (dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumento)) {
 											nombreAspirante = dtoMiembroPlancha.getApellidosNombres();
 											hayRegistro = true;
 											break;
 										}
 									}
-								}							
+								}
 							}
-						}
-						else
-						{
+						} else {
 							numPlancha = "";
-							nombreAspirante ="";
-							numeroDocuemtoAspirante ="";
-							fechaElaboracionDoc =  null;
+							nombreAspirante = "";
+							numeroDocuemtoAspirante = "";
+							fechaElaboracionDoc = null;
 						}
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "";
 	}
-	
-	public void generarReporteListener()
-	{
-		HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+	public void generarReporteListener() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
 		List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		
-		
-		//Resolucion de admision de planchas
-		if(tipoReporte.equalsIgnoreCase("172"))
-		{
+
+		// Resolucion de admision de planchas
+		if (tipoReporte.equalsIgnoreCase("172")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
-			request.getSession().setAttribute("nombreAsociado",nombreCabezaPlancha);
+			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("numResolucion", numResolucionAdmisionPlancha);
-			request.getSession().setAttribute("numActa",numActa);
-			request.getSession().setAttribute("fecha",fechaActa);
-			request.getSession().setAttribute("ciudadZona",ciudad);
-			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getYear()):"");
-			
+			request.getSession().setAttribute("numActa", numActa);
+			request.getSession().setAttribute("fecha", fechaActa);
+			request.getSession().setAttribute("ciudadZona", ciudad);
+			request.getSession().setAttribute("dia",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+			request.getSession().setAttribute("mes",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+			request.getSession().setAttribute("anio",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : "");
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, ciudad));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 33L, numResolucionAdmisionPlancha));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 33L, numResolucionAdmisionPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 41L, sdf.format(fechaActa)));
 
 		}
-		//resolución de Rechazo de Planchas CO-FT-173
-		else if(tipoReporte.equalsIgnoreCase("173"))
-		{
+		// resolución de Rechazo de Planchas CO-FT-173
+		else if (tipoReporte.equalsIgnoreCase("173")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
-			request.getSession().setAttribute("numResolucion" ,numResolucionRechazoComision);
-			request.getSession().setAttribute("numActa",numActa);
-			request.getSession().setAttribute("fecha",fechaActa);
-			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getYear()):""); 
+			request.getSession().setAttribute("numResolucion", numResolucionRechazoComision);
+			request.getSession().setAttribute("numActa", numActa);
+			request.getSession().setAttribute("fecha", fechaActa);
+			request.getSession().setAttribute("dia",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+			request.getSession().setAttribute("mes",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+			request.getSession().setAttribute("anio",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("razones", razones);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 26L, numResolucionRechazoComision));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 26L, numResolucionRechazoComision));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 41L, sdf.format(fechaActa)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 61L, razones));
-			
+
 		}
-		//Informacion Personal del caneza de Plancha CO-FT-174 (eliminado de base de datos)
-		/*else if(tipoReporte.equalsIgnoreCase("174"))
-		{
-			request.getSession().setAttribute("plancha", numPlancha);
-			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
-			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
-			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
-			request.getSession().setAttribute("fechaAntiguedad", antiguedad);
-			request.getSession().setAttribute("profesion", profesionCabezaPlancha);
-			request.getSession().setAttribute("fechaTitulo", anioExpedicionTitulo);
-			request.getSession().setAttribute("estudios", otrosEstudios); 
-			String[] experiencia = experienciaLaboral!=null?experienciaLaboral.split(","):null; 
-			request.getSession().setAttribute("empresa", experiencia!=null?experiencia[0]:null); 
-			request.getSession().setAttribute("cargo", experiencia!=null?experiencia[1]:null);  
-			request.getSession().setAttribute("antiguedad", experiencia!=null?experiencia[2]:null);					
-			request.getSession().setAttribute("ultimoCargo", ultimoCargo);
-			
-			// para guardar en base de datos los registros de los campos
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 25L, numPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 55L, antiguedad));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 5L, profesionCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 56L, anioExpedicionTitulo));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 57L, otrosEstudios));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 58L, experienciaLaboral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 59L, ultimoCargo));
-			
-		}*/
-		
-		//CERTIFICACIÓN DE CUMPLIMIENTO PARA SER ELEGIDO DELEGADO CO-FT-176
-		else if(tipoReporte.equalsIgnoreCase("176"))
-		{
-			request.getSession().setAttribute("nombreAsociado", nombreAspirante); 
+		// Informacion Personal del caneza de Plancha CO-FT-174 (eliminado de base de
+		// datos)
+		/*
+		 * else if(tipoReporte.equalsIgnoreCase("174")) {
+		 * request.getSession().setAttribute("plancha", numPlancha);
+		 * request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
+		 * request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
+		 * request.getSession().setAttribute("cedulaAsociado",
+		 * numeroDocuemtoCabezaPlancha);
+		 * request.getSession().setAttribute("fechaAntiguedad", antiguedad);
+		 * request.getSession().setAttribute("profesion", profesionCabezaPlancha);
+		 * request.getSession().setAttribute("fechaTitulo", anioExpedicionTitulo);
+		 * request.getSession().setAttribute("estudios", otrosEstudios); String[]
+		 * experiencia = experienciaLaboral!=null?experienciaLaboral.split(","):null;
+		 * request.getSession().setAttribute("empresa",
+		 * experiencia!=null?experiencia[0]:null);
+		 * request.getSession().setAttribute("cargo",
+		 * experiencia!=null?experiencia[1]:null);
+		 * request.getSession().setAttribute("antiguedad",
+		 * experiencia!=null?experiencia[2]:null);
+		 * request.getSession().setAttribute("ultimoCargo", ultimoCargo);
+		 * 
+		 * // para guardar en base de datos los registros de los campos
+		 * listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte),
+		 * 25L, numPlancha)); listaRegCampos.add(new EleRegistroCampos(null,
+		 * Long.valueOf(tipoReporte), 18L, numZonaElectroral)); listaRegCampos.add(new
+		 * EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L,
+		 * nombreCabezaPlancha)); listaRegCampos.add(new EleRegistroCampos(null,
+		 * Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
+		 * listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte),
+		 * 55L, antiguedad)); listaRegCampos.add(new EleRegistroCampos(null,
+		 * Long.valueOf(tipoReporte), 5L, profesionCabezaPlancha));
+		 * listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte),
+		 * 56L, anioExpedicionTitulo)); listaRegCampos.add(new EleRegistroCampos(null,
+		 * Long.valueOf(tipoReporte), 57L, otrosEstudios)); listaRegCampos.add(new
+		 * EleRegistroCampos(null, Long.valueOf(tipoReporte), 58L, experienciaLaboral));
+		 * listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte),
+		 * 59L, ultimoCargo));
+		 * 
+		 * }
+		 */
+
+		// CERTIFICACIÓN DE CUMPLIMIENTO PARA SER ELEGIDO DELEGADO CO-FT-176
+		else if (tipoReporte.equalsIgnoreCase("176")) {
+			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
 			request.getSession().setAttribute("numPlancha", numPlancha);
 			request.getSession().setAttribute("nombreRepresen", nombreRespresenateComision);
 			request.getSession().setAttribute("preguntas", listaPreguntas);
-			
+
 			String preguntas = "";
 			for (PreguntasFormulario176DTO pregunta : listaPreguntas) {
-				preguntas += pregunta.getPreguntas() + ":"+pregunta.getRespuesta()+".";
+				preguntas += pregunta.getPreguntas() + ":" + pregunta.getRespuesta() + ".";
 			}
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 25L, numPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 31L, nombreRespresenateComision));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 62L, preguntas));
 		}
-		
-		//CONSTANCIA DE RADICACIÓN Y RECIBO DE PLANCHAS CO-FT-208
-		else if(tipoReporte.equalsIgnoreCase("208"))
-		{
+
+		// CONSTANCIA DE RADICACIÓN Y RECIBO DE PLANCHAS CO-FT-208
+		else if (tipoReporte.equalsIgnoreCase("208")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("numComision", numComicion);
-			request.getSession().setAttribute("ciudad", ciudadComicion);					
+			request.getSession().setAttribute("ciudad", ciudadComicion);
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
 			request.getSession().setAttribute("ciudadCedula", zonaExpedicionDocumento);
-			request.getSession().setAttribute("dia",fechaFirma!=null?String.valueOf(fechaFirma.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaFirma!=null?String.valueOf(fechaFirma.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaFirma!=null?String.valueOf(fechaFirma.getYear()):"");
+			request.getSession().setAttribute("dia", fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
+			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("anio", fechaFirma != null ? String.valueOf(fechaFirma.getYear()) : "");
 			request.getSession().setAttribute("nombreEntrega", nombreEntrega);
 			request.getSession().setAttribute("nombreRecibe", nombreRecibe);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, zonaExpedicionDocumento));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 20L, numComicion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 22L, ciudadComicion));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 50L, nombreRecibe));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 64L, nombreEntrega));
-			
+
 		}
-		
-		//RESOLUCION INADMISION PLANCHA CO-FT-209
-		else if(tipoReporte.equalsIgnoreCase("209"))
-		{
+
+		// RESOLUCION INADMISION PLANCHA CO-FT-209
+		else if (tipoReporte.equalsIgnoreCase("209")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
-			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):""); 
+			request.getSession().setAttribute("dia",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+			request.getSession().setAttribute("mes",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+			request.getSession().setAttribute("anio",
+					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("hora", hora);
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("resolucion", numResolucionCodigo);
 			request.getSession().setAttribute("acta", numActa);
 			request.getSession().setAttribute("fecha", fechaActa);
-			request.getSession().setAttribute("ciudad",ciudad);
+			request.getSession().setAttribute("ciudad", ciudad);
 			request.getSession().setAttribute("razon1", razon1);
 			request.getSession().setAttribute("razon2", razon2);
 			request.getSession().setAttribute("razon3", razon3);
 			request.getSession().setAttribute("razon4", razon4);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 13L, numeroDocuemtoCabezaPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, ciudad));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 24L, hora));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 35L, numResolucionCodigo));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
@@ -554,82 +473,83 @@ public class FormularioReportesVista extends BaseVista {
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 66L, razon3));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 67L, razon4));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 68L, razon1));
-			
+
 		}
-		
-		//INSCRIPCIÓN DE PLANCHAS CO-FT-210
-		/*else if(tipoReporte.equalsIgnoreCase("210")) //( eliminado de la base de datos)
-		{
-			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);					
-			//request.getSession().setAttribute("fecha");
-			request.getSession().setAttribute("ciudad", ciudad);																		
-		}*/
-		
-		//Declaración para acreditar ocupación y cumplimiento de requisitos CO-FT-211
-		else if(tipoReporte.equalsIgnoreCase("211"))
-		{
-			if(fechaElaboracionDoc == null || fechaFirma == null )
-			{
+
+		// INSCRIPCIÓN DE PLANCHAS CO-FT-210
+		/*
+		 * else if(tipoReporte.equalsIgnoreCase("210")) //( eliminado de la base de
+		 * datos) { request.getSession().setAttribute("zonaElectoral",
+		 * numZonaElectroral); //request.getSession().setAttribute("fecha");
+		 * request.getSession().setAttribute("ciudad", ciudad); }
+		 */
+
+		// Declaración para acreditar ocupación y cumplimiento de requisitos CO-FT-211
+		else if (tipoReporte.equalsIgnoreCase("211")) {
+			if (fechaElaboracionDoc == null || fechaFirma == null) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
-				this.mensajeVista.setMensaje("Señor Asociado, recuerde que la información de las fechas es obligatorio");
+				this.mensajeVista
+						.setMensaje("Señor Asociado, recuerde que la información de las fechas es obligatorio");
 				return;
 			}
-			
-			if(nombreAspirante == null || nombreAspirante.isEmpty() )
-			{
+
+			if (nombreAspirante == null || nombreAspirante.isEmpty()) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 				this.mensajeVista.setMensaje("Señor Asociado, recuerde que todos los campos son obligatorio");
 				return;
 			}
-			
-			if(numeroDocuemtoAspirante == null || numeroDocuemtoAspirante.isEmpty() )
-			{
+
+			if (numeroDocuemtoAspirante == null || numeroDocuemtoAspirante.isEmpty()) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 				this.mensajeVista.setMensaje("Señor Asociado, recuerde que todos los campos son obligatorio");
 				return;
 			}
-			
-			if(zonaExpedicionDocumento == null || zonaExpedicionDocumento.isEmpty() )
-			{
+
+			if (zonaExpedicionDocumento == null || zonaExpedicionDocumento.isEmpty()) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 				this.mensajeVista.setMensaje("Señor Asociado, recuerde que todos los campos son obligatorio");
 				return;
 			}
-			
-			if(ciudad == null || ciudad.isEmpty() )
-			{
+
+			if (ciudad == null || ciudad.isEmpty()) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 				this.mensajeVista.setMensaje("Señor Asociado, recuerde que todos los campos son obligatorio");
 				return;
 			}
-						
-			request.getSession().setAttribute("ciudad", ciudad);					
-			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):"");
+
+			request.getSession().setAttribute("ciudad", ciudad);
+			request.getSession().setAttribute("dia",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+			request.getSession().setAttribute("mes",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+			request.getSession().setAttribute("anio",
+					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoAspirante);
 			request.getSession().setAttribute("ciudadCedula", zonaExpedicionDocumento);
-			request.getSession().setAttribute("ciudadFirma", ciudad);	
-			request.getSession().setAttribute("diaFirma",fechaFirma!=null?String.valueOf(fechaFirma.getDate()):""); 
-			request.getSession().setAttribute("mesFirma",fechaFirma!=null?WorkStrigs.getMes(fechaFirma.getMonth()):""); 
-			request.getSession().setAttribute("anioFirma",fechaFirma!=null?WorkStrigs.getAnio(fechaFirma.getYear()):"");		
-			
+			request.getSession().setAttribute("ciudadFirma", ciudad);
+			request.getSession().setAttribute("diaFirma",
+					fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
+			request.getSession().setAttribute("mesFirma",
+					fechaFirma != null ? WorkStrigs.getMes(fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("anioFirma",
+					fechaFirma != null ? WorkStrigs.getAnio(fechaFirma.getYear()) : "");
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, numeroDocuemtoAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, zonaExpedicionDocumento));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, ciudad));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
-			
+
 		}
-		
-		//RESOLUCIÓN QUE RESUELVE UN RECURSO DE REPOSICIÓN
-		//FAVORABLEMENTE CO-FT-458
-		else if(tipoReporte.equalsIgnoreCase("458"))
-		{
-			
+
+		// RESOLUCIÓN QUE RESUELVE UN RECURSO DE REPOSICIÓN
+		// FAVORABLEMENTE CO-FT-458
+		else if (tipoReporte.equalsIgnoreCase("458")) {
+
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("hora", hora);
@@ -640,11 +560,12 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("argumento", argReposicion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 24L, hora));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
@@ -654,106 +575,107 @@ public class FormularioReportesVista extends BaseVista {
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 71L, argReposicion));
 
 		}
-		
-		//RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓN
-		//Y NO CONCEDE APELACIÓN POR NO SER SOLICITADO CO-FT-459
-		else if(tipoReporte.equalsIgnoreCase("459"))
-		{
+
+		// RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓN
+		// Y NO CONCEDE APELACIÓN POR NO SER SOLICITADO CO-FT-459
+		else if (tipoReporte.equalsIgnoreCase("459")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreComision", nombreComicion);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
-			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
+			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);
 			request.getSession().setAttribute("resolucion", numResolucionImpugnada);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 44L, nombreSecretario));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 54L, argApelacion));
 
 		}
-		
-		//RESOLUCIÓN QUE RESUELVE UN RECURSO DE REPOSICIÓN
-		//EN CONTRA Y REMITE LA APELACIÓN CO-FT-460
-		else if(tipoReporte.equalsIgnoreCase("460"))
-		{
+
+		// RESOLUCIÓN QUE RESUELVE UN RECURSO DE REPOSICIÓN
+		// EN CONTRA Y REMITE LA APELACIÓN CO-FT-460
+		else if (tipoReporte.equalsIgnoreCase("460")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreComision", nombreComicion);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
-			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
+			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);
 			request.getSession().setAttribute("resolucion", numResolucionImpugnada);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 44L, nombreSecretario));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 54L, argApelacion));
-			
+
 		}
-		
-		//RESOLUCIÓN QUE RESUELVE UN RECURSO DE
-		//APELACIÓN FAVORABLE CO-FT-461
-		else if(tipoReporte.equalsIgnoreCase("461"))
-		{
+
+		// RESOLUCIÓN QUE RESUELVE UN RECURSO DE
+		// APELACIÓN FAVORABLE CO-FT-461
+		else if (tipoReporte.equalsIgnoreCase("461")) {
 			request.getSession().setAttribute("acta", numActa);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
-			request.getSession().setAttribute("nombreAsociado",nombreAspirante);
-			request.getSession().setAttribute("resolucionApelada" ,numResolucionApelada);
-			request.getSession().setAttribute("resolucionComision", numResolucionDecisionComision);			
+			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
+			request.getSession().setAttribute("resolucionApelada", numResolucionApelada);
+			request.getSession().setAttribute("resolucionComision", numResolucionDecisionComision);
 			request.getSession().setAttribute("actaTribunal", numActaTribunal);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("decision", desicion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
-			request.getSession().setAttribute("nombreSecretario", nombreSecretario);	
-			
+			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 27L, numResolucionApelada));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 30L, numResolucionDecisionComision));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 30L, numResolucionDecisionComision));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 39L, numActaTribunal));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 44L, nombreSecretario));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 54L, argApelacion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 69L, desicion));
-			
+
 		}
-		
-		//RESOLUCIÓN QUE RESUELVE UN RECURSO DE
-		//APELACIÓN EN CONTRA CO-FT-462
-		else if(tipoReporte.equalsIgnoreCase("462"))
-		{
+
+		// RESOLUCIÓN QUE RESUELVE UN RECURSO DE
+		// APELACIÓN EN CONTRA CO-FT-462
+		else if (tipoReporte.equalsIgnoreCase("462")) {
 			request.getSession().setAttribute("acta", numActa);
 			request.getSession().setAttribute("fecha", fechaActa);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
 			request.getSession().setAttribute("resolucionApelada", numResolucionApelada);
-			request.getSession().setAttribute("resolucionComision", numResolucionDecisionComision);			
+			request.getSession().setAttribute("resolucionComision", numResolucionDecisionComision);
 			request.getSession().setAttribute("actaTribunal", numActaTribunal);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
-			
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 27L, numResolucionApelada));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 30L, numResolucionDecisionComision));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 30L, numResolucionDecisionComision));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 39L, numActaTribunal));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 41L, sdf.format(fechaActa)));
@@ -761,33 +683,37 @@ public class FormularioReportesVista extends BaseVista {
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 44L, nombreSecretario));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 54L, argApelacion));
 		}
-		
-		//RESOLUCIÓN QUE RESUELVE RECURSOS INTERPUESTOS EXTEMPORANEAMENTE CO-FT-753
-		else if(tipoReporte.equalsIgnoreCase("753"))
-		{
+
+		// RESOLUCIÓN QUE RESUELVE RECURSOS INTERPUESTOS EXTEMPORANEAMENTE CO-FT-753
+		else if (tipoReporte.equalsIgnoreCase("753")) {
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("nombreComision", nombreComicion);
 			request.getSession().setAttribute("resolucion", numResolucionExtemporaneamente);
-			request.getSession().setAttribute("diaPresentado",fechaPresentacion!=null?String.valueOf(fechaPresentacion.getDate()):"" );
-			request.getSession().setAttribute("dia",fechaFirma!=null?String.valueOf(fechaFirma.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaFirma!=null?String.valueOf(fechaFirma.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaFirma!=null?String.valueOf(fechaFirma.getYear()):"");
-			
+			request.getSession().setAttribute("diaPresentado",
+					fechaPresentacion != null ? String.valueOf(fechaPresentacion.getDate()) : "");
+			request.getSession().setAttribute("dia", fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
+			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("anio", fechaFirma != null ? String.valueOf(fechaFirma.getYear()) : "");
+
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 29L, numResolucionExtemporaneamente));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 60L, sdf.format(fechaPresentacion)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 29L, numResolucionExtemporaneamente));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 60L, sdf.format(fechaPresentacion)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
-			
+
 		}
 		try {
 			UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
-			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos, user.getUserId());
+			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos,
+					user.getUserId());
 		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje(e.getMessage());
@@ -795,609 +721,462 @@ public class FormularioReportesVista extends BaseVista {
 		}
 		request.getSession().setAttribute("codigoReporte", tipoReporte);
 		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
-		
+
 		this.mensajeVista.setVisible(Boolean.TRUE);
-		this.mensajeVista.setMensaje("Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
+		this.mensajeVista.setMensaje(
+				"Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
 
 	}
-	
-	private void guardarRegistroFormulario(HttpServletRequest request){
-		
+
+	private void guardarRegistroFormulario(HttpServletRequest request) {
+
 		Enumeration<String> listaAtributos = request.getAttributeNames();
 		String atributo;
-		while((atributo = listaAtributos.nextElement()) != null) {
+		while ((atributo = listaAtributos.nextElement()) != null) {
 			System.out.print(atributo);
-		}		
+		}
 	}
-	
-	public String limpiarCamposListener(ActionEvent accion)
-	{
+
+	public String limpiarCamposListener(ActionEvent accion) {
 		accionLimpiarCampos();
 		return "";
 	}
 
-	private void accionCargarCampos(String codFormulario) 
-	{	
-		try
-		{
-			List<EleCampo> listaCampo = DelegadoFormulario.getInstance().listarCamposFormulario(Long.valueOf(codFormulario));
-			
-			if(codFormulario.equalsIgnoreCase("176"))
-			{
+	private void accionCargarCampos(String codFormulario) {
+		try {
+			List<EleCampo> listaCampo = DelegadoFormulario.getInstance()
+					.listarCamposFormulario(Long.valueOf(codFormulario));
+
+			if (codFormulario.equalsIgnoreCase("176")) {
 				isReporte176 = true;
 				verNumeroDocumentoAspirante = true;
-			}
-			else if( codFormulario.equalsIgnoreCase("211"))
-			{ 
+			} else if (codFormulario.equalsIgnoreCase("211")) {
 				esReporte211 = true;
 				verNumeroDocumentoAspirante = true;
-				
+
 				fechaElaboracionDoc = new Date();
 				fechaFirma = new Date();
 			}
-			if(listaCampo != null && !codFormulario.isEmpty())
-			{
+			if (listaCampo != null && !codFormulario.isEmpty()) {
 				for (EleCampo eleCampo : listaCampo) {
-					
-					if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreAspirante"))
-					{
+
+					if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreAspirante")) {
 						verNombreAspirante = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaCandidato"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaCandidato")) {
 						verFirmaCadidato = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fotoCabezaPlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fotoCabezaPlancha")) {
 						verFotoCabezaPlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("profesionApirante"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("profesionApirante")) {
 						verProfesionAspirante = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("profesionCabezaPlancha"))
-					{
-						verProfesionCabezaPlancha= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentAspirante"))
-					{
-						verTipoIdentAspirante= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoAspirante"))
-					{
-						verNumeroDocumentoAspirante= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("zonaExpedicionDocumento"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("profesionCabezaPlancha")) {
+						verProfesionCabezaPlancha = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentAspirante")) {
+						verTipoIdentAspirante = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoAspirante")) {
+						verNumeroDocumentoAspirante = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("zonaExpedicionDocumento")) {
 						verZonaExpedicionDocumento = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaExpedicionDocumento"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaExpedicionDocumento")) {
 						verFechaExpedicionDocumento = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreCabezaPlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreCabezaPlancha")) {
 						verNombreCabezaPlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaCabezaPlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaCabezaPlancha")) {
 						verFirmaCabezaPlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentCabezaPlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentCabezaPlancha")) {
 						verTipoIdentCabezaPlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoCabezaPlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoCabezaPlancha")) {
 						verNumeroDocumentoCabezaPlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreIncribePlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreIncribePlancha")) {
 						verNombreIncribePlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaIncribePlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaIncribePlancha")) {
 						verFirmaIncribePlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentIncribePlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("tipoIdentIncribePlancha")) {
 						verTipoIdentIncribePlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoIncribePlancha"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numeroDocuemtoIncribePlancha")) {
 						verNumeroDocumentoIncribePlancha = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numZonaElectroral"))
-					{
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numZonaElectroral")) {
 						verNumZonaElectroral = true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreComicion"))
-					{
-						verNombreComicion= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numComicion"))
-					{
-						verNumComicion= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("ciudad"))
-					{
-						verCiudad= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("ciudadComicion"))
-					{
-						verCiudadComicion= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaElaboracionDoc"))
-					{
-						verFechaElaboracionDoc= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("hora"))
-					{
-						verHora= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numPlancha"))
-					{
-						verNumPlancha= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionRechazoComision"))
-					{
-						verNumResolucionRechazoComision= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionApelada"))
-					{
-						verNumResolucionApelada= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionImpugnada"))
-					{
-						verNumResolucionImpugnada= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionExtemporaneamente"))
-					{
-						verNumResolucionExtemporaneamente= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionDecisionComision"))
-					{
-						verNumResolucionDecisionComision= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreRespresenateComision"))
-					{
-						verNombreRespresenateComision= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaRespresenateComision"))
-					{
-						verFirmaRespresenateComision= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionAdmisionPlancha"))
-					{
-						verNumResolucionAdmisionPlancha= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionInadmisionPlancha"))
-					{
-						verNumResolucionInadmisionPlancha= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionCodigo"))
-					{
-						verNumResolucionCodigo= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaResolucionCodigo"))
-					{
-						verFechaResolucionCodigo= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionReglamento"))
-					{
-						verNumResolucionReglamento= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaResolucionReglamento"))
-					{
-						verFechaResolucionReglamento= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numActaTribunal"))
-					{
-						verNumActaTribunal= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numActa"))
-					{
-						verNumActa= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaActa"))
-					{
-						verFechaActa= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombrePresidente"))
-					{
-						verNombrePresidente= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaPresidente"))
-					{
-						verFirmaPresidente= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreSecretario"))
-					{
-						verNombreSecretario= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaSecretario"))
-					{
-						verFirmSecretario= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaEntrega"))
-					{
-						verFirmEntrega= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("tipoDocEntrega"))
-					{
-						verTipoDocEntrega= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numDocEntrega"))
-					{
-						verNumDocEntrega= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("anioSuspension"))
-					{
-						verAnioSuspension= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreRecibe"))
-					{
-						verNombreRecibe= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("firmaRecibe"))
-					{
-						verFirmRecibe= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("tipoDocRecibe"))
-					{
-						verTipoDocRecibe= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("numDocRecibe"))
-					{
-						verNumDocRecibe= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("argApelacion"))
-					{
-						verArgApelacion= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("antiguedad"))
-					{
-						verAntiguedad= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("anioExpedicionTitulo"))
-					{
-						verAnioExpedicionTitulo= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("otrosEstudios"))
-					{
-						verOtrosEstudios= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("experienciaLaboral"))
-					{
-						verExperienciaLaboral= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("ultimoCargo"))
-					{
-						verultimoCargo= true;
-						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaPresentacion"))
-					{
-						verFechaPresentacion= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("razones"))
-					{
-						verRazones= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreEntrega"))
-					{
-						verNombreEntrega= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("razon1"))
-					{
-						verRazon1= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("razon2"))
-					{
-						verRazon2= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("razon3"))
-					{
-						verRazon3= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("razon4"))
-					{
-						verRazon4= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("fechaFirma"))
-					{
-						verFechaFirma= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("desicion"))
-					{
-						verDesicion= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("nombreAccionante"))
-					{
-						verNombreAccionante= true;						
-					}
-					else if(eleCampo.getNombre().trim().equalsIgnoreCase("argReposicion"))
-					{
-						verArgReposicion= true;						
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreComicion")) {
+						verNombreComicion = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numComicion")) {
+						verNumComicion = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("ciudad")) {
+						verCiudad = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("ciudadComicion")) {
+						verCiudadComicion = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaElaboracionDoc")) {
+						verFechaElaboracionDoc = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("hora")) {
+						verHora = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numPlancha")) {
+						verNumPlancha = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionRechazoComision")) {
+						verNumResolucionRechazoComision = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionApelada")) {
+						verNumResolucionApelada = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionImpugnada")) {
+						verNumResolucionImpugnada = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionExtemporaneamente")) {
+						verNumResolucionExtemporaneamente = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionDecisionComision")) {
+						verNumResolucionDecisionComision = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreRespresenateComision")) {
+						verNombreRespresenateComision = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaRespresenateComision")) {
+						verFirmaRespresenateComision = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionAdmisionPlancha")) {
+						verNumResolucionAdmisionPlancha = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionInadmisionPlancha")) {
+						verNumResolucionInadmisionPlancha = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionCodigo")) {
+						verNumResolucionCodigo = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaResolucionCodigo")) {
+						verFechaResolucionCodigo = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numResolucionReglamento")) {
+						verNumResolucionReglamento = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaResolucionReglamento")) {
+						verFechaResolucionReglamento = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numActaTribunal")) {
+						verNumActaTribunal = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numActa")) {
+						verNumActa = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaActa")) {
+						verFechaActa = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombrePresidente")) {
+						verNombrePresidente = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaPresidente")) {
+						verFirmaPresidente = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreSecretario")) {
+						verNombreSecretario = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaSecretario")) {
+						verFirmSecretario = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaEntrega")) {
+						verFirmEntrega = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("tipoDocEntrega")) {
+						verTipoDocEntrega = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numDocEntrega")) {
+						verNumDocEntrega = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("anioSuspension")) {
+						verAnioSuspension = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreRecibe")) {
+						verNombreRecibe = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("firmaRecibe")) {
+						verFirmRecibe = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("tipoDocRecibe")) {
+						verTipoDocRecibe = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("numDocRecibe")) {
+						verNumDocRecibe = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("argApelacion")) {
+						verArgApelacion = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("antiguedad")) {
+						verAntiguedad = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("anioExpedicionTitulo")) {
+						verAnioExpedicionTitulo = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("otrosEstudios")) {
+						verOtrosEstudios = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("experienciaLaboral")) {
+						verExperienciaLaboral = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("ultimoCargo")) {
+						verultimoCargo = true;
+
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaPresentacion")) {
+						verFechaPresentacion = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("razones")) {
+						verRazones = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreEntrega")) {
+						verNombreEntrega = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("razon1")) {
+						verRazon1 = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("razon2")) {
+						verRazon2 = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("razon3")) {
+						verRazon3 = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("razon4")) {
+						verRazon4 = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("fechaFirma")) {
+						verFechaFirma = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("desicion")) {
+						verDesicion = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("nombreAccionante")) {
+						verNombreAccionante = true;
+					} else if (eleCampo.getNombre().trim().equalsIgnoreCase("argReposicion")) {
+						verArgReposicion = true;
 					}
 				}
 			}
-		}
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-	private void accionLimpiarCampos() 
-	{
+	private void accionLimpiarCampos() {
 		nombreAspirante = "";
 		verNombreAspirante = false;
-		
-		 firmaCandidato= "";
-		verFirmaCadidato= false;
-		
+
+		firmaCandidato = "";
+		verFirmaCadidato = false;
+
 		fotoCabezaPlancha = null;
-		verFotoCabezaPlancha= false;
-		
-		 profesionApirante= "";
-		verProfesionAspirante= false;
-		
-		 profesionCabezaPlancha= "";
-		verProfesionCabezaPlancha= false;
-		
-		 tipoIdentAspirante= "";
-		verTipoIdentAspirante= false;
-	
-		 numeroDocuemtoAspirante= "";
-		verNumeroDocumentoAspirante= false;
-		
-		 zonaExpedicionDocumento= "";
-		verZonaExpedicionDocumento= false;
-		
+		verFotoCabezaPlancha = false;
+
+		profesionApirante = "";
+		verProfesionAspirante = false;
+
+		profesionCabezaPlancha = "";
+		verProfesionCabezaPlancha = false;
+
+		tipoIdentAspirante = "";
+		verTipoIdentAspirante = false;
+
+		numeroDocuemtoAspirante = "";
+		verNumeroDocumentoAspirante = false;
+
+		zonaExpedicionDocumento = "";
+		verZonaExpedicionDocumento = false;
+
 		fechaExpedicionDocumento = null;
-		verFechaExpedicionDocumento= false;
-		
-		 nombreCabezaPlancha= "";
-		verNombreCabezaPlancha= false;
-		
-		 firmaCabezaPlancha= "";
-		verFirmaCabezaPlancha= false;
-		
-		 tipoIdentCabezaPlancha= "";
-		verTipoIdentCabezaPlancha= false;
-		
-		 numeroDocuemtoCabezaPlancha= "";
-		verNumeroDocumentoCabezaPlancha= false;
-		
-		 nombreIncribePlancha= "";
-		verNombreIncribePlancha= false;
-		
-		 firmaIncribePlancha= "";
-		verFirmaIncribePlancha= false;
-		
-		 tipoIdentIncribePlancha= "";
-		verTipoIdentIncribePlancha= false;
-		
-		 numeroDocuemtoIncribePlancha= "";
-		verNumeroDocumentoIncribePlancha= false;
-		
-		 numZonaElectroral= "";
-		verNumZonaElectroral= false;
-		
-		 nombreComicion= "";
-		verNombreComicion= false;
-		
-		 numComicion= "";
-		verNumComicion= false;
-		
-		 ciudad= "";
-		verCiudad= false;
-		
-		 ciudadComicion= "";
-		verCiudadComicion= false;
-		
+		verFechaExpedicionDocumento = false;
+
+		nombreCabezaPlancha = "";
+		verNombreCabezaPlancha = false;
+
+		firmaCabezaPlancha = "";
+		verFirmaCabezaPlancha = false;
+
+		tipoIdentCabezaPlancha = "";
+		verTipoIdentCabezaPlancha = false;
+
+		numeroDocuemtoCabezaPlancha = "";
+		verNumeroDocumentoCabezaPlancha = false;
+
+		nombreIncribePlancha = "";
+		verNombreIncribePlancha = false;
+
+		firmaIncribePlancha = "";
+		verFirmaIncribePlancha = false;
+
+		tipoIdentIncribePlancha = "";
+		verTipoIdentIncribePlancha = false;
+
+		numeroDocuemtoIncribePlancha = "";
+		verNumeroDocumentoIncribePlancha = false;
+
+		numZonaElectroral = "";
+		verNumZonaElectroral = false;
+
+		nombreComicion = "";
+		verNombreComicion = false;
+
+		numComicion = "";
+		verNumComicion = false;
+
+		ciudad = "";
+		verCiudad = false;
+
+		ciudadComicion = "";
+		verCiudadComicion = false;
+
 		fechaElaboracionDoc = null;
-		verFechaElaboracionDoc= false;
-		
-		 hora= "";
-		verHora= false;
-		
-		 numPlancha= "";
-		verNumPlancha= false;
-		
-		 numResolucionRechazoComision= "";
-		verNumResolucionRechazoComision= false;
+		verFechaElaboracionDoc = false;
 
-		 numResolucionApelada= "";
-		verNumResolucionApelada= false;
-		
-		 numResolucionImpugnada= "";
-		verNumResolucionImpugnada= false;
-		
-		 numResolucionExtemporaneamente= "";
-		verNumResolucionExtemporaneamente= false;
-		
-		 numResolucionDecisionComision= "";
-		verNumResolucionDecisionComision= false;
-		
-		 nombreRespresenateComision= "";
-		verNombreRespresenateComision= false;
-		
-		 firmaRespresenateComision= "";
-		verFirmaRespresenateComision= false;
-		
-		 numResolucionAdmisionPlancha= "";
-		verNumResolucionAdmisionPlancha= false;
-		
-		 numResolucionInadmisionPlancha= "";
-		verNumResolucionInadmisionPlancha= false;
-		
-		 numResolucionCodigo= "";
-		verNumResolucionCodigo= false;
-		
+		hora = "";
+		verHora = false;
+
+		numPlancha = "";
+		verNumPlancha = false;
+
+		numResolucionRechazoComision = "";
+		verNumResolucionRechazoComision = false;
+
+		numResolucionApelada = "";
+		verNumResolucionApelada = false;
+
+		numResolucionImpugnada = "";
+		verNumResolucionImpugnada = false;
+
+		numResolucionExtemporaneamente = "";
+		verNumResolucionExtemporaneamente = false;
+
+		numResolucionDecisionComision = "";
+		verNumResolucionDecisionComision = false;
+
+		nombreRespresenateComision = "";
+		verNombreRespresenateComision = false;
+
+		firmaRespresenateComision = "";
+		verFirmaRespresenateComision = false;
+
+		numResolucionAdmisionPlancha = "";
+		verNumResolucionAdmisionPlancha = false;
+
+		numResolucionInadmisionPlancha = "";
+		verNumResolucionInadmisionPlancha = false;
+
+		numResolucionCodigo = "";
+		verNumResolucionCodigo = false;
+
 		fechaResolucionCodigo = null;
-		verFechaResolucionCodigo= false;
-		
-		 numResolucionReglamento= "";
-		verNumResolucionReglamento= false;
-		
-		fechaResolucionReglamento = null;
-		verFechaResolucionReglamento= false;
-		
-		 numActaTribunal= "";
-		verNumActaTribunal= false;
-		
-		 numActa= "";
-		verNumActa = false;
-		
-		fechaActa = null;
-		verFechaActa= false;
-		
-		 nombrePresidente= "";
-		verNombrePresidente= false;
-		
-		 firmaPresidente= "";
-		verFirmaPresidente= false;
-		
-		 nombreSecretario= "";
-		verNombreSecretario= false;
-		
-		 firmaSecretario= "";
-		verFirmSecretario= false;
-		
-		 firmaEntrega= "";
-		verFirmEntrega= false;
-		
-		 tipoDocEntrega= "";
-		verTipoDocEntrega= false;
-		
-		 numDocEntrega= "";
-		verNumDocEntrega= false;
-		
-		 anioSuspension= "";
-		verAnioSuspension= false;
-		
-		 nombreRecibe= "";
-		verNombreRecibe= false;
-		
-		 firmaRecibe= "";
-		verFirmRecibe= false;
-		
-		 tipoDocRecibe= "";
-		verTipoDocRecibe= false;
-		
-		 numDocRecibe= "";
-		verNumDocRecibe= false;
+		verFechaResolucionCodigo = false;
 
-		 argApelacion= "";
-		verArgApelacion= false;
-		
-		 antiguedad= "";
-		verAntiguedad= false;
-		
-		 anioExpedicionTitulo= "";
-		verAnioExpedicionTitulo= false;
-		
-		 otrosEstudios= "";
-		verOtrosEstudios= false;
-		
-		 experienciaLaboral= "";
-		verExperienciaLaboral= false;
-		
-		 ultimoCargo= "";
-		verultimoCargo= false;
-		
+		numResolucionReglamento = "";
+		verNumResolucionReglamento = false;
+
+		fechaResolucionReglamento = null;
+		verFechaResolucionReglamento = false;
+
+		numActaTribunal = "";
+		verNumActaTribunal = false;
+
+		numActa = "";
+		verNumActa = false;
+
+		fechaActa = null;
+		verFechaActa = false;
+
+		nombrePresidente = "";
+		verNombrePresidente = false;
+
+		firmaPresidente = "";
+		verFirmaPresidente = false;
+
+		nombreSecretario = "";
+		verNombreSecretario = false;
+
+		firmaSecretario = "";
+		verFirmSecretario = false;
+
+		firmaEntrega = "";
+		verFirmEntrega = false;
+
+		tipoDocEntrega = "";
+		verTipoDocEntrega = false;
+
+		numDocEntrega = "";
+		verNumDocEntrega = false;
+
+		anioSuspension = "";
+		verAnioSuspension = false;
+
+		nombreRecibe = "";
+		verNombreRecibe = false;
+
+		firmaRecibe = "";
+		verFirmRecibe = false;
+
+		tipoDocRecibe = "";
+		verTipoDocRecibe = false;
+
+		numDocRecibe = "";
+		verNumDocRecibe = false;
+
+		argApelacion = "";
+		verArgApelacion = false;
+
+		antiguedad = "";
+		verAntiguedad = false;
+
+		anioExpedicionTitulo = "";
+		verAnioExpedicionTitulo = false;
+
+		otrosEstudios = "";
+		verOtrosEstudios = false;
+
+		experienciaLaboral = "";
+		verExperienciaLaboral = false;
+
+		ultimoCargo = "";
+		verultimoCargo = false;
+
 		fechaPresentacion = null;
-		verFechaPresentacion= false;
-		
+		verFechaPresentacion = false;
+
 		razones = "";
-		verRazones= false;
-		
-		nombreEntrega= "";
+		verRazones = false;
+
+		nombreEntrega = "";
 		verNombreEntrega = false;
-		
+
 		nombreAccionante = "";
-		verNombreAccionante = false; 
+		verNombreAccionante = false;
 
 		argReposicion = "";
 		verArgReposicion = false;
-		
+
 		razon1 = "";
-		verRazon1= false;
+		verRazon1 = false;
 		razon2 = "";
-		verRazon2= false;
+		verRazon2 = false;
 		razon3 = "";
-		verRazon3= false;
+		verRazon3 = false;
 		razon4 = "";
-		verRazon4= false;
+		verRazon4 = false;
 		fechaFirma = null;
-		verFechaFirma =false;
-		
+		verFechaFirma = false;
+
 		desicion = "";
 		verDesicion = false;
 		isReporte176 = false;
 		esReporte211 = false;
 		listaPreguntas = null;
-		
+
 		tipoReporte = "-1";
 	}
 
@@ -1605,8 +1384,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumeroDocumentoCabezaPlancha;
 	}
 
-	public void setVerNumeroDocumentoCabezaPlancha(
-			boolean verNumeroDocumentoCabezaPlancha) {
+	public void setVerNumeroDocumentoCabezaPlancha(boolean verNumeroDocumentoCabezaPlancha) {
 		this.verNumeroDocumentoCabezaPlancha = verNumeroDocumentoCabezaPlancha;
 	}
 
@@ -1670,8 +1448,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumeroDocumentoIncribePlancha;
 	}
 
-	public void setVerNumeroDocumentoIncribePlancha(
-			boolean verNumeroDocumentoIncribePlancha) {
+	public void setVerNumeroDocumentoIncribePlancha(boolean verNumeroDocumentoIncribePlancha) {
 		this.verNumeroDocumentoIncribePlancha = verNumeroDocumentoIncribePlancha;
 	}
 
@@ -1815,8 +1592,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumResolucionRechazoComision;
 	}
 
-	public void setVerNumResolucionRechazoComision(
-			boolean verNumResolucionRechazoComision) {
+	public void setVerNumResolucionRechazoComision(boolean verNumResolucionRechazoComision) {
 		this.verNumResolucionRechazoComision = verNumResolucionRechazoComision;
 	}
 
@@ -1856,8 +1632,7 @@ public class FormularioReportesVista extends BaseVista {
 		return numResolucionExtemporaneamente;
 	}
 
-	public void setNumResolucionExtemporaneamente(
-			String numResolucionExtemporaneamente) {
+	public void setNumResolucionExtemporaneamente(String numResolucionExtemporaneamente) {
 		this.numResolucionExtemporaneamente = numResolucionExtemporaneamente;
 	}
 
@@ -1865,8 +1640,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumResolucionExtemporaneamente;
 	}
 
-	public void setVerNumResolucionExtemporaneamente(
-			boolean verNumResolucionExtemporaneamente) {
+	public void setVerNumResolucionExtemporaneamente(boolean verNumResolucionExtemporaneamente) {
 		this.verNumResolucionExtemporaneamente = verNumResolucionExtemporaneamente;
 	}
 
@@ -1874,8 +1648,7 @@ public class FormularioReportesVista extends BaseVista {
 		return numResolucionDecisionComision;
 	}
 
-	public void setNumResolucionDecisionComision(
-			String numResolucionDecisionComision) {
+	public void setNumResolucionDecisionComision(String numResolucionDecisionComision) {
 		this.numResolucionDecisionComision = numResolucionDecisionComision;
 	}
 
@@ -1883,8 +1656,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumResolucionDecisionComision;
 	}
 
-	public void setVerNumResolucionDecisionComision(
-			boolean verNumResolucionDecisionComision) {
+	public void setVerNumResolucionDecisionComision(boolean verNumResolucionDecisionComision) {
 		this.verNumResolucionDecisionComision = verNumResolucionDecisionComision;
 	}
 
@@ -1900,8 +1672,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNombreRespresenateComision;
 	}
 
-	public void setVerNombreRespresenateComision(
-			boolean verNombreRespresenateComision) {
+	public void setVerNombreRespresenateComision(boolean verNombreRespresenateComision) {
 		this.verNombreRespresenateComision = verNombreRespresenateComision;
 	}
 
@@ -1933,8 +1704,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumResolucionAdmisionPlancha;
 	}
 
-	public void setVerNumResolucionAdmisionPlancha(
-			boolean verNumResolucionAdmisionPlancha) {
+	public void setVerNumResolucionAdmisionPlancha(boolean verNumResolucionAdmisionPlancha) {
 		this.verNumResolucionAdmisionPlancha = verNumResolucionAdmisionPlancha;
 	}
 
@@ -1942,8 +1712,7 @@ public class FormularioReportesVista extends BaseVista {
 		return numResolucionInadmisionPlancha;
 	}
 
-	public void setNumResolucionInadmisionPlancha(
-			String numResolucionInadmisionPlancha) {
+	public void setNumResolucionInadmisionPlancha(String numResolucionInadmisionPlancha) {
 		this.numResolucionInadmisionPlancha = numResolucionInadmisionPlancha;
 	}
 
@@ -1951,8 +1720,7 @@ public class FormularioReportesVista extends BaseVista {
 		return verNumResolucionInadmisionPlancha;
 	}
 
-	public void setVerNumResolucionInadmisionPlancha(
-			boolean verNumResolucionInadmisionPlancha) {
+	public void setVerNumResolucionInadmisionPlancha(boolean verNumResolucionInadmisionPlancha) {
 		this.verNumResolucionInadmisionPlancha = verNumResolucionInadmisionPlancha;
 	}
 
@@ -2381,63 +2149,55 @@ public class FormularioReportesVista extends BaseVista {
 	}
 
 	public List<SelectItem> getListaFormulario() {
-		try
-		{
+		try {
 			List<EleFormulario> listaFormularios = null;
-			
-			if(listaFormulario == null)
-			{
-				listaFormulario= new ArrayList<SelectItem>();
-				
+
+			if (listaFormulario == null) {
+				listaFormulario = new ArrayList<SelectItem>();
+
 				listaFormularios = DelegadoFormulario.getInstance().listarFormularios();
-				if(listaFormularios != null)
-				{
+				if (listaFormularios != null) {
 					SelectItem selectItem = new SelectItem(-1, "-seleccione-");
 					listaFormulario.add(selectItem);
 					for (EleFormulario eleFormulario : listaFormularios) {
-						
-						if(!eleFormulario.getCodFormulario().equals(176L))
-						{
-							selectItem = new SelectItem(eleFormulario.getCodFormulario(), eleFormulario.getDescripcion());
+
+						if (!eleFormulario.getCodFormulario().equals(176L)) {
+							selectItem = new SelectItem(eleFormulario.getCodFormulario(),
+									eleFormulario.getDescripcion());
 							listaFormulario.add(selectItem);
-							
-						}						
+
+						}
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return listaFormulario;
 	}
-	
+
 	public List<SelectItem> getListaFormularioComite() {
-		try
-		{
+		try {
 			List<EleFormulario> listaFormularios = null;
-			
-			if(listaFormulario == null)
-			{
-				listaFormulario= new ArrayList<SelectItem>();
-				
+
+			if (listaFormulario == null) {
+				listaFormulario = new ArrayList<SelectItem>();
+
 				listaFormularios = DelegadoFormulario.getInstance().listarFormularios();
-				if(listaFormularios != null)
-				{
+				if (listaFormularios != null) {
 					SelectItem selectItem = new SelectItem(-1, "-seleccione-");
 					listaFormulario.add(selectItem);
 					for (EleFormulario eleFormulario : listaFormularios) {
-						
-						if(eleFormulario.getCodFormulario().equals(176L))
-						{
-							selectItem = new SelectItem(eleFormulario.getCodFormulario(), eleFormulario.getDescripcion());
-							listaFormulario.add(selectItem);			
-						}						
+
+						if (eleFormulario.getCodFormulario().equals(176L)) {
+							selectItem = new SelectItem(eleFormulario.getCodFormulario(),
+									eleFormulario.getDescripcion());
+							listaFormulario.add(selectItem);
+						}
 					}
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return listaFormulario;
@@ -2584,8 +2344,7 @@ public class FormularioReportesVista extends BaseVista {
 	}
 
 	public List<PreguntasFormulario176DTO> getListaPreguntas() {
-		if(listaPreguntas == null)
-		{
+		if (listaPreguntas == null) {
 			listaPreguntas = PreguntasFormulario176Util.crearFormulario();
 		}
 		return listaPreguntas;
@@ -2596,9 +2355,8 @@ public class FormularioReportesVista extends BaseVista {
 	}
 
 	public List<SelectItem> getListRespuesta() {
-		
-		if(listRespuesta == null)
-		{
+
+		if (listRespuesta == null) {
 			listRespuesta = new ArrayList<SelectItem>();
 			listRespuesta.add(new SelectItem(1, "SI"));
 			listRespuesta.add(new SelectItem(0, "NO"));

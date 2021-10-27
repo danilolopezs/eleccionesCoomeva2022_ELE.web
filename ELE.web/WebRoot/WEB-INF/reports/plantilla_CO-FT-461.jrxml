@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_189" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e95313c0-1302-4026-aeca-3b9a5e1be248">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_189" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3310000000000024"/>
 	<property name="ireport.x" value="29"/>
 	<property name="ireport.y" value="150"/>
@@ -21,199 +20,200 @@
 	<detail>
 		<band height="713">
 			<frame>
-				<reportElement x="0" y="0" width="555" height="713" forecolor="#00B050" uuid="08d2e2e4-d313-4eb4-b569-784c6d91407c"/>
+				<reportElement x="0" y="0" width="555" height="713" forecolor="#00B050"/>
 				<rectangle>
-					<reportElement x="0" y="0" width="555" height="82" forecolor="#7D933C" backcolor="#7D933C" uuid="ed8e7295-3074-409d-8a52-8622eefac5c8"/>
+					<reportElement x="0" y="0" width="555" height="82" forecolor="#7D933C" backcolor="#7D933C"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="5" y="0" width="550" height="82" forecolor="#FFFFFF" uuid="0b93ab20-5a6b-44e0-8d28-d07781a94d40"/>
+					<reportElement x="5" y="0" width="550" height="82" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14" isBold="true"/>
 					</textElement>
-					<text><![CDATA[ELECCIÓN DE DELEGADOS 2022-2026
+					<text><![CDATA[ELECCIÓN DE DELEGADOS 2017-2020
 RESOLUCIÓN QUE RESUELVE UN RECURSO DE
 APELACIÓN FAVORABLE]]></text>
 				</staticText>
 				<image>
-					<reportElement x="213" y="92" width="119" height="39" uuid="9731b444-3626-4311-83a7-fc9d22e18ae8"/>
-					<imageExpression><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
+					<reportElement x="213" y="92" width="119" height="39"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
 				</image>
 				<rectangle>
-					<reportElement x="22" y="139" width="533" height="31" forecolor="#000000" uuid="67fa1920-70d6-4474-b906-b9e22b1cc80f"/>
+					<reportElement x="22" y="139" width="533" height="31" forecolor="#000000"/>
 				</rectangle>
 				<rectangle>
-					<reportElement x="22" y="170" width="533" height="34" forecolor="#000000" uuid="390262ba-9ed2-42dd-ae2a-9217447455f6"/>
+					<reportElement x="22" y="170" width="533" height="34" forecolor="#000000"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="455" y="695" width="100" height="18" uuid="53b0022c-2333-4c5f-a04f-a69e3d8823c8"/>
+					<reportElement x="455" y="695" width="100" height="18"/>
 					<textElement textAlignment="Right"/>
 					<text><![CDATA[Mod.Agosto 2016]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="193" y="139" width="174" height="14" uuid="1a6d8a8c-b4ab-4d49-b2cc-a2b48511b204"/>
+					<reportElement x="193" y="139" width="174" height="14"/>
 					<textElement textAlignment="Center">
 						<font isBold="false"/>
 					</textElement>
 					<text><![CDATA[Apelante : Apellido (s) y Nombre (s)]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="22" y="170" width="115" height="34" uuid="0720e104-c72b-461f-96e6-2217f294e3d3"/>
+					<reportElement x="22" y="170" width="115" height="34"/>
+					<textElement/>
 					<text><![CDATA[Resolucion Apelada
 No.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="195" y="171" width="121" height="33" uuid="a8605f42-56ec-4e30-b6da-cb0b65a15b96"/>
+					<reportElement x="195" y="171" width="121" height="33"/>
+					<textElement/>
 					<text><![CDATA[Decisión de la Comisión
 Resolución No.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="438" y="171" width="50" height="20" uuid="449eeffc-27ca-43ba-b5f6-db3fa7cdcf33"/>
+					<reportElement x="438" y="171" width="50" height="20"/>
+					<textElement/>
 					<text><![CDATA[Fecha]]></text>
 				</staticText>
 				<line>
-					<reportElement x="191" y="139" width="1" height="65" forecolor="#000000" uuid="029fb23b-f2fd-4c38-8294-7ecdb286af3a"/>
+					<reportElement x="191" y="139" width="1" height="65" forecolor="#000000"/>
 				</line>
 				<line>
-					<reportElement x="437" y="170" width="1" height="34" forecolor="#000000" uuid="7de95fd3-83be-47eb-98fe-b5e54ffa58a9"/>
+					<reportElement x="437" y="170" width="1" height="34" forecolor="#000000"/>
 				</line>
 				<rectangle>
-					<reportElement x="22" y="224" width="533" height="412" forecolor="#000000" uuid="8e33eaf1-8ce9-45f3-872c-90b18f1678ef"/>
+					<reportElement x="22" y="224" width="533" height="412" forecolor="#000000"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="31" y="204" width="321" height="20" uuid="95ea3b84-4495-4ca2-90ac-6dcb4161bcb1"/>
+					<reportElement x="31" y="204" width="321" height="20"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Análisis de los hechos presentados]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="31" y="242" width="524" height="53" uuid="95ad4537-e986-4f42-bea4-2cf022082c6a"/>
-					<textElement textAlignment="Left">
+					<reportElement x="31" y="242" width="524" height="53"/>
+					<textElement textAlignment="Left" lineSpacing="1_1_2">
 						<font size="11" isBold="false"/>
-						<paragraph lineSpacing="1_1_2"/>
 					</textElement>
 					<text><![CDATA[Ha recibido este Tribunal según consta en el Acta No. _________ el Recurso intrepuesto y una vez revisados los hechos planteados por el Apelante se determinó probado el argumento de:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="31" y="378" width="524" height="20" uuid="ab60ffcb-d89a-4cc5-a4fc-30768fb08c1a"/>
-					<textElement>
+					<reportElement x="31" y="378" width="524" height="20"/>
+					<textElement lineSpacing="1_1_2">
 						<font size="11"/>
-						<paragraph lineSpacing="1_1_2"/>
 					</textElement>
 					<text><![CDATA[Por lo tanto se modifica la Resolución No. _________ y se describe la nueva decisión.]]></text>
 				</staticText>
 				<line>
-					<reportElement x="31" y="550" width="407" height="1" forecolor="#000000" uuid="31167a14-6aac-40f3-8688-2263b8e73531"/>
+					<reportElement x="31" y="550" width="407" height="1" forecolor="#000000"/>
 				</line>
 				<staticText>
-					<reportElement x="30" y="595" width="246" height="18" forecolor="#000000" uuid="c2b8395c-eafb-4b70-94d5-f20c8bfbf93c"/>
+					<reportElement x="30" y="595" width="246" height="18" forecolor="#000000"/>
 					<textElement textAlignment="Center">
 						<font size="12"/>
 					</textElement>
 					<text><![CDATA[Nombre Y Firma del Secretario]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="31" y="551" width="246" height="18" forecolor="#000000" uuid="1233c051-c5cf-4129-8cff-97c04ef9fd9d"/>
+					<reportElement x="31" y="551" width="246" height="18" forecolor="#000000"/>
 					<textElement textAlignment="Center">
 						<font size="12"/>
 					</textElement>
 					<text><![CDATA[Nombre Y Firma del Presidente]]></text>
 				</staticText>
 				<line>
-					<reportElement x="30" y="594" width="407" height="1" forecolor="#000000" uuid="756edef2-49aa-44de-8c15-93d412e8fc38"/>
+					<reportElement x="30" y="594" width="407" height="1" forecolor="#000000"/>
 				</line>
 				<rectangle>
-					<reportElement x="0" y="636" width="555" height="59" forecolor="#7D933C" backcolor="#7D933C" uuid="6f0d599f-d392-49c1-8cb6-55f41ca819f3"/>
+					<reportElement x="0" y="636" width="555" height="59" forecolor="#7D933C" backcolor="#7D933C"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="97" y="636" width="322" height="59" forecolor="#FFFFFF" uuid="700db227-7de9-4435-bede-8cbb417c8f6c"/>
+					<reportElement x="97" y="636" width="322" height="59" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="31" y="295" width="517" height="69" uuid="7f0de0e1-4947-4753-88ae-0a0d27f408ab"/>
-					<textElement>
+					<reportElement x="31" y="295" width="517" height="69"/>
+					<textElement lineSpacing="Single">
 						<font size="11"/>
-						<paragraph lineSpacing="Single"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{argumento}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{argumento}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="193" y="153" width="362" height="17" uuid="8ac2faff-cd9f-44fb-ab5b-2bd66a616a9b"/>
+					<reportElement x="193" y="153" width="362" height="17"/>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{nombreApelante}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreApelante}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="37" y="184" width="154" height="20" uuid="f75a91d5-1d1a-4e63-98eb-92429f41e4c4"/>
+					<reportElement x="37" y="184" width="154" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{resolucionApelada}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucionApelada}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement mode="Transparent" x="97" y="151" width="94" height="19" uuid="187eb8e5-88a5-4a81-9700-ab29f70c76c2"/>
+					<reportElement mode="Transparent" x="97" y="151" width="94" height="19"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{acta}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{acta}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="267" y="183" width="170" height="20" uuid="7d81497f-6329-4e21-b5c8-119238a34a28"/>
+					<reportElement x="267" y="183" width="170" height="20"/>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{resolucionComision}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucionComision}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="297" y="242" width="55" height="20" uuid="179dd30d-c00f-42d0-98ee-a8293d964b3c"/>
+					<reportElement x="297" y="242" width="55" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{actaTribunal}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{actaTribunal}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="241" y="378" width="56" height="20" uuid="82f09bc1-709c-49c5-a00e-bd08c21dfbe2"/>
+					<reportElement x="241" y="378" width="56" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{resolucionApelada}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucionApelada}]]></textFieldExpression>
 				</textField>
 				<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-					<reportElement x="438" y="184" width="117" height="19" uuid="d19f4a8f-f02d-4401-abc7-808c866921ba"/>
+					<reportElement x="438" y="184" width="117" height="19"/>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+					<textFieldExpression class="java.util.Date"><![CDATA[$P{fecha}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="31" y="405" width="517" height="53" uuid="a87e2db8-1daf-4704-b417-6b80e78d8483"/>
-					<textFieldExpression><![CDATA[$P{decision}]]></textFieldExpression>
+					<reportElement x="31" y="405" width="517" height="53"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{decision}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="31" y="458" width="517" height="47" uuid="a2b64092-506d-4ddb-b31f-841e3ab19766"/>
-					<textElement>
+					<reportElement x="31" y="458" width="517" height="47"/>
+					<textElement lineSpacing="1_1_2">
 						<font size="11"/>
-						<paragraph lineSpacing="1_1_2"/>
 					</textElement>
 					<text><![CDATA[La presente Resolución será comunicada a la dirección registrada en la Cooperativa para su notificación al interesado (basado en Art. 109 del Código Electoral).]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="8" y="131" width="14" height="361" uuid="4a57eaa4-6824-45d7-b560-ce2f83010e0e"/>
+					<reportElement x="8" y="131" width="14" height="361"/>
 					<textElement rotation="Left">
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[Vigilado por la Superintendencia de la Economia Solidaria  NIT.:890.300.625-1]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="22" y="695" width="100" height="18" uuid="c461a421-27a7-4e1b-b108-d9def8254169"/>
+					<reportElement x="22" y="695" width="100" height="18"/>
+					<textElement/>
 					<text><![CDATA[CO-FT-461]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Transparent" x="22" y="139" width="169" height="31" forecolor="#000000" uuid="9bfd9e23-c47a-443b-a606-8c01c402bdc0"/>
+					<reportElement mode="Transparent" x="22" y="139" width="169" height="31" forecolor="#000000"/>
 					<textElement markup="none">
 						<font size="10" isBold="false"/>
 					</textElement>

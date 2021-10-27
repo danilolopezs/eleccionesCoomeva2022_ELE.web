@@ -1779,32 +1779,32 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteCertificadoAcreditaOcupacion_FT_211(String ciudad, String anio, String mes, String dia,
 			String nombreAsociado, String cedulaAsociado, String ciudadCedula, String ciudadFirma, String diaFirma,
-			String mesFirma, String anioFirma, String formulario, String rutaReporte) throws Exception {
+			String mesFirma, String anioFirma, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
-		try {
-			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("ciudad", ciudad);
-			parameters.put("año", anio);
-			parameters.put("mes", mes);
-			parameters.put("dia", dia);
-			parameters.put("nombre", nombreAsociado);
-			parameters.put("cedula", cedulaAsociado);
-			parameters.put("ciudad_cedula", ciudadCedula);
-			parameters.put("ciudad_firma", ciudadFirma);
-			parameters.put("dias_firma", diaFirma);
-			parameters.put("mes_firma", mesFirma);
-			parameters.put("año_firma", anioFirma);
-			parameters.put("formulario", formulario);
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("ciudad", ciudad);
+		parameters.put("año", anio);
+		parameters.put("mes", mes);
+		parameters.put("dia", dia);
+		parameters.put("nombre", nombreAsociado);
+		parameters.put("cedula", cedulaAsociado);
+		parameters.put("ciudad_cedula", ciudadCedula);
+		parameters.put("ciudad_firma", ciudadFirma);
+		parameters.put("dias_firma", diaFirma);
+		parameters.put("mes_firma", mesFirma);
+		parameters.put("año_firma", anioFirma);
+		parameters.put("rutaImagen", rutaImagen);
 
-			rutaReporte = rutaReporte + "CO-FT-211.jasper";
-			JRDataSource ds = new JREmptyDataSource();
-			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
+		rutaReporte = rutaReporte + "plantilla_CO-FT-211.jasper";
+		// rutaReporte =
+		// "D:\\Elecciones_coomeva_2022_web\\Workspace.Eclipse.Elecciones.Original\\ELE.web\\WebRoot\\WEB-INF\\reports\\plantilla_CO-FT-211.jasper";
+		JRDataSource ds = new JREmptyDataSource();
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
+		jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
 
-			return jasperPrint;
-		} catch (JRException e) {
-			throw e;
-		}
+		return jasperPrint;
+		
 	}
 
 	/**

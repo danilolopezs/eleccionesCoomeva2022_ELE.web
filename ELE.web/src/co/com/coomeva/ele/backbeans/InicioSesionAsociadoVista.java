@@ -2,12 +2,14 @@ package co.com.coomeva.ele.backbeans;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
+import co.com.coomeva.ele.delegado.DelegadoAutenticacion;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
@@ -33,6 +35,8 @@ import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.ele.util.Validador;
+import co.com.coomeva.profile.ws.client.CaasStub.Section;
+import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
 
@@ -71,15 +75,11 @@ public class InicioSesionAsociadoVista extends BaseVista {
 						|| respuestaWS.getStatusCode().equals("1500")) {
 					visible = Boolean.TRUE;
 					if (respuestaWS.getClient() != null) {
-						FacesUtils.setSessionParameter("numeroDocAsociado",
-								Long.parseLong(respuestaWS.getClient().getUser()));
-						validacionInformacionPlanchas(respuestaWS.getClient().getUser());
+						completarInicioSesion(Long.parseLong(respuestaWS.getClient().getUser()));
 					} else {
 						if (existeUsuario()) {
-							FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
-							validacionInformacionPlanchas(login);
+							completarInicioSesion(Long.parseLong(login));
 						} else {
-							//validacionInformacionPlanchas(login);
 							exceptionGenery("El usuario no existe.");
 						}
 					}
@@ -102,6 +102,25 @@ public class InicioSesionAsociadoVista extends BaseVista {
 
 	private boolean existeUsuario() throws NumberFormatException, Exception {
 		return DelegadoAsociado.getInstance().consultarInformacionBasicaAsociado(Long.parseLong(login)) != null;
+	}
+	
+	private void completarInicioSesion(Long numeroDocumento) {
+		FacesUtils.setSessionParameter("numeroDocAsociado", numeroDocumento);
+		UserVo user = new UserVo();
+		user.setUserId(numeroDocumento+"");
+		FacesUtils.setSessionParameter("user", user);
+//		try {
+//			user = DelegadoAutenticacion.getInstance().autenDirectorioActivo(login, password);
+//			FacesUtils.setSessionParameter("user", user);
+//		} catch (Exception e) {
+//			visible = false;
+//			String mensaje = e.getMessage();
+//			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
+//				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
+//			}
+//			getMensaje().mostrarMensaje(mensaje);
+//		}
+		validacionInformacionPlanchas(numeroDocumento+"");		
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {

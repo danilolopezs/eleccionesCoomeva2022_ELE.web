@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="330353d7-69d3-44f0-9b97-d7c032ebf748">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.4641000000000053"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -23,17 +22,17 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle>
-				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#7D933C" uuid="5fca67ef-e633-4b44-b2c7-9740e3ca678a"/>
+				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#7D933C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="12" width="555" height="25" forecolor="#FFFFFF" uuid="25e19fcc-12fc-47c4-9597-a4b2def400ff"/>
+				<reportElement x="0" y="12" width="555" height="25" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" markup="none">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Elección de Delegados 2022-2026]]></text>
+				<text><![CDATA[Elección de Delegados 2017-2020]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="47" width="555" height="20" forecolor="#FFFFFF" uuid="f2d9db29-de0c-472a-912a-a464eea3308c"/>
+				<reportElement x="0" y="47" width="555" height="20" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" markup="none">
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -44,77 +43,77 @@
 	<pageHeader>
 		<band height="44" splitType="Stretch">
 			<image>
-				<reportElement x="225" y="4" width="127" height="36" uuid="87f4096d-e864-40dd-9627-f4b8c708cfcc"/>
-				<imageExpression><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
+				<reportElement x="225" y="4" width="127" height="36"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="39" splitType="Stretch">
 			<rectangle>
-				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000" uuid="7527685f-0994-4d6c-b010-e855710217a4"/>
+				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000"/>
 			</rectangle>
 			<line>
-				<reportElement x="297" y="1" width="1" height="31" forecolor="#000000" uuid="040e37be-1d29-4f67-a4de-a088397749ca"/>
+				<reportElement x="297" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="430" y="1" width="1" height="31" forecolor="#000000" uuid="d7b6768b-7ef6-4365-b9dd-9cb0670fc696"/>
+				<reportElement x="430" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<staticText>
-				<reportElement x="49" y="5" width="84" height="14" forecolor="#000000" uuid="1497982c-2cdb-40f5-9c34-0e6b9d859d7b"/>
+				<reportElement x="49" y="5" width="84" height="14" forecolor="#000000"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="305" y="5" width="29" height="14" forecolor="#000000" uuid="8f2a759a-4163-4db8-a3a2-d2c21fb32cc0"/>
+				<reportElement x="305" y="5" width="29" height="14" forecolor="#000000"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="431" y="5" width="26" height="14" forecolor="#000000" uuid="277f4efb-2c69-4910-85c4-d2588166a7f5"/>
+				<reportElement x="431" y="5" width="26" height="14" forecolor="#000000"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Hora]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="50" y="1" width="470" height="4" forecolor="#000000" backcolor="#000000" uuid="4ea89c97-6cae-40ff-912b-16410a44c484"/>
+				<reportElement x="50" y="1" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="133" y="12" width="161" height="20" uuid="d7ee583e-d3ce-4cca-952e-7768c4825470"/>
+				<reportElement x="133" y="12" width="161" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[$P{zona}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="298" y="14" width="132" height="18" uuid="8cfa5748-908d-4bc6-863f-aed6922056c5"/>
+				<reportElement x="298" y="14" width="132" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{fechaActual}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
 			</textField>
 			<textField pattern="h.mm a" isBlankWhenNull="true">
-				<reportElement x="431" y="14" width="89" height="18" uuid="aaedcb9b-066a-4929-92cb-53368f575e2e"/>
+				<reportElement x="431" y="14" width="89" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{fechaActual}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="258" splitType="Stretch">
 			<rectangle>
-				<reportElement x="49" y="0" width="471" height="205" forecolor="#000000" uuid="adfc7be7-d904-4de4-9687-e820e9de6611"/>
+				<reportElement x="49" y="0" width="471" height="205" forecolor="#000000"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="50" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000" uuid="6c0d2d76-4f8c-4034-9456-e7defd6992a1"/>
+				<reportElement x="50" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="84" y="163" width="126" height="24" forecolor="#000000" uuid="c0c6028b-69b9-4ea4-a15d-83d0857301f0"/>
+				<reportElement x="84" y="163" width="126" height="24" forecolor="#000000"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
@@ -122,7 +121,7 @@
 C.C:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="334" y="163" width="145" height="24" forecolor="#000000" uuid="00930449-ce62-4167-ae2d-503509759e43"/>
+				<reportElement x="334" y="163" width="145" height="24" forecolor="#000000"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
@@ -130,35 +129,35 @@ C.C:]]></text>
 C.C]]></text>
 			</staticText>
 			<line>
-				<reportElement x="71" y="162" width="184" height="1" forecolor="#000000" uuid="8bbfd073-07d3-4e21-be4b-15f569f28f02"/>
+				<reportElement x="71" y="162" width="184" height="1" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="316" y="161" width="184" height="1" forecolor="#000000" uuid="189c8ff8-610c-4cf9-87ce-7a4b53890fdd"/>
+				<reportElement x="316" y="161" width="184" height="1" forecolor="#000000"/>
 			</line>
 			<rectangle>
-				<reportElement x="-21" y="205" width="595" height="32" forecolor="#7D933C" backcolor="#7D933C" uuid="28515bc4-b9e8-4ccf-9a10-d78aebca0019"/>
+				<reportElement x="-21" y="205" width="595" height="32" forecolor="#7D933C" backcolor="#7D933C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="50" y="211" width="470" height="20" forecolor="#FFFFFF" uuid="30509dcb-60c0-421d-b4cb-3ad9a42c0006"/>
+				<reportElement x="50" y="211" width="470" height="20" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="50" y="238" width="100" height="20" forecolor="#000000" uuid="ee39c32e-1ef2-49c4-a0e1-55219b0a340b"/>
+				<reportElement x="50" y="238" width="100" height="20" forecolor="#000000"/>
+				<textElement/>
 				<text><![CDATA[CO-FT-208]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="418" y="238" width="100" height="20" forecolor="#000000" uuid="9f82e1c9-816a-4339-8b97-3d6a71b44d2f"/>
+				<reportElement x="418" y="238" width="100" height="20" forecolor="#000000"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Mod.Agosto.2016]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="4" width="429" height="78" forecolor="#000000" uuid="20c4c705-2b4d-4d96-a93a-cdbb55bad28b"/>
-				<textElement>
+				<reportElement x="71" y="4" width="429" height="78" forecolor="#000000"/>
+				<textElement lineSpacing="1_1_2">
 					<font size="9"/>
-					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[La Comisión Electoral No. ________ de la ciudad de ______________________________________
 expide Constancia de Recibo y radicación de la Plancha encabezada por ______________________
@@ -166,77 +165,77 @@ identificado con cédula de ciudadanía número _____________________ de________
 el día __________ del mes de ____________________________ del año __________ .]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="180" y="4" width="30" height="20" uuid="88ae53c3-1b99-4bcc-81a0-1eab1ad1d433"/>
+				<reportElement x="180" y="4" width="30" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{comision}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comision}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="289" y="6" width="212" height="20" uuid="c7af427c-00c9-4656-bcb8-a9c0a65d68fb"/>
+				<reportElement x="289" y="6" width="212" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{ciudad}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="366" y="24" width="152" height="13" uuid="cd22e779-cd10-44df-b8e4-24638222398e"/>
+				<reportElement x="366" y="24" width="152" height="13"/>
 				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="255" y="35" width="100" height="17" uuid="a0a3a2be-f94f-4914-99e1-7ed6408cb1c6"/>
+				<reportElement x="255" y="35" width="100" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{cedula}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cedula}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="369" y="31" width="149" height="22" uuid="3cde9efe-84fd-4ac7-9132-b66648a1481c"/>
+				<reportElement x="369" y="31" width="149" height="22"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{ciudadCedula}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudadCedula}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="55" width="53" height="13" uuid="82fd3a7f-194b-443f-b8eb-b42073f4bc3f"/>
+				<reportElement x="94" y="55" width="53" height="13"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{dia}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="195" y="55" width="121" height="13" uuid="d48516d9-c547-439d-b19d-94ee0c6463b6"/>
+				<reportElement x="195" y="55" width="121" height="13"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{mes}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="360" y="54" width="47" height="14" uuid="ad3e91db-5bf2-48d6-b084-5f283b018862"/>
+				<reportElement x="360" y="54" width="47" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{anio}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="39" y="0" width="10" height="205" forecolor="#000000" uuid="11ba4426-58ec-4065-8543-bc0e2b7917f2"/>
+				<reportElement x="39" y="0" width="10" height="205" forecolor="#000000"/>
 				<textElement textAlignment="Center" rotation="Left">
 					<font size="5"/>
 				</textElement>
 				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="89" width="184" height="12" forecolor="#000000" uuid="03d9a69e-6f12-4466-a4c4-9a5cedfed3d6"/>
+				<reportElement x="71" y="89" width="184" height="12" forecolor="#000000"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[Nombre(s) y Apellido(s) de quien presenta la Plancha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="89" width="212" height="12" forecolor="#000000" uuid="7645e183-b084-4c07-9569-a4f4a57a6fb8"/>
+				<reportElement x="289" y="89" width="212" height="12" forecolor="#000000"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
@@ -244,31 +243,31 @@ el día __________ del mes de ____________________________ del año __________ .
 ]]></text>
 			</staticText>
 			<line>
-				<reportElement x="71" y="126" width="173" height="1" forecolor="#000000" uuid="087bb819-146d-42a7-89be-5684568e8f91"/>
+				<reportElement x="71" y="126" width="173" height="1" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="289" y="127" width="211" height="1" forecolor="#000000" uuid="6b1302d7-4071-445b-a729-bb2e80513885"/>
+				<reportElement x="289" y="127" width="211" height="1" forecolor="#000000"/>
 			</line>
 			<staticText>
-				<reportElement x="71" y="187" width="386" height="20" forecolor="#000000" uuid="1da7442c-ffc5-48a8-9f96-520ef4213a3c"/>
+				<reportElement x="71" y="187" width="386" height="20" forecolor="#000000"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nota: La entrega de esta constancia no significa la Admisión y Aceptación de la Plancha.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="71" y="108" width="173" height="20" uuid="047af35c-20df-4271-96b5-e1e1d949b623"/>
+				<reportElement x="71" y="108" width="173" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nombreEntrega}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreEntrega}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="289" y="108" width="212" height="20" uuid="68f59320-8afb-4c4d-a2d4-c2b72ff04f8c"/>
+				<reportElement x="289" y="108" width="212" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nombreRecibe}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreRecibe}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -174,8 +174,7 @@
 			type="java.lang.String" />
 		<![CDATA[
 			SELECT (CASE WHEN RH.TIPO_VALIDACION = 1 THEN '1' ELSE '0' END) HABILIDAD_ASOCIADO
-			FROM ELECDB.ELE_REPORTE_HABIL RH 
-			WHERE RH.NUMERO_DOCUMENTO = :numIdAsociado
+			FROM ELECDB.ELE_REPORTE_HABIL RH WHERE RH.NUMERO_DOCUMENTO = :numIdAsociado
 		]]>
 	</sql-query>
 
@@ -229,9 +228,8 @@
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT ACD.NUMINT_ASOCIADO
-			FROM ELECDB.ELE_ASOC_CHEQUES_DEV ACD 
-           		INNER JOIN ELECDB.ELEASOCIA EA ON ACD.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ACD.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_CHEQUES_DEV ACD 
+           	INNER JOIN ELECDB.ELEASOCIA EA ON ACD.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
@@ -243,9 +241,8 @@
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT ACA.NUMINT_ASOCIADO
-			FROM ELECDB.ELE_ASOC_CUENTAS_AHOR ACA
-   				INNER JOIN ELECDB.ELEASOCIA EA ON ACA.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT ACA.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_CUENTAS_AHOR ACA
+   			INNER JOIN ELECDB.ELEASOCIA EA ON ACA.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
@@ -258,9 +255,8 @@
 		<return-scalar column="NUMINT_ASOCIADO"
 			type="java.lang.Long" />
 		<![CDATA[
-			SELECT AFC.NUMINT_ASOCIADO
-			FROM ELECDB.ELE_ASOC_FONDO_CAL AFC
-   				INNER JOIN ELECDB.ELEASOCIA EA ON AFC.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+			SELECT AFC.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_FONDO_CAL AFC
+   			INNER JOIN ELECDB.ELEASOCIA EA ON AFC.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
@@ -271,8 +267,7 @@
 		################################################################################ -->
 	<query name="consulta.inhabilidades.proceso.valor.mora.no.null">
 		<![CDATA[
-			select distinct i 
-			from EleInhabilidad i join i.eleProcesoRegla pr      
+			select distinct i from EleInhabilidad i join i.eleProcesoRegla pr      
 			where pr.eleProceso.codigoProceso = :codigoProceso and
 			(i.valorMoraFin is not null or i.valorMoraMul is not null) 
 		]]>
@@ -342,7 +337,7 @@
 			type="java.lang.Long" />
 		<![CDATA[
 			SELECT ARM.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_REESTRUC_MUL ARM
-   				INNER JOIN ELECDB.ELEASOCIA EA ON ARM.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+   			INNER JOIN ELECDB.ELEASOCIA EA ON ARM.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 
@@ -356,7 +351,7 @@
 			type="java.lang.Long" />
 		<![CDATA[
 			SELECT ARF.NUMINT_ASOCIADO FROM ELECDB.ELE_ASOC_REESTRUC_FINA ARF
-   				INNER JOIN ELECDB.ELEASOCIA EA ON ARF.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
+   			INNER JOIN ELECDB.ELEASOCIA EA ON ARF.NUMINT_ASOCIADO = EA.CODIGO_ASOCIADO
 		]]>
 	</sql-query>
 

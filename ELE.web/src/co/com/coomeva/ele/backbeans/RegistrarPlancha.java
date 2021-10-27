@@ -705,6 +705,7 @@ public class RegistrarPlancha extends BaseVista {
 	}
 
 	public void setActivarBotonRegistrar(boolean activarBotonRegistrar) {
+		
 	}
 
 	public String getMensajeConfirmacion() {
