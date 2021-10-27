@@ -131,11 +131,11 @@ public class DelegadoGenerador {
 			String cedulaAsociado, String fechaAntiguedad, String profesion,
 			Date fechaTitulo, String estudios, String empresa, String cargo,
 			String antiguedad, String ultimoCargo, String imagen,
-			String formulario, String rutaReporte)throws Exception {
+			String rutaImagen, String rutaReporte, String tipoAsociado)throws Exception {
 		// TODO Auto-generated method stub
 		return logicaGenerador.reporteInformacionPersonal_FT_174(plancha, zonaElectoral, nombreAsociado, 
 				cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo, estudios, empresa, cargo, antiguedad,
-				ultimoCargo, imagen, formulario, rutaReporte);
+				ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado);
 	}
 
 	public JasperPrint reporteCumplimientoDelegado_FT_176(

@@ -1699,8 +1699,8 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteInformacionPersonal_FT_174(String plancha, String zonaElectoral, String nombreAsociado,
 			String cedulaAsociado, String fechaAntiguedad, String profesion, Date fechaTitulo, String estudios,
-			String empresa, String cargo, String antiguedad, String ultimoCargo, String imagen, String formulario,
-			String rutaReporte) throws Exception {
+			String empresa, String cargo, String antiguedad, String ultimoCargo, String imagen, String rutaImagen,
+			String rutaReporte, String tipoAsociado) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1717,9 +1717,10 @@ public class LogicaGenerador {
 			parameters.put("antiguedad", antiguedad);
 			parameters.put("ultimo_cargo", ultimoCargo);
 			parameters.put("imagen", imagen);
-			parameters.put("formulario", formulario);
-
-			rutaReporte = rutaReporte + "CO-FT-174.jasper";
+			parameters.put("rutaImagen", rutaImagen);
+			parameters.put("tipoAsociado", tipoAsociado);
+			
+			rutaReporte = rutaReporte + "plantilla_CO-FT-174.jasper";
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);

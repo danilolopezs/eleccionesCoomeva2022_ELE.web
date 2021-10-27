@@ -181,17 +181,14 @@ public class ServletReportesJasper extends HttpServlet {
 					String antiguedad = (String) req.getSession().getAttribute("antiguedad");
 					String ultimoCargo = (String) req.getSession().getAttribute("ultimoCargo");
 					String imagen = (String) req.getSession().getAttribute("foto");
-					Boolean esSuplene = (Boolean) req.getSession().getAttribute("esSuplente");
+					Boolean esSuplente = (Boolean) req.getSession().getAttribute("esSuplente");
 					imagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(), "plantilla")
 							+ "/foto" + imagen + ".jpg";
-					String formulario = rutaImagen + "/CO-FT-174.png";
-					if (esSuplene) {
-						formulario = rutaImagen + "/CO-FT-766.png";
-					}
+					String tipoAsociado = esSuplente ? "Suplente" : "Principal";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteInformacionPersonal_FT_174(plancha,
 							zonaElectoral, nombreAsociado, cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo,
-							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, formulario, rutaReporte);
+							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado);
 
 					removerAtributos(session, "plancha", "zonaElectoral", "nombreAsociado", "cedulaAsociado",
 							"fechaAntiguedad", "profesion", "fechaTitulo", "estudios", "empresa", "cargo", "antiguedad",
@@ -266,7 +263,7 @@ public class ServletReportesJasper extends HttpServlet {
 					String razon2 = (String) req.getSession().getAttribute("razon2");
 					String razon3 = (String) req.getSession().getAttribute("razon3");
 					String razon4 = (String) req.getSession().getAttribute("razon4");
-					formulario = rutaImagen + "/CO-FT-209.png";
+					String formulario = rutaImagen + "/CO-FT-209.png";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionInadmisionPlancha_FT_209(
 							zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta,

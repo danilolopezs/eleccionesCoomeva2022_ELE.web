@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-211" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="124"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="año" class="java.lang.String"/>
+	<parameter name="mes" class="java.lang.String"/>
+	<parameter name="dia" class="java.lang.String"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="cedula" class="java.lang.String"/>
+	<parameter name="ciudad_cedula" class="java.lang.String"/>
+	<parameter name="ciudad_firma" class="java.lang.String"/>
+	<parameter name="dias_firma" class="java.lang.String"/>
+	<parameter name="mes_firma" class="java.lang.String"/>
+	<parameter name="año_firma" class="java.lang.String"/>
+	<parameter name="rutaImagen" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-19" y="-19" width="595" height="100" forecolor="#009232" backcolor="#009232"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="15" width="555" height="25" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Elección de Delegados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="40" width="555" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESOLUCIÓN DE ADMISIÓN DE PLANCHAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<image>
+				<reportElement x="226" y="4" width="127" height="36"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"/icono_coomeva.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement x="43" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="43" y="2" width="470" height="30" forecolor="#000000"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="45" y="3" width="45" height="14" forecolor="#009232"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ciudad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="3" width="29" height="14" forecolor="#009232"/>
+				<textElement markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<line>
+				<reportElement x="320" y="0" width="1" height="31" forecolor="#000000"/>
+			</line>
+			<textField>
+				<reportElement x="91" y="8" width="200" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="10" width="150" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["| " +$P{año}+ " | " +$P{mes}+ " | " +$P{dia} + "|"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="257" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="10" width="10" height="196" forecolor="#009232"/>
+				<textElement rotation="Left">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="43" y="5" width="470" height="221" forecolor="#000000"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="43" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
+			</rectangle>
+			<textField>
+				<reportElement x="63" y="15" width="430" height="91"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Yo, " +$P{nombre}.toUpperCase()+ ", identificado con la Cédula de Ciudadanía No. " +$P{cedula}+ " de " +$P{ciudad_cedula}.toUpperCase()+ ", con el fin de postularme como Delegado a la Asamblea, declaro que cuento con una antigüedad mínima de tres (3) años en el desempeño de mi oficio  y certifico no haber sido sancionado en los últimos cinco (5) años con multa o suspensión, destitución o remoción del Cargo por un Organismo de Control Estatal o de Control en el ejercicio de mi profesión, lo anterior para dar cumplimiento al  Articulo 99  del Estatuto Social. numerales  4 y 6, y Acuerdo numero 652 del 15 de Julio de 2021 Articulo 36 numerales 4 y 6."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="148" y="201" width="68" height="12"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Firma del Asociado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="80" y="194" width="200" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="65" y="118" width="430" height="34"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Se firma en " +$P{ciudad_firma}.toUpperCase()+ " a los " +$P{dias_firma}+ " días del mes de " +$P{mes_firma}+ " del año " +$P{año_firma}+ "."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-19" y="1" width="595" height="32" forecolor="#009232" backcolor="#009232"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="397" y="35" width="111" height="13" forecolor="#009232"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mod.Septiembre 2021]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="7" width="270" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="36" width="106" height="13" forecolor="#009232"/>
+				<textElement/>
+				<text><![CDATA[CO-FT-172]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
