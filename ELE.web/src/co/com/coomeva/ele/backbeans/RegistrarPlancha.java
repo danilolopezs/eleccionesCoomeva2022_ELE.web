@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+import co.com.coomeva.ele.delegado.DelegadoClimae;
 import co.com.coomeva.ele.delegado.DelegadoFormatoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.formulario.DelegadoRegistroFormulario;
@@ -25,6 +26,7 @@ import co.com.coomeva.ele.dto.DTOZonaElectoral;
 import co.com.coomeva.ele.entidades.formulario.EleRegistroCampos;
 import co.com.coomeva.ele.exception.EleccionesDelegadosException;
 import co.com.coomeva.ele.formatos.pdf.inscripcion.plancha.FormatoPdfInscripcionPlancha;
+import co.com.coomeva.ele.modelo.EleAsociadoDTO;
 import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.ele.util.FacesUtils;
@@ -35,6 +37,7 @@ import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
 
+import com.icesoft.faces.component.ext.HtmlCommandButton;
 import com.icesoft.faces.component.ext.HtmlInputText;
 import com.icesoft.faces.context.effects.JavascriptContext;
 
@@ -87,6 +90,8 @@ public class RegistrarPlancha extends BaseVista {
 			UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_FORMATO_INSCRIPCION_PLANCHA));
 
+	private static final String MSJ_INFO_CEDULA = "Señor usuario, por favor digite la siguiente información correspondiente a la Cédula de Ciudadania número: ";
+	
 	private String numeroZonaElectoral;
 	private List<DTOMiembroPlancha> miembrosPrincipales = new ArrayList<DTOMiembroPlancha>();
 	private List<DTOMiembroPlancha> miembrosSuplentes = new ArrayList<DTOMiembroPlancha>();
@@ -117,6 +122,13 @@ public class RegistrarPlancha extends BaseVista {
 	// variable usada para la modificacion de la plancha en estado inscirta y dentro
 	// de las fechas de modificación
 	private boolean esModificable;
+	
+	private boolean visibleInfoReporte211;
+	private String mensajeInfoCedula;
+	private String lugExpCedula;
+	private String ciudadUbicacion;
+	private Date fechaFirma;
+	private EleAsociadoDTO asociadoDTO;
 
 	public RegistrarPlancha() {
 		log.info("Leega plancha");
@@ -283,7 +295,6 @@ public class RegistrarPlancha extends BaseVista {
 		HtmlInputText inputTextCedula = (HtmlInputText) v.getComponent();
 
 		if (v.getNewValue() != null && !"".equals(v.getNewValue().toString().trim())) {
-
 			try {
 
 				Long numeroDocumento = Long.parseLong(v.getNewValue().toString());
@@ -563,11 +574,7 @@ public class RegistrarPlancha extends BaseVista {
 			this.esModificable = false;
 		}
 
-		if (cumpleFechaSaneamiento) {
-			return true;
-		} else {
-			return false;
-		}
+		return cumpleFechaSaneamiento;
 	}
 
 	public String actionConfirmarImprimirFormatoPlancha() {
@@ -575,82 +582,77 @@ public class RegistrarPlancha extends BaseVista {
 		this.mensajeConfirmacion = "¿Esta seguro que desea imprimir el formato de plancha?";
 		return "";
 	}
-
-	// metodos de accion para Cargue y Descargue de formulario de oficio
-	/**
-	 * metodo de accion para Descargar formulario de constancia de oficio de miembro
-	 * principal
-	 * 
-	 * @param event
-	 */
+	
+	public String actionCloseConfirmar() {
+		this.visibleConfirmar = Boolean.FALSE;
+		this.visibleConfirmarEnviar = Boolean.FALSE;
+		this.visibleConfirmarImprimir = Boolean.FALSE;
+		this.visibleInfoReporte211 = Boolean.FALSE;
+		borrarDatosReporte211();
+		return "";
+	}
+	
+	//****************************************************************************************
+	// metodos de accion para Descargar formulario de constancia de oficio de miembro suplente
 	public void actionDescargarFormatoPrincipal(ActionEvent event) {
-		String edit = (String) event.getComponent().getAttributes().get("getPosPrincipal");
-		log.error(">>>accion desCargar formato  " + edit);
+		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
+		String posPrincipal = button.getAlt();
+		DTOMiembroPlancha principal = this.miembrosPrincipales.get(Integer.parseInt(posPrincipal) - 1);		
+		consultarInformacionReporte211(principal.getNumeroDocumento());
 	}
-
-	/**
-	 * metodo de accion para Cargar formulario de constancia de oficio de miembro
-	 * principal
-	 * 
-	 * @param event
-	 */
-	public void actionCargarFormatoPrincipal(ActionEvent event) {
-		String edit = (String) event.getComponent().getAttributes().get("setPosPrincipal");
-		log.error(">>>accion Cargar formato  " + edit);
-	}
-
-	/**
-	 * metodo de accion para Descargar formulario de constancia de oficio de miembro
-	 * suplente
-	 * 
-	 * @param event
-	 */
+	
 	public void actionDescargarFormatoSuplente(ActionEvent event) {
-		String edit = (String) event.getComponent().getAttributes().get("getPosSuplente");
-		log.error(">>>accion desCargar formato  " + edit);
+		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
+		String posPrincipal = button.getAlt();
+		DTOMiembroPlancha principal = this.miembrosSuplentes.get(Integer.parseInt(posPrincipal) - 1);		
+		consultarInformacionReporte211(principal.getNumeroDocumento());
 	}
 
-	/**
-	 * metodo de accion para Cargar formulario de constancia de oficio de miembro
-	 * suplente
-	 * 
-	 * @param event
-	 */
-	public void actionCargarFormatoSuplente(ActionEvent event) {
-		String edit = (String) event.getComponent().getAttributes().get("setPosSuplente");
-		log.error(">>>accion Cargar formato " + edit);
+	public void consultarInformacionReporte211(Long documento) {
+		try {
+			asociadoDTO = DelegadoClimae.getInstance().find(documento + "");
+			if (asociadoDTO != null) {
+				this.visibleInfoReporte211 = Boolean.TRUE;
+				this.mensajeInfoCedula = MSJ_INFO_CEDULA + documento + ".";
+			}
+		} catch (Exception e) {
+			actionCloseConfirmar();
+			this.mensajeVista.setVisible(Boolean.TRUE);
+			this.mensajeVista.setMensaje("Se presento un error Inesperado");
+		}
 	}
-
-	private void descargarFormato_211(DTOMiembroPlancha persona, String nombreAspirante, Date fechaElaboracionDoc,
-			String zonaExpedicionDocumento, String ciudad, Date fechaFirma, String tipoReporte) {
+	
+	public String actionImprimirReporte211() {
+		Date fechaElaboracionDoc = new Date();
+		String tipoReporte = "211";
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
-		request.getSession().setAttribute("ciudad", ciudad);
+		request.getSession().setAttribute("ciudad", this.ciudadUbicacion);
 		request.getSession().setAttribute("dia",
 				fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 		request.getSession().setAttribute("mes",
 				fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
 		request.getSession().setAttribute("anio",
 				fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
-		request.getSession().setAttribute("nombreAsociado", nombreAspirante);
-		request.getSession().setAttribute("cedulaAsociado", persona.getNumeroDocumento() + "");
-		request.getSession().setAttribute("ciudadCedula", zonaExpedicionDocumento);
-		request.getSession().setAttribute("ciudadFirma", ciudad);
-		request.getSession().setAttribute("diaFirma", fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
+		request.getSession().setAttribute("nombreAsociado", asociadoDTO.getNombre());
+		request.getSession().setAttribute("cedulaAsociado", asociadoDTO.getId() + "");
+		request.getSession().setAttribute("ciudadCedula", this.lugExpCedula);
+		request.getSession().setAttribute("ciudadFirma", this.ciudadUbicacion);
+		request.getSession().setAttribute("diaFirma", this.fechaFirma != null ? String.valueOf(this.fechaFirma.getDate()) : "");
 		request.getSession().setAttribute("mesFirma",
-				fechaFirma != null ? WorkStrigs.getMes(fechaFirma.getMonth()) : "");
+				this.fechaFirma != null ? WorkStrigs.getMes(this.fechaFirma.getMonth()) : "");
 		request.getSession().setAttribute("anioFirma",
-				fechaFirma != null ? WorkStrigs.getAnio(fechaFirma.getYear()) : "");
+				this.fechaFirma != null ? WorkStrigs.getAnio(this.fechaFirma.getYear()) : "");
 
 		// para guardar en base de datos los registros de los campos
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, asociadoDTO.getNombre()));
 		listaRegCampos
-				.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, persona.getNumeroDocumento() + ""));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, zonaExpedicionDocumento));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, ciudad));
+				.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, asociadoDTO.getId() + ""));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, this.lugExpCedula));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
 		listaRegCampos
 				.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
@@ -665,12 +667,30 @@ public class RegistrarPlancha extends BaseVista {
 		}
 		request.getSession().setAttribute("codigoReporte", tipoReporte);
 		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
-
-//		this.mensajeVista.setVisible(Boolean.TRUE);
-//		this.mensajeVista.setMensaje(
-//				"Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
+		actionCloseConfirmar();
+		return "";
+	}
+	
+	// metodos de accion para Cargar formulario de constancia de oficio de miembro principal
+	public void actionCargarFormatoPrincipal(ActionEvent event) {
+		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
+		String posPrincipal = button.getAlt();
+		DTOMiembroPlancha principal = this.miembrosPrincipales.get(Integer.parseInt(posPrincipal) - 1);
 	}
 
+	public void actionCargarFormatoSuplente(ActionEvent event) {
+		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
+		String posSuplente = button.getAlt();
+		DTOMiembroPlancha principal = this.miembrosSuplentes.get(Integer.parseInt(posSuplente) - 1);
+	}
+	
+	private void borrarDatosReporte211() {
+		lugExpCedula = null;
+		ciudadUbicacion = null;
+		fechaFirma = null;
+		asociadoDTO = null;
+	}
+	
 	public String getNumeroZonaElectoral() {
 		return numeroZonaElectoral;
 	}
@@ -701,13 +721,6 @@ public class RegistrarPlancha extends BaseVista {
 
 	public void setMensajeVista(MensajesVista mensajeVista) {
 		this.mensajeVista = mensajeVista;
-	}
-
-	public String actionCloseConfirmar() {
-		this.visibleConfirmar = Boolean.FALSE;
-		this.visibleConfirmarEnviar = Boolean.FALSE;
-		this.visibleConfirmarImprimir = Boolean.FALSE;
-		return "";
 	}
 
 	public boolean isVisibleConfirmar() {
@@ -874,6 +887,46 @@ public class RegistrarPlancha extends BaseVista {
 
 	public void setMensajePopupExcepciones(String mensajePopupExcepciones) {
 		this.mensajePopupExcepciones = mensajePopupExcepciones;
+	}
+
+	public boolean isVisibleInfoReporte211() {
+		return visibleInfoReporte211;
+	}
+
+	public void setVisibleInfoReporte211(boolean visibleInfoReporte211) {
+		this.visibleInfoReporte211 = visibleInfoReporte211;
+	}
+
+	public String getMensajeInfoCedula() {
+		return mensajeInfoCedula;
+	}
+
+	public void setMensajeInfoCedula(String mensajeInfoCedula) {
+		this.mensajeInfoCedula = mensajeInfoCedula;
+	}
+
+	public String getLugExpCedula() {
+		return lugExpCedula;
+	}
+
+	public void setLugExpCedula(String lugExpCedula) {
+		this.lugExpCedula = lugExpCedula;
+	}
+
+	public String getCiudadUbicacion() {
+		return ciudadUbicacion;
+	}
+
+	public void setCiudadUbicacion(String ciudadUbicacion) {
+		this.ciudadUbicacion = ciudadUbicacion;
+	}
+
+	public Date getFechaFirma() {
+		return fechaFirma;
+	}
+
+	public void setFechaFirma(Date fechaFirma) {
+		this.fechaFirma = fechaFirma;
 	}
 
 }
