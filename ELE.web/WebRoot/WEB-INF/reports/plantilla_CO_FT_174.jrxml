@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_174" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.000000000000007"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="276"/>
+	<property name="ireport.zoom" value="3.7974983358324463"/>
+	<property name="ireport.x" value="710"/>
+	<property name="ireport.y" value="747"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="plancha" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="cedula" class="java.lang.String"/>
 	<parameter name="fecha_antiguedad" class="java.lang.String"/>
 	<parameter name="profesion" class="java.lang.String"/>
-	<parameter name="fecha_titulo" class="java.util.Date"/>
+	<parameter name="fecha_titulo" class="java.lang.String"/>
 	<parameter name="estudios" class="java.lang.String"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="cargo" class="java.lang.String"/>
@@ -17,13 +17,15 @@
 	<parameter name="ultimo_cargo" class="java.lang.String"/>
 	<parameter name="imagen" class="java.lang.String"/>
 	<parameter name="tipoAsociado" class="java.lang.String"/>
+	<parameter name="rutaImagen" class="java.lang.String"/>
+	<parameter name="nombreReporte" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="70" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="69" forecolor="#00834C" backcolor="#00834C"/>
+				<reportElement x="-19" y="-19" width="594" height="88" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="186" y="11" width="166" height="22" forecolor="#FFFFFF"/>
@@ -33,9 +35,11 @@
 				<text><![CDATA[Elección de Delegados]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="69" y="37" width="423" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{tipoAsociado}.toUpperCase()]]></textFieldExpression>
+				<reportElement x="25" y="37" width="501" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["INFORMACIÓN PERSONAL DEL CABEZA DE PLANCHA " +$P{tipoAsociado}.toUpperCase()]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -70,13 +74,15 @@
 				<text><![CDATA[PLANCHA No.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="7" y="23" width="148" height="20"/>
-				<textElement/>
+				<reportElement x="7" y="23" width="201" height="20"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="225" y="23" width="173" height="20"/>
-				<textElement/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="225" y="23" width="173" height="20">
+					<printWhenExpression><![CDATA[$P{plancha} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{plancha}]]></textFieldExpression>
 			</textField>
 			<image>
@@ -87,8 +93,10 @@
 				<reportElement x="0" y="46" width="425" height="51" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="7" y="51" width="100" height="14"/>
-				<textElement/>
+				<reportElement x="7" y="51" width="135" height="14" forecolor="#006400"/>
+				<textElement>
+					<font size="10" isBold="false" isStrikeThrough="false"/>
+				</textElement>
 				<text><![CDATA[Nombre(s) y Apellidos]]></text>
 			</staticText>
 			<textField pattern="">
@@ -100,7 +108,7 @@
 				<reportElement x="0" y="97" width="425" height="36" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="6" y="100" width="100" height="13"/>
+				<reportElement x="6" y="100" width="136" height="14" forecolor="#006400"/>
 				<textElement/>
 				<text><![CDATA[Cédula de Ciudadanía]]></text>
 			</staticText>
@@ -108,34 +116,40 @@
 				<reportElement x="177" y="97" width="1" height="36" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="183" y="101" width="126" height="29"/>
+				<reportElement x="183" y="100" width="223" height="14" forecolor="#006400"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Antigüedad en Coomeva como Asociado]]></text>
 			</staticText>
-			<line>
-				<reportElement x="314" y="97" width="1" height="36" forecolor="#00834C"/>
-			</line>
 			<textField>
-				<reportElement x="6" y="115" width="149" height="15"/>
+				<reportElement x="6" y="116" width="161" height="15"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="320" y="105" width="99" height="20"/>
+				<reportElement x="183" y="116" width="215" height="15"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_antiguedad}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="225" y="24" width="173" height="13" forecolor="#999999">
+					<printWhenExpression><![CDATA[$P{plancha} == null]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[espacio exclusivo para coomeva]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="327" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="-1" width="555" height="38" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="11" y="2" width="81" height="14"/>
+				<reportElement x="9" y="2" width="131" height="14" forecolor="#006400"/>
 				<textElement/>
 				<text><![CDATA[Profesión - Oficio]]></text>
 			</staticText>
@@ -143,17 +157,17 @@
 				<reportElement x="274" y="-1" width="1" height="38" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="297" y="2" width="132" height="14"/>
+				<reportElement x="282" y="2" width="151" height="14" forecolor="#006400"/>
 				<textElement/>
 				<text><![CDATA[Año de Expedición del Título]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="11" y="18" width="219" height="16"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="18" width="251" height="16"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{profesion}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="297" y="17" width="190" height="16"/>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="283" y="18" width="261" height="16"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha_titulo}]]></textFieldExpression>
 			</textField>
@@ -161,128 +175,123 @@
 				<reportElement x="0" y="37" width="555" height="66" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="6" y="42" width="74" height="13"/>
+				<reportElement x="8" y="42" width="136" height="13" forecolor="#006400"/>
 				<textElement/>
 				<text><![CDATA[Otros Estudios:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="7" y="58" width="538" height="38"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="8" y="58" width="538" height="38"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{estudios}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="103" width="555" height="22" forecolor="#00834C" backcolor="#00834C"/>
+				<reportElement x="0" y="103" width="555" height="22" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="183" y="107" width="223" height="14" forecolor="#FFFFFF"/>
-				<textElement/>
+				<reportElement x="142" y="107" width="287" height="14" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
 				<text><![CDATA[Cargo y/o actividad que actualmente desempeña]]></text>
 			</staticText>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="171" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="45" forecolor="#00834C"/>
+				<reportElement x="0" y="125" width="555" height="45" forecolor="#00834C"/>
 			</rectangle>
-			<line>
-				<reportElement x="0" y="16" width="555" height="1" forecolor="#00834C"/>
-			</line>
-			<staticText>
-				<reportElement x="37" y="2" width="100" height="13"/>
-				<textElement/>
-				<text><![CDATA[Empresa y/o Actividad]]></text>
-			</staticText>
-			<line>
-				<reportElement x="184" y="0" width="1" height="45" forecolor="#00834C"/>
-			</line>
-			<staticText>
-				<reportElement x="292" y="1" width="28" height="13"/>
-				<textElement/>
-				<text><![CDATA[Cargo]]></text>
-			</staticText>
-			<line>
-				<reportElement x="432" y="0" width="1" height="45" forecolor="#00834C"/>
-			</line>
-			<staticText>
-				<reportElement x="474" y="1" width="52" height="13"/>
-				<textElement/>
-				<text><![CDATA[Antigüedad]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="5" y="21" width="172" height="20"/>
-				<textElement/>
+				<reportElement x="8" y="145" width="171" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="189" y="21" width="236" height="20"/>
-				<textElement/>
+				<reportElement x="187" y="144" width="227" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cargo}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="182" y="125" width="1" height="45" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="425" y="125" width="1" height="45" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="0" y="140" width="555" height="1" forecolor="#00834C"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="126" width="142" height="13" forecolor="#006400"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Empresa y/o Actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="125" width="118" height="13" forecolor="#006400"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="126" width="77" height="13" forecolor="#006400"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Antigüedad]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="439" y="21" width="112" height="20"/>
-				<textElement/>
+				<reportElement x="433" y="144" width="112" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{antiguedad}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="45" width="555" height="126" forecolor="#00834C"/>
+				<reportElement x="0" y="170" width="555" height="149" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="48" width="257" height="14"/>
-				<textElement/>
-				<text><![CDATA[Último cargo dirigencial desempeñado en la Cooperativa]]></text>
-			</staticText>
-			<line>
-				<reportElement x="7" y="95" width="255" height="1"/>
-			</line>
-			<textField>
-				<reportElement x="7" y="78" width="255" height="15"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{ultimo_cargo}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="53" y="145" width="133" height="1"/>
-			</line>
-			<line>
-				<reportElement x="383" y="145" width="130" height="1"/>
-			</line>
-			<staticText>
-				<reportElement x="53" y="147" width="133" height="13"/>
+				<reportElement x="56" y="295" width="165" height="13"/>
 				<textElement/>
 				<text><![CDATA[Firma del Cabeza de Plancha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="394" y="148" width="109" height="13"/>
+				<reportElement x="333" y="295" width="154" height="13"/>
 				<textElement/>
 				<text><![CDATA[Firma de quién entrega]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="25" y="185" width="282" height="14" forecolor="#006400"/>
+				<textElement/>
+				<text><![CDATA[Último cargo dirigencial desempeñado en la Cooperativa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="25" y="213" width="500" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ultimo_cargo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="25" y="285" width="230" height="1"/>
+			</line>
+			<line>
+				<reportElement x="296" y="285" width="230" height="1"/>
+			</line>
+			<line>
+				<reportElement x="25" y="235" width="500" height="1"/>
+			</line>
 		</band>
-	</columnFooter>
+	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="1" width="555" height="34" forecolor="#00834C" backcolor="#00834C"/>
+				<reportElement x="-19" y="1" width="594" height="34" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="180" y="10" width="175" height="15" forecolor="#FFFFFF"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="155" y="10" width="278" height="25" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="39" width="55" height="13"/>
-				<textElement/>
-				<text><![CDATA[CO-FT-174]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="449" y="37" width="104" height="15"/>
 				<textElement/>
 				<text><![CDATA[Mod. Septiembre 2021]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="2" y="35" width="100" height="17"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreReporte}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

@@ -1,6 +1,7 @@
 package co.com.coomeva.ele.logica.generador;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -1700,8 +1701,9 @@ public class LogicaGenerador {
 	public JasperPrint reporteInformacionPersonal_FT_174(String plancha, String zonaElectoral, String nombreAsociado,
 			String cedulaAsociado, String fechaAntiguedad, String profesion, Date fechaTitulo, String estudios,
 			String empresa, String cargo, String antiguedad, String ultimoCargo, String imagen, String rutaImagen,
-			String rutaReporte, String tipoAsociado) throws Exception {
+			String rutaReporte, String tipoAsociado, String nombreReporteFoter) throws Exception {
 		JasperPrint jasperPrint = null;
+		SimpleDateFormat formateadorFecha = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put("plancha", plancha);
@@ -1710,7 +1712,7 @@ public class LogicaGenerador {
 			parameters.put("cedula", cedulaAsociado);
 			parameters.put("fecha_antiguedad", fechaAntiguedad);
 			parameters.put("profesion", profesion);
-			parameters.put("fecha_titulo", fechaTitulo);
+			parameters.put("fecha_titulo", formateadorFecha.format(fechaTitulo));
 			parameters.put("estudios", estudios);
 			parameters.put("empresa", empresa);
 			parameters.put("cargo", cargo);
@@ -1719,8 +1721,9 @@ public class LogicaGenerador {
 			parameters.put("imagen", imagen);
 			parameters.put("rutaImagen", rutaImagen);
 			parameters.put("tipoAsociado", tipoAsociado);
+			parameters.put("nombreReporte", nombreReporteFoter);
 			
-			rutaReporte = rutaReporte + "plantilla_CO-FT-174.jasper";
+			rutaReporte = rutaReporte + "plantilla_CO_FT_174.jasper";
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);

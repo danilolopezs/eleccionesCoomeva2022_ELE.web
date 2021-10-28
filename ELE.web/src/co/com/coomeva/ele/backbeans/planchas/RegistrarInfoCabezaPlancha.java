@@ -417,8 +417,8 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 					.getRequest();
 
 			request.getSession().setAttribute("codigoReporte", "174");
-
-			request.getSession().setAttribute("plancha", dto.getNumeroPlancha());
+			//request.getSession().setAttribute("plancha", dto.getNumeroPlancha());
+			request.getSession().setAttribute("plancha", null);
 			request.getSession().setAttribute("zonaElectoral", dto.getZonaElectoral());
 			request.getSession().setAttribute("nombreAsociado", dto.getNombreCompleto());
 			request.getSession().setAttribute("cedulaAsociado", String.valueOf(numeroDocumentoAsociado));

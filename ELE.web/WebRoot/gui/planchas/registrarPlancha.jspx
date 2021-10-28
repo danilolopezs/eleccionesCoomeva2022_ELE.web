@@ -157,14 +157,6 @@ body {
 											title="Descargar formato de Ocupaci&#243;n."
 											image="../imagenes/iconoDescargar.png"
 											style="height: 15px; width: 15px" styleClass="button" />
-										<ice:outputText value="  " />
-										<ice:commandButton id="btnCargarFormatoPpal"
-											actionListener="#{registrarPlancha.actionCargarFormatoPrincipal}"
-											rendered="#{!recordTitulares.tieneProfesion}"
-											alt="#{recordTitulares.posicionPlancha}"
-											title="Cargar formato de Ocupaci&#243;n."
-											image="../imagenes/iconoCargar.png"
-											style="height: 15px; width: 15px" styleClass="button" />
 									</center>
 								</ice:column>
 
@@ -260,14 +252,6 @@ body {
 													alt="#{recordSuplentes.posicionPlancha}"
 													title="Descargar formato de Ocupaci&#243;n."
 													image="../imagenes/iconoDescargar.png"
-													style="height: 15px; width: 15px" styleClass="button" />
-												<ice:outputText value="  " />
-												<ice:commandButton id="btnCargarFormato"
-													actionListener="#{registrarPlancha.actionCargarFormatoSuplente}"
-													rendered="#{!recordSuplentes.tieneProfesion}"
-													alt="#{recordSuplentes.posicionPlancha}"
-													title="Cargar formato de Ocupaci&#243;n."
-													image="../imagenes/iconoCargar.png"
 													style="height: 15px; width: 15px" styleClass="button" />
 											</center>
 										</ice:column>

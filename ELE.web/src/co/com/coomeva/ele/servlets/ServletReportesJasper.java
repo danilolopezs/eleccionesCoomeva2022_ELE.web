@@ -185,10 +185,12 @@ public class ServletReportesJasper extends HttpServlet {
 					imagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(), "plantilla")
 							+ "/foto" + imagen + ".jpg";
 					String tipoAsociado = esSuplente ? "Suplente" : "Principal";
+					String nombreReporteFoter = esSuplente ? "CO-FT-766" : "CO-FT-174";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteInformacionPersonal_FT_174(plancha,
 							zonaElectoral, nombreAsociado, cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo,
-							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado);
+							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte,
+							tipoAsociado, nombreReporteFoter);
 
 					removerAtributos(session, "plancha", "zonaElectoral", "nombreAsociado", "cedulaAsociado",
 							"fechaAntiguedad", "profesion", "fechaTitulo", "estudios", "empresa", "cargo", "antiguedad",
