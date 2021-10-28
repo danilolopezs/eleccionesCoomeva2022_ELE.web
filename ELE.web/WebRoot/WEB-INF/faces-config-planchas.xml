@@ -446,6 +446,10 @@
 			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
-		
+		<navigation-case>
+			<from-outcome>goEnviarRadicacion</from-outcome>
+			<to-view-id>/gui/forms/enviarRadicacion.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

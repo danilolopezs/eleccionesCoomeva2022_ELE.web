@@ -942,7 +942,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			List<DTOMiembroPlancha> listaRealMiembrosSuplentes = obtenerListaRealMiembros(miembrosSuplentes);
 			if (listaRealMiembrosTitulares.size() < 1) {
 				throw new EleccionesDelegadosException(
-						"Por favor registre al menos" + " un miembro titular para registrar la plancha.");
+						"Por favor registre al menos un miembro titular para registrar la plancha.");
 			}
 
 			if (aplicaValidaciones) {

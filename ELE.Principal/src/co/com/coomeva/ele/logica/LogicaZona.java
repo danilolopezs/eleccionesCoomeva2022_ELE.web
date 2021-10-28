@@ -85,6 +85,38 @@ public class LogicaZona extends EleZonasDAO {
 
 		return elZona;
 	}
+	
+	//metodo antiguo de consulta de zona
+	public EleZonas consultarZonaPlancha_old(String nroCabIdentificacion) throws Exception
+	{
+		EleAsociadoDTO asociadoDTO =  DelegadoClimae.getInstance().find(nroCabIdentificacion);
+		EleZonas elZona = new EleZonas();
+		EleZonasFinanciero eleZonasFinanciero = new EleZonasFinanciero();
+
+		boolean existAsesorFin = DelegadoLico.getInstance().existAsesorFin(nroCabIdentificacion);
+		boolean existAsesorPla = DelegadoAsesor.getInstance().existAsesor(nroCabIdentificacion);
+		boolean existAsesorMP = DelegadoSalud.getInstance().existAsesor(nroCabIdentificacion);
+		boolean existAsesorSrh = DelegadoSrh.getInstance().existEmpleado(nroCabIdentificacion);
+
+		boolean isAsesor = false;
+		if (existAsesorSrh||existAsesorFin||existAsesorMP||existAsesorPla) {
+			isAsesor = true;
+		}
+		if (isAsesor) {
+			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
+			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
+			//elZona = DelegadoZona.getInstance().consultarZona(elZona.getZonEspecial());
+			
+			//hay que quitarlo cuando se terminen las pruebas de ingreso
+			elZona = DelegadoZona.getInstance().consultarZona("05");
+		}else{
+			eleZonasFinanciero = DelegadoZonaFinanciero.getInstance().consultarZonaFinanciero(asociadoDTO.getOficina());
+			elZona = DelegadoZona.getInstance().consultarZona(eleZonasFinanciero.getId().getCodZonaElec());
+		}
+
+		return elZona;
+	}
+	
 
 	/**
 	 * Consulta todas la zonas que estan en la tabla ELEZONAS
