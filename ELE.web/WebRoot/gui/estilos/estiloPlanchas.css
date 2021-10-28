@@ -103,7 +103,7 @@
     font: 11px tahoma;
 }
 .banner {
-	background-image: url('../imagenes/EncabezadoElec2022.png');
+	background-image: url('../imagenes/EncabezadoElec2022.jpg');
 	background-repeat: no-repeat;
 	height: 244px;
 	width: 829px;
@@ -111,7 +111,7 @@
 	float: left;
 }
 .bannerHabilidad {
-	background-image: url('../imagenes/EncabezadoElec2022.png');
+	background-image: url('../imagenes/EncabezadoElec2022.jpg');
 	background-repeat: no-repeat;
 	height: 244px;
 	width: 829px;

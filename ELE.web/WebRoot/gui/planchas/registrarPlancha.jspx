@@ -150,20 +150,25 @@ body {
 										</div>
 									</f:facet>
 									<center>
-										<ice:commandButton id="btnDescargarFormato"
-											styleClass="button"
-											action="#{registrarPlancha.actionDescargarFormato}"
+										<ice:commandButton id="btnDescargarFormatoPpal"
+											actionListener="#{registrarPlancha.actionDescargarFormatoPrincipal}"
+											rendered="#{!recordTitulares.tieneProfesion}"
+											title="Descargar formato de Ocupaci&#243;n."
 											image="../imagenes/iconoDescargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Descargar formato de Ocupaci&#243;n." />
+											style="height: 15px; width: 15px" styleClass="button">
+											<f:attribute name="getPosPrincipal"
+												value="#{recordTitulares.posicionPlancha}" />
+										</ice:commandButton>
 										<ice:outputText value="  " />
-										<ice:commandButton id="btnCargarFormato" styleClass="button"
-											action="#{registrarPlancha.actionCargarFormato}"
+										<ice:commandButton id="btnCargarFormatoPpal"
+											actionListener="#{registrarPlancha.actionCargarFormatoPrincipal}"
+											rendered="#{!recordTitulares.tieneProfesion}"
+											title="Cargar formato de Ocupaci&#243;n."
 											image="../imagenes/iconoCargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Cargar formato de Ocupaci&#243;n." />
+											style="height: 15px; width: 15px" styleClass="button">
+											<f:attribute name="setPosPrincipal"
+												value="#{recordTitulares.posicionPlancha}" />
+										</ice:commandButton>
 									</center>
 								</ice:column>
 
@@ -180,7 +185,7 @@ body {
 									<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
 										value="#{registrarPlancha.miembrosSuplentes}"
 										style="width:100%; height:100%;">
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
@@ -193,7 +198,7 @@ body {
 													styleClass="textoLabel" readonly="true" />
 											</center>
 										</ice:column>
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
@@ -254,26 +259,29 @@ body {
 											</f:facet>
 											<center>
 												<ice:commandButton id="btnDescargarFormato"
-													styleClass="button"
-													action="#{registrarPlancha.actionDescargarFormato}"
+													actionListener="#{registrarPlancha.actionDescargarFormatoSuplente}"
+													rendered="#{!recordSuplentes.tieneProfesion}"
+													title="Descargar formato de Ocupaci&#243;n."
 													image="../imagenes/iconoDescargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Descargar formato de Ocupaci&#243;n." />
+													style="height: 15px; width: 15px" styleClass="button">
+													<f:attribute name="getPosSuplente"
+														value="#{recordSuplentes.posicionPlancha}" />
+												</ice:commandButton>
 												<ice:outputText value="  " />
-												<ice:commandButton id="btnCargarFormato" styleClass="button"
-													action="#{registrarPlancha.actionCargarFormato}"
+												<ice:commandButton id="btnCargarFormato"
+													actionListener="#{registrarPlancha.actionCargarFormatoSuplente}"
+													rendered="#{!recordSuplentes.tieneProfesion}"
+													title="Cargar formato de Ocupaci&#243;n."
 													image="../imagenes/iconoCargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Cargar formato de Ocupaci&#243;n." />
+													style="height: 15px; width: 15px" styleClass="button">
+													<f:attribute name="setPosSuplente"
+														value="#{recordSuplentes.posicionPlancha}" />
+												</ice:commandButton>
 											</center>
 										</ice:column>
-
 									</ice:dataTable>
 								</div>
 							</ice:panelGrid>
-
 						</div>
 					</td>
 				</tr>

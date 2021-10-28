@@ -24,7 +24,7 @@ public class FiltroRegistroPlanchas implements Filter {
 			session = req.getSession(true);
 			resp.sendRedirect("../inicioAsociado.jspx");
 		} else {
-			if ((session.getAttribute("asociado") == null) && (session.getAttribute("numeroDocAsociado") == null))
+			if ((session.getAttribute("asociado") == null) && (session.getAttribute("numeroDocAsociado") != null))
 				resp.sendRedirect("../inicioAsociado.jspx");
 		}
 		chain.doFilter(request, response); // continue filtering
