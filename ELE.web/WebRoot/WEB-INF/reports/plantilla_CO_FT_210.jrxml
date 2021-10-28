@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.3310000000000055"/>
+	<property name="ireport.zoom" value="1.2100000000000093"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="873"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="ciudad" class="java.lang.String"/>
 	<parameter name="fechaActual" class="java.util.Date"/>
@@ -10,6 +10,7 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["D:\\AVRESPALDO\\backupcmtc4227\\ELECCIONES\\Reportes IReport\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="plancha" class="java.lang.String"/>
 	<field name="miembrosPrincipal" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<field name="miembrosSuplentes" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<background>
@@ -41,80 +42,95 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="33" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="1" width="545" height="31" forecolor="#00834C"/>
+				<reportElement x="0" y="1" width="555" height="31" forecolor="#00834C"/>
 			</rectangle>
 			<line>
-				<reportElement x="430" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="380" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="12" y="5" width="70" height="14" forecolor="#00834C"/>
+				<reportElement x="9" y="5" width="70" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="305" y="5" width="29" height="14" forecolor="#00834C"/>
+				<reportElement x="261" y="5" width="25" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="431" y="5" width="26" height="14" forecolor="#00834C"/>
+				<reportElement x="388" y="5" width="27" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Hora]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="10" y="1" width="545" height="4" forecolor="#00834C" backcolor="#00834C"/>
+				<reportElement x="0" y="1" width="555" height="4" forecolor="#00834C" backcolor="#00834C"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="19" width="119" height="13"/>
+				<reportElement x="5" y="19" width="93" height="13"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="139" y="5" width="70" height="14" forecolor="#00834C"/>
+				<reportElement x="111" y="5" width="54" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Ciudad]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="150" y="17" width="147" height="15"/>
+				<reportElement x="108" y="17" width="134" height="15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="297" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="248" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<line>
-				<reportElement x="133" y="5" width="1" height="27" forecolor="#00834C"/>
+				<reportElement x="102" y="5" width="1" height="27" forecolor="#00834C"/>
 			</line>
 			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="298" y="17" width="133" height="15"/>
+				<reportElement x="254" y="17" width="119" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
 			</textField>
 			<textField pattern="h.mm a" isBlankWhenNull="true">
-				<reportElement x="431" y="17" width="122" height="15"/>
+				<reportElement x="388" y="17" width="91" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="482" y="5" width="1" height="27" forecolor="#00834C"/>
+			</line>
+			<staticText>
+				<reportElement x="490" y="6" width="46" height="12" forecolor="#00834C"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Plancha No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="490" y="18" width="58" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{plancha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="645" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="27" width="545" height="598" forecolor="#00834C"/>
+				<reportElement x="0" y="27" width="555" height="598" forecolor="#00834C"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="10" y="625" width="99" height="20" forecolor="#00834C"/>
@@ -122,32 +138,55 @@
 				<text><![CDATA[CO-FT-210 (Anverso)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="479" y="625" width="74" height="20" forecolor="#00834C"/>
+				<reportElement x="462" y="625" width="91" height="20" forecolor="#00834C"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Mod. Nov./2012]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="45" width="10" height="271" forecolor="#00834C"/>
-				<textElement textAlignment="Center" rotation="Left">
-					<font size="6"/>
-				</textElement>
-				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
+				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="10" y="0" width="545" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
+				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
 			</rectangle>
 			<subreport>
-				<reportElement x="12" y="27" width="543" height="598"/>
+				<reportElement x="0" y="27" width="555" height="455"/>
 				<dataSourceExpression><![CDATA[$F{miembrosPrincipal}]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="12" y="0" width="543" height="27" forecolor="#00834D"/>
+				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834D"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[MIEMBROS PRINCIPALES]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="482" width="553" height="77"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Todo candidato al momento de postularse y con la firma del presente formato de inscripción de planchas,  declara  que  no  se  encuentra  incurso  en  alguna causal  de  inhabilidad  o  incompatibilidad  estatutaria  o  reglamentaria,  así  como  que conoce  y  acata  el  Código  de  Buen  Gobierno  y  el  Código de  Ética  y  se  compromete  a permanecer  actualizado  respecto  de  los  reglamentos  y  demás  normas  que  expida  la Cooperativa y que le sean aplicables, ante la Junta de Vigilancia. Código Electoral Acuerdo N° 652 (CA-AC-2021.652) Art 61 Numeral 3. Reglamento Electoral Resolución 459 (CA-RE-2021.459) Art 26 Numeral 3.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="559" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="7" y="600" width="238" height="15" forecolor="#00834C"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre (s) y  Apellidos  de quién inscribe la Plancha:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="597" width="216" height="1" forecolor="#00834C"/>
+			</line>
+			<staticText>
+				<reportElement x="368" y="601" width="157" height="14" forecolor="#00834C"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
+			</staticText>
+			<line>
+				<reportElement x="361" y="597" width="169" height="1" forecolor="#00834C"/>
+			</line>
 		</band>
 		<band height="645">
 			<rectangle>
@@ -164,7 +203,7 @@
 				<text><![CDATA[MIEMBROS SUPLENTES]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="0" y="27" width="555" height="555"/>
+				<reportElement x="0" y="27" width="555" height="479"/>
 				<dataSourceExpression><![CDATA[$F{miembrosSuplentes}]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
 			</subreport>
@@ -174,9 +213,9 @@
 				<text><![CDATA[CO-FT-210 (Reverso)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="469" y="625" width="74" height="20" forecolor="#00834C"/>
+				<reportElement x="462" y="625" width="86" height="20" forecolor="#00834C"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Mod. Nov./2012]]></text>
+				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement x="0" y="582" width="555" height="43" forecolor="#00834C"/>
@@ -201,6 +240,13 @@
 			<line>
 				<reportElement x="276" y="604" width="250" height="1" forecolor="#00834C"/>
 			</line>
+			<staticText>
+				<reportElement x="0" y="506" width="555" height="76"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[	Todo candidato al momento de postularse y con la firma del presente formato de inscripción de planchas,  declara  que  no  se  encuentra  incurso  en  alguna causal  de  inhabilidad  o  incompatibilidad  estatutaria  o  reglamentaria,  así  como  que conoce  y  acata  el  Código  de  Buen  Gobierno  y  el  Código de  Ética  y  se  compromete  a permanecer  actualizado  respecto  de  los  reglamentos  y  demás  normas  que  expida  la Cooperativa y que le sean aplicables, ante la Junta de Vigilancia. Código Electoral Acuerdo N° 652 (CA-AC-2021.652) Art 61 Numeral 3. Reglamento Electoral Resolución 459 (CA-RE-2021.459) Art 26 Numeral 3.]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

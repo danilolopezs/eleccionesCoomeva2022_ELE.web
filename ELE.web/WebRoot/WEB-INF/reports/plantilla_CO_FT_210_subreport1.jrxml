@@ -1,49 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_210_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.7715610000000015"/>
+	<property name="ireport.zoom" value="1.3310000000000073"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="nombreCompleto" class="java.lang.String"/>
 	<field name="profesion" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="23">
+		<band height="24">
 			<frame>
 				<reportElement x="0" y="0" width="555" height="23"/>
 				<rectangle>
-					<reportElement x="0" y="0" width="554" height="22" forecolor="#00834D"/>
+					<reportElement x="0" y="0" width="554" height="23" forecolor="#00834D"/>
 				</rectangle>
 				<rectangle>
-					<reportElement x="21" y="0" width="166" height="22" forecolor="#00834D"/>
+					<reportElement x="101" y="0" width="110" height="23" forecolor="#00834D"/>
 				</rectangle>
 				<rectangle>
-					<reportElement x="187" y="0" width="123" height="22" forecolor="#00834D"/>
+					<reportElement x="211" y="0" width="126" height="23" forecolor="#00834D"/>
 				</rectangle>
 				<rectangle>
-					<reportElement x="310" y="0" width="124" height="22" forecolor="#00834D"/>
+					<reportElement x="0" y="0" width="101" height="23" forecolor="#00834D"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="21" y="0" width="166" height="22" forecolor="#00834D"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Apellido (s) y Nombre(s)]]></text>
+					<reportElement x="101" y="1" width="110" height="22" forecolor="#00834D"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre(s) y Apellido(s)]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="187" y="0" width="123" height="22" forecolor="#00834D"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<reportElement x="211" y="1" width="126" height="21" forecolor="#00834D"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Profesión]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="310" y="0" width="124" height="22" forecolor="#00834D"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<reportElement x="0" y="0" width="101" height="22" forecolor="#00834D"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Cédula de Ciudadanía]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="434" y="0" width="120" height="22" forecolor="#00834D"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<reportElement x="464" y="0" width="90" height="23" forecolor="#00834D"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
 					<text><![CDATA[Firma]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="337" y="0" width="127" height="23" forecolor="#00834D"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="337" y="1" width="127" height="22" forecolor="#00834D"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Correo Electrónico]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -51,37 +70,47 @@
 	<detail>
 		<band height="22" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="554" height="22" forecolor="#00834D"/>
+				<reportElement x="0" y="-1" width="554" height="23" forecolor="#00834D"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="21" y="0" width="166" height="22" forecolor="#00834D"/>
+				<reportElement x="101" y="-1" width="110" height="23" forecolor="#00834D"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="211" y="-1" width="126" height="23" forecolor="#00834D"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="-1" width="101" height="23" forecolor="#00834D"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="21" y="0" width="166" height="22"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCompleto}]]></textFieldExpression>
-			</textField>
-			<rectangle>
-				<reportElement x="187" y="0" width="123" height="22" forecolor="#00834D"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="310" y="0" width="124" height="22" forecolor="#00834D"/>
-			</rectangle>
-			<textField isBlankWhenNull="true">
-				<reportElement x="187" y="0" width="123" height="22"/>
+				<reportElement x="211" y="0" width="126" height="22"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{profesion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="310" y="0" width="124" height="22"/>
+				<reportElement x="0" y="0" width="101" height="22"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="0" width="110" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCompleto}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="337" y="-1" width="127" height="23" forecolor="#00834D"/>
+			</rectangle>
+			<textField>
+				<reportElement x="337" y="0" width="127" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
