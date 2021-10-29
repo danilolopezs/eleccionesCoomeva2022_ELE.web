@@ -1476,21 +1476,15 @@ public class LogicaGenerador {
 	 * @return
 	 * @throws Exception
 	 */
-	public JasperPrint reporteInscripcionPlanchas_FT_210(String zonaElectoral, String ciudad, Date fecha,
+	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros,
 			String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
-			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("zona", zonaElectoral);
-			parameters.put("ciudad", ciudad);
-			parameters.put("fechaActual", fecha);
-			parameters.put("rutaImagen", rutaImagen);
-			parameters.put("SUBREPORT_DIR", rutaReporte);
-
-			rutaReporte = rutaReporte + "plantilla_CO_FT_588.jasper";
+			parametros.put("rutaImagen", rutaImagen);
+			rutaReporte = rutaReporte + "plantilla_CO_FT_210.jasper";
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
-			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
+			jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, ds);
 
 			return jasperPrint;
 

@@ -1718,7 +1718,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				asociadosComunes.append(miembroComun.toString() + ", ");
 			}
 			asociadosComunes.append(
-					"por favor corrija la información ingresada de forma que estos" + " no existan en ambas listas");
+					"por favor corrija la información ingresada de forma que estos no existan en ambas listas");
 			throw new EleccionesDelegadosException(asociadosComunes.toString());
 		}
 

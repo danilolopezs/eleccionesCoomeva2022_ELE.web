@@ -40,6 +40,7 @@ import co.com.coomeva.util.date.ManipulacionFechas;
 import com.icesoft.faces.component.ext.HtmlCommandButton;
 import com.icesoft.faces.component.ext.HtmlInputText;
 import com.icesoft.faces.context.effects.JavascriptContext;
+import com.lowagie.text.Document;
 
 /**
  * Managedbean para el registro de los integrantes de una plancha
@@ -670,20 +671,7 @@ public class RegistrarPlancha extends BaseVista {
 		actionCloseConfirmar();
 		return "";
 	}
-	
-	// metodos de accion para Cargar formulario de constancia de oficio de miembro principal
-	public void actionCargarFormatoPrincipal(ActionEvent event) {
-		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
-		String posPrincipal = button.getAlt();
-		DTOMiembroPlancha principal = this.miembrosPrincipales.get(Integer.parseInt(posPrincipal) - 1);
-	}
 
-	public void actionCargarFormatoSuplente(ActionEvent event) {
-		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
-		String posSuplente = button.getAlt();
-		DTOMiembroPlancha principal = this.miembrosSuplentes.get(Integer.parseInt(posSuplente) - 1);
-	}
-	
 	private void borrarDatosReporte211() {
 		lugExpCedula = null;
 		ciudadUbicacion = null;
@@ -691,6 +679,7 @@ public class RegistrarPlancha extends BaseVista {
 		asociadoDTO = null;
 	}
 	
+	//GETTERS AND SETTERS
 	public String getNumeroZonaElectoral() {
 		return numeroZonaElectoral;
 	}

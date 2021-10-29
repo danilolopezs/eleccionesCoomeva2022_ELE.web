@@ -1,11 +1,23 @@
 package co.com.coomeva.ele.formatos.pdf.inscripcion.plancha;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import com.icesoft.faces.context.effects.JavascriptContext;
+
+import co.com.coomeva.ele.delegado.formulario.DelegadoRegistroFormulario;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
 import co.com.coomeva.ele.dto.DTOInformacionPlancha;
 import co.com.coomeva.ele.dto.DTOMiembroPlancha;
-import co.com.coomeva.ele.formatos.pdf.AbstractFormatoPdf;
+import co.com.coomeva.ele.entidades.formulario.EleRegistroCampos;
 import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.ele.util.FacesUtils;
+import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
 /**
@@ -18,88 +30,119 @@ import co.com.coomeva.util.acceso.UtilAcceso;
  * @date 2/12/2012
  */
 
-public class FormatoPdfInscripcionPlancha extends AbstractFormatoPdf {
+public class FormatoPdfInscripcionPlancha {
+
+	private static final String NOMBRE_PLANTILLA_210 = "plantilla_CO-FT-210";
+	private static final String TIPO_REPORTE = "210";
 
 	private String nombrePlantillaFormatoInscripcionPlancha;
 	private String tipoEleccionesSession;
 	private String tipoEleccionesRepresentantes;
 
+	private String urlUbicacionPlantillas;
+	private String urlDestino;
+
+	private HashMap<String, String> parametros;
+	private List<EleRegistroCampos> listaRegCampos;
+
 	public FormatoPdfInscripcionPlancha() {
 		super();
 		try {
-			this.tipoEleccionesSession = (String) FacesUtils
-					.getSessionParameter("tipoElecciones");
+			this.parametros = new HashMap<String, String>();
+			listaRegCampos = new ArrayList<EleRegistroCampos>();
+
+			this.urlUbicacionPlantillas = UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.url.ubicacion.plantillas");
+			this.urlDestino = UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					"param.url.destino.reportes");
+
+			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
 			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");
+			nombrePlantillaFormatoInscripcionPlancha = UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"param.tipo.elecciones.representantes");
-			nombrePlantillaFormatoInscripcionPlancha = UtilAcceso
-					.getParametroFuenteS(
-							ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-							"param.nombre.plantilla.inscripcion.plancha."
-									+ this.tipoEleccionesSession);
+					"param.nombre.plantilla.inscripcion.plancha." + this.tipoEleccionesSession);
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage(e.getMessage());
 		}
 	}
 
-	@Override
-	public void setearValorMapaReporte(Object... params) throws Exception {
-		Long consecutivoPlancha = (Long) params[0];
+	public void generarReporte(Object... params) throws Exception {
+		setParametrosListaCampos((Long) params[0]);
+		guardarRegistroFormulario();
+		generarReportePDF();
+	}
 
+	private void guardarRegistroFormulario() throws NumberFormatException, Exception {
+		UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
+		DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(TIPO_REPORTE), listaRegCampos,
+				user.getUserId());
+	}
+
+	public void setParametrosListaCampos(Long consecutivoPlancha) throws Exception {
 		DTOInformacionPlancha infoPlancha = DelegadoPlancha.getInstance()
 				.consultarInformacionPlancha(consecutivoPlancha);
 
-		this.getValores().put("numeroZonaElect",
-				infoPlancha.getNumeroZonaElectoral());
+		parametros.put("zona", infoPlancha.getNumeroZonaElectoral());
 		if (!tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
-			
-			this.getValores().put("ciudad", infoPlancha.getCiudad());
+			parametros.put("ciudad", infoPlancha.getCiudad());
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 21L, infoPlancha.getCiudad()));
 		}
-		this.getValores().put("anno", infoPlancha.getAnno());
-		this.getValores().put("mes", infoPlancha.getMes());
-		this.getValores().put("dia", infoPlancha.getDia());
-		this.getValores().put("hora", infoPlancha.getHora());
+		parametros.put("anno", infoPlancha.getAnno());
+		parametros.put("mes", infoPlancha.getMes());
+		parametros.put("dia", infoPlancha.getDia());
+		parametros.put("hora", infoPlancha.getHora());
+		parametros.put("numeroPlancha", infoPlancha.getNumeroPlancha());
 
-		int i = 1;
+		listaRegCampos.add(
+				new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 18L, infoPlancha.getNumeroZonaElectoral()));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 73L, infoPlancha.getAnno()));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 74L, infoPlancha.getMes()));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 75L, infoPlancha.getDia()));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 24L, infoPlancha.getHora()));
+		listaRegCampos
+				.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 25L, infoPlancha.getNumeroPlancha()));
+
 		for (DTOMiembroPlancha miembro : infoPlancha.getMiembrosTitulares()) {
-			this.getValores().put("apeNomTit" + miembro.getPosicionPlancha(),
-					miembro.getApellidosNombres());
-			this.getValores().put("profTit" + miembro.getPosicionPlancha(),
-					miembro.getProfesion());
-			this.getValores().put("cedTit" + miembro.getPosicionPlancha(),
-					miembro.getNumeroDocumento().toString());
-			i++;
+			parametros.put("nombreCompleto" + miembro.getPosicionPlancha(), miembro.getApellidosNombres());
+			parametros.put("profesion" + miembro.getPosicionPlancha(), miembro.getProfesion());
+			parametros.put("cedula" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
+			parametros.put("email" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
+
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 1L, miembro.getApellidosNombres()));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 5L, miembro.getProfesion()));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 13L,
+					miembro.getNumeroDocumento().toString()));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 72L,
+					miembro.getNumeroDocumento().toString()));
 		}
 
 		if (!tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
-			i = 1;
 			for (DTOMiembroPlancha miembro : infoPlancha.getMiembrosSuplentes()) {
-				this.getValores().put(
-						"apeNomSup" + miembro.getPosicionPlancha(),
-						miembro.getApellidosNombres());
-				this.getValores().put("profSup" + miembro.getPosicionPlancha(),
-						miembro.getProfesion());
-				this.getValores().put("cedSup" + miembro.getPosicionPlancha(),
-						miembro.getNumeroDocumento().toString());
-				i++;
+				parametros.put("nombreCompleto" + miembro.getPosicionPlancha(), miembro.getApellidosNombres());
+				parametros.put("profesion" + miembro.getPosicionPlancha(), miembro.getProfesion());
+				parametros.put("cedula" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
+				parametros.put("email" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
+
+				listaRegCampos.add(
+						new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 1L, miembro.getApellidosNombres()));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 4L, miembro.getProfesion()));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 7L,
+						miembro.getNumeroDocumento().toString()));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 72L,
+						miembro.getNumeroDocumento().toString()));
 			}
 		}
 	}
 
-	@Override
-	public void generarReporte(Object... params) throws Exception {
-		this.setearValorMapaReporte(params);
-		Long consecutivoPlancha = (Long) params[0];
-		this.generarReportePDF(this.nombrePlantillaFormatoInscripcionPlancha,
-				"InscripcionPlancha" + consecutivoPlancha);
+	private void generarReportePDF() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		request.getSession().setAttribute("codigoReporte", TIPO_REPORTE);
+		request.getSession().setAttribute("parametrosFormulario210", parametros);
+		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
 	}
 
-	public String generarReport() {
-		try {
-			generarReporte();
-		} catch (Exception e) {
-			FacesUtils.addErrorMessage(e.getMessage());
-		}
-		return "";
-	}
 }

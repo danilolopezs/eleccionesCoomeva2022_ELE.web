@@ -2,6 +2,7 @@ package co.com.coomeva.ele.delegado.generador;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import net.sf.jasperreports.engine.JasperPrint;
@@ -163,11 +164,10 @@ public class DelegadoGenerador {
 		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, formulario, rutaReporte);
 	}
 
-	public JasperPrint reporteInscripcionPlanchas_FT_210(
-			String zonaElectoral, String ciudad, Date fecha, String rutaImagen,
+	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros, String rutaImagen,
 			String rutaReporte)throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteInscripcionPlanchas_FT_210(zonaElectoral, ciudad, fecha, rutaImagen, rutaReporte);
+		return logicaGenerador.reporteInscripcionPlanchas_FT_210(parametros, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteCertificadoAcreditaOcupacion_FT_211(
