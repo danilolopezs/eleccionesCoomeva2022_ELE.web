@@ -258,12 +258,21 @@ public class LogicaPlancha implements ILogicaPlancha {
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
 				
-				EleAsociado eleAsociado = new EleAsociadoDAO().findById(Long.parseLong(nroIdentificacionMiembro));
-				if (eleAsociado.getDescProfesion() != null) {
-					miembros.get(posicionPlancha - 1).setProfesion(eleAsociado.getDescProfesion());
-				} else {				
-					excepciones.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-							"msgAsociadoDebeAcreditarOficio"));
+				List<EleAsociado> listaAsociado = new EleAsociadoDAO().findByProperty("numeroDocumento",
+						Long.parseLong(nroIdentificacionMiembro));
+				boolean encontroAsociado = Boolean.FALSE;
+				for (EleAsociado asociado : listaAsociado) {
+					if (asociado.getNumeroDocumento()== Long.parseLong(nroIdentificacionMiembro)
+							&& asociado.getDescProfesion() != null) {
+						miembros.get(posicionPlancha - 1).setProfesion(asociado.getDescProfesion());
+						encontroAsociado = Boolean.TRUE; 
+						break;
+					}
+				}
+				if (!encontroAsociado) {
+					excepciones
+							.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+									"msgAsociadoDebeAcreditarOficio"));
 					miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
 							"Por favor tener en cuenta las siguientes observaciones: </br>" + excepciones.toString());
 					miembros.get(posicionPlancha - 1).setTieneProfesion(Boolean.FALSE);
