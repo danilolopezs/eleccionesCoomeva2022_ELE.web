@@ -1,16 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2100000000000093"/>
+	<property name="ireport.zoom" value="2.3579476910000503"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="873"/>
+	<property name="ireport.y" value="358"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_TH" mode="Opaque" backcolor="#F0F8FF">
+		<pen lineColor="#00834D"/>
+		<box>
+			<pen lineWidth="0.5" lineColor="#00834D"/>
+		</box>
+	</style>
+	<style name="table 8_CH" mode="Opaque" backcolor="#BFE1FF">
+		<pen lineColor="#00834D"/>
+		<box>
+			<pen lineWidth="0.5" lineColor="#00834D"/>
+		</box>
+	</style>
+	<style name="table 8_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+			<pen lineWidth="0.5" lineColor="#00834D"/>
+			<topPen lineColor="#00834D"/>
+			<leftPen lineColor="#00834D"/>
+			<bottomPen lineColor="#00834D"/>
+			<rightPen lineColor="#00834D"/>
+		</box>
+	</style>
+	<subDataset name="listaSuplentes">
+		<field name="consecutivo" class="java.lang.String"/>
+		<field name="cedula" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="profesion" class="java.lang.String"/>
+		<field name="correo" class="java.lang.String"/>
+		<field name="firma" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="listaPrincipales">
+		<field name="consecutivo" class="java.lang.String"/>
+		<field name="cedula" class="java.lang.String"/>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="profesion" class="java.lang.String"/>
+		<field name="correo" class="java.lang.String"/>
+		<field name="firma" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="ciudad" class="java.lang.String"/>
-	<parameter name="fechaActual" class="java.util.Date"/>
 	<parameter name="rutaImagen" class="java.lang.String"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["D:\\AVRESPALDO\\backupcmtc4227\\ELECCIONES\\Reportes IReport\\"]]></defaultValueExpression>
+	<parameter name="numeroPlancha" class="java.lang.String"/>
+	<parameter name="anno" class="java.lang.String"/>
+	<parameter name="mes" class="java.lang.String"/>
+	<parameter name="dia" class="java.lang.String"/>
+	<parameter name="hora" class="java.lang.String"/>
+	<parameter name="miembrosPrincipales" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="plancha" class="java.lang.String"/>
+	<parameter name="miembrosSuplentes" class="java.util.Collection"/>
 	<field name="miembrosPrincipal" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<field name="miembrosSuplentes" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<background>
@@ -19,22 +70,22 @@
 	<pageHeader>
 		<band height="124" splitType="Stretch">
 			<image>
-				<reportElement x="219" y="80" width="127" height="36"/>
+				<reportElement x="226" y="80" width="127" height="36"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"\\icono_coomeva.png"]]></imageExpression>
 			</image>
 			<rectangle>
-				<reportElement x="-22" y="-19" width="595" height="94" forecolor="#00834C" backcolor="#00834C"/>
+				<reportElement x="-22" y="-19" width="595" height="94" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="161" y="0" width="243" height="25" forecolor="#FFFFFF"/>
-				<textElement markup="none">
+				<reportElement x="167" y="0" width="243" height="25" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Elección de Delegados 2017-2020]]></text>
+				<text><![CDATA[Elección de Delegados]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="25" width="216" height="20" forecolor="#FFFFFF"/>
-				<textElement markup="none">
+				<reportElement x="145" y="25" width="285" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" markup="none">
 					<font size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INSCRIPCIÓN DE PLANCHAS]]></text>
@@ -44,27 +95,27 @@
 	<columnHeader>
 		<band height="32" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="1" width="555" height="31" forecolor="#00834C"/>
+				<reportElement x="0" y="0" width="555" height="32" forecolor="#00834C"/>
 			</rectangle>
 			<line>
-				<reportElement x="380" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="376" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="9" y="5" width="70" height="14" forecolor="#00834C"/>
+				<reportElement x="4" y="6" width="80" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Zonal Electoral No.]]></text>
+				<text><![CDATA[Zona Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="5" width="25" height="14" forecolor="#00834C"/>
+				<reportElement x="263" y="6" width="39" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="388" y="5" width="27" height="14" forecolor="#00834C"/>
+				<reportElement x="380" y="6" width="51" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
@@ -74,179 +125,478 @@
 				<reportElement x="0" y="1" width="555" height="4" forecolor="#00834C" backcolor="#00834C"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="5" y="19" width="93" height="13"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<reportElement x="1" y="17" width="101" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="111" y="5" width="54" height="14" forecolor="#00834C"/>
+				<reportElement x="106" y="6" width="54" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Ciudad]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="17" width="134" height="15"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}]]></textFieldExpression>
+				<reportElement x="103" y="17" width="156" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="248" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="259" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<line>
 				<reportElement x="102" y="5" width="1" height="27" forecolor="#00834C"/>
 			</line>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="254" y="17" width="119" height="15"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
-			</textField>
-			<textField pattern="h.mm a" isBlankWhenNull="true">
-				<reportElement x="388" y="17" width="91" height="15"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="482" y="5" width="1" height="27" forecolor="#00834C"/>
+				<reportElement x="462" y="5" width="1" height="27" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="490" y="6" width="46" height="12" forecolor="#00834C"/>
+				<reportElement x="466" y="6" width="53" height="11" forecolor="#00834C"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Plancha No]]></text>
 			</staticText>
+			<line>
+				<reportElement x="351" y="19" width="1" height="13" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="285" y="19" width="1" height="13" forecolor="#00834C"/>
+			</line>
+			<line>
+				<reportElement x="324" y="19" width="1" height="13" forecolor="#00834C"/>
+			</line>
 			<textField>
-				<reportElement x="490" y="18" width="58" height="13"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{plancha}]]></textFieldExpression>
+				<reportElement x="286" y="17" width="38" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="17" width="26" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="17" width="22" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="377" y="17" width="85" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="17" width="89" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{numeroPlancha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="645" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="27" width="555" height="598" forecolor="#00834C"/>
+				<reportElement x="0" y="559" width="554" height="66" forecolor="#00834C"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="10" y="625" width="99" height="20" forecolor="#00834C"/>
-				<textElement/>
-				<text><![CDATA[CO-FT-210 (Anverso)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="462" y="625" width="91" height="20" forecolor="#00834C"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="450" y="625" width="103" height="15" forecolor="#00834C"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
-			</rectangle>
-			<subreport>
-				<reportElement x="0" y="27" width="555" height="455"/>
-				<dataSourceExpression><![CDATA[$F{miembrosPrincipal}]]></dataSourceExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
-			</subreport>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834D"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[MIEMBROS PRINCIPALES]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="482" width="553" height="77"/>
+				<reportElement x="0" y="471" width="554" height="88"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.5" lineColor="#00834C"/>
+					<topPen lineWidth="1.5" lineColor="#00834C"/>
+					<leftPen lineWidth="1.5" lineColor="#00834C"/>
+					<bottomPen lineWidth="1.5" lineColor="#00834C"/>
+					<rightPen lineWidth="1.5" lineColor="#00834C"/>
+				</box>
 				<textElement textAlignment="Justified">
-					<font isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Todo candidato al momento de postularse y con la firma del presente formato de inscripción de planchas,  declara  que  no  se  encuentra  incurso  en  alguna causal  de  inhabilidad  o  incompatibilidad  estatutaria  o  reglamentaria,  así  como  que conoce  y  acata  el  Código  de  Buen  Gobierno  y  el  Código de  Ética  y  se  compromete  a permanecer  actualizado  respecto  de  los  reglamentos  y  demás  normas  que  expida  la Cooperativa y que le sean aplicables, ante la Junta de Vigilancia. Código Electoral Acuerdo N° 652 (CA-AC-2021.652) Art 61 Numeral 3. Reglamento Electoral Resolución 459 (CA-RE-2021.459) Art 26 Numeral 3.]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="559" width="555" height="1"/>
-			</line>
 			<staticText>
-				<reportElement x="7" y="600" width="238" height="15" forecolor="#00834C"/>
+				<reportElement x="20" y="563" width="220" height="15" forecolor="#00834C"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Nombre (s) y  Apellidos  de quién inscribe la Plancha:]]></text>
+				<text><![CDATA[Nombre (s) y  Apellidos  de quién inscribe la Plancha]]></text>
 			</staticText>
 			<line>
-				<reportElement x="20" y="597" width="216" height="1" forecolor="#00834C"/>
+				<reportElement x="20" y="616" width="220" height="1" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="368" y="601" width="157" height="14" forecolor="#00834C"/>
+				<reportElement x="310" y="601" width="220" height="14" forecolor="#00834C"/>
 				<textElement textAlignment="Center">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement key="table 8" style="table 8" x="0" y="1" width="555" height="430"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="listaPrincipales">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{miembrosPrincipales})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="29">
+						<jr:columnHeader style="table 8_TD" height="60" rowSpan="2">
+							<staticText>
+								<reportElement style="table 8_TD" x="0" y="0" width="29" height="60" forecolor="#00834D"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Consecutivo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement style="table 8_TD" x="0" y="0" width="29" height="30"/>
+								<textElement textAlignment="Justified">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="526">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="table 8_CH" x="0" y="0" width="525" height="30" forecolor="#00834D"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[MIEMBROS PRINCIPALES]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="83">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="83" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Cédula de Ciudadanía ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="83" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="124">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="124" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[ Nombre (s) y  Apellidos ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="124" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="104">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="104" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Profesión / Oficio]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="104" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivo}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="93">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Correo Electrónico]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{correo}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="122">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="121" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Firma]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="table 8_TD" x="0" y="0" width="121" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{firma}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="1" y="625" width="99" height="15" forecolor="#00834C"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CO-FT-210 (Anverso)]]></text>
+			</staticText>
 			<line>
-				<reportElement x="361" y="597" width="169" height="1" forecolor="#00834C"/>
+				<reportElement x="310" y="597" width="220" height="1" forecolor="#00834C"/>
 			</line>
 		</band>
 		<band height="645">
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="625" forecolor="#00834C"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834C" backcolor="#CDE4D7"/>
-			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="27" forecolor="#00834D"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+				<reportElement x="1" y="625" width="111" height="15" forecolor="#00834C"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
 				</textElement>
-				<text><![CDATA[MIEMBROS SUPLENTES]]></text>
-			</staticText>
-			<subreport>
-				<reportElement x="0" y="27" width="555" height="479"/>
-				<dataSourceExpression><![CDATA[$F{miembrosSuplentes}]]></dataSourceExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "plantilla_CO_FT_210_subreport1.jasper"]]></subreportExpression>
-			</subreport>
-			<staticText>
-				<reportElement x="0" y="625" width="98" height="20" forecolor="#00834C"/>
-				<textElement/>
 				<text><![CDATA[CO-FT-210 (Reverso)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="462" y="625" width="86" height="20" forecolor="#00834C"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="431" y="625" width="123" height="15" forecolor="#00834C"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="false"/>
+				</textElement>
 				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="582" width="555" height="43" forecolor="#00834C"/>
+				<reportElement x="0" y="559" width="554" height="66" forecolor="#00834C"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="606" width="236" height="19" forecolor="#00834C"/>
+				<reportElement x="20" y="566" width="236" height="15" forecolor="#00834C"/>
 				<textElement verticalAlignment="Bottom">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Apellido(s) y Nombre(s) de quién inscribe la Plancha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="606" width="154" height="19" forecolor="#00834C"/>
-				<textElement verticalAlignment="Bottom">
+				<reportElement x="310" y="606" width="220" height="14" forecolor="#00834C"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="604" width="250" height="1" forecolor="#00834C"/>
+				<reportElement x="20" y="614" width="220" height="1" forecolor="#00834C"/>
 			</line>
 			<line>
-				<reportElement x="276" y="604" width="250" height="1" forecolor="#00834C"/>
+				<reportElement x="310" y="604" width="220" height="1" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="506" width="555" height="76"/>
+				<reportElement x="0" y="471" width="554" height="88"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<pen lineWidth="1.5" lineColor="#00834C"/>
+					<topPen lineWidth="1.5" lineColor="#00834C"/>
+					<leftPen lineWidth="1.5" lineColor="#00834C"/>
+					<bottomPen lineWidth="1.5" lineColor="#00834C"/>
+					<rightPen lineWidth="1.5" lineColor="#00834C"/>
+				</box>
 				<textElement textAlignment="Justified">
-					<font isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[	Todo candidato al momento de postularse y con la firma del presente formato de inscripción de planchas,  declara  que  no  se  encuentra  incurso  en  alguna causal  de  inhabilidad  o  incompatibilidad  estatutaria  o  reglamentaria,  así  como  que conoce  y  acata  el  Código  de  Buen  Gobierno  y  el  Código de  Ética  y  se  compromete  a permanecer  actualizado  respecto  de  los  reglamentos  y  demás  normas  que  expida  la Cooperativa y que le sean aplicables, ante la Junta de Vigilancia. Código Electoral Acuerdo N° 652 (CA-AC-2021.652) Art 61 Numeral 3. Reglamento Electoral Resolución 459 (CA-RE-2021.459) Art 26 Numeral 3.]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement key="table 7" style="table 8" x="0" y="1" width="555" height="416"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="listaSuplentes">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{miembrosSuplentes})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="30">
+						<jr:columnHeader height="60" rowSpan="2">
+							<staticText>
+								<reportElement style="table 8_TD" x="0" y="0" width="30" height="60" forecolor="#00834D"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Consecutivo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement style="table 8_TD" x="0" y="0" width="30" height="30"/>
+								<textElement textAlignment="Center">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="526">
+						<jr:columnHeader style="table 8_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="table 8_CH" x="0" y="0" width="525" height="30" forecolor="#00834D"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[MIEMBROS SUPLENTES]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="83">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="83" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Cédula de Ciudadanía ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="83" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="124">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="124" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Nombre (s) y  Apellidos ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="124" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="104">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="104" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Profesión / Oficio]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField>
+									<reportElement style="table 8_TD" x="0" y="0" width="104" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{profesion}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="93">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Correo Electrónico]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{correo}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="122">
+							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="table 8_TD" x="0" y="0" width="121" height="30" forecolor="#00834D"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<text><![CDATA[Firma]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="30" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="table 8_TD" x="0" y="0" width="121" height="30"/>
+									<textElement>
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{firma}.toUpperCase()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
 </jasperReport>

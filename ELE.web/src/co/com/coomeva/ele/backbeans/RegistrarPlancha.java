@@ -649,9 +649,18 @@ public class RegistrarPlancha extends BaseVista {
 				this.fechaFirma != null ? WorkStrigs.getAnio(this.fechaFirma.getYear()) : "");
 
 		// para guardar en base de datos los registros de los campos
+		
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 73L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : ""));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 74L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : ""));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 75L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : ""));
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, asociadoDTO.getNombre()));
 		listaRegCampos
-				.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, asociadoDTO.getId() + ""));
+		.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, asociadoDTO.getId() + ""));
+		
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 76L, this.ciudadUbicacion));
+		
+		
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, this.lugExpCedula));
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
 		listaRegCampos

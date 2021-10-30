@@ -42,13 +42,13 @@ public class FormatoPdfInscripcionPlancha {
 	private String urlUbicacionPlantillas;
 	private String urlDestino;
 
-	private HashMap<String, String> parametros;
+	private HashMap<String, Object> parametros;
 	private List<EleRegistroCampos> listaRegCampos;
 
 	public FormatoPdfInscripcionPlancha() {
 		super();
 		try {
-			this.parametros = new HashMap<String, String>();
+			this.parametros = new HashMap<String, Object>();
 			listaRegCampos = new ArrayList<EleRegistroCampos>();
 
 			this.urlUbicacionPlantillas = UtilAcceso.getParametroFuenteS(
@@ -100,40 +100,40 @@ public class FormatoPdfInscripcionPlancha {
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 74L, infoPlancha.getMes()));
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 75L, infoPlancha.getDia()));
 		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 24L, infoPlancha.getHora()));
-		listaRegCampos
-				.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 25L, infoPlancha.getNumeroPlancha()));
+		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 25L,
+				infoPlancha.getNumeroPlancha() == null ? "" : infoPlancha.getNumeroPlancha()));
 
+		List<AsociadoVO> listaSuplentes = new ArrayList<AsociadoVO>();
+		List<AsociadoVO> listaPrincipales = new ArrayList<AsociadoVO>();
 		for (DTOMiembroPlancha miembro : infoPlancha.getMiembrosTitulares()) {
-			parametros.put("nombreCompleto" + miembro.getPosicionPlancha(), miembro.getApellidosNombres());
-			parametros.put("profesion" + miembro.getPosicionPlancha(), miembro.getProfesion());
-			parametros.put("cedula" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
-			parametros.put("email" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
-
+			listaPrincipales.add(new AsociadoVO(miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString(),
+					miembro.getApellidosNombres(), miembro.getProfesion(), miembro.getCorreo(), null));
 			listaRegCampos
 					.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 1L, miembro.getApellidosNombres()));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 5L, miembro.getProfesion()));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 5L,
+					miembro.getProfesion() == null ? "" : miembro.getProfesion()));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 13L,
 					miembro.getNumeroDocumento().toString()));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 72L,
-					miembro.getNumeroDocumento().toString()));
+					miembro.getCorreo() == null ? "" : miembro.getCorreo()));
 		}
-
 		if (!tipoEleccionesRepresentantes.equals(tipoEleccionesSession)) {
 			for (DTOMiembroPlancha miembro : infoPlancha.getMiembrosSuplentes()) {
-				parametros.put("nombreCompleto" + miembro.getPosicionPlancha(), miembro.getApellidosNombres());
-				parametros.put("profesion" + miembro.getPosicionPlancha(), miembro.getProfesion());
-				parametros.put("cedula" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
-				parametros.put("email" + miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString());
-
+				listaSuplentes
+						.add(new AsociadoVO(miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString(),
+								miembro.getApellidosNombres(), miembro.getProfesion(), miembro.getCorreo(), null));
 				listaRegCampos.add(
 						new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 1L, miembro.getApellidosNombres()));
-				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 4L, miembro.getProfesion()));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 4L,
+						miembro.getProfesion() == null ? miembro.getProfesion() : ""));
 				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 7L,
 						miembro.getNumeroDocumento().toString()));
 				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(TIPO_REPORTE), 72L,
 						miembro.getNumeroDocumento().toString()));
 			}
 		}
+		parametros.put("miembrosPrincipales", listaPrincipales);
+		parametros.put("miembrosSuplentes", listaSuplentes);
 	}
 
 	private void generarReportePDF() {
