@@ -1,5 +1,6 @@
 package co.com.coomeva.ele.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -102,9 +103,12 @@ public class ServletReportesJasper extends HttpServlet {
 
 		String codigoReporte = (String) req.getSession().getAttribute("codigoReporte");
 		String rutaImagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(),
-				"imagenes/reportes");
-		String rutaReporte = getServletContext().getRealPath("WEB-INF/reports/");
-		rutaReporte = rutaReporte + "/";
+				"imagenes"+File.separator+"reportes");
+		rutaImagen += File.separator;
+		
+		
+		String rutaReporte = getServletContext().getRealPath("WEB-INF"+File.separator+"reports"+File.separator);
+		rutaReporte = rutaReporte + File.separator;
 
 		try {
 

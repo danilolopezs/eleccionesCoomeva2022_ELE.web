@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="2.3579476910000503"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="358"/>
+	<property name="ireport.zoom" value="1.9487171000000418"/>
+	<property name="ireport.x" value="117"/>
+	<property name="ireport.y" value="21"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -71,7 +71,7 @@
 		<band height="124" splitType="Stretch">
 			<image>
 				<reportElement x="226" y="80" width="127" height="36"/>
-				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"\\icono_coomeva.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rutaImagen}+"icono_coomeva.png"]]></imageExpression>
 			</image>
 			<rectangle>
 				<reportElement x="-22" y="-19" width="595" height="94" forecolor="#009232" backcolor="#009232"/>
@@ -191,14 +191,14 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="377" y="17" width="85" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{hora}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="464" y="17" width="89" height="14"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="10"/>
@@ -254,7 +254,7 @@
 				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 8" style="table 8" x="0" y="1" width="555" height="430"/>
+				<reportElement key="table 8" style="table 8" x="0" y="1" width="555" height="430" forecolor="#000000"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="listaPrincipales">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{miembrosPrincipales})]]></dataSourceExpression>
@@ -345,7 +345,7 @@
 									<textElement>
 										<font size="10"/>
 									</textElement>
-									<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivo}.toUpperCase()]]></textFieldExpression>
+									<textFieldExpression class="java.lang.String"><![CDATA[$F{profesion}.toUpperCase()]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>

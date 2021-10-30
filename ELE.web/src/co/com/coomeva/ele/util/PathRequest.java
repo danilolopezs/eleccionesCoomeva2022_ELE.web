@@ -1,5 +1,6 @@
 package co.com.coomeva.ele.util;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -39,7 +40,7 @@ public class PathRequest {
 	
 	public String getPathServerContextPath(ServletContext context,String nombreDirectorioReferencia){
 		String pathFile = context.getRealPath(
-		"gui/"+nombreDirectorioReferencia+"/");
+		"gui"+File.separator + nombreDirectorioReferencia + File.separator);
 		return pathFile;
 	}	
 	

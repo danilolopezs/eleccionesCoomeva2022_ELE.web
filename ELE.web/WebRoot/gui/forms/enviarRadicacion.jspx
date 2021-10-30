@@ -72,6 +72,22 @@
 							</tr>
 							<tr>
 								<td>
+									<div align="center">
+										<ice:outputLabel value="#{etiquetas.textInfoEnvioRadicacion}"></ice:outputLabel>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div align="center">
+										<ice:selectBooleanCheckbox value="">
+										
+										</ice:selectBooleanCheckbox>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<center>
 										<br />
 										<ice:commandButton value="enviar" />
