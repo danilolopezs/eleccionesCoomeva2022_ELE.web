@@ -119,4 +119,23 @@ public class LogicaZonaElectoral extends EleZonaElectoralDAO implements ILogicaZ
 			session.close();
 		}
 	}
+
+	@Override
+	public String consultarZonaElectoralByCodigo(Long codigo) {
+		String nombre_zona_ele = null;
+		Session session = getSession();
+		try {
+			Query queryObject = session.getNamedQuery("consultar.zona.electoral.por.codigo");
+			queryObject.setLong("codigoZonaEle", codigo);
+			nombre_zona_ele = (String) queryObject.uniqueResult();
+			return nombre_zona_ele != null ? nombre_zona_ele : "";
+		} catch (Exception e) {
+			System.out.println("No se logró consultar el nombre de la zona electoral");
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return "";
+	}
 }

@@ -157,11 +157,13 @@ if (self === top) {
 																	<ice:outputText value="#{etiquetas.lblNumeroPlancha}"
 																		styleClass="textoLabel" />
 																</td>
-																<td>
+																<td>																
 																	<div align="left">
 																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.numeroPlancha}"
+																			value=""
 																			styleClass="textoInput" />
+																		<!-- modificacion 30/10/2021 se requiere no mostrar este campo al asociado -->
+																		<!-- value="#{registrarInfoCabezaPlancha.dto.numeroPlancha}" -->
 																	</div>
 																</td>
 

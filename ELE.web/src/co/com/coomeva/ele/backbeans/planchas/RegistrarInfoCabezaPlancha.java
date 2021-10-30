@@ -23,6 +23,7 @@ import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoFormatoPlanchas;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
+import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoZonaElectoral;
 import co.com.coomeva.ele.dto.DTOInformacionPlancha;
 import co.com.coomeva.ele.dto.DTOMiembroPlancha;
 import co.com.coomeva.ele.dto.InfoDetalleFormatoPlanchaDTO;
@@ -204,6 +205,14 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 					}
 				}
 			}
+			//consulta zona electoral
+			if (dto.getZonaElectoral() != null) {
+				String nombre_zona_elec = DelegadoZonaElectoral.getInstance()
+						.consultarZonaElectoralByCodigo(Long.parseLong(dto.getZonaElectoral()));
+				dto.setZonaElectoral(
+						dto.getZonaElectoral() + ((nombre_zona_elec != null) ? " - " + nombre_zona_elec : ""));
+			}
+			// se verifica si la instancia dto tiene profesion
 			if (dto.getProfesion() == null) { 
 				List<EleAsociado> listaAsociado = new EleAsociadoDAO().findByProperty("numeroDocumento",
 						numeroDocumentoAsociado);

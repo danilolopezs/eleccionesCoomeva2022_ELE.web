@@ -1216,5 +1216,18 @@
 			WHERE cldi.numint = :numeroDocumento and cldi.tipubi = 'DIN' FETCH FIRST 1 ROWS ONLY	
 		]]>
 	</sql-query>
+	
+	<!-- ###################################################################################### 
+		## Danilo Lopez - GTC CORPORATION. - 2021-10-25 ## 
+		## Consulta de nombre de la zona electoral por Codigo de zona_electoral ## 
+		###################################################################################### -->
+	<sql-query name="consultar.zona.electoral.por.codigo">
+		<return-scalar column="DESC_ZONA_ELECTORAL"
+			type="java.lang.String" />
+		<![CDATA[
+			SELECT ze.DESCRIPCION_ZONA_ELE DESC_ZONA_ELECTORAL from elecdb.ele_zona_electoral ze 
+			WHERE ze.codigo_zona_ele = :codigoZonaEle
+		]]>
+	</sql-query>
 
 </hibernate-mapping>
