@@ -66,7 +66,7 @@
 							<tr>
 								<td>
 									<div align="center">
-										<ice:outputLabel value="#{etiquetas.lblMenuEnviarRadicacion}"></ice:outputLabel>
+										<ice:outputLabel value="#{etiquetas.lblMenuEnviarRadicacion}"></ice:outputLabel>										
 									</div>
 								</td>
 							</tr>
@@ -80,9 +80,11 @@
 							<tr>
 								<td>
 									<div align="center">
-										<ice:selectBooleanCheckbox value="">
-										
-										</ice:selectBooleanCheckbox>
+										<ice:outputText value="Firma virtual" style="font-size: 11px" />
+										<ice:selectBooleanCheckbox value="" />
+										<ice:outputText value="Firma presencial"
+											style="font-size: 11px" />
+										<ice:selectBooleanCheckbox value="" />
 									</div>
 								</td>
 							</tr>

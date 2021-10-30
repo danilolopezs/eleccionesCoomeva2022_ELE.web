@@ -28,6 +28,8 @@ import co.com.coomeva.ele.dto.DTOMiembroPlancha;
 import co.com.coomeva.ele.dto.InfoDetalleFormatoPlanchaDTO;
 import co.com.coomeva.ele.dto.InformacionCabezaPlanchaDTO;
 import co.com.coomeva.ele.dto.InputFileDataDTO;
+import co.com.coomeva.ele.entidades.habilidad.EleAsociado;
+import co.com.coomeva.ele.entidades.habilidad.dao.EleAsociadoDAO;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlancha;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleFotoFormatoPlancha;
 import co.com.coomeva.ele.logica.LogicaAsociado;
@@ -202,6 +204,17 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 					}
 				}
 			}
+			if (dto.getProfesion() == null) { 
+				List<EleAsociado> listaAsociado = new EleAsociadoDAO().findByProperty("numeroDocumento",
+						numeroDocumentoAsociado);
+				for (EleAsociado asociado : listaAsociado) {
+					if (asociado.getNumeroDocumento().longValue() == numeroDocumentoAsociado.longValue()
+							&& asociado.getDescProfesion() != null) {
+						dto.setProfesion(asociado.getDescProfesion());
+						break;
+					}
+				}
+			}
 			/*
 			 * Long fechaGradoLong = DelegadoCabezaPlancha.getInstance()
 			 * .obtieneFechaGradoAsociado(new Long(dto.getCodAsociado())); if
@@ -219,7 +232,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 
 			EleDetalleFormatoPlancha entity = null;
 			EleFotoFormatoPlancha fotoPlancha = null;
-			if (esSuplente) {
+			if (esSuplente) { 
 				entity = DelegadoCabezaPlancha.getInstance()
 						.consultarDetalleFormatoPlanchaPorId(numintSuplenteCabezaPlancha);
 				fotoPlancha = DelegadoCabezaPlancha.getInstance()
