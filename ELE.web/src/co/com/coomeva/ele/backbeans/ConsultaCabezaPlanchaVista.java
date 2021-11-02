@@ -251,7 +251,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
 			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):""); 
 			request.getSession().setAttribute("hora", fechaElaboracionDoc);
-			request.getSession().setAttribute("cedulaAsociado", ""+cabezaPlancha);
+			//request.getSession().setAttribute("cedulaAsociado", ""+cabezaPlancha);
 			request.getSession().setAttribute("nombreAsociado", nombreAsociado);
 			request.getSession().setAttribute("resolucion", resolucionNro);
 			request.getSession().setAttribute("acta", numActa);

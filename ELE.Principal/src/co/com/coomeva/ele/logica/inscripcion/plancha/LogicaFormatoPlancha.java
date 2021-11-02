@@ -92,9 +92,9 @@ public class LogicaFormatoPlancha implements ILogicaFormatoPlancha {
 				throw new EleccionesDelegadosException("Por favor ingrese la fecha de acta");
 			}
 
-			if (dto.getRazon() == null || "".equals(dto.getRazon())) {
-				throw new EleccionesDelegadosException("Por favor ingrese la razón");
-			}
+//			if (dto.getRazon() == null || "".equals(dto.getRazon())) {
+//				throw new EleccionesDelegadosException("Por favor ingrese la razón");
+//			}
 
 			InfoPlanchaDTO infoPlancha = LogicaPlanchas.getInstance().obtenerInfoPlancha(dto.getNumeroDocumento(),
 					userId);

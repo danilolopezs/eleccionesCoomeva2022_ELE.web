@@ -494,6 +494,9 @@ public class LogicaPlancha implements ILogicaPlancha {
 			info.setDia(formatterDia.format(fechaRegistro));
 			info.setHora(formatterHora.format(fechaRegistro) + ":" + formatterMinutos.format(fechaRegistro));
 		}
+		if(plancha.getFirmaVirtual() != null) {
+			info.setFirmaVirtual(plancha.getFirmaVirtual());
+		}
 
 		List<ElePlanchaAsociado> asociadosPlancha = new ElePlanchaAsociadoDAO()
 				.findByConsecutivoPlancha(consecutivoPlancha);
@@ -2351,6 +2354,19 @@ public class LogicaPlancha implements ILogicaPlancha {
 			HibernateSessionFactoryElecciones2012.getSession().close();
 		}
 		return actualizacionOK;
+	}
+	
+	public void asignarTipoFirmaPlancha(Long consecutivoPlancha, Long tipoFirma) throws EleccionesDelegadosException {
+		try {
+			ElePlancha elePlancha = new ElePlanchaDAO().findById(consecutivoPlancha);
+
+			if (elePlancha != null) {
+				elePlancha.setFirmaVirtual(tipoFirma);
+				modificarPlancha(elePlancha);
+			}
+		} catch (Exception e) {
+			throw new EleccionesDelegadosException(e.getMessage(), e);
+		}
 	}
 
 }

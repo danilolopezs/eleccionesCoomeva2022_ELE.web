@@ -28,6 +28,10 @@
          <property name="codigoUsuario" type="java.lang.Long">
             <column name="CODIGO_USUARIO"  precision="17" scale="0" />
         </property>
+        <property generated="never" lazy="false" name="firmaVirtual"
+			type="java.lang.Long">
+			<column name="FIRMA_VIRTUAL" precision="1" scale="0" />
+		</property>
         <many-to-one name="eleZonaElectoralEspecial" class="co.com.coomeva.ele.entidades.planchas.dosmildoce.EleZonaElectoralEspecial" fetch="select">
             <column name="CODIGO_ZONA_ELE_ESPECIAL" length="10" />
         </many-to-one>

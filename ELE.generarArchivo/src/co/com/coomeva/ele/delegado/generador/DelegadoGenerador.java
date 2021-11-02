@@ -120,11 +120,11 @@ public class DelegadoGenerador {
 	public JasperPrint reporteResolucionRechazoPlanchas_FT_173(
 			String zonaElectoral, String nombreAsociado, String numResolucion,
 			String cedulaAsociado, String numActa, Date fecha, String dia,
-			String mes, String anio, String razones, String mesActa, String rutaImagen,
+			String mes, String anio, String mesActa, String rutaImagen,
 			String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
 		return logicaGenerador.reporteResolucionRechazoPlanchas_FT_173(zonaElectoral, nombreAsociado, numResolucion, cedulaAsociado,
-				numActa, fecha, dia, mes, anio, razones, mesActa, rutaImagen, rutaReporte);
+				numActa, fecha, dia, mes, anio, mesActa, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteInformacionPersonal_FT_174(String plancha, String zonaElectoral, String nombreAsociado,
@@ -159,9 +159,9 @@ public class DelegadoGenerador {
 			Date hora, String nombreAsociado, String cedulaAsociado,
 			String resolucion, String acta, Date fecha, String ciudad,
 			String razon1, String razon2, String razon3, String razon4,
-			String formulario, String rutaReporte) throws Exception {
+			String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, formulario, rutaReporte);
+		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros, String rutaImagen,

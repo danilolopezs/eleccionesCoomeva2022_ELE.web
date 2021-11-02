@@ -132,10 +132,11 @@ public class ServletReportesJasper extends HttpServlet {
 					// Resolución de Admisión CO-FT-172
 					nombreReporte = "RESOLUCION ADMISION DE PLANCHA";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
+					fecha = (Date) req.getSession().getAttribute("fecha");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
 					numResolucion = (String) req.getSession().getAttribute("numResolucion");
 					String numActa = (String) req.getSession().getAttribute("numActa");
-					fecha = (Date) req.getSession().getAttribute("fecha");
+					
 					String ciudadZona = (String) req.getSession().getAttribute("ciudadZona");
 					dia = (String) req.getSession().getAttribute("dia");
 					mes = (String) req.getSession().getAttribute("mes");
@@ -152,23 +153,22 @@ public class ServletReportesJasper extends HttpServlet {
 					// resolución de Rechazo de Planchas CO-FT-173
 					nombreReporte = "RESOLUCIÓN DE RECHAZO DE PLANCHAS";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
+					fecha = (Date) req.getSession().getAttribute("fecha");
+					numResolucion = (String) req.getSession().getAttribute("numResolucion");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
 					cedulaAsociado = (String) req.getSession().getAttribute("cedulaAsociado");
-					numResolucion = (String) req.getSession().getAttribute("numResolucion");
 					numActa = (String) req.getSession().getAttribute("numActa");
-					fecha = (Date) req.getSession().getAttribute("fecha");
+					String mesActa = (String) req.getSession().getAttribute("mesActa");
 					dia = (String) req.getSession().getAttribute("dia");
 					mes = (String) req.getSession().getAttribute("mes");
 					anio = (String) req.getSession().getAttribute("anio");
-					String razones = (String) req.getSession().getAttribute("razones");
-					String mesActa = (String) req.getSession().getAttribute("mesActa");
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionRechazoPlanchas_FT_173(zonaElectoral,
-							nombreAsociado, numResolucion, cedulaAsociado, numActa, fecha, dia, mes, anio, razones,
+							nombreAsociado, numResolucion, cedulaAsociado, numActa, fecha, dia, mes, anio,
 							mesActa, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "nombreAsociado", "cedulaAsociado", "numResolucion",
-							"numActa", "fecha", "dia", "mes", "anio", "razones", "mesActa");
+							"numActa", "fecha", "dia", "mes", "anio", "mesActa");
 					break;
 				case 174:
 					// Informacion Personal del caneza de Plancha CO-FT-174
@@ -261,7 +261,8 @@ public class ServletReportesJasper extends HttpServlet {
 					anio = (String) req.getSession().getAttribute("anio");
 					Date hora = (Date) req.getSession().getAttribute("hora");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
-					cedulaAsociado = (String) req.getSession().getAttribute("cedulaAsociado");
+					//cedulaAsociado = (String) req.getSession().getAttribute("cedulaAsociado");
+					cedulaAsociado = "";
 					resolucion = (String) req.getSession().getAttribute("resolucion");
 					String acta = (String) req.getSession().getAttribute("acta");
 					fecha = (Date) req.getSession().getAttribute("fecha");
@@ -270,11 +271,11 @@ public class ServletReportesJasper extends HttpServlet {
 					String razon2 = (String) req.getSession().getAttribute("razon2");
 					String razon3 = (String) req.getSession().getAttribute("razon3");
 					String razon4 = (String) req.getSession().getAttribute("razon4");
-					String formulario = rutaImagen + "/CO-FT-209.png";
+					//String formulario = rutaImagen + "/CO-FT-209.png";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionInadmisionPlancha_FT_209(
 							zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta,
-							fecha, ciudad, razon1, razon2, razon3, razon4, formulario, rutaReporte);
+							fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "dia", "mes", "anio", "hora", "nombreAsociado",
 							"cedulaAsociado", "resolucion", "acta", "fecha", "ciudad", "razon1", "razon2", "razon3",

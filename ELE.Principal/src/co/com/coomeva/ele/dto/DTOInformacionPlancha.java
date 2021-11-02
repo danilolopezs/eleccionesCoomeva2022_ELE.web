@@ -27,6 +27,7 @@ public class DTOInformacionPlancha {
 	public String numeroPlancha;
 	private String descripcionZonaElectoral;
 	private String descripcionExcepciones;
+	private Long firmaVirtual;
 	
 	public String numeroZonaElectoralEspecial;
 	private String descripcionZonaElectoralEspecial;
@@ -140,6 +141,10 @@ public class DTOInformacionPlancha {
 			String descripcionZonaElectoralEspecial) {
 		this.descripcionZonaElectoralEspecial = descripcionZonaElectoralEspecial;
 	}
-	
-	
+	public Long getFirmaVirtual() {
+		return firmaVirtual;
+	}
+	public void setFirmaVirtual(Long firmaVirtual) {
+		this.firmaVirtual = firmaVirtual;
+	}
 }

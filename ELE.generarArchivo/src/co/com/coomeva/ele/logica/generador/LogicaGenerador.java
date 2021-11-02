@@ -1268,7 +1268,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteResolucionRechazoPlanchas_FT_173(String zonaElectoral, String nombreAsociado,
 			String numResolucion, String cedulaAsociado, String numActa, Date fecha, String dia, String mes,
-			String anio, String razones, String mesActa, String rutaImagen, String rutaReporte) throws Exception {
+			String anio, String mesActa, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1281,7 +1281,6 @@ public class LogicaGenerador {
 			parameters.put("dia", dia);
 			parameters.put("mes", mes);
 			parameters.put("anio", anio);
-			parameters.put("razones", razones);
 			parameters.put("mesActa", mesActa);
 			parameters.put("rutaImagen", rutaImagen);
 
@@ -1736,7 +1735,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteResolucionInadmisionPlancha_FT_209(String zonaElectoral, String anio, String mes,
 			String dia, Date hora, String nombreAsociado, String cedulaAsociado, String resolucion, String acta,
-			Date fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String formulario,
+			Date fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String rutaImagen,
 			String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
@@ -1745,9 +1744,9 @@ public class LogicaGenerador {
 			parameters.put("año", anio);
 			parameters.put("mes", mes);
 			parameters.put("dia", dia);
-			parameters.put("hora", hora);
+			//parameters.put("hora", hora);
 			parameters.put("nombre", nombreAsociado);
-			parameters.put("cedula", cedulaAsociado);
+			//parameters.put("cedula", cedulaAsociado);
 			parameters.put("resolucion", resolucion);
 			parameters.put("acta", acta);
 			parameters.put("fecha", fecha);
@@ -1756,9 +1755,10 @@ public class LogicaGenerador {
 			parameters.put("razon2", razon2);
 			parameters.put("razon3", razon3);
 			parameters.put("razon4", razon4);
-			parameters.put("formulario", formulario);
+			parameters.put("rutaImagen", rutaImagen);
+			//parameters.put("formulario", formulario);
 
-			rutaReporte = rutaReporte + "CO-FT-209.jasper";
+			rutaReporte = rutaReporte + "plantilla_CO_FT_209.jasper";
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);

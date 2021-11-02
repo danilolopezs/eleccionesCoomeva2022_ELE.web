@@ -367,7 +367,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 				DelegadoCabezaPlancha.getInstance().guardarInformacionCabezaPlancha(dtoInfo, this.imageToBase64String);
 				modificarRegistro = true;
 			}
-			mensajeExito = "Se guardó satisfactoriamente la información del asociado cabeza de plancha";
+			mensajeExito = "La información del asociado cabeza de plancha se guardó satisfactoriamente ";
 			this.visiblemensajeExito = true;
 			this.disabledFinalizar = false;
 			this.disabledImprimir = false;

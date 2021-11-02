@@ -328,7 +328,7 @@ public class FormularioReportesVista extends BaseVista {
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : "");
-			request.getSession().setAttribute("razones", razones);
+			//request.getSession().setAttribute("razones", razones);
 
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreCabezaPlancha));
@@ -341,9 +341,10 @@ public class FormularioReportesVista extends BaseVista {
 					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 26L, numResolucionRechazoComision));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 40L, numActa));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 41L, sdf.format(fechaActa)));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 61L, razones));
+			//listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 61L, razones));
 
 		}
+		//TODO habilitar este reporte  
 		// Informacion Personal del caneza de Plancha CO-FT-174 (eliminado de base de
 		// datos)
 		/*
@@ -446,7 +447,7 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("hora", hora);
-			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
+			//request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("resolucion", numResolucionCodigo);
 			request.getSession().setAttribute("acta", numActa);

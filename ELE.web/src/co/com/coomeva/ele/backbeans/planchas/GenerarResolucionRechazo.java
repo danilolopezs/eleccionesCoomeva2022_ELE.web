@@ -30,7 +30,7 @@ public class GenerarResolucionRechazo {
 	private Date fechaResolucion;
 	private Long numeroActa;
 	private Date fechaActa;
-	private String razon;
+	//private String razon;
 	private MensajesVista mensajeVista = new MensajesVista();
 	private String mensajeConfirmacion = "";
 	private boolean visibleConfirmarGenerar;
@@ -42,13 +42,14 @@ public class GenerarResolucionRechazo {
 
 	public String actionGenerarFormatoPdf() {
 		try {
+			/*
 			if (this.razon.isEmpty()) {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 				this.mensajeVista.setMensaje(UtilAcceso.getParametroFuenteS(
 						ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 						"campo.obligatorio.resolucion.razonResolucionRechazo"));
 				return "";
-			}
+			}*/
 
 			Long numCedulaAttribute = (Long) FacesUtils.getSession()
 					.getAttribute("numeroDocCabeza");
@@ -58,7 +59,7 @@ public class GenerarResolucionRechazo {
 			dto.setNumeroResolucion(this.numeroResolucion);
 			dto.setNumeroActa(this.numeroActa);
 			dto.setFechaActa(this.fechaActa);
-			dto.setRazon(this.razon);
+			dto.setRazon("");
 
 			UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
 
@@ -104,7 +105,6 @@ public class GenerarResolucionRechazo {
 		request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaResolucion.getDate()):""); 
 		request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?WorkStrigs.getMes(fechaResolucion.getMonth()):""); 
 		request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaResolucion.getYear()):"");
-		request.getSession().setAttribute("razones", dto.getRazon());
 		request.getSession().setAttribute("mesActa",fechaElaboracionDoc!=null?WorkStrigs.getMes(dto.getFechaActa().getMonth()):""); 
 		
 		request.getSession().setAttribute("codigoReporte", "173");
@@ -153,14 +153,6 @@ public class GenerarResolucionRechazo {
 
 	public void setFechaActa(Date fechaActa) {
 		this.fechaActa = fechaActa;
-	}
-
-	public String getRazon() {
-		return razon;
-	}
-
-	public void setRazon(String razon) {
-		this.razon = razon;
 	}
 
 	public MensajesVista getMensajeVista() {

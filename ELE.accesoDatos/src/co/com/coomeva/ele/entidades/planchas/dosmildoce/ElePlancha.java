@@ -19,6 +19,7 @@ public class ElePlancha implements java.io.Serializable {
 	private String estadoPlancha;
 	private Timestamp fechaEnvio;
 	private Long codigoUsuario;
+	private Long firmaVirtual;
 	private EleZonaElectoralEspecial eleZonaElectoralEspecial;
 	private Set eleEstadoPlanchas = new HashSet(0);
 	private Set eleFormatoPlanchas = new HashSet(0);
@@ -35,8 +36,7 @@ public class ElePlancha implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ElePlancha(Long consecutivoPlancha,
-			EleZonaElectoral eleZonaElectoral, Timestamp fechaRegistro,
+	public ElePlancha(Long consecutivoPlancha, EleZonaElectoral eleZonaElectoral, Timestamp fechaRegistro,
 			Integer numeroPlancha, String estadoPlancha, Timestamp fechaEnvio, Set eleEstadoPlanchas,
 			Set eleFormatoPlanchas, Long codigoUsuario) {
 		this.consecutivoPlancha = consecutivoPlancha;
@@ -48,6 +48,22 @@ public class ElePlancha implements java.io.Serializable {
 		this.eleEstadoPlanchas = eleEstadoPlanchas;
 		this.eleFormatoPlanchas = eleFormatoPlanchas;
 		this.codigoUsuario = codigoUsuario;
+	}
+
+	/** full constructor */
+	public ElePlancha(Long consecutivoPlancha, EleZonaElectoral eleZonaElectoral, Timestamp fechaRegistro,
+			Integer numeroPlancha, String estadoPlancha, Timestamp fechaEnvio, Set eleEstadoPlanchas,
+			Set eleFormatoPlanchas, Long codigoUsuario, Long firmaVirtual) {
+		this.consecutivoPlancha = consecutivoPlancha;
+		this.eleZonaElectoral = eleZonaElectoral;
+		this.fechaRegistro = fechaRegistro;
+		this.numeroPlancha = numeroPlancha;
+		this.estadoPlancha = estadoPlancha;
+		this.fechaEnvio = fechaEnvio;
+		this.eleEstadoPlanchas = eleEstadoPlanchas;
+		this.eleFormatoPlanchas = eleFormatoPlanchas;
+		this.codigoUsuario = codigoUsuario;
+		this.firmaVirtual = firmaVirtual;
 	}
 
 	// Property accessors
@@ -115,7 +131,7 @@ public class ElePlancha implements java.io.Serializable {
 	public void setFechaEnvio(Timestamp fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
 	}
-	
+
 	public Long getCodigoUsuario() {
 		return codigoUsuario;
 	}
@@ -128,10 +144,15 @@ public class ElePlancha implements java.io.Serializable {
 		return eleZonaElectoralEspecial;
 	}
 
-	public void setEleZonaElectoralEspecial(
-			EleZonaElectoralEspecial eleZonaElectoralEspecial) {
+	public void setEleZonaElectoralEspecial(EleZonaElectoralEspecial eleZonaElectoralEspecial) {
 		this.eleZonaElectoralEspecial = eleZonaElectoralEspecial;
 	}
-	
-	
+
+	public Long getFirmaVirtual() {
+		return firmaVirtual;
+	}
+
+	public void setFirmaVirtual(Long firmaVirtual) {
+		this.firmaVirtual = firmaVirtual;
+	}
 }

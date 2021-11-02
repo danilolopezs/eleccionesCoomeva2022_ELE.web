@@ -8,8 +8,7 @@ import java.util.Set;
  * 
  * @author MyEclipse Persistence Tools
  */
-public class ElePlanchas extends AbstractElePlanchas implements
-		java.io.Serializable {
+public class ElePlanchas extends AbstractElePlanchas implements java.io.Serializable {
 
 	// Constructors
 
@@ -18,18 +17,15 @@ public class ElePlanchas extends AbstractElePlanchas implements
 	}
 
 	/** minimal constructor */
-	public ElePlanchas(String nroCabPlancha, EleZonas eleZonas,
-			Date fechaInscripcion, String estado) {
+	public ElePlanchas(String nroCabPlancha, EleZonas eleZonas, Date fechaInscripcion, String estado) {
 		super(nroCabPlancha, eleZonas, fechaInscripcion, estado);
 	}
 
 	/** full constructor */
-	public ElePlanchas(String nroCabPlancha, EleZonas eleZonas,
-			Date fechaInscripcion, String estado, Long nroPlancha,
-			String descEstado, Set eleSuplenteses, Set eleCabPlanchas,
-			Set elePrincipaleses) {
-		super(nroCabPlancha, eleZonas, fechaInscripcion, estado, nroPlancha,
-				descEstado, eleSuplenteses, eleCabPlanchas, elePrincipaleses);
+	public ElePlanchas(String nroCabPlancha, EleZonas eleZonas, Date fechaInscripcion, String estado, Long nroPlancha,
+			String descEstado, Set eleSuplenteses, Set eleCabPlanchas, Set elePrincipaleses) {
+		super(nroCabPlancha, eleZonas, fechaInscripcion, estado, nroPlancha, descEstado, eleSuplenteses, eleCabPlanchas,
+				elePrincipaleses);
 	}
 
 }

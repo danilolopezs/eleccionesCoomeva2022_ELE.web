@@ -108,20 +108,16 @@
 													</ice:selectInputDate>
 												</td>
 											</tr>
-
+											<!-- 
 											<tr style="height: 70%;">
 												<td colspan="2" class="formularioTabla">
 													<ice:outputText value="#{etiquetas.lblRazon}" />
 													<br />
-													<!--  
-												<ice:inputTextarea rows="6" style="width: 100%; height:70%"
-													maxlength="300" value="#{generarResolucionRechazo.razon}" />
-												-->
 													<ice:inputTextarea rows="6" style="width: 100%; height:70%"
 														maxlength="264" value="#{generarResolucionRechazo.razon}" />
-
 												</td>
 											</tr>
+											-->
 											<tr>
 												<td colspan="2">
 													<div align="center">

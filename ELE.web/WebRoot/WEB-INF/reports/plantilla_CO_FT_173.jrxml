@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.4641000000000035"/>
-	<property name="ireport.x" value="76"/>
-	<property name="ireport.y" value="564"/>
+	<property name="ireport.zoom" value="1.7715610000000044"/>
+	<property name="ireport.x" value="35"/>
+	<property name="ireport.y" value="288"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="resolucion" class="java.lang.String"/>
@@ -12,7 +12,6 @@
 	<parameter name="dia" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
-	<parameter name="razones" class="java.lang.String"/>
 	<parameter name="mesActa" class="java.lang.String"/>
 	<parameter name="rutaImagen" class="java.lang.String"/>
 	<background>
@@ -245,11 +244,6 @@ ante el Tribunal de Elecciones y Escrutinios, establecidos en el Código Elector
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cedula}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="71" y="120" width="428" height="95"/>
-				<textElement lineSpacing="1_1_2"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{razones}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="50" y="394" width="100" height="20" forecolor="#000000"/>
