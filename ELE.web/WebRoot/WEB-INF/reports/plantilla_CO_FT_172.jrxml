@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.464100000000002"/>
+	<property name="ireport.zoom" value="1.4641000000000026"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="116"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="resolucion" class="java.lang.String"/>
@@ -22,14 +22,14 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle>
-				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#7D933C"/>
+				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="0" y="12" width="555" height="25" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" markup="none">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Elección de Delegados 2017-2020]]></text>
+				<text><![CDATA[Elección de Delegados]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="47" width="555" height="20" forecolor="#FFFFFF"/>
@@ -54,60 +54,60 @@
 				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000"/>
 			</rectangle>
 			<line>
-				<reportElement x="297" y="1" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="314" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="430" y="1" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="471" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<staticText>
-				<reportElement x="49" y="5" width="84" height="14" forecolor="#000000"/>
+				<reportElement x="59" y="5" width="84" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="305" y="5" width="29" height="14" forecolor="#000000"/>
+				<reportElement x="323" y="5" width="29" height="14" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="431" y="5" width="26" height="14" forecolor="#000000"/>
-				<textElement markup="none">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Hora]]></text>
-			</staticText>
 			<rectangle>
 				<reportElement x="50" y="1" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="133" y="12" width="161" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<reportElement x="143" y="12" width="171" height="20"/>
+				<textElement verticalAlignment="Top"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="305" y="13" width="125" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActa}]]></textFieldExpression>
+			<line>
+				<reportElement x="419" y="5" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement x="365" y="5" width="1" height="27"/>
+			</line>
+			<textField>
+				<reportElement x="378" y="12" width="31" height="20"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{anio}]]></textFieldExpression>
 			</textField>
-			<textField pattern="h.mm a" isBlankWhenNull="true">
-				<reportElement x="431" y="13" width="89" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActa}]]></textFieldExpression>
+			<textField>
+				<reportElement x="420" y="12" width="51" height="20"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="12" width="31" height="20"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="263" splitType="Stretch">
+		<band height="218" splitType="Stretch">
 			<staticText>
-				<reportElement x="39" y="7" width="10" height="196" forecolor="#000000"/>
+				<reportElement x="39" y="14" width="10" height="186" forecolor="#000000"/>
 				<textElement rotation="Left">
 					<font size="5"/>
 				</textElement>
@@ -119,29 +119,6 @@
 			<rectangle>
 				<reportElement x="50" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
-			<staticText>
-				<reportElement x="69" y="14" width="441" height="20" forecolor="#000000"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Asociado(a) ______________________________________________________________________ (Cabeza de Plancha)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="70" y="50" width="429" height="65" forecolor="#000000"/>
-				<textElement lineSpacing="1_1_2">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[La Comisión Electoral expide Resolución No. ________de Admisión de la Plancha encabezada por Usted,
-según consta en Acta No.________de la fecha _________________________________________, inscrita
-en la ciudad de ____________________________________.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="69" y="115" width="430" height="34" forecolor="#000000"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[En constancia se firma el día _____ del mes __________________________________ del año ________.]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="119" y="190" width="90" height="11" forecolor="#000000"/>
 				<textElement>
@@ -162,80 +139,47 @@ en la ciudad de ____________________________________.]]></text>
 			<line>
 				<reportElement x="315" y="188" width="184" height="1" forecolor="#000000"/>
 			</line>
+			<textField>
+				<reportElement x="69" y="14" width="429" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Asociado(a) " + $P{nombre}.toUpperCase() +  " (Cabeza de Plancha)."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="46" width="429" height="60"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral expide Resolución No. " +$P{resolucion}+ " de Admisión de la Plancha encabezada por Usted," +
+"según consta en Acta No. " + $P{acta}+ " de la fecha " + $P{fechaActa}+ ", inscrita" +
+"en la ciudad de " + $P{ciudadZona}.toUpperCase() + "."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="115" width="429" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["En constancia se firma el día " + $P{dia} + " del mes " +$P{mes} + " del año " +$P{anio} + "."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="58">
 			<rectangle>
-				<reportElement x="-21" y="218" width="595" height="32" forecolor="#7D933C" backcolor="#7D933C"/>
+				<reportElement x="-21" y="0" width="595" height="45" forecolor="#7D933C" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="139" y="224" width="270" height="20" forecolor="#FFFFFF"/>
+				<reportElement x="50" y="45" width="106" height="13" forecolor="#000000"/>
+				<textElement/>
+				<text><![CDATA[CO-FT-172]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="45" width="111" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mod.Septiembre 2021]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="11" width="270" height="20" forecolor="#FFFFFF"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="119" y="7" width="311" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="248" y="54" width="38" height="13"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucion}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="170" y="70" width="39" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{acta}]]></textFieldExpression>
-			</textField>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="260" y="70" width="203" height="12"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActa}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="136" y="86" width="169" height="20"/>
-				<textElement>
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudadZona}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="185" y="115" width="24" height="22"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="249" y="115" width="160" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="446" y="115" width="39" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{anio}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="50" y="250" width="106" height="13" forecolor="#000000"/>
-				<textElement/>
-				<text><![CDATA[CO-FT-172]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="409" y="250" width="111" height="13" forecolor="#000000"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Mod.Agosto 2016]]></text>
-			</staticText>
 		</band>
-	</detail>
+	</columnFooter>
 </jasperReport>

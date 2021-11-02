@@ -160,9 +160,9 @@ public class DelegadoGenerador {
 			Date hora, String nombreAsociado, String cedulaAsociado,
 			String resolucion, String acta, Date fecha, String ciudad,
 			String razon1, String razon2, String razon3, String razon4,
-			String formulario, String rutaReporte) throws Exception {
+			String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, formulario, rutaReporte);
+		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteInscripcionPlanchas_FT_210(

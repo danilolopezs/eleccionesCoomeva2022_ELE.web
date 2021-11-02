@@ -1739,7 +1739,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteResolucionInadmisionPlancha_FT_209(String zonaElectoral, String anio, String mes,
 			String dia, Date hora, String nombreAsociado, String cedulaAsociado, String resolucion, String acta,
-			Date fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String formulario,
+			Date fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String rutaImagen,
 			String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
@@ -1759,9 +1759,9 @@ public class LogicaGenerador {
 			parameters.put("razon2", razon2);
 			parameters.put("razon3", razon3);
 			parameters.put("razon4", razon4);
-			parameters.put("formulario", formulario);
+			parameters.put("rutaImagen", rutaImagen);
 
-			rutaReporte = rutaReporte + "CO-FT-209.jasper";
+			rutaReporte = rutaReporte + "plantilla_CO-FT-209.jasper";
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);

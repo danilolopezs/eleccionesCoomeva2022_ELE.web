@@ -263,11 +263,10 @@ public class ServletReportesJasper extends HttpServlet {
 					String razon2 = (String) req.getSession().getAttribute("razon2");
 					String razon3 = (String) req.getSession().getAttribute("razon3");
 					String razon4 = (String) req.getSession().getAttribute("razon4");
-					String formulario = rutaImagen + "/CO-FT-209.png";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionInadmisionPlancha_FT_209(
 							zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta,
-							fecha, ciudad, razon1, razon2, razon3, razon4, formulario, rutaReporte);
+							fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "dia", "mes", "anio", "hora", "nombreAsociado",
 							"cedulaAsociado", "resolucion", "acta", "fecha", "ciudad", "razon1", "razon2", "razon3",
