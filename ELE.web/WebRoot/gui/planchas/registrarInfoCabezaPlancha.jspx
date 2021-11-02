@@ -7,24 +7,24 @@
 		pageEncoding="ISO-8859-1" />
 	<f:view>
 		<html>
-			<head>
-				<title>Software de Inscripci&#243;n de Planchas - Registrar
-					informac&#243;n cabeza plancha</title>
-				<link rel="stylesheet" type="text/css"
-					href="../estilos/rime/rime-portlet2.css" />
-				<link rel="stylesheet" type="text/css"
-					href="../estilos/estiloPlanchas.css" />
-				<script type="text/javascript" language="JavaScript"
-					src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/gui/js/validaNumeroJSF.js">
+<head>
+<title>Software de Inscripci&#243;n de Planchas - Registrar
+	informac&#243;n cabeza plancha</title>
+<link rel="stylesheet" type="text/css"
+	href="../estilos/rime/rime-portlet2.css" />
+<link rel="stylesheet" type="text/css"
+	href="../estilos/estiloPlanchas.css" />
+<script type="text/javascript" language="JavaScript"
+	src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/gui/js/validaNumeroJSF.js">
 </script>
-				<script type="text/javascript" src="../js/servletInvoker.js">
+<script type="text/javascript" src="../js/servletInvoker.js">
 </script>
-				<style id="antiClickjack">
+<style id="antiClickjack">
 body {
 	display: none !important;
 }
 </style>
-				<script type="text/javascript">
+<script type="text/javascript">
 if (self === top) {
 	var antiClickjack = document.getElementById("antiClickjack");
 	antiClickjack.parentNode.removeChild(antiClickjack);
@@ -33,211 +33,195 @@ if (self === top) {
 }
 </script>
 
-				<meta http-equiv="Cache-Control" content="no-cache" />
-				<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
-					var="etiquetas" />
-			</head>
-			<body bgcolor="#DFDFDF">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<f:loadBundle basename="co.com.coomeva.ele.etiquetas.etiquetas"
+	var="etiquetas" />
+</head>
+<body bgcolor="#DFDFDF">
 
 
 
-				<ice:form partialSubmit="true">
-					<div align="center">
+	<ice:form partialSubmit="true">
+		<div align="center">
 
-						<table cellpadding="0" cellspacing="0" width="824"
-							bgcolor="#FFFFFF">
-							<tr>
-								<td>
-									<div align="left" class="banner"></div>
-								</td>
-							</tr>
-							<td align="left" style="background: white" valign="top">
-								<ice:panelGrid columns="2">
-									<ice:outputText value="#{etiquetas.saludoRegistroPlanchas}"
-										style="font-size: 11px; font-weight: bold" />
-									<ice:outputText
-										value="#{validacionIngreso.asociado.nombreAsociado}"
-										style="font-size: 11px" />
-								</ice:panelGrid>
-							</td>
-							<tr>
-								<td valign="top">
-									<div align="left">
-										<jsp:directive.include file="./menuPlanchasAsociado.jsp" />
-									</div>
-								</td>
-							</tr>
-							<tr style="height: 250px">
-								<td align="left" valign="top" bgcolor="#FFFFFF">
-									<br />
-									<div align="center">
-										<ice:panelCollapsible expanded="true" toggleOnClick="false">
-											<f:facet name="header">
-												<ice:outputText id="ttlprincipal"
-													value="#{registrarInfoCabezaPlancha.lblPanelInfoCabezaPlancha}" />
-												<!-- 	
-												<ice:outputText id="ttlsuplente" rendered="#{registrarInfoCabezaPlancha.esSuplente}"
-													value="#{etiquetas.lblPanelInfoCabezaPlanchaSup}" /> -->
-											</f:facet>
+			<table cellpadding="0" cellspacing="0" width="824" bgcolor="#FFFFFF">
+				<!-- BANNER -->
+				<tr>
+					<td>
+						<div align="left" class="banner"></div>
+					</td>
+				</tr>
+				<!-- NOMBRE ASOCIADO -->
+				<td align="left" style="background: white" valign="top"><ice:panelGrid
+						columns="2">
+						<ice:outputText value="#{etiquetas.saludoRegistroPlanchas}"
+							style="font-size: 11px; font-weight: bold" />
+						<ice:outputText
+							value="#{validacionIngreso.asociado.nombreAsociado}"
+							style="font-size: 11px" />
+					</ice:panelGrid>
+				</td>
+				<!-- MENU ASOCIADO -->
+				<tr>
+					<td valign="top">
+						<div align="left">
+							<jsp:directive.include file="./menuPlanchasAsociado.jsp" />
+						</div>
+					</td>
+				</tr>
+				
+				<!-- REGISTRAR INFO ASOCIADO -->
+				<tr style="height: 250px">
+					<td align="left" valign="top" bgcolor="#FFFFFF"><br />
+						<div align="center">
+							<ice:panelCollapsible expanded="true" toggleOnClick="false">
+								<f:facet name="header">
+									<ice:outputText id="ttlprincipal"
+										value="#{registrarInfoCabezaPlancha.lblPanelInfoCabezaPlancha}" />
+								</f:facet>
 
-											<table border="2" width="100%">
+								<table border="2" width="100%">
 
-												<tr>
-													<td>
-														<table border="1" style="width: 98%">
-															<tr>
-																<td>
-																	<ice:outputText value="#{etiquetas.lblDocumento}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.numeroDocumento}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td style="width: 33%">
-																	<ice:outputText value="#{etiquetas.lblNombreAsociado}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.nombreCompleto}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>
-																	<ice:outputText value="#{etiquetas.lblAntiguedad}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.antiguedadMeses}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>
-																	<ice:outputText value="#{etiquetas.lblProfesion}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.profesion}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-
-															</tr>
-															<tr>
-																<td>
-																	<ice:outputText value="#{etiquetas.lblZona}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.zonaElectoral}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-
-															</tr>
-															<tr>
-																<td>
-																	<ice:outputText value="#{etiquetas.lblNumeroPlancha}"
-																		styleClass="textoLabel" />
-																</td>
-																<td>
-																	<div align="left">
-																		<ice:outputText
-																			value="#{registrarInfoCabezaPlancha.dto.numeroPlancha}"
-																			styleClass="textoInput" />
-																	</div>
-																</td>
-
-															</tr>
-
-														</table>
-													</td>
-												</tr>
-
-											</table>
-
-										</ice:panelCollapsible>
-
-
-
-									</div>
-									<div align="center">
-										<ice:panelCollapsible expanded="true" toggleOnClick="false"
-											rendered="true">
-
-											<f:facet name="header">
-												<ice:outputText value="#{etiquetas.ttlExperiencia}" />
-											</f:facet>
-
-											<ice:panelGrid columns="3" border="1" width="90%">
-												<ice:outputText value="#{etiquetas.lblEmpresa}"
-													styleClass="textoLabel" />
-												<ice:inputText size="90" maxlength="35"
-													value="#{registrarInfoCabezaPlancha.dtoInfo.empresaActual}"
-													styleClass="textoInput" />
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
-
-												<ice:outputText value="#{etiquetas.lblCargo}"
-													styleClass="textoLabel" />
-												<ice:inputText size="90" maxlength="35"
-													value="#{registrarInfoCabezaPlancha.dtoInfo.cargoActual}"
-													styleClass="textoInput" />
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
-
-
+									<tr>
+										<td>
+											<ice:outputText value="#{etiquetas.lblDocumento}"
+												styleClass="textoLabel" />
+										</td>
+										<td>
+											<div align="left">
 												<ice:outputText
-													value="#{etiquetas.lblAntiguedadEmpresaActual}"
-													styleClass="textoLabel" />
-												<ice:inputText size="9" maxlength="5"
-													onkeypress="return keyCheck(event, this); "
-													value="#{registrarInfoCabezaPlancha.dtoInfo.antigLaboral}"
+													value="#{registrarInfoCabezaPlancha.dto.numeroDocumento}"
 													styleClass="textoInput" />
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td style="width: 33%"><ice:outputText
+												value="#{etiquetas.lblNombreAsociado}"
+												styleClass="textoLabel" /></td>
+										<td>
+											<div align="left">
+												<ice:outputText
+													value="#{registrarInfoCabezaPlancha.dto.nombreCompleto}"
+													styleClass="textoInput" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td><ice:outputText value="#{etiquetas.lblAntiguedad}"
+												styleClass="textoLabel" /></td>
+										<td>
+											<div align="left">
+												<ice:outputText
+													value="#{registrarInfoCabezaPlancha.dto.antiguedadMeses}"
+													styleClass="textoInput" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td><ice:outputText value="#{etiquetas.lblProfesion}"
+												styleClass="textoLabel" /></td>
+										<td>
+											<div align="left">
+												<ice:outputText
+													value="#{registrarInfoCabezaPlancha.dto.profesion}"
+													styleClass="textoInput" />
+											</div>
+										</td>
 
-												<ice:outputText value="#{etiquetas.lblanioExpeTitulo}"
-													styleClass="textoLabel" />
+									</tr>
+									<tr>
+										<td><ice:outputText value="#{etiquetas.lblZona}"
+												styleClass="textoLabel" /></td>
+										<td>
+											<div align="left">
+												<ice:outputText
+													value="#{registrarInfoCabezaPlancha.dto.zonaElectoral}"
+													styleClass="textoInput" />
+											</div>
+										</td>
 
-												<ice:panelGroup>
-													<ice:panelGrid columns="1">
-														<ice:selectInputDate
-															value="#{registrarInfoCabezaPlancha.dtoInfo.fechaGrado}"
-															renderAsPopup="true">
-															<f:convertDateTime type="date" timeZone="GMT-5"
-																pattern="yyyy/MM/dd" />
-														</ice:selectInputDate>
-													</ice:panelGrid>
-												</ice:panelGroup>
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+									</tr>
+									<tr>
+										<td><ice:outputText value="#{etiquetas.lblNumeroPlancha}"
+												styleClass="textoLabel" /></td>
+										<td>
+											<div align="left">
+												<ice:outputText value="" styleClass="textoInput" />
+												<!-- modificacion 30/10/2021 se requiere no mostrar este campo al asociado -->
+												<!-- value="#{registrarInfoCabezaPlancha.dto.numeroPlancha}" -->
+											</div>
+										</td>
 
-												<ice:outputText value="#{etiquetas.lblOtrosEstudios}"
-													styleClass="textoLabel" />
+									</tr>
 
-												<ice:panelGroup>
-													<ice:panelGrid columns="1">
-														<ice:inputTextarea cols="106" rows="3"
-															value="#{registrarInfoCabezaPlancha.dtoInfo.otrosEstudios}"
-															styleClass="textoInput" maxlength="100" />
-													</ice:panelGrid>
-												</ice:panelGroup>
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
-												<!-- 
+								</table>
+
+
+							</ice:panelCollapsible>
+
+
+
+						</div>
+						<div align="center">
+							<ice:panelCollapsible expanded="true" toggleOnClick="false"
+								rendered="true">
+
+								<f:facet name="header">
+									<ice:outputText value="#{etiquetas.ttlExperiencia}" />
+								</f:facet>
+
+								<ice:panelGrid columns="3" border="1" width="90%" >
+									<ice:outputText value="#{etiquetas.lblEmpresa}"
+										styleClass="textoLabel" />
+									<ice:inputText size="90" maxlength="35"
+										value="#{registrarInfoCabezaPlancha.dtoInfo.empresaActual}"
+										styleClass="textoInput" />
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+
+									<ice:outputText value="#{etiquetas.lblCargo}"
+										styleClass="textoLabel" />
+									<ice:inputText size="90" maxlength="35"
+										value="#{registrarInfoCabezaPlancha.dtoInfo.cargoActual}"
+										styleClass="textoInput" />
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+
+
+									<ice:outputText value="#{etiquetas.lblAntiguedadEmpresaActual}"
+										styleClass="textoLabel" />
+									<ice:inputText size="9" maxlength="5"
+										onkeypress="return keyCheck(event, this); "
+										value="#{registrarInfoCabezaPlancha.dtoInfo.antigLaboral}"
+										styleClass="textoInput" />
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+
+									<ice:outputText value="#{etiquetas.lblanioExpeTitulo}"
+										styleClass="textoLabel" />
+
+									<ice:panelGroup>
+										<ice:panelGrid columns="1">
+											<ice:selectInputDate
+												value="#{registrarInfoCabezaPlancha.dtoInfo.fechaGrado}"
+												renderAsPopup="true">
+												<f:convertDateTime type="date" timeZone="GMT-5"
+													pattern="yyyy/MM/dd" />
+											</ice:selectInputDate>
+										</ice:panelGrid>
+									</ice:panelGroup>
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+
+									<ice:outputText value="#{etiquetas.lblOtrosEstudios}"
+										styleClass="textoLabel" />
+
+									<ice:panelGroup>
+										<ice:panelGrid columns="1">
+											<ice:inputTextarea cols="90" rows="4"
+												value="#{registrarInfoCabezaPlancha.dtoInfo.otrosEstudios}"
+												styleClass="textoInput" maxlength="100" />
+										</ice:panelGrid>
+									</ice:panelGroup>
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
+									<!-- 
 												<ice:outputText value="#{etiquetas.lblPerfilCandidato}"
 													styleClass="textoLabel" />
 												<ice:panelGroup>
@@ -278,188 +262,183 @@ if (self === top) {
 												</ice:panelGroup>
 												 -->
 
-											</ice:panelGrid>
-
-										</ice:panelCollapsible>
-
-										<ice:panelCollapsible expanded="true" toggleOnClick="false">
-											<f:facet name="header">
-												<ice:outputText value="#{etiquetas.lblExpDirigencial}" />
-											</f:facet>
-											<ice:panelGrid columns="3" border="1" width="90%">
-												<ice:outputText value="#{etiquetas.lblUltimoCargoCoomeva}"
-													styleClass="textoLabel" />
-
-												<ice:panelGrid columns="3">
-													<ice:inputText size="50" maxlength="100"
-														value="#{registrarInfoCabezaPlancha.dtoInfo.ultimoCargoDirectivoCoomeva}"
-														styleClass="textoInput" />
-
-													<ice:outputLabel styleClass="textoLabel"
-														value="#{etiquetas.lblanio}">
-													</ice:outputLabel>
-
-													<ice:inputText onkeypress="return keyCheck(event, this); "
-														value="#{registrarInfoCabezaPlancha.dtoInfo.numeroActa}">
-													</ice:inputText>
-												</ice:panelGrid>
-												<ice:outputText value="" />
-
-												<ice:panelGrid>
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha2}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha3}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha4}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha5}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha6}"
-														styleClass="textoLabel" />
-													<ice:outputText
-														value="#{etiquetas.lblCargarFotoCabezaPlancha7}"
-														styleClass="textoLabel" />
-												</ice:panelGrid>
-												<ice:panelGroup>
-													<div align="center">
-														<ice:panelGrid>
-															<ice:inputFile id="inputFileName" width="410"
-																label="Subir"
-																progressListener="#{registrarInfoCabezaPlancha.actionFileUploadProgress}"
-																actionListener="#{registrarInfoCabezaPlancha.actionUploadFile}"
-																submitOnUpload="preUpload" />
-
-															<ice:outputProgress
-																value="#{registrarInfoCabezaPlancha.fileProgress}"
-																styleClass="uploadProgressBar" />
-														</ice:panelGrid>
-													</div>
-												</ice:panelGroup>
-
-												<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
-
-											</ice:panelGrid>
-											<ice:panelGrid border="1" width="90%">
-												<ice:panelGroup>
-													<ice:outputText style="font: bold"
-														value="#{etiquetas.lblMensajeObligatoriedad}"
-														styleClass="textoLabel"></ice:outputText>
-												</ice:panelGroup>
-											</ice:panelGrid>
-											<ice:commandButton value="#{etiquetas.lblGuardar}"
-												disabled="#{registrarInfoCabezaPlancha.disabledGuardar}"
-												action="#{registrarInfoCabezaPlancha.action_guardar}"
-												styleClass="boton" />
-
-											<ice:commandButton value="#{etiquetas.lblBtnImprimir}"
-												disabled="#{registrarInfoCabezaPlancha.disabledImprimir}"
-												action="#{registrarInfoCabezaPlancha.action_imprimir_formato}"
-												styleClass="boton" />
-
-										</ice:panelCollapsible>
-
-										<ice:panelCollapsible expanded="true" toggleOnClick="false"
-											rendered="#{registrarInfoCabezaPlancha.esCabezaPlancha}">
-											<f:facet name="header">
-												<ice:commandLink style="color: #FFFFFF;"
-													value="#{etiquetas.lblConsultaSuplente} dando click aqui"
-													action="#{registrarInfoCabezaPlancha.action_mostrarConsulta}" />
-											</f:facet>
-
-										</ice:panelCollapsible>
-
-									</div>
-
-								</td>
-							</tr>
-						</table>
-
-						<ice:panelPopup id="consultarSuplente" draggable="true"
-							visible="#{registrarInfoCabezaPlancha.visibleConsultarSuplente}"
-							rendered="#{registrarInfoCabezaPlancha.visibleConsultarSuplente}"
-							modal="true">
-
-							<f:facet name="header">
-								<ice:panelGrid cellpadding="0" cellspacing="0"
-									style="text-align: center;" headerClass="icePanelPopupHeader">
-									<ice:outputText style="color: #FFFFFF;"
-										value="#{etiquetas.lblConsultaSuplente}" />
 								</ice:panelGrid>
-							</f:facet>
 
-							<f:facet name="body">
-								<div align="center">
-									<ice:panelGrid cellpadding="0" cellspacing="0" columns="2"
-										styleClass="font: 11px / 17px tahoma;">
-										
-										<ice:outputLabel styleClass="textoLabel" 
-											value="#{etiquetas.lblDocumento}">
+							</ice:panelCollapsible>
+
+							<ice:panelCollapsible expanded="true" toggleOnClick="false">
+								<f:facet name="header">
+									<ice:outputText value="#{etiquetas.lblExpDirigencial}" />
+								</f:facet>
+								<ice:panelGrid columns="3" border="1" width="90%">
+									<ice:outputText value="#{etiquetas.lblUltimoCargoCoomeva}"
+										styleClass="textoLabel" />
+
+									<ice:panelGrid columns="3">
+										<ice:inputText size="50" maxlength="100"
+											value="#{registrarInfoCabezaPlancha.dtoInfo.ultimoCargoDirectivoCoomeva}"
+											styleClass="textoInput" />
+
+										<ice:outputLabel styleClass="textoLabel"
+											value="#{etiquetas.lblanio}">
 										</ice:outputLabel>
+
 										<ice:inputText onkeypress="return keyCheck(event, this); "
-											value="#{registrarInfoCabezaPlancha.numeroDocumentoAsociado}">
+											value="#{registrarInfoCabezaPlancha.dtoInfo.numeroActa}">
 										</ice:inputText>
 									</ice:panelGrid>
-									<ice:commandButton value="#{etiquetas.lblBuscar}"
-											actionListener="#{registrarInfoCabezaPlancha.actionConsultarSuplente}">
-									</ice:commandButton>
-								</div>
+									<ice:outputText value="" />
 
-							</f:facet>
-						</ice:panelPopup>
-						
-						<ice:panelPopup id="mensajeExito" draggable="true"
-							visible="#{registrarInfoCabezaPlancha.visiblemensajeExito}"
-							rendered="#{registrarInfoCabezaPlancha.visiblemensajeExito}"
-							modal="true">
-
-							<f:facet name="header">
-								<ice:panelGrid cellpadding="0" cellspacing="0"
-									style="text-align: center;" headerClass="icePanelPopupHeader">
-									<ice:outputText style="color: #FFFFFF;"
-										value="Mensaje" />
-								</ice:panelGrid>
-							</f:facet>
-
-							<f:facet name="body">
-								<div align="center">
-									<ice:panelGrid cellpadding="0" cellspacing="0" columns="1"
-										styleClass="font: 11px / 17px tahoma;">
-										<center>
-										<ice:outputLabel styleClass="textoLabel" 
-											value="#{registrarInfoCabezaPlancha.mensajeExito}">
-										</ice:outputLabel>
-										</center>
-									</ice:panelGrid>
-									
 									<ice:panelGrid>
-										<center>
-											<ice:commandButton image="../imagenes/boton_salir.gif"
-												action="#{registrarInfoCabezaPlancha.action_cerrar_mensaje_exito}" />
-										</center>
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha2}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha3}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha4}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha5}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha6}"
+											styleClass="textoLabel" />
+										<ice:outputText
+											value="#{etiquetas.lblCargarFotoCabezaPlancha7}"
+											styleClass="textoLabel" />
 									</ice:panelGrid>
-								</div>
+									<ice:panelGroup>
+										<div align="center">
+											<ice:panelGrid>
+												<ice:inputFile id="inputFileName" width="410" label="Subir"
+													progressListener="#{registrarInfoCabezaPlancha.actionFileUploadProgress}"
+													actionListener="#{registrarInfoCabezaPlancha.actionUploadFile}"
+													submitOnUpload="preUpload" />
 
-							</f:facet>
-						</ice:panelPopup>
+												<ice:outputProgress
+													value="#{registrarInfoCabezaPlancha.fileProgress}"
+													styleClass="uploadProgressBar" />
+											</ice:panelGrid>
+										</div>
+									</ice:panelGroup>
 
-						<jsp:directive.include
-							file="../popup/popupMensajeIngresoInfoCabezaPlancha.jsp" />
+									<ice:outputText value="#{etiquetas.lblObligatoriedad}" />
 
-						<jsp:directive.include
-							file="../popup/popupMensajeInformativoIngresoCabezaPlancha.jsp" />
+								</ice:panelGrid>
+								<ice:panelGrid width="100%">
+									<ice:outputText style="font: bold"
+										value="#{etiquetas.lblMensajeObligatoriedad}"
+										styleClass="textoLabel"></ice:outputText>
+									<br />
+								</ice:panelGrid>
+								<ice:commandButton value="#{etiquetas.lblGuardar}"
+									disabled="#{registrarInfoCabezaPlancha.disabledGuardar}"
+									action="#{registrarInfoCabezaPlancha.action_guardar}"
+									styleClass="boton" />
 
+								<ice:commandButton value="#{etiquetas.lblBtnImprimir}"
+									disabled="#{registrarInfoCabezaPlancha.disabledImprimir}"
+									action="#{registrarInfoCabezaPlancha.action_imprimir_formato}"
+									styleClass="boton" />
+
+							</ice:panelCollapsible>
+
+							<ice:panelCollapsible expanded="true" toggleOnClick="false"
+								rendered="#{registrarInfoCabezaPlancha.esCabezaPlancha}">
+								<f:facet name="header">
+									<ice:commandLink style="color: #FFFFFF;"
+										value="#{etiquetas.lblConsultaSuplente} dando click aqui"
+										action="#{registrarInfoCabezaPlancha.action_mostrarConsulta}" />
+								</f:facet>
+
+							</ice:panelCollapsible>
+
+						</div></td>
+				</tr>
+			</table>
+
+			<ice:panelPopup id="consultarSuplente" draggable="true"
+				visible="#{registrarInfoCabezaPlancha.visibleConsultarSuplente}"
+				rendered="#{registrarInfoCabezaPlancha.visibleConsultarSuplente}"
+				modal="true">
+
+				<f:facet name="header">
+					<ice:panelGrid cellpadding="0" cellspacing="0"
+						style="text-align: center;" headerClass="icePanelPopupHeader">
+						<ice:outputText style="color: #FFFFFF;"
+							value="#{etiquetas.lblConsultaSuplente}" />
+					</ice:panelGrid>
+				</f:facet>
+
+				<f:facet name="body">
+					<div align="center">
+						<ice:panelGrid cellpadding="0" cellspacing="0" columns="2"
+							styleClass="font: 11px / 17px tahoma;">
+
+							<ice:outputLabel styleClass="textoLabel"
+								value="#{etiquetas.lblDocumento}">
+							</ice:outputLabel>
+							<ice:inputText onkeypress="return keyCheck(event, this); "
+								value="#{registrarInfoCabezaPlancha.numeroDocumentoAsociado}">
+							</ice:inputText>
+						</ice:panelGrid>
+						<ice:commandButton value="#{etiquetas.lblBuscar}"
+							actionListener="#{registrarInfoCabezaPlancha.actionConsultarSuplente}">
+						</ice:commandButton>
 					</div>
-				</ice:form>
 
-			</body>
+				</f:facet>
+			</ice:panelPopup>
+
+			<ice:panelPopup id="mensajeExito" draggable="true"
+				visible="#{registrarInfoCabezaPlancha.visiblemensajeExito}"
+				rendered="#{registrarInfoCabezaPlancha.visiblemensajeExito}"
+				modal="true">
+
+				<f:facet name="header">
+					<ice:panelGrid cellpadding="0" cellspacing="0"
+						style="text-align: center;" headerClass="icePanelPopupHeader">
+						<ice:outputText style="color: #FFFFFF;" value="Mensaje" />
+					</ice:panelGrid>
+				</f:facet>
+
+				<f:facet name="body">
+					<div align="center">
+						<ice:panelGrid cellpadding="0" cellspacing="0" columns="1"
+							styleClass="font: 11px / 17px tahoma;">
+							<center>
+								<ice:outputLabel styleClass="textoLabel"
+									value="#{registrarInfoCabezaPlancha.mensajeExito}">
+								</ice:outputLabel>
+							</center>
+						</ice:panelGrid>
+
+						<ice:panelGrid>
+							<center>
+								<ice:commandButton image="../imagenes/boton_salir.gif"
+									action="#{registrarInfoCabezaPlancha.action_cerrar_mensaje_exito}" />
+							</center>
+						</ice:panelGrid>
+					</div>
+
+				</f:facet>
+			</ice:panelPopup>
+
+			<jsp:directive.include
+				file="../popup/popupMensajeIngresoInfoCabezaPlancha.jsp" />
+
+			<jsp:directive.include
+				file="../popup/popupMensajeInformativoIngresoCabezaPlancha.jsp" />
+
+		</div>
+	</ice:form>
+
+</body>
 		</html>
 	</f:view>
 </jsp:root>

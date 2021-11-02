@@ -2,6 +2,7 @@ package co.com.coomeva.ele.delegado.generador;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import net.sf.jasperreports.engine.JasperPrint;
@@ -126,16 +127,14 @@ public class DelegadoGenerador {
 				numActa, fecha, dia, mes, anio, razones, mesActa, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteInformacionPersonal_FT_174(
-			String plancha, String zonaElectoral, String nombreAsociado,
-			String cedulaAsociado, String fechaAntiguedad, String profesion,
-			Date fechaTitulo, String estudios, String empresa, String cargo,
-			String antiguedad, String ultimoCargo, String imagen,
-			String rutaImagen, String rutaReporte, String tipoAsociado)throws Exception {
+	public JasperPrint reporteInformacionPersonal_FT_174(String plancha, String zonaElectoral, String nombreAsociado,
+			String cedulaAsociado, String fechaAntiguedad, String profesion, Date fechaTitulo, String estudios,
+			String empresa, String cargo, String antiguedad, String ultimoCargo, String imagen, String rutaImagen,
+			String rutaReporte, String tipoAsociado, String nombreReporteFoter) throws Exception {
 		// TODO Auto-generated method stub
 		return logicaGenerador.reporteInformacionPersonal_FT_174(plancha, zonaElectoral, nombreAsociado, 
 				cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo, estudios, empresa, cargo, antiguedad,
-				ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado);
+				ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado, nombreReporteFoter);
 	}
 
 	public JasperPrint reporteCumplimientoDelegado_FT_176(
@@ -165,11 +164,10 @@ public class DelegadoGenerador {
 		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteInscripcionPlanchas_FT_210(
-			String zonaElectoral, String ciudad, Date fecha, String rutaImagen,
+	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros, String rutaImagen,
 			String rutaReporte)throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteInscripcionPlanchas_FT_210(zonaElectoral, ciudad, fecha, rutaImagen, rutaReporte);
+		return logicaGenerador.reporteInscripcionPlanchas_FT_210(parametros, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteCertificadoAcreditaOcupacion_FT_211(

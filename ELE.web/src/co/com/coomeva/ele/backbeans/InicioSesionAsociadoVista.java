@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.DefaultRowSorter;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -18,6 +20,7 @@ import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPrincipal;
 import co.com.coomeva.ele.delegado.DelegadoSuplente;
 import co.com.coomeva.ele.delegado.DelegadoZona;
+import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.entidades.planchas.EleCabPlancha;
 import co.com.coomeva.ele.entidades.planchas.EleExperienciaLaboral;
 import co.com.coomeva.ele.entidades.planchas.ElePParametros;
@@ -56,6 +59,26 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
 	private String url = "https://secure.coomeva.com.co/pasaporte-Autenticacion-1/rest/";
 
+	public String action_ingreso() {
+		visible = false;
+		valid = validaCampos();
+		if (valid) {
+			try {
+				if (existeUsuario()) {
+					completarInicioSesion(login);
+					visible = Boolean.TRUE;
+				} else {
+					exceptionGenery("El usuario no existe en base de datos.");
+				}
+			} catch (NumberFormatException e) {
+				exceptionGenery("Error inesperado, por favor comuniquese con un administrador. " + e.getCause());
+			} catch (Exception e) {
+				exceptionGenery(e.getMessage());
+			}
+		}
+		return "";
+	}
+	
 	/**
 	 * Metodo que obtiene el numero de documento y verifica que el asociado exista y
 	 * que si es o no cabeza de plancha
@@ -63,7 +86,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	 * @author Manuel Galvez, Ricardo Chiriboga
 	 * @return String
 	 */
-	public String action_ingreso() {
+	public String action_ingreso_original() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -75,10 +98,10 @@ public class InicioSesionAsociadoVista extends BaseVista {
 						|| respuestaWS.getStatusCode().equals("1500")) {
 					visible = Boolean.TRUE;
 					if (respuestaWS.getClient() != null) {
-						completarInicioSesion(Long.parseLong(respuestaWS.getClient().getUser()));
+						completarInicioSesion(respuestaWS.getClient().getUser());
 					} else {
 						if (existeUsuario()) {
-							completarInicioSesion(Long.parseLong(login));
+							completarInicioSesion(login);
 						} else {
 							exceptionGenery("El usuario no existe.");
 						}
@@ -104,23 +127,21 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		return DelegadoAsociado.getInstance().consultarInformacionBasicaAsociado(Long.parseLong(login)) != null;
 	}
 	
-	private void completarInicioSesion(Long numeroDocumento) {
-		FacesUtils.setSessionParameter("numeroDocAsociado", numeroDocumento);
-		UserVo user = new UserVo();
-		user.setUserId(numeroDocumento+"");
-		FacesUtils.setSessionParameter("user", user);
-//		try {
-//			user = DelegadoAutenticacion.getInstance().autenDirectorioActivo(login, password);
-//			FacesUtils.setSessionParameter("user", user);
-//		} catch (Exception e) {
-//			visible = false;
-//			String mensaje = e.getMessage();
-//			if (mensaje == null || mensaje.equalsIgnoreCase("")) {
-//				mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
-//			}
-//			getMensaje().mostrarMensaje(mensaje);
-//		}
-		validacionInformacionPlanchas(numeroDocumento+"");		
+	private void completarInicioSesion(String numeroDocumento) throws NumberFormatException, Exception {
+		DTOHabilidadAsociado asoHabil = DelegadoAsociado.getInstance().consultarHabilidadAsociado(Long.parseLong(numeroDocumento));
+		if (asoHabil != null) {
+			if(asoHabil.getAsociadoHabil()) {
+				UserVo user = new UserVo();
+				user.setUserId(numeroDocumento);
+				FacesUtils.setSessionParameter("user", user);
+				FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(numeroDocumento));
+				validacionInformacionPlanchas(numeroDocumento);
+			} else {
+				throw new Exception("El asociado no cumple con los requisitos de habilidad."); 
+			}
+		} else {
+			throw new Exception("Ocurrio un error consultando la habilidad del asociado.");
+		}
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {
@@ -132,14 +153,14 @@ public class InicioSesionAsociadoVista extends BaseVista {
 					identificacion);
 
 			verificarFechaInscripcion();
-
-			bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
-					+ asociadoDTO.getNombre().toString();
-
+			
 			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(identificacion);
 			// Verifica que el Usuario Exista
-			if (asociadoDTO != null) {
+			if (asociadoDTO != null) {				
 				if (asociadoDTO.getNombre() != null && !asociadoDTO.getNombre().equalsIgnoreCase("")) {
+					bienvenido = UtilAcceso.getParametroFuenteS("parametros", "msbBienvenido") + ", "
+							+ asociadoDTO.getNombre().toString();
+					
 					EleCabPlanchaDTO eleCabPlanchaDTO = new EleCabPlanchaDTO();
 					eleCabPlanchaDTO.setNroIdentificacion(identificacion);
 					eleCabPlanchaDTO.setNombreCompleto(asociadoDTO.getNombre());
@@ -205,7 +226,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							elePlanchaDTO.setEleZonas(elZona);
 							FacesUtils.setSessionParameter("userPlancha", elePlanchaDTO);
 
-//							returnString = "goCrearPlancha";
+							//returnString = "goCrearPlancha";
 							returnString = "goInicioMenuAsociado";
 						}
 					} else {

@@ -258,12 +258,21 @@ public class LogicaPlancha implements ILogicaPlancha {
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
 				
-				EleAsociado eleAsociado = new EleAsociadoDAO().findById(Long.parseLong(nroIdentificacionMiembro));
-				if (eleAsociado.getDescProfesion() != null) {
-					miembros.get(posicionPlancha - 1).setProfesion(eleAsociado.getDescProfesion());
-				} else {				
-					excepciones.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-							"msgAsociadoDebeAcreditarOficio"));
+				List<EleAsociado> listaAsociado = new EleAsociadoDAO().findByProperty("numeroDocumento",
+						Long.parseLong(nroIdentificacionMiembro));
+				boolean encontroAsociado = Boolean.FALSE;
+				for (EleAsociado asociado : listaAsociado) {
+					if (asociado.getNumeroDocumento()== Long.parseLong(nroIdentificacionMiembro)
+							&& asociado.getDescProfesion() != null) {
+						miembros.get(posicionPlancha - 1).setProfesion(asociado.getDescProfesion());
+						encontroAsociado = Boolean.TRUE; 
+						break;
+					}
+				}
+				if (!encontroAsociado) {
+					excepciones
+							.append("- " + UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+									"msgAsociadoDebeAcreditarOficio"));
 					miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
 							"Por favor tener en cuenta las siguientes observaciones: </br>" + excepciones.toString());
 					miembros.get(posicionPlancha - 1).setTieneProfesion(Boolean.FALSE);
@@ -942,7 +951,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			List<DTOMiembroPlancha> listaRealMiembrosSuplentes = obtenerListaRealMiembros(miembrosSuplentes);
 			if (listaRealMiembrosTitulares.size() < 1) {
 				throw new EleccionesDelegadosException(
-						"Por favor registre al menos" + " un miembro titular para registrar la plancha.");
+						"Por favor registre al menos un miembro titular para registrar la plancha.");
 			}
 
 			if (aplicaValidaciones) {
@@ -1709,7 +1718,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				asociadosComunes.append(miembroComun.toString() + ", ");
 			}
 			asociadosComunes.append(
-					"por favor corrija la información ingresada de forma que estos" + " no existan en ambas listas");
+					"por favor corrija la información ingresada de forma que estos no existan en ambas listas");
 			throw new EleccionesDelegadosException(asociadosComunes.toString());
 		}
 

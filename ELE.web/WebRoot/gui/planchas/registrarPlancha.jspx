@@ -150,20 +150,13 @@ body {
 										</div>
 									</f:facet>
 									<center>
-										<ice:commandButton id="btnDescargarFormato"
-											styleClass="button"
-											action="#{registrarPlancha.actionDescargarFormato}"
+										<ice:commandButton id="btnDescargarFormatoPpal"
+											actionListener="#{registrarPlancha.actionDescargarFormatoPrincipal}"
+											rendered="#{!recordTitulares.tieneProfesion}"
+											alt="#{recordTitulares.posicionPlancha}"
+											title="Descargar formato de Ocupaci&#243;n."
 											image="../imagenes/iconoDescargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Descargar formato de Ocupaci&#243;n." />
-										<ice:outputText value="  " />
-										<ice:commandButton id="btnCargarFormato" styleClass="button"
-											action="#{registrarPlancha.actionCargarFormato}"
-											image="../imagenes/iconoCargar.png"
-											style="height: 15px; width: 15px"
-											disabled="#{recordTitulares.tieneProfesion}"
-											title="Cargar formato de Ocupaci&#243;n." />
+											style="height: 15px; width: 15px" styleClass="button" />
 									</center>
 								</ice:column>
 
@@ -180,7 +173,7 @@ body {
 									<ice:dataTable id="tablaSuplentes" var="recordSuplentes"
 										value="#{registrarPlancha.miembrosSuplentes}"
 										style="width:100%; height:100%;">
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
@@ -193,7 +186,7 @@ body {
 													styleClass="textoLabel" readonly="true" />
 											</center>
 										</ice:column>
-										
+
 										<ice:column>
 											<f:facet name="header">
 												<div align="center">
@@ -254,26 +247,17 @@ body {
 											</f:facet>
 											<center>
 												<ice:commandButton id="btnDescargarFormato"
-													styleClass="button"
-													action="#{registrarPlancha.actionDescargarFormato}"
+													actionListener="#{registrarPlancha.actionDescargarFormatoSuplente}"
+													rendered="#{!recordSuplentes.tieneProfesion}"
+													alt="#{recordSuplentes.posicionPlancha}"
+													title="Descargar formato de Ocupaci&#243;n."
 													image="../imagenes/iconoDescargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Descargar formato de Ocupaci&#243;n." />
-												<ice:outputText value="  " />
-												<ice:commandButton id="btnCargarFormato" styleClass="button"
-													action="#{registrarPlancha.actionCargarFormato}"
-													image="../imagenes/iconoCargar.png"
-													style="height: 15px; width: 15px"
-													disabled="#{recordTitulares.tieneProfesion}"
-													title="Cargar formato de Ocupaci&#243;n." />
+													style="height: 15px; width: 15px" styleClass="button" />
 											</center>
 										</ice:column>
-
 									</ice:dataTable>
 								</div>
 							</ice:panelGrid>
-
 						</div>
 					</td>
 				</tr>
@@ -520,6 +504,95 @@ body {
 						</tr>
 					</table>
 
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+		
+		<ice:panelPopup id="informacionReporte211" draggable="false"
+			visible="#{registrarPlancha.visibleInfoReporte211}"
+			rendered="#{registrarPlancha.visibleInfoReporte211}" modal="true"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 470px; height: 250px;">
+
+			<f:facet name="header">
+				<ice:panelGrid width="450px" cellpadding="0" cellspacing="0" 
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Acreditaci&#243;n de Ocupaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid width="460px" cellpadding="0" cellspacing="0"
+					styleClass="font: 12px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td>
+									<ice:graphicImage value="../imagenes/Symbol-Check.png" />
+								</td>
+								<td>
+									<ice:outputText value="#{registrarPlancha.mensajeInfoCedula}"
+										styleClass="textoLabel" />
+								</td>
+							</tr>
+						</table>
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="#{etiquetas.lblLugarExpdDoc}" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText
+									value="#{registrarPlancha.lugExpCedula}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="Ciudad de ubicaci&#243;n" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText value="#{registrarPlancha.ciudadUbicacion}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="Fecha firma" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:selectInputDate
+									value="#{registrarPlancha.fechaFirma}"
+									renderAsPopup="true">
+									<f:convertDateTime type="both" />
+								</ice:selectInputDate>
+							</td>
+						</tr>
+					</table>
+					
+					<br />
+					<center>
+						<table>
+							<tr>
+								<td>
+									<ice:commandButton value="Imprimir"
+										style="padding-left:5px;padding-right:5px"
+										action="#{registrarPlancha.actionImprimirReporte211}" />
+								</td>
+								<td style="padding-left: 5px; padding-right: 5px"></td>
+								<td>
+									<ice:commandButton value="Cancelar"
+										style="padding-left:5px;padding-right:5px"
+										action="#{registrarPlancha.actionCloseConfirmar}"  />
+								</td>
+							</tr>
+						</table>
+					</center>
 				</ice:panelGrid>
 			</f:facet>
 		</ice:panelPopup>

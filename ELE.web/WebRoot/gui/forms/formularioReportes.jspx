@@ -8,7 +8,7 @@
 	<f:view>
 		<html>
 <head>
-<title>Formulario Generación de Reportes</title>
+<title>Formulario Generaci&#243;n de Reportes</title>
 <link rel="stylesheet" type="text/css"
 	href="../estilos/rime/rime-portlet.css" />
 <link rel="stylesheet" type="text/css"
@@ -52,24 +52,25 @@
 					<td align="center" style="background: white; width: 706px;"><jsp:directive.include
 							file="../planchas/menuPlanchasAsociado.jsp" /></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
-				</tr>
+				</tr>-->
 				
-				<!-- GENERACION DE REPORTE -->
+				<!-- OPERACIONES DE ENVIO -->
 				<tr>
 					<td bgcolor="#FFFFFF">
+						<!-- CONTENIDO VISTA -->
 						<table align="right" width="100%" border="0" cellspacing="0"
 							cellpadding="0">
 							<tr>
 								<td>
 									<div align="center">
-										<ice:outputLabel value="#{etiquetas.lblTituloGenerarReportes}"></ice:outputLabel>
+										<ice:outputLabel value="#{etiquetas.lblTituloGenerarReportes}" />
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								 <td>
 									<div align="center"
 										style="margin-top: 40px; margin-bottom: 20px">
 										<ice:panelGrid columns="2">
@@ -990,18 +991,22 @@
 						</table>
 					</td>
 				</tr>
+				
+				<!-- 
 				<tr>
 					<td colspan="2" bgcolor="#FFFFFF"></td>
 				</tr>
 				<tr>
 					<td colspan="2" bgcolor="#FFFFFF"><br /></td>
 				</tr>
+				 
 				<tr>
 					<td width="130" align="left" valign="top" bgcolor="#FFFFFF"><br />
 						<br /></td>
 
 					<td align="center" bgcolor="#FFFFFF"><br /> <br /></td>
 				</tr>
+				
 				<tr>
 					<td>
 						<div align="center">
@@ -1010,7 +1015,7 @@
 						</div>
 					</td>
 				</tr>
-
+-->
 			</table>
 		</div>
 	</ice:form>

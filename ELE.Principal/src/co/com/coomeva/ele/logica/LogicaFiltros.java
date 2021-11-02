@@ -446,9 +446,10 @@ public class LogicaFiltros {
 
 		ILogicaPlancha iLogicaPlancha = new LogicaPlancha();
 		try {
-			Query query = null;
+			Query query = null;			
+			Boolean esColaborador = iLogicaPlancha.esColaboradorGECoomeva(numeroDocumento.toString());
 			session = HibernateSessionFactoryElecciones2012.getSession();
-			if (iLogicaPlancha.esColaboradorGECoomeva(numeroDocumento.toString())) {
+			if (esColaborador) {
 				query = session.getNamedQuery("consulta.zona.electorale.por.asociado.especial");
 			} else {
 				query = session.getNamedQuery("consulta.zona.electorale.por.asociado");

@@ -167,6 +167,11 @@
 		<managed-bean-class>co.com.coomeva.ele.backbeans.FormularioReportesVista</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>enviarRadicacionVista</managed-bean-name>
+		<managed-bean-class>co.com.coomeva.ele.backbeans.EnviarRadicacionVista</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	
 	
 	<navigation-rule>
@@ -446,6 +451,10 @@
 			<to-view-id>/gui/forms/inicioAdmHabilidad.jspx</to-view-id>
 			<redirect />
 		</navigation-case>
-		
+		<navigation-case>
+			<from-outcome>goEnviarRadicacion</from-outcome>
+			<to-view-id>/gui/forms/enviarRadicacion.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

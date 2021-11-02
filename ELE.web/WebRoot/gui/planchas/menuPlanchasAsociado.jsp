@@ -10,8 +10,8 @@
 		action="goRegistrarInfoCabezaPlancha" />
 	<!--<ice:menuItem value="2. #{etiquetas.mnuinfosuplentePlancha}"
 		action="goRegistrarInfoCabezaPlancha" />-->
-	<ice:menuItem value="3. #{etiquetas.mnuCertificado}"
-		action="goFormularioReportes" />
+	<ice:menuItem value="3. #{etiquetas.lblMenuEnviarRadicacion}"
+		action="goEnviarRadicacion" />
 	<ice:menuItem value="4. #{etiquetas.mnuSalir}"
 		rendered="#{menuVistaAsociado.renderSalir}"
 		action="#{menuPlanchaAsociado.salir}" />

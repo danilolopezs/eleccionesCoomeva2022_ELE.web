@@ -1,9 +1,11 @@
 package co.com.coomeva.ele.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -101,9 +103,12 @@ public class ServletReportesJasper extends HttpServlet {
 
 		String codigoReporte = (String) req.getSession().getAttribute("codigoReporte");
 		String rutaImagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(),
-				"imagenes/reportes");
-		String rutaReporte = getServletContext().getRealPath("WEB-INF/reports/");
-		rutaReporte = rutaReporte + "/";
+				"imagenes"+File.separator+"reportes");
+		rutaImagen += File.separator;
+		
+		
+		String rutaReporte = getServletContext().getRealPath("WEB-INF"+File.separator+"reports"+File.separator);
+		rutaReporte = rutaReporte + File.separator;
 
 		try {
 
@@ -185,10 +190,12 @@ public class ServletReportesJasper extends HttpServlet {
 					imagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(), "plantilla")
 							+ "/foto" + imagen + ".jpg";
 					String tipoAsociado = esSuplente ? "Suplente" : "Principal";
+					String nombreReporteFoter = esSuplente ? "CO-FT-766" : "CO-FT-174";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteInformacionPersonal_FT_174(plancha,
 							zonaElectoral, nombreAsociado, cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo,
-							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte, tipoAsociado);
+							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte,
+							tipoAsociado, nombreReporteFoter);
 
 					removerAtributos(session, "plancha", "zonaElectoral", "nombreAsociado", "cedulaAsociado",
 							"fechaAntiguedad", "profesion", "fechaTitulo", "estudios", "empresa", "cargo", "antiguedad",
@@ -276,14 +283,11 @@ public class ServletReportesJasper extends HttpServlet {
 				case 210:
 					// INSCRIPCIÓN DE PLANCHAS CO-FT-210
 					nombreReporte = "INSCRIPCIÓN DE PLANCHAS";
-					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
-					fecha = (Date) req.getSession().getAttribute("fecha");
-					ciudad = (String) req.getSession().getAttribute("ciudad");
+					HashMap<String, String> parametros = (HashMap<String, String>) req.getSession()
+							.getAttribute("parametrosFormulario210");
 
-					jasperPrint = DelegadoGenerador.getInstance().reporteInscripcionPlanchas_FT_210(zonaElectoral,
-							ciudad, fecha, rutaImagen, rutaReporte);
-
-					removerAtributos(session, "zonaElectoral", "fecha", "ciudad");
+					jasperPrint = DelegadoGenerador.getInstance().reporteInscripcionPlanchas_FT_210(parametros, rutaImagen, rutaReporte);
+					removerAtributos(session, "parametrosFormulario210");
 					break;
 
 				case 211:

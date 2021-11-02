@@ -17,4 +17,6 @@ public interface ILogicaZonaElectoral {
 	
 	List<EleZonaElectoralRegionalDTO> consultarCodigosRegionalDeZonaElectoral()
 			throws EleccionesDelegadosException;
+
+	String consultarZonaElectoralByCodigo(Long codigo);
 }

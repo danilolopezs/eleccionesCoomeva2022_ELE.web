@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-211" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="ciudad" class="java.lang.String"/>
 	<parameter name="año" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -80,7 +80,7 @@
 			<textField>
 				<reportElement x="353" y="10" width="150" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression class="java.lang.String"><![CDATA["| " +$P{año}+ " | " +$P{mes}+ " | " +$P{dia} + "|"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["|  " +$P{año}+ "  |  " +$P{mes}+ "  |  " +$P{dia} + "  |"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -131,21 +131,21 @@
 				<reportElement x="-19" y="1" width="595" height="32" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="397" y="35" width="111" height="13" forecolor="#009232"/>
+				<reportElement x="397" y="35" width="111" height="13" forecolor="#000000"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="153" y="7" width="270" height="20" forecolor="#FFFFFF"/>
-				<textElement>
+				<reportElement x="130" y="7" width="296" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="40" y="36" width="106" height="13" forecolor="#009232"/>
+				<reportElement x="40" y="36" width="106" height="13" forecolor="#000000"/>
 				<textElement/>
-				<text><![CDATA[CO-FT-172]]></text>
+				<text><![CDATA[CO-FT-211]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
