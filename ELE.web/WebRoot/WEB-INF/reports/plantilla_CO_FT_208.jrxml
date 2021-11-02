@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<<<<<<< HEAD
 	<property name="ireport.zoom" value="1.6105100000000074"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="31"/>
+=======
+	<property name="ireport.zoom" value="1.6105100000000068"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="129"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="fechaActual" class="java.util.Date"/>
 	<parameter name="comision" class="java.lang.String"/>
@@ -22,7 +28,11 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle>
+<<<<<<< HEAD
 				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#009232"/>
+=======
+				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#009205" backcolor="#009205"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 			</rectangle>
 			<staticText>
 				<reportElement x="0" y="8" width="555" height="25" forecolor="#FFFFFF"/>
@@ -54,27 +64,39 @@
 				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000"/>
 			</rectangle>
 			<line>
-				<reportElement x="297" y="1" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="307" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="430" y="1" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="440" y="1" width="1" height="31" forecolor="#000000"/>
 			</line>
 			<staticText>
+<<<<<<< HEAD
 				<reportElement x="52" y="5" width="84" height="14" forecolor="#009232"/>
+=======
+				<reportElement x="49" y="5" width="84" height="14" forecolor="#00834C"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<staticText>
+<<<<<<< HEAD
 				<reportElement x="301" y="5" width="29" height="14" forecolor="#009232"/>
+=======
+				<reportElement x="308" y="5" width="29" height="14" forecolor="#00834C"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
+<<<<<<< HEAD
 				<reportElement x="433" y="5" width="26" height="14" forecolor="#009232"/>
+=======
+				<reportElement x="441" y="5" width="26" height="14" forecolor="#00834C"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
@@ -84,19 +106,23 @@
 				<reportElement x="50" y="1" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
+<<<<<<< HEAD
 				<reportElement x="51" y="10" width="244" height="20"/>
+=======
+				<reportElement x="133" y="12" width="174" height="20"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
-				<reportElement x="298" y="14" width="132" height="18"/>
+				<reportElement x="308" y="14" width="132" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaActual}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA["|  " + $P{anio} + "  |  " + $P{mes} + "  |  " + $P{dia} + "  |"]]></textFieldExpression>
 			</textField>
 			<textField pattern="h.mm a" isBlankWhenNull="true">
-				<reportElement x="431" y="14" width="89" height="18"/>
+				<reportElement x="441" y="14" width="79" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -105,7 +131,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="258" splitType="Stretch">
+		<band height="206" splitType="Stretch">
 			<rectangle>
 				<reportElement x="49" y="0" width="471" height="242" forecolor="#000000"/>
 			</rectangle>
@@ -129,6 +155,7 @@ C.C:]]></text>
 C.C]]></text>
 			</staticText>
 			<line>
+<<<<<<< HEAD
 				<reportElement x="71" y="162" width="200" height="1" forecolor="#000000"/>
 			</line>
 			<line>
@@ -136,6 +163,15 @@ C.C]]></text>
 			</line>
 			<staticText>
 				<reportElement x="39" y="0" width="10" height="242" forecolor="#009232"/>
+=======
+				<reportElement x="71" y="162" width="173" height="1" forecolor="#000000"/>
+			</line>
+			<line>
+				<reportElement x="307" y="162" width="193" height="1" forecolor="#000000"/>
+			</line>
+			<staticText>
+				<reportElement x="39" y="0" width="10" height="205" forecolor="#000000"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement textAlignment="Center" rotation="Left">
 					<font size="6"/>
 				</textElement>
@@ -163,7 +199,11 @@ C.C]]></text>
 				<reportElement x="300" y="127" width="200" height="1" forecolor="#000000"/>
 			</line>
 			<staticText>
+<<<<<<< HEAD
 				<reportElement x="71" y="204" width="429" height="20" forecolor="#000000"/>
+=======
+				<reportElement x="71" y="187" width="386" height="18" forecolor="#000000"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -184,6 +224,7 @@ C.C]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreRecibe}]]></textFieldExpression>
 			</textField>
 			<textField>
+<<<<<<< HEAD
 				<reportElement x="70" y="15" width="430" height="60"/>
 				<textElement>
 					<font size="10"/>
@@ -206,14 +247,48 @@ C.C]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="50" y="33" width="100" height="20" forecolor="#009232"/>
+=======
+				<reportElement x="72" y="15" width="429" height="74"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral No. " + $P{zona}+ " de la ciudad de " + $P{ciudad}.toUpperCase()+
+"expide Constancia de Recibo y radicación de la Plancha encabezada por " + $P{nombre}.toUpperCase() +
+"identificado con cédula de ciudadanía número " + $P{cedula} + " de " + $P{ciudadCedula} +
+"el día " + $P{dia}  + " del mes de " + $P{mes} +  " del año " + $P{anio} + "."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="63">
+			<staticText>
+				<reportElement x="418" y="38" width="100" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Mod.Septiembre 2021]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-21" y="0" width="595" height="37" forecolor="#009205" backcolor="#009205"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="50" y="38" width="100" height="20" forecolor="#000000"/>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 				<textElement/>
 				<text><![CDATA[CO-FT-208]]></text>
 			</staticText>
 			<staticText>
+<<<<<<< HEAD
 				<reportElement x="374" y="33" width="144" height="20" forecolor="#009232"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
+=======
+				<reportElement x="50" y="11" width="470" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 </jasperReport>

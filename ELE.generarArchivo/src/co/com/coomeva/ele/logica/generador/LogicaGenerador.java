@@ -1756,9 +1756,14 @@ public class LogicaGenerador {
 			parameters.put("razon3", razon3);
 			parameters.put("razon4", razon4);
 			parameters.put("rutaImagen", rutaImagen);
+<<<<<<< HEAD
 			//parameters.put("formulario", formulario);
 
 			rutaReporte = rutaReporte + "plantilla_CO_FT_209.jasper";
+=======
+
+			rutaReporte = rutaReporte + "plantilla_CO-FT-209.jasper";
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);

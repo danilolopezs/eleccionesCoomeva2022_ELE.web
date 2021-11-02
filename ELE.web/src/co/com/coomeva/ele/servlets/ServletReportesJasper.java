@@ -271,7 +271,10 @@ public class ServletReportesJasper extends HttpServlet {
 					String razon2 = (String) req.getSession().getAttribute("razon2");
 					String razon3 = (String) req.getSession().getAttribute("razon3");
 					String razon4 = (String) req.getSession().getAttribute("razon4");
+<<<<<<< HEAD
 					//String formulario = rutaImagen + "/CO-FT-209.png";
+=======
+>>>>>>> 01c63f3166592f080ed33618dcb366f27d489824
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionInadmisionPlancha_FT_209(
 							zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta,
