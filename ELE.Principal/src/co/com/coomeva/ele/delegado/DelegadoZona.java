@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.com.coomeva.ele.entidades.planchas.EleZonas;
 import co.com.coomeva.ele.logica.LogicaZona;
+import co.com.coomeva.ele.modelo.EleZonaElectoralEspecialDTO;
 
 public class DelegadoZona {
 	private static DelegadoZona instance;

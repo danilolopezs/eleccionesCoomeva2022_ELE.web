@@ -34,6 +34,7 @@ import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
+import co.com.coomeva.ele.modelo.EleZonaElectoralEspecialDTO;
 import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
@@ -63,7 +64,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
-			try {
+			try { 
 				if (existeUsuario()) {
 					completarInicioSesion(login);
 					visible = Boolean.TRUE;
@@ -128,15 +129,11 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	}
 	
 	private void completarInicioSesion(String numeroDocumento) throws NumberFormatException, Exception {
-		
-		
-			UserVo user = new UserVo();
-			user.setUserId(numeroDocumento);
-			FacesUtils.setSessionParameter("user", user);
-			FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(numeroDocumento));
-			validacionInformacionPlanchas(numeroDocumento);
-			
-		
+		UserVo user = new UserVo();
+		user.setUserId(numeroDocumento);
+		FacesUtils.setSessionParameter("user", user);
+		FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(numeroDocumento));
+		validacionInformacionPlanchas(numeroDocumento);
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {

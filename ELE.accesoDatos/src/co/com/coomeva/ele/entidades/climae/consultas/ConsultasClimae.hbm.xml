@@ -31,9 +31,10 @@
 		<return-scalar column="AGCVIN" type="java.lang.String" />
 		<return-scalar column="EMAIL" type="java.lang.String" />
 		<![CDATA[
-		SELECT a.nitcli NITCLI, trim(a.nomcl1) NOMCLI, a.feccon FECCON, a.fecing FECING, 
-		DB2UTIL.F_PROFESION(a.NUMINT) NOMTIT, trim(db2util.getdir(dec(a.nitcli),char('DIN')))EMAIL,
-        CASE a.codcii WHEN ? THEN trim(DB2UTIL.GETZONA(a.AGCVIN)) ELSE trim(DB2UTIL.GETZONA(a.AGCVIN))END AGCVIN
+		SELECT a.nitcli NITCLI, trim(a.nomcl1) NOMCLI, DB2UTIL.F_PROFESION(a.NUMINT) NOMTIT, 
+		a.feccon FECCON, a.fecing FECING,
+		CASE a.codcii WHEN ? THEN trim(DB2UTIL.GETZONA(a.AGCVIN)) ELSE trim(DB2UTIL.GETZONA(a.AGCVIN))END AGCVIN,
+		trim(db2util.getdir(dec(a.nitcli),char('DIN')))EMAIL
 		FROM ELECDB.eleasomul a LEFT OUTER JOIN MULCLIDAT.clitit b ON A.NUMINT = B.NUMINT
 		WHERE a.asocia = ? AND a.nitcli = ? AND a.estaso >=? AND a.estaso <=? AND a.tipcli = ?
 		]]>
