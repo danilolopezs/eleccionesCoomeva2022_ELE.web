@@ -74,5 +74,14 @@ public class DelegadoZonaElectoral {
 			logicaZonaElectoral = null;	
 		}
 	}
+	
+	public String consultarZonaElectoralEspecialByCodigo(Long codigo) {
+		try {
+			logicaZonaElectoral = new LogicaZonaElectoral();
+			return logicaZonaElectoral.consultarZonaElectoralEspecialByCodigo(codigo);
+		} finally {
+			logicaZonaElectoral = null;	
+		}
+	}
 
 }

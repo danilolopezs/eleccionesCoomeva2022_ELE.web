@@ -127,7 +127,7 @@ public class ValidacionIngreso extends BaseVista {
 						UtilAcceso.getParametroFuenteS("mensajes", "msgIdNoFiguraComoAsociadoCooperativa"));
 			}
 
-			if (asociado != null && asociado.getAsociadoHabil()) {
+			if (asociado != null) {
 
 				/**
 				 * se valida que la fecha actual sea una fecha hábil para el proceso de
@@ -148,12 +148,8 @@ public class ValidacionIngreso extends BaseVista {
 				Date dateFechaFinInscrpcion = ManipulacionFechas.stringToDate(elePParametrosFin.getNombreParametro(),
 						"dd-MM-yyyy hh:mm:ss");
 			
-				boolean validacionFecha = false;
-
-				if (dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
-						&& dateToday.getTime() <= dateFechaFinInscrpcion.getTime()) {
-					validacionFecha = true;
-				}
+				boolean validacionFecha = dateToday.getTime() >= dateFechaIniInscrpcion.getTime()
+						&& dateToday.getTime() <= dateFechaFinInscrpcion.getTime();
 
 				if (validacionFecha) {
 					DelegadoLogAsociado.getInstance().crearRegistroLogAsociado(null,

@@ -128,20 +128,15 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	}
 	
 	private void completarInicioSesion(String numeroDocumento) throws NumberFormatException, Exception {
-		DTOHabilidadAsociado asoHabil = DelegadoAsociado.getInstance().consultarHabilidadAsociado(Long.parseLong(numeroDocumento));
-		if (asoHabil != null) {
-			if(asoHabil.getAsociadoHabil()) {
-				UserVo user = new UserVo();
-				user.setUserId(numeroDocumento);
-				FacesUtils.setSessionParameter("user", user);
-				FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(numeroDocumento));
-				validacionInformacionPlanchas(numeroDocumento);
-			} else {
-				throw new Exception("El asociado no cumple con los requisitos de habilidad."); 
-			}
-		} else {
-			throw new Exception("Ocurrio un error consultando la habilidad del asociado.");
-		}
+		
+		
+			UserVo user = new UserVo();
+			user.setUserId(numeroDocumento);
+			FacesUtils.setSessionParameter("user", user);
+			FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(numeroDocumento));
+			validacionInformacionPlanchas(numeroDocumento);
+			
+		
 	}
 
 	private void validacionInformacionPlanchas(String identificacion) {
@@ -173,7 +168,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 					eleCabPlanchaDTO.setPrimerApellido(asociadoDTO.getPrimerApellido());
 					eleCabPlanchaDTO.setSegundoApellido(asociadoDTO.getSegundoApellido());
 
-					if (asociadoDTO.isEstadoHabilidad()) {
+					
 						// Verifica que el usuario es cabeza
 						if (elePlanchas != null) {
 							msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
@@ -219,6 +214,9 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							returnString = "goResumenPlancha";
 						} else {
 							msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
+							if (asociadoDTO.isEstadoHabilidad()) {
+								msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
+							}
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");
 							ElePlanchaDTO elePlanchaDTO = new ElePlanchaDTO();
 							elePlanchaDTO.setEleCabPlanchaDTO(eleCabPlanchaDTO);
@@ -229,11 +227,6 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							//returnString = "goCrearPlancha";
 							returnString = "goInicioMenuAsociado";
 						}
-					} else {
-						msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
-						btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblCerrar");
-						returnString = "";
-					}
 				}
 			}
  		} catch (Exception e) {

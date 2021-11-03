@@ -275,15 +275,18 @@ public class RegistrarPlancha extends BaseVista {
 				this.mensajeVista.setMensaje(e.getMessage() != null && !"".equals(e.getMessage()) ? e.getMessage()
 						: UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorNullPointerException"));
-				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
-				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
-				this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
+				limpiarPosicionPrincipal(Integer.parseInt(inputTextCedula.getAlt()) - 1);
 			}
 		} else {
-			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
-			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
-			this.miembrosPrincipales.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
+			limpiarPosicionPrincipal(Integer.parseInt(inputTextCedula.getAlt()) - 1);
 		}
+	}
+	
+	public void limpiarPosicionPrincipal(int posicion) {
+		this.miembrosPrincipales.get(posicion).setNumeroDocumento(null);
+		this.miembrosPrincipales.get(posicion).setApellidosNombres(null);
+		this.miembrosPrincipales.get(posicion).setProfesion(null);
+		this.miembrosPrincipales.get(posicion).setCorreo(null);
 	}
 
 	/**
@@ -297,9 +300,7 @@ public class RegistrarPlancha extends BaseVista {
 
 		if (v.getNewValue() != null && !"".equals(v.getNewValue().toString().trim())) {
 			try {
-
 				Long numeroDocumento = Long.parseLong(v.getNewValue().toString());
-
 				this.miembrosSuplentes = adicionarMiembro(this.miembrosSuplentes, numeroDocumento,
 						Integer.parseInt(inputTextCedula.getAlt()));
 
@@ -315,15 +316,18 @@ public class RegistrarPlancha extends BaseVista {
 				this.mensajeVista.setMensaje(e.getMessage() != null && !"".equals(e.getMessage()) ? e.getMessage()
 						: UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorNullPointerException"));
-				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
-				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
-				this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
+				limpiarPosicionSuplente(Integer.parseInt(inputTextCedula.getAlt()) - 1);
 			}
 		} else {
-			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setNumeroDocumento(null);
-			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setApellidosNombres(null);
-			this.miembrosSuplentes.get(Integer.parseInt(inputTextCedula.getAlt()) - 1).setProfesion(null);
+			limpiarPosicionSuplente(Integer.parseInt(inputTextCedula.getAlt()) - 1);
 		}
+	}
+	
+	public void limpiarPosicionSuplente(int posicion) {
+		this.miembrosSuplentes.get(posicion).setNumeroDocumento(null);
+		this.miembrosSuplentes.get(posicion).setApellidosNombres(null);
+		this.miembrosSuplentes.get(posicion).setProfesion(null);
+		this.miembrosSuplentes.get(posicion).setCorreo(null);
 	}
 
 	private List<DTOMiembroPlancha> adicionarMiembro(List<DTOMiembroPlancha> lista, Long numeroDocumento, int posicion)

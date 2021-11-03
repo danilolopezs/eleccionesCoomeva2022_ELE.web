@@ -205,13 +205,15 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 					}
 				}
 			}
-			//consulta zona electoral
-			if (dto.getZonaElectoral() != null) {
-				String nombre_zona_elec = DelegadoZonaElectoral.getInstance()
-						.consultarZonaElectoralByCodigo(Long.parseLong(dto.getZonaElectoral()));
-				dto.setZonaElectoral(
-						dto.getZonaElectoral() + ((nombre_zona_elec != null) ? " - " + nombre_zona_elec : ""));
-			}
+			//consulta zona electoral 
+			String nombre_zona_elec = dto.getZonaElectoralEspecial() != null
+					? DelegadoZonaElectoral.getInstance()
+							.consultarZonaElectoralEspecialByCodigo(Long.parseLong(dto.getZonaElectoralEspecial()))
+					: DelegadoZonaElectoral.getInstance()
+							.consultarZonaElectoralByCodigo(Long.parseLong(dto.getZonaElectoral()));
+			
+			dto.setZonaElectoral(
+					dto.getZonaElectoral() + ((nombre_zona_elec != null) ? " - " + nombre_zona_elec : ""));
 			// se verifica si la instancia dto tiene profesion
 			if (dto.getProfesion() == null) { 
 				List<EleAsociado> listaAsociado = new EleAsociadoDAO().findByProperty("numeroDocumento",

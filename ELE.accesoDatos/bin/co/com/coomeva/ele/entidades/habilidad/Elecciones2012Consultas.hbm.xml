@@ -559,28 +559,27 @@
 		condiciones para obtener el## ## codigo de la zona electoral ## 
 		###################################################################################### -->
 	<sql-query name="consulta.informacion.cabeza.plancha">
-		<return-scalar column="NUMERO_DOCUMENTO"
-			type="java.lang.Long" />
+	<return-scalar column="NUMERO_DOCUMENTO"
+		type="java.lang.Long" />
 		<return-scalar column="NOMCL1" type="java.lang.String" />
 		<return-scalar column="FECING" type="java.lang.Integer" />
-		<return-scalar column="PROFESION"
-			type="java.lang.String" />
+		<return-scalar column="PROFESION" type="java.lang.String" />
 		<return-scalar column="ZONA" type="java.lang.String" />
-		<return-scalar column="CODASOCIADO"
-			type="java.lang.Long" />
-		<return-scalar column="CONSECUTIVO_PLANCHA"
-			type="java.lang.Long" />
+		<return-scalar column="ZONA_ESPECIAL" type="java.lang.String" />
+		<return-scalar column="CODASOCIADO" type="java.lang.Long" />
+		<return-scalar column="CONSECUTIVO_PLANCHA" type="java.lang.Long" />
 		<![CDATA[
-			SELECT A.NUMERO_DOCUMENTO, C.NOMCL1, C.FECING, DB2UTIL.F_PROFESION(C.NUMINT) PROFESION, 
-				Z.CODIGO_ZONA_ELE ZONA, PL_ASO.CODIGO_ASOCIADO CODASOCIADO, PL.CONSECUTIVO_PLANCHA 
+			SELECT A.NUMERO_DOCUMENTO, C.NOMCL1, C.FECING, DB2UTIL.F_PROFESION(C.NUMINT) PROFESION, Z.CODIGO_ZONA_ELE ZONA, 
+				ZE.CODIGO_ZONA_ELE ZONA_ESPECIAL, PL_ASO.CODIGO_ASOCIADO CODASOCIADO, PL.CONSECUTIVO_PLANCHA 
 			FROM ELECDB.ELEASOCIA A
 				INNER JOIN ELECDB.ELE_PLANCHA_ASOCIADO PL_ASO ON  PL_ASO.CODIGO_ASOCIADO = A.CODIGO_ASOCIADO
 				INNER JOIN ELECDB.ELE_PLANCHA PL ON PL.CONSECUTIVO_PLANCHA = PL_ASO.CONSECUTIVO_PLANCHA
 				INNER JOIN ELECDB.ELE_ZONA_ELECTORAL Z ON Z.CODIGO_ZONA_ELE = PL.CODIGO_ZONA_ELE 
+				LEFT JOIN ELECDB.ELE_ZONA_ELECTORAL_ESPECIAL ZE ON ZE.CODIGO_ZONA_ELE = PL.CODIGO_ZONA_ELE
 			    INNER JOIN ELECDB.ELEASOMUL C ON C.NUMINT = A.CODIGO_ASOCIADO
 			WHERE A.NUMERO_DOCUMENTO = :numeroDocumento AND A.CODIGO_ASOCIADO = PL_ASO.CODIGO_ASOCIADO
 		]]>
-	</sql-query>
+</sql-query>
 
 	<!-- ###################################################################################### 
 		## 28. Bernardo Lopez - Pragma S.A. - 2012-12-01 ## ## Consulta el codigo 
@@ -1227,6 +1226,19 @@
 		<![CDATA[
 			SELECT ze.DESCRIPCION_ZONA_ELE DESC_ZONA_ELECTORAL from elecdb.ele_zona_electoral ze 
 			WHERE ze.codigo_zona_ele = :codigoZonaEle
+		]]>
+	</sql-query>
+	
+	<!-- ###################################################################################### 
+		## Danilo Lopez - GTC CORPORATION. - 2021-10-25 ## 
+		## Consulta de nombre de la zona electoral especial por Codigo de zona_electoral especial ## 
+		###################################################################################### -->
+	<sql-query name="consultar.zona.electoral.especial.por.codigo">
+		<return-scalar column="DESC_ZONA_ELECTORAL"
+			type="java.lang.String" />
+		<![CDATA[
+			SELECT ZE.DESCRIPCION_ZONA_ELE DESC_ZONA_ELECTORAL 
+			FROM elecdb.ele_zona_electoral_especial ZE WHERE ZE.codigo_zona_ele = :codigoZonaEle
 		]]>
 	</sql-query>
 

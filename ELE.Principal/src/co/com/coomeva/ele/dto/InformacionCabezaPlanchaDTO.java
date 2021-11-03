@@ -8,14 +8,13 @@ public class InformacionCabezaPlanchaDTO {
 	private String antiguedadMeses;
 	private String profesion;
 	private String zonaElectoral;
+	private String zonaElectoralEspecial;
 	private String ciudad;
 	private String fechaGrado;
 	private String codAsociado;
 	private String numeroPlancha;
 	
-	
 	public InformacionCabezaPlanchaDTO(){
-		
 	}
 
 	public String getNumeroDocumento() {
@@ -56,6 +55,14 @@ public class InformacionCabezaPlanchaDTO {
 
 	public void setZonaElectoral(String zonaElectoral) {
 		this.zonaElectoral = zonaElectoral;
+	}
+
+	public String getZonaElectoralEspecial() {
+		return zonaElectoralEspecial;
+	}
+
+	public void setZonaElectoralEspecial(String zonaElectoralEspecial) {
+		this.zonaElectoralEspecial = zonaElectoralEspecial;
 	}
 
 	public String getCiudad() {

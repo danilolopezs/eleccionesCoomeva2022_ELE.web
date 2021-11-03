@@ -1238,8 +1238,9 @@ public class LogicaCabezaPlancha extends EleCabPlanchaDAO {
 				dto.setAntiguedadMeses(antiguedadMeses.toString());
 				dto.setProfesion(element[3] == null ? null : element[3].toString());
 				dto.setZonaElectoral(element[4] == null ? null : element[4].toString());
-				dto.setCodAsociado(element[5].toString());
-				dto.setNumeroPlancha(element[6] == null ? null : element[6].toString());
+				dto.setZonaElectoralEspecial(element[5] == null ? null : element[5].toString());
+				dto.setCodAsociado(element[6].toString());
+				dto.setNumeroPlancha(element[7] == null ? null : element[7].toString());
 			}
 		} catch (Exception e) {
 			throw new Exception(loaderResourceElements.getKeyResourceValue(

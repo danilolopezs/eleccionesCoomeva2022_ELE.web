@@ -17,7 +17,9 @@ import org.hibernate.Transaction;
 
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoClimae;
+import co.com.coomeva.ele.delegado.DelegadoHabilidad;
 import co.com.coomeva.ele.delegado.DelegadoSie;
+import co.com.coomeva.ele.delegado.formulario.DelegadoFormulario;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
 import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.dto.DTOInformacionPlancha;
@@ -25,8 +27,10 @@ import co.com.coomeva.ele.dto.DTOMiembroPlancha;
 import co.com.coomeva.ele.dto.DTOPlanchaAsociado;
 import co.com.coomeva.ele.dto.DTOZonaElectoral;
 import co.com.coomeva.ele.entidades.habilidad.EleAsociado;
+import co.com.coomeva.ele.entidades.habilidad.EleInhabilidad;
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.habilidad.dao.EleAsociadoDAO;
+import co.com.coomeva.ele.entidades.planchas.EleInhabilidades;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaAsociadoAudDAO;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaAsociadoDAO;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaDAO;
@@ -44,6 +48,7 @@ import co.com.coomeva.ele.exception.EleccionesDelegadosException;
 import co.com.coomeva.ele.logica.LogicaAsociado;
 import co.com.coomeva.ele.logica.LogicaEstadoPlancha;
 import co.com.coomeva.ele.logica.LogicaFiltros;
+import co.com.coomeva.ele.logica.LogicaInhabilidad;
 import co.com.coomeva.ele.modelo.AsociadoDTO;
 import co.com.coomeva.ele.modelo.EleAsociadoDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
@@ -126,6 +131,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			}
 
 			// si aplicaValidaciones = true son validaciones para delegados
+			//1.1.	Tiempo de retiro de Asociados empleados y promotores. 
 			else if (aplicaValidaciones) {
 				if (!esColaboradorGECoopmeva) {
 					String msgValidacionEmpleadoFechaRetiro = validarEmpleadoFechaRetiro(
@@ -135,6 +141,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 						excepciones.append("- " + msgValidacionEmpleadoFechaRetiro);
 					}
 				}
+			}
 
 				// Validacion del titulo academico
 				/*
@@ -159,25 +166,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 				 * ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 				 * "msgErrorAsociadoConMenos3AnnosObtencionTitulo")) + "<br/>"); }
 				 */
-			}
+			
 
 			if (validarExistenciaEnPlancha(miembros, numeroDocumento, posicionPlancha)) {
 				throw new EleccionesDelegadosException(MessageFormat
 						.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorAsociadoYaRegistradoEnPlancha"), numeroDocumento.toString()));
-			}
-
-			// Validamos si el asociado es hábil para elegir y ser elegido
-			boolean esAsociadoHabil = false;
-
-			DTOHabilidadAsociado habilidadAso = LogicaAsociado.getInstance()
-					.consultarHabilidadAsociado(numeroDocumento);
-			esAsociadoHabil = (habilidadAso != null) ? habilidadAso.getAsociadoHabil() : Boolean.FALSE;
-
-			if (!esAsociadoHabil) {
-				throw new EleccionesDelegadosException(MessageFormat
-						.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-								"msgAsociadoInhabilRegistroPlancha"), numeroDocumento.toString()));
 			}
 
 			if (!asociadoPertenceOtraPlancha(nroIdentificacionMiembro, consecutivoPlancha).isEmpty()) {
@@ -187,17 +181,17 @@ public class LogicaPlancha implements ILogicaPlancha {
 			}
 			// Cambio 20122013 :
 			// Se valida frente a una fecha limite de vinculacion segun requerimiento
-			Date fechaMaximaVinculacion = DateManipultate.stringToDate(
-					UtilAcceso.getParametroFuenteS("parametros", "fechaMaximaVinculacionAntiguedadPlancha"),
-					"yyyyMMdd");
+//			Date fechaMaximaVinculacion = DateManipultate.stringToDate(
+//					UtilAcceso.getParametroFuenteS("parametros", "fechaMaximaVinculacionAntiguedadPlancha"),
+//					"yyyyMMdd");
 			// Si fecha de vinculacion es mayor o igual a la fecha maxima de vinculacion
-			if (asociadoDTO.getFechaVinculacion().compareTo(fechaMaximaVinculacion) >= 0) {
-				excepciones.append("- "
-						+ MessageFormat
-								.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-										"msgErrorAsociadoConMenos1AnnoAntiguedad"), nroIdentificacionMiembro)
-						+ "</br>");
-			}
+//			if (asociadoDTO.getFechaVinculacion().compareTo(fechaMaximaVinculacion) >= 0) {
+//				excepciones.append("- "
+//						+ MessageFormat
+//								.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+//										"msgErrorAsociadoConMenos1AnnoAntiguedad"), nroIdentificacionMiembro)
+//						+ "</br>");
+//			}
 
 			if (!logicaAsociado.estaAsociaActivo(Long.parseLong(nroIdentificacionMiembro))) {
 				throw new EleccionesDelegadosException(UtilAcceso
@@ -221,15 +215,15 @@ public class LogicaPlancha implements ILogicaPlancha {
 
 			}
 
-			if (obtenerAsosSacionados5AnnosAtras().contains(Long.parseLong(nroIdentificacionMiembro))) {
-				excepciones
-						.append("- "
-								+ MessageFormat.format(
-										UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-												"msgErrorAsoSancionados5AnnosAtras"),
-										nroIdentificacionMiembro)
-								+ "</br>");
-			}
+//			if (obtenerAsosSacionados5AnnosAtras().contains(Long.parseLong(nroIdentificacionMiembro))) {
+//				excepciones
+//						.append("- "
+//								+ MessageFormat.format(
+//										UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+//												"msgErrorAsoSancionados5AnnosAtras"),
+//										nroIdentificacionMiembro)
+//								+ "</br>");
+//			}
 
 			// SE DEBE VALIDAR CON JULIAN DE QUE DS SE TRAEN LOS DATOS
 //			if (aplicaValidaciones && DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacionMiembro)) {
@@ -279,13 +273,28 @@ public class LogicaPlancha implements ILogicaPlancha {
 				}
 			} else {
 				miembros.get(posicionPlancha - 1).setProfesion(asociadoDTO.getProfesion());
-				String mensajesExcepciones = excepciones.toString();
-				if (mensajesExcepciones != null && !"".equals(mensajesExcepciones)) {
-					// Eliminamos la coma seguida de un espacio que siempre se
-					// pone al final de las excepciones que se concatenan
-					miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
-							"Por favor tener en cuenta las siguientes observaciones: </br>" + mensajesExcepciones);
+			}
+			
+			// Validar si el asociado es hábil para elegir y ser elegido
+			DTOHabilidadAsociado habilidadAso = LogicaAsociado.getInstance()
+					.consultarHabilidadAsociado(numeroDocumento);
+			boolean esAsociadoHabil = Boolean.FALSE;
+			if (habilidadAso != null) {
+				esAsociadoHabil = habilidadAso.getAsociadoHabil();
+				if (!esAsociadoHabil && !habilidadAso.getObservacionesInhabilidades().isEmpty()) {
+					for (String inhabilidad : habilidadAso.getObservacionesInhabilidades()) {
+						excepciones.append("- " + inhabilidad + "</br>");
+					}
 				}
+			}
+			
+			String mensajesExcepciones = excepciones.toString();
+			if (mensajesExcepciones != null && !"".equals(mensajesExcepciones)) {
+				// Eliminamos la coma seguida de un espacio que siempre se
+				// pone al final de las excepciones que se concatenan
+				miembros.get(posicionPlancha - 1).setObservacionAdicionMiembro(
+						"Por favor tener en cuenta las siguientes observaciones: </br>" + mensajesExcepciones);
+
 			}
 		} catch (Exception e) {
 			throw new EleccionesDelegadosException(e.getMessage(), e);

@@ -19,4 +19,6 @@ public interface ILogicaZonaElectoral {
 			throws EleccionesDelegadosException;
 
 	String consultarZonaElectoralByCodigo(Long codigo);
+	
+	String consultarZonaElectoralEspecialByCodigo(Long codigo);
 }
