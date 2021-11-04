@@ -35,7 +35,6 @@ public class FormatoPdfInscripcionPlancha {
 	private static final String NOMBRE_PLANTILLA_210 = "plantilla_CO-FT-210";
 	private static final String TIPO_REPORTE = "210";
 
-	private String nombrePlantillaFormatoInscripcionPlancha;
 	private String tipoEleccionesSession;
 	private String tipoEleccionesRepresentantes;
 
@@ -43,6 +42,8 @@ public class FormatoPdfInscripcionPlancha {
 	private String urlDestino;
 
 	private HashMap<String, Object> parametros;
+	private Long cedulaCabezaPlancha;
+	private String nombreCabezaPlancha;
 	private List<EleRegistroCampos> listaRegCampos;
 
 	public FormatoPdfInscripcionPlancha() {
@@ -59,9 +60,6 @@ public class FormatoPdfInscripcionPlancha {
 			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
 			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "param.tipo.elecciones.representantes");
-			nombrePlantillaFormatoInscripcionPlancha = UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-					"param.nombre.plantilla.inscripcion.plancha." + this.tipoEleccionesSession);
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage(e.getMessage());
 		}
@@ -106,6 +104,11 @@ public class FormatoPdfInscripcionPlancha {
 		List<AsociadoVO> listaSuplentes = new ArrayList<AsociadoVO>();
 		List<AsociadoVO> listaPrincipales = new ArrayList<AsociadoVO>();
 		for (DTOMiembroPlancha miembro : infoPlancha.getMiembrosTitulares()) {
+			//se fijan valores de cabeza plancha para nombre de reporte
+			if(miembro.getPosicionPlancha().equals("1")) {
+				nombreCabezaPlancha = miembro.getApellidosNombres(); 
+				cedulaCabezaPlancha = miembro.getNumeroDocumento();
+			}
 			listaPrincipales.add(new AsociadoVO(miembro.getPosicionPlancha(), miembro.getNumeroDocumento().toString(),
 					miembro.getApellidosNombres(), miembro.getProfesion(), miembro.getCorreo(), null));
 			listaRegCampos
@@ -141,6 +144,8 @@ public class FormatoPdfInscripcionPlancha {
 				.getRequest();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		request.getSession().setAttribute("codigoReporte", TIPO_REPORTE);
+		request.getSession().setAttribute("cedulaCabezaPlancha", cedulaCabezaPlancha);
+		request.getSession().setAttribute("nombreCabezaPlancha", nombreCabezaPlancha);
 		request.getSession().setAttribute("parametrosFormulario210", parametros);
 		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
 	}

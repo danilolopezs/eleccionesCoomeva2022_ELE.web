@@ -165,24 +165,23 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 
 	public EleAsociadoDTO validateAsociadoDTO(String nroIdentificacion, EleZonas elZona, String nroCabPlancha)
 			throws Exception {
+		
 		EleAsociadoDTO asociado = null;
 		asociado = DelegadoClimae.getInstance().find(nroIdentificacion);
-
-		asociado.setZonaPlancha(elZona);
-
+		
 		Long cons = 0l;
-		asociado.setEstadoHabilidad(true);
+		asociado.setZonaPlancha(elZona);
+		
+		asociado.setEstadoHabilidad(Boolean.TRUE);
 		asociado = validaSancion(asociado, nroIdentificacion, cons++);
 		asociado = validaAntiguedadAsociado(asociado, cons++);
 		asociado = validaAntiguedadTitulo(asociado, cons++);
-
 		asociado = validaZonaAsociado(elZona, asociado, cons++);
-
 		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
 		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
 
 		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons++);
-
+		return asociado;
 		/*
 		 * if (!DelegadoHabilidad.getInstance().validateEmpleado(nroIdentificacion,
 		 * elZona) && elZona.getZonEspecial()
@@ -199,7 +198,6 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		 * + " " + nroIdentificacion + "				 " +
 		 * UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2")); } }
 		 */
-		return asociado;
 	}
 
 	private EleAsociadoDTO validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado,
@@ -219,20 +217,21 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldSubComision")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
+			//asociado.setEstadoHabilidad(true);
 		}
 		return asociado;
 	}
 
 	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons)
 			throws Exception {
+		
 		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
 			cons++;
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
+			//asociado.setEstadoHabilidad(true);
 		}
 		return asociado;
 	}
@@ -241,8 +240,7 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		if (elZona == null) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldZonaValida")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
 		}
 		return asociado;
 	}
@@ -251,8 +249,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		if (asociado.getAntiguedad() < UtilAcceso.getParametroFuenteI("parametros", "antiguedadMinima")) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoMayor3")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
+			//asociado.setEstadoHabilidad(true);
 		}
 		return asociado;
 	}
@@ -262,8 +260,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 				"antiguedadMinima")) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoFechaObtencionTitulo")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
+			//asociado.setEstadoHabilidad(true);
 		}
 		return asociado;
 	}
@@ -275,8 +273,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		if (isValid) {
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoFechaObtencionTitulo")));
-//			asociado.setEstadoHabilidad(false);
-			asociado.setEstadoHabilidad(true);
+			asociado.setEstadoHabilidad(false);
+			//asociado.setEstadoHabilidad(true);
 		}
 		return asociado;
 	}

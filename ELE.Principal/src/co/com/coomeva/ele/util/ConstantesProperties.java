@@ -95,4 +95,7 @@ public interface ConstantesProperties {
 	String MENSAJE_IMPOSIBLE_IMPRIMIR_RESOLUCION_RECURSOS = "msg.imposible.imprimir.resolucion.recursos";
 
 	String LBL_TITLE_RESOLUCION_CONCEDE_RECURSO_DE_APELACION = "lblTitleResolucionConcedeRecursoDeApelacion";
+	
+	String LBL_CONFIRMACION_FIRMA_PRESENCIAL = "confirmacionFirmaPresencial";
+	String LBL_CONFIRMACION_FIRMA_VIRTUAL = "confirmacionFirmaVirtual";
 }

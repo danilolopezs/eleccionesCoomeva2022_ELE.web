@@ -24,6 +24,7 @@ import co.com.coomeva.ele.logica.LogicaAsociado;
 import co.com.coomeva.ele.logica.LogicaPlanchas;
 import co.com.coomeva.ele.logica.inscripcion.plancha.LogicaPlancha;
 import co.com.coomeva.ele.util.ConstantesProperties;
+import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
@@ -32,8 +33,19 @@ public class EnviarRadicacionVista extends BaseVista {
 
 	private static final String VIRTUAL = "virtual";
 	private static final String PRESENCIAL = "presencial";
+	
+	private static final String MSJ_CONFIRMACION_FIRMA_VIRTUAL = UtilAcceso
+			.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
+					ConstantesProperties.LBL_CONFIRMACION_FIRMA_VIRTUAL);
+	
+	private static final String MSJ_CONFIRMACION_FIRMA_PRESENCIAL = UtilAcceso
+			.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB,
+					ConstantesProperties.LBL_CONFIRMACION_FIRMA_PRESENCIAL);
 
 	private String mensajeIngresoInfoEnviarRadicacion = "";
+	private String mensajeConfirmacionRadicar = "";
 	private EleDetalleFormatoPlanchaDAO dao = new EleDetalleFormatoPlanchaDAO();
 	private ElePlanchaDAO daoPlanchas = new ElePlanchaDAO();
 	LogicaPlancha logicaPlancha = new LogicaPlancha();
@@ -66,6 +78,7 @@ public class EnviarRadicacionVista extends BaseVista {
 	private Boolean mensajeIngreso = false;
 	private Boolean mensajeInformativo = false;
 	private boolean visibleConfirmar;
+	private Boolean visibleConfirmarRadicar;
 
 	public EnviarRadicacionVista() {
 		init();
@@ -79,6 +92,7 @@ public class EnviarRadicacionVista extends BaseVista {
 		listaOpcionFirma[1] = new SelectItem(PRESENCIAL, "Firma Presencial");
 		existenPendientes = Boolean.FALSE;
 		seleccionFirma = Boolean.FALSE;
+		visibleConfirmarRadicar = Boolean.FALSE;
 		numeroDocumentoAsociado = (Long) FacesUtils.getSessionParameter("numeroDocAsociado");
 		validacionInicial();
 	}
@@ -106,16 +120,20 @@ public class EnviarRadicacionVista extends BaseVista {
 						&& !existeRegistro) {
 					validacionIngresoInformacionCabezas();
 					cargarTipoFirmaPlancha();
-					mensajeIngresoInfoEnviarRadicacion = "Estimado asociado, recuerda que para Finalizar el registro de Inscripción  de Plancha, debes escoger si deseas enviar tu plancha a Radicación de Firma de forma Virtual o forma Presencial";
-					mensajeInformativo = Boolean.TRUE;
+					if(!existeEnvioRadicacion) {
+						mensajeIngresoInfoEnviarRadicacion = "Estimado asociado, recuerda que para Finalizar el registro de Inscripción de Plancha, debe escoger si desea enviar tu plancha a Radicación de Firma Virtual o Firma Presencial.";
+						mensajeInformativo = Boolean.TRUE;
+					}
 					// consultarInformacionCabezaPlancha();
 				} else {
-					mensajeIngresoInfoEnviarRadicacion = new String(
-							UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
-									"mensajeIngresoInfoCabezaPlancha"));
+					mensajeIngresoInfoEnviarRadicacion = new String(UtilAcceso.getParametroFuenteS(
+							ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "mensajeIngresoInfoCabezaPlancha"));
 					action_mostrar_mensaje_ingreso();
 				}
 			}
+		} catch (EleccionesDelegadosException ed) {
+			mensajeIngresoInfoEnviarRadicacion = ed.getMessage();
+			action_mostrar_mensaje_ingreso();
 		} catch (Exception e) {
 			mensajeIngresoInfoEnviarRadicacion = new String(UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "mensajeIngresoInfoCabezaPlancha"));
@@ -123,41 +141,26 @@ public class EnviarRadicacionVista extends BaseVista {
 		}
 	}
 	
-	public void cargarTipoFirmaPlancha() {
+	public void cargarTipoFirmaPlancha() throws EleccionesDelegadosException {
 		existeEnvioRadicacion = Boolean.FALSE;
-		if(consecutivoPlancha != null) {
-			try {
-				DTOInformacionPlancha plancha = logicaPlancha.consultarInformacionPlancha(consecutivoPlancha);
-				if(plancha != null && plancha.getFirmaVirtual() != null) {
-					opcionFirma = (plancha.getFirmaVirtual().longValue() == 1L) ? VIRTUAL : PRESENCIAL;
-					existeEnvioRadicacion = Boolean.TRUE;
-				}
-			} catch (EleccionesDelegadosException e) {
-				mensajeIngresoInfoEnviarRadicacion = "Ocurrio un error inesperado guardando el Registro de Plancha";
-				action_mostrar_mensaje_ingreso();
+		if (consecutivoPlancha != null) {
+			DTOInformacionPlancha plancha = logicaPlancha.consultarInformacionPlancha(consecutivoPlancha);
+			if (plancha != null && plancha.getFirmaVirtual() != null) {
+				opcionFirma = (plancha.getFirmaVirtual().longValue() == 1L) ? VIRTUAL : PRESENCIAL;
+				existeEnvioRadicacion = Boolean.TRUE;
 			}
 		}
 	}
 
-	public void validacionIngresoInformacionCabezas() {
-		Long codigoAsociado;
-		try {
-			codigoAsociado = logicaAsociado.consultarCodigoAsociadoPorNumeroDocumento(numeroDocumentoAsociado);
-
-			EleDetalleFormatoPlanchaId id = new EleDetalleFormatoPlanchaId();
-
-			id.setCodigoAsociado(codigoAsociado);
-			id.setCodigoFormato(CODIGO_FORMATO_INFO_CABEZA_PLANCHA.byteValue());
-
-			EleDetalleFormatoPlancha entity = dao.findById(id);
-			if (entity == null) {
-				throw new Exception(
-						"Estimado Asociado, para continuar con el proceso de Radicación de Firma, primero debe registrar la información general del Cabeza de Plancha.");
-			}
-
-		} catch (Exception e) {
-			mensajeIngresoInfoEnviarRadicacion = e.getMessage();
-			action_mostrar_mensaje_ingreso();
+	public void validacionIngresoInformacionCabezas() throws Exception {
+		Long codigoAsociado = logicaAsociado.consultarCodigoAsociadoPorNumeroDocumento(numeroDocumentoAsociado);
+		EleDetalleFormatoPlanchaId id = new EleDetalleFormatoPlanchaId();
+		id.setCodigoAsociado(codigoAsociado);
+		id.setCodigoFormato(CODIGO_FORMATO_INFO_CABEZA_PLANCHA.byteValue());
+		EleDetalleFormatoPlancha entity = dao.findById(id);
+		if (entity == null) {
+			throw new EleccionesDelegadosException(
+					"Estimado Asociado, para continuar con el proceso de Radicación de Firma, primero debe registrar la información general del Cabeza de Plancha.");
 		}
 	}
 
@@ -190,19 +193,40 @@ public class EnviarRadicacionVista extends BaseVista {
 		}
 	}
 	
-	public void action_enviarRadicacion() {
+	public String action_enviarRadicacion() {
 		if(consecutivoPlancha != null && numeroDocumentoCabezaPlancha != null) {
 			try {
 				if (seleccionFirma) {
 					logicaPlancha.asignarTipoFirmaPlancha(consecutivoPlancha, opcionFirma.equals(VIRTUAL) ? 1L : 2L);
-					mensajeIngresoInfoEnviarRadicacion = "Estimado Asociado, el proceso de Inscripción de Plancha se completó satisfactoriamente.";
-					action_mostrar_mensaje_ingreso();
+					visibleConfirmarRadicar = Boolean.FALSE;
+					return "goEnviarRadicacion";
 				}
-
 			} catch (Exception e) {
 				mensajeIngresoInfoEnviarRadicacion = "Ocurrio un error inesperado guardando el Registro de Plancha";
 				action_mostrar_mensaje_ingreso();
 			}
+		}
+		return "";
+	}
+	
+	public void action_closeConfirmarRadicar() {
+		visibleConfirmarRadicar = Boolean.FALSE;
+	}
+	
+	public void action_mostrarConfirmacionEnviarRadicacion() {
+		if(seleccionFirma) {
+			visibleConfirmarRadicar = Boolean.TRUE;
+			if(opcionFirma.equals(VIRTUAL)) {
+				mensajeConfirmacionRadicar = MSJ_CONFIRMACION_FIRMA_VIRTUAL;
+			} else {
+				mensajeConfirmacionRadicar = MSJ_CONFIRMACION_FIRMA_PRESENCIAL;
+			}	 
+		}else {
+			visibleConfirmarRadicar = Boolean.FALSE;
+			mensajeIngreso = Boolean.FALSE;
+			mensajeInformativo = Boolean.TRUE; 
+			mensajeIngresoInfoEnviarRadicacion = "Primero debe seleccionar una opción de Firma.";
+			//action_mostrar_mensaje_ingreso();
 		}
 	}
 
@@ -301,4 +325,22 @@ public class EnviarRadicacionVista extends BaseVista {
 	public void setExisteEnvioRadicacion(Boolean existeEnvioRadicacion) {
 		this.existeEnvioRadicacion = existeEnvioRadicacion;
 	}
+
+	public String getMensajeConfirmacionRadicar() {
+		return mensajeConfirmacionRadicar;
+	}
+
+	public void setMensajeConfirmacionRadicar(String mensajeConfirmacionRadicar) {
+		this.mensajeConfirmacionRadicar = mensajeConfirmacionRadicar;
+	}
+
+	public Boolean getVisibleConfirmarRadicar() {
+		return visibleConfirmarRadicar;
+	}
+
+	public void setVisibleConfirmarRadicar(Boolean visibleConfirmarRadicar) {
+		this.visibleConfirmarRadicar = visibleConfirmarRadicar;
+	}
+	
+	
 }

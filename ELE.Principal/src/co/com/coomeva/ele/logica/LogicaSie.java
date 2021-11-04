@@ -51,17 +51,10 @@ public class LogicaSie {
 		Query query=null;
 		session= HibernateSessionFactorySie.getSession();
 		query = session.getNamedQuery("asociado.validateHorasDemocracia");
-
 		query.setString(0, nroIdentificacion);
 		
-		
-		
 		Double horas = Double.parseDouble(query.uniqueResult().toString());
-		
-		if (horas<UtilAcceso.getParametroFuenteI("parametros", "horasDemocracia")) {
-			return true;
-		}else
-			return false;
+		return horas < UtilAcceso.getParametroFuenteI("parametros", "horasDemocracia");
 	}
 	
 	

@@ -164,10 +164,9 @@ public class DelegadoGenerador {
 		return logicaGenerador.reporteResolucionInadmisionPlancha_FT_209(zonaElectoral, anio, mes, dia, hora, nombreAsociado, cedulaAsociado, resolucion, acta, fecha, ciudad, razon1, razon2, razon3, razon4, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros, String rutaImagen,
-			String rutaReporte)throws Exception {
-		// TODO Auto-generated method stub
-		return logicaGenerador.reporteInscripcionPlanchas_FT_210(parametros, rutaImagen, rutaReporte);
+	public JasperPrint reporteInscripcionPlanchas_FT_210(HashMap<String, String> parametros, String rutaReporte, String rutaImagen)
+			throws Exception {
+		return logicaGenerador.reporteInscripcionPlanchas_FT_210(parametros, rutaReporte, rutaImagen);
 	}
 
 	public JasperPrint reporteCertificadoAcreditaOcupacion_FT_211(

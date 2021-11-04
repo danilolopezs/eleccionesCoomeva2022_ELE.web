@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.9487171000000418"/>
-	<property name="ireport.x" value="117"/>
-	<property name="ireport.y" value="21"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -216,9 +216,9 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="450" y="625" width="103" height="15" forecolor="#00834C"/>
+				<reportElement x="431" y="627" width="122" height="15" forecolor="#00834C"/>
 				<textElement textAlignment="Right">
-					<font size="8"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
@@ -272,7 +272,7 @@
 						<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement style="table 8_TD" x="0" y="0" width="29" height="30"/>
-								<textElement textAlignment="Justified">
+								<textElement textAlignment="Center">
 									<font size="10"/>
 								</textElement>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{consecutivo}]]></textFieldExpression>
@@ -393,9 +393,9 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="1" y="625" width="99" height="15" forecolor="#00834C"/>
+				<reportElement x="1" y="627" width="99" height="15" forecolor="#00834C"/>
 				<textElement>
-					<font size="8"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[CO-FT-210 (Anverso)]]></text>
 			</staticText>
@@ -405,16 +405,16 @@
 		</band>
 		<band height="645">
 			<staticText>
-				<reportElement x="1" y="625" width="111" height="15" forecolor="#00834C"/>
+				<reportElement x="1" y="627" width="144" height="15" forecolor="#00834C"/>
 				<textElement verticalAlignment="Top">
-					<font size="8"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[CO-FT-210 (Reverso)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="431" y="625" width="123" height="15" forecolor="#00834C"/>
+				<reportElement x="431" y="627" width="123" height="15" forecolor="#00834C"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font size="8" isBold="false"/>
+					<font size="10" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Mod. Octubre 2021]]></text>
 			</staticText>
@@ -425,16 +425,9 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="20" y="566" width="236" height="15" forecolor="#00834C"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[Apellido(s) y Nombre(s) de quién inscribe la Plancha:]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="310" y="606" width="220" height="14" forecolor="#00834C"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Firma de quién inscribe la Plancha]]></text>
 			</staticText>
@@ -597,6 +590,13 @@
 					</jr:columnGroup>
 				</jr:table>
 			</componentElement>
+			<staticText>
+				<reportElement x="21" y="564" width="220" height="15" forecolor="#00834C"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nombre (s) y  Apellidos  de quién inscribe la Plancha]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

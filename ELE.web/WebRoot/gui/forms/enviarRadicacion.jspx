@@ -91,7 +91,8 @@ body {
 									<td>
 										<div align="center">
 											<ice:panelCollapsible expanded="true" toggleOnClick="false"
-												style="width:80%" rendered="#{not enviarRadicacionVista.existeEnvioRadicacion}">
+												style="width:80%"
+												rendered="#{not enviarRadicacionVista.existeEnvioRadicacion}">
 												<f:facet name="header">
 													<ice:outputText id="ttlOpcionesFirma"
 														value="#{etiquetas.lblTipoFirma}" />
@@ -99,7 +100,8 @@ body {
 												<ice:outputText value="#{etiquetas.textInfoEnvioRadicacion}" />
 												<ice:panelGrid columns="1" width="45%"
 													styleClass="textoLabel">
-													<ice:selectOneRadio value="#{enviarRadicacionVista.opcionFirma}"
+													<ice:selectOneRadio
+														value="#{enviarRadicacionVista.opcionFirma}"
 														valueChangeListener="#{enviarRadicacionVista.action_cambioDeFirma}">
 														<f:selectItems
 															value="#{enviarRadicacionVista.listaOpcionFirma}" />
@@ -109,12 +111,12 @@ body {
 										</div>
 									</td>
 								</tr>
-								
-								<tr >
+								<tr>
 									<td>
 										<div align="center">
 											<ice:panelCollapsible expanded="true" toggleOnClick="false"
-												style="width:80%" rendered="#{enviarRadicacionVista.existeEnvioRadicacion}">
+												style="width:80%"
+												rendered="#{enviarRadicacionVista.existeEnvioRadicacion}">
 												<f:facet name="header">
 													<ice:outputText id="ttlDetallePendientes"
 														value="#{etiquetas.lblTipoFirma}" />
@@ -124,18 +126,15 @@ body {
 											</ice:panelCollapsible>
 										</div>
 									</td>
-								</tr>  
-								
+								</tr>
 								<tr>
 									<td>
 										<center>
 											<br />
 											<ice:commandButton value="#{etiquetas.btnEnviarRadicacion}"
-												action="#{enviarRadicacionVista.action_enviarRadicacion}"
+												action="#{enviarRadicacionVista.action_mostrarConfirmacionEnviarRadicacion}"
 												disabled="#{enviarRadicacionVista.existeEnvioRadicacion}"
 												styleClass="boton" />
-									
-									
 										</center>
 									</td>
 								</tr>
@@ -176,7 +175,8 @@ body {
 						<table border="0" align="center" cellpadding="0" cellspacing="0"
 							background="">
 							<tr>
-								<th width="70px" align="center" style="color: #D4D4D4"><ice:commandButton
+								<th width="70px" align="center" style="color: #D4D4D4">
+									<ice:commandButton
 										image="../imagenes/boton_salir.gif"
 										action="#{enviarRadicacionVista.action_cerrar_mensaje_ingreso}" />
 								</th>
@@ -192,14 +192,14 @@ body {
 				styleClass="formulario"
 				visible="#{enviarRadicacionVista.mensajeInformativo}" modal="true"
 				style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 280px; height: auto;">
-				
+
 				<f:facet name="header">
 					<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"
 						style="text-align: center;" headerClass="icePanelPopupHeader">
 						<ice:outputText style="color: #FFFFFF;" value="Mensaje" />
 					</ice:panelGrid>
 				</f:facet>
-				
+
 				<f:facet name="body">
 					<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"
 						styleClass="font: 11px / 17px tahoma;">
@@ -226,7 +226,53 @@ body {
 				</f:facet>
 			</ice:panelPopup>
 
+			<ice:panelPopup id="confirmarImprimir" draggable="true"
+			visible="#{enviarRadicacionVista.visibleConfirmarRadicar}"
+			rendered="#{enviarRadicacionVista.visibleConfirmarRadicar}" modal="true"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 400px; height:200px;">
 
+			<f:facet name="header">
+				<ice:panelGrid width="380px" cellpadding="0" cellspacing="0"
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid width="380px" cellpadding="0" cellspacing="0"
+					styleClass="font: 11px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td><ice:graphicImage
+										value="../imagenes/Symbol-Exclamation.png" /></td>
+								<td><ice:outputText
+										value="#{enviarRadicacionVista.mensajeConfirmacionRadicar}"
+										styleClass="textoLabel" /></td>
+							</tr>
+						</table>
+					</center>
+					<br />
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<ice:commandButton value="Enviar"
+									style="padding-left:7px;padding-right:7px"
+									action="#{enviarRadicacionVista.action_enviarRadicacion}"/>
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:commandButton value="Cancelar"
+									style="padding-left:5px;padding-right:5px"
+									action="#{enviarRadicacionVista.action_closeConfirmarRadicar}" />
+							</td>
+						</tr>
+					</table>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+		
+		
 		</div>
 	</ice:form>
 </body>

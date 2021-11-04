@@ -138,9 +138,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 
 	private void validacionInformacionPlanchas(String identificacion) {
 		try {
-
 			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(identificacion);
-
 			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
 					identificacion);
 
@@ -211,7 +209,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 							returnString = "goResumenPlancha";
 						} else {
 							msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgHabil");
-							if (asociadoDTO.isEstadoHabilidad()) {
+							if (!asociadoDTO.getListaInhabilidades().isEmpty()) {
 								msgEntrada = UtilAcceso.getParametroFuenteS("mensajes", "msgNoHabil");
 							}
 							btnCerrar = UtilAcceso.getParametroFuenteS("parametros", "lblContinuar");

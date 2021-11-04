@@ -34,32 +34,22 @@ public class RegistrarNovedadesHabilidadVista extends BaseVista {
 			UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"codigo.tipo.parametro.fecha.registro.novedades.habilidad"));
-
 	
 	private final static Long CODIGO_PARAMETRO_FECHA_REGISTRO_NOVEDADES_HABILIDAD = new Long(
 			UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"codigo.parametro.fecha.registro.novedades.habilidad"));
 	
-	
-	
-	/**
-	 * 
-	 */
 	private final static Long CODIGO_TIPO_PARAMETRO_FECHA_INICIAL_REGISTRO_NOVEDADES_HABILIDAD = new Long(
 			UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"codigo.parametro.fecha.inicial.registro.novedades.habilidad"));
 
-	
 	private final static Long CODIGO_PARAMETRO_FECHA_FINAL_REGISTRO_NOVEDADES_HABILIDAD = new Long(
 			UtilAcceso.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					"codigo.parametro.fecha.final.registro.novedades.habilidad"));
-					
-	
-	
-	
+
 	private final static Long CODIGO_TIPO_PARAMETRO_LISTA__CORREOS_NOTIFICACION_CAMBIO_HABILIDAD = new Long(
 			UtilAcceso
 					.getParametroFuenteS(

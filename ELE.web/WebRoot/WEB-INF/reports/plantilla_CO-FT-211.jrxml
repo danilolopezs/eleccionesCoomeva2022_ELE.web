@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-211" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.7715610000000044"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="157"/>
 	<parameter name="ciudad" class="java.lang.String"/>
 	<parameter name="año" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -84,7 +84,7 @@
 				<reportElement x="453" y="12" width="1" height="20" forecolor="#000000"/>
 			</line>
 			<textField>
-				<reportElement x="357" y="11" width="48" height="20"/>
+				<reportElement x="354" y="11" width="48" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{año}]]></textFieldExpression>
 			</textField>
@@ -94,7 +94,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="11" width="58" height="20"/>
+				<reportElement x="457" y="11" width="40" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
@@ -103,9 +103,9 @@
 	<detail>
 		<band height="257" splitType="Stretch">
 			<staticText>
-				<reportElement x="30" y="5" width="10" height="239" forecolor="#009232"/>
+				<reportElement x="30" y="0" width="10" height="244" forecolor="#009232"/>
 				<textElement textAlignment="Center" rotation="Left">
-					<font size="5" isBold="true"/>
+					<font size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
 			</staticText>
@@ -149,7 +149,7 @@
 			<staticText>
 				<reportElement mode="Transparent" x="369" y="34" width="144" height="19" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>
@@ -163,7 +163,7 @@
 			<staticText>
 				<reportElement mode="Transparent" x="40" y="34" width="106" height="18" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[CO-FT-211]]></text>
 			</staticText>

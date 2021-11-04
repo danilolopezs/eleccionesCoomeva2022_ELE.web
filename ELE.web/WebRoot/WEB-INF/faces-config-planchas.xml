@@ -457,4 +457,12 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>gui/forms/enviarRadicacion.jspx</from-view-id>
+		<navigation-case>
+			<from-outcome>goEnviarRadicacion</from-outcome>
+			<to-view-id>gui/forms/enviarRadicacion.jspx</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

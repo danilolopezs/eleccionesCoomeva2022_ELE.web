@@ -282,13 +282,15 @@ public class ServletReportesJasper extends HttpServlet {
 					break;
 
 				case 210:
-					// INSCRIPCIÓN DE PLANCHAS CO-FT-210
-					nombreReporte = "INSCRIPCIÓN DE PLANCHAS";
+					// INSCRIPCIÓN DE PLANCHAS CO-FT-210					
 					HashMap<String, String> parametros = (HashMap<String, String>) req.getSession()
 							.getAttribute("parametrosFormulario210");
-
-					jasperPrint = DelegadoGenerador.getInstance().reporteInscripcionPlanchas_FT_210(parametros, rutaImagen, rutaReporte);
-					removerAtributos(session, "parametrosFormulario210");
+					cedulaAsociado = String.valueOf(req.getSession().getAttribute("cedulaCabezaPlancha"));
+					nombreAsociado = String.valueOf(req.getSession().getAttribute("nombreCabezaPlancha"));
+					nombreReporte = cedulaAsociado+ "_" +nombreAsociado+ "_COFT_210" ;
+					
+					jasperPrint = DelegadoGenerador.getInstance().reporteInscripcionPlanchas_FT_210(parametros, rutaReporte, rutaImagen);
+					removerAtributos(session, "parametrosFormulario210", "cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 211:
@@ -491,6 +493,7 @@ public class ServletReportesJasper extends HttpServlet {
 		for (String attr : atributos) {
 			session.removeAttribute(attr);
 		}
+		session.removeAttribute("codigoReporte");
 	}
 
 }
