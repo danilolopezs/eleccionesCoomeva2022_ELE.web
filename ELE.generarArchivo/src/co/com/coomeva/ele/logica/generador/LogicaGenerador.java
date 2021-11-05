@@ -1486,7 +1486,6 @@ public class LogicaGenerador {
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, ds);
 
 			return jasperPrint;
-
 		} catch (JRException e) {
 			throw e;
 		}

@@ -143,7 +143,6 @@ public class InicioSesionAsociadoVista extends BaseVista {
 					identificacion);
 
 			verificarFechaInscripcion();
-			
 			ElePlanchas elePlanchas = DelegadoPlanchas.getInstance().consultarPlancha(identificacion);
 			// Verifica que el Usuario Exista
 			if (asociadoDTO != null) {				

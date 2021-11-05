@@ -15,6 +15,7 @@ import co.com.coomeva.ele.delegado.DelegadoHabilidad;
 import co.com.coomeva.ele.delegado.DelegadoLico;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoSalud;
+import co.com.coomeva.ele.delegado.DelegadoSidco;
 import co.com.coomeva.ele.delegado.DelegadoSie;
 import co.com.coomeva.ele.delegado.DelegadoSrh;
 import co.com.coomeva.ele.delegado.DelegadoSubcomision;
@@ -225,15 +226,24 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 
 	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons)
 			throws Exception {
-		
-		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
-			cons++;
-			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
-					UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
-			asociado.setEstadoHabilidad(false);
-			//asociado.setEstadoHabilidad(true);
+		Long horasAsociado = DelegadoSidco.getInstance().consultarHorasDemocraciaAsociado(nroIdentificacion);
+		if(horasAsociado != null && horasAsociado.longValue() > 0) {
+			Integer horasDemocracia = UtilAcceso.getParametroFuenteI("parametros", "horasDemocracia");
+			if(horasDemocracia <= horasAsociado ) {
+				cons++;
+				asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+						UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
+				asociado.setEstadoHabilidad(false);
+			}
 		}
 		return asociado;
+//		if (DelegadoSie.getInstance().validateHorasDemocracia(nroIdentificacion)) {
+//			cons++;
+//			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+//					UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
+//			asociado.setEstadoHabilidad(false);
+//			//asociado.setEstadoHabilidad(true);
+//		}
 	}
 
 	private EleAsociadoDTO validaZonaAsociado(EleZonas elZona, EleAsociadoDTO asociado, Long cons) {

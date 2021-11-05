@@ -7,13 +7,13 @@
 		<property name="transaction.factory_class">
 			org.hibernate.transaction.JDBCTransactionFactory
 		</property>
-		<property name="connection.datasource">java:SaludDs</property>
+		<property name="connection.datasource">java:SidcoDs</property>
 		<property name="hibernate.transaction.flush_before_completion">
 			true
 		</property>
-		<property name="dialect">org.hibernate.dialect.DB2Dialect</property>
+		<property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
 		<property name="connection.autocommit">true</property>
 		<mapping
-			resource="co/com/coomeva/ele/entidades/salud/consultas/ConsultasSalud.hbm.xml" />
+			resource="co/com/coomeva/ele/entidades/sidco/consultas/ConsultasSidco.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

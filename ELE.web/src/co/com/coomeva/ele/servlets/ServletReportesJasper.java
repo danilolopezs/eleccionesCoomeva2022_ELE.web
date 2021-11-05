@@ -171,8 +171,7 @@ public class ServletReportesJasper extends HttpServlet {
 							"numActa", "fecha", "dia", "mes", "anio", "mesActa");
 					break;
 				case 174:
-					// Informacion Personal del caneza de Plancha CO-FT-174
-					nombreReporte = "INFORMACION PERSONASL DEL CABEZA DE PLANCHA";
+					// Informacion Personal del caneza de Plancha CO-FT-174					
 					String plancha = (String) req.getSession().getAttribute("plancha");
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
@@ -191,7 +190,7 @@ public class ServletReportesJasper extends HttpServlet {
 							+ "/foto" + imagen + ".jpg";
 					String tipoAsociado = esSuplente ? "Suplente" : "Principal";
 					String nombreReporteFoter = esSuplente ? "CO-FT-766" : "CO-FT-174";
-
+					nombreReporte = cedulaAsociado+ "_"+ nombreAsociado+ (esSuplente ? "COFT_766" : "COFT_174");
 					jasperPrint = DelegadoGenerador.getInstance().reporteInformacionPersonal_FT_174(plancha,
 							zonaElectoral, nombreAsociado, cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo,
 							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte,
