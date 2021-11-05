@@ -178,7 +178,7 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		asociado = validaAntiguedadAsociado(asociado, cons++);
 		asociado = validaAntiguedadTitulo(asociado, cons++);
 		asociado = validaZonaAsociado(elZona, asociado, cons++);
-		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
+		//asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
 		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
 
 		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons++);

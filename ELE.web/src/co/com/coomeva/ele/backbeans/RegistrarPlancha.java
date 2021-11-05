@@ -112,6 +112,7 @@ public class RegistrarPlancha extends BaseVista {
 	private FormatoPdfInscripcionPlancha formatoPdfInscripcionPlancha = new FormatoPdfInscripcionPlancha();
 	private String tipoEleccionesSession;
 	private String tipoEleccionesRepresentantes;
+	private String profesionAsociadoPopUp;
 
 	// atributo para indicar que se deben aplicar validaciones sobre elecciones de
 	// representantes únicamente
@@ -931,4 +932,13 @@ public class RegistrarPlancha extends BaseVista {
 		this.fechaFirma = fechaFirma;
 	}
 
+	public String getProfesionAsociadoPopUp() {
+		return profesionAsociadoPopUp;
+	}
+
+	public void setProfesionAsociadoPopUp(String profesionAsociadoPopUp) {
+		this.profesionAsociadoPopUp = profesionAsociadoPopUp;
+	}
+
+	
 }

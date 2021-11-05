@@ -235,7 +235,7 @@ body {
 											</f:facet>
 											<ice:inputText value="#{recordSuplentes.profesion}"
 												partialSubmit="false"
-												readonly="#{recordTitulares.tieneProfesion}"
+												readonly="true"
 												style="width:100%;" maxlength="28" />
 										</ice:column>
 
@@ -531,7 +531,23 @@ body {
 						</table>
 					</center>
 					<br />
+					
 					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="#{etiquetas.lblProfesion}" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText value="#{registrarPlancha.profesionAsociadoPopUp}"
+									partialSubmit="false"
+									style="width:100%;" maxlength="28" />
+												
+							</td>
+						</tr>
+						
+						<tr></tr>
 						<tr>
 							<td>
 								<ice:outputText styleClass="textoLabel2"
