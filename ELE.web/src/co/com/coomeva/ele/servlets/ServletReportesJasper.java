@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
@@ -106,6 +108,8 @@ public class ServletReportesJasper extends HttpServlet {
 				"imagenes"+File.separator+"reportes");
 		rutaImagen += File.separator;
 		
+		String rutaRaizReportes = getServletContext().getRealPath("upload"+File.separator);
+		rutaRaizReportes += File.separator;
 		
 		String rutaReporte = getServletContext().getRealPath("WEB-INF"+File.separator+"reports"+File.separator);
 		rutaReporte = rutaReporte + File.separator;
@@ -457,10 +461,14 @@ public class ServletReportesJasper extends HttpServlet {
 
 				resp.setCharacterEncoding("iso-8859-1");
 
+				//imprimir reporte en el navegador
 				JRPdfExporter pdfExporter = new JRPdfExporter();
 				pdfExporter.setParameter(JRPdfExporterParameter.JASPER_PRINT, jasperPrint);
 				pdfExporter.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, resp.getOutputStream());
 				pdfExporter.exportReport();
+				
+				//almacenar reporte en la carpeta upload del proyecto
+				JasperExportManager.exportReportToPdfFile(jasperPrint, rutaRaizReportes+nombreReporte+".pdf");				
 			} else {
 				throw new Exception("No hay Tipo de Reporte Selecionado");
 			}

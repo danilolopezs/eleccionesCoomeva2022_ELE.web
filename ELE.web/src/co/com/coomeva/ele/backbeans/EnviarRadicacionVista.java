@@ -121,7 +121,7 @@ public class EnviarRadicacionVista extends BaseVista {
 					validacionIngresoInformacionCabezas();
 					cargarTipoFirmaPlancha();
 					if(!existeEnvioRadicacion) {
-						mensajeIngresoInfoEnviarRadicacion = "Estimado asociado, recuerda que para Finalizar el registro de Inscripción de Plancha, debe escoger si desea enviar tu plancha a Radicación de Firma Virtual o Firma Presencial.";
+						mensajeIngresoInfoEnviarRadicacion = "Estimado(a) asociado(a), recuerde que para finalizar el registro de Inscripción de Plancha, debe escoger si desea enviar su Plancha a Radicación de Firma Virtual o Firma Presencial.";
 						mensajeInformativo = Boolean.TRUE;
 					}
 					// consultarInformacionCabezaPlancha();
@@ -160,7 +160,7 @@ public class EnviarRadicacionVista extends BaseVista {
 		EleDetalleFormatoPlancha entity = dao.findById(id);
 		if (entity == null) {
 			throw new EleccionesDelegadosException(
-					"Estimado Asociado, para continuar con el proceso de Radicación de Firma, primero debe registrar la información general del Cabeza de Plancha.");
+					"Estimado(a) Asociado(a), para continuar con el proceso de Radicación de Firma, primero debe registrar la información general del Cabeza de Plancha.");
 		}
 	}
 

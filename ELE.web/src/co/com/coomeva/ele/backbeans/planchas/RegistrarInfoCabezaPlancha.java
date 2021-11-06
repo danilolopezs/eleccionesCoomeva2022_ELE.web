@@ -460,7 +460,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
 
 			this.visiblemensajeExito = true;
-			this.mensajeExito = "Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co";
+			this.mensajeExito = "Señor(a) Asociado(a), recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co";
 
 		} catch (Exception e) {
 			// getMensaje().mostrarMensaje(e.getMessage());
@@ -518,7 +518,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	}
 
 	public String action_mostrar_mensaje_informativo() {
-		mensajeIngresoInfoCabezaPlancha = "Estimado asociado, recuerde que este formato debe ser diligenciado únicamente por el cabeza de plancha o el suplente cabeza de plancha. Se dará por terminado el proceso de diligenciamiento del formulario cuando se expida el formato de Constancia de Radicación y Recibo";
+		mensajeIngresoInfoCabezaPlancha = "Estimado(a) Asociado(a), recuerde que este formato debe ser diligenciado únicamente por el Cabeza Principal de Plancha o el Cabeza Suplente de Plancha. Se dará por terminado el proceso de diligenciamiento del formulario cuando se expida el Formato de Constancia de Radicación y Recibo";
 		mensajeInformativo = true;
 		return "";
 	}

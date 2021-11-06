@@ -31,7 +31,7 @@ public class HibernateSessionFactoryElecciones2012 {
 			sessionFactory = configuration.buildSessionFactory();
 		} catch (Exception e) {
 			System.err
-					.println("%%%% Error Creating SessionFactory %%%%");
+					.println("%%%% Error Creating SessionFactory Elecciones 2012 %%%%");
 			e.printStackTrace();
 		}
     }

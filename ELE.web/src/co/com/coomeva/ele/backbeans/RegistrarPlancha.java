@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.DefaultRowSorter;
 
 import org.apache.log4j.Logger;
 
@@ -105,6 +106,7 @@ public class RegistrarPlancha extends BaseVista {
 	private String mensajeConfirmacion = "";
 	private boolean visibleConfirmarEnviar;
 	private boolean visibleConfirmarImprimir;
+	private Integer posImprimir;
 
 	private boolean mostrarPopupExcepciones;
 	private String mensajePopupExcepciones;
@@ -113,6 +115,7 @@ public class RegistrarPlancha extends BaseVista {
 	private String tipoEleccionesSession;
 	private String tipoEleccionesRepresentantes;
 	private String profesionAsociadoPopUp;
+	private UserVo user; 
 
 	// atributo para indicar que se deben aplicar validaciones sobre elecciones de
 	// representantes únicamente
@@ -120,6 +123,7 @@ public class RegistrarPlancha extends BaseVista {
 	// Verifica si el usuario de la sesión es de la comisión
 	private boolean esUsuarioComision;
 	private boolean esSaneamiento;
+	private boolean imprimirSuplente;
 
 	// variable usada para la modificacion de la plancha en estado inscirta y dentro
 	// de las fechas de modificación
@@ -136,6 +140,7 @@ public class RegistrarPlancha extends BaseVista {
 		log.info("Leega plancha");
 		List<DTOPlanchaAsociado> planchaAsociado = null;
 		try {
+			user = (UserVo) FacesUtils.getSessionParameter("user");
 			this.esUsuarioComision = FacesUtils.getSessionParameter("userComision") != null;
 			this.tipoEleccionesSession = (String) FacesUtils.getSessionParameter("tipoElecciones");
 			this.tipoEleccionesRepresentantes = UtilAcceso.getParametroFuenteS(
@@ -351,7 +356,7 @@ public class RegistrarPlancha extends BaseVista {
 
 	public String actionConfirmarRegistrarPlancha() {
 		this.visibleConfirmar = Boolean.TRUE;
-		this.mensajeConfirmacion = "¿Esta seguro que desea registrar la plancha?";
+		this.mensajeConfirmacion = "¿Esta seguro(a) que desea registrar la plancha?";
 		return "";
 	}
 
@@ -377,7 +382,7 @@ public class RegistrarPlancha extends BaseVista {
 				}
 
 				if (!usuarioQueRegistraEsTitular) {
-					throw new EleccionesDelegadosException("Estimado Asociado, recuerde que el "
+					throw new EleccionesDelegadosException("Estimado(a) Asociado(a), recuerde que el "
 							+ "formulario debe ser diligenciado únicamente por el cabeza de la plancha.");
 				}
 			}
@@ -392,6 +397,7 @@ public class RegistrarPlancha extends BaseVista {
 				}
 			}
 
+			
 			if (this.consecutivoPlancha == null) {
 
 				DTOInformacionPlancha dtoInfoPlancha = DelegadoPlancha.getInstance().registrarPlancha(
@@ -414,7 +420,7 @@ public class RegistrarPlancha extends BaseVista {
 				if ((listaRealMiembrosTitulares != null && listaRealMiembrosSuplentes != null)
 						&& (listaRealMiembrosSuplentes.size() > listaRealMiembrosTitulares.size())) {
 					throw new EleccionesDelegadosException(
-							"Estimado Asociado, recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos.");
+							"Estimado(a) Asociado(a), recuerde que el no. de suplentes debe ser igual o inferior al no. de principales inscritos.");
 				}
 
 				this.estadoPlancha = DelegadoPlancha.getInstance().modificarPlancha(this.miembrosPrincipales,
@@ -429,8 +435,9 @@ public class RegistrarPlancha extends BaseVista {
 			}
 
 			// this.mensajeVista.setVisible(Boolean.TRUE);
-			this.mensajeVista.setMensaje("Se guardaron los datos del formulario. Recuerde "
-					+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo.");
+			this.mensajeVista.setMensaje("Los datos del formulario han sido guardados. Recuerde "
+					+ "que puede modificarlo mientras no se expida el formato de Constancia de Radicación y Recibo.\n"+
+					"Para continuar, debe hacer click en el botón imprimir");
 		} catch (EleccionesDelegadosException e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje(e.getMessage());
@@ -491,7 +498,7 @@ public class RegistrarPlancha extends BaseVista {
 				this.mensajeVista.setVisible(Boolean.TRUE);
 			}
 
-			this.mensajeVista.setMensaje("Estimado asociado, ud. Finalizó el registro de la "
+			this.mensajeVista.setMensaje("Estimado(a) Asociado(a), usted finalizó el registro de la "
 					+ "plancha. Por favor, imprima el formato generado, fírmelo y entréguelo en "
 					+ "las oficinas indicadas en la dirección www.coomeva.com.co");
 		} catch (Exception e) {
@@ -514,7 +521,8 @@ public class RegistrarPlancha extends BaseVista {
 
 			this.mensajeVista.setVisible(Boolean.TRUE);
 			this.mensajeVista.setMensaje(
-					"Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
+					"Señor(a) Asociado(a), recuerde que este formato debe descargarlo y guardarlo. "
+					+ "Para continuar con el proceso dirijase al menú número 2 &#34;Registrar Información General de Asociado Cabeza de la Plancha&#34;");
 
 		} catch (Exception e) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
@@ -585,7 +593,7 @@ public class RegistrarPlancha extends BaseVista {
 
 	public String actionConfirmarImprimirFormatoPlancha() {
 		this.visibleConfirmarImprimir = Boolean.TRUE;
-		this.mensajeConfirmacion = "¿Esta seguro que desea imprimir el formato de plancha?";
+		this.mensajeConfirmacion = "¿Esta seguro(a) que desea imprimir el Formato de Plancha?";
 		return "";
 	}
 	
@@ -603,6 +611,8 @@ public class RegistrarPlancha extends BaseVista {
 	public void actionDescargarFormatoPrincipal(ActionEvent event) {
 		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
 		String posPrincipal = button.getAlt();
+		posImprimir = Integer.parseInt(posPrincipal) - 1;
+		imprimirSuplente = Boolean.FALSE;
 		DTOMiembroPlancha principal = this.miembrosPrincipales.get(Integer.parseInt(posPrincipal) - 1);		
 		consultarInformacionReporte211(principal.getNumeroDocumento());
 	}
@@ -610,7 +620,10 @@ public class RegistrarPlancha extends BaseVista {
 	public void actionDescargarFormatoSuplente(ActionEvent event) {
 		HtmlCommandButton button = (HtmlCommandButton) event.getComponent();
 		String posPrincipal = button.getAlt();
-		DTOMiembroPlancha principal = this.miembrosSuplentes.get(Integer.parseInt(posPrincipal) - 1);		
+		posImprimir = Integer.parseInt(posPrincipal) - 1;
+		imprimirSuplente = Boolean.TRUE;
+		DTOMiembroPlancha principal = this.miembrosSuplentes.get(posImprimir);
+		
 		consultarInformacionReporte211(principal.getNumeroDocumento());
 	}
 
@@ -630,66 +643,107 @@ public class RegistrarPlancha extends BaseVista {
 	
 	public String actionImprimirReporte211() {
 		Date fechaElaboracionDoc = new Date();
-		String tipoReporte = "211";
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-
-		request.getSession().setAttribute("ciudad", this.ciudadUbicacion);
-		request.getSession().setAttribute("dia",
-				fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
-		request.getSession().setAttribute("mes",
-				fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
-		request.getSession().setAttribute("anio",
-				fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
-		request.getSession().setAttribute("nombreAsociado", asociadoDTO.getNombre());
-		request.getSession().setAttribute("cedulaAsociado", asociadoDTO.getId() + "");
-		request.getSession().setAttribute("ciudadCedula", this.lugExpCedula);
-		request.getSession().setAttribute("ciudadFirma", this.ciudadUbicacion);
-		request.getSession().setAttribute("diaFirma", this.fechaFirma != null ? String.valueOf(this.fechaFirma.getDate()) : "");
-		request.getSession().setAttribute("mesFirma",
-				this.fechaFirma != null ? WorkStrigs.getMes(this.fechaFirma.getMonth()) : "");
-		request.getSession().setAttribute("anioFirma",
-				this.fechaFirma != null ? WorkStrigs.getAnio(this.fechaFirma.getYear()) : "");
-
-		// para guardar en base de datos los registros de los campos
-		
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 73L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : ""));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 74L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : ""));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 75L, fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : ""));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, asociadoDTO.getNombre()));
-		listaRegCampos
-		.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, asociadoDTO.getId() + ""));
-		
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 76L, this.ciudadUbicacion));
-		
-		
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, this.lugExpCedula));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
-		listaRegCampos
-				.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
-		listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
-
 		try {
-			UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
-			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos,
-					user.getUserId());
-		} catch (Exception e) {
+			validarDatosImprimirReporte();
+			if(asociadoDTO.getProfesion().equals("No Inscrito")) {
+				if(imprimirSuplente) {
+					this.miembrosSuplentes.get(posImprimir).setProfesion(profesionAsociadoPopUp);
+				} else {
+					this.miembrosPrincipales.get(posImprimir).setProfesion(profesionAsociadoPopUp);
+				}
+				//this.miembrosSuplentes
+				//asociadoDTO.setProfesion(profesionAsociadoPopUp);
+			}
+			String tipoReporte = "211";
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+					.getRequest();
+			List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+
+			request.getSession().setAttribute("ciudad", this.ciudadUbicacion);
+			request.getSession().setAttribute("dia",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+			request.getSession().setAttribute("mes",
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth() +1) : "");
+			request.getSession().setAttribute("anio",
+					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
+			request.getSession().setAttribute("nombreAsociado", asociadoDTO.getNombre());
+			request.getSession().setAttribute("cedulaAsociado", asociadoDTO.getId() + "");
+			request.getSession().setAttribute("ciudadCedula", this.lugExpCedula);
+			request.getSession().setAttribute("ciudadFirma", this.ciudadUbicacion);
+			request.getSession().setAttribute("diaFirma",
+					this.fechaFirma != null ? String.valueOf(this.fechaFirma.getDate()) : "");
+			request.getSession().setAttribute("mesFirma",
+					this.fechaFirma != null ? WorkStrigs.getMes(this.fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("anioFirma",
+					this.fechaFirma != null ? WorkStrigs.getAnio(this.fechaFirma.getYear()) : "");
+
+			// para guardar en base de datos los registros de los campos
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 73L,
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : ""));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 74L,
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : ""));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 75L,
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : ""));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, asociadoDTO.getNombre()));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 7L, asociadoDTO.getId() + ""));
+
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 76L, this.ciudadUbicacion));
+
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 8L, this.lugExpCedula));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
+			listaRegCampos
+					.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 63L, sdf.format(fechaFirma)));
+
+			try {
+				UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
+				if(this.miembrosPrincipales.get(0) == null) {
+					request.getSession().setAttribute("cedulaCabezaPlancha",this.miembrosPrincipales.get(0).getNumeroDocumento());
+					request.getSession().setAttribute("nombreCabezaPlancha",this.miembrosPrincipales.get(0).getApellidosNombres());
+				} else {
+					request.getSession().setAttribute("cedulaCabezaPlancha",user.getUserId());
+					request.getSession().setAttribute("nombreCabezaPlancha",this.miembrosPrincipales.get(0).getApellidosNombres());
+				}
+				DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte),
+						listaRegCampos, user.getUserId());
+			} catch (Exception e) {
+				this.mensajeVista.setVisible(Boolean.TRUE);
+				this.mensajeVista.setMensaje(e.getMessage());
+			}
+			request.getSession().setAttribute("codigoReporte", tipoReporte);
+			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
+			actionCloseConfirmar();
+		} catch (Exception e1) {
 			this.mensajeVista.setVisible(Boolean.TRUE);
-			this.mensajeVista.setMensaje(e.getMessage());
+			this.mensajeVista.setMensaje(e1.getMessage());
 		}
-		request.getSession().setAttribute("codigoReporte", tipoReporte);
-		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
-		actionCloseConfirmar();
 		return "";
+	}
+	
+	private void validarDatosImprimirReporte() throws Exception {
+		if(profesionAsociadoPopUp == null || profesionAsociadoPopUp.isEmpty()) {
+			throw new Exception("El campo Profesion es obligatorio");
+		}
+		if(ciudadUbicacion == null || ciudadUbicacion.isEmpty()) {
+			throw new Exception("El campo Ciudad de Ubicación es obligatorio");
+		}
+		if(lugExpCedula == null || lugExpCedula.isEmpty()) {
+			throw new Exception("El campo Lugar de Expedición es obligatorio");
+				}
+		if(fechaFirma == null) {
+			throw new Exception("El campo Fecha Firma es obligatorio");
+		}
+		
 	}
 
 	private void borrarDatosReporte211() {
 		lugExpCedula = null;
 		ciudadUbicacion = null;
 		fechaFirma = null;
+		profesionAsociadoPopUp = null;
+		posImprimir = null;
 		asociadoDTO = null;
 	}
 	

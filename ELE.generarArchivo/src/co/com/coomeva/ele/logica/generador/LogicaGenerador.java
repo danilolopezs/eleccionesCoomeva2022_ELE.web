@@ -1522,6 +1522,7 @@ public class LogicaGenerador {
 			JRDataSource ds = new JREmptyDataSource();
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
+			
 
 			return jasperPrint;
 

@@ -725,7 +725,8 @@ public class FormularioReportesVista extends BaseVista {
 
 		this.mensajeVista.setVisible(Boolean.TRUE);
 		this.mensajeVista.setMensaje(
-				"Señor Asociado, recuerde que este formato debe imprimirlo, firmarlo y entregarlo en las oficinas indicadas en la página web www.coomeva.com.co");
+				"Señor(a) Asociado(a), recuerde que este formato debe descargarlo y guardarlo. "
+				+ "Para continuar con el proceso dirijase al menú número 2 &#34;Registrar Información General de Asociado Cabeza de la Plancha&#34;");
 
 	}
 

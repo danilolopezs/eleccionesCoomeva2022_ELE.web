@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<sql-query name="consultar.horas.democracia.asociado">
+		<return-scalar column="HORAS" type="java.lang.lONG" />
+		<![CDATA[
+		   		select sum(horas) horas FROM (
+  			 	SELECT identificacion_asociado, SUM(horas_solicitadas) AS horas FROM dir_formacion_asociado GROUP BY identificacion_asociado
+		        UNION ALL
+		        SELECT identificacion, SUM(horas_acreditadas) FROM dir_historico_sie dhs GROUP BY identificacion
+		        UNION
+		        SELECT identificacion, SUM(hora_acreditada) FROM dir_homologacion dh GROUP BY identificacion
+		        UNION ALL
+		        SELECT dd.identificacion, SUM(horas_solicitadas) FROM dir_dirigente dd  INNER JOIN dir_formacion forma 
+		        	ON (dd.cons_dirigente = forma.cons_dirigente) GROUP BY dd.identificacion
+				) todo WHERE identificacion_asociado = ? GROUP BY identificacion_asociado
+			]]>
+	</sql-query>
+</hibernate-mapping>
+
+
+

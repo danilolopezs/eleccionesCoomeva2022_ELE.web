@@ -112,6 +112,7 @@ public class EleZonaElectoralDAO extends BaseHibernateDAO {
 	public List findAll() {
 		log.debug("finding all EleZonaElectoral instances");
 		try {
+			int a;
 			String queryString = "from EleZonaElectoral";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();

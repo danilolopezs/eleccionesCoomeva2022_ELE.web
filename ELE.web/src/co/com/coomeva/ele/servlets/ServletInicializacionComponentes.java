@@ -86,7 +86,7 @@ public class ServletInicializacionComponentes extends HttpServlet {
 		System.out.println("######################################################################");
 		System.out.println("        INICIALIZANDO SESSION DE BD [HABILIDADES, CLIMAE, ELECDB...]  ");
 		System.out.println("######################################################################");
-		HibernateSessionFactoryHab.getSession();
+		//HibernateSessionFactoryHab.getSession();
 		HibernateSessionFactoryClimae.getSession();		
 		HibernateSessionFactoryElecciones2012.getSession();
 		System.out.println("######################################################################");

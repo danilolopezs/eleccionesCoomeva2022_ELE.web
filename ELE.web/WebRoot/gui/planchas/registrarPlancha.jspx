@@ -138,7 +138,7 @@ body {
 
 									<ice:inputText value="#{recordTitulares.profesion}"
 										partialSubmit="false"
-										readonly="#{recordTitulares.tieneProfesion}"
+										disabled="true"
 										style="width:100%;" maxlength="28" />
 
 								</ice:column>
@@ -174,7 +174,7 @@ body {
 										value="#{registrarPlancha.miembrosSuplentes}"
 										style="width:100%; height:100%;">
 
-										<ice:column>
+										<ice:column >
 											<f:facet name="header">
 												<div align="center">
 													<ice:outputText value="#{etiquetas.lblPosicionPlancha}" />
@@ -235,8 +235,15 @@ body {
 											</f:facet>
 											<ice:inputText value="#{recordSuplentes.profesion}"
 												partialSubmit="false"
-												readonly="true"
+												disabled="true"
 												style="width:100%;" maxlength="28" />
+												<!-- 
+												<ice:inputText value="#{recordSuplentes.profesion}"
+												partialSubmit="false"
+												readonly="#{recordTitulares.tieneProfesion}"
+												disble="true"
+												style="width:100%;" maxlength="28" />
+												 -->
 										</ice:column>
 
 										<ice:column>
@@ -297,6 +304,111 @@ body {
 		<!-- ********************************************* -->
 		<!--  MENSAJES DE INFORMACION EMERGENTES - POPUPS  -->
 		<!-- ********************************************* -->
+		<ice:panelPopup id="informacionReporte211" draggable="true"
+			visible="#{registrarPlancha.visibleInfoReporte211}"
+			rendered="#{registrarPlancha.visibleInfoReporte211}" modal="true"
+			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 470px; height: 270px;">
+
+			<f:facet name="header">
+				<ice:panelGrid width="400px" cellpadding="0" cellspacing="0" 
+					style="text-align: center;" headerClass="icePanelPopupHeader">
+					<ice:outputText style="color: #FFFFFF;" value="Acreditaci&#243;n de Ocupaci&#243;n" />
+				</ice:panelGrid>
+			</f:facet>
+
+			<f:facet name="body">
+				<ice:panelGrid width="460px" cellpadding="0" cellspacing="0"
+					styleClass="font: 12px / 17px tahoma;">
+					<center>
+						<table>
+							<tr>
+								<td>
+									<ice:graphicImage value="../imagenes/Symbol-Check.png" />
+								</td>
+								<td>
+									<ice:outputText value="#{registrarPlancha.mensajeInfoCedula}"
+										styleClass="textoLabel" />
+								</td>
+							</tr>
+						</table>
+					</center>
+					<br />
+					
+					<table border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="#{etiquetas.lblProfesion}" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText value="#{registrarPlancha.profesionAsociadoPopUp}"
+									partialSubmit="false"
+									style="width:100%;" maxlength="28" />
+												
+							</td>
+						</tr>
+						
+						<tr></tr>
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="#{etiquetas.lblLugarExpdDoc}" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText
+									value="#{registrarPlancha.lugExpCedula}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="Ciudad de ubicaci&#243;n" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:inputText value="#{registrarPlancha.ciudadUbicacion}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ice:outputText styleClass="textoLabel2"
+									value="Fecha firma" />
+							</td>
+							<td style="padding-left: 5px; padding-right: 5px"></td>
+							<td>
+								<ice:selectInputDate
+									value="#{registrarPlancha.fechaFirma}"
+									renderAsPopup="true">
+									<f:convertDateTime type="both" />
+								</ice:selectInputDate>
+							</td>
+						</tr>
+					</table>
+					
+					<br />
+					<center>
+						<table>
+							<tr>
+								<td>
+									<ice:commandButton value="Imprimir"
+										style="padding-left:5px;padding-right:5px"
+										action="#{registrarPlancha.actionImprimirReporte211}" />
+								</td>
+								<td style="padding-left: 5px; padding-right: 5px"></td>
+								<td>
+									<ice:commandButton value="Cancelar"
+										style="padding-left:5px;padding-right:5px"
+										action="#{registrarPlancha.actionCloseConfirmar}"  />
+								</td>
+							</tr>
+						</table>
+					</center>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+		
 		<ice:panelPopup id="mensaje" draggable="true" styleClass="formulario"
 			visible="#{registrarPlancha.mensajeVista.visible}" modal="true"
 			rendered="#{registrarPlancha.mensajeVista.visible}"
@@ -502,110 +614,7 @@ body {
 			</f:facet>
 		</ice:panelPopup>
 		
-		<ice:panelPopup id="informacionReporte211" draggable="false"
-			visible="#{registrarPlancha.visibleInfoReporte211}"
-			rendered="#{registrarPlancha.visibleInfoReporte211}" modal="true"
-			style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 470px; height: 250px;">
-
-			<f:facet name="header">
-				<ice:panelGrid width="450px" cellpadding="0" cellspacing="0" 
-					style="text-align: center;" headerClass="icePanelPopupHeader">
-					<ice:outputText style="color: #FFFFFF;" value="Acreditaci&#243;n de Ocupaci&#243;n" />
-				</ice:panelGrid>
-			</f:facet>
-
-			<f:facet name="body">
-				<ice:panelGrid width="460px" cellpadding="0" cellspacing="0"
-					styleClass="font: 12px / 17px tahoma;">
-					<center>
-						<table>
-							<tr>
-								<td>
-									<ice:graphicImage value="../imagenes/Symbol-Check.png" />
-								</td>
-								<td>
-									<ice:outputText value="#{registrarPlancha.mensajeInfoCedula}"
-										styleClass="textoLabel" />
-								</td>
-							</tr>
-						</table>
-					</center>
-					<br />
-					
-					<table border="0" align="center" cellpadding="0" cellspacing="0">
-						<tr>
-							<td>
-								<ice:outputText styleClass="textoLabel2"
-									value="#{etiquetas.lblProfesion}" />
-							</td>
-							<td style="padding-left: 5px; padding-right: 5px"></td>
-							<td>
-								<ice:inputText value="#{registrarPlancha.profesionAsociadoPopUp}"
-									partialSubmit="false"
-									style="width:100%;" maxlength="28" />
-												
-							</td>
-						</tr>
-						
-						<tr></tr>
-						<tr>
-							<td>
-								<ice:outputText styleClass="textoLabel2"
-									value="#{etiquetas.lblLugarExpdDoc}" />
-							</td>
-							<td style="padding-left: 5px; padding-right: 5px"></td>
-							<td>
-								<ice:inputText
-									value="#{registrarPlancha.lugExpCedula}" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<ice:outputText styleClass="textoLabel2"
-									value="Ciudad de ubicaci&#243;n" />
-							</td>
-							<td style="padding-left: 5px; padding-right: 5px"></td>
-							<td>
-								<ice:inputText value="#{registrarPlancha.ciudadUbicacion}" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<ice:outputText styleClass="textoLabel2"
-									value="Fecha firma" />
-							</td>
-							<td style="padding-left: 5px; padding-right: 5px"></td>
-							<td>
-								<ice:selectInputDate
-									value="#{registrarPlancha.fechaFirma}"
-									renderAsPopup="true">
-									<f:convertDateTime type="both" />
-								</ice:selectInputDate>
-							</td>
-						</tr>
-					</table>
-					
-					<br />
-					<center>
-						<table>
-							<tr>
-								<td>
-									<ice:commandButton value="Imprimir"
-										style="padding-left:5px;padding-right:5px"
-										action="#{registrarPlancha.actionImprimirReporte211}" />
-								</td>
-								<td style="padding-left: 5px; padding-right: 5px"></td>
-								<td>
-									<ice:commandButton value="Cancelar"
-										style="padding-left:5px;padding-right:5px"
-										action="#{registrarPlancha.actionCloseConfirmar}"  />
-								</td>
-							</tr>
-						</table>
-					</center>
-				</ice:panelGrid>
-			</f:facet>
-		</ice:panelPopup>
+		
 	</ice:form>
 </body>
 		</html>
