@@ -129,6 +129,8 @@ public class ServletReportesJasper extends HttpServlet {
 				String anio;
 				String numResolucion;
 				String cedulaAsociado;
+				String cedulaAsociadoCabeza;
+				String nombreAsociadoCabeza;
 
 				switch (Integer.parseInt(codigoReporte)) {
 
@@ -193,12 +195,12 @@ public class ServletReportesJasper extends HttpServlet {
 					imagen = PathRequest.getInstance().getPathServerContextPath(getServletContext(), "plantilla")
 							+ "/foto" + imagen + ".jpg";
 					String tipoAsociado = esSuplente ? "Suplente" : "Principal";
-					String nombreReporteFoter = esSuplente ? "CO-FT-766" : "CO-FT-174";
-					nombreReporte = cedulaAsociado+ "_"+ nombreAsociado+ (esSuplente ? "COFT_766" : "COFT_174");
+					String nombreReporteFooter = esSuplente ? "CO-FT-766" : "CO-FT-174";
+					nombreReporte = cedulaAsociado+ "_"+ nombreAsociado+ "_"+ (esSuplente ? "COFT_766" : "COFT_174");
 					jasperPrint = DelegadoGenerador.getInstance().reporteInformacionPersonal_FT_174(plancha,
 							zonaElectoral, nombreAsociado, cedulaAsociado, fechaAntiguedad, profesion, fechaTitulo,
 							estudios, empresa, cargo, antiguedad, ultimoCargo, imagen, rutaImagen, rutaReporte,
-							tipoAsociado, nombreReporteFoter);
+							tipoAsociado, nombreReporteFooter);
 
 					removerAtributos(session, "plancha", "zonaElectoral", "nombreAsociado", "cedulaAsociado",
 							"fechaAntiguedad", "profesion", "fechaTitulo", "estudios", "empresa", "cargo", "antiguedad",
@@ -288,9 +290,9 @@ public class ServletReportesJasper extends HttpServlet {
 					// INSCRIPCIÓN DE PLANCHAS CO-FT-210					
 					HashMap<String, String> parametros = (HashMap<String, String>) req.getSession()
 							.getAttribute("parametrosFormulario210");
-					cedulaAsociado = String.valueOf(req.getSession().getAttribute("cedulaCabezaPlancha"));
-					nombreAsociado = String.valueOf(req.getSession().getAttribute("nombreCabezaPlancha"));
-					nombreReporte = cedulaAsociado+ "_" +nombreAsociado+ "_COFT_210" ;
+					cedulaAsociadoCabeza = String.valueOf(req.getSession().getAttribute("cedulaCabezaPlancha"));
+					nombreAsociadoCabeza = String.valueOf(req.getSession().getAttribute("nombreCabezaPlancha"));
+					nombreReporte = cedulaAsociadoCabeza+ "_" +nombreAsociadoCabeza+ "_COFT_210" ;
 					
 					jasperPrint = DelegadoGenerador.getInstance().reporteInscripcionPlanchas_FT_210(parametros, rutaReporte, rutaImagen);
 					removerAtributos(session, "parametrosFormulario210", "cedulaCabezaPlancha", "nombreCabezaPlancha");
@@ -310,6 +312,9 @@ public class ServletReportesJasper extends HttpServlet {
 					String diaFirma = (String) req.getSession().getAttribute("diaFirma");
 					String mesFirma = (String) req.getSession().getAttribute("mesFirma");
 					String anioFirma = (String) req.getSession().getAttribute("anioFirma");
+					cedulaAsociadoCabeza = String.valueOf(req.getSession().getAttribute("cedulaCabezaPlancha"));
+					nombreAsociadoCabeza = String.valueOf(req.getSession().getAttribute("nombreCabezaPlancha"));
+					nombreReporte = cedulaAsociado + "_" + nombreAsociado + "_COFT_211";
 					//formulario = rutaImagen + "/CO-FT-211.png";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteCertificadoAcreditaOcupacion_FT_211(ciudad,
@@ -317,7 +322,8 @@ public class ServletReportesJasper extends HttpServlet {
 							mesFirma, anioFirma, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "ciudad", "dia", "mes", "anio", "hora", "nombreAsociado",
-							"cedulaAsociado", "ciudadCedula", "ciudadFirma", "diaFirma", "mesFirma", "anioFirma");
+							"cedulaAsociado", "ciudadCedula", "ciudadFirma", "diaFirma", "mesFirma", "anioFirma",
+							"cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 458:

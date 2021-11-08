@@ -1795,14 +1795,11 @@ public class LogicaGenerador {
 		parameters.put("rutaImagen", rutaImagen);
 
 		rutaReporte = rutaReporte + "plantilla_CO-FT-211.jasper";
-		// rutaReporte =
-		// "D:\\Elecciones_coomeva_2022_web\\Workspace.Eclipse.Elecciones.Original\\ELE.web\\WebRoot\\WEB-INF\\reports\\plantilla_CO-FT-211.jasper";
 		JRDataSource ds = new JREmptyDataSource();
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 		jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
 
 		return jasperPrint;
-		
 	}
 
 	/**

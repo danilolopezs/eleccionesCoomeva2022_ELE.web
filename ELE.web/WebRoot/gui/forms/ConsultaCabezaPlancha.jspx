@@ -209,24 +209,29 @@
 												<ice:panelGroup>
 													<ice:commandButton id="btnPdf" styleClass="button"
 														visible="#{menuVista.pintarBotonGenerarReciboPlancha}"
-														value="Imprimir Constancia"
+														value="Radicar"
 														action="#{consultaCabezaPlanchaVista.actionConfirmarRadicacion}" />
+
+													<ice:commandButton id="btnPdf" styleClass="button"
+														visible="#{menuVista.pintarBotonGenerarReciboPlancha}"
+														value="Cumplimiento de Requisitos"
+														action="#" />
 
 													<ice:commandButton id="btnPdf2" styleClass="button"
 														visible="#{menuVista.pintarBotonExpedirResolucionAdmision}"
-														value="#{etiquetas.lblResolAdmision}"
+														value="Admitir"
 														action="#{consultaCabezaPlanchaVista.actionExpedirResolucion}" />
 
 													<ice:commandButton id="btnResolInadmision"
 														styleClass="button"
 														visible="#{menuVista.pintarBotonExpedirResolucionInadmision}"
-														value="#{etiquetas.lblBtnResolInadmision}"
+														value="Inadmitir"
 														action="#{consultaCabezaPlanchaVista.actionExpedirResolucionInadmision}" />
 
 													<ice:commandButton id="btnResolucionRechazo"
 														styleClass="button"
 														visible="#{menuVista.pintarBotonExpedirResolucionRechazo}"
-														value="#{etiquetas.lblBtnRechazarPlancha}"
+														value="Rechazar"
 														action="#{consultaCabezaPlanchaVista.actionIrFormularioResolucionRechazo}" />
 												</ice:panelGroup>
 												<ice:panelGroup visible="#{menuVista.pintarBotonGenerarArchivo}">

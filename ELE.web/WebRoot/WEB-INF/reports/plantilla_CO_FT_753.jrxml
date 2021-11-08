@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.4641000000000035"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.143588810000006"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="466"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="fechaActual" class="java.util.Date"/>
 	<parameter name="nombre" class="java.lang.String"/>
@@ -22,16 +22,16 @@
 				<reportElement mode="Opaque" x="-19" y="-19" width="595" height="100" forecolor="#009332" backcolor="#009332"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="30" width="555" height="44" forecolor="#FFFFFF"/>
+				<reportElement x="0" y="30" width="555" height="30" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" markup="none">
-					<font size="14" isBold="true"/>
+					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RESOLUCIÓN QUE RESUELVE RECURSOS INTERPUESTOS EXTEMPORANEAMENTE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="25" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" markup="none">
-					<font size="16" isBold="true"/>
+					<font size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Elección de Delegados]]></text>
 			</staticText>
@@ -46,7 +46,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="32" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<rectangle>
 				<reportElement x="49" y="1" width="471" height="31" forecolor="#000000"/>
 			</rectangle>
@@ -98,31 +98,31 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="338" splitType="Stretch">
+		<band height="311" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Transparent" x="49" y="6" width="471" height="313"/>
+				<reportElement mode="Transparent" x="49" y="6" width="471" height="289"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="300" y="286" width="200" height="11" forecolor="#000000"/>
+				<reportElement x="300" y="272" width="200" height="11" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[Nombre Y Firma del Presidente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="286" width="200" height="12" forecolor="#000000"/>
+				<reportElement x="70" y="272" width="200" height="12" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Nombre Y Firma del Secretario]]></text>
 			</staticText>
 			<line>
-				<reportElement x="300" y="285" width="200" height="1" forecolor="#000000"/>
+				<reportElement x="300" y="271" width="200" height="1" forecolor="#000000"/>
 			</line>
 			<staticText>
-				<reportElement mode="Transparent" x="35" y="1" width="14" height="318" forecolor="#009232" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="35" y="1" width="14" height="294" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" rotation="Left" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Vigilado por la superintendencia de la Economia Solidaria NIT.:890.300.625-1]]></text>
 			</staticText>
@@ -165,7 +165,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["Para constancia se firma el día " +$P{dia}+ " del mes " +$P{mes}+ " del año " +$P{anio}+ "."]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="74" y="285" width="196" height="1" forecolor="#000000"/>
+				<reportElement x="74" y="271" width="196" height="1" forecolor="#000000"/>
 			</line>
 		</band>
 	</detail>
@@ -174,7 +174,7 @@
 			<staticText>
 				<reportElement mode="Transparent" x="49" y="32" width="118" height="22" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[CO-FT-753]]></text>
 			</staticText>
@@ -182,7 +182,7 @@
 				<reportElement x="-19" y="0" width="595" height="32" forecolor="#7D933C" backcolor="#009332"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="1" width="555" height="30" forecolor="#FFFFFF"/>
+				<reportElement x="0" y="5" width="555" height="19" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -191,7 +191,7 @@
 			<staticText>
 				<reportElement mode="Transparent" x="374" y="32" width="146" height="22" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>

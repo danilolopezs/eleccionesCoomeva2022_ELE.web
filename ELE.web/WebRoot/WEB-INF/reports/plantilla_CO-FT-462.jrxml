@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_189" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.210000000000004"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.1435888100000082"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="acta" class="java.lang.String"/>
 	<parameter name="nombreApelante" class="java.lang.String"/>
 	<parameter name="resolucionApelada" class="java.lang.String"/>
@@ -111,32 +111,32 @@
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="40" y="12" width="265" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{actaTribunal}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="167" y="42" width="353" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreApelante}.toUpperCase()]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="40" y="72" width="180" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucionApelada}]]></textFieldExpression>
 			</textField>
-			<textField pattern="yyyy/MM/dd">
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
 				<reportElement x="402" y="72" width="131" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{fecha}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="225" y="72" width="171" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucionComision}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="314" y="12" width="206" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{resolucion}]]></textFieldExpression>
@@ -183,8 +183,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Ha recibido este Tribunal según consta en el Acta No. " +$P{acta}+ "el Recurso interpuesto y una vez revisados  los hechos y argumentos planteados por el Apelante  se determinó  No procedente el argumento de:"
-]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ha recibido este Tribunal según consta en el Acta No. " +$P{acta}+ "el Recurso interpuesto y una vez revisados  los hechos y argumentos planteados por el Apelante  se determinó  No procedente el argumento de:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="85" width="470" height="44"/>
@@ -238,14 +237,14 @@
 			<staticText>
 				<reportElement mode="Transparent" x="396" y="32" width="137" height="16" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="37" y="32" width="100" height="16" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[CO-FT-462]]></text>
 			</staticText>

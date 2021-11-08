@@ -48,7 +48,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="33" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<rectangle>
 				<reportElement x="43" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
@@ -117,7 +117,7 @@
 			</rectangle>
 			<textField>
 				<reportElement x="63" y="15" width="430" height="117"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Yo, " +$P{nombre}.toUpperCase()+ ", identificado con la Cédula de Ciudadanía No. " +$P{cedula}+ " de " +$P{ciudad_cedula}.toUpperCase()+ ", con el fin de postularme como Delegado a la Asamblea, declaro que cuento con una antigüedad mínima de tres (3) años en el desempeño de mi oficio  y certifico no haber sido sancionado en los últimos cinco (5) años con multa o suspensión, destitución o remoción del Cargo por un Organismo de Control Estatal o de Control en el ejercicio de mi profesión, lo anterior para dar cumplimiento al  Articulo 99  del Estatuto Social. numerales  4 y 6, y Acuerdo numero 652 del 15 de Julio de 2021 Articulo 36 numerales 4 y 6."]]></textFieldExpression>
@@ -134,7 +134,7 @@
 			</line>
 			<textField>
 				<reportElement x="65" y="134" width="430" height="34"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Se firma en " +$P{ciudad_firma}.toUpperCase()+ " a los " +$P{dias_firma}+ " días del mes de " +$P{mes_firma}+ " del año " +$P{año_firma}+ "."]]></textFieldExpression>

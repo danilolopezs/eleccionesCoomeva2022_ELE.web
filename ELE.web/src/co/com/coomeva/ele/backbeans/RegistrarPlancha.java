@@ -14,6 +14,7 @@ import javax.swing.DefaultRowSorter;
 
 import org.apache.log4j.Logger;
 
+import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoClimae;
 import co.com.coomeva.ele.delegado.DelegadoFormatoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
@@ -699,12 +700,15 @@ public class RegistrarPlancha extends BaseVista {
 
 			try {
 				UserVo user = (UserVo) FacesUtils.getSessionParameter("user");
-				if(this.miembrosPrincipales.get(0) == null) {
+				if(this.miembrosPrincipales.get(0).getNumeroDocumento() != null) {
 					request.getSession().setAttribute("cedulaCabezaPlancha",this.miembrosPrincipales.get(0).getNumeroDocumento());
 					request.getSession().setAttribute("nombreCabezaPlancha",this.miembrosPrincipales.get(0).getApellidosNombres());
 				} else {
-					request.getSession().setAttribute("cedulaCabezaPlancha",user.getUserId());
-					request.getSession().setAttribute("nombreCabezaPlancha",this.miembrosPrincipales.get(0).getApellidosNombres());
+					String nombreAsociadoCabeza = DelegadoAsociado.getInstance().consultarNombreAsociado(Long.valueOf(user.getUserId()));
+					if(nombreAsociadoCabeza != null) {
+						request.getSession().setAttribute("cedulaCabezaPlancha",user.getUserId());
+						request.getSession().setAttribute("nombreCabezaPlancha",nombreAsociadoCabeza);
+					}
 				}
 				DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte),
 						listaRegCampos, user.getUserId());

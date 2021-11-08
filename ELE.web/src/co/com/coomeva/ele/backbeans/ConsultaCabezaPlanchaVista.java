@@ -1537,7 +1537,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 
 			if (!COD_ESTADO_PLANCHA_ADMITIDA.equals(infoPlancha
 					.getCodigoEstadoPlancha())
-					&& !COD_ESTADO_PLANCHA_INADMITIDA.equals(infoPlancha
+					&& !COD_ESTADO_PLANCHA_RECHAZADA.equals(infoPlancha
 							.getCodigoEstadoPlancha())) {
 				throw new EleccionesDelegadosException(
 						LoaderResourceElements
@@ -1547,6 +1547,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 										ConstantesProperties.MENSAJE_IMPOSIBLE_IMPRIMIR_RESOLUCION_RECURSOS));
 			}
 
+			//admitidas o rechazadas
 			if ("1".equals(codResolucion.toString())) {
 				titleImprResolucion = UtilAcceso
 						.getParametroFuenteS(
@@ -1640,8 +1641,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 								ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 								"codigo.formato.delegado.deniegaRoposicion");
 				id.setCodigoFormato(new Byte(codigoFormato));
-				EleDetalleFormatoPlancha fPlancha = DelegadoDetalleFormato
-						.getInstance().findById(id);
+				EleDetalleFormatoPlancha fPlancha = DelegadoDetalleFormato.getInstance().findById(id);
 				if (fPlancha != null) {
 					throw new Exception(
 							"Ya fué generada la resolución que deniega un recurso de reposición y no concede apelación por no ser solicitado. ");
