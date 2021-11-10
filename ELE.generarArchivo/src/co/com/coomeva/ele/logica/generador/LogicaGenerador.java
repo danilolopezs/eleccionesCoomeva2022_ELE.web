@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import jxl.CellView;
@@ -1218,7 +1219,7 @@ public class LogicaGenerador {
 	 * @return
 	 */
 	public JasperPrint reporteResolucionAdmisionPlanchas_FT_172(String zonaElectoral, String nombreAsociado,
-			String numResolucion, String numActa, Date fecha, String ciudadZona, String dia, String mes, String anio,
+			String numResolucion, String numActa, String fecha, String ciudadZona, String dia, String mes, String anio,
 			String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
@@ -1233,9 +1234,10 @@ public class LogicaGenerador {
 			parameters.put("mes", mes);
 			parameters.put("anio", anio);
 			parameters.put("rutaImagen", rutaImagen);
-
+			
 			rutaReporte = rutaReporte + "plantilla_CO_FT_172.jasper";
 			JRDataSource ds = new JREmptyDataSource();
+			
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(rutaReporte);
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
 
@@ -1267,7 +1269,7 @@ public class LogicaGenerador {
 	 * @throws Exception
 	 */
 	public JasperPrint reporteResolucionRechazoPlanchas_FT_173(String zonaElectoral, String nombreAsociado,
-			String numResolucion, String cedulaAsociado, String numActa, Date fecha, String dia, String mes,
+			String numResolucion, String cedulaAsociado, String numActa, String fecha, String dia, String mes,
 			String anio, String mesActa, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
@@ -1307,99 +1309,22 @@ public class LogicaGenerador {
 	 * @return
 	 * @throws Exception
 	 */
-	public JasperPrint reporteCumplimientoDelegado_FT_176(String nombreAsociado, String numPlancha,
-			String nombreRepresen, List<String> respustas, String rutaImagen, String rutaReporte) throws Exception {
+	public JasperPrint reporteCumplimientoDelegado_FT_176(String zonaElectoral, String nombreAsociado,
+			String cedulaAsociado, String dia, String mes, String anio, String ciudad, 
+			String observaciones, String rutaImagen,
+			String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("nombre", nombreAsociado);
-			parameters.put("plancha", numPlancha);
-			parameters.put("nombreRepresen", nombreRepresen);
+			parameters.put("zonaElectoral", zonaElectoral);
+			parameters.put("nombreAsociado", nombreAsociado);
+			parameters.put("cedulaAsociado", cedulaAsociado);
+			parameters.put("dia", dia);
+			parameters.put("mes", mes);
+			parameters.put("annio", anio);
+			parameters.put("ciudad", ciudad);
+			parameters.put("observaciones", observaciones);
 			parameters.put("rutaImagen", rutaImagen);
-
-			if (respustas != null) {
-				for (int i = 0; i < respustas.size(); i++) {
-
-					// pregunta 1
-					if (i == 0 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("1SI", "X");
-					} else if (i == 0 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("1NO", "X");
-					}
-
-					if (i == 1 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("2SI", "X");
-					} else if (i == 1 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("2NO", "X");
-					}
-
-					if (i == 2 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("3SI", "X");
-					} else if (i == 2 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("3NO", "X");
-					}
-
-					if (i == 3 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("4SI", "X");
-					} else if (i == 3 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("4NO", "X");
-					}
-
-					if (i == 3 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("4SI", "X");
-					} else if (i == 3 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("4NO", "X");
-					}
-
-					if (i == 4 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("5SI", "X");
-					} else if (i == 4 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("5NO", "X");
-					}
-
-					if (i == 5 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("6SI", "X");
-					} else if (i == 5 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("6NO", "X");
-					}
-
-					if (i == 6 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("7SI", "X");
-					} else if (i == 6 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("7NO", "X");
-					}
-
-					if (i == 7 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("8SI", "X");
-					} else if (i == 7 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("8NO", "X");
-					}
-
-					if (i == 8 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("9SI", "X");
-					} else if (i == 8 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("9NO", "X");
-					}
-
-					if (i == 9 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("10SI", "X");
-					} else if (i == 9 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("10NO", "X");
-					}
-
-					if (i == 10 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("11SI", "X");
-					} else if (i == 10 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("11NO", "X");
-					}
-
-					if (i == 11 && respustas.get(i).equalsIgnoreCase("S")) {
-						parameters.put("12SI", "X");
-					} else if (i == 11 && respustas.get(i).equalsIgnoreCase("N")) {
-						parameters.put("12NO", "X");
-					}
-				}
-			}
 
 			rutaReporte = rutaReporte + "plantilla_CO_FT_176.jasper";
 			JRDataSource ds = new JREmptyDataSource();
@@ -1407,7 +1332,6 @@ public class LogicaGenerador {
 			jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
 
 			return jasperPrint;
-
 		} catch (JRException e) {
 			throw e;
 		}
@@ -1619,7 +1543,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteResuelveApelacion_FT_461(String acta, String nombreAsociado, String resolucionApelada,
 			String resolucionComision, Date fecha, String actaTribunal, String argumento, String desicion,
-			String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
+			String nombrePresidente, String nombreSecretario, String resolucionNro, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1631,6 +1555,7 @@ public class LogicaGenerador {
 			parameters.put("actaTribunal", actaTribunal);
 			parameters.put("argumento", argumento);
 			parameters.put("decision", desicion);
+			parameters.put("resolucionNumero", resolucionNro);
 			parameters.put("nombrePresidente", nombrePresidente);
 			parameters.put("nombreSecretario", nombreSecretario);
 			parameters.put("rutaImagen", rutaImagen);
@@ -1735,7 +1660,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteResolucionInadmisionPlancha_FT_209(String zonaElectoral, String anio, String mes,
 			String dia, Date hora, String nombreAsociado, String cedulaAsociado, String resolucion, String acta,
-			Date fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String rutaImagen,
+			String fecha, String ciudad, String razon1, String razon2, String razon3, String razon4, String rutaImagen,
 			String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {

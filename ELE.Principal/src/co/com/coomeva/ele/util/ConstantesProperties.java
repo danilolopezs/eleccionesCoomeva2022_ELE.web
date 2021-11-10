@@ -41,6 +41,7 @@ public interface ConstantesProperties {
 	String CODIGO_FORMATO_ADMISION_CABEZA_PLANCHA = "codigo.formato.admision.cabeza.plancha";
 	String CODIGO_ESTADO_PLANCHA_RECHAZADA = "param.cod.estado.plancha.rechazada";
 	String CODIGO_FORMATO_CONSTANCIA_CABEZA_PLANCHA = "codigo.formato.constancia.cabeza.plancha";
+	String CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS = "codigo.formato.constancia.cumplimiento.requisitos";
 	String MENSAJE_CONFIRMACION_PLANCHA_RECURSO = "msj.confirma.plancha.recurso";
 	String CADENA_ZONA_ELECTORAL = "lblMuestraZonaElectoral";
 	String CADENA_ZONA_ELECTORAL_ESPECIAL = "lblMuestraZonaELectoralEspecial";
@@ -61,6 +62,7 @@ public interface ConstantesProperties {
 	String OPC_MENU_GENERAR_ARCHIVO_PLANCHA = "opc.menu.generar.archivo.plancha";
 	String OPC_MENU_CONSULTAR_PLANCHA = "opc.menu.consultar.plancha";
 	String OPC_MENU_EXPEDIR_RESOLUCION_ADMISION = "opc.menu.expedir.resolucion.admision";
+	String OPC_MENU_EXPEDIR_RESOLUCION_CUMPLIMIENTO_REQUISITOS = "opc.menu.expedir.resolucion.cumplimiento.requisitos";
 	String OPC_MENU_EXPEDIR_RESOLUCION_INADMISION = "opc.menu.expedir.resolucion.inadmision";
 	String OPC_MENU_CUOCIENTE_ELECTORAL = "opc.menu.cuociente.electoral";
 	String OPC_MENU_CARGAR_ENT_ELECTORALES = "opc.menu.cargar.entidades.electorales";

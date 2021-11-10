@@ -286,6 +286,7 @@ public class FormularioReportesVista extends BaseVista {
 				.getRequest();
 		List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		SimpleDateFormat sdfsh = new SimpleDateFormat("dd/MM/yyyy");
 
 		// Resolucion de admision de planchas
 		if (tipoReporte.equalsIgnoreCase("172")) {
@@ -293,12 +294,12 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("nombreAsociado", nombreCabezaPlancha);
 			request.getSession().setAttribute("numResolucion", numResolucionAdmisionPlancha);
 			request.getSession().setAttribute("numActa", numActa);
-			request.getSession().setAttribute("fecha", fechaActa);
+			request.getSession().setAttribute("fecha", sdfsh.format(fechaActa));
 			request.getSession().setAttribute("ciudadZona", ciudad);
 			request.getSession().setAttribute("dia",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 			request.getSession().setAttribute("mes",
-					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : "");
 
@@ -321,11 +322,11 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
 			request.getSession().setAttribute("numResolucion", numResolucionRechazoComision);
 			request.getSession().setAttribute("numActa", numActa);
-			request.getSession().setAttribute("fecha", fechaActa);
+			request.getSession().setAttribute("fecha", sdfsh.format(fechaActa));
 			request.getSession().setAttribute("dia",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 			request.getSession().setAttribute("mes",
-					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getYear()) : "");
 			//request.getSession().setAttribute("razones", razones);
@@ -416,7 +417,7 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("cedulaAsociado", numeroDocuemtoCabezaPlancha);
 			request.getSession().setAttribute("ciudadCedula", zonaExpedicionDocumento);
 			request.getSession().setAttribute("dia", fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
-			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()+1) : "");
 			request.getSession().setAttribute("anio", fechaFirma != null ? String.valueOf(fechaFirma.getYear()) : "");
 			request.getSession().setAttribute("nombreEntrega", nombreEntrega);
 			request.getSession().setAttribute("nombreRecibe", nombreRecibe);
@@ -443,7 +444,7 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("dia",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 			request.getSession().setAttribute("mes",
-					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("hora", hora);
@@ -522,7 +523,7 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("dia",
 					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 			request.getSession().setAttribute("mes",
-					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()) : "");
+					fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
 			request.getSession().setAttribute("anio",
 					fechaElaboracionDoc != null ? WorkStrigs.getAnio(fechaElaboracionDoc.getYear()) : "");
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
@@ -695,7 +696,7 @@ public class FormularioReportesVista extends BaseVista {
 			request.getSession().setAttribute("diaPresentado",
 					fechaPresentacion != null ? String.valueOf(fechaPresentacion.getDate()) : "");
 			request.getSession().setAttribute("dia", fechaFirma != null ? String.valueOf(fechaFirma.getDate()) : "");
-			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()) : "");
+			request.getSession().setAttribute("mes", fechaFirma != null ? String.valueOf(fechaFirma.getMonth()+1) : "");
 			request.getSession().setAttribute("anio", fechaFirma != null ? String.valueOf(fechaFirma.getYear()) : "");
 
 			// para guardar en base de datos los registros de los campos

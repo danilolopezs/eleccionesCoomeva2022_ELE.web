@@ -1241,5 +1241,23 @@
 			FROM elecdb.ele_zona_electoral_especial ZE WHERE ZE.codigo_zona_ele = :codigoZonaEle
 		]]>
 	</sql-query>
+	
+	<!-- ###################################################################################### 
+		## Danilo Lopez - GTC CORPORATION. - 2021-11-08 ## 
+		## Consulta el consecutivo de la Plancha por numero de documento de Asociado 
+		###################################################################################### -->
+	<sql-query name="consultar.consecutivo.plancha.por.documento.asociado">
+		<return-scalar column="consecutivo_plancha"
+			type="java.lang.String" />
+		<![CDATA[
+			SELECT EPA.CONSECUTIVO_PLANCHA FROM ELECDB.ELEASOCIA A INNER JOIN ELECDB.ELE_PLANCHA_ASOCIADO EPA 
+				ON A.CODIGO_ASOCIADO = EPA.CODIGO_ASOCIADO WHERE A.NUMERO_DOCUMENTO = :numeroDocumento
+		]]>
+	</sql-query>
+	
+	<sql-query name="consultar.horas.democracia.asociado.by.id">
+		<return-scalar column="HORAS" type="java.lang.Long" />
+		<![CDATA[SELECT HORAS_COOPERATIVAS HORAS FROM ELECDB.ELEASOCIA A WHERE A.NUMERO_DOCUMENTO = :numeroDocumento]]>
+	</sql-query>
 
 </hibernate-mapping>

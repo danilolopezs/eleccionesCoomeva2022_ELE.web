@@ -207,16 +207,16 @@
 											<br />
 											<div align="center">
 												<ice:panelGroup>
+													<ice:commandButton id="btnCumplimientoRequisitos" styleClass="button"
+														visible="#{menuVista.pintarBotonExpedirCumplimientoRequisitos}"
+														value="Cumplimiento de Requisitos"
+														action="#{consultaCabezaPlanchaVista.actionConfirmarcumplimientoRequisitos}" />
+
 													<ice:commandButton id="btnPdf" styleClass="button"
 														visible="#{menuVista.pintarBotonGenerarReciboPlancha}"
 														value="Radicar"
 														action="#{consultaCabezaPlanchaVista.actionConfirmarRadicacion}" />
-
-													<ice:commandButton id="btnPdf" styleClass="button"
-														visible="#{menuVista.pintarBotonGenerarReciboPlancha}"
-														value="Cumplimiento de Requisitos"
-														action="#" />
-
+													
 													<ice:commandButton id="btnPdf2" styleClass="button"
 														visible="#{menuVista.pintarBotonExpedirResolucionAdmision}"
 														value="Admitir"
@@ -358,6 +358,61 @@
 						</f:facet>
 					</ice:panelPopup>
 
+					<!-- *******************************************************
+						Mensaje de confirmación para imprimir el certificado de 
+						cumplimiento de Requisitos 
+						**************************************************** -->
+					<ice:panelPopup id="confirmarCumplimientoRequisitos" draggable="true"
+						visible="#{consultaCabezaPlanchaVista.visibleConfirmarCumplimientoRequisitos}"
+						rendered="#{consultaCabezaPlanchaVista.visibleConfirmarCumplimientoRequisitos}" modal="true"
+						style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 300px;">
+
+						<f:facet name="header">
+							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+								style="text-align: center;" headerClass="icePanelPopupHeader">
+								<ice:outputText style="color: #FFFFFF;" value="Confirmaci&#243;n" />
+							</ice:panelGrid>
+						</f:facet>
+
+						<f:facet name="body">
+							<ice:panelGrid width="280px" cellpadding="0" cellspacing="0"
+								styleClass="font: 11px / 17px tahoma;">
+								<center>
+									<table>
+										<tr>
+											<td>
+												<ice:graphicImage
+													value="../imagenes/Symbol-Exclamation.png" />
+											</td>
+											<td>
+												<ice:outputText
+													value="#{consultaCabezaPlanchaVista.mensajeConfirmacion}"
+													styleClass="textoLabel" />
+											</td>
+										</tr>
+									</table>
+
+								</center>
+								<br />
+								<table border="0" align="center" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<ice:commandButton value="Si" style="padding-left:7px;padding-right:7px"
+												action="#{consultaCabezaPlanchaVista.actionImprimirFormatoPdfCumplimientoRequisitos}"
+												onclick="disableButton(this);" />
+										</td>
+										<td style="padding-left:5px;padding-right:5px"></td>
+										<td>
+											<ice:commandButton style="padding-left:5px;padding-right:5px"
+												action="#{consultaCabezaPlanchaVista.actionCloseConfirmarCumplimientoRequisitos}" value="No" />
+										</td>
+									</tr>
+								</table>
+
+							</ice:panelGrid>
+						</f:facet>
+					</ice:panelPopup>
+					
 				</ice:form>
 			</body>
 		</html>

@@ -38,6 +38,11 @@ public class DelegadoHabilidad {
 			throws Exception {
 		return logicaHabilidad.validateAsociadoDTO(nroIdentificacion,eleZona,nroCabPlancha);
 	}
+	
+	public EleAsociadoDTO validateAsociadoObservacionesDTO(String nroIdentificacion, EleZonas eleZona,String nroCabPlancha)
+			throws Exception {
+		return logicaHabilidad.validateAsociadoObservacionesDTO(nroIdentificacion,eleZona,nroCabPlancha);
+	}
 
 	public void inscribirInhabilidades(List<EleInhabilidades> listInhabilidades) {
 		logicaHabilidad.inscribirInhabilidades(listInhabilidades);

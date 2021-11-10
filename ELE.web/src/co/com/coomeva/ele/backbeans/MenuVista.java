@@ -64,6 +64,10 @@ public class MenuVista {
 	public static final String EXPEDIR_RESOLUCION_ADMISION = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
 			ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_ADMISION);
+	
+	public static final String EXPEDIR_RESOLUCION_CUMPLIMIENTO_REQUISITOS = UtilAcceso.getParametroFuenteS(
+			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
+			ConstantesProperties.OPC_MENU_EXPEDIR_RESOLUCION_CUMPLIMIENTO_REQUISITOS);
 
 	public static final String EXPEDIR_RESOLUCION_INADMISION = UtilAcceso.getParametroFuenteS(
 			ConstantesProperties.NOMBRE_ARCHIVO_PROPIEDADES_PM,
@@ -120,6 +124,7 @@ public class MenuVista {
 	private boolean pintarBotonExpedirResolucionRechazo;
 	private boolean pintarBotonExpedirResolucionAdmision;
 	private boolean pintarBotonExpedirResolucionInadmision;
+	private boolean pintarBotonExpedirCumplimientoRequisitos;
 
 	private boolean renderExpedirCumplimiento;
 
@@ -410,6 +415,11 @@ public class MenuVista {
 						this.pintarBotonExpedirResolucionAdmision = Boolean.TRUE;
 					}
 
+					if (listaAcciones.contains(EXPEDIR_RESOLUCION_CUMPLIMIENTO_REQUISITOS)) {
+						this.pintarBotonExpedirCumplimientoRequisitos = Boolean.TRUE;
+					}
+					this.pintarBotonExpedirCumplimientoRequisitos = Boolean.TRUE;
+					
 					if (listaAcciones.contains(EXPEDIR_RESOLUCION_INADMISION)) {
 						this.pintarBotonExpedirResolucionInadmision = Boolean.TRUE;
 					}
@@ -864,5 +874,13 @@ public class MenuVista {
 
 	public void setRenderDesbloUser(boolean renderDesbloUser) {
 		this.renderDesbloUser = renderDesbloUser;
+	}
+
+	public boolean isPintarBotonExpedirCumplimientoRequisitos() {
+		return pintarBotonExpedirCumplimientoRequisitos;
+	}
+
+	public void setPintarBotonExpedirCumplimientoRequisitos(boolean pintarBotonExpedirCumplimientoRequisitos) {
+		this.pintarBotonExpedirCumplimientoRequisitos = pintarBotonExpedirCumplimientoRequisitos;
 	}
 }

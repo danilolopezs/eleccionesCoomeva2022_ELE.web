@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.9487171000000083"/>
+	<property name="ireport.zoom" value="1.6105100000000077"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="576"/>
+	<property name="ireport.y" value="480"/>
 	<parameter name="annio" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="dia" class="java.lang.String"/>
@@ -124,12 +124,12 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="569" splitType="Stretch">
+		<band height="577" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="4" width="555" height="464"/>
+				<reportElement x="0" y="4" width="555" height="437"/>
 			</rectangle>
 			<textField>
 				<reportElement x="10" y="14" width="535" height="30"/>
@@ -139,24 +139,21 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral o el Comité Auxiliar de la ciudad de " +$P{ciudad}.toUpperCase()+ " validó los siguientes requisitos para cada uno de los integrantes de la placha:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="388" width="535" height="30"/>
+				<reportElement x="10" y="362" width="535" height="30"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Una vez revisados los requisitos para la inscripción de la plancha, se concluye con base en lo establecido en el Artículo 99 del Estatuto Social de la Cooperativa que: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="430" width="535" height="27"/>
+				<reportElement x="10" y="404" width="535" height="27"/>
 				<textElement verticalAlignment="Top">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones}.isEmpty() ? "Todos los integrantes Cumplen." : "Alguno de los integrantes No Cumple."]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones} == null ? "Todos los integrantes Cumplen." : "Alguno de los integrantes No Cumple."]]></textFieldExpression>
 			</textField>
-			<rectangle>
-				<reportElement x="0" y="468" width="555" height="88"/>
-			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="483" width="535" height="73" forecolor="#C0C0C0"/>
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="456" width="535" height="97" forecolor="#000000"/>
 				<textElement verticalAlignment="Top">
 					<font size="10"/>
 				</textElement>
@@ -177,70 +174,73 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["2.        Acreditar por lo menos:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="84" width="535" height="30"/>
+				<reportElement x="44" y="84" width="501" height="30"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["a) Al momento de la inscripción 120 horas de formación en cooperativismo, de acuerdo con los programas curriculares de educación que la Cooperativa diseñe para sus dirigentes. "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="113" width="535" height="65"/>
+				<reportElement x="44" y="113" width="501" height="65"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["b) Adicionalmente, dentro del año siguiente a su elección, 240 horas de formación de acuerdo con los programas curriculares de educación que la Cooperativa ha diseñado o diseñe para sus dirigentes sobre el funcionamiento de COOMEVA en sus aspectos administrativos, financieros, reglamentarios y legales, entre otros. Si al vencimiento del año siguiente a su elección, no se acreditan las 240 horas aquí previstas, quedará suspendido en su condición de Delegado hasta tanto las acredite."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="211" width="535" height="15"/>
+				<reportElement x="10" y="185" width="535" height="15"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["3.        Tener una antigüedad como asociado, de por lo menos tres (3) años."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="229" width="535" height="15"/>
+				<reportElement x="10" y="203" width="535" height="15"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["4.        Acreditar título en su respectiva profesión u oficio con una anterioridad mínima a tres (3) años."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="247" width="535" height="30"/>
+				<reportElement x="10" y="221" width="535" height="30"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["5.        No haber sido sancionado por la Cooperativa, durante los cinco (5) años anteriores a la nominación, con suspensión o pérdida de sus derechos sociales, de acuerdo con lo establecido en el Estatuto Social de Coomeva."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="280" width="535" height="30"/>
+				<reportElement x="10" y="254" width="535" height="30"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["6.        No haber sido sancionado en los últimos cinco (5) años con multa o con suspensión, destitución o remoción del cargo por un organismo de control estatal o de control en el ejercicio de su profesión."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="313" width="535" height="30"/>
+				<reportElement x="10" y="287" width="535" height="30"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["7.        No haber sido empleado o promotor o corredor de COOMEVA o de las empresas que conforman su Grupo Empresarial Cooperativo, durante los tres (3) años inmediatamente anteriores al de la respectiva elección."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="346" width="535" height="30"/>
+				<reportElement x="10" y="320" width="535" height="30"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["8.        No estar incurso en las inhabilidades e incompatibilidades que establezca la ley y el Estatuto Social de Coomeva."]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="10" y="177" width="535" height="30"/>
-				<textElement>
+			<rectangle>
+				<reportElement x="0" y="442" width="555" height="121"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="456" width="535" height="97" forecolor="#000000"/>
+				<textElement verticalAlignment="Top">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[En todo caso, la Administración deberá facilitar y garantizar los mecanismos virtuales o presenciales para el cumplimiento las obligaciones señaladas en el presente numeral."]]></text>
-			</staticText>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones} == null ? "" : $P{observaciones}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="10" y="469" width="100" height="15" forecolor="#009232"/>
+				<reportElement x="10" y="442" width="100" height="15" forecolor="#009232"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>

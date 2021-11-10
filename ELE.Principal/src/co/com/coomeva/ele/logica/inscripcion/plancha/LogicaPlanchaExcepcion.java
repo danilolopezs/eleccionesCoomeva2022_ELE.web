@@ -31,15 +31,36 @@ public class LogicaPlanchaExcepcion implements ILogicaPlanchaExcepcion {
 			elePlanchaExcepcionDAO = new ElePlanchaExcepcionDAO();
 			ElePlanchaExcepcion excepcion = new ElePlanchaExcepcion();
 
-			Long consecutivo = GeneradorConsecutivos.getInstance()
-					.getConsecutivo(ConstantesNamedQueries.QUERY_SEQ_PLANCHA_EXCEPCION,
-							HibernateSessionFactoryElecciones2012.getSession());
+			Long consecutivo = null; 
+			Boolean esModificar = Boolean.FALSE;
 			
-			excepcion.setConsecutivo(consecutivo);
+			List<ElePlanchaExcepcion> listaObs = consultarExcepcionesByCodigoAsociado(codigoAsociado, ""+consecutivoPlancha);
+			for (ElePlanchaExcepcion elePlanchaExcepcion : listaObs) {
+				if (elePlanchaExcepcion.getConsecutivo() != null
+						&& elePlanchaExcepcion.getCodigoAsociado().longValue() == codigoAsociado
+						&& elePlanchaExcepcion.getConsecutivoPlancha().longValue() == consecutivoPlancha) {
+					consecutivo = elePlanchaExcepcion.getConsecutivo();
+					esModificar = Boolean.TRUE;
+				}
+			}
+			
 			excepcion.setCodigoAsociado(codigoAsociado);
 			excepcion.setConsecutivoPlancha(consecutivoPlancha);
 			excepcion.setDescExcepcion(excepciones);
-			elePlanchaExcepcionDAO.save(excepcion);
+			
+			if (!esModificar) {
+				consecutivo = GeneradorConsecutivos.getInstance().getConsecutivo(
+						ConstantesNamedQueries.QUERY_SEQ_PLANCHA_EXCEPCION,
+						HibernateSessionFactoryElecciones2012.getSession());
+			}
+			
+			excepcion.setConsecutivo(consecutivo);
+			if(esModificar) {
+				elePlanchaExcepcionDAO.merge(excepcion);
+			} else {
+				elePlanchaExcepcionDAO.save(excepcion);
+			}
+			
 		} catch (Exception e) {
 			throw new EleccionesDelegadosException(
 					"Se ha presentado un error al intentar"
@@ -63,6 +84,26 @@ public class LogicaPlanchaExcepcion implements ILogicaPlanchaExcepcion {
 		try {
 			Long codigoAsociado = LogicaAsociado.getInstance().consultarCodigoAsociadoPorNumeroDocumento(new Long(identificacionAsociado));
 			
+			if( codigoAsociado != null ){
+				elePlanchaExcepcionDAO = new ElePlanchaExcepcionDAO();
+				Criteria criteria = elePlanchaExcepcionDAO.getSession().createCriteria(ElePlanchaExcepcion.class);
+		    	criteria.add(Expression.eq("codigoAsociado", codigoAsociado));
+		    	criteria.add(Expression.eq("consecutivoPlancha", Long.parseLong(consecutivoPlancha)));
+		    	return criteria.list();
+			}
+			
+		} catch (NumberFormatException e) {
+			throw new EleccionesDelegadosException("La identificación del asociado debe ser numérica");
+		} catch (Exception e) {
+			throw new EleccionesDelegadosException("No fue posible consultar las excepciones del asociado");
+		}
+		return resultado;
+	}
+	
+	public List<ElePlanchaExcepcion> consultarExcepcionesByCodigoAsociado(Long codigoAsociado, String consecutivoPlancha) throws EleccionesDelegadosException {
+		List<ElePlanchaExcepcion> resultado = null; 
+		
+		try {
 			if( codigoAsociado != null ){
 				elePlanchaExcepcionDAO = new ElePlanchaExcepcionDAO();
 				Criteria criteria = elePlanchaExcepcionDAO.getSession().createCriteria(ElePlanchaExcepcion.class);

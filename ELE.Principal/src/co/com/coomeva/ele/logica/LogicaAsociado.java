@@ -1631,4 +1631,16 @@ public class LogicaAsociado extends AsoelecfDAO {
 		}
 		return correo;
 	}
+	
+	public Long consultarHorasDemocraciaAsociado(String nroIdentificacion) {
+		Session session=null;
+		int f;
+		Query query=null;
+		session= HibernateSessionFactoryElecciones2012.getSession();
+		query = session.getNamedQuery("consultar.horas.democracia.asociado.by.id");
+		query.setLong("numeroDocumento", Long.parseLong(nroIdentificacion));
+		
+		Long horas = (Long)query.uniqueResult();
+		return horas;
+	}
 }

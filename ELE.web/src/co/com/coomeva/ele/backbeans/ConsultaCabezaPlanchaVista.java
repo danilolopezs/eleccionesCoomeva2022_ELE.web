@@ -19,6 +19,9 @@ import co.com.coomeva.ele.delegado.DelegadoLogicaPlanchaExcepcion;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoEstadoPlancha;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
+import co.com.coomeva.ele.dto.DTOInformacionPlancha;
+import co.com.coomeva.ele.dto.DTOMiembroPlancha;
+import co.com.coomeva.ele.dto.DTOPlanchaAsociado;
 import co.com.coomeva.ele.dto.InfoDetalleFormatoPlanchaDTO;
 import co.com.coomeva.ele.entidades.formulario.EleRegistroCampos;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlancha;
@@ -65,6 +68,11 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 					ConstantesProperties.CODIGO_ESTADO_PLANCHA_INSCRITA);
 
+	public static final String COD_ESTADO_PLANCHA_MODIFICADA = UtilAcceso
+			.getParametroFuenteS(
+					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+					ConstantesProperties.CODIGO_ESTADO_PLANCHA_MODIFICADA);
+	
 	public static final String COD_ESTADO_PLANCHA_EN_RECURSO = UtilAcceso
 			.getParametroFuenteS(
 					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
@@ -121,6 +129,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	private InfoDetalleFormatoPlanchaDTO dtoInfo = new InfoDetalleFormatoPlanchaDTO();
 	private UserVo user;
 	private boolean visibleConfirmarRadicacion;
+	private boolean visibleConfirmarCumplimientoRequisitos;
 	private String mensajeConfirmacion = "";
 
 	private Long CODIGO_FORMATO_ADMISION_CABEZA_PLANCHA = new Long(
@@ -134,6 +143,14 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					.getParametroFuenteS(
 							ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
 							ConstantesProperties.CODIGO_FORMATO_CONSTANCIA_CABEZA_PLANCHA));
+	
+	private Long CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS = new Long(
+			UtilAcceso
+					.getParametroFuenteS(
+							ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL,
+							ConstantesProperties.CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS));
+	
+	
 
 	String fechasAdmision = "";
 	String fechasConstancia = "";
@@ -245,22 +262,25 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			Date fechaElaboracionDoc = new Date();
 			Date fechaActa = new Date();
+			SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
 			
 			request.getSession().setAttribute("zonaElectoral", infoPlancha.getCodZona());
 			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()):""); 
+			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getMonth()+1):""); 
 			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):""); 
 			request.getSession().setAttribute("hora", fechaElaboracionDoc);
-			//request.getSession().setAttribute("cedulaAsociado", ""+cabezaPlancha);
 			request.getSession().setAttribute("nombreAsociado", nombreAsociado);
 			request.getSession().setAttribute("resolucion", resolucionNro);
 			request.getSession().setAttribute("acta", numActa);
-			request.getSession().setAttribute("fecha", fechaActa);
+			request.getSession().setAttribute("fecha", dt1.format(fechaActa));
 			request.getSession().setAttribute("ciudad",cuidad);
 			request.getSession().setAttribute("razon1", razon1);
 			request.getSession().setAttribute("razon2", razon2);
 			request.getSession().setAttribute("razon3", razon3);
 			request.getSession().setAttribute("razon4", razon4);
+			
+			request.getSession().setAttribute("cedulaCabezaPlancha", cabezaPlancha);
+			request.getSession().setAttribute("nombreCabezaPlancha", nombreAsociado);
 			
 			request.getSession().setAttribute("codigoReporte", "209");
 			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
@@ -646,6 +666,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			nombreComicion = this.comisionElectoral;
 		}
 		
+		request.getSession().setAttribute("cedulaCabezaPlancha", cabezaPlancha);
+		request.getSession().setAttribute("nombreCabezaPlancha", nombreAsociado);
 		//RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓN
 		//Y NO CONCEDE APELACIÓN POR NO SER SOLICITADO CO-FT-458
 		if(tipoReporte.equalsIgnoreCase("458"))
@@ -732,7 +754,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado",nombreAspirante);
 			request.getSession().setAttribute("resolucionApelada" ,numResolucionImpugnada);
-			request.getSession().setAttribute("resolucionComision", resolucion);			
+			request.getSession().setAttribute("resolucionComision", resolucion);
+			request.getSession().setAttribute("resolucionNumero", resolucion);	
 			request.getSession().setAttribute("actaTribunal", numActaTribunal);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("decision", desicionTribunal);
@@ -837,17 +860,20 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			Date fechaElaboracionDoc = new Date();
 			Date fechaActa = new Date();
+			SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd");
 			
 			request.getSession().setAttribute("zonaElectoral", infoPlancha.getCodZona());
-			request.getSession().setAttribute("nombreAsociado",nombreAsociado);
+			request.getSession().setAttribute("nombreAsociado", nombreAsociado);
 			request.getSession().setAttribute("numResolucion", resolucionNro);
-			request.getSession().setAttribute("numActa",numActa);
-			request.getSession().setAttribute("fecha",fechaActa);
+			request.getSession().setAttribute("numActa", numActa);
+			request.getSession().setAttribute("fecha",dt1.format(fechaActa));
 			request.getSession().setAttribute("ciudadZona",infoPlancha.getZona());
-			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-			request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?WorkStrigs.getMes(fechaElaboracionDoc.getMonth()):""); 
-			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):"");		
+			request.getSession().setAttribute("dia",String.valueOf(fechaElaboracionDoc.getDate()));
+			request.getSession().setAttribute("mes",String.valueOf(fechaElaboracionDoc.getMonth()+1));
+			request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):"");
 			
+			request.getSession().setAttribute("cedulaCabezaPlancha", cabezaPlancha);
+			request.getSession().setAttribute("nombreCabezaPlancha", nombreAsociado);
 			
 			request.getSession().setAttribute("codigoReporte", "172");
 			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
@@ -884,21 +910,16 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			this.visibleConfirmarRadicacion = false;
 			if (DelegadoPlanchas.getInstance().validarFechaPlanchaConstancia()) {
 
-				if (!COD_ESTADO_PLANCHA_REGISTRADA.equals(infoPlancha
-						.getCodigoEstadoPlancha())) {
-					throw new EleccionesDelegadosException(
-							LoaderResourceElements
-									.getInstance()
-									.getKeyResourceValue(
-											ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
-											"msg.error.imposible.generar.constancia.recibo.plancha.no.registrada"));
+				if (!COD_ESTADO_PLANCHA_REGISTRADA.equals(infoPlancha.getCodigoEstadoPlancha())) {
+					throw new EleccionesDelegadosException(LoaderResourceElements.getInstance().getKeyResourceValue(
+							ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+							"msg.error.imposible.generar.constancia.recibo.plancha.no.registrada"));
 				}
 
 //				formato.generarReporte(new Long(infoPlancha
 //						.getConsecutivoPlancha()));
-				DelegadoFormatoPlanchas.getInstance().crearFormatoPlancha(
-						user.getUserId(), new Timestamp(new Date().getTime()),
-						CODIGO_FORMATO_CONSTANCIA_CABEZA_PLANCHA,
+				DelegadoFormatoPlanchas.getInstance().crearFormatoPlancha(user.getUserId(),
+						new Timestamp(new Date().getTime()), CODIGO_FORMATO_CONSTANCIA_CABEZA_PLANCHA,
 						infoPlancha.getConsecutivoPlancha());
 
 				// Cambiar el estado de la plancha a inscrita:
@@ -927,8 +948,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 				request.getSession().setAttribute("ciudad", infoPlanchaDTO.getComisionCiu());					
 				request.getSession().setAttribute("cedulaAsociado", infoPlanchaDTO.getNumCedula().toString());
 				request.getSession().setAttribute("ciudadCedula", infoPlanchaDTO.getCiudadExp());
-				request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
-				request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?WorkStrigs.getMes(fechaElaboracionDoc.getMonth()):""); 
+				request.getSession().setAttribute("dia",String.valueOf(fechaElaboracionDoc.getDate())); 
+				request.getSession().setAttribute("mes",String.valueOf(fechaElaboracionDoc.getMonth()+1)); 
 				request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaElaboracionDoc.getYear()):"");		
 				request.getSession().setAttribute("nombreEntrega", "");
 				request.getSession().setAttribute("nombreRecibe", "");
@@ -948,6 +969,107 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		return "";
 	}
 
+	/**
+	 * Imprime el formato CO-FT-176 – CERTIFICACIÓN DE CUMPLIMIENTO PARA SER 
+	 * ELEGIDO DELEGADO
+	 * 
+	 * @author GTC CORPORATION - Danilo López Sandoval
+	 * 
+	 */
+	public String actionImprimirFormatoPdfCumplimientoRequisitos() {
+		List<EleRegistroCampos> listaRegCampos = new ArrayList<EleRegistroCampos>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String tipoReporte = "176";
+		try {
+			this.visibleConfirmarCumplimientoRequisitos = Boolean.FALSE;
+			if (DelegadoPlanchas.getInstance().validarFechaPlanchaConstancia()) {
+
+				if (!COD_ESTADO_PLANCHA_REGISTRADA.equals(infoPlancha.getCodigoEstadoPlancha())) {
+					throw new EleccionesDelegadosException(LoaderResourceElements.getInstance().getKeyResourceValue(
+							ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
+							"msg.error.imposible.generar.cumplimiento.requisitos.plancha.no.registrada"));
+				}
+
+				DelegadoFormatoPlanchas.getInstance().crearFormatoPlancha(
+						user.getUserId(), new Timestamp(new Date().getTime()),
+						CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS,
+						infoPlancha.getConsecutivoPlancha());
+				
+				InfoPlanchaConstanciaPdfDTO infoPlanchaDTO = DelegadoPlanchas.getInstance().obtenerInfoPlanchaConstanciaPdf(new Long(infoPlancha.getConsecutivoPlancha()));
+				
+				HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+				Date fechaElaboracionDoc = new Date();
+				Date fechaActa = new Date();
+
+				request.getSession().setAttribute("zonaElectoral", infoPlancha.getCodZona().toString());
+				request.getSession().setAttribute("nombreAsociado",
+						infoPlanchaDTO.getNombres() + " " + (infoPlanchaDTO.getApellidos() != null
+								? infoPlanchaDTO.getApellidos()
+								: ""));
+				request.getSession().setAttribute("cedulaAsociado", infoPlanchaDTO.getNumCedula().toString());
+				request.getSession().setAttribute("dia",
+						fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
+				request.getSession().setAttribute("mes",
+						fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
+				request.getSession().setAttribute("annio",
+						fechaElaboracionDoc != null ? String.valueOf(WorkStrigs.getAnio(fechaElaboracionDoc.getYear()))
+								: "");
+				request.getSession().setAttribute("ciudad", infoPlanchaDTO.getComisionCiu());
+				request.getSession().setAttribute("observaciones", obtenerObservacionesAsociados());
+				request.getSession().setAttribute("codigoReporte", tipoReporte);
+				
+				//TODO descomentar esto y validar tipo parametro
+//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreAspirante));
+//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
+//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
+//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
+//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 29L, resolucion));
+//				
+//				try {
+//					DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos);
+//				}catch (Exception e) {
+//					e.printStackTrace();
+//				}
+				
+				JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
+				action_find();
+			} else {
+				visibleImprConstanciaFechas = true;
+			}
+		} catch (Exception e) {
+			// getMensaje().mostrarMensaje(e.getMessage());
+			mensaje2 = e.getMessage();
+			this.visible = true;
+		}
+		return "";
+	}
+	
+	private String obtenerObservacionesAsociados(){
+		String observaciones = "";
+		try {
+			DTOInformacionPlancha infoPlanchas = DelegadoPlancha.getInstance()
+					.consultarInformacionPlancha(infoPlancha.getConsecutivoPlancha());			
+			List<String> listaObservaciones = new ArrayList<String>();
+			for (DTOMiembroPlancha titulares : infoPlanchas.getMiembrosTitulares()) {
+				listaObservaciones.add(consultarExcepcionesPorIdAsociado(titulares.getNumeroDocumento() + "",
+						infoPlancha.getConsecutivoPlancha() + ""));
+			}
+			for (DTOMiembroPlancha suplentes : infoPlanchas.getMiembrosSuplentes()) {				
+				listaObservaciones.add(consultarExcepcionesPorIdAsociado(suplentes.getNumeroDocumento() + "",
+						infoPlancha.getConsecutivoPlancha() + ""));
+			}
+			
+			for (String observacion : listaObservaciones) {
+				if(!observacion.equals(""))
+					observaciones += "\n" +observacion;
+			}
+		} catch (EleccionesDelegadosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return observaciones.isEmpty() ? null :observaciones;
+	}
+	
 	/**
 	 * Cierra el popup de generación de formato CO-FT-172
 	 * 
@@ -1037,8 +1159,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 				} else {
 					limpiarCampos();
 					throw new Exception(
-							"El documento ingresado no corresponde a ningún Cabeza de Plancha o la cédula de "
-									+ "ciudadanía ingresada corresponde a la Cabeza de una plancha que no pertenece a la zona electoral "
+							"El documento ingresado no corresponde a ningún Cabeza de Plancha o la Cédula de "
+									+ "Ciudadanía ingresada corresponde a un Cabeza de una plancha que no pertenece a la zona electoral "
 									+ "que usted está asociado señor usuario");
 				}
 			}
@@ -1371,17 +1493,9 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					mostrarExcepciones = true;
 					mensajeExcepciones = "";
 					for (int i = 0; i < listaExcepciones.size(); i++) {
-						listaExcepciones
-								.get(i)
-								.setDescExcepcion(
-										listaExcepciones
-												.get(i)
-												.getDescExcepcion()
-												.replace(
-														"Por favor tener en cuenta las siguientes observaciones:",
-														""));
-						listaExcepciones.get(i).getDescExcepcion().replace(
-								"</br>", "\n");
+						listaExcepciones.get(i).setDescExcepcion(listaExcepciones.get(i).getDescExcepcion()
+								.replace("Por favor tener en cuenta las siguientes observaciones:", ""));
+						listaExcepciones.get(i).getDescExcepcion().replace("</br>", "\n");
 					}
 				}
 			}
@@ -1394,6 +1508,39 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		return null;
 	}
 
+	/**
+	 * Nuevo método para la consulta de excepciones del asociado.
+	 */
+	public String consultarExcepcionesPorIdAsociado(String identificacion,
+			String consecutivoPlancha) {
+		List<ElePlanchaExcepcion> listaExcepcionesAsoc = null;
+		String obs = "";
+		try {
+			if (identificacion != null) {
+				listaExcepcionesAsoc = new ArrayList<ElePlanchaExcepcion>(DelegadoLogicaPlanchaExcepcion.getInstance()
+						.consultarExcepciones(identificacion, consecutivoPlancha));
+
+				if (!listaExcepcionesAsoc.isEmpty()) {
+					for (int i = 0; i < listaExcepcionesAsoc.size(); i++) {
+						obs = listaExcepcionesAsoc.get(i).getDescExcepcion();
+						obs = obs.replace("Por favor tener en cuenta las siguientes observaciones: </br>", "");
+						obs = obs.replace(
+								"- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.",
+								"");
+						if(i == 0 && !obs.isEmpty()) {
+							obs = ("Asociado: " + identificacion + "\n") + obs;
+						}
+						obs = obs.replace("<br/>", "\n");
+					}
+				}
+			}
+		} catch (Exception e) {
+			mensaje2 = e.getMessage();
+			this.visible = true;
+		}
+		return obs;
+	}
+	
 	public void setTxtNumDoc(HtmlInputText txtNumDoc) {
 		this.txtNumDoc = txtNumDoc;
 	}
@@ -1767,12 +1914,25 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		this.mensajeConfirmacion = "¿Está seguro que desea radicar la plancha e imprimir la constancia?";
 		return "";
 	}
-
+	
 	public String actionCloseConfirmar() {
 		this.visibleConfirmarRadicacion = false;
 		this.mensajeConfirmacion = "";
 		return "";
 	}
+	
+	public String actionConfirmarcumplimientoRequisitos() {
+		this.visibleConfirmarCumplimientoRequisitos = Boolean.TRUE;
+		this.mensajeConfirmacion = "¿Está seguro que desea imprimir el Certificado de Cumplimiento de Requisitos?";
+		return "";
+	}
+	
+	public String actionCloseConfirmarCumplimientoRequisitos() {
+		this.visibleConfirmarCumplimientoRequisitos = false;
+		this.mensajeConfirmacion = "";
+		return "";
+	}
+
 
 	public void action_cancelar_inadmision() {
 		limpiar_formulario();
@@ -2206,4 +2366,13 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	public void setNombreAccionante(String nombreAccionante) {
 		this.nombreAccionante = nombreAccionante;
 	}
+
+	public boolean isVisibleConfirmarCumplimientoRequisitos() {
+		return visibleConfirmarCumplimientoRequisitos;
+	}
+
+	public void setVisibleConfirmarCumplimientoRequisitos(boolean visibleConfirmarCumplimientoRequisitos) {
+		this.visibleConfirmarCumplimientoRequisitos = visibleConfirmarCumplimientoRequisitos;
+	}
+	
 }

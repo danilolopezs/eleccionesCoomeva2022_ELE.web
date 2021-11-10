@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_209" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="2.1435888100000136"/>
+	<property name="ireport.zoom" value="1.464100000000009"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="20"/>
 	<parameter name="zona" class="java.lang.String">
 		<defaultValueExpression><![CDATA["001"]]></defaultValueExpression>
 	</parameter>
@@ -24,8 +24,8 @@
 	<parameter name="acta" class="java.lang.String">
 		<defaultValueExpression><![CDATA["004"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="fecha" class="java.util.Date">
-		<defaultValueExpression><![CDATA["16/05/2016"]]></defaultValueExpression>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ciudad" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."]]></defaultValueExpression>
@@ -76,7 +76,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="35" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<staticText>
 				<reportElement x="338" y="11" width="29" height="14" forecolor="#009232"/>
 				<textElement markup="none">
@@ -114,8 +114,8 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="42" y="13" width="293" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<reportElement x="120" y="13" width="215" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -136,19 +136,19 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="497" splitType="Stretch">
+		<band height="474" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Transparent" x="39" y="4" width="493" height="478"/>
+				<reportElement mode="Transparent" x="39" y="4" width="493" height="452"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="61" y="446" width="198" height="12" forecolor="#000000"/>
+				<reportElement x="61" y="430" width="198" height="12" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Nombre Y Firma del Presidente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="292" y="445" width="215" height="12" forecolor="#000000"/>
+				<reportElement x="292" y="429" width="215" height="12" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -169,7 +169,7 @@
 				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral expide Resolución No. " +$P{resolucion}+ " de Inadmisión de la Plancha encabezada por Usted, según consta en Acta No. " +$P{acta}+ " de fecha " +$P{fecha}.toLocaleString()+ ", inscrita en la ciudad de " +$P{ciudad}.toUpperCase()+ " por las siguientes razones:"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral expide Resolución No. " +$P{resolucion}+ " de Inadmisión de la Plancha encabezada por Usted, según consta en Acta No. " +$P{acta}+ " de fecha " +$P{fecha}+ ", inscrita en la ciudad de " +$P{ciudad}.toUpperCase()+ " por las siguientes razones:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="61" y="97" width="446" height="18"/>
@@ -193,7 +193,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["3. " +$P{razon3}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="25" y="4" width="14" height="478" forecolor="#009232" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="25" y="4" width="14" height="452" forecolor="#009232" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" rotation="Left" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -235,10 +235,10 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["Para constancia se firma el día " +$P{dia}+ " del mes " +$P{mes}+ " del año " +$P{año}+ "."]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="61" y="445" width="198" height="1"/>
+				<reportElement x="61" y="429" width="198" height="1"/>
 			</line>
 			<line>
-				<reportElement x="292" y="444" width="215" height="1"/>
+				<reportElement x="292" y="428" width="215" height="1"/>
 			</line>
 		</band>
 	</detail>

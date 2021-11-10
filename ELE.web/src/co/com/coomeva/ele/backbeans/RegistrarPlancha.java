@@ -398,8 +398,8 @@ public class RegistrarPlancha extends BaseVista {
 				}
 			}
 
-			
-			if (this.consecutivoPlancha == null) {
+
+			if (this.consecutivoPlancha == null) { 			//si la plancha es nueva
 
 				DTOInformacionPlancha dtoInfoPlancha = DelegadoPlancha.getInstance().registrarPlancha(
 						this.miembrosPrincipales, this.miembrosSuplentes, this.numeroDocumentoUserEnSesion,
@@ -415,8 +415,8 @@ public class RegistrarPlancha extends BaseVista {
 				} else {
 					this.mensajeVista.setVisible(Boolean.TRUE);
 				}
-
-			} else {
+				
+			} else { //si la plancha ya existe
 
 				if ((listaRealMiembrosTitulares != null && listaRealMiembrosSuplentes != null)
 						&& (listaRealMiembrosSuplentes.size() > listaRealMiembrosTitulares.size())) {
@@ -461,7 +461,7 @@ public class RegistrarPlancha extends BaseVista {
 		return listaReal;
 	}
 
-	public String actionConfirmarFinalizarEnviarPlancha() {
+	public String c() {
 		this.visibleConfirmarEnviar = Boolean.TRUE;
 		this.mensajeConfirmacion = "¿Esta seguro que desea finalizar y enviar la plancha?";
 		return "";
@@ -678,7 +678,7 @@ public class RegistrarPlancha extends BaseVista {
 					this.fechaFirma != null ? WorkStrigs.getMes(this.fechaFirma.getMonth()) : "");
 			request.getSession().setAttribute("anioFirma",
 					this.fechaFirma != null ? WorkStrigs.getAnio(this.fechaFirma.getYear()) : "");
-
+			
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, this.ciudadUbicacion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 73L,

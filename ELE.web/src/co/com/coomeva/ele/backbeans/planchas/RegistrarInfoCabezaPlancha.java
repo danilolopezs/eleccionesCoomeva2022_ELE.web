@@ -68,12 +68,16 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	private boolean disabledImprimir = true;
 	private String mensajeIngresoInfoCabezaPlancha = "";
 	private String imageToBase64String;
+	private String nombreCabezaPlancha;
 
 	/** Variable de sesion id cabeza de plancha **/
 	Long numintCabezaPlancha = null;
 	Long numeroDocumentoCabezaPlancha = null;
 	Long numeroDocumentoAsociado = null;
+	Long numeroDocumentoSuplenteCabezaPlancha = null;
 	Long consecutivoPlancha = null;
+	Long numeroDocumentoConsulta = null;
+	
 
 	/** Variables para el suplente cabeza de placha; */
 	boolean esSuplente = false;
@@ -168,8 +172,10 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			if (numeroDocumentoAsociado.equals(numeroDocumentoCabezaPlancha)) {
 				dto = DelegadoCabezaPlancha.getInstance()
 						.consultarInformacionCabezaPlancha(numeroDocumentoCabezaPlancha);
-				esSuplente = false;
-				esCabezaPlancha = true;
+				esSuplente = Boolean.FALSE;
+				esCabezaPlancha = Boolean.TRUE;
+				numeroDocumentoCabezaPlancha = Long.valueOf(dto.getNumeroDocumento());
+				nombreCabezaPlancha = dto.getNombreCompleto();
 			} else {
 				dto = DelegadoCabezaPlancha.getInstance().consultarInformacionCabezaPlancha(numeroDocumentoAsociado);
 
@@ -184,11 +190,13 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 
 				if (miembrosSuplentes != null) {
 					for (DTOMiembroPlancha dtoMiembroPlancha : miembrosSuplentes) {
-						if (dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumentoAsociado)
-								&& dtoMiembroPlancha.getPosicionPlancha().equalsIgnoreCase("1")) {
-							esSuplente = true;
-							esCabezaPlancha = false;
-							break;
+						if(dtoMiembroPlancha.getPosicionPlancha().equalsIgnoreCase("1")) {
+							numeroDocumentoSuplenteCabezaPlancha = dtoMiembroPlancha.getNumeroDocumento();
+							if (dtoMiembroPlancha.getNumeroDocumento().equals(numeroDocumentoAsociado)) {
+								esSuplente = true;
+								esCabezaPlancha = false;
+								break;
+							}
 						}
 					}
 				}
@@ -320,9 +328,10 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	public void actionConsultarSuplente(ActionEvent evento) {
 		try {
 			limpiarCampos();
+			numeroDocumentoAsociado = numeroDocumentoConsulta;
 			consultarInformacionCabezaPlancha();
 			esCabezaPlancha = true;
-			visibleConsultarSuplente = false;
+			visibleConsultarSuplente = Boolean.FALSE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -330,7 +339,12 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 	}
 
 	public void action_mostrarConsulta() {
-		visibleConsultarSuplente = true;
+		visibleConsultarSuplente = Boolean.TRUE;
+		if(esSuplente) {
+			numeroDocumentoConsulta = numeroDocumentoCabezaPlancha;
+		} else {
+			numeroDocumentoConsulta = numeroDocumentoSuplenteCabezaPlancha;
+		}
 	}
 
 	private void limpiarCampos() {
@@ -457,6 +471,9 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			request.getSession().setAttribute("foto", String.valueOf(numeroDocumentoCabezaPlancha));
 			request.getSession().setAttribute("esSuplente", new Boolean(esSuplente));
 
+			request.getSession().setAttribute("cedulaCabezaPlancha",numeroDocumentoCabezaPlancha);
+			request.getSession().setAttribute("nombreCabezaPlancha",nombreCabezaPlancha);
+			
 			JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
 
 			this.visiblemensajeExito = true;
@@ -731,5 +748,13 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 
 	public void setVisiblemensajeExito(boolean visiblemensajeExito) {
 		this.visiblemensajeExito = visiblemensajeExito;
+	}
+
+	public Long getNumeroDocumentoConsulta() {
+		return numeroDocumentoConsulta;
+	}
+
+	public void setNumeroDocumentoConsulta(Long numeroDocumentoConsulta) {
+		this.numeroDocumentoConsulta = numeroDocumentoConsulta;
 	}
 }

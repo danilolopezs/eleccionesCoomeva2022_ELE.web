@@ -3,6 +3,7 @@ package co.com.coomeva.ele.logica;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.sidco.HibernateSessionFactorySidco;
 import co.com.coomeva.ele.entidades.sie.HibernateSessionFactorySie;
 import co.com.coomeva.util.acceso.UtilAcceso;
@@ -26,7 +27,7 @@ public class LogicaSidco {
 		Session session=null;
 		int f;
 		Query query=null;
-		session= HibernateSessionFactorySidco.getSession();
+		session= HibernateSessionFactoryElecciones2012.getSession();
 		query = session.getNamedQuery("consultar.horas.democracia.asociado");
 		query.setString(0, nroIdentificacion);
 		

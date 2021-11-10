@@ -384,7 +384,7 @@ if (self === top) {
 								value="#{etiquetas.lblDocumento}">
 							</ice:outputLabel>
 							<ice:inputText onkeypress="return keyCheck(event, this); "
-								value="#{registrarInfoCabezaPlancha.numeroDocumentoAsociado}">
+								value="#{registrarInfoCabezaPlancha.numeroDocumentoConsulta}">
 							</ice:inputText>
 						</ice:panelGrid>
 						<ice:commandButton value="#{etiquetas.lblBuscar}"

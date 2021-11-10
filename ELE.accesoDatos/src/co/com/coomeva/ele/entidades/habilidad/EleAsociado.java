@@ -14,7 +14,8 @@ import java.util.Set;
  * 
  */
 public class EleAsociado implements java.io.Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Long codigoAsociado;
 	private Long numeroDocumento;
 	private String descZonaAso;
@@ -25,6 +26,7 @@ public class EleAsociado implements java.io.Serializable {
 	private Integer fechaIngreso;
 	private Long codigoProfesion;
 	private String descProfesion;
+	private Integer horasCooperativas;
 	private Set<EleNovedad> eleNovedads = new HashSet<EleNovedad>(0);
 	private Set<EleInhabilidad> eleInhabilidads = new HashSet<EleInhabilidad>(0);
 
@@ -138,5 +140,13 @@ public class EleAsociado implements java.io.Serializable {
 
 	public void setDescProfesion(String descProfesion) {
 		this.descProfesion = descProfesion;
+	}
+
+	public Integer getHorasCooperativas() {
+		return horasCooperativas;
+	}
+
+	public void setHorasCooperativas(Integer horasCooperativas) {
+		this.horasCooperativas = horasCooperativas;
 	}
 }

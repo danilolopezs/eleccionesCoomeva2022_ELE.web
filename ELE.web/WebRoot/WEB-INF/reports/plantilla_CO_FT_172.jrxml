@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.4641000000000028"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="4"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="resolucion" class="java.lang.String"/>
 	<parameter name="acta" class="java.lang.String"/>
-	<parameter name="fechaActa" class="java.util.Date"/>
+	<parameter name="fechaActa" class="java.lang.String"/>
 	<parameter name="ciudadZona" class="java.lang.String"/>
 	<parameter name="dia" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
@@ -22,7 +22,7 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle>
-				<reportElement x="-21" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#009232"/>
+				<reportElement x="-20" y="-21" width="595" height="100" forecolor="#7D933C" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="0" y="12" width="555" height="25" forecolor="#FFFFFF"/>
@@ -105,16 +105,16 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="235" splitType="Stretch">
+		<band height="250" splitType="Stretch">
 			<staticText>
-				<reportElement x="39" y="4" width="10" height="214" forecolor="#00A732"/>
+				<reportElement x="39" y="4" width="10" height="231" forecolor="#00A732"/>
 				<textElement textAlignment="Center" rotation="Left">
-					<font size="5"/>
+					<font size="6"/>
 				</textElement>
 				<text><![CDATA[Vigilada por la Superintendencia de la Economia Solidaria NIT.: 890.300.625-1]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="49" y="0" width="471" height="218" forecolor="#000000"/>
+				<reportElement x="49" y="0" width="471" height="235" forecolor="#000000"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="50" y="0" width="470" height="4" forecolor="#000000" backcolor="#000000"/>

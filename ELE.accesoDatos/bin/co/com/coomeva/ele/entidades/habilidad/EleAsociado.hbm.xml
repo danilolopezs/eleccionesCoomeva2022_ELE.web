@@ -35,6 +35,9 @@
         <property name="descProfesion" type="java.lang.String">
             <column name="DESC_PROFESION" length="50" />
         </property>
+        <property name="horasCooperativas" type="java.lang.Integer">
+            <column name="HORAS_COOPERATIVAS" length="5" scale="0" />
+        </property>
         <set name="eleNovedads" inverse="true" lazy="true" table="ELE_NOVEDAD" fetch="select">
             <key>
                 <column name="CODIGO_ASOCIADO" precision="17" scale="0" />

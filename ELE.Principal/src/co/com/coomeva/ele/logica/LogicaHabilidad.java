@@ -178,7 +178,7 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		asociado = validaAntiguedadAsociado(asociado, cons++);
 		asociado = validaAntiguedadTitulo(asociado, cons++);
 		asociado = validaZonaAsociado(elZona, asociado, cons++);
-		//asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
+		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
 		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
 
 		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons++);
@@ -199,6 +199,24 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		 * + " " + nroIdentificacion + "				 " +
 		 * UtilAcceso.getParametroFuenteS("mensajes", "msgNoEmpleadoNatural2")); } }
 		 */
+	}
+	
+	public EleAsociadoDTO validateAsociadoObservacionesDTO(String nroIdentificacion, EleZonas elZona, String nroCabPlancha)
+			throws Exception {
+		
+		EleAsociadoDTO asociado = null;
+		asociado = DelegadoClimae.getInstance().find(nroIdentificacion);
+		
+		Long cons = 0l;
+		asociado.setZonaPlancha(elZona);
+		asociado.setEstadoHabilidad(Boolean.TRUE);
+		
+		asociado = validaSancion(asociado, nroIdentificacion, cons++);
+		asociado = validaAntiguedadAsociado(asociado, cons++);
+		asociado = validadHorasDemocracia(nroIdentificacion, asociado, cons++);
+		asociado = validaSubComision(nroIdentificacion, asociado, cons++);
+		validaOtraPlancha(nroIdentificacion, nroCabPlancha, asociado, cons++);
+		return asociado;
 	}
 
 	private EleAsociadoDTO validaOtraPlancha(String nroIdentificacion, String nroCabPlancha, EleAsociadoDTO asociado,
@@ -226,8 +244,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 
 	private EleAsociadoDTO validadHorasDemocracia(String nroIdentificacion, EleAsociadoDTO asociado, Long cons)
 			throws Exception {
-		Long horasAsociado = DelegadoSidco.getInstance().consultarHorasDemocraciaAsociado(nroIdentificacion);
-		if(horasAsociado != null && horasAsociado.longValue() > 0) {
+		Long horasAsociado = LogicaAsociado.getInstance().consultarHorasDemocraciaAsociado(nroIdentificacion);
+		if(horasAsociado != null) {
 			Integer horasDemocracia = UtilAcceso.getParametroFuenteI("parametros", "horasDemocracia");
 			if(horasDemocracia <= horasAsociado ) {
 				cons++;
@@ -268,6 +286,8 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 	private EleAsociadoDTO validaAntiguedadTitulo(EleAsociadoDTO asociado, Long cons) {
 		if (asociado.getAntiguedadDesdeObtencionTitulo() < UtilAcceso.getParametroFuenteI("parametros",
 				"antiguedadMinima")) {
+//			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
+//					UtilAcceso.getParametroFuenteS("mensajes", "msgAsociadoDebeAcreditarOficio")));
 			asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 					UtilAcceso.getParametroFuenteS("mensajes", "vldAsociadoFechaObtencionTitulo")));
 			asociado.setEstadoHabilidad(false);

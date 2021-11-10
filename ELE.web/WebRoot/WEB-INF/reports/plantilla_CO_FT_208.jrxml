@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.zoom" value="1.6105100000000023"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="132"/>
+	<property name="ireport.y" value="77"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="fechaActual" class="java.util.Date"/>
 	<parameter name="comision" class="java.lang.String"/>
@@ -88,12 +88,12 @@
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="308" y="14" width="132" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA["|  " + $P{anio} + "  |  " + $P{mes} + "  |  " + $P{dia} + "  |"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["|  " + $P{anio} + "  |  " + $P{mes} + "  |  " + $P{dia} + "  |"]]></textFieldExpression>
 			</textField>
 			<textField pattern="h.mm a" isBlankWhenNull="true">
 				<reportElement x="441" y="14" width="79" height="18"/>
@@ -121,7 +121,7 @@
 C.C.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="187" width="204" height="24" forecolor="#000000"/>
+				<reportElement x="285" y="187" width="219" height="24" forecolor="#000000"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -132,7 +132,7 @@ C.C.]]></text>
 				<reportElement x="64" y="185" width="207" height="1" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="300" y="185" width="203" height="1" forecolor="#000000"/>
+				<reportElement x="285" y="185" width="218" height="1" forecolor="#000000"/>
 			</line>
 			<staticText>
 				<reportElement x="38" y="0" width="10" height="242" forecolor="#009232"/>
@@ -144,14 +144,14 @@ C.C.]]></text>
 			<staticText>
 				<reportElement x="64" y="112" width="207" height="15" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[Nombre(s) y Apellido(s) de quien presenta la Plancha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="112" width="204" height="15" forecolor="#000000"/>
+				<reportElement x="285" y="112" width="218" height="15" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[Nombre(s) y Apellido(s) de quien recibe y radica la Plancha
 ]]></text>
@@ -160,12 +160,12 @@ C.C.]]></text>
 				<reportElement x="64" y="151" width="207" height="1" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="300" y="151" width="204" height="1" forecolor="#000000"/>
+				<reportElement x="285" y="151" width="218" height="1" forecolor="#000000"/>
 			</line>
 			<staticText>
 				<reportElement x="64" y="216" width="439" height="18" forecolor="#009232"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nota: La entrega de esta constancia no significa la admisión y aceptación de la Plancha.]]></text>
 			</staticText>
@@ -177,7 +177,7 @@ C.C.]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombreEntrega}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="131" width="204" height="20"/>
+				<reportElement x="285" y="131" width="218" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
@@ -186,7 +186,7 @@ C.C.]]></text>
 			<textField>
 				<reportElement x="64" y="15" width="440" height="88"/>
 				<textElement textAlignment="Justified"/>
-				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral o Comite Auxiliar  de la ciudad de " + $P{ciudad}.toUpperCase()+ " expide constancia de recibo y radicación de la Plancha encabezada por " + $P{nombre}.toUpperCase() + " identificado con cédula de ciudadanía número " + $P{cedula} + " de " + $P{ciudadCedula}.toUpperCase()+ ", el día " + $P{dia}  + " del mes de " + $P{mes} +  " del año " + $P{anio} + "." ]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral o Comite Auxiliar  de la ciudad de " + $P{ciudad}.toUpperCase()+ " expide constancia de recibo y radicación de la Plancha encabezada por " + $P{nombre}.toUpperCase() + " identificado con cédula de ciudadanía número " + $P{cedula} + " de " + $P{ciudadCedula}.toUpperCase()+ ", el día " + $P{dia}  + " del mes " + $P{mes} +  " del año " + $P{anio} + "."]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

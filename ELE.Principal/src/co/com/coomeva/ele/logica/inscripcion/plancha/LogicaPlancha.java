@@ -19,6 +19,7 @@ import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoClimae;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
 import co.com.coomeva.ele.delegado.DelegadoSie;
+import co.com.coomeva.ele.delegado.DelegadoZona;
 import co.com.coomeva.ele.delegado.formulario.DelegadoFormulario;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
 import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
@@ -31,6 +32,7 @@ import co.com.coomeva.ele.entidades.habilidad.EleInhabilidad;
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
 import co.com.coomeva.ele.entidades.habilidad.dao.EleAsociadoDAO;
 import co.com.coomeva.ele.entidades.planchas.EleInhabilidades;
+import co.com.coomeva.ele.entidades.planchas.EleZonas;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaAsociadoAudDAO;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaAsociadoDAO;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaDAO;
@@ -241,6 +243,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 			miembros.get(posicionPlancha - 1).setApellidosNombres(
 					getNombreAsociadoConFormato(asociadoDTO)+ " " +getApellidoAsociadoConFormato(asociadoDTO));
 
+			//fijar email de asociado
 			if(!UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscritoEmail")
 					.equals(asociadoDTO.getEmail())) {
 				miembros.get(posicionPlancha -1).setCorreo(asociadoDTO.getEmail());
@@ -249,6 +252,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				miembros.get(posicionPlancha -1).setCorreo(correo);
 			}
 			
+			//fijar correo del asociado
 			if (UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "noInscrito")
 					.equals(asociadoDTO.getProfesion())) {
 				
@@ -274,19 +278,38 @@ public class LogicaPlancha implements ILogicaPlancha {
 			} else {
 				miembros.get(posicionPlancha - 1).setProfesion(asociadoDTO.getProfesion());
 			}
-			
-			// Validar si el asociado es hábil para elegir y ser elegido
-			DTOHabilidadAsociado habilidadAso = LogicaAsociado.getInstance()
-					.consultarHabilidadAsociado(numeroDocumento);
-			boolean esAsociadoHabil = Boolean.FALSE;
-			if (habilidadAso != null) {
-				esAsociadoHabil = habilidadAso.getAsociadoHabil();
-				if (!esAsociadoHabil && !habilidadAso.getObservacionesInhabilidades().isEmpty()) {
-					for (String inhabilidad : habilidadAso.getObservacionesInhabilidades()) {
-						excepciones.append("- " + inhabilidad + "</br>");
+			int f;
+			String cedulaCabeza = miembros.get(0).getNumeroDocumento()+"";
+			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(cedulaCabeza);
+			try {
+				EleAsociadoDTO aso = DelegadoHabilidad.getInstance().validateAsociadoObservacionesDTO(
+						miembros.get(posicionPlancha - 1).getNumeroDocumento()+"", elZona, cedulaCabeza);
+				if(aso.getListaInhabilidades() != null && !aso.getListaInhabilidades().isEmpty()) {
+					String observaciones = "";
+					for (EleInhabilidades inha : aso.getListaInhabilidades()) {
+						observaciones += "- " +inha.getInhabilidad()+ "<br/>";
+					}
+					if(!observaciones.isEmpty()) {
+						excepciones.append(observaciones);
 					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new EleccionesDelegadosException(e.getMessage(), e);
 			}
+			
+			// Validar si el asociado es hábil para elegir y ser elegido
+//			DTOHabilidadAsociado habilidadAso = LogicaAsociado.getInstance()
+//					.consultarHabilidadAsociado(numeroDocumento);
+//			boolean esAsociadoHabil = Boolean.FALSE;
+//			if (habilidadAso != null) {
+//				esAsociadoHabil = habilidadAso.getAsociadoHabil();
+//				if (!esAsociadoHabil && !habilidadAso.getObservacionesInhabilidades().isEmpty()) {
+//					for (String inhabilidad : habilidadAso.getObservacionesInhabilidades()) {
+//						excepciones.append("- " + inhabilidad + "</br>");
+//					}
+//				}
+//			}
 			
 			String mensajesExcepciones = excepciones.toString();
 			if (mensajesExcepciones != null && !"".equals(mensajesExcepciones)) {
@@ -561,7 +584,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 				miembroPlancha.setProfesion(asociadoDTO.getProfesion());
 			}
 
-			if (tipoInscritoTitular.equals(asociado.getTipoInscrito())) {
+			if (asociado.getTipoInscrito().equals(tipoInscritoTitular)) {
 				miembroPlancha.setTipoMiembro(tipoInscritoTitular);
 				miembrosTitulares.add(miembroPlancha);
 
@@ -897,6 +920,9 @@ public class LogicaPlancha implements ILogicaPlancha {
 					modificarPlancha(elePlancha);
 				}
 			}
+			
+			registrarExcepcionesPlancha(miembros, consecutivoPlancha);
+			
 
 			return COD_ESTADO_PLANCHA_REGISTRADA;
 
@@ -1128,8 +1154,8 @@ public class LogicaPlancha implements ILogicaPlancha {
 			registrarMiembrosEnPlancha(listaRealMiembrosTitulares, tipoInscritoTitular, consecutivoPlancha, session);
 			registrarMiembrosEnPlancha(listaRealMiembrosSuplentes, tipoInscritoSuplente, consecutivoPlancha, session);
 
-			registrarExcepcionesPlancha(listaRealMiembrosTitulares, consecutivoPlancha);
-			registrarExcepcionesPlancha(listaRealMiembrosSuplentes, consecutivoPlancha);
+			registrarExcepcionesPlancha(miembrosTitulares, consecutivoPlancha);
+			registrarExcepcionesPlancha(miembrosSuplentes, consecutivoPlancha);
 
 			// Registramos las excepciones que ya no están como tal relacionadas
 			// a un asociado
@@ -1302,7 +1328,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 	 */
 	private void registrarExcepcionesPlancha(List<DTOMiembroPlancha> miembros, Long consecutivoPlancha)
 			throws EleccionesDelegadosException {
-
 		try {
 			iLogicaPlanchaExcepcion = new LogicaPlanchaExcepcion();
 			for (DTOMiembroPlancha dtoMiembroPlancha : miembros) {
@@ -1312,20 +1337,18 @@ public class LogicaPlancha implements ILogicaPlancha {
 						&& dtoMiembroPlancha.getObservacionAdicionMiembro().length() > 1) {
 					Long codigoAsociado = LogicaAsociado.getInstance()
 							.consultarCodigoAsociadoPorNumeroDocumento(dtoMiembroPlancha.getNumeroDocumento());
-
+					
 					String cadenaEliminar = "- " + UtilAcceso.getParametroFuenteS(
 							ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES, "msgAsociadoDebeAcreditarOficio");
-					boolean excepcionProfesion = false;
 					if (dtoMiembroPlancha.getObservacionAdicionMiembro().contains(cadenaEliminar)) {
-						dtoMiembroPlancha.setObservacionAdicionMiembro(
-								dtoMiembroPlancha.getObservacionAdicionMiembro().substring(0,
-										dtoMiembroPlancha.getObservacionAdicionMiembro().indexOf(cadenaEliminar)));
-						excepcionProfesion = true;
+						String obs = dtoMiembroPlancha.getObservacionAdicionMiembro();
+						dtoMiembroPlancha
+								.setObservacionAdicionMiembro(obs.substring(0, obs.length()));
 					}
 					// Registrar excepción excepto si no tiene profesión:
-					if (!excepcionProfesion) {
+					if(!dtoMiembroPlancha.getObservacionAdicionMiembro().isEmpty()) {
 						iLogicaPlanchaExcepcion.registrarPlanchaExcepcion(consecutivoPlancha, codigoAsociado,
-								dtoMiembroPlancha.getObservacionAdicionMiembro());
+							dtoMiembroPlancha.getObservacionAdicionMiembro());
 					}
 				}
 			}
@@ -1692,7 +1715,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 		StringBuffer excepcionesEnvioPlancha = new StringBuffer();
 		boolean usuarioQueRegistraEsTitular = Boolean.FALSE;
 		for (DTOMiembroPlancha dtoMiembroPlancha : miembrosTitulares) {
-
 			if (dtoMiembroPlancha.getNumeroDocumento() != null) {
 				if (!asociadoPertenceOtraPlancha(dtoMiembroPlancha.getNumeroDocumento().toString(), consecutivoPlancha)
 						.isEmpty()) {
@@ -1703,11 +1725,9 @@ public class LogicaPlancha implements ILogicaPlancha {
 									dtoMiembroPlancha.getNumeroDocumento()));
 				}
 			}
-
 			if (dtoMiembroPlancha.getNumeroDocumento() != null
 					&& dtoMiembroPlancha.getNumeroDocumento().equals(numDocUsuarioRegistra)) {
 				usuarioQueRegistraEsTitular = Boolean.TRUE;
-				break;
 			}
 		}
 
@@ -1721,7 +1741,6 @@ public class LogicaPlancha implements ILogicaPlancha {
 		}
 
 		List<Long> miembrosComunes = hallarMiembroComunesListas(miembrosTitulares, miembrosSuplentes);
-
 		if (miembrosComunes != null && !miembrosComunes.isEmpty()) {
 			StringBuffer asociadosComunes = new StringBuffer();
 			asociadosComunes.append("Estimado asociado, los asociados con las siguientes"
@@ -1729,13 +1748,12 @@ public class LogicaPlancha implements ILogicaPlancha {
 			for (Long miembroComun : miembrosComunes) {
 				asociadosComunes.append(miembroComun.toString() + ", ");
 			}
-			asociadosComunes.append(
-					"por favor corrija la información ingresada de forma que estos no existan en ambas listas");
+			asociadosComunes
+					.append("por favor corrija la información ingresada de forma que estos no existan en ambas listas");
 			throw new EleccionesDelegadosException(asociadosComunes.toString());
 		}
 
 		miembrosSuplentes = obtenerListaRealMiembros(miembrosSuplentes);
-
 		if (aplicaValidaciones && miembrosSuplentes.size() < 1) {
 			// throw new EleccionesDelegadosException(
 			// "Estimado Asociado, recuerde que la plancha debe "
@@ -1771,7 +1789,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 		if (admiteSuplentes) {
 			modificarMiembrosPlanchas(miembrosSuplentes, TIPO_INSCRITO_SUPLENTE, consecutivoPlancha, false);
 		}
-
+		
 		ElePlancha plancha = new ElePlanchaDAO().findById(consecutivoPlancha);
 
 		Session session = HibernateSessionFactoryElecciones2012.getSession();

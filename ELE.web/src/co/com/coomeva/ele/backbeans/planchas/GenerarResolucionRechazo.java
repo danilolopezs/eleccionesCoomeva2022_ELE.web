@@ -1,5 +1,6 @@
 package co.com.coomeva.ele.backbeans.planchas;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.context.FacesContext;
@@ -95,17 +96,18 @@ public class GenerarResolucionRechazo {
 	private void generarformulario(InfoDetalleFormatoPlanchaDTO dto) {
 		HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		Date fechaElaboracionDoc = new Date();
+		SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
 		
 		request.getSession().setAttribute("zonaElectoral", dto.getNumeroComisionElectoral());
 		request.getSession().setAttribute("nombreAsociado", dto.getNombresApellidosAsociadoCabeza());
 		request.getSession().setAttribute("cedulaAsociado", dto.getNumeroDocumento().toString());
 		request.getSession().setAttribute("numResolucion", dto.getNumeroResolucion().toString());
 		request.getSession().setAttribute("numActa", dto.getNumeroActa().toString());
-		request.getSession().setAttribute("fecha", fechaElaboracionDoc);
+		request.getSession().setAttribute("fecha", dt1.format(fechaElaboracionDoc));
 		request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaResolucion.getDate()):""); 
-		request.getSession().setAttribute("mes",fechaElaboracionDoc!=null?WorkStrigs.getMes(fechaResolucion.getMonth()):""); 
+		request.getSession().setAttribute("mes",String.valueOf(fechaResolucion.getMonth()+1));
 		request.getSession().setAttribute("anio",fechaElaboracionDoc!=null?WorkStrigs.getAnio(fechaResolucion.getYear()):"");
-		request.getSession().setAttribute("mesActa",fechaElaboracionDoc!=null?WorkStrigs.getMes(dto.getFechaActa().getMonth()):""); 
+		request.getSession().setAttribute("mesActa",String.valueOf(dto.getFechaActa().getMonth()+1)); 
 		
 		request.getSession().setAttribute("codigoReporte", "173");
 		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");

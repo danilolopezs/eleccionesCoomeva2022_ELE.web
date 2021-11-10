@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.4641000000000022"/>
+	<property name="ireport.zoom" value="1.2100000000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="83"/>
+	<property name="ireport.y" value="52"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="resolucion" class="java.lang.String"/>
 	<parameter name="cedula" class="java.lang.String"/>
 	<parameter name="acta" class="java.lang.String"/>
-	<parameter name="fechaActa" class="java.util.Date"/>
+	<parameter name="fechaActa" class="java.lang.String"/>
 	<parameter name="dia" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="anio" class="java.lang.String"/>
@@ -152,7 +152,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Para constancia se firma el día " +$P{fechaActa}+ " del mes " + $P{mes} + " del año " +$P{anio} + "."]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Para constancia se firma el día " +$P{dia}+ " del mes " + $P{mes} + " del año " +$P{anio} + "."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="71" y="16" width="427" height="20"/>
@@ -166,7 +166,7 @@
 				<textElement textAlignment="Justified">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral de la Zona Electoral No. " + $P{zona} + " expide Resolución No. " + $P{resolucion} + " de Rechazo de la Plancha inscrita por el Asociado(a) " + $P{nombre}.toUpperCase()+ " identificado con cédula de ciudadanía Número " + $P{cedula} + " según consta en el Acta No. " +$P{acta} + " del mes de " + $P{mesActa} + ", por las siguientes razones:"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral de la Zona Electoral No. " + $P{zona} + " expide Resolución No. " + $P{resolucion} + " de Rechazo de la Plancha inscrita por el Asociado(a) " + $P{nombre}.toUpperCase()+ " identificado con cédula de ciudadanía Número " + $P{cedula} + " según consta en el Acta No. " +$P{acta} + " del mes " + $P{mesActa} + ", por las siguientes razones:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="71" y="201" width="427" height="60"/>

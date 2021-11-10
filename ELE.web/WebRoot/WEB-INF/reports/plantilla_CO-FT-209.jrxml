@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CO-FT-209" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.331000000000004"/>
+	<property name="ireport.zoom" value="1.9487171000000083"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="405"/>
 	<parameter name="zona" class="java.lang.String">
 		<defaultValueExpression><![CDATA["001"]]></defaultValueExpression>
 	</parameter>
@@ -100,9 +100,9 @@
 				<text><![CDATA[Zonal Electoral No.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="95" y="18" width="202" height="17"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
+				<reportElement x="121" y="14" width="176" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
@@ -117,39 +117,39 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<line>
-				<reportElement x="462" y="4" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="462" y="14" width="1" height="21" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="408" y="4" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="408" y="14" width="1" height="21" forecolor="#000000"/>
 			</line>
 			<line>
-				<reportElement x="360" y="4" width="1" height="31" forecolor="#000000"/>
+				<reportElement x="360" y="14" width="1" height="21" forecolor="#000000"/>
 			</line>
 			<textField>
-				<reportElement x="371" y="18" width="30" height="17"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
+				<reportElement x="361" y="14" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{año}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="409" y="18" width="53" height="17"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
+				<reportElement x="409" y="14" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="473" y="18" width="32" height="17"/>
-				<textElement textAlignment="Center">
-					<font size="10"/>
+				<reportElement x="465" y="14" width="34" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="500" splitType="Stretch">
+		<band height="510" splitType="Stretch">
 			<rectangle>
 				<reportElement x="40" y="4" width="470" height="496" forecolor="#000000"/>
 			</rectangle>
@@ -166,7 +166,7 @@
 			<textField>
 				<reportElement x="63" y="19" width="427" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["Asociado(a) "+ $P{nombre} + " (Cabeza de Plancha)."]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Asociado(a) "+ $P{nombre}.toUpperCase() + " (Cabeza de Plancha)."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="63" y="249" width="427" height="46"/>
@@ -176,7 +176,7 @@
 			<textField>
 				<reportElement x="63" y="50" width="427" height="57"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral expide Resolución No. " + $P{resolucion} + " de Inadmisión de la Plancha encabezada por Usted, según consta en Acta No. " + $P{acta}+ " de fecha " + $P{fecha} + ", inscrita en la ciudad de " + $P{ciudad}.toUpperCase() + ", por las siguientes razones:"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["La Comisión Electoral expide Resolución No. " + $P{resolucion} + " de Inadmisión de la Plancha encabezada por Usted, según consta en Acta No. " + $P{acta}+ " de fecha " + new SimpleDateFormat("dd-MM-yyyy").format($P{fecha}) + ", inscrita en la ciudad de " + $P{ciudad}.toUpperCase() + ", por las siguientes razones:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="63" y="118" width="427" height="20"/>
@@ -199,24 +199,28 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["4. " + $P{razon4}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="63" y="418" width="427" height="20"/>
+				<reportElement x="63" y="408" width="427" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Para constancia se firma el día " + $P{dia}+ " del mes " + $P{mes} + " del año " + $P{año} + "."]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="95" y="470" width="142" height="1"/>
+				<reportElement x="63" y="470" width="180" height="1"/>
 			</line>
 			<line>
-				<reportElement x="329" y="469" width="134" height="1"/>
+				<reportElement x="309" y="470" width="181" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="116" y="469" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="63" y="471" width="180" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
 				<text><![CDATA[Firma del Presidente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="346" y="469" width="100" height="20"/>
-				<textElement/>
+				<reportElement x="309" y="471" width="181" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
 				<text><![CDATA[Firma del Secretario]]></text>
 			</staticText>
 			<textField>
@@ -225,7 +229,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA["Contra la presente Resolución proceden los recursos de Reposición ante la Comisión Electoral y Apelación ante el Tribunal de Elecciones y Escrutinios , establecidos en el Código Electoral Resolución No. 652 del 15 de Julio de 2021 y en el Reglamento de Elecciones Resolución No. 459 del 15 de Julio de 2021."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="63" y="352" width="427" height="44"/>
+				<reportElement x="63" y="354" width="427" height="44"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["La presente Resolución será comunicada al interesado, a la dirección que tenga registrada en la Cooperativa, en su condición de asociado, de acuerdo con lo previsto en el Artículo 110 del Código Electoral."]]></textFieldExpression>
 			</textField>
