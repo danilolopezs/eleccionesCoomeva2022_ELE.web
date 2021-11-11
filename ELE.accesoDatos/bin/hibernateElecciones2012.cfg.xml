@@ -128,6 +128,26 @@
 			resource="co/com/coomeva/ele/entidades/planchas/dosmildoce/EleZonaElectoralEspecial.hbm.xml" />
 		<mapping
 			resource="co/com/coomeva/ele/entidades/planchas/EleSubcomision.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/ElePrincipales.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleSuplentes.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/ElePlanchas.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleCabPlancha.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleAsesores.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleExperienciaLaboral.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleInhabilidades.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleLog.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleZonas.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleZonasFinanciero.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

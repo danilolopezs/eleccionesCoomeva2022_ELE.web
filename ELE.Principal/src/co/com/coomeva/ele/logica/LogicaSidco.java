@@ -4,9 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
-import co.com.coomeva.ele.entidades.sidco.HibernateSessionFactorySidco;
-import co.com.coomeva.ele.entidades.sie.HibernateSessionFactorySie;
-import co.com.coomeva.util.acceso.UtilAcceso;
 
 public class LogicaSidco {
 

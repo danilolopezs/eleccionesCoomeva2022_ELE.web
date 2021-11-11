@@ -1,11 +1,7 @@
 package co.com.coomeva.ele.logica;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-
 import co.com.coomeva.ele.entidades.planchas.EleSubcomision;
 import co.com.coomeva.ele.entidades.planchas.EleSubcomisionDAO;
-import co.com.coomeva.ele.entidades.sie.HibernateSessionFactorySie;
 import co.com.coomeva.util.acceso.UtilAcceso;
 
 public class LogicaSubComision extends EleSubcomisionDAO {

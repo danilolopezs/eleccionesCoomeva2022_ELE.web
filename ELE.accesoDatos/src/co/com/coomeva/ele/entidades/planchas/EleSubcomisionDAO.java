@@ -27,7 +27,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public void save(EleSubcomision transientInstance) {
 		log.debug("saving EleSubcomision instance");
 		try {
-			getSession().save(transientInstance);
+			getSession2012().save(transientInstance);
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
@@ -38,7 +38,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public void delete(EleSubcomision persistentInstance) {
 		log.debug("deleting EleSubcomision instance");
 		try {
-			getSession().delete(persistentInstance);
+			getSession2012().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -49,7 +49,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public EleSubcomision findById(java.lang.String id) {
 		log.debug("getting EleSubcomision instance with id: " + id);
 		try {
-			EleSubcomision instance = (EleSubcomision) getSession().get(
+			EleSubcomision instance = (EleSubcomision) getSession2012().get(
 					"co.com.coomeva.ele.entidades.planchas.EleSubcomision", id);
 			return instance;
 		} catch (RuntimeException re) {
@@ -61,7 +61,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public List findByExample(EleSubcomision instance) {
 		log.debug("finding EleSubcomision instance by example");
 		try {
-			List results = getSession().createCriteria(
+			List results = getSession2012().createCriteria(
 					"co.com.coomeva.ele.entidades.planchas.EleSubcomision")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
@@ -79,7 +79,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 		try {
 			String queryString = "from EleSubcomision as model where model."
 					+ propertyName + "= ?";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getSession2012().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -96,7 +96,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 		log.debug("finding all EleSubcomision instances");
 		try {
 			String queryString = "from EleSubcomision";
-			Query queryObject = getSession().createQuery(queryString);
+			Query queryObject = getSession2012().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -107,7 +107,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public EleSubcomision merge(EleSubcomision detachedInstance) {
 		log.debug("merging EleSubcomision instance");
 		try {
-			EleSubcomision result = (EleSubcomision) getSession().merge(
+			EleSubcomision result = (EleSubcomision) getSession2012().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -120,7 +120,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public void attachDirty(EleSubcomision instance) {
 		log.debug("attaching dirty EleSubcomision instance");
 		try {
-			getSession().saveOrUpdate(instance);
+			getSession2012().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -131,7 +131,7 @@ public class EleSubcomisionDAO extends BaseHibernateDAOPlanchas {
 	public void attachClean(EleSubcomision instance) {
 		log.debug("attaching clean EleSubcomision instance");
 		try {
-			getSession().lock(instance, LockMode.NONE);
+			getSession2012().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

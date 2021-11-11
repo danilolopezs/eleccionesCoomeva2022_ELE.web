@@ -38,33 +38,37 @@
 	
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleAsesores.hbm.xml" />
+	<!-- 
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleCabPlancha.hbm.xml" />
+		
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleExperienciaLaboral.hbm.xml" />
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleInhabilidades.hbm.xml" />
 	<mapping
-		resource="co/com/coomeva/ele/entidades/planchas/EleLog.hbm.xml" />
+		resource="co/com/coomeva/ele/entidades/planchas/EleLog.hbm.xml" />-->
+	<!-- 
 	<mapping
-		resource="co/com/coomeva/ele/entidades/planchas/ElePlanchas.hbm.xml" />
+		resource="co/com/coomeva/ele/entidades/planchas/ElePlanchas.hbm.xml" />-->
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/ElePParametros.hbm.xml" />
+	<!--
 	<mapping
-		resource="co/com/coomeva/ele/entidades/planchas/ElePrincipales.hbm.xml" />
+		resource="co/com/coomeva/ele/entidades/planchas/ElePrincipales.hbm.xml" />-->
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/ElePValorParametros.hbm.xml" />
 	
 	<!-- 
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleSubcomision.hbm.xml" />
-		-->
+		
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleSuplentes.hbm.xml" />
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleZonas.hbm.xml" />
 	<mapping
-		resource="co/com/coomeva/ele/entidades/planchas/EleZonasFinanciero.hbm.xml" />
+		resource="co/com/coomeva/ele/entidades/planchas/EleZonasFinanciero.hbm.xml" />-->
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/consultas/ConsultasUtilidad.hbm.xml" />
 	

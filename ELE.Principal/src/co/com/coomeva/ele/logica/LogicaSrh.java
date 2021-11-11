@@ -7,8 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
-import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
-import co.com.coomeva.ele.entidades.srh.HibernateSessionFactorySrh;
 import co.com.coomeva.ele.util.Validador;
 import co.com.coomeva.util.acceso.UtilAcceso;
 

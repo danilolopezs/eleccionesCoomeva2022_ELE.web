@@ -1501,7 +1501,9 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					for (int i = 0; i < listaExcepciones.size(); i++) {
 						listaExcepciones.get(i).setDescExcepcion(listaExcepciones.get(i).getDescExcepcion()
 								.replace("Por favor tener en cuenta las siguientes observaciones:", ""));
-						
+						listaExcepciones.get(i).setDescExcepcion(listaExcepciones.get(i).getDescExcepcion().replace(
+								"- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.",
+								""));
 						listaExcepciones.get(i).getDescExcepcion().replace("</br>", "\n");
 					}
 				}
@@ -1543,6 +1545,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 							}
 						}
 						obs = obs.replace("<br/>", "\n");
+						obs = obs.replace("</br>", "");
 					}
 				}
 			}

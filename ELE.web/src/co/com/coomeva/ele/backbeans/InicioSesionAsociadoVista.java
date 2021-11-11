@@ -1,17 +1,12 @@
 package co.com.coomeva.ele.backbeans;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.DefaultRowSorter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
-import co.com.coomeva.ele.delegado.DelegadoAutenticacion;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
 import co.com.coomeva.ele.delegado.DelegadoHabilidad;
@@ -20,7 +15,6 @@ import co.com.coomeva.ele.delegado.DelegadoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoPrincipal;
 import co.com.coomeva.ele.delegado.DelegadoSuplente;
 import co.com.coomeva.ele.delegado.DelegadoZona;
-import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.entidades.planchas.EleCabPlancha;
 import co.com.coomeva.ele.entidades.planchas.EleExperienciaLaboral;
 import co.com.coomeva.ele.entidades.planchas.ElePParametros;
@@ -34,12 +28,10 @@ import co.com.coomeva.ele.modelo.EleCabPlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePlanchaDTO;
 import co.com.coomeva.ele.modelo.ElePrincipalesDTO;
 import co.com.coomeva.ele.modelo.EleSuplentesDTO;
-import co.com.coomeva.ele.modelo.EleZonaElectoralEspecialDTO;
 import co.com.coomeva.ele.modelo.Parametro;
 import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.ele.util.Validador;
-import co.com.coomeva.profile.ws.client.CaasStub.Section;
 import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
 import co.com.coomeva.util.date.ManipulacionFechas;
@@ -60,7 +52,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
 	private String url = "https://secure.coomeva.com.co/pasaporte-Autenticacion-1/rest/";
 
-	public String action_ingreso_no_pass() {
+	public String action_ingreso() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -80,7 +72,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		return "";
 	}
 	
-	public String action_ingreso() {
+	public String action_ingreso_pass() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {

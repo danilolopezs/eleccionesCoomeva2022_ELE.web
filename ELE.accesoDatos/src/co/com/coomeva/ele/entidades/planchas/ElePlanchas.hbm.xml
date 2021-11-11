@@ -7,7 +7,7 @@
 
 <hibernate-mapping default-lazy="false">
 	<class name="co.com.coomeva.ele.entidades.planchas.ElePlanchas"
-		schema="ELECCION" table="ELE_PLANCHAS">
+		schema="ELECDB" table="ELE_PLANCHAS">
 		<id name="nroCabPlancha" type="java.lang.String">
 			<column length="20" name="NRO_CAB_PLANCHA" />
 			<generator class="assigned" />

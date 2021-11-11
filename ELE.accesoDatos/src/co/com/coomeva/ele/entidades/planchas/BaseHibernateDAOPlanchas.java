@@ -11,8 +11,12 @@ import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElec
  */
 public class BaseHibernateDAOPlanchas implements IBaseHibernateDAOPlanchas {
 	
+//	public Session getSession() {
+//		return HibernateSessionFactoryPlanchas.getSession();
+//	}
+	
 	public Session getSession() {
-		return HibernateSessionFactoryPlanchas.getSession();
+		return HibernateSessionFactoryElecciones2012.getSession();
 	}
 	
 	public Session getSession2012() {
