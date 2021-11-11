@@ -54,8 +54,11 @@
 		resource="co/com/coomeva/ele/entidades/planchas/ElePrincipales.hbm.xml" />
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/ElePValorParametros.hbm.xml" />
+	
+	<!-- 
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleSubcomision.hbm.xml" />
+		-->
 	<mapping
 		resource="co/com/coomeva/ele/entidades/planchas/EleSuplentes.hbm.xml" />
 	<mapping

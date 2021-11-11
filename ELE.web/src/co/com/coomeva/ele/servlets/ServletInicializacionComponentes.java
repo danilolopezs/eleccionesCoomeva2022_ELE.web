@@ -12,15 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.com.coomeva.ele.entidades.admhabilidad.HibernateSessionFactoryHab;
 import co.com.coomeva.ele.entidades.climae.HibernateSessionFactoryClimae;
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
-import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
-import co.com.coomeva.ele.entidades.planchas.HibernateSessionFactoryPlanchas;
-import co.com.coomeva.ele.entidades.salud.HibernateSessionFactorySalud;
-import co.com.coomeva.ele.entidades.sie.HibernateSessionFactorySie;
-
-
 
 public class ServletInicializacionComponentes extends HttpServlet {
 	

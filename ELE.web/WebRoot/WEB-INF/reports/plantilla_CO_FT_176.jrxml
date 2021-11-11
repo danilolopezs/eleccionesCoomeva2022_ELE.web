@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.6105100000000077"/>
+	<property name="ireport.zoom" value="2.593742460100014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="480"/>
+	<property name="ireport.y" value="1235"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="listaObservaciones">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="annio" class="java.lang.String"/>
 	<parameter name="mes" class="java.lang.String"/>
 	<parameter name="dia" class="java.lang.String"/>
@@ -10,7 +33,7 @@
 	<parameter name="nombreAsociado" class="java.lang.String"/>
 	<parameter name="cedulaAsociado" class="java.lang.String"/>
 	<parameter name="ciudad" class="java.lang.String"/>
-	<parameter name="observaciones" class="java.lang.String">
+	<parameter name="observaciones" class="java.util.List">
 		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
 	</parameter>
 	<background>
@@ -124,12 +147,12 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="577" splitType="Stretch">
+		<band height="443" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="4" forecolor="#000000" backcolor="#000000"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="0" y="4" width="555" height="437"/>
+				<reportElement x="0" y="5" width="555" height="437"/>
 			</rectangle>
 			<textField>
 				<reportElement x="10" y="14" width="535" height="30"/>
@@ -150,14 +173,7 @@
 				<textElement verticalAlignment="Top">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones} == null ? "Todos los integrantes Cumplen." : "Alguno de los integrantes No Cumple."]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="10" y="456" width="535" height="97" forecolor="#000000"/>
-				<textElement verticalAlignment="Top">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones} == null ? "" : $P{observaciones}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones}.isEmpty() ? "Todos los integrantes Cumplen." : "Alguno de los integrantes No Cumple."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="50" width="535" height="15"/>
@@ -229,51 +245,64 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["8.        No estar incurso en las inhabilidades e incompatibilidades que establezca la ley y el Estatuto Social de Coomeva."]]></textFieldExpression>
 			</textField>
-			<rectangle>
-				<reportElement x="0" y="442" width="555" height="121"/>
-			</rectangle>
-			<textField isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="10" y="456" width="535" height="97" forecolor="#000000"/>
-				<textElement verticalAlignment="Top">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{observaciones} == null ? "" : $P{observaciones}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="10" y="442" width="100" height="15" forecolor="#009232"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Observaciones:]]></text>
-			</staticText>
+		</band>
+		<band height="70">
+			<componentElement>
+				<reportElement key="table" style="table" x="1" y="0" width="553" height="69"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="listaObservaciones">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{observaciones})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="553">
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="553" height="30" forecolor="#00A432"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Observaciones]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="553" height="20"/>
+								<textElement>
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{_THIS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="48">
+	<pageFooter>
+		<band height="50">
 			<staticText>
-				<reportElement x="420" y="31" width="135" height="15" forecolor="#009332"/>
+				<reportElement x="422" y="32" width="135" height="15" forecolor="#009332"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="-21" y="0" width="595" height="31" forecolor="#009205" backcolor="#009205"/>
+				<reportElement x="-19" y="1" width="595" height="31" forecolor="#009205" backcolor="#009205"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="31" width="100" height="15" forecolor="#009332"/>
+				<reportElement x="2" y="32" width="100" height="15" forecolor="#009332"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[CO-FT-176]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="-1" width="555" height="32" forecolor="#FFFFFF"/>
+				<reportElement x="2" y="0" width="555" height="32" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tribunal de Elecciones y Escrutinios]]></text>
 			</staticText>
 		</band>
-	</columnFooter>
+	</pageFooter>
 </jasperReport>

@@ -1,6 +1,5 @@
 package co.com.coomeva.ele.logica;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
-import co.com.coomeva.ele.entidades.lico.HibernateSessionFactoryLico;
-import co.com.coomeva.ele.entidades.salud.HibernateSessionFactorySalud;
-import co.com.coomeva.util.acceso.UtilAcceso;
 
 public class LogicaLico {
 

@@ -44,11 +44,7 @@ public class LogicaSubComision extends EleSubcomisionDAO {
 			this.getSession().flush();
 		}
 		
-		if (subcomision != null) 
-			return true;
-		else
-			return false;
-		
+		return subcomision != null;
 	}
 
 	public EleSubcomision consultarSubComision(String id)throws Exception {

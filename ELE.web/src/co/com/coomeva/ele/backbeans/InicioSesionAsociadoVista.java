@@ -60,7 +60,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
 	private String url = "https://secure.coomeva.com.co/pasaporte-Autenticacion-1/rest/";
 
-	public String action_ingreso() {
+	public String action_ingreso_no_pass() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -69,24 +69,45 @@ public class InicioSesionAsociadoVista extends BaseVista {
 					completarInicioSesion(login);
 					visible = Boolean.TRUE;
 				} else {
-					exceptionGenery("El usuario no existe en base de datos.");
+					throwsException("El usuario no existe en base de datos.");
 				}
 			} catch (NumberFormatException e) {
-				exceptionGenery("Error inesperado, por favor comuniquese con un administrador. " + e.getCause());
+				throwsException("Error inesperado, por favor comuniquese con un administrador. " + e.getCause());
 			} catch (Exception e) {
-				exceptionGenery(e.getMessage());
+				throwsException(e.getMessage());
 			}
 		}
 		return "";
 	}
 	
-	/**
-	 * Metodo que obtiene el numero de documento y verifica que el asociado exista y
-	 * que si es o no cabeza de plancha
-	 * 
-	 * @author Manuel Galvez, Ricardo Chiriboga
-	 * @return String
-	 */
+	public String action_ingreso() {
+		visible = false;
+		valid = validaCampos();
+		if (valid) {
+			try {
+				RequestBodyVO body = new RequestBodyVO(token, login, password);
+				RequestRest<RespuestaWS> request = new RequestRest<RespuestaWS>(url, body, RespuestaWS.class);
+				RespuestaWS respuestaWS = request.getRespuesta();
+				if (respuestaWS.getStatusCode().equals("0")) {
+					if (respuestaWS.getClient() != null) {
+						visible = true;
+						completarInicioSesion(respuestaWS.getClient().getUser());
+					}
+				} else {
+					throwsException(respuestaWS.getDescStatusCode());
+					returnString = "";
+				}
+			} catch (CoomevaRuntimeException e) {
+				throwsException(e.getMessage());
+			} catch (Exception e) {
+				throwsException(e.getMessage());
+			}
+		} else {
+			returnString = "";
+		}
+		return "";
+	}
+	
 	public String action_ingreso_original() {
 		visible = false;
 		valid = validaCampos();
@@ -104,19 +125,19 @@ public class InicioSesionAsociadoVista extends BaseVista {
 						if (existeUsuario()) {
 							completarInicioSesion(login);
 						} else {
-							exceptionGenery("El usuario no existe.");
+							throwsException("El usuario no existe.");
 						}
 					}
 				} else {
 					FacesUtils.setSessionParameter("numeroDocAsociado", Long.parseLong(login));
 					//validacionInformacionPlanchas(login);
-					exceptionGenery(respuestaWS.getDescStatusCode());
+					throwsException(respuestaWS.getDescStatusCode());
 					returnString = "";
 				}
 			} catch (CoomevaRuntimeException e) {
-				exceptionGenery(e.getMessage());
+				throwsException(e.getMessage());
 			} catch (Exception e) {
-				exceptionGenery(e.getMessage());
+				throwsException(e.getMessage());
 			}
 		} else {
 			returnString = "";
@@ -139,7 +160,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private void validacionInformacionPlanchas(String identificacion) {
 		try {
 			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(identificacion);
-			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoDTO(identificacion, elZona,
+			EleAsociadoDTO asociadoDTO = DelegadoHabilidad.getInstance().validateAsociadoObservacionesDTO(identificacion, elZona,
 					identificacion);
 
 			verificarFechaInscripcion();
@@ -262,7 +283,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		}
 	}
 
-	private void exceptionGenery(String mensaje) {
+	private void throwsException(String mensaje) {
 		if (mensaje == null || mensaje.equalsIgnoreCase("")) {
 			mensaje = UtilAcceso.getParametroFuenteS("mensajes", "nullException");
 		}

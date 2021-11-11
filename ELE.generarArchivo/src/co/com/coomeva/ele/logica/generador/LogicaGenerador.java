@@ -1311,7 +1311,7 @@ public class LogicaGenerador {
 	 */
 	public JasperPrint reporteCumplimientoDelegado_FT_176(String zonaElectoral, String nombreAsociado,
 			String cedulaAsociado, String dia, String mes, String anio, String ciudad, 
-			String observaciones, String rutaImagen,
+			List<String> observaciones, String rutaImagen,
 			String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {

@@ -140,7 +140,7 @@ public class DelegadoGenerador {
 	public JasperPrint reporteCumplimientoDelegado_FT_176(
 			String zonaElectoral, String nombreAsociado,
 			String cedulaAsociado, String dia, String mes, String anio, String ciudad,
-			String observaciones, String rutaImagen,
+			List<String> observaciones, String rutaImagen,
 			String rutaReporte) throws Exception {
 		return logicaGenerador.reporteCumplimientoDelegado_FT_176(zonaElectoral,nombreAsociado,
 				cedulaAsociado, dia, mes, anio, ciudad, observaciones, rutaImagen, rutaReporte);

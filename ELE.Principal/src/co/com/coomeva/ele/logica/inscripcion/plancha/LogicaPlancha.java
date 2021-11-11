@@ -118,12 +118,14 @@ public class LogicaPlancha implements ILogicaPlancha {
 			String nroIdentificacionMiembro = numeroDocumento.toString();
 			EleAsociadoDTO asociadoDTO = DelegadoClimae.getInstance().find(nroIdentificacionMiembro);
 
+			//validacion persona juridica
 			if (!aplicaValidaciones && DelegadoAsociado.getInstance().esAsociadoPersonaJuridica(numeroDocumento)) {
 				throw new EleccionesDelegadosException(MessageFormat.format(
 						UtilAcceso.getParametroFuenteS("mensajes", "msgErrorNoSePermitenPlanchasAsociadoJuridico"),
 						nroIdentificacionMiembro.toString()));
 			}
 
+			//validacion colaborador coomeva
 			boolean esColaboradorGECoopmeva = DelegadoPlancha.getInstance()
 					.esColaboradorGECoomeva(nroIdentificacionMiembro);
 			if (!aplicaValidaciones && esColaboradorGECoopmeva) {
@@ -170,12 +172,14 @@ public class LogicaPlancha implements ILogicaPlancha {
 				 */
 			
 
+			//validacion existencia de planchas
 			if (validarExistenciaEnPlancha(miembros, numeroDocumento, posicionPlancha)) {
 				throw new EleccionesDelegadosException(MessageFormat
 						.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
 								"msgErrorAsociadoYaRegistradoEnPlancha"), numeroDocumento.toString()));
 			}
 
+			//validacion pertenencia de otras planchas
 			if (!asociadoPertenceOtraPlancha(nroIdentificacionMiembro, consecutivoPlancha).isEmpty()) {
 				throw new EleccionesDelegadosException(MessageFormat
 						.format(UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES,
@@ -195,19 +199,21 @@ public class LogicaPlancha implements ILogicaPlancha {
 //						+ "</br>");
 //			}
 
+			//validacion asociado activo
 			if (!logicaAsociado.estaAsociaActivo(Long.parseLong(nroIdentificacionMiembro))) {
 				throw new EleccionesDelegadosException(UtilAcceso
 						.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES, "vldAsociadoInactivo"));
 			}
 
+			//validacion zona electoral
 			Long idZona = logicaFiltros.consultarZonaElectoralePorAsociado(Long.parseLong(nroIdentificacionMiembro))
 					.getCodigoFiltro();
-
 			if (idZona == null) {
 				throw new EleccionesDelegadosException(
 						UtilAcceso.getParametroFuenteS(ConstantesProperties.NOMBRE_ARCHIVO_MENSAJES, "vldZonaValida"));
 			}
 
+			//validacion institucion electoral
 			if (perteneceInstitucionesElectoralesGECoomeva(nroIdentificacionMiembro)) {
 				excepciones.append("- "
 						+ MessageFormat
@@ -240,6 +246,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 //			excepciones.append(msgValidacionEmpleadoFechaRetiro != null ? "- "
 //					+ msgValidacionEmpleadoFechaRetiro : "");
 
+			//fijar el nombre del asociado
 			miembros.get(posicionPlancha - 1).setApellidosNombres(
 					getNombreAsociadoConFormato(asociadoDTO)+ " " +getApellidoAsociadoConFormato(asociadoDTO));
 
@@ -278,7 +285,8 @@ public class LogicaPlancha implements ILogicaPlancha {
 			} else {
 				miembros.get(posicionPlancha - 1).setProfesion(asociadoDTO.getProfesion());
 			}
-			int f;
+			
+			//validacion de inhabilidades
 			String cedulaCabeza = miembros.get(0).getNumeroDocumento()+"";
 			EleZonas elZona = DelegadoZona.getInstance().consultarZonaPlancha(cedulaCabeza);
 			try {
@@ -290,7 +298,7 @@ public class LogicaPlancha implements ILogicaPlancha {
 						observaciones += "- " +inha.getInhabilidad()+ "<br/>";
 					}
 					if(!observaciones.isEmpty()) {
-						excepciones.append(observaciones);
+						excepciones.append("<br/>"+observaciones);
 					}
 				}
 			} catch (Exception e) {

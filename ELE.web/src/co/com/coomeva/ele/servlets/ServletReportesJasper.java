@@ -226,7 +226,7 @@ public class ServletReportesJasper extends HttpServlet {
 					mes = (String) req.getSession().getAttribute("mes");
 					anio = (String) req.getSession().getAttribute("annio");
 					ciudad = (String) req.getSession().getAttribute("ciudad");
-					String observaciones = (String) req.getSession().getAttribute("observaciones");
+					List<String> observaciones = (List<String>) req.getSession().getAttribute("observaciones");
 					nombreReporte = cedulaAsociado+ "_" +nombreAsociado+ "_COFT_176";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteCumplimientoDelegado_FT_176(zonaElectoral,

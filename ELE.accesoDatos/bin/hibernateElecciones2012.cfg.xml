@@ -126,6 +126,8 @@
 			resource="co/com/coomeva/ele/entidades/planchas/dosmildoce/EleZonaEspecial.hbm.xml" />
 		<mapping
 			resource="co/com/coomeva/ele/entidades/planchas/dosmildoce/EleZonaElectoralEspecial.hbm.xml" />
+		<mapping
+			resource="co/com/coomeva/ele/entidades/planchas/EleSubcomision.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

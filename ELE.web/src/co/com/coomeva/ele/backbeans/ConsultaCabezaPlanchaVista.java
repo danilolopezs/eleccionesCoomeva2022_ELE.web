@@ -1044,30 +1044,36 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		return "";
 	}
 	
-	private String obtenerObservacionesAsociados(){
-		String observaciones = "";
+	private List<String> obtenerObservacionesAsociados(){
+		List<String> listaObservaciones = new ArrayList<String>();
 		try {
 			DTOInformacionPlancha infoPlanchas = DelegadoPlancha.getInstance()
 					.consultarInformacionPlancha(infoPlancha.getConsecutivoPlancha());			
-			List<String> listaObservaciones = new ArrayList<String>();
 			for (DTOMiembroPlancha titulares : infoPlanchas.getMiembrosTitulares()) {
-				listaObservaciones.add(consultarExcepcionesPorIdAsociado(titulares.getNumeroDocumento() + "",
-						infoPlancha.getConsecutivoPlancha() + ""));
+				String obs = consultarExcepcionesPorIdAsociado(titulares.getNumeroDocumento() + "",
+						infoPlancha.getConsecutivoPlancha() + "");
+				if(obs != null && !obs.isEmpty()) {
+					listaObservaciones.add(obs);
+				}
 			}
 			for (DTOMiembroPlancha suplentes : infoPlanchas.getMiembrosSuplentes()) {				
-				listaObservaciones.add(consultarExcepcionesPorIdAsociado(suplentes.getNumeroDocumento() + "",
-						infoPlancha.getConsecutivoPlancha() + ""));
+				String obs = consultarExcepcionesPorIdAsociado(suplentes.getNumeroDocumento() + "",
+						infoPlancha.getConsecutivoPlancha() + "");
+				if(obs != null && !obs.isEmpty()) {
+					listaObservaciones.add(obs);
+				}
 			}
 			
-			for (String observacion : listaObservaciones) {
-				if(!observacion.equals(""))
-					observaciones += "\n" +observacion;
-			}
+//			for (String observacion : listaObservaciones) {
+//				if(!observacion.equals(""))
+//					observaciones += "\n" +observacion;
+//			}
 		} catch (EleccionesDelegadosException e) {
-			// TODO Auto-generated catch block
+			mensaje2 = e.getMessage();
+			this.visible = true;
 			e.printStackTrace();
 		}
-		return observaciones.isEmpty() ? null :observaciones;
+		return listaObservaciones;
 	}
 	
 	/**
@@ -1125,7 +1131,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			Long numCedulaAttribute = (Long) FacesUtils.getSession()
 					.getAttribute("numCedula");
 			if (numCedula == null && numCedulaAttribute == null) {
-				throw new Exception("Debe ingresar el número de cédula del asociado cabeza de plancha");
+				throw new Exception("Debe ingresar el número de cédula del asociado Cabeza de Plancha");
 			} else {
 
 				if (numCedula != null) {
@@ -1495,6 +1501,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					for (int i = 0; i < listaExcepciones.size(); i++) {
 						listaExcepciones.get(i).setDescExcepcion(listaExcepciones.get(i).getDescExcepcion()
 								.replace("Por favor tener en cuenta las siguientes observaciones:", ""));
+						
 						listaExcepciones.get(i).getDescExcepcion().replace("</br>", "\n");
 					}
 				}
@@ -1527,8 +1534,13 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 						obs = obs.replace(
 								"- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.",
 								"");
+						String nombre = DelegadoAsociado.getInstance().consultarNombreAsociado(Long.valueOf(identificacion));
 						if(i == 0 && !obs.isEmpty()) {
-							obs = ("Asociado: " + identificacion + "\n") + obs;
+							if(nombre != null && !nombre.isEmpty()) {
+								obs = (" Asociado(a): " + nombre.trim() + ". Número de identificación: " +identificacion + "\n") + obs;
+							} else {
+								obs = (" Número de identificación del asociado(a): " +identificacion + "\n") + obs;
+							}
 						}
 						obs = obs.replace("<br/>", "\n");
 					}

@@ -3,28 +3,19 @@ package co.com.coomeva.ele.backbeans;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
-import org.hibernate.Transaction;
-
 import co.com.coomeva.ele.delegado.DelegadoAsociado;
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoEnvioRadicacion;
 import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.dto.DTOInformacionPlancha;
-import co.com.coomeva.ele.entidades.habilidad.acceso.HibernateSessionFactoryElecciones2012;
-import co.com.coomeva.ele.entidades.planchas.ElePlanchas;
 import co.com.coomeva.ele.entidades.planchas.dao.EleDetalleFormatoPlanchaDAO;
 import co.com.coomeva.ele.entidades.planchas.dao.ElePlanchaDAO;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlancha;
 import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleDetalleFormatoPlanchaId;
-import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleFotoFormatoPlancha;
-import co.com.coomeva.ele.entidades.planchas.dosmildoce.EleFotoFormatoPlanchaId;
-import co.com.coomeva.ele.entidades.planchas.dosmildoce.ElePlancha;
 import co.com.coomeva.ele.exception.EleccionesDelegadosException;
 import co.com.coomeva.ele.logica.LogicaAsociado;
-import co.com.coomeva.ele.logica.LogicaPlanchas;
 import co.com.coomeva.ele.logica.inscripcion.plancha.LogicaPlancha;
 import co.com.coomeva.ele.util.ConstantesProperties;
-import co.com.coomeva.ele.util.CoomevaRuntimeException;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.util.acceso.UtilAcceso;
 

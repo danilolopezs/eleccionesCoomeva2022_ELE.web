@@ -72,7 +72,7 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		for (ElePrincipalesDTO elePrincipalesDTO : listaPrincipales) {
 			if (listaAsociados.get(elePrincipalesDTO.getNroPriIdentificacion()) == null) {
 				principalValidado = new EleAsociadoDTO();
-				principalValidado = validateAsociadoDTO(elePrincipalesDTO.getNroPriIdentificacion(),
+				principalValidado = validateAsociadoObservacionesDTO(elePrincipalesDTO.getNroPriIdentificacion(),
 						plancha.getEleZonas(), plancha.getEleCabPlanchaDTO().getNroIdentificacion());
 				elePrincipalesDTO.setEmail(principalValidado.getEmail());
 				elePrincipalesDTO.setAntiguedad(principalValidado.getAntiguedad() + " años");
@@ -247,7 +247,7 @@ public class LogicaHabilidad extends EleInhabilidadesDAO {
 		Long horasAsociado = LogicaAsociado.getInstance().consultarHorasDemocraciaAsociado(nroIdentificacion);
 		if(horasAsociado != null) {
 			Integer horasDemocracia = UtilAcceso.getParametroFuenteI("parametros", "horasDemocracia");
-			if(horasDemocracia <= horasAsociado ) {
+			if(horasAsociado < horasDemocracia) {
 				cons++;
 				asociado.addInhabilidad(new EleInhabilidades(new EleInhabilidadesId(cons, asociado.getId()),
 						UtilAcceso.getParametroFuenteS("mensajes", "vldHorasDemocracia")));
