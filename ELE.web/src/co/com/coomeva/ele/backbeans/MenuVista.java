@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import co.com.coomeva.ele.dto.DTOHabilidadAsociado;
 import co.com.coomeva.ele.modelo.ParametroPlanchaDTO;
 import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.ele.util.FacesUtils;
@@ -467,6 +468,10 @@ public class MenuVista {
 	public String salir() {
 		FacesUtils.setSessionParameter("user", null);
 		FacesUtils.setSessionParameter("zonaSubComision", null);
+		FacesUtils.setSessionParameter("userComision", null);
+		FacesUtils.setSessionParameter("asociado", null);
+		FacesUtils.setSessionParameter("numeroDocAsociado", null);
+		FacesUtils.setSessionParameter("tipoElecciones", null);
 		return "goLogin";
 	}
 
