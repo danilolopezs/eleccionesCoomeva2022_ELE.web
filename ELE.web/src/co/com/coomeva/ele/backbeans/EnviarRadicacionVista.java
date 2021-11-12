@@ -127,7 +127,7 @@ public class EnviarRadicacionVista extends BaseVista {
 			action_mostrar_mensaje_ingreso();
 		} catch (Exception e) {
 			mensajeIngresoInfoEnviarRadicacion = new String(UtilAcceso.getParametroFuenteS(
-					ConstantesProperties.NOMBRE_ARCHIVO_PARAMETROS_PRINCIPAL, "mensajeIngresoInfoCabezaPlancha"));
+					ConstantesProperties.NOMBRE_ARCHIVO_ETIQUETAS_WEB, "mensajeIngresoInfoCabezaPlancha"));
 			action_mostrar_mensaje_ingreso();
 		}
 	}
