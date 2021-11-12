@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import co.com.coomeva.ele.util.FacesUtils;
+
 public class FiltroRegistroPlanchas implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -19,7 +21,6 @@ public class FiltroRegistroPlanchas implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-
 		if (session == null) {
 			session = req.getSession(true);
 			resp.sendRedirect("../inicioAsociado.jspx");
@@ -27,6 +28,7 @@ public class FiltroRegistroPlanchas implements Filter {
 			if ((session.getAttribute("asociado") == null) && (session.getAttribute("numeroDocAsociado") == null))
 				resp.sendRedirect("../inicioAsociado.jspx");
 		}
+		session.setAttribute("userComision", null);
 		chain.doFilter(request, response); // continue filtering
 	}
 
