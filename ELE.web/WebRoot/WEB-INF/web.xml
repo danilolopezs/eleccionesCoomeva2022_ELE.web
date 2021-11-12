@@ -46,6 +46,15 @@
 		<filter-name>Filtro Asociado</filter-name>
 		<url-pattern>/gui/planchas/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>Cors Filter</filter-name>
+		<filter-class>co.com.coomeva.ele.util.filtro.CorsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Cors Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- <listener> <listener-class> co.com.coomeva.util.resources.log4j.AppContextListener 
 		</listener-class> </listener> -->

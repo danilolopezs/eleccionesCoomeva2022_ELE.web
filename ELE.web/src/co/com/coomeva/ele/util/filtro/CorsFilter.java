@@ -10,14 +10,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-public class FilterHeader implements Filter{
+public class CorsFilter implements Filter{
     
     public void doFilter(ServletRequest request, ServletResponse response, 
                          FilterChain chain) throws IOException, ServletException {
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setHeader("Content-Security-Policy", "frame-ancestors 'self'");
-
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+		httpResponse.setHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST"); 
+        
         chain.doFilter(request, response);
     }
 
@@ -28,7 +30,7 @@ public class FilterHeader implements Filter{
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+		System.out.println("Filtro header cargado...");
 		
 	}
 }
