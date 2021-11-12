@@ -51,12 +51,14 @@
 										<div align="center">
 										<ice:panelGrid>
 											<ice:inputFile id="inputFileName"  width="410"
-					                                    	progressListener="#{cargarArchivoOtrasEntElectVista.actionFileUploadProgress}"
-					                                    	actionListener="#{cargarArchivoOtrasEntElectVista.actionUploadFile}"
-					                                    	submitOnUpload="preUpload"  />
-					                                    	
-					                                    	<ice:outputProgress value="#{cargarArchivoOtrasEntElectVista.fileProgress}"  
-					                                        styleClass="uploadProgressBar"/>
+			                                    	progressListener="#{cargarArchivoOtrasEntElectVista.actionFileUploadProgress}"
+			                                    	actionListener="#{cargarArchivoOtrasEntElectVista.actionUploadFile}"
+			                                    	submitOnUpload="preUpload"  />
+			                                    	
+	                                    	<ice:outputProgress value="#{cargarArchivoOtrasEntElectVista.fileProgress}"  
+			                                        styleClass="uploadProgressBar"/>
+			                                        
+			                                 <ice:outputText value="#{etiquetas.lblInfoTipoArchivoExcel}" />
 										</ice:panelGrid>
 										</div>
 									</ice:panelGroup>

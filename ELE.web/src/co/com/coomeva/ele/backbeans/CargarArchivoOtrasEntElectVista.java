@@ -30,6 +30,7 @@ import co.com.coomeva.ele.modelo.EleAsocOtrasEntElectDTO;
 import co.com.coomeva.ele.util.DataPage;
 import co.com.coomeva.ele.util.DataSource;
 import co.com.coomeva.ele.util.FacesUtils;
+import co.com.coomeva.ele.util.InputFileData;
 import co.com.coomeva.ele.util.PagedListDataModel;
 import co.com.coomeva.profile.ws.client.CaasStub.UserVo;
 import co.com.coomeva.util.acceso.UtilAcceso;
@@ -81,6 +82,16 @@ public class CargarArchivoOtrasEntElectVista extends DataSource implements Rende
 	public void actionUploadFile(ActionEvent event) {
 		InputFile inputFile = (InputFile) event.getSource();
 		FileInfo fileInfo = inputFile.getFileInfo();
+		String tipoContenido = fileInfo.getContentType();
+		if (!InputFileData.validarArchivoExcel(tipoContenido)) {
+			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
+		}
+		if (fileInfo.getStatus() == FileInfo.INVALID_CONTENT_TYPE) {
+			mensajePopupErrorCargaArchivo = "Solo Se permiten archivos de tipo Excel.";
+			this.mostrarPopupErrorCargaArchivo = Boolean.TRUE;
+			return;
+		}
+		
 		if (fileInfo.getStatus() == FileInfo.SAVED) {
 			this.currentFile = new InputFileDataDTO(fileInfo);
 			

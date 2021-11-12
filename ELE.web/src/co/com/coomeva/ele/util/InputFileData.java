@@ -53,5 +53,10 @@ public class InputFileData {
     	return tipoContenido.contains("image");
     }
     
+    public static boolean validarArchivoExcel(String tipoContenido)
+    {
+    	return tipoContenido.contains("excel");
+    }
+    
    
 }
