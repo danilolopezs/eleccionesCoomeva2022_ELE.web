@@ -31,6 +31,7 @@
 								value="#{consultaCabezaPlanchaVista.nombreAsociado}" />
 						</td>
 					</tr>
+					
 					<tr align="left">
 						<td class="formularioTabla">
 							<ice:outputText value="#{etiquetas.lblResolucionNro}" />

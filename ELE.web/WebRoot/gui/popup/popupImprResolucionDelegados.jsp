@@ -1,4 +1,4 @@
-<ice:panelPopup id="popupImprResolucionDelegados" draggable="true" styleClass="formulario"
+<ice:panelPopup id="popupImprResolucionDelegados" draggable="false" styleClass="formulario"
 	visible="#{consultaCabezaPlanchaVista.visibleImprResolucionDelegados}" modal="true"
 	style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 600px; height: 600px; ">
 
@@ -33,6 +33,7 @@
 													value="#{consultaCabezaPlanchaVista.nombreAsociado}" />
 											</td>
 										</tr>
+										<!-- 
 										<tr align="left">
 											<td >
 												<ice:outputText value="#{etiquetas.lblNombreComision}"
@@ -47,7 +48,7 @@
 													style="width: 358px">
 												</ice:inputText>
 											</td>
-										</tr>
+										</tr>-->
 										
 										<tr align="left">
 											<td >
@@ -62,6 +63,22 @@
 												</ice:inputText>
 											</td>
 										</tr>
+										
+										<!-- 	
+										<tr align="left">
+											<td>
+												<ice:outputText value="#{etiquetas.lblNumeroResolucion}" 
+												rendered="#{consultaCabezaPlanchaVista.visibleNumeroResolucion}"/>
+											</td>
+											<td>
+												<ice:inputText maxlength="80"
+													value="#{consultaCabezaPlanchaVista.numeroResolucion}"
+													style="width: 358px" onkeypress="return keyCheck(event, this);"
+													rendered="#{consultaCabezaPlanchaVista.visibleNumeroResolucion}">
+												</ice:inputText>
+											</td>
+										</tr>
+										-->
 										
 										<tr align="left">
 											<td >
@@ -146,16 +163,16 @@
 												</ice:selectInputDate>
 											</td>
 										</tr>
-										
+										<!-- 
 										<tr align="center">
 											<td colspan="2">
 												<ice:outputText value="#{etiquetas.lblFormatoArgumentos}" />
 											</td>
-										</tr>
+										</tr>-->
 										
 										<tr align="left">
-											<td >
-												<ice:outputText value="" />
+											<td>
+												<ice:outputText value="#{etiquetas.lblFormatoArgumentos}" />
 											</td>
 											<td>
 												<ice:inputTextarea maxlength="250"
@@ -171,7 +188,7 @@
 										</tr>
 										<tr align="left">
 											<td >
-												<ice:outputText value="#{etiquetas.lbldisionTribunal}" 
+												<ice:outputText value="#{etiquetas.lblDecisionComision}" 
 													rendered="#{consultaCabezaPlanchaVista.visibleDesicionTribunalnDelegados
 														|| consultaCabezaPlanchaVista.visibleFavorable}"/>
 											</td>

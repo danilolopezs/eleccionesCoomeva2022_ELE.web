@@ -238,7 +238,7 @@ public class ServletReportesJasper extends HttpServlet {
 
 				case 208:
 					// CONSTANCIA DE RADICACIÓN Y RECIBO DE PLANCHAS CO-FT-208
-					nombreReporte = "CERTIFICACIÓN DE CUMPLIMIENTO PARA SER ELEGIDO DELEGADO";
+					//nombreReporte = "CERTIFICACIÓN DE CUMPLIMIENTO PARA SER ELEGIDO DELEGADO";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					fecha = (Date) req.getSession().getAttribute("fecha");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
@@ -264,7 +264,7 @@ public class ServletReportesJasper extends HttpServlet {
 
 				case 209:
 					// RESOLUCION INADMISION PLANCHA CO-FT-209
-					nombreReporte = "RESOLUCION INADMISION PLANCHA";
+					//nombreReporte = "RESOLUCION INADMISION PLANCHA";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					dia = (String) req.getSession().getAttribute("dia");
 					mes = (String) req.getSession().getAttribute("mes");
@@ -309,7 +309,7 @@ public class ServletReportesJasper extends HttpServlet {
 
 				case 211:
 					// Declaración para acreditar ocupación y cumplimiento de requisitos CO-FT-211
-					nombreReporte = "CETIFICADO PARA ACREDITAR OCUPACIÓN Y CUMPLIMIENTO DE REQUISITOS";
+					//nombreReporte = "CETIFICADO PARA ACREDITAR OCUPACIÓN Y CUMPLIMIENTO DE REQUISITOS";
 					ciudad = (String) req.getSession().getAttribute("ciudad");
 					dia = (String) req.getSession().getAttribute("dia");
 					mes = (String) req.getSession().getAttribute("mes");
@@ -337,13 +337,12 @@ public class ServletReportesJasper extends HttpServlet {
 
 				case 458:
 					// RESOLUCION QUE RESULELVE RECURSOSO DE REPOSICIÓN FAVORABLEMENTE CO-FT-458
-					nombreReporte = "RESOLUCION QUE RESULELVE RECURSOSO DE REPOSICIÓN FAVORABLEMENTE";
+					//nombreReporte = "RESOLUCION QUE RESULELVE RECURSOSO DE REPOSICIÓN FAVORABLEMENTE";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					fecha = (Date) req.getSession().getAttribute("fecha");
-					nombreComision = (String) req.getSession().getAttribute("nombreComision");
-					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
+					nombreAsociado = (String) req.getSession().getAttribute("nombreAccionante");
 					String resolucionImpugnada = (String) req.getSession().getAttribute("resolucionImpugnada");
-					String resolucionMod = (String) req.getSession().getAttribute("resolucion");
+					String resolucionNumero = (String) req.getSession().getAttribute("resolucionNumero");
 					String argumento = (String) req.getSession().getAttribute("argumento");
 					String decision = (String) req.getSession().getAttribute("decision");
 					String nombrePresidente = (String) req.getSession().getAttribute("nombrePresidente");
@@ -354,34 +353,33 @@ public class ServletReportesJasper extends HttpServlet {
 					nombreReporte = cedulaAsociadoCabeza + "_" + nombreAsociadoCabeza + "_COFT_458";
 					
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionFavorable_FT_458(zonaElectoral,
-							nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucionMod, argumento,
+							nombreAsociado, resolucionImpugnada, fecha, resolucionNumero, argumento,
 							nombrePresidente, nombreSecretario, decision, rutaImagen, rutaReporte);
 
-					removerAtributos(session, "zonaElectoral", "fecha", "nombreComision", "nombreAsociado",
-							"resolucionImpugnada", "resolucion", "argumento", "decision", "nombrePresidente",
+					removerAtributos(session, "zonaElectoral", "fecha", "nombreAccionante",
+							"resolucionImpugnada", "resolucionNumero", "argumento", "decision", "nombrePresidente",
 							"nombreSecretario");
 					break;
 
 				case 459:
 					// RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓN Y NO CONCEDE APELACIÓN POR NO SER SOLICITADO CO-FT-459
-					nombreReporte = "RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓNY  NO CONCEDE APELACIÓN POR NO SER SOLICITADO";
+					//nombreReporte = "RESOLUCIÓN QUE DENIEGA UN RECURSO DE REPOSICIÓN Y  NO CONCEDE APELACIÓN POR NO SER SOLICITADO";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					fecha = (Date) req.getSession().getAttribute("fecha");
-					nombreComision = (String) req.getSession().getAttribute("nombreComision");
-					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
+					nombreAsociado = (String) req.getSession().getAttribute("nombreAccionante");
 					resolucionImpugnada = (String) req.getSession().getAttribute("resolucionImpugnada");
-					resolucion = (String) req.getSession().getAttribute("resolucion");
+					resolucion = (String) req.getSession().getAttribute("resolucionNumero");
 					argumento = (String) req.getSession().getAttribute("argumento");
 					nombrePresidente = (String) req.getSession().getAttribute("nombrePresidente");
 					nombreSecretario = (String) req.getSession().getAttribute("nombreSecretario");
-					
+							
 					cedulaAsociadoCabeza = String.valueOf(req.getSession().getAttribute("cedulaCabezaPlancha"));
 					nombreAsociadoCabeza = String.valueOf(req.getSession().getAttribute("nombreCabezaPlancha"));
 					nombreReporte = cedulaAsociadoCabeza + "_" + nombreAsociadoCabeza + "_COFT_459";
-					
+
 					jasperPrint = DelegadoGenerador.getInstance().reporteResolucionDeniega_FT_459(zonaElectoral,
-							nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento,
-							nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
+							nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento, nombrePresidente,
+							nombreSecretario, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "fecha", "nombreComision", "nombreAsociado",
 							"resolucionImpugnada", "resolucion", "argumento", "nombrePresidente", "nombreSecretario");

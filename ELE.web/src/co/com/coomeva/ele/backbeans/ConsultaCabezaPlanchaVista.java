@@ -17,6 +17,7 @@ import co.com.coomeva.ele.delegado.DelegadoDetalleFormato;
 import co.com.coomeva.ele.delegado.DelegadoFormatoPlanchas;
 import co.com.coomeva.ele.delegado.DelegadoLogicaPlanchaExcepcion;
 import co.com.coomeva.ele.delegado.DelegadoPlanchas;
+import co.com.coomeva.ele.delegado.formulario.DelegadoRegistroFormulario;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoEstadoPlancha;
 import co.com.coomeva.ele.delegado.inscripcion.plancha.DelegadoPlancha;
 import co.com.coomeva.ele.dto.DTOInformacionPlancha;
@@ -131,6 +132,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	private boolean visibleConfirmarRadicacion;
 	private boolean visibleConfirmarCumplimientoRequisitos;
 	private String mensajeConfirmacion = "";
+	private boolean visibleNumeroResolucion = Boolean.FALSE;
 
 	private Long CODIGO_FORMATO_ADMISION_CABEZA_PLANCHA = new Long(
 			UtilAcceso
@@ -158,6 +160,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	private String cabezaPlancha;
 	private String nombreAsociado;
 	private String resolucionNro;
+	private String numeroResolucion;
 	private String resolucionNroApelacion;
 	private String actNro;
 	private String resolucionImpugnada;
@@ -174,7 +177,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	private String argumentoResolucion3;
 	private String razonResolucion1;
 	private String razonResolucion2;
-	private String comisionElectoral;
+	
 	private String titleImprResolucion;
 
 	private String resolucionInterpuesta;
@@ -657,14 +660,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		String resolucion = String.valueOf(dtoInfo2.getNumeroResolucion());
 		String nombrePresidente = "";
 		String nombreSecretario = "";
-		
-		String nombreComicion = "";
+
 		String nombreAspirante = this.nombreAsociado;
-		
-		if(this.comisionElectoral != null)
-		{
-			nombreComicion = this.comisionElectoral;
-		}
 		
 		request.getSession().setAttribute("cedulaCabezaPlancha", cabezaPlancha);
 		request.getSession().setAttribute("nombreCabezaPlancha", nombreAsociado);
@@ -674,19 +671,17 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		{	
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
-			request.getSession().setAttribute("nombreComision",nombreComicion);
-			request.getSession().setAttribute("nombreAsociado",  nombreAccionante);
+			request.getSession().setAttribute("nombreAccionante",  nombreAccionante);
 			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
-			request.getSession().setAttribute("resolucion", resolucion);
+			request.getSession().setAttribute("resolucionNumero", resolucion);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("decision", desicionTribunal);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
 			
 			// para guardar en base de datos los registros de los campos
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
+			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAccionante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
@@ -700,10 +695,9 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		{	
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
-			request.getSession().setAttribute("nombreComision",nombreComicion);
-			request.getSession().setAttribute("nombreAsociado",  nombreAspirante);
+			request.getSession().setAttribute("nombreAccionante",  nombreAccionante);
 			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
-			request.getSession().setAttribute("resolucion", resolucion);
+			request.getSession().setAttribute("resolucionNumero", resolucion);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);
@@ -711,7 +705,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
@@ -726,7 +719,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		{
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
-			request.getSession().setAttribute("nombreComision", nombreComicion);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
 			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
 			request.getSession().setAttribute("resolucion", resolucion);
@@ -737,7 +729,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 1L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 28L, numResolucionImpugnada));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 42L, nombrePresidente));
@@ -808,7 +799,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
-			request.getSession().setAttribute("nombreComision", nombreComicion);
 			request.getSession().setAttribute("resolucion", resolucion);
 			request.getSession().setAttribute("diaPresentado",fechaPresentacion!=null?String.valueOf(fechaPresentacion.getDate()):"" );
 			request.getSession().setAttribute("dia",fechaElaboracionDoc!=null?String.valueOf(fechaElaboracionDoc.getDate()):""); 
@@ -819,7 +809,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			// para guardar en base de datos los registros de los campos
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreAspirante));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
 			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 29L, resolucion));
 //			listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 60L, sdf.format(fechaPresentacion)));
@@ -827,7 +816,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			
 		}
 		try {
-//			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos);
+			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos,user.getUserId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -990,47 +979,57 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 							"msg.error.imposible.generar.cumplimiento.requisitos.plancha.no.registrada"));
 				}
 
-				DelegadoFormatoPlanchas.getInstance().crearFormatoPlancha(
-						user.getUserId(), new Timestamp(new Date().getTime()),
-						CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS,
+				DelegadoFormatoPlanchas.getInstance().crearFormatoPlancha(user.getUserId(),
+						new Timestamp(new Date().getTime()), CODIGO_FORMATO_CONSTANCIA_CUMPLIMIENTO_REQUISITOS,
 						infoPlancha.getConsecutivoPlancha());
-				
-				InfoPlanchaConstanciaPdfDTO infoPlanchaDTO = DelegadoPlanchas.getInstance().obtenerInfoPlanchaConstanciaPdf(new Long(infoPlancha.getConsecutivoPlancha()));
-				
-				HttpServletRequest request= (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+				InfoPlanchaConstanciaPdfDTO infoPlanchaDTO = DelegadoPlanchas.getInstance()
+						.obtenerInfoPlanchaConstanciaPdf(new Long(infoPlancha.getConsecutivoPlancha()));
+
+				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+						.getRequest();
 				Date fechaElaboracionDoc = new Date();
 				Date fechaActa = new Date();
 
 				request.getSession().setAttribute("zonaElectoral", infoPlancha.getCodZona().toString());
-				request.getSession().setAttribute("nombreAsociado",
-						infoPlanchaDTO.getNombres() + " " + (infoPlanchaDTO.getApellidos() != null
-								? infoPlanchaDTO.getApellidos()
-								: ""));
+				request.getSession().setAttribute("nombreAsociado", infoPlanchaDTO.getNombres() + " "
+						+ (infoPlanchaDTO.getApellidos() != null ? infoPlanchaDTO.getApellidos() : ""));
 				request.getSession().setAttribute("cedulaAsociado", infoPlanchaDTO.getNumCedula().toString());
 				request.getSession().setAttribute("dia",
 						fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getDate()) : "");
 				request.getSession().setAttribute("mes",
-						fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth()+1) : "");
+						fechaElaboracionDoc != null ? String.valueOf(fechaElaboracionDoc.getMonth() + 1) : "");
 				request.getSession().setAttribute("annio",
 						fechaElaboracionDoc != null ? String.valueOf(WorkStrigs.getAnio(fechaElaboracionDoc.getYear()))
 								: "");
 				request.getSession().setAttribute("ciudad", infoPlanchaDTO.getComisionCiu());
-				request.getSession().setAttribute("observaciones", obtenerObservacionesAsociados());
+				List<String> observaciones = obtenerObservacionesAsociados();
+				request.getSession().setAttribute("observaciones", observaciones);
 				request.getSession().setAttribute("codigoReporte", tipoReporte);
-				
-				//TODO descomentar esto y validar tipo parametro
-//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, nombreAspirante));
-//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L, numZonaElectroral));
-//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 19L, nombreComicion));
-//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L, sdf.format(fechaElaboracionDoc)));
-//				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 29L, resolucion));
-//				
-//				try {
-//					DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos);
-//				}catch (Exception e) {
-//					e.printStackTrace();
-//				}
-				
+
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 18L,
+						infoPlancha.getCodZona().toString()));
+				listaRegCampos
+						.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 10L, infoPlanchaDTO.getNombres()
+								+ " " + (infoPlanchaDTO.getApellidos() != null ? infoPlanchaDTO.getApellidos() : "")));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 77L,
+						infoPlanchaDTO.getNumCedula().toString()));
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 23L,sdf.format(fechaElaboracionDoc)));
+				listaRegCampos.add(
+						new EleRegistroCampos(null, Long.valueOf(tipoReporte), 21L, infoPlanchaDTO.getComisionCiu()));
+				String cadenaObs = "";
+				for (String obs : observaciones) {
+					cadenaObs += obs;
+				}
+				listaRegCampos.add(new EleRegistroCampos(null, Long.valueOf(tipoReporte), 78L, cadenaObs));
+				try {
+					if (user != null) {
+						DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte),
+								listaRegCampos, user.getUserId());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
 				action_find();
 			} else {
@@ -1897,25 +1896,19 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 				visibleImprResolucion = true;
 			} else if (codResolucion.equals(3L)) {
 				visibleImprApelacionFavorable = true;
-			}else if(codResolucion.equals(6L) || codResolucion.equals(7L)
-					|| codResolucion.equals(8L) || codResolucion.equals(9L)
-					|| codResolucion.equals(10L) || codResolucion.equals(11L)
-				)
-			{
+			} else if (codResolucion.equals(6L) || codResolucion.equals(7L) || codResolucion.equals(8L)
+					|| codResolucion.equals(9L) || codResolucion.equals(10L) || codResolucion.equals(11L)) {
 				visibleImprResolucionDelegados = true;
-				if(codResolucion.equals(8L) || codResolucion.equals(9L))
-				{
+				if (codResolucion.equals(8L) || codResolucion.equals(9L)) {
 					visibleDesicionTribunalnDelegados = true;
-				}
-				else if(codResolucion.equals(10L))
-				{
+				} else if (codResolucion.equals(10L)) {
 					visibleFechaRecurso = true;
-				}
-				else if (codResolucion.equals(11L))
-				{
+				} else if (codResolucion.equals(11L)) {
+					visibleFavorable = true;
+				} else if (codResolucion.equals(6L)) {
 					visibleFavorable = true;
 				}
-			}	
+			}
 			
 		} catch (Exception e) {
 			// getMensaje().mostrarMensaje(e.getMessage());
@@ -2143,14 +2136,6 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 
 	public void setRazonResolucion2(String razonResolucion2) {
 		this.razonResolucion2 = razonResolucion2;
-	}
-
-	public String getComisionElectoral() {
-		return comisionElectoral;
-	}
-
-	public void setComisionElectoral(String comisionElectoral) {
-		this.comisionElectoral = comisionElectoral;
 	}
 
 	public HtmlSelectOneMenu getSelEstado() {
@@ -2388,6 +2373,22 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 
 	public void setVisibleConfirmarCumplimientoRequisitos(boolean visibleConfirmarCumplimientoRequisitos) {
 		this.visibleConfirmarCumplimientoRequisitos = visibleConfirmarCumplimientoRequisitos;
+	}
+
+	public String getNumeroResolucion() {
+		return numeroResolucion;
+	}
+
+	public void setNumeroResolucion(String numeroResolucion) {
+		this.numeroResolucion = numeroResolucion;
+	}
+
+	public boolean isVisibleNumeroResolucion() {
+		return visibleNumeroResolucion;
+	}
+
+	public void setVisibleNumeroResolucion(boolean visibleNumeroResolucion) {
+		this.visibleNumeroResolucion = visibleNumeroResolucion;
 	}
 	
 }

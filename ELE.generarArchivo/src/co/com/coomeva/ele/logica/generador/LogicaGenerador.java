@@ -1465,18 +1465,17 @@ public class LogicaGenerador {
 	 * @return
 	 * @throws Exception
 	 */
-	public JasperPrint reporteResolucionDeniega_FT_459(String zonaElectoral, String nombreComision,
-			String nombreAsociado, String resolucionImpugnada, Date fecha, String resolucion, String argumento,
-			String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
+	public JasperPrint reporteResolucionDeniega_FT_459(String zonaElectoral, String nombreAsociado,
+			String resolucionImpugnada, Date fecha, String resolucion, String argumento, String nombrePresidente,
+			String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("zona", zonaElectoral);
-			parameters.put("nombreComision", nombreComision);
+			parameters.put("zonaElectoral", zonaElectoral);
 			parameters.put("nombreAccionante", nombreAsociado);
 			parameters.put("resolucionImpugnada", resolucionImpugnada);
 			parameters.put("fecha", fecha);
-			parameters.put("resolucion", resolucion);
+			parameters.put("resolucionNumero", resolucion);
 			parameters.put("argumento", argumento);
 			parameters.put("nombrePresidente", nombrePresidente);
 			parameters.put("nombreSecretario", nombreSecretario);
@@ -1737,19 +1736,17 @@ public class LogicaGenerador {
 	 * @return
 	 * @throws Exception
 	 */
-	public JasperPrint reporteResolucionFavorable_FT_458(String zonaElectoral, String nombreComision,
-			String nombreAsociado, String resolucionImpugnada, Date fecha, String resolucion, String argumento,
-			String nombrePresidente, String nombreSecretario, String resolucionMod, String decision, String rutaImagen,
-			String rutaReporte) throws Exception {
+	public JasperPrint reporteResolucionFavorable_FT_458(String zonaElectoral, String nombreAsociado,
+			String resolucionImpugnada, Date fecha, String resolucionNumero, String argumento, String nombrePresidente,
+			String nombreSecretario, String decision, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("zona", zonaElectoral);
-			parameters.put("nombreComision", nombreComision);
+			parameters.put("zonaElectoral", zonaElectoral);
 			parameters.put("nombreAccionante", nombreAsociado);
-			parameters.put("resolucion", resolucionImpugnada);
+			parameters.put("resolucionNumero", resolucionNumero);
+			parameters.put("resolucionInpugnada", resolucionImpugnada);
 			parameters.put("fecha", fecha);
-			parameters.put("resolucion_mod", resolucionMod);
 			parameters.put("argumento", argumento);
 			parameters.put("decision", decision);
 			parameters.put("nombre_presidente", nombrePresidente);

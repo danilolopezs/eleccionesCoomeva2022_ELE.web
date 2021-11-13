@@ -57,9 +57,8 @@
 			                                    	
 	                                    	<ice:outputProgress value="#{cargarArchivoOtrasEntElectVista.fileProgress}"  
 			                                        styleClass="uploadProgressBar"/>
-			                                        
-			                                 <ice:outputText value="#{etiquetas.lblInfoTipoArchivoExcel}" />
 										</ice:panelGrid>
+										<ice:outputText styleClass="textoLabel2" value="#{etiquetas.lblInfoTipoArchivoExcel}" />
 										</div>
 									</ice:panelGroup>
 									

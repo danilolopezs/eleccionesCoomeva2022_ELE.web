@@ -50,8 +50,7 @@
 								</td>
 							</tr>
 						</table>
-						<!--<jsp:directive.include
-							file="../popup/popupVerInhabilidad.jsp" />-->
+					
 						<jsp:directive.include
 							file="../popup/popupCncpCambioEstadoHab.jsp" />
 

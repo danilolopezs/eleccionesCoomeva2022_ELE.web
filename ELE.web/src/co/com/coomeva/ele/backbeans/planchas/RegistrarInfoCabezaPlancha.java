@@ -500,8 +500,14 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		if (!InputFileData.validarArchivoImagen(tipoContenido)) {
 			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
+		if(!fileInfo.getFileName().contains(".jpg")) {
+			mensajeIngresoInfoCabezaPlancha = "Por favor verifique la extensi&#243;n del archivo.";
+			this.mensajeInformativo = true;
+			return;
+			//fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
+		}
 		if (fileInfo.getStatus() == FileInfo.INVALID_CONTENT_TYPE) {
-			mensajeIngresoInfoCabezaPlancha = "Solo Se permiten imagenes.";
+			mensajeIngresoInfoCabezaPlancha = "Solo se permiten imagenes.";
 			this.mensajeInformativo = true;
 		}
 		if (fileInfo.getStatus() == FileInfo.SAVED) {
@@ -519,6 +525,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 
 	private void imageProcess(InputFileDataDTO inputFile) {
 		try {
+			int a;
 			File foto = inputFile.getFile();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(1000);
 			BufferedImage img = ImageIO.read(foto);

@@ -181,13 +181,12 @@ public class DelegadoGenerador {
 				cedulaAsociado, ciudadCedula, ciudadFirma, diaFirma, mesFirma, anioFirma, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteResolucionDeniega_FT_459(
-			String zonaElectoral, String nombreComision, String nombreAsociado,
-			String resolucionImpugnada, Date fecha, String resolucion,
-			String argumento, String nombrePresidente, String nombreSecretario,
-			String rutaImagen, String rutaReporte) throws Exception {
+	public JasperPrint reporteResolucionDeniega_FT_459(String zonaElectoral, String nombreAsociado,
+			String resolucionImpugnada, Date fecha, String resolucion, String argumento, String nombrePresidente,
+			String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResolucionDeniega_FT_459(zonaElectoral, nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento, nombrePresidente, nombreSecretario,rutaImagen, rutaReporte);
+		return logicaGenerador.reporteResolucionDeniega_FT_459(zonaElectoral, nombreAsociado, resolucionImpugnada,
+				fecha, resolucion, argumento, nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteResuelveReposicion_FT_460(
@@ -226,14 +225,14 @@ public class DelegadoGenerador {
 		// TODO Auto-generated method stub
 		return logicaGenerador.reporteResolucionExtemporaneamente_FT_753(zonaElectoral, fecha, nombreAsociado, nombreComision, resolucion, diaPresentado, dia, mes, anio, rutaImagen, rutaReporte);
 	}
-	
-	public JasperPrint reporteResolucionFavorable_FT_458(
-			String zonaElectoral, String nombreComision, String nombreAsociado,
-			String resolucionImpugnada, Date fecha, String resolucionMod,
-			String argumento, String nombrePresidente, String nombreSecretario,
-			String decision, String rutaImagen, String rutaReporte) throws Exception {
+
+	public JasperPrint reporteResolucionFavorable_FT_458(String zonaElectoral, String nombreAsociado,
+			String resolucionImpugnada, Date fecha, String resolucionNumero, String argumento, String nombrePresidente,
+			String nombreSecretario, String decision, String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResolucionFavorable_FT_458(zonaElectoral, nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucionImpugnada, argumento, nombrePresidente, nombreSecretario, resolucionMod, decision, rutaImagen, rutaReporte);
+		return logicaGenerador.reporteResolucionFavorable_FT_458(zonaElectoral, nombreAsociado, resolucionImpugnada,
+				fecha, resolucionNumero, argumento, nombrePresidente, nombreSecretario, decision, rutaImagen,
+				rutaReporte);
 	}
 	
 }
