@@ -1502,18 +1502,17 @@ public class LogicaGenerador {
 	 * @return
 	 * @throws Exception
 	 */
-	public JasperPrint reporteResuelveReposicion_FT_460(String zonaElectoral, String nombreComision,
+	public JasperPrint reporteResuelveReposicion_FT_460(String zonaElectoral,
 			String nombreAsociado, String resolucionImpugnada, Date fecha, String resolucion, String argumento,
 			String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put("zona", zonaElectoral);
-			parameters.put("nombreComision", nombreComision);
 			parameters.put("nombreAccionante", nombreAsociado);
 			parameters.put("resolucionImpugnada", resolucionImpugnada);
 			parameters.put("fecha", fecha);
-			parameters.put("resolucion", resolucion);
+			parameters.put("resolucionNumero", resolucion);
 			parameters.put("argumento", argumento);
 			parameters.put("nombrePresidente", nombrePresidente);
 			parameters.put("nombreSecretario", nombreSecretario);
@@ -1541,17 +1540,15 @@ public class LogicaGenerador {
 	 * @throws Exception
 	 */
 	public JasperPrint reporteResuelveApelacion_FT_461(String acta, String nombreAsociado, String resolucionApelada,
-			String resolucionComision, Date fecha, String actaTribunal, String argumento, String desicion,
-			String nombrePresidente, String nombreSecretario, String resolucionNro, String rutaImagen, String rutaReporte) throws Exception {
+			Date fecha, String argumento, String desicion, String nombrePresidente, String nombreSecretario,
+			String resolucionNro, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put("acta", acta);
 			parameters.put("nombreApelante", nombreAsociado);
 			parameters.put("resolucionApelada", resolucionApelada);
-			parameters.put("resolucionComision", resolucionComision);
 			parameters.put("fecha", fecha);
-			parameters.put("actaTribunal", actaTribunal);
 			parameters.put("argumento", argumento);
 			parameters.put("decision", desicion);
 			parameters.put("resolucionNumero", resolucionNro);
@@ -1581,17 +1578,16 @@ public class LogicaGenerador {
 	 * @throws Exception
 	 */
 	public JasperPrint reporteResuelveApelacionContra_FT_462(String acta, String nombreAsociado,
-			String resolucionApelada, String resolucionComision, Date fecha, String actaTribunal, String argumento,
-			String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
+			String resolucionApelada, String resolucionNumero, Date fecha, String argumento, String nombrePresidente,
+			String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
 		JasperPrint jasperPrint = null;
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put("acta", acta);
 			parameters.put("nombreApelante", nombreAsociado);
 			parameters.put("resolucionApelada", resolucionApelada);
-			parameters.put("resolucionComision", resolucionComision);
+			parameters.put("resolucionNumero", resolucionNumero);
 			parameters.put("fecha", fecha);
-			parameters.put("actaTribunal", actaTribunal);
 			parameters.put("argumento", argumento);
 			parameters.put("nombrePresidente", nombrePresidente);
 			parameters.put("nombreSecretario", nombreSecretario);

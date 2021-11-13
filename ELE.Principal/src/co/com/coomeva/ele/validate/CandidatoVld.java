@@ -1,7 +1,5 @@
 package co.com.coomeva.ele.validate;
 
-import java.sql.Connection;
-
 public class CandidatoVld {
 
 	private boolean flag=false;

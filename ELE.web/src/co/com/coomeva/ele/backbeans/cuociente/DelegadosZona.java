@@ -1,11 +1,14 @@
 package co.com.coomeva.ele.backbeans.cuociente;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+
+import com.icesoft.faces.component.ext.HtmlInputText;
+import com.icesoft.faces.component.ext.HtmlSelectOneMenu;
+import com.icesoft.faces.context.effects.JavascriptContext;
 
 import co.com.coomeva.ele.backbeans.BaseVista;
 import co.com.coomeva.ele.backbeans.selectFactory.SelectFactoryView;
@@ -15,10 +18,6 @@ import co.com.coomeva.ele.entidades.cuociente.EleCuocienteDelegadosZona;
 import co.com.coomeva.ele.util.ConstantesProperties;
 import co.com.coomeva.ele.util.FacesUtils;
 import co.com.coomeva.util.acceso.UtilAcceso;
-
-import com.icesoft.faces.component.ext.HtmlInputText;
-import com.icesoft.faces.component.ext.HtmlSelectOneMenu;
-import com.icesoft.faces.context.effects.JavascriptContext;
 
 public class DelegadosZona extends BaseVista {
 

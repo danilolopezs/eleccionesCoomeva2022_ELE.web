@@ -1,6 +1,5 @@
 package co.com.coomeva.ele.modelo;
 
-import co.com.coomeva.ele.entidades.admhabilidad.Asoelecf;
 import co.com.coomeva.ele.entidades.habilidad.EleSuspendido;
 
 public class SuspendidoDTO extends EleSuspendido

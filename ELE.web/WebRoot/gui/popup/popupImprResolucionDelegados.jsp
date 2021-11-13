@@ -53,12 +53,12 @@
 										<tr align="left">
 											<td >
 												<ice:outputText value="#{etiquetas.lblNombreAccionante}"
-												rendered="#{consultaCabezaPlanchaVista.visibleFavorable}" />
+												rendered="#{consultaCabezaPlanchaVista.visibleFavorable or consultaCabezaPlanchaVista.visibleAccionante}" />
 											</td>
 											<td>
 												<ice:inputText maxlength="20"
 													value="#{consultaCabezaPlanchaVista.nombreAccionante}"
-													rendered="#{consultaCabezaPlanchaVista.visibleFavorable}"
+													rendered="#{consultaCabezaPlanchaVista.visibleFavorable or consultaCabezaPlanchaVista.visibleAccionante}"
 													style="width: 358px">
 												</ice:inputText>
 											</td>
@@ -181,11 +181,13 @@
 												</ice:inputTextarea>
 											</td>
 										</tr>										
+										<!-- 
 										<tr align="center">
 											<td colspan="2">
 												<ice:outputText value="#{etiquetas.lbldisionTribunal}" rendered="#{consultaCabezaPlanchaVista.visibleDesicionTribunalnDelegados}"/>
 											</td>
 										</tr>
+										-->
 										<tr align="left">
 											<td >
 												<ice:outputText value="#{etiquetas.lblDecisionComision}" 

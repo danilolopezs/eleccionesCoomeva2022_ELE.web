@@ -48,7 +48,7 @@ public class LogicaRegistroFormulario implements ILogicaRegistroFormulario {
 
 			tr.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

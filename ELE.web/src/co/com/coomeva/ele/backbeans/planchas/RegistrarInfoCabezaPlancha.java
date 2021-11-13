@@ -501,7 +501,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
 		if(!fileInfo.getFileName().contains(".jpg")) {
-			mensajeIngresoInfoCabezaPlancha = "Por favor verifique la extensi&#243;n del archivo.";
+			mensajeIngresoInfoCabezaPlancha = "Por favor verifique la extensión del archivo.";
 			this.mensajeInformativo = true;
 			return;
 			//fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);

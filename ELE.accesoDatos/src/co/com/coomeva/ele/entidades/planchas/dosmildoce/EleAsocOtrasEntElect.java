@@ -1,6 +1,5 @@
 package co.com.coomeva.ele.entidades.planchas.dosmildoce;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**

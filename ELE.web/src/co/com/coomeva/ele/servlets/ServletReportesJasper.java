@@ -157,7 +157,7 @@ public class ServletReportesJasper extends HttpServlet {
 							rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "nombreAsociado", "numResolucion", "numActa", "fecha",
-							"ciudadZona", "dia", "mes", "anio");
+							"ciudadZona", "dia", "mes", "anio", "cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 				case 173:
 					// resolución de Rechazo de Planchas CO-FT-173
@@ -292,7 +292,7 @@ public class ServletReportesJasper extends HttpServlet {
 
 					removerAtributos(session, "zonaElectoral", "dia", "mes", "anio", "hora", "nombreAsociado",
 							"cedulaAsociado", "resolucion", "acta", "fecha", "ciudad", "razon1", "razon2", "razon3",
-							"razon4");
+							"razon4", "cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 210:
@@ -358,7 +358,7 @@ public class ServletReportesJasper extends HttpServlet {
 
 					removerAtributos(session, "zonaElectoral", "fecha", "nombreAccionante",
 							"resolucionImpugnada", "resolucionNumero", "argumento", "decision", "nombrePresidente",
-							"nombreSecretario");
+							"nombreSecretario", "cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 459:
@@ -382,7 +382,8 @@ public class ServletReportesJasper extends HttpServlet {
 							nombreSecretario, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "fecha", "nombreComision", "nombreAsociado",
-							"resolucionImpugnada", "resolucion", "argumento", "nombrePresidente", "nombreSecretario");
+							"resolucionImpugnada", "resolucion", "argumento", "nombrePresidente", "nombreSecretario",
+							"nombreCabezaPlancha", "cedulaCabezaPlancha");
 					break;
 
 				case 460:
@@ -390,7 +391,6 @@ public class ServletReportesJasper extends HttpServlet {
 					nombreReporte = "RESOLUCIÓN QUE RESUELVE UN RECURSO DE REPOSICIÓN EN CONTRA Y REMITE LA APELACIÓN";
 					zonaElectoral = (String) req.getSession().getAttribute("zonaElectoral");
 					fecha = (Date) req.getSession().getAttribute("fecha");
-					nombreComision = (String) req.getSession().getAttribute("nombreComision");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
 					resolucionImpugnada = (String) req.getSession().getAttribute("resolucionImpugnada");
 					resolucion = (String) req.getSession().getAttribute("resolucion");
@@ -403,11 +403,12 @@ public class ServletReportesJasper extends HttpServlet {
 					nombreReporte = cedulaAsociadoCabeza + "_" + nombreAsociadoCabeza + "_COFT_460";
 
 					jasperPrint = DelegadoGenerador.getInstance().reporteResuelveReposicion_FT_460(zonaElectoral,
-							nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento,
+							nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento,
 							nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "zonaElectoral", "fecha", "nombreComision", "nombreAsociado",
-							"resolucionImpugnada", "resolucion", "argumento", "nombrePresidente", "nombreSecretario");
+							"resolucionImpugnada", "resolucion", "argumento", "nombrePresidente", "nombreSecretario",
+							"cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 461:
@@ -417,9 +418,7 @@ public class ServletReportesJasper extends HttpServlet {
 					fecha = (Date) req.getSession().getAttribute("fecha");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
 					String resolucionApelada = (String) req.getSession().getAttribute("resolucionApelada");
-					String resolucionComision = (String) req.getSession().getAttribute("resolucionComision");
 					String resolucionNro = (String) req.getSession().getAttribute("resolucionNumero");
-					String actaTribunal = (String) req.getSession().getAttribute("actaTribunal");
 					argumento = (String) req.getSession().getAttribute("argumento");
 					decision = (String) req.getSession().getAttribute("decision");
 					nombrePresidente = (String) req.getSession().getAttribute("nombrePresidente");
@@ -430,12 +429,12 @@ public class ServletReportesJasper extends HttpServlet {
 					nombreReporte = cedulaAsociadoCabeza + "_" + nombreAsociadoCabeza + "_COFT_461";
 					
 					jasperPrint = DelegadoGenerador.getInstance().reporteResuelveApelacion_FT_461(acta, nombreAsociado,
-							resolucionApelada, resolucionComision, fecha, actaTribunal, argumento, decision,
+							resolucionApelada, fecha, argumento, decision,
 							nombrePresidente, nombreSecretario, resolucionNro, rutaImagen, rutaReporte);
 
-					removerAtributos(session, "acta", "fecha", "resolucionApelada", "nombreAsociado",
-							"resolucionComision", "actaTribunal", "argumento", "decision", "nombrePresidente",
-							"nombreSecretario", "resolucionNumero");
+					removerAtributos(session, "acta", "fecha", "resolucionApelada", "nombreAsociado", "argumento",
+							"decision", "nombrePresidente", "nombreSecretario", "resolucionNumero",
+							"cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				case 462:
@@ -445,8 +444,7 @@ public class ServletReportesJasper extends HttpServlet {
 					fecha = (Date) req.getSession().getAttribute("fecha");
 					nombreAsociado = (String) req.getSession().getAttribute("nombreAsociado");
 					resolucionApelada = (String) req.getSession().getAttribute("resolucionApelada");
-					resolucionComision = (String) req.getSession().getAttribute("resolucionComision");
-					actaTribunal = (String) req.getSession().getAttribute("actaTribunal");
+					resolucionNumero = (String) req.getSession().getAttribute("resolucionNumero");
 					argumento = (String) req.getSession().getAttribute("argumento");
 					nombrePresidente = (String) req.getSession().getAttribute("nombrePresidente");
 					nombreSecretario = (String) req.getSession().getAttribute("nombreSecretario");
@@ -456,11 +454,11 @@ public class ServletReportesJasper extends HttpServlet {
 					nombreReporte = cedulaAsociadoCabeza + "_" + nombreAsociadoCabeza + "_COFT_462";
 					
 					jasperPrint = DelegadoGenerador.getInstance().reporteResuelveApelacionContra_FT_462(acta,
-							nombreAsociado, resolucionApelada, resolucionComision, fecha, actaTribunal, argumento,
+							nombreAsociado, resolucionApelada, resolucionNumero, fecha, argumento,
 							nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "acta", "fecha", "resolucionApelada", "nombreAsociado",
-							"resolucionComision", "actaTribunal", "argumento", "nombrePresidente", "nombreSecretario");
+							"resolucionComision", "argumento", "nombrePresidente", "nombreSecretario");
 					break;
 
 				case 753:
@@ -485,7 +483,7 @@ public class ServletReportesJasper extends HttpServlet {
 							anio, rutaImagen, rutaReporte);
 
 					removerAtributos(session, "dia", "mes", "anio", "zonaElectoral", "nombreAsociado", "nombreComision",
-							"resolucion", "diaPresentado");
+							"resolucion", "diaPresentado", "cedulaCabezaPlancha", "nombreCabezaPlancha");
 					break;
 
 				default:

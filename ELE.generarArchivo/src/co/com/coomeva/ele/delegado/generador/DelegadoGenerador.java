@@ -189,32 +189,27 @@ public class DelegadoGenerador {
 				fecha, resolucion, argumento, nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteResuelveReposicion_FT_460(
-			String zonaElectoral, String nombreComision, String nombreAsociado,
-			String resolucionImpugnada, Date fecha, String resolucion,
-			String argumento, String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte)throws Exception {
+	public JasperPrint reporteResuelveReposicion_FT_460(String zonaElectoral,
+			String nombreAsociado, String resolucionImpugnada, Date fecha, String resolucion, String argumento,
+			String nombrePresidente, String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
 		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResuelveReposicion_FT_460(zonaElectoral, nombreComision, nombreAsociado, resolucionImpugnada, fecha, resolucion, argumento, nombrePresidente, nombreSecretario,rutaImagen, rutaReporte);
+		return logicaGenerador.reporteResuelveReposicion_FT_460(zonaElectoral, nombreAsociado,
+				resolucionImpugnada, fecha, resolucion, argumento, nombrePresidente, nombreSecretario, rutaImagen,
+				rutaReporte);
 	}
 
-	public JasperPrint reporteResuelveApelacion_FT_461(String acta,
-			String nombreAsociado, String resolucionApelada,
-			String resolucionComision, Date fecha, String actaTribunal,
-			String argumento, String decision, String nombrePresidente, String nombreSecretario,
+	public JasperPrint reporteResuelveApelacion_FT_461(String acta, String nombreAsociado, String resolucionApelada,
+			Date fecha, String argumento, String decision, String nombrePresidente, String nombreSecretario,
 			String resolucionNro, String rutaImagen, String rutaReporte) throws Exception {
-		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResuelveApelacion_FT_461(acta, nombreAsociado, resolucionApelada,
-				resolucionComision, fecha, actaTribunal, argumento, decision, nombrePresidente, nombreSecretario,
-				resolucionNro, rutaImagen, rutaReporte);
+		return logicaGenerador.reporteResuelveApelacion_FT_461(acta, nombreAsociado, resolucionApelada, fecha,
+				argumento, decision, nombrePresidente, nombreSecretario, resolucionNro, rutaImagen, rutaReporte);
 	}
 
-	public JasperPrint reporteResuelveApelacionContra_FT_462(
-			String acta, String nombreAsociado, String resolucionApelada,
-			String resolucionComision, Date fecha, String actaTribunal,
-			String argumento,String nombrePresidente, String nombreSecretario,
-			String rutaImagen, String rutaReporte)throws Exception {
-		// TODO Auto-generated method stub
-		return logicaGenerador.reporteResuelveApelacionContra_FT_462(acta, nombreAsociado, resolucionApelada, resolucionComision, fecha, actaTribunal, argumento, nombrePresidente, nombreSecretario,rutaImagen, rutaReporte);
+	public JasperPrint reporteResuelveApelacionContra_FT_462(String acta, String nombreAsociado,
+			String resolucionApelada, String resolucionNumero, Date fecha, String argumento, String nombrePresidente,
+			String nombreSecretario, String rutaImagen, String rutaReporte) throws Exception {
+		return logicaGenerador.reporteResuelveApelacionContra_FT_462(acta, nombreAsociado, resolucionApelada,
+				resolucionNumero, fecha, argumento, nombrePresidente, nombreSecretario, rutaImagen, rutaReporte);
 	}
 
 	public JasperPrint reporteResolucionExtemporaneamente_FT_753(

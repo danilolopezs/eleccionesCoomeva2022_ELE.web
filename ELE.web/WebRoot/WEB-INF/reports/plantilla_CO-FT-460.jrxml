@@ -2,13 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO_FT_189" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6105100000000068"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="388"/>
+	<property name="ireport.y" value="229"/>
 	<parameter name="zona" class="java.lang.String"/>
 	<parameter name="resolucionNumero" class="java.lang.String"/>
 	<parameter name="nombreAccionante" class="java.lang.String"/>
 	<parameter name="resolucionImpugnada" class="java.lang.String"/>
 	<parameter name="fecha" class="java.util.Date"/>
-	<parameter name="resolucion" class="java.lang.String"/>
 	<parameter name="argumento" class="java.lang.String"/>
 	<parameter name="nombrePresidente" class="java.lang.String"/>
 	<parameter name="nombreSecretario" class="java.lang.String"/>
@@ -125,7 +124,7 @@
 				<reportElement x="308" y="410" width="235" height="1" forecolor="#000000"/>
 			</line>
 			<textField>
-				<reportElement x="27" y="147" width="521" height="77"/>
+				<reportElement x="50" y="147" width="498" height="77"/>
 				<textElement lineSpacing="Single">
 					<font size="11"/>
 				</textElement>
@@ -150,7 +149,7 @@
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Por lo tanto, se niega el recurso de reposición interpuesto contra la Resolución No."+$P{resolucion}+", por las razones antes expuestas y se concede el recurso de apelación oportunamente interpuesto, procediendo a remitir la presente actuación al Tribunal de Elecciones y Escrutinios."]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Por lo tanto, se niega el recurso de reposición interpuesto contra la Resolución No. " +$P{resolucionImpugnada}+ ", por las razones antes expuestas y se concede el recurso de apelación oportunamente interpuesto, procediendo a remitir la presente actuación al Tribunal de Elecciones y Escrutinios."]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
 				<reportElement x="438" y="52" width="117" height="20"/>
@@ -197,21 +196,21 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="62">
+		<band height="53">
 			<rectangle>
 				<reportElement x="-19" y="0" width="593" height="35" forecolor="#009232" backcolor="#009232"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="20" y="39" width="100" height="20" forecolor="#009232"/>
+				<reportElement x="20" y="37" width="100" height="15" forecolor="#009232"/>
 				<textElement>
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CO-FT-460]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="402" y="39" width="153" height="20" forecolor="#009232"/>
+				<reportElement x="402" y="37" width="153" height="15" forecolor="#009232"/>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Mod.Septiembre 2021]]></text>
 			</staticText>

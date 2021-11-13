@@ -217,6 +217,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	private Date fechaPresentacion;
 	private boolean visibleFavorable;
 	private String nombreAccionante;
+	private boolean visibleAccionante;
+	
 
 	public ConsultaCabezaPlanchaVista() {
 		super("");
@@ -308,66 +310,46 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			// throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
 			// "campo.obligatorio.inadmision.cuidad"));
 			// }
-			
-			if("6".equals(codResolucion.toString())
-				||"7".equals(codResolucion.toString()) 
-				||"8".equals(codResolucion.toString())
-				||"9".equals(codResolucion.toString())
-				||"10".equals(codResolucion.toString())
-				||"11".equals(codResolucion.toString())
-			   )
-			{
+
+			if ("6".equals(codResolucion.toString()) || "7".equals(codResolucion.toString())
+					|| "8".equals(codResolucion.toString()) || "9".equals(codResolucion.toString())
+					|| "10".equals(codResolucion.toString()) || "11".equals(codResolucion.toString())) {
 				if (resolucionNro == null || resolucionNro.length() == 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS(
-							"mensajes",
-							"campo.obligatorio.resolucion.resolucionNro"));
+					throw new Exception(
+							UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.resolucion.resolucionNro"));
 				}
-				if (resolucionImpugnada == null
-						|| resolucionImpugnada.length() == 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS(
-							"mensajes",
-							"campo.obligatorio.resolucion.impugnada"));
+				if (resolucionImpugnada == null || resolucionImpugnada.length() == 0) {
+					throw new Exception(
+							UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.resolucion.impugnada"));
 				}
-				if (argumentoResolucion1 == null
-						|| argumentoResolucion1.length() == 0) {
-					throw new Exception(UtilAcceso.getParametroFuenteS(
-							"mensajes",
+				if (argumentoResolucion1 == null || argumentoResolucion1.length() == 0) {
+					throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
 							"campo.obligatorio.resolucion.argumentoResolucion"));
 				}
-				
-				if("8".equals(codResolucion.toString()))
-				{
+
+				if ("8".equals(codResolucion.toString())) {
 					if (desicionTribunal == null || desicionTribunal.length() == 0) {
-						throw new Exception(UtilAcceso.getParametroFuenteS(
-								"mensajes",
+						throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
 								"campo.obligatorio.resolucion.desicionTribunal"));
 					}
-					
-					if(numActa == null || numActa.length() == 0)
-					{
-						throw new Exception(UtilAcceso.getParametroFuenteS(
-								"mensajes",
-								"campo.obligatorio.resolucion.numActa"));
+
+					if (numActa == null || numActa.length() == 0) {
+						throw new Exception(
+								UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.resolucion.numActa"));
 					}
 				}
-				
-				if("10".equals(codResolucion.toString()))
-				{
-					if(fechaPresentacion == null)
-					{
-						throw new Exception(UtilAcceso.getParametroFuenteS(
-								"mensajes",
+
+				if ("10".equals(codResolucion.toString())) {
+					if (fechaPresentacion == null) {
+						throw new Exception(UtilAcceso.getParametroFuenteS("mensajes",
 								"campo.obligatorio.resolucion.fechaPresentacion"));
 					}
 				}
 				
-				if("11".equals(codResolucion.toString()))
-				{
-					if(nombreAccionante == null)
-					{
-						throw new Exception(UtilAcceso.getParametroFuenteS(
-								"mensajes",
-								"campo.obligatorio.resolucion.accionante"));
+				if ("11".equals(codResolucion.toString()) || "7".equals(codResolucion.toString())) {
+					if (nombreAccionante == null) {
+						throw new Exception(
+								UtilAcceso.getParametroFuenteS("mensajes", "campo.obligatorio.resolucion.accionante"));
 					}
 				}
 
@@ -719,7 +701,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		{
 			request.getSession().setAttribute("zonaElectoral", numZonaElectroral);
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
-			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
+			request.getSession().setAttribute("nombreAsociado", nombreAccionante);
 			request.getSession().setAttribute("resolucionImpugnada", numResolucionImpugnada);			
 			request.getSession().setAttribute("resolucion", resolucion);
 			request.getSession().setAttribute("argumento", argApelacion);
@@ -745,11 +727,8 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado",nombreAspirante);
 			request.getSession().setAttribute("resolucionApelada" ,numResolucionImpugnada);
-			request.getSession().setAttribute("resolucionComision", resolucion);
-			request.getSession().setAttribute("resolucionNumero", resolucion);	
-			request.getSession().setAttribute("actaTribunal", numActaTribunal);
+			request.getSession().setAttribute("resolucionNumero", resolucion);
 			request.getSession().setAttribute("argumento", argApelacion);
-			request.getSession().setAttribute("decision", desicionTribunal);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
 			request.getSession().setAttribute("nombreSecretario", nombreSecretario);	
 			
@@ -775,7 +754,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 			request.getSession().setAttribute("fecha", fechaElaboracionDoc);
 			request.getSession().setAttribute("nombreAsociado", nombreAspirante);
 			request.getSession().setAttribute("resolucionApelada", numResolucionImpugnada);
-			request.getSession().setAttribute("resolucionComision", resolucion);			
+			request.getSession().setAttribute("resolucionNumero", resolucion);			
 			request.getSession().setAttribute("actaTribunal", numActaTribunal);
 			request.getSession().setAttribute("argumento", argApelacion);
 			request.getSession().setAttribute("nombrePresidente", nombrePresidente);
@@ -818,7 +797,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 		try {
 			DelegadoRegistroFormulario.getInstance().crearRegistroFormulario(Long.valueOf(tipoReporte), listaRegCampos,user.getUserId());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		request.getSession().setAttribute("codigoReporte", tipoReporte);
 		JavascriptContext.addJavascriptCall(FacesContext.getCurrentInstance(), "ServletReportesJasper();");
@@ -1889,7 +1868,7 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 							"Ya fué generada la resolución que resuelve recursos interpuestos extemporáneamente");
 				}
 			}
-
+			visibleAccionante = false;
 			if (codResolucion.equals(1L) || codResolucion.equals(2L)
 					|| codResolucion.equals(4L) || codResolucion.equals(5L)
 				) {
@@ -1907,7 +1886,10 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 					visibleFavorable = true;
 				} else if (codResolucion.equals(6L)) {
 					visibleFavorable = true;
+				} else if (codResolucion.equals(7L)) {
+					visibleAccionante = true;
 				}
+				
 			}
 			
 		} catch (Exception e) {
@@ -2390,5 +2372,14 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 	public void setVisibleNumeroResolucion(boolean visibleNumeroResolucion) {
 		this.visibleNumeroResolucion = visibleNumeroResolucion;
 	}
+
+	public boolean isVisibleAccionante() {
+		return visibleAccionante;
+	}
+
+	public void setVisibleAccionante(boolean visibleAccionante) {
+		this.visibleAccionante = visibleAccionante;
+	}
+	
 	
 }

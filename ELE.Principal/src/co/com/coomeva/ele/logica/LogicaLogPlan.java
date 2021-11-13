@@ -1,6 +1,5 @@
 package co.com.coomeva.ele.logica;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import co.com.coomeva.ele.entidades.admhabilidad.LogTransacciones;
 import co.com.coomeva.ele.entidades.planchas.EleLog;
 import co.com.coomeva.ele.entidades.planchas.EleLogDAO;
 import co.com.coomeva.ele.entidades.planchas.HibernateSessionFactoryPlanchas;

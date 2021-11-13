@@ -1,7 +1,5 @@
 package co.com.coomeva.ele.delegado;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.sql.Timestamp;
 
 import co.com.coomeva.ele.logica.LogicaLogAsociado;
