@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla_CO-FT-172" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="38"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -100,24 +100,24 @@
 				<reportElement x="0" y="0" width="802" height="32" forecolor="#00834C"/>
 			</rectangle>
 			<line>
-				<reportElement x="376" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="434" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="4" y="6" width="80" height="11" forecolor="#00834C"/>
+				<reportElement x="4" y="5" width="80" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Zona Electoral No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="263" y="6" width="39" height="11" forecolor="#00834C"/>
+				<reportElement x="294" y="5" width="39" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="6" width="51" height="11" forecolor="#00834C"/>
+				<reportElement x="436" y="5" width="51" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
@@ -127,83 +127,80 @@
 				<reportElement x="0" y="1" width="802" height="4" forecolor="#00834C" backcolor="#00834C"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1" y="17" width="101" height="14"/>
+				<reportElement x="1" y="12" width="111" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{zona}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="106" y="6" width="54" height="11" forecolor="#00834C"/>
+				<reportElement x="114" y="5" width="54" height="11" forecolor="#00834C"/>
 				<textElement markup="none">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Ciudad]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="103" y="17" width="156" height="14"/>
+				<reportElement x="114" y="12" width="176" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{ciudad}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="259" y="1" width="1" height="31" forecolor="#00834C"/>
+				<reportElement x="291" y="1" width="1" height="31" forecolor="#00834C"/>
 			</line>
 			<line>
-				<reportElement x="102" y="5" width="1" height="27" forecolor="#00834C"/>
+				<reportElement x="112" y="5" width="1" height="27" forecolor="#00834C"/>
 			</line>
 			<line>
-				<reportElement x="462" y="5" width="1" height="27" forecolor="#00834C"/>
+				<reportElement x="543" y="5" width="1" height="27" forecolor="#00834C"/>
 			</line>
 			<staticText>
-				<reportElement x="466" y="6" width="53" height="11" forecolor="#00834C"/>
+				<reportElement x="545" y="5" width="53" height="11" forecolor="#00834C"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Plancha No]]></text>
 			</staticText>
 			<line>
-				<reportElement x="351" y="19" width="1" height="13" forecolor="#00834C"/>
+				<reportElement x="398" y="16" width="1" height="16" forecolor="#00834C"/>
 			</line>
 			<line>
-				<reportElement x="285" y="19" width="1" height="13" forecolor="#00834C"/>
-			</line>
-			<line>
-				<reportElement x="324" y="19" width="1" height="13" forecolor="#00834C"/>
+				<reportElement x="362" y="16" width="1" height="16" forecolor="#00834C"/>
 			</line>
 			<textField>
-				<reportElement x="286" y="17" width="38" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+				<reportElement x="311" y="12" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{anno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="325" y="17" width="26" height="14"/>
+				<reportElement x="364" y="12" width="33" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{mes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="352" y="17" width="22" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+				<reportElement x="400" y="12" width="33" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dia}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="377" y="17" width="85" height="14"/>
+				<reportElement x="436" y="12" width="106" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{hora}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="464" y="17" width="174" height="14"/>
+				<reportElement x="579" y="12" width="195" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{numeroPlancha}]]></textFieldExpression>
 			</textField>
@@ -240,7 +237,7 @@
 					<jr:columnGroup width="773">
 						<jr:tableFooter height="134" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="773" height="94" forecolor="#00834C"/>
+								<reportElement x="0" y="0" width="772" height="94" forecolor="#00834C"/>
 								<textElement verticalAlignment="Middle"/>
 								<text><![CDATA[Nombre(s) y  Apellidos  de quién inscribe la Plancha                                                    Firma de quién inscribe la Plancha
 
@@ -248,14 +245,16 @@
 _________________________________________                                                   _________________________________________]]></text>
 							</staticText>
 							<staticText>
-								<reportElement x="0" y="94" width="773" height="40" forecolor="#00834C"/>
-								<textElement verticalAlignment="Top"/>
-								<text><![CDATA[CO-FT-210 (Reverso)                                                                                                                                                                                    Mod. Octubre 2021]]></text>
+								<reportElement x="0" y="93" width="772" height="40" forecolor="#00834C"/>
+								<textElement verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<text><![CDATA[CO-FT-210 (Reverso)                                                                                                                                                                                                 Mod. Octubre 2021]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:columnHeader height="30" rowSpan="1">
 							<staticText>
-								<reportElement style="table 8_CH" x="0" y="0" width="772" height="30" forecolor="#00834D"/>
+								<reportElement style="table 8_CH" x="0" y="1" width="773" height="29" forecolor="#00834D"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -264,13 +263,13 @@ _________________________________________                                       
 						</jr:columnHeader>
 						<jr:columnFooter height="140" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="1" width="773" height="138"/>
-								<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
-									<pen lineWidth="1.5" lineColor="#00834C"/>
-									<topPen lineWidth="1.5" lineColor="#00834C"/>
-									<leftPen lineWidth="1.5" lineColor="#00834C"/>
-									<bottomPen lineWidth="1.5" lineColor="#00834C"/>
-									<rightPen lineWidth="1.5" lineColor="#00834C"/>
+								<reportElement x="0" y="1" width="772" height="138"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+									<pen lineWidth="1.0" lineColor="#009232"/>
+									<topPen lineWidth="1.0" lineColor="#009232"/>
+									<leftPen lineWidth="1.0" lineColor="#009232"/>
+									<bottomPen lineWidth="1.0" lineColor="#009232"/>
+									<rightPen lineWidth="1.0" lineColor="#009232"/>
 								</box>
 								<textElement textAlignment="Justified">
 									<font size="10" isBold="true"/>
@@ -299,10 +298,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="245">
+						<jr:column width="220">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="245" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="220" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -311,7 +310,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="245" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="220" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -319,10 +318,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="225">
+						<jr:column width="190">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="225" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="190" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -331,7 +330,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="225" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="190" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -339,10 +338,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="102">
+						<jr:column width="161">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="101" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="161" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -351,7 +350,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="101" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="161" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -359,10 +358,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="118">
+						<jr:column width="119">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="117" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="119" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -371,7 +370,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="117" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="119" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -431,17 +430,19 @@ _________________________________________                                       
 							</staticText>
 							<staticText>
 								<reportElement x="0" y="208" width="771" height="30" forecolor="#00834C"/>
-								<textElement verticalAlignment="Top"/>
-								<text><![CDATA[CO-FT-210 (Reverso)                                                                                                                                                                                       Mod. Octubre 2021]]></text>
+								<textElement verticalAlignment="Top">
+									<font size="10"/>
+								</textElement>
+								<text><![CDATA[CO-FT-210 (Reverso)                                                                                                                                                                                                                 Mod. Octubre 2021]]></text>
 							</staticText>
 							<staticText>
 								<reportElement x="0" y="1" width="771" height="137"/>
-								<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
-									<pen lineWidth="1.5" lineColor="#00834C"/>
-									<topPen lineWidth="1.5" lineColor="#00834C"/>
-									<leftPen lineWidth="1.5" lineColor="#00834C"/>
-									<bottomPen lineWidth="1.5" lineColor="#00834C"/>
-									<rightPen lineWidth="1.5" lineColor="#00834C"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+									<pen lineWidth="1.5" lineColor="#009232"/>
+									<topPen lineWidth="1.5" lineColor="#009232"/>
+									<leftPen lineWidth="1.5" lineColor="#009232"/>
+									<bottomPen lineWidth="1.5" lineColor="#009232"/>
+									<rightPen lineWidth="1.5" lineColor="#009232"/>
 								</box>
 								<textElement textAlignment="Justified">
 									<font size="10" isBold="true"/>
@@ -470,10 +471,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="245">
+						<jr:column width="221">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="245" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="221" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -482,7 +483,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="245" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="221" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -490,10 +491,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="225">
+						<jr:column width="190">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="225" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="190" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -502,7 +503,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="225" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="190" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -510,10 +511,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="93">
+						<jr:column width="161">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="161" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -522,7 +523,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell style="table 8_TD" height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="93" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="161" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
@@ -530,10 +531,10 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="125">
+						<jr:column width="116">
 							<jr:columnHeader style="table 8_TD" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="table 8_TD" x="0" y="0" width="125" height="30" forecolor="#00834D"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="116" height="30" forecolor="#00834D"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10"/>
 									</textElement>
@@ -542,7 +543,7 @@ En el caso de Zona Electoral Especial Regional la condición de candidato y elec
 							</jr:columnHeader>
 							<jr:detailCell height="30" rowSpan="1">
 								<textField isBlankWhenNull="true">
-									<reportElement style="table 8_TD" x="0" y="0" width="125" height="30"/>
+									<reportElement style="table 8_TD" x="0" y="0" width="116" height="30"/>
 									<textElement>
 										<font size="10"/>
 									</textElement>
