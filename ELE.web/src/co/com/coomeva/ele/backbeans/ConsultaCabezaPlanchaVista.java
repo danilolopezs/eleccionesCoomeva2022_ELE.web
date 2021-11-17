@@ -1514,16 +1514,16 @@ public class ConsultaCabezaPlanchaVista extends DataSource implements
 						obs = obs.replace(
 								"- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.",
 								"");
+						obs = obs.replace("<br/>", "\n");
+						obs = obs.replace(" </br>", "");
 						String nombre = DelegadoAsociado.getInstance().consultarNombreAsociado(Long.valueOf(identificacion));
-						if(i == 0 && !obs.isEmpty()) {
+						if(i == 0 && obs.length() > 6 && !obs.equals("\n")) {
 							if(nombre != null && !nombre.isEmpty()) {
 								obs = (" Asociado(a): " + nombre.trim() + ". Número de identificación: " +identificacion + "\n") + obs;
 							} else {
 								obs = (" Número de identificación del asociado(a): " +identificacion + "\n") + obs;
 							}
 						}
-						obs = obs.replace("<br/>", "\n");
-						obs = obs.replace("</br>", "");
 					}
 				}
 			}

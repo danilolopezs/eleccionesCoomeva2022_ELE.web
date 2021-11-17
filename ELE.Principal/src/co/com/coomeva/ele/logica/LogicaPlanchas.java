@@ -843,7 +843,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 		aux.replace("- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.","");
 		aux.replace("</br>", "");
 		//si la cadena no es vacia indica que existe la excepcion de profesion
-		return aux.isEmpty();
+		return aux.length() <= 6;
 	}
 
 	public List<CabezaPlanchaDTO> obtenerIntegrantesCabezaPlanchaPrincSinPag(Long numPlancha) throws Exception {

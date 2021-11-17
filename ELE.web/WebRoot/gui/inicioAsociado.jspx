@@ -105,35 +105,41 @@
 							<tr>
 
 								<td nowrap="nowrap"><span class="Estilo9">* Para
-										Ingresar al sistema debe de digitar el usuario y contraseña de
+										Ingresar al sistema debe digitar el usuario y contraseña de
 										su Cuenta Coomeva.</span></td>
 							</tr>
 							<tr>
 								<td nowrap="nowrap"><span class="Estilo9">* Si Usted
-										es Asociado a Coomeva y aún no tiene "Cuenta Coomeva" puede
-										resgistrarse desde </span><span class="Estilo11"> <font
+										es Asociado(a) a Coomeva y aún no tiene "Cuenta Coomeva" puede
+										registrarse desde </span><span class="Estilo11"> <font
 										onclick="abrirVentana('https://secure.coomeva.com.co/CuentaCoomeva/#/registro/1/1/FF3FD5gffd5iojbet78398bndWPLIO767HYhu')"
 										style="cursor: hand; text-decoration: underline; color: green;"
-										class="Estilo11"> Aquí</font>
+										class="Estilo11"> AQUÍ</font>.
 								</span></td>
 							</tr>
 							<tr>
 								<td nowrap="nowrap"><span class="Estilo9">* Si
-										olvidó su contraseña recupérala facílmente desde </span><span
+										olvidó su contraseña recupérela</span><span
 									class="Estilo11"> <font
 										onclick="abrirVentana('https://secure.coomeva.com.co/CuentaCoomeva/#/registro/1/2/FF3FD5gffd5iojbet78398bndWPLIO767HYhu')"
 										style="cursor: hand; text-decoration: underline; color: green;"
-										class="Estilo11"> Aquí</font>
+										class="Estilo11"> AQUÍ</font>.
 								</span></td>
 							</tr>
 							<tr>
 								<td nowrap="nowrap"><span class="Estilo27"><span
 										class="Estilo11">* </span>Si tiene inconvenientes para
-										ingresar al sistema, por favor pongase en contacto con
-										nosotros a través de </span><span class="Estilo11"> <font
+										ingresar al sistema, por favor póngase en contacto con
+										nosotros <br/> a través de la opción: </span><span class="Estilo11"> <font
 										onclick="abrirVentana('http://atentosinternet.coomeva.com.co/atentos/php/view/atencion_cliente/verRegsCasoCliente.php?empresa=1')"
 										style="cursor: hand; text-decoration: underline; color: green;"
-										class="Estilo11">Contáctenos </font></span></td>
+										class="Estilo11">Contáctenos</font>.</span></td>
+							</tr>
+							<tr>
+								<td nowrap="nowrap"><span class="Estilo27"><span
+										class="Estilo11">* </span>Tener en cuenta que para la foto
+										únicamente aplica formato jpg.</span>
+								</td>
 							</tr>
 						</table></td>
 				</tr>

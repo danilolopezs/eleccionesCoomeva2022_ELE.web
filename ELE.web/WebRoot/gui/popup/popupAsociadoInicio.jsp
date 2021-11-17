@@ -1,7 +1,7 @@
 <ice:panelPopup id="mensajesInicioAso" draggable="true"
 							styleClass="formulario"
 							visible="#{inicioSesionAsociadoVista.visible}" modal="true"
-							style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 280px; height: 100px;">
+							style="z-index: 50000; top: 30%; left: 35%; position: absolute; width: 280px;">
 
 							<f:facet name="header">
 								<ice:panelGrid width="100%" cellpadding="0" cellspacing="0"

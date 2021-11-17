@@ -500,15 +500,21 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		if (!InputFileData.validarArchivoImagen(tipoContenido)) {
 			fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
-		if(!fileInfo.getFileName().contains(".jpg")) {
-			mensajeIngresoInfoCabezaPlancha = "Por favor verifique la extensión del archivo.";
+		String nombreArchivo = fileInfo.getFileName();
+		String[] splitNombre = nombreArchivo.split("\\.");
+		int cant = splitNombre.length;	
+		if(cant == 1 || !splitNombre[cant-1].equals("jpg")) {
+			mensajeIngresoInfoCabezaPlancha = "Por favor verifique la extensión del archivo, debe ser jpg";
 			this.mensajeInformativo = true;
+			fileProgress = 0;
 			return;
 			//fileInfo.setStatus(FileInfo.INVALID_CONTENT_TYPE);
 		}
+		//fileInfo.setFileName(nombreArchivo);
 		if (fileInfo.getStatus() == FileInfo.INVALID_CONTENT_TYPE) {
-			mensajeIngresoInfoCabezaPlancha = "Solo se permiten imagenes.";
+			mensajeIngresoInfoCabezaPlancha = "Solo se permiten archivos de tipo imagen.";
 			this.mensajeInformativo = true;
+			fileProgress = 0;
 		}
 		if (fileInfo.getStatus() == FileInfo.SAVED) {
 			this.currentFile = new InputFileDataDTO(fileInfo);
@@ -520,6 +526,7 @@ public class RegistrarInfoCabezaPlancha extends BaseVista {
 		if (fileInfo.getStatus() == FileInfo.SIZE_LIMIT_EXCEEDED) {
 			mensajeIngresoInfoCabezaPlancha = "El archivo excede el tamaño máximo permitido.";
 			this.mensajeInformativo = true;
+			fileProgress = 0;
 		}
 	}
 
