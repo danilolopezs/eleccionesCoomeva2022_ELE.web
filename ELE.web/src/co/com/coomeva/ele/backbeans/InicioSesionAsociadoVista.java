@@ -52,7 +52,12 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	private java.lang.String token = "FF3FD5gffd5iojbet78398bndWPLIO767HYhu";
 	private String url = "https://secure.coomeva.com.co/pasaporte-Autenticacion-1/rest/";
 
-	public String action_ingreso() {
+	/**
+	 * inicio de sesion con login deshabilitado
+	 * para dejar funcional este metodo se debe cambiar el nombre por action_ingreso()
+	 * @return
+	 */
+	public String action_ingreso_no_pass() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -72,7 +77,12 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		return "";
 	}
 	
-	public String action_ingreso_pass() {
+	/**
+	 * inicio de sesion con login habilitado
+	 * para dejar funcional este metodo se debe cambiar el nombre por action_ingreso()
+	 * @return
+	 */
+	public String action_ingreso() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -100,6 +110,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 		return "";
 	}
 	
+	//no funcional
 	public String action_ingreso_original() {
 		visible = false;
 		valid = validaCampos();
