@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.jboss.aspects.dbc.condition.parser.ForAllExpression;
 
 import co.com.coomeva.ele.delegado.DelegadoCabezaPlancha;
 import co.com.coomeva.ele.delegado.DelegadoExperienciaLaboral;
@@ -62,6 +63,7 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 	private EleEstadoPlanchaDAO daoEstadoPlanchaDAO = new EleEstadoPlanchaDAO();
 	private ILogicaUsuarioComision logicaUsuarioComision;
 
+	private final String TXT_EXCEPCION_PROFESION = "Por favor tener en cuenta las siguientes observaciones: </br>- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.";
 	private LogicaPlanchas() {
 	}
 
@@ -769,8 +771,8 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 					+ "CASE WHEN db2util.f_profesion(aso.CODIGO_ASOCIADO) IS NOT NULL "
 					+ "THEN  db2util.f_profesion(aso.CODIGO_ASOCIADO) " + "ELSE " + "aso. DESC_PROFESION "
 					+ "END    profesion, " + "pl_aso.tipo_inscrito tipo, pl_aso.numero_inscrito numero "
-					+ "from elecdb.ELE_ASOCIADO aso, elecdb.ELE_PLANCHA pl, elecdb.ELE_PLANCHA_ASOCIADO pl_aso, "
-					+ "elecdb.CLIMAE cl where pl.CONSECUTIVO_PLANCHA = pl_aso.CONSECUTIVO_PLANCHA and  pl_aso.CONSECUTIVO_PLANCHA = :numPlancha and "
+					+ "from elecdb.ELEASOCIA aso, elecdb.ELE_PLANCHA pl, elecdb.ELE_PLANCHA_ASOCIADO pl_aso, "
+					+ "elecdb.ELEASOMUL cl where pl.CONSECUTIVO_PLANCHA = pl_aso.CONSECUTIVO_PLANCHA and  pl_aso.CONSECUTIVO_PLANCHA = :numPlancha and "
 					+ "pl_aso.CODIGO_ASOCIADO = aso.CODIGO_ASOCIADO and pl_aso.CODIGO_ASOCIADO = cl.NUMINT "
 					+ "ORDER BY pl_aso.tipo_inscrito, pl_aso.numero_inscrito asc");
 
@@ -811,8 +813,17 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 
 					List<ElePlanchaExcepcion> excepciones = new LogicaPlanchaExcepcion()
 							.consultarExcepciones(integrante.getIdentificacion(), numPlancha.toString());
-					integrante.setPoseeExcepciones(excepciones != null && !excepciones.isEmpty());
-
+					//validar si el suario solo podee la excepcion de profesion u oficio
+					integrante.setPoseeExcepciones(Boolean.FALSE);
+					for(ElePlanchaExcepcion e : excepciones) {
+						/**si el asociado posee una excepcion diferente a profesion,
+						  se fija la bandera @poseeExcepciones a True*/ 
+						if(!excepcionEsSoloProfesion(e.getDescExcepcion())) {
+							integrante.setPoseeExcepciones(Boolean.TRUE);
+							break;
+						}
+					}
+					//integrante.setPoseeExcepciones(excepciones != null && !excepciones.isEmpty());
 					list.add(integrante);
 				}
 			}
@@ -824,6 +835,15 @@ public class LogicaPlanchas extends ElePlanchasDAO {
 
 		return list;
 
+	}
+
+	private boolean excepcionEsSoloProfesion(String cadena) {
+		String aux = cadena;
+		aux.replace("Por favor tener en cuenta las siguientes observaciones:", "");
+		aux.replace("- El asociado no registra profesión. Por favor actualice la misma descargando el Certificado de Profesion u Oficio para poder continuar.","");
+		aux.replace("</br>", "");
+		//si la cadena no es vacia indica que existe la excepcion de profesion
+		return aux.isEmpty();
 	}
 
 	public List<CabezaPlanchaDTO> obtenerIntegrantesCabezaPlanchaPrincSinPag(Long numPlancha) throws Exception {
