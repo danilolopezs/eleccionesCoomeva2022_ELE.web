@@ -57,7 +57,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	 * para dejar funcional este metodo se debe cambiar el nombre por action_ingreso()
 	 * @return
 	 */
-	public String action_ingreso_no_pass() {
+	public String action_ingreso() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
@@ -82,7 +82,7 @@ public class InicioSesionAsociadoVista extends BaseVista {
 	 * para dejar funcional este metodo se debe cambiar el nombre por action_ingreso()
 	 * @return
 	 */
-	public String action_ingreso() {
+	public String action_ingreso_pass() {
 		visible = false;
 		valid = validaCampos();
 		if (valid) {
